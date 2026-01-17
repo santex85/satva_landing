@@ -1,0 +1,23 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8DCC6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4C4A8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg3)"/>
+  <g transform="translate(200,150)">
+    <!-- Символическое изображение промасливания -->
+    <ellipse cx="0" cy="0" rx="80" ry="100" fill="#D4C4A8" opacity="0.4"/>
+    <!-- Руки с маслом -->
+    <ellipse cx="-50" cy="-20" rx="20" ry="30" fill="#E8DCC6"/>
+    <ellipse cx="50" cy="-20" rx="20" ry="30" fill="#E8DCC6"/>
+    <!-- Капли масла -->
+    <circle cx="-30" cy="10" r="4" fill="#5F9EA0" opacity="0.7"/>
+    <circle cx="30" cy="10" r="4" fill="#5F9EA0" opacity="0.7"/>
+    <circle cx="0" cy="20" r="4" fill="#5F9EA0" opacity="0.7"/>
+    <circle cx="-15" cy="30" r="3" fill="#5F9EA0" opacity="0.7"/>
+    <circle cx="15" cy="30" r="3" fill="#5F9EA0" opacity="0.7"/>
+  </g>
+  <text x="200" y="250" font-family="Arial" font-size="14" fill="#4A7C59" text-anchor="middle" font-weight="bold">Абхьянга</text>
+</svg>

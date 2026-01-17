@@ -1,0 +1,22 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8DCC6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4C4A8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg2)"/>
+  <g transform="translate(200,150)">
+    <!-- Символическое изображение процедуры омоложения -->
+    <circle cx="0" cy="-30" r="50" fill="#5F9EA0" opacity="0.2"/>
+    <circle cx="0" cy="-30" r="30" fill="#4A7C59" opacity="0.3"/>
+    <!-- Руки массажиста -->
+    <ellipse cx="-40" cy="20" rx="15" ry="25" fill="#D4C4A8" opacity="0.6"/>
+    <ellipse cx="40" cy="20" rx="15" ry="25" fill="#D4C4A8" opacity="0.6"/>
+    <!-- Капли масла -->
+    <circle cx="-20" cy="10" r="3" fill="#5F9EA0"/>
+    <circle cx="20" cy="10" r="3" fill="#5F9EA0"/>
+    <circle cx="0" cy="5" r="3" fill="#5F9EA0"/>
+  </g>
+  <text x="200" y="250" font-family="Arial" font-size="14" fill="#4A7C59" text-anchor="middle" font-weight="bold">Омоложение</text>
+</svg>

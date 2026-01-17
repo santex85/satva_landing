@@ -1,0 +1,24 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8DCC6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4C4A8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <g transform="translate(200,150)">
+    <!-- Баночки с травами -->
+    <rect x="-80" y="-60" width="40" height="80" fill="#8B7355" rx="5"/>
+    <rect x="-75" y="-55" width="30" height="60" fill="#4A7C59" opacity="0.3"/>
+    <text x="-60" y="30" font-family="Arial" font-size="12" fill="#5F9EA0" text-anchor="middle">Травы</text>
+    
+    <rect x="-20" y="-60" width="40" height="80" fill="#8B7355" rx="5"/>
+    <rect x="-15" y="-55" width="30" height="60" fill="#4A7C59" opacity="0.3"/>
+    <text x="0" y="30" font-family="Arial" font-size="12" fill="#5F9EA0" text-anchor="middle">Масла</text>
+    
+    <rect x="40" y="-60" width="40" height="80" fill="#8B7355" rx="5"/>
+    <rect x="45" y="-55" width="30" height="60" fill="#4A7C59" opacity="0.3"/>
+    <text x="60" y="30" font-family="Arial" font-size="12" fill="#5F9EA0" text-anchor="middle">Препараты</text>
+  </g>
+  <text x="200" y="250" font-family="Arial" font-size="14" fill="#4A7C59" text-anchor="middle" font-weight="bold">Аюрведическая терапия</text>
+</svg>
