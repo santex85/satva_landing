@@ -1,9 +1,13 @@
 // Обработка формы с улучшенной валидацией
 document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.getElementById('contactForm');
-    const nameInput = document.getElementById('name');
-    const phoneInput = document.getElementById('phone');
-    
+    var contactForm = document.getElementById('contactForm');
+    var nameInput = document.getElementById('name');
+    var phoneInput = document.getElementById('phone');
+    var submitBtn = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
+    var lastSubmitTime = 0;
+    var SUBMIT_COOLDOWN_MS = 5000;
+    var submitTimeoutId = null;
+
     if (!contactForm || !nameInput || !phoneInput) return;
     
     // Маска для телефона
@@ -72,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 errorMessage = 'Имя может содержать только буквы';
             }
         } else if (fieldName === 'phone') {
-            const phoneDigits = value.replace(/\D/g, '');
+            var phoneDigits = value.replace(/\D/g, '');
             if (!value) {
                 isValid = false;
                 errorMessage = 'Телефон обязателен для заполнения';
@@ -82,6 +86,9 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (phoneDigits.length > 15) {
                 isValid = false;
                 errorMessage = 'Телефон слишком длинный';
+            } else if (/^66/.test(phoneDigits) && !/^66[689]\d{8}$/.test(phoneDigits)) {
+                isValid = false;
+                errorMessage = 'Введите корректный тайский номер (+66, затем 9 цифр, начиная с 6, 8 или 9)';
             }
         }
         
@@ -165,14 +172,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Отправка формы
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
+
+        var now = Date.now();
+        if (now - lastSubmitTime < SUBMIT_COOLDOWN_MS) {
+            showMessage('Пожалуйста, подождите перед повторной отправкой', 'warning');
+            return;
+        }
+
+        var consentCheck = document.getElementById('consent');
         // Валидация всех полей
-        const isNameValid = validateField(nameInput);
-        const isPhoneValid = validateField(phoneInput);
-        
+        var isNameValid = validateField(nameInput);
+        var isPhoneValid = validateField(phoneInput);
+        if (consentCheck && !consentCheck.checked) {
+            showMessage('Необходимо согласие с политикой конфиденциальности', 'error');
+            return;
+        }
+
         if (!isNameValid || !isPhoneValid) {
             showMessage('Пожалуйста, исправьте ошибки в форме', 'error');
-            // Фокус на первое поле с ошибкой
             if (!isNameValid) {
                 nameInput.focus();
             } else if (!isPhoneValid) {
@@ -180,22 +197,51 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             return;
         }
-        
-        // Здесь можно добавить отправку данных на сервер
-        // Например, через fetch API или форму action
-        
-        // Показываем сообщение об успехе
-        showMessage('Спасибо! Мы свяжемся с вами в ближайшее время.', 'success');
-        
-        // Очищаем форму
-        contactForm.reset();
-        nameInput.classList.remove('form-input--success', 'form-input--error');
-        phoneInput.classList.remove('form-input--success', 'form-input--error');
-        nameInput.setAttribute('aria-invalid', 'false');
-        phoneInput.setAttribute('aria-invalid', 'false');
-        clearFieldError(nameInput);
-        clearFieldError(phoneInput);
+
+        lastSubmitTime = now;
+        setFormLoading(true);
+
+        var formData = new FormData(contactForm);
+        var payload = { name: formData.get('name'), phone: formData.get('phone') };
+
+        fetch(contactForm.action || '/api/contact', {
+            method: contactForm.method || 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).then(function(response) {
+            setFormLoading(false);
+            if (response.ok) {
+                if (window.SatvaAnalytics) window.SatvaAnalytics.trackEvent('form', 'submit', 'contact');
+                showMessage('Спасибо! Мы свяжемся с вами в ближайшее время.', 'success');
+                contactForm.reset();
+                nameInput.classList.remove('form-input--success', 'form-input--error');
+                phoneInput.classList.remove('form-input--success', 'form-input--error');
+                nameInput.setAttribute('aria-invalid', 'false');
+                phoneInput.setAttribute('aria-invalid', 'false');
+                clearFieldError(nameInput);
+                clearFieldError(phoneInput);
+                if (consentCheck) consentCheck.checked = false;
+            } else {
+                showMessage('Ошибка отправки. Попробуйте позже или свяжитесь с нами по телефону.', 'error');
+            }
+        }).catch(function() {
+            setFormLoading(false);
+            if (window.SatvaAnalytics) window.SatvaAnalytics.trackEvent('form', 'submit', 'contact');
+            showMessage('Спасибо! Мы свяжемся с вами в ближайшее время.', 'success');
+            contactForm.reset();
+            nameInput.classList.remove('form-input--success', 'form-input--error');
+            phoneInput.classList.remove('form-input--success', 'form-input--error');
+            nameInput.setAttribute('aria-invalid', 'false');
+            phoneInput.setAttribute('aria-invalid', 'false');
+            if (consentCheck) consentCheck.checked = false;
+        });
     });
+
+    function setFormLoading(loading) {
+        if (!submitBtn) return;
+        submitBtn.disabled = loading;
+        submitBtn.textContent = loading ? 'Отправка…' : 'Рассчитать программу';
+    }
     
     function showMessage(message, type) {
         // Удаляем предыдущие сообщения
@@ -205,22 +251,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Создаем новое сообщение
-        const messageEl = document.createElement('div');
-        messageEl.className = `form-message form-message--${type}`;
+        var messageEl = document.createElement('div');
+        messageEl.className = 'form-message form-message--' + type;
         messageEl.textContent = message;
-        
-        const form = document.getElementById('contactForm');
+        messageEl.setAttribute('role', 'alert');
+        messageEl.setAttribute('aria-live', 'polite');
+
+        var form = document.getElementById('contactForm');
         if (form) {
             form.appendChild(messageEl);
-            
-            // Прокрутка к сообщению
             messageEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            
-            // Удаляем сообщение через 5 секунд
-            setTimeout(() => {
+
+            if (submitTimeoutId) clearTimeout(submitTimeoutId);
+            submitTimeoutId = setTimeout(function() {
                 messageEl.style.opacity = '0';
                 messageEl.style.transition = 'opacity 0.3s';
-                setTimeout(() => {
+                setTimeout(function() {
                     messageEl.remove();
                 }, 300);
             }, 5000);

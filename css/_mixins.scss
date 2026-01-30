@@ -11,6 +11,13 @@
     }
 }
 
+// Миксин для всех экранов до планшета включительно (меньше 1024px)
+@mixin tablet-and-below {
+    @media (max-width: #{$breakpoint-tablet - 1px}) {
+        @content;
+    }
+}
+
 @mixin desktop {
     @media (min-width: #{$breakpoint-tablet}) {
         @content;

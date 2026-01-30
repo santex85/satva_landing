@@ -1,8 +1,24 @@
+// Единый механизм блокировки скролла (меню, модалки, lightbox)
+window.scrollLock = (function() {
+    var count = 0;
+    return {
+        lock: function() {
+            count++;
+            document.body.classList.add('scroll-locked');
+        },
+        unlock: function() {
+            count--;
+            if (count <= 0) {
+                count = 0;
+                document.body.classList.remove('scroll-locked');
+            }
+        }
+    };
+})();
+
 // Основная логика приложения
 document.addEventListener('DOMContentLoaded', function() {
     // Инициализация всех модулей
-    console.log('Satva Samui Landing Page initialized');
-    
     // Инициализация навигации
     initNavigation();
     
@@ -52,7 +68,41 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Инициализация keyboard navigation для слайдеров
     initSliderKeyboardNav();
+
+    // Аналитика: события CTA, соцсети, WhatsApp
+    initAnalyticsTracking();
+
+    // Год в футере
+    var yearEl = document.getElementById('copyright-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Обработка ошибок загрузки изображений
+    document.querySelectorAll('img').forEach(function(img) {
+        img.addEventListener('error', function() {
+            this.src = 'img/placeholder-ayurveda.svg';
+            this.alt = 'Изображение не загружено';
+        });
+    });
 });
+
+function initAnalyticsTracking() {
+    if (typeof window.SatvaAnalytics === 'undefined' || !window.SatvaAnalytics.trackEvent) return;
+    var track = window.SatvaAnalytics.trackEvent.bind(window.SatvaAnalytics);
+    document.addEventListener('click', function(e) {
+        var target = e.target.closest('a');
+        if (!target) return;
+        if (target.classList.contains('floating-button') || (target.href && target.href.indexOf('wa.me') !== -1)) {
+            track('contact', 'whatsapp_click', '');
+        } else if (target.classList.contains('social-link')) {
+            var label = target.getAttribute('aria-label') || target.href || '';
+            track('social', 'click', label);
+        } else if (target.getAttribute('href') === '#contact' && (target.classList.contains('btn') || target.classList.contains('header__link'))) {
+            track('cta', target.classList.contains('btn--primary') ? 'consultation' : 'nav_contact', '');
+        } else if (target.classList.contains('btn--outline') && target.getAttribute('href') === '#contact') {
+            track('cta', 'book', '');
+        }
+    });
+}
 
 // Навигация
 function initNavigation() {
@@ -64,9 +114,16 @@ function initNavigation() {
     
     // Бургер-меню
     burger.addEventListener('click', function() {
-        burger.classList.toggle('header__burger--active');
-        nav.classList.toggle('header__nav--active');
-        document.body.style.overflow = nav.classList.contains('header__nav--active') ? 'hidden' : '';
+        var isOpen = nav.classList.toggle('header__nav--active');
+        burger.classList.toggle('header__burger--active', isOpen);
+        burger.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Меню');
+        if (isOpen) window.scrollLock.lock(); else window.scrollLock.unlock();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && nav.classList.contains('header__nav--active')) {
+            closeMobileMenu();
+        }
     });
     
     // Изменение header при скролле
@@ -106,7 +163,7 @@ function closeMobileMenu() {
     if (burger && nav) {
         burger.classList.remove('header__burger--active');
         nav.classList.remove('header__nav--active');
-        document.body.style.overflow = '';
+        window.scrollLock.unlock();
         
         // Убираем focus с бургера после закрытия
         burger.blur();
@@ -131,10 +188,13 @@ document.addEventListener('click', function(e) {
 
 // Слайдер процедур
 function initProceduresSlider() {
-    const slides = document.querySelectorAll('.procedure-slide');
-    const dots = document.querySelectorAll('.slider-dot');
-    const prevBtn = document.querySelector('.slider-nav__btn--prev');
-    const nextBtn = document.querySelector('.slider-nav__btn--next');
+    const section = document.getElementById('procedures');
+    if (!section) return;
+    
+    const slides = section.querySelectorAll('.procedure-slide');
+    const dots = section.querySelectorAll('.slider-dot');
+    const prevBtn = section.querySelector('.slider-nav__btn--prev');
+    const nextBtn = section.querySelector('.slider-nav__btn--next');
     
     if (slides.length === 0) return;
     
@@ -156,12 +216,14 @@ function initProceduresSlider() {
         currentSlide = index;
     }
     
-    function nextSlide() {
+    function nextSlide(e) {
+        if (e) e.preventDefault();
         const next = (currentSlide + 1) % slides.length;
         showSlide(next);
     }
     
-    function prevSlide() {
+    function prevSlide(e) {
+        if (e) e.preventDefault();
         const prev = (currentSlide - 1 + slides.length) % slides.length;
         showSlide(prev);
     }
@@ -175,11 +237,38 @@ function initProceduresSlider() {
         prevBtn.addEventListener('click', prevSlide);
     }
     
-    // Обработчики для точек
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => showSlide(index));
+    // Обработчики для точек (клик и клавиатура)
+    dots.forEach(function(dot, index) {
+        dot.setAttribute('tabindex', '0');
+        dot.setAttribute('role', 'button');
+        dot.setAttribute('aria-label', 'Слайд ' + (index + 1));
+        dot.addEventListener('click', function(e) {
+            e.preventDefault();
+            showSlide(index);
+        });
+        dot.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                showSlide(index);
+            }
+        });
     });
-    
+
+    // Touch/swipe для мобильных
+    let touchStartX = 0;
+    let touchEndX = 0;
+    section.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    section.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) nextSlide(e);
+            else prevSlide(e);
+        }
+    }, { passive: true });
+
     // Автоматическая смена слайдов (опционально)
     // setInterval(nextSlide, 5000);
 }
@@ -227,13 +316,38 @@ function initTestimonialsSlider() {
         prevBtn.addEventListener('click', prevSlide);
     }
     
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => showSlide(index));
+    dots.forEach(function(dot, index) {
+        dot.setAttribute('tabindex', '0');
         dot.setAttribute('role', 'tab');
-        dot.setAttribute('aria-label', `Перейти к отзыву ${index + 1}`);
+        dot.setAttribute('aria-label', 'Перейти к отзыву ' + (index + 1));
         dot.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+        dot.addEventListener('click', function() { showSlide(index); });
+        dot.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                showSlide(index);
+            }
+        });
     });
-    
+
+    // Touch/swipe для мобильных
+    var testimonialsContainer = document.querySelector('.testimonials-slider');
+    if (testimonialsContainer) {
+        var touchStartX = 0;
+        var touchEndX = 0;
+        testimonialsContainer.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        testimonialsContainer.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            var diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) nextSlide();
+                else prevSlide();
+            }
+        }, { passive: true });
+    }
+
     // Keyboard navigation для слайдера отзывов
     document.addEventListener('keydown', function(e) {
         if (e.target.closest('.testimonials-slider')) {
@@ -303,13 +417,17 @@ function initGallery() {
     function openLightbox(index) {
         currentIndex = index;
         lightboxImage.src = images[currentIndex];
+        var sourceImg = galleryItems[currentIndex] ? galleryItems[currentIndex].querySelector('img') : null;
+        lightboxImage.alt = sourceImg ? (sourceImg.getAttribute('alt') || 'Изображение галереи') : 'Изображение галереи';
         lightbox.classList.add('lightbox--active');
-        document.body.style.overflow = 'hidden';
+        window.scrollLock.lock();
+        var closeBtn = document.querySelector('.lightbox__close');
+        if (closeBtn) closeBtn.focus();
     }
     
     function closeLightbox() {
         lightbox.classList.remove('lightbox--active');
-        document.body.style.overflow = '';
+        window.scrollLock.unlock();
     }
     
     function showNext() {
@@ -353,6 +471,17 @@ function initGallery() {
             showPrev();
         } else if (e.key === 'ArrowRight') {
             showNext();
+        } else if (e.key === 'Tab') {
+            var focusable = lightbox.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])');
+            var first = focusable[0];
+            var last = focusable[focusable.length - 1];
+            if (focusable.length && document.activeElement === last && !e.shiftKey) {
+                e.preventDefault();
+                first.focus();
+            } else if (focusable.length && document.activeElement === first && e.shiftKey) {
+                e.preventDefault();
+                last.focus();
+            }
         }
     });
 }

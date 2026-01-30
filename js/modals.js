@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Получаем все карточки с атрибутом data-modal
     const stepCards = document.querySelectorAll('.step-card[data-modal]');
+    const modalButtons = document.querySelectorAll('.open-modal-btn');
     const modals = document.querySelectorAll('.modal');
     const closeButtons = document.querySelectorAll('.modal__close');
     const overlays = document.querySelectorAll('.modal__overlay');
@@ -12,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Клик по карточке
         card.addEventListener('click', function(e) {
-            // Предотвращаем открытие, если клик был по ссылке внутри карточки
-            if (e.target.tagName === 'A') return;
+            // Предотвращаем открытие, если клик был по ссылке или кнопке внутри карточки
+            if (e.target.tagName === 'A' || e.target.classList.contains('open-modal-btn')) return;
             
             const modalId = this.getAttribute('data-modal');
             openModal(modalId);
@@ -29,34 +30,82 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Функция открытия модального окна
+    // Обработка кликов по кнопкам "Подробнее"
+    modalButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Предотвращаем всплытие к карточке
+            const modalId = this.getAttribute('data-modal');
+            openModal(modalId);
+        });
+    });
+    
+    var activeModal = null;
+    var modalFocusTrapHandler = null;
+    var previousActiveElement = null;
+    var modalOpenTimer = null;
+    var modalCloseTimer = null;
+
+    function trapFocus(modal) {
+        var focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (!first) return;
+        first.focus();
+        modalFocusTrapHandler = function(e) {
+            if (e.key !== 'Tab') return;
+            if (e.shiftKey) {
+                if (document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                }
+            } else {
+                if (document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            }
+        };
+        modal.addEventListener('keydown', modalFocusTrapHandler);
+    }
+
     function openModal(modalId) {
-        const modal = document.getElementById(modalId);
+        var modal = document.getElementById(modalId);
         if (!modal) return;
-        
-        // Блокируем скролл body
-        document.body.style.overflow = 'hidden';
-        
-        // Показываем модальное окно
+
+        if (window.SatvaAnalytics && window.SatvaAnalytics.trackEvent) {
+            window.SatvaAnalytics.trackEvent('modal', 'open', modalId);
+        }
+
+        if (modalOpenTimer) clearTimeout(modalOpenTimer);
+        if (modalCloseTimer) clearTimeout(modalCloseTimer);
+        previousActiveElement = document.activeElement;
+        if (window.scrollLock) window.scrollLock.lock();
         modal.classList.add('modal--active');
-        
-        // Плавное появление
-        setTimeout(() => {
+        activeModal = modal;
+
+        modalOpenTimer = setTimeout(function() {
+            modalOpenTimer = null;
             modal.classList.add('modal--visible');
+            trapFocus(modal);
         }, 10);
     }
-    
-    // Функция закрытия модального окна
+
     function closeModal(modal) {
         if (!modal) return;
-        
-        // Убираем класс видимости
+        if (modalFocusTrapHandler) {
+            modal.removeEventListener('keydown', modalFocusTrapHandler);
+            modalFocusTrapHandler = null;
+        }
         modal.classList.remove('modal--visible');
-        
-        // После анимации скрываем модальное окно
-        setTimeout(() => {
+        if (modalCloseTimer) clearTimeout(modalCloseTimer);
+        modalCloseTimer = setTimeout(function() {
+            modalCloseTimer = null;
             modal.classList.remove('modal--active');
-            document.body.style.overflow = '';
+            if (window.scrollLock) window.scrollLock.unlock();
+            activeModal = null;
+            if (previousActiveElement && previousActiveElement.focus) {
+                previousActiveElement.focus();
+            }
         }, 300);
     }
     
@@ -85,5 +134,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
+    });
+
+    // Открытие попапа политики конфиденциальности
+    document.querySelectorAll('.js-open-privacy').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal('modal-privacy');
+        });
     });
 });

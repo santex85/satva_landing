@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0F4C5C">
     <meta name="description" content="Детокс-программа Satva Samui - клеточное очищение и омоложение на основе древнейшей практики Панчакарма. Перезагрузка организма под наблюдением врачей аюрведы на острове Самуи, Таиланд.">
     <meta name="keywords" content="детокс, панчакарма, аюрведа, Самуи, очищение организма, омоложение, йога, медитация">
     <title>Satva Samui - Детокс-программа на Самуи | Клеточное очищение и омоложение</title>
@@ -18,14 +19,14 @@
     <meta property="og:url" content="https://satvasamui.com/">
     <meta property="og:title" content="Satva Samui - Детокс-программа на Самуи">
     <meta property="og:description" content="Клеточное очищение и омоложение на основе древнейшей практики Панчакарма. Перезагрузка организма под наблюдением врачей аюрведы.">
-    <meta property="og:image" content="https://satvasamui.com/img/satva%20logo.png">
+    <meta property="og:image" content="https://satvasamui.com/img/satva-logo.png">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://satvasamui.com/">
     <meta property="twitter:title" content="Satva Samui - Детокс-программа на Самуи">
     <meta property="twitter:description" content="Клеточное очищение и омоложение на основе древнейшей практики Панчакарма.">
-    <meta property="twitter:image" content="https://satvasamui.com/img/satva%20logo.png">
+    <meta property="twitter:image" content="https://satvasamui.com/img/satva-logo.png">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://satvasamui.com/">
@@ -44,21 +45,28 @@
             "addressCountry": "TH"
         },
         "priceRange": "$$",
-        "image": "https://satvasamui.com/img/satva%20logo.png"
+        "image": "https://satvasamui.com/img/satva-logo.png"
     }
     </script>
     
+    <link rel="preload" href="assets/fonts/Montserrat-Bold.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="assets/fonts/Montserrat-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="img/relax1.png" as="image">
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Перейти к основному содержимому</a>
+    <!-- Индикатор прогресса скролла -->
+    <div id="scrollProgress" class="scroll-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
     <!-- Навигационное меню -->
     <header class="header" id="header">
         <div class="header__container">
-            <a href="#" class="header__logo">
-                <img src="img/satva logo.png" alt="Satva Samui" loading="eager">
+            <a href="#main-content" class="header__logo">
+                <img src="img/satva-logo.png" alt="Satva Samui" loading="eager">
             </a>
             <nav class="header__nav" id="headerNav">
                 <a href="#concept" class="header__link">О программе</a>
+                <a href="#packages" class="header__link">Цены</a>
                 <a href="#program" class="header__link">Шаги</a>
                 <a href="#procedures" class="header__link">Процедуры</a>
                 <a href="#team" class="header__link">Команда</a>
@@ -79,13 +87,83 @@
         <div class="hero__overlay"></div>
         <div class="hero__content">
             <div class="hero__logo">
-                <img src="img/satva logo.png" alt="Satva Samui Logo" loading="eager">
+                <img src="img/satva-logo.png" alt="Satva Samui Logo" loading="eager">
             </div>
             <h1 class="hero__title">Клеточное очищение и омоложение в Satva Samui</h1>
             <p class="hero__subtitle">Авторская детокс-программа на основе древнейшей практики Панчакарма. Перезагрузка организма под наблюдением врачей аюрведы.</p>
             <div class="hero__buttons">
                 <a href="#contact" class="btn btn--primary">Получить бесплатную консультацию</a>
-                <a href="#program" class="btn btn--secondary">Узнать стоимость тура</a>
+                <a href="#packages" class="btn btn--secondary">Узнать стоимость тура</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок: Форматы отдыха (Цены) -->
+    <section class="packages section-alt" id="packages">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 50px;">Выберите свой формат обновления</h2>
+            <div class="packages-grid">
+                
+                <div class="package-card">
+                    <div class="package-card__header">
+                        <h3 class="package-card__title">Йога тур</h3>
+                        <div class="package-card__price">от $75 <span>/ сутки</span></div>
+                    </div>
+                    <div class="package-card__body">
+                        <ul class="package-list">
+                            <li>Проживание на берегу спокойного моря</li>
+                            <li>Йога на рассвете и закате</li>
+                            <li>Вкусные и здоровые завтраки и обеды</li>
+                            <li>Диагностика «Веда Пульс»</li>
+                            <li>Разработка индивидуальной программы здоровья</li>
+                            <li>Медитация утром и вечером</li>
+                        </ul>
+                    </div>
+                    <div class="package-card__footer">
+                        <a href="#contact" class="btn btn--outline">Забронировать</a>
+                    </div>
+                </div>
+
+                <div class="package-card package-card--popular">
+                    <div class="popular-tag">Хит продаж</div>
+                    <div class="package-card__header">
+                        <h3 class="package-card__title">Детокс очищение</h3>
+                        <div class="package-card__subtitle">на клеточном уровне</div>
+                        <div class="package-card__price">от $130 <span>/ сутки</span></div>
+                    </div>
+                    <div class="package-card__body">
+                        <ul class="package-list">
+                            <li><strong>Всё, что в Йога-туре +</strong></li>
+                            <li>Глубокая диагностика всего организма</li>
+                            <li>Индивидуальный подбор программы детоксикации</li>
+                            <li>Прием мощных натуральных препаратов Аюрведы (Индия)</li>
+                            <li>Детокс питание из натуральных продуктов</li>
+                        </ul>
+                    </div>
+                    <div class="package-card__footer">
+                        <a href="#contact" class="btn btn--outline">Забронировать</a>
+                    </div>
+                </div>
+
+                <div class="package-card">
+                    <div class="package-card__header">
+                        <h3 class="package-card__title">Панчакарма</h3>
+                        <div class="package-card__subtitle">Детокс + Омоложение</div>
+                        <div class="package-card__price">от $230 <span>/ сутки</span></div>
+                    </div>
+                    <div class="package-card__body">
+                        <ul class="package-list">
+                            <li><strong>Полная программа Детокса +</strong></li>
+                            <li><strong>Панчакарма</strong> — омоложение всего организма</li>
+                            <li>Прием препаратов Аюрведы</li>
+                            <li>Индивидуальная Detox-диета</li>
+                            <li>Йога и медитации дважды в день</li>
+                        </ul>
+                    </div>
+                    <div class="package-card__footer">
+                        <a href="#contact" class="btn btn--outline">Забронировать</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -125,45 +203,51 @@
             <div class="steps-grid">
                 <div class="step-card" data-modal="modal-1" role="button" tabindex="0" aria-label="Открыть информацию о глубокой диагностике">
                     <div class="step-card__image">
-                        <img src="img/diagnostic.png" alt="Глубокая диагностика" loading="lazy">
+                        <img src="img/diagnostic.jpg" alt="Глубокая диагностика" loading="lazy">
                     </div>
                     <h3 class="step-card__title">Глубокая диагностика</h3>
                     <p class="step-card__text">Аппаратно-программный комплекс «Веда Пульс» определяет вашу конституцию (Дошу) и уровень зашлакованности. Мы выявляем зоны риска и составляем персональную карту оздоровления.</p>
+                    <button class="btn-link open-modal-btn" data-modal="modal-1">Подробнее →</button>
                 </div>
                 <div class="step-card" data-modal="modal-2" role="button" tabindex="0" aria-label="Открыть информацию об аюрведической терапии">
                     <div class="step-card__image">
-                        <img src="img/ayurvedic_therapy.png" alt="Аюрведическая терапия" loading="lazy">
+                        <img src="img/ayurvedic_therapy.jpg" alt="Аюрведическая терапия" loading="lazy">
                     </div>
                     <h3 class="step-card__title">Аюрведическая терапия</h3>
                     <p class="step-card__text">Мощнейшие органические препараты из Индии (в 10 000 раз сильнее активированного угля). Очищение кишечника, печени и крови от токсинов, паразитов и тяжелых металлов.</p>
+                    <button class="btn-link open-modal-btn" data-modal="modal-2">Подробнее →</button>
                 </div>
                 <div class="step-card" data-modal="modal-3" role="button" tabindex="0" aria-label="Открыть информацию о детокс-питании">
                     <div class="step-card__image">
-                        <img src="img/smuthi.png" alt="Detox-питание" loading="lazy">
+                        <img src="img/smuthi.jpg" alt="Detox-питание" loading="lazy">
                     </div>
                     <h3 class="step-card__title">Detox-питание</h3>
                     <p class="step-card__text">Щелочное вегетарианское меню, в котором не выживают паразиты. Вкусные завтраки, обеды и специальные программы (например, «3 дня на смузи») для избавления от пищевых зависимостей.</p>
+                    <button class="btn-link open-modal-btn" data-modal="modal-3">Подробнее →</button>
                 </div>
                 <div class="step-card" data-modal="modal-4" role="button" tabindex="0" aria-label="Открыть информацию о йоге и медитации">
                     <div class="step-card__image">
-                        <img src="img/yoga.png" alt="Йога и Медитация" loading="lazy">
+                        <img src="img/yoga.jpg" alt="Йога и Медитация" loading="lazy">
                     </div>
                     <h3 class="step-card__title">Йога и Медитация</h3>
                     <p class="step-card__text">Утренние и вечерние практики на берегу моря. Снятие умственного напряжения, работа с осанкой и эмоциональным фоном.</p>
+                    <button class="btn-link open-modal-btn" data-modal="modal-4">Подробнее →</button>
                 </div>
                 <div class="step-card" data-modal="modal-5" role="button" tabindex="0" aria-label="Открыть информацию об омоложении">
                     <div class="step-card__image">
-                        <img src="img/antiage.png" alt="Омоложение" loading="lazy">
+                        <img src="img/antiage.jpg" alt="Омоложение" loading="lazy">
                     </div>
                     <h3 class="step-card__title">Омоложение (Anti-Age)</h3>
                     <p class="step-card__text">Процедуры Абхьянга, Широдхара, Удвартана. Разглаживание морщин, подтяжка кожи при похудении и тонус мышц благодаря промасливанию и травяным сборам.</p>
+                    <button class="btn-link open-modal-btn" data-modal="modal-5">Подробнее →</button>
                 </div>
                 <div class="step-card" data-modal="modal-6" role="button" tabindex="0" aria-label="Открыть информацию о сопровождении экспертов">
                     <div class="step-card__image">
-                        <img src="img/diagnostic.png" alt="Сопровождение экспертов" loading="lazy">
+                        <img src="img/diagnostic.jpg" alt="Сопровождение экспертов" loading="lazy">
                     </div>
                     <h3 class="step-card__title">Сопровождение экспертов</h3>
                     <p class="step-card__text">Весь курс проходит под строгим контролем специалистов. Повторная диагностика в конце тура для фиксации физиологических изменений.</p>
+                    <button class="btn-link open-modal-btn" data-modal="modal-6">Подробнее →</button>
                 </div>
             </div>
         </div>
@@ -177,7 +261,7 @@
                 <div class="procedures-slider__wrapper">
                     <div class="procedure-slide active">
                         <div class="procedure-slide__image">
-                            <img src="img/Shirodhara.png" alt="Широдхара" loading="lazy">
+                            <img src="img/Shirodhara.jpg" alt="Широдхара" loading="lazy">
                         </div>
                         <div class="procedure-slide__content">
                             <h3 class="procedure-slide__title">Широдхара</h3>
@@ -186,7 +270,7 @@
                     </div>
                     <div class="procedure-slide">
                         <div class="procedure-slide__image">
-                            <img src="img/adbhianga.png" alt="Абхьянга" loading="lazy">
+                            <img src="img/adbhianga.jpg" alt="Абхьянга" loading="lazy">
                         </div>
                         <div class="procedure-slide__content">
                             <h3 class="procedure-slide__title">Абхьянга</h3>
@@ -195,7 +279,7 @@
                     </div>
                     <div class="procedure-slide">
                         <div class="procedure-slide__image">
-                            <img src="img/pinndasvedana.png" alt="Пиндасведана" loading="lazy">
+                            <img src="img/pinndasvedana.jpg" alt="Пиндасведана" loading="lazy">
                         </div>
                         <div class="procedure-slide__content">
                             <h3 class="procedure-slide__title">Пиндасведана</h3>
@@ -204,7 +288,7 @@
                     </div>
                     <div class="procedure-slide">
                         <div class="procedure-slide__image">
-                            <img src="img/udvartana.png" alt="Удвартана" loading="lazy">
+                            <img src="img/udvartana.jpg" alt="Удвартана" loading="lazy">
                         </div>
                         <div class="procedure-slide__content">
                             <h3 class="procedure-slide__title">Удвартана</h3>
@@ -213,14 +297,14 @@
                     </div>
                 </div>
                 <div class="procedures-slider__nav">
-                    <button class="slider-nav__btn slider-nav__btn--prev" aria-label="Предыдущая процедура">‹</button>
+                    <button type="button" class="slider-nav__btn slider-nav__btn--prev" aria-label="Предыдущая процедура">‹</button>
                     <div class="slider-nav__dots">
-                        <button class="slider-dot active" aria-label="Слайд 1"></button>
-                        <button class="slider-dot" aria-label="Слайд 2"></button>
-                        <button class="slider-dot" aria-label="Слайд 3"></button>
-                        <button class="slider-dot" aria-label="Слайд 4"></button>
+                        <button type="button" class="slider-dot active" aria-label="Слайд 1"></button>
+                        <button type="button" class="slider-dot" aria-label="Слайд 2"></button>
+                        <button type="button" class="slider-dot" aria-label="Слайд 3"></button>
+                        <button type="button" class="slider-dot" aria-label="Слайд 4"></button>
                     </div>
-                    <button class="slider-nav__btn slider-nav__btn--next" aria-label="Следующая процедура">›</button>
+                    <button type="button" class="slider-nav__btn slider-nav__btn--next" aria-label="Следующая процедура">›</button>
                 </div>
             </div>
         </div>
@@ -234,37 +318,37 @@
                 <div class="gallery-item" data-image="img/relax1.png">
                     <img src="img/relax1.png" alt="Вид на море" loading="lazy">
                     <div class="gallery-item__overlay">
-                        <span class="gallery-item__icon">🔍</span>
+                        <span class="gallery-item__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
                     </div>
                 </div>
-                <div class="gallery-item" data-image="img/yoga.png">
-                    <img src="img/yoga.png" alt="Йога на берегу моря" loading="lazy">
+                <div class="gallery-item" data-image="img/yoga.jpg">
+                    <img src="img/yoga.jpg" alt="Йога на берегу моря" loading="lazy">
                     <div class="gallery-item__overlay">
-                        <span class="gallery-item__icon">🔍</span>
+                        <span class="gallery-item__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
                     </div>
                 </div>
-                <div class="gallery-item" data-image="img/Shirodhara.png">
-                    <img src="img/Shirodhara.png" alt="Процедура Широдхара" loading="lazy">
+                <div class="gallery-item" data-image="img/Shirodhara.jpg">
+                    <img src="img/Shirodhara.jpg" alt="Процедура Широдхара" loading="lazy">
                     <div class="gallery-item__overlay">
-                        <span class="gallery-item__icon">🔍</span>
+                        <span class="gallery-item__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
                     </div>
                 </div>
-                <div class="gallery-item" data-image="img/pinndasvedana.png">
-                    <img src="img/pinndasvedana.png" alt="Процедура Пиндасведана" loading="lazy">
+                <div class="gallery-item" data-image="img/pinndasvedana.jpg">
+                    <img src="img/pinndasvedana.jpg" alt="Процедура Пиндасведана" loading="lazy">
                     <div class="gallery-item__overlay">
-                        <span class="gallery-item__icon">🔍</span>
+                        <span class="gallery-item__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
                     </div>
                 </div>
-                <div class="gallery-item" data-image="img/smuthi.png">
-                    <img src="img/smuthi.png" alt="Детокс-питание" loading="lazy">
+                <div class="gallery-item" data-image="img/smuthi.jpg">
+                    <img src="img/smuthi.jpg" alt="Детокс-питание" loading="lazy">
                     <div class="gallery-item__overlay">
-                        <span class="gallery-item__icon">🔍</span>
+                        <span class="gallery-item__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
                     </div>
                 </div>
-                <div class="gallery-item" data-image="img/relax2.png">
-                    <img src="img/relax2.png" alt="Релаксация" loading="lazy">
+                <div class="gallery-item" data-image="img/relax2.jpg">
+                    <img src="img/relax2.jpg" alt="Релаксация" loading="lazy">
                     <div class="gallery-item__overlay">
-                        <span class="gallery-item__icon">🔍</span>
+                        <span class="gallery-item__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
                     </div>
                 </div>
             </div>
@@ -286,7 +370,7 @@
             <div class="team-grid">
                 <div class="team-member">
                     <div class="team-member__photo">
-                        <img src="img/doctor.png" alt="Юлия Чернобаева" loading="lazy">
+                        <img src="img/doctor.jpg" alt="Юлия Чернобаева" loading="lazy">
                     </div>
                     <h3 class="team-member__name">Юлия Чернобаева</h3>
                     <p class="team-member__role">Врач аюрведы, член НАМА</p>
@@ -294,7 +378,7 @@
                 </div>
                 <div class="team-member">
                     <div class="team-member__photo">
-                        <img src="img/yog_man.png" alt="Дмитрий Врубель" loading="lazy">
+                        <img src="img/yog_man.jpg" alt="Дмитрий Врубель" loading="lazy">
                     </div>
                     <h3 class="team-member__name">Дмитрий Врубель</h3>
                     <p class="team-member__role">Инструктор йоги</p>
@@ -302,7 +386,7 @@
                 </div>
                 <div class="team-member">
                     <div class="team-member__photo">
-                        <img src="img/yog_lady.png" alt="Галина Васюта" loading="lazy">
+                        <img src="img/yog_lady.jpg" alt="Галина Васюта" loading="lazy">
                     </div>
                     <h3 class="team-member__name">Галина Васюта</h3>
                     <p class="team-member__role">Сертифицированный инструктор йоги</p>
@@ -379,7 +463,7 @@
                                 </div>
                                 <div class="testimonial-card__info">
                                     <h4 class="testimonial-card__name">Александр М.</h4>
-                                    <p class="testimonial-card__date">Январь 2024</p>
+                                    <p class="testimonial-card__date">Январь 2026</p>
                                 </div>
                             </div>
                         </div>
@@ -400,7 +484,7 @@
                                 </div>
                                 <div class="testimonial-card__info">
                                     <h4 class="testimonial-card__name">Мария К.</h4>
-                                    <p class="testimonial-card__date">Декабрь 2023</p>
+                                    <p class="testimonial-card__date">Декабрь 2025</p>
                                 </div>
                             </div>
                         </div>
@@ -421,7 +505,7 @@
                                 </div>
                                 <div class="testimonial-card__info">
                                     <h4 class="testimonial-card__name">Елена С.</h4>
-                                    <p class="testimonial-card__date">Ноябрь 2023</p>
+                                    <p class="testimonial-card__date">Ноябрь 2025</p>
                                 </div>
                             </div>
                         </div>
@@ -449,7 +533,7 @@
                     <p class="footer__subtitle">Индивидуальная программа оздоровления уже включена в стоимость тура.</p>
                     <form class="contact-form" id="contactForm">
                         <div class="form-group">
-                            <input type="text" id="name" name="name" class="form-input" placeholder="Ваше имя" required aria-describedby="name-error" aria-invalid="false">
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Ваше имя" required aria-describedby="name-error" aria-invalid="false" autocomplete="name">
                             <span class="form-icon form-icon--success" id="name-success-icon" aria-hidden="true">
                                 <img src="img/icons/check-circle.svg" alt="">
                             </span>
@@ -459,7 +543,7 @@
                             <span class="form-error" id="name-error" role="alert"></span>
                         </div>
                         <div class="form-group">
-                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="Телефон / WhatsApp" required aria-describedby="phone-error" aria-invalid="false">
+                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="Телефон / WhatsApp" required aria-describedby="phone-error" aria-invalid="false" autocomplete="tel" inputmode="tel">
                             <span class="form-icon form-icon--success" id="phone-success-icon" aria-hidden="true">
                                 <img src="img/icons/check-circle.svg" alt="">
                             </span>
@@ -467,6 +551,13 @@
                                 <img src="img/icons/error-circle.svg" alt="">
                             </span>
                             <span class="form-error" id="phone-error" role="alert"></span>
+                        </div>
+                        <div class="form-group form-group--checkbox">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="consent" id="consent" required aria-describedby="consent-error">
+                                <span>Я согласен с <a href="#" class="js-open-privacy">политикой конфиденциальности</a></span>
+                            </label>
+                            <span class="form-error" id="consent-error" role="alert"></span>
                         </div>
                         <button type="submit" class="btn btn--primary btn--block">Рассчитать программу</button>
                     </form>
@@ -479,18 +570,18 @@
                     </div>
                     <div class="footer__contact-item">
                         <strong>Телефон:</strong>
-                        <p><a href="tel:+66123456789">+66 12 345 6789</a></p>
+                        <p><a href="tel:+66812345678">+66 81 234 5678</a></p>
                     </div>
                     <div class="footer__contact-item">
                         <strong>Социальные сети:</strong>
                         <div class="footer__social">
-                            <a href="#" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                            <a href="https://www.instagram.com/satvasamui/" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
                                 <img src="img/icons/social/instagram.svg" alt="Instagram" width="24" height="24">
                             </a>
-                            <a href="#" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                            <a href="https://www.facebook.com/satvasamui/" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
                                 <img src="img/icons/social/facebook.svg" alt="Facebook" width="24" height="24">
                             </a>
-                            <a href="https://wa.me/66123456789" class="social-link" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+                            <a href="https://wa.me/66812345678" class="social-link" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
                                 <img src="img/icons/social/whatsapp.svg" alt="WhatsApp" width="24" height="24">
                             </a>
                         </div>
@@ -498,18 +589,18 @@
                 </div>
             </div>
             <div class="footer__copyright">
-                <p>&copy; 2024 Satva Samui. Все права защищены.</p>
+                <p>&copy; <span id="copyright-year">2026</span> Satva Samui. Все права защищены. <a href="#" class="js-open-privacy">Политика конфиденциальности</a></p>
             </div>
         </div>
     </footer>
 
     <!-- Модальные окна -->
     <!-- Модальное окно 1: Глубокая диагностика -->
-    <div class="modal" id="modal-1">
+    <div class="modal" id="modal-1" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
         <div class="modal__overlay"></div>
         <div class="modal__content">
             <button class="modal__close" aria-label="Закрыть">&times;</button>
-            <h2 class="modal__title">Диагностика организма и «Веда Пульс»</h2>
+            <h2 class="modal__title" id="modal-1-title">Диагностика организма и «Веда Пульс»</h2>
             <div class="modal__body">
                 <p><strong>Технология:</strong> Диагностика проводится на аппаратно-программном комплексе «Веда Пульс». Это синтез древнего аюрведического знания и современной науки.</p>
                 
@@ -527,11 +618,11 @@
     </div>
 
     <!-- Модальное окно 2: Аюрведическая терапия -->
-    <div class="modal" id="modal-2">
+    <div class="modal" id="modal-2" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
         <div class="modal__overlay"></div>
         <div class="modal__content">
             <button class="modal__close" aria-label="Закрыть">&times;</button>
-            <h2 class="modal__title">Сила натуральных препаратов</h2>
+            <h2 class="modal__title" id="modal-2-title">Сила натуральных препаратов</h2>
             <div class="modal__body">
                 <p>Мы используем только органические средства природного происхождения (травы, масла), созданные профессорами Индийской клиники.</p>
                 
@@ -548,11 +639,11 @@
     </div>
 
     <!-- Модальное окно 3: Detox-питание -->
-    <div class="modal" id="modal-3">
+    <div class="modal" id="modal-3" role="dialog" aria-modal="true" aria-labelledby="modal-3-title">
         <div class="modal__overlay"></div>
         <div class="modal__content">
             <button class="modal__close" aria-label="Закрыть">&times;</button>
-            <h2 class="modal__title">Питание как лекарство</h2>
+            <h2 class="modal__title" id="modal-3-title">Питание как лекарство</h2>
             <div class="modal__body">
                 <p>Наша философия: <strong>«В щелочной среде паразиты не выживают»</strong>. Питание помогает избавиться от пищевых зависимостей и тяги к «мусорной» еде.</p>
                 
@@ -569,11 +660,11 @@
     </div>
 
     <!-- Модальное окно 4: Йога и Медитация -->
-    <div class="modal" id="modal-4">
+    <div class="modal" id="modal-4" role="dialog" aria-modal="true" aria-labelledby="modal-4-title">
         <div class="modal__overlay"></div>
         <div class="modal__content">
             <button class="modal__close" aria-label="Закрыть">&times;</button>
-            <h2 class="modal__title">Практики для тела и ума</h2>
+            <h2 class="modal__title" id="modal-4-title">Практики для тела и ума</h2>
             <div class="modal__body">
                 <p>Занятия проходят на специальной площадке на берегу моря — на рассвете и на закате.</p>
                 
@@ -590,11 +681,11 @@
     </div>
 
     <!-- Модальное окно 5: Омоложение (Anti-Age) -->
-    <div class="modal" id="modal-5">
+    <div class="modal" id="modal-5" role="dialog" aria-modal="true" aria-labelledby="modal-5-title">
         <div class="modal__overlay"></div>
         <div class="modal__content">
             <button class="modal__close" aria-label="Закрыть">&times;</button>
-            <h2 class="modal__title">Клеточное омоложение</h2>
+            <h2 class="modal__title" id="modal-5-title">Клеточное омоложение</h2>
             <div class="modal__body">
                 <p>Панчакарма запускает процессы обновления тканей. Эффект усиливается специальными процедурами:</p>
                 
@@ -611,11 +702,11 @@
     </div>
 
     <!-- Модальное окно 6: Сопровождение экспертов -->
-    <div class="modal" id="modal-6">
+    <div class="modal" id="modal-6" role="dialog" aria-modal="true" aria-labelledby="modal-6-title">
         <div class="modal__overlay"></div>
         <div class="modal__content">
             <button class="modal__close" aria-label="Закрыть">&times;</button>
-            <h2 class="modal__title">Профессиональный контроль</h2>
+            <h2 class="modal__title" id="modal-6-title">Профессиональный контроль</h2>
             <div class="modal__body">
                 <p>Весь курс проходит под наблюдением квалифицированных специалистов отеля Satva Samui.</p>
                 
@@ -630,8 +721,35 @@
         </div>
     </div>
 
+    <!-- Модальное окно: Политика конфиденциальности -->
+    <div class="modal modal--privacy" id="modal-privacy" role="dialog" aria-modal="true" aria-labelledby="modal-privacy-title">
+        <div class="modal__overlay"></div>
+        <div class="modal__content modal__content--wide">
+            <button class="modal__close" aria-label="Закрыть">&times;</button>
+            <h2 class="modal__title" id="modal-privacy-title">Политика конфиденциальности</h2>
+            <div class="modal__body modal__body--scroll">
+                <p><strong>Satva Samui</strong> («мы») соблюдаем вашу конфиденциальность. Настоящая политика описывает, какие данные мы собираем и как их используем.</p>
+                <h3>1. Какие данные мы собираем</h3>
+                <p>При заполнении формы обратной связи мы можем получать:</p>
+                <ul>
+                    <li>имя;</li>
+                    <li>номер телефона (в т.ч. WhatsApp).</li>
+                </ul>
+                <h3>2. Цели использования данных</h3>
+                <p>Данные используются только для связи с вами по запросу консультации или бронирования программ Satva Samui. Мы не передаём ваши данные третьим лицам для маркетинга.</p>
+                <h3>3. Хранение и защита</h3>
+                <p>Мы храним персональные данные только в течение срока, необходимого для обработки запроса и ведения переписки. Принимаем разумные меры для защиты данных от несанкционированного доступа.</p>
+                <h3>4. Ваши права</h3>
+                <p>Вы можете запросить доступ к своим данным, их исправление или удаление. Для этого свяжитесь с нами по контактам, указанным на сайте.</p>
+                <h3>5. Изменения политики</h3>
+                <p>Мы можем обновлять эту политику. Актуальная версия всегда доступна на этой странице.</p>
+                <p><em>Дата последнего обновления: январь 2026.</em></p>
+            </div>
+        </div>
+    </div>
+
     <!-- Плавающая кнопка связи -->
-    <a href="https://wa.me/66123456789?text=Здравствуйте!%20Хочу%20узнать%20о%20детокс-программе%20Satva%20Samui" 
+    <a href="https://wa.me/66812345678?text=Здравствуйте!%20Хочу%20узнать%20о%20детокс-программе%20Satva%20Samui" 
        class="floating-button" 
        target="_blank" 
        rel="noopener noreferrer"
@@ -641,6 +759,11 @@
         </svg>
     </a>
 
+    <!-- Analytics: раскомментируйте и подставьте ID для GA/Яндекс.Метрики
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+    <script type="text/javascript">(function(m,e,t,r,i,k){...})();</script> -->
+    <script src="js/analytics.js"></script>
     <script src="js/main.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/form.js"></script>

@@ -19,13 +19,22 @@ body {
     font-size: $font-size-body;
     line-height: $line-height-normal;
     color: $color-text;
-    background-color: $color-white;
+    background-color: $color-bg-main;
     overflow-x: hidden;
     padding-top: 80px; // Отступ для фиксированного header
     
     @include mobile {
         padding-top: 70px;
     }
+}
+
+body.scroll-locked {
+    overflow: hidden;
+}
+
+// Класс для чередующихся секций с мятным фоном
+.section-alt {
+    background-color: $color-bg-secondary;
 }
 
 // Skip link для accessibility
@@ -113,12 +122,13 @@ body {
         text-decoration: none;
         
         img {
-            height: 50px;
+            height: 65px;
             width: auto;
+            filter: brightness(0);
             transition: transform $transition-normal;
             
             @include mobile {
-                height: 40px;
+                height: 50px;
             }
         }
         
@@ -132,34 +142,34 @@ body {
         align-items: center;
         gap: $spacing-md;
         
-        @include tablet {
+        @include tablet-and-below {
             position: fixed;
-            top: 70px;
+            top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: $color-white;
+            width: 100vw;
+            min-height: 100vh;
+            height: 100%;
+            background-color: $color-white;
             flex-direction: column;
-            align-items: flex-start;
-            padding: $spacing-xl;
+            align-items: stretch;
+            justify-content: flex-start;
+            padding: 100px $spacing-lg $spacing-lg;
             transform: translateX(100%);
-            transition: transform $transition-slow ease-in-out, opacity $transition-slow ease-in-out;
-            box-shadow: -2px 0 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease-in-out;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
             overflow-y: auto;
-            z-index: 998;
-            opacity: 0;
-            visibility: hidden;
-            will-change: transform, opacity;
+            overflow-x: hidden;
+            z-index: 99999;
+            -webkit-overflow-scrolling: touch;
             
             &--active {
                 transform: translateX(0);
-                opacity: 1;
                 visibility: visible;
             }
         }
         
         @include mobile {
-            padding: $spacing-lg $spacing-md;
+            padding: 90px $spacing-md $spacing-md;
         }
     }
     
@@ -182,13 +192,17 @@ body {
             border-radius: 4px;
         }
         
-        @include tablet {
+        @include tablet-and-below {
+            display: block;
             font-size: 1.125rem;
             padding: $spacing-md $spacing-sm;
             width: 100%;
+            min-height: 48px;
+            box-sizing: border-box;
             border-bottom: 1px solid rgba($color-primary, 0.1);
             border-radius: $border-radius-sm;
             transition: all $transition-normal;
+            color: $color-text;
             
             &:hover,
             &:focus {
@@ -211,10 +225,15 @@ body {
         border: none;
         cursor: pointer;
         padding: $spacing-xs;
+        position: relative;
         z-index: 1001;
         
-        @include tablet {
+        @include tablet-and-below {
             display: flex;
+            // Когда меню открыто — бургер (крестик) поверх панели, чтобы его можно было нажать и закрыть меню
+            &--active {
+                z-index: 100000;
+            }
         }
         
         span {
@@ -246,10 +265,17 @@ body {
     padding: 0.5rem 1.5rem;
     font-size: 0.875rem;
     
-    @include tablet {
+    @include tablet-and-below {
         width: 100%;
         margin-top: $spacing-md;
     }
+}
+
+// Кнопка внутри header навигации
+.header__nav .btn {
+    align-self: center;
+    height: auto;
+    flex-shrink: 0;
 }
 
 // Контейнер
@@ -296,7 +322,27 @@ h3 {
         color: $color-white;
         
         &:hover {
-            background: linear-gradient(135deg, #3A6B47 0%, #2C4E35 100%);
+            background: linear-gradient(135deg, $color-primary-dark 0%, darken($color-primary-dark, 5%) 100%);
+        }
+    }
+    
+    &--outline {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        border: 2px solid $color-primary;
+        color: $color-primary;
+        text-align: center;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: $font-weight-semibold;
+        transition: all $transition-normal;
+        box-sizing: border-box;
+        background: transparent;
+        
+        &:hover {
+            background: $color-primary;
+            color: $color-white;
         }
     }
     
@@ -346,6 +392,10 @@ h3 {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+
+    @include mobile {
+        background-attachment: scroll;
+    }
     
     &__overlay {
         position: absolute;
@@ -403,6 +453,9 @@ h3 {
             padding: 8px 12px;
             margin-bottom: $spacing-lg;
         }
+
+        // Временно скрыто
+        display: none !important;
     }
     
     &__title {
@@ -440,6 +493,130 @@ h3 {
         @include mobile {
             flex-direction: column;
             gap: $spacing-sm;
+        }
+    }
+}
+
+// Packages Section (Тарифы)
+.packages {
+    padding: $spacing-xxl 0;
+}
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    align-items: start;
+}
+
+.package-card {
+    background: $color-white;
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 10px 30px rgba(15, 76, 92, 0.08);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid rgba(15, 76, 92, 0.1);
+    position: relative;
+    transition: transform $transition-normal;
+    
+    &:hover {
+        transform: translateY(-10px);
+    }
+    
+    &--popular {
+        border: 2px solid $color-accent;
+        transform: scale(1.05);
+        z-index: 2;
+        
+        &:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        @include mobile {
+            transform: scale(1);
+            
+            &:hover {
+                transform: translateY(-10px);
+            }
+        }
+    }
+    
+    &__header {
+        margin-bottom: $spacing-md;
+    }
+    
+    &__title {
+        font-size: 24px;
+        color: $color-primary;
+        margin: 0 0 5px;
+    }
+    
+    &__subtitle {
+        font-size: 14px;
+        color: $color-text-light;
+        margin-bottom: 5px;
+    }
+    
+    &__price {
+        font-size: 36px;
+        font-weight: $font-weight-bold;
+        color: $color-primary;
+        margin-top: 10px;
+        
+        span {
+            font-size: 16px;
+            font-weight: $font-weight-regular;
+            color: #999;
+        }
+    }
+    
+    &__body {
+        flex-grow: 1;
+    }
+    
+    &__footer {
+        margin-top: auto;
+    }
+}
+
+.popular-tag {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: $gradient-accent;
+    color: $color-white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.package-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    
+    li {
+        position: relative;
+        padding-left: 25px;
+        margin-bottom: 12px;
+        color: $color-text;
+        
+        &::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: $color-primary;
+            font-weight: $font-weight-bold;
+        }
+        
+        strong {
+            color: $color-primary;
         }
     }
 }
@@ -499,7 +676,7 @@ h3 {
 // Program Steps Section
 .program-steps {
     padding: $spacing-xxl 0;
-    background-image: url('../img/фон_3_градиент.png');
+    background-image: url('../img/bg_3_gradient.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -550,10 +727,29 @@ h3 {
     }
 }
 
+// Кнопка-ссылка "Подробнее"
+.btn-link {
+    background: none;
+    border: none;
+    color: $color-primary;
+    border-bottom: 1px dashed $color-primary;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 14px;
+    padding: 0;
+    font-family: $font-family-primary;
+    transition: all $transition-normal;
+    
+    &:hover {
+        color: $color-primary-dark;
+        border-bottom-color: $color-primary-dark;
+    }
+}
+
 // Procedures Section
 .procedures {
     padding: $spacing-xxl 0;
-    background-image: url('../img/фон_4_градиент.png');
+    background-image: url('../img/bg_4_gradient.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -666,7 +862,7 @@ h3 {
 // Team Section
 .team {
     padding: $spacing-xxl 0;
-    background-image: url('../img/фон_5_градиент.png');
+    background-image: url('../img/bg_5_gradient.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -864,33 +1060,13 @@ h3 {
     &:active {
         transform: translateY(0);
     }
-    
-    img {
-        width: 24px;
-        height: 24px;
-        filter: brightness(0) invert(1);
-        transition: transform $transition-normal;
-    }
-    
-    &:hover {
-        background: rgba($color-white, 0.2);
-        transform: translateY(-2px);
-        
-        img {
-            transform: scale(1.1);
-        }
-    }
-    
-    &:active {
-        transform: translateY(0);
-    }
-    
-    &__copyright {
-        text-align: center;
-        padding-top: $spacing-lg;
-        border-top: 1px solid rgba($color-white, 0.2);
-        opacity: 0.7;
-    }
+}
+
+.footer__copyright {
+    text-align: center;
+    padding-top: $spacing-lg;
+    border-top: 1px solid rgba($color-white, 0.2);
+    opacity: 0.7;
 }
 
 // Contact Form
@@ -985,6 +1161,33 @@ h3 {
         min-height: 1.25rem;
     }
     
+    .form-group--checkbox {
+        margin-bottom: $spacing-md;
+        
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            cursor: pointer;
+            color: rgba($color-white, 0.95);
+            font-size: $font-size-small;
+            
+            input[type="checkbox"] {
+                margin-top: 0.25rem;
+                flex-shrink: 0;
+            }
+            
+            a {
+                color: $color-accent;
+                text-decoration: underline;
+                
+                &:hover {
+                    color: lighten($color-accent, 10%);
+                }
+            }
+        }
+    }
+    
     .form-message {
         padding: 1rem;
         margin-top: 1rem;
@@ -1000,6 +1203,11 @@ h3 {
         
         &--error {
             background-color: #dc3545;
+            color: $color-white;
+        }
+        
+        &--warning {
+            background-color: #e6a23c;
             color: $color-white;
         }
     }
@@ -1507,6 +1715,16 @@ h3 {
             padding: $spacing-lg;
             max-height: 95vh;
         }
+
+        &--wide {
+            max-width: 800px;
+        }
+    }
+
+    &__body--scroll {
+        max-height: 60vh;
+        overflow-y: auto;
+        padding-right: 0.5rem;
     }
     
     &__close {
