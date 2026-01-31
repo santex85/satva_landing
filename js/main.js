@@ -456,6 +456,37 @@ function initGallery() {
         lightboxNext.addEventListener('click', showNext);
     }
     
+    // Свайп пальцем: влево — следующее, вправо — предыдущее
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var SWIPE_THRESHOLD = 50;
+    
+    lightbox.addEventListener('touchstart', function(e) {
+        if (e.touches.length !== 1) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    
+    lightbox.addEventListener('touchmove', function(e) {
+        if (!lightbox.classList.contains('lightbox--active') || e.touches.length !== 1) return;
+        var deltaX = Math.abs(e.touches[0].clientX - touchStartX);
+        var deltaY = Math.abs(e.touches[0].clientY - touchStartY);
+        if (deltaX > deltaY && deltaX > 30) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    
+    lightbox.addEventListener('touchend', function(e) {
+        if (!lightbox.classList.contains('lightbox--active') || e.changedTouches.length !== 1) return;
+        var endX = e.changedTouches[0].clientX;
+        var deltaX = endX - touchStartX;
+        if (deltaX < -SWIPE_THRESHOLD) {
+            showNext();
+        } else if (deltaX > SWIPE_THRESHOLD) {
+            showPrev();
+        }
+    }, { passive: true });
+    
     lightbox.addEventListener('click', function(e) {
         if (e.target === lightbox) {
             closeLightbox();

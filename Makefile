@@ -5,7 +5,7 @@ CSS_SRC := css/main.scss
 CSS_OUT := css/main.css
 PORT ?= 8765
 
-.PHONY: css build watch serve clean build-prod optimize-images help
+.PHONY: css build watch serve run stop-port clean build-prod optimize-images help
 
 # Собрать CSS из SCSS (по умолчанию)
 css build:
@@ -21,13 +21,22 @@ build-prod:
 watch:
 	$(SASS) $(CSS_SRC) $(CSS_OUT) --watch --style=expanded
 
+# Освободить порт, если занят (убить процесс на $(PORT))
+stop-port:
+	@pid=$$(lsof -ti :$(PORT) 2>/dev/null); \
+	if [ -n "$$pid" ]; then \
+		kill $$pid 2>/dev/null && echo "✓ Процесс на порту $(PORT) остановлен (PID $$pid)" || true; \
+	else \
+		echo "✓ Порт $(PORT) свободен"; \
+	fi
+
 # Запустить локальный сервер
 serve:
 	python3 -m http.server $(PORT)
 	@echo "→ http://localhost:$(PORT)/"
 
-# Собрать и запустить сервер (одна команда)
-run: css serve
+# Собрать CSS, освободить порт при необходимости и запустить сервер
+run: css stop-port serve
 
 # Удалить сгенерированный CSS
 clean:
@@ -49,8 +58,9 @@ help:
 	@echo "  make        — собрать CSS (то же что make css)"
 	@echo "  make css    — пересобрать стили из SCSS"
 	@echo "  make watch  — следить за SCSS и пересобирать"
-	@echo "  make serve  — запустить сервер на порту $(PORT)"
-	@echo "  make run    — собрать CSS и запустить сервер"
+	@echo "  make serve     — запустить сервер на порту $(PORT)"
+	@echo "  make stop-port — освободить порт $(PORT) (остановить процесс, если занят)"
+	@echo "  make run       — собрать CSS, освободить порт и запустить сервер"
 	@echo "  make clean  — удалить main.css и .map"
 	@echo "  make optimize-images — создать JPG из больших PNG (1200px, 80%%)"
 	@echo "  make build-prod   — собрать минифицированный CSS"
