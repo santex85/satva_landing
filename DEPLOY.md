@@ -105,12 +105,9 @@ ssh root@152.42.186.191 "cd /var/www/satva-landing && git pull origin main && ma
 
 ---
 
-## Google Maps (карта в футере)
+## Карта в футере
 
-Карта в футере встроена через **Google Maps Embed API**. В `index.html` в iframe карты используется плейсхолдер ключа: `KEY_GOOGLE_MAPS_EMBED`.
-
-- **Если ключ не подставлен:** на месте карты отображается блок «Нажмите, чтобы открыть карту» со ссылкой на Google Maps (Place ID Satva Samui).
-- **Чтобы показывать карту:** создать API key в [Google Cloud Console](https://console.cloud.google.com) (включить Maps Embed API), ограничить его по HTTP referrers (`https://satvasamui.site/*`, `http://localhost:*`), затем в `index.html` заменить строку `KEY_GOOGLE_MAPS_EMBED` в атрибуте `src` iframe карты на реальный ключ. Ключ не коммитить в репозиторий — подставлять при деплое на сервере (например, через `sed` или локальный конфиг).
+В футере отображаются **иконка и ссылка** на точку Satva Samui в Google Maps (открывается на стороне Google). Отдельный API-ключ Google Maps и эндпоинт `/api/config` **не используются**.
 
 ---
 
