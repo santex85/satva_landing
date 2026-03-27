@@ -1544,11 +1544,12 @@ h3 {
     }
 }
 
-// Плавающая кнопка связи
+// Плавающая кнопка связи (слева внизу — не пересекается с Tawk.to справа)
 .floating-button {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: max(30px, env(safe-area-inset-bottom, 0px));
+    left: max(30px, env(safe-area-inset-left, 0px));
+    right: auto;
     width: 60px;
     height: 60px;
     background: #25D366; // WhatsApp green
@@ -1565,8 +1566,8 @@ h3 {
     @include mobile {
         width: 56px;
         height: 56px;
-        bottom: 20px;
-        right: 20px;
+        bottom: max(20px, env(safe-area-inset-bottom, 0px));
+        left: max(20px, env(safe-area-inset-left, 0px));
     }
     
     svg {
