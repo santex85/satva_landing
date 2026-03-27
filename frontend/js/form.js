@@ -276,6 +276,26 @@ document.addEventListener('DOMContentLoaded', function () {
         if (successIcon) successIcon.style.display = 'none';
     }
 
+    var GENERIC_SUBMIT_ERROR = 'Ошибка отправки. Попробуйте позже или свяжитесь с нами по телефону.';
+
+    function messageFromApiError(status, body) {
+        if (status === 429) {
+            return 'Слишком много отправок с вашего адреса. Подождите минуту и попробуйте снова.';
+        }
+        if (!body || typeof body !== 'object') return null;
+        var detail = body.detail;
+        if (typeof detail === 'string' && detail.trim()) return detail;
+        if (Array.isArray(detail)) {
+            var parts = [];
+            for (var i = 0; i < detail.length; i++) {
+                var item = detail[i];
+                if (item && typeof item.msg === 'string') parts.push(item.msg);
+            }
+            if (parts.length) return parts.join(' ');
+        }
+        return null;
+    }
+
     contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -354,8 +374,21 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify(payload),
         })
             .then(function (response) {
+                return response.text().then(function (text) {
+                    var body = null;
+                    if (text) {
+                        try {
+                            body = JSON.parse(text);
+                        } catch (err) {
+                            body = null;
+                        }
+                    }
+                    return { ok: response.ok, status: response.status, body: body };
+                });
+            })
+            .then(function (r) {
                 setFormLoading(false);
-                if (response.ok) {
+                if (r.ok) {
                     if (window.SatvaAnalytics) window.SatvaAnalytics.trackEvent('form', 'submit', formMode);
                     showMessage('Спасибо! Мы свяжемся с вами в ближайшее время.', 'success');
                     contactForm.reset();
@@ -369,7 +402,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     setFormMode('contact');
                     resetTurnstile();
                 } else {
-                    showMessage('Ошибка отправки. Попробуйте позже или свяжитесь с нами по телефону.', 'error');
+                    var apiMsg = messageFromApiError(r.status, r.body);
+                    showMessage(apiMsg || GENERIC_SUBMIT_ERROR, 'error');
                     resetTurnstile();
                 }
             })

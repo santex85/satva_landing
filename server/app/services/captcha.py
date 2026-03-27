@@ -13,12 +13,34 @@ logger = logging.getLogger(__name__)
 TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify"
 
 
+def _host_is_localhost(request: Request) -> bool:
+    """Host с браузера при открытии http://localhost / 127.0.0.1 (Docker compose dev)."""
+    raw = (request.headers.get("host") or "").strip()
+    if not raw:
+        return False
+    if raw.startswith("["):
+        end = raw.find("]")
+        host = (raw[1:end] if end != -1 else "").lower()
+    else:
+        host, _, _ = raw.partition(":")
+        host = host.lower()
+    if host in ("localhost", "127.0.0.1", "::1"):
+        return True
+    if host.endswith(".localhost"):
+        return True
+    return False
+
+
 def verify_turnstile_or_skip(request: Request, captcha_token: str | None) -> None:
     """
-    If TURNSTILE_SECRET_KEY is empty and DEBUG is True — skip.
-    If secret is empty and not DEBUG — 503.
-    If secret is set — require non-empty token and verify with Cloudflare.
+    На localhost (Host header) — не проверяем Turnstile.
+    Если TURNSTILE_SECRET_KEY пустой и DEBUG — пропуск.
+    Если секрета нет и не DEBUG — 503.
+    Иначе — проверка токена у Cloudflare.
     """
+    if _host_is_localhost(request):
+        return
+
     secret = (settings.TURNSTILE_SECRET_KEY or "").strip()
     if not secret:
         if settings.DEBUG:
