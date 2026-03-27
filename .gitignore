@@ -41,6 +41,7 @@ yarn-error.log*
 
 # Environment variables
 .env
+.env.deploy
 .env.local
 .env.*.local
 

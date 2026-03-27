@@ -1238,6 +1238,27 @@ h3 {
 
 // Contact Form
 .contact-form {
+    .is-hidden {
+        display: none !important;
+    }
+
+    .form-mode-hint {
+        font-size: $font-size-small;
+        opacity: 0.95;
+        margin-bottom: $spacing-sm;
+    }
+
+    .form-booking-extra label {
+        display: block;
+        margin-bottom: $spacing-xs;
+        font-size: $font-size-small;
+        color: rgba($color-white, 0.95);
+    }
+
+    .form-group--turnstile {
+        min-height: 72px;
+    }
+
     .form-group {
         margin-bottom: $spacing-md;
         position: relative;
@@ -1973,6 +1994,11 @@ h3 {
         strong {
             color: $color-dark;
         }
+    }
+
+    &__cta {
+        margin-top: $spacing-lg;
+        margin-bottom: 0;
     }
 }
 

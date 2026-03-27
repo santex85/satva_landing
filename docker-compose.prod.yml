@@ -1,0 +1,52 @@
+# Прод: Postgres без публикации порта наружу; nginx только на 127.0.0.1:9080.
+# Перед запуском: задать POSTGRES_PASSWORD и согласовать с DATABASE_URL в server/.env
+# или переопределить DATABASE_URL целиком через environment app.
+#
+# Пример:
+#   export POSTGRES_PASSWORD='strong-secret'
+#   # В server/.env: DATABASE_URL=postgresql://satva:strong-secret@postgres:5432/satva
+#   docker compose -f docker-compose.prod.yml --env-file .env.deploy up -d --build
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-satva}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in environment or .env.deploy}
+      POSTGRES_DB: ${POSTGRES_DB:-satva}
+    volumes:
+      - satva_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-satva}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - ./server/.env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-satva}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-satva}
+    expose:
+      - "8000"
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "127.0.0.1:9080:80"
+    volumes:
+      - ./frontend:/var/www/static:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+    restart: unless-stopped
+
+volumes:
+  satva_postgres_data:

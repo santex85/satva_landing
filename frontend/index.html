@@ -120,7 +120,7 @@
                         </ul>
                     </div>
                     <div class="package-card__footer">
-                        <a href="#contact" class="btn btn--outline">Забронировать</a>
+                        <a href="#contact" class="btn btn--outline js-package-cta" data-package-slug="yoga">Забронировать</a>
                     </div>
                 </div>
 
@@ -141,7 +141,7 @@
                         </ul>
                     </div>
                     <div class="package-card__footer">
-                        <a href="#contact" class="btn btn--outline">Забронировать</a>
+                        <a href="#contact" class="btn btn--outline js-package-cta" data-package-slug="detox">Забронировать</a>
                     </div>
                 </div>
 
@@ -162,7 +162,7 @@
                         </ul>
                     </div>
                     <div class="package-card__footer">
-                        <a href="#contact" class="btn btn--outline">Забронировать</a>
+                        <a href="#contact" class="btn btn--outline js-package-cta" data-package-slug="panchakarma">Забронировать</a>
                     </div>
                 </div>
             </div>
@@ -532,8 +532,22 @@
                 <div class="footer__cta">
                     <h2 class="footer__title">Начните путь к обновлению уже сегодня</h2>
                     <p class="footer__subtitle">Индивидуальная программа оздоровления уже включена в стоимость тура.</p>
-                    <form class="contact-form" id="contactForm">
+                    <form class="contact-form" id="contactForm" action="/api/contact" method="POST">
                         <input type="text" name="website" id="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+                        <p id="formModeHint" class="form-mode-hint is-hidden" aria-live="polite"></p>
+                        <div id="formBookingExtra" class="form-booking-extra is-hidden">
+                            <div class="form-group">
+                                <label for="preferred_date">Желаемая дата (необязательно)</label>
+                                <input type="date" id="preferred_date" name="preferred_date" class="form-input" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="booking_comment">Комментарий (необязательно)</label>
+                                <textarea id="booking_comment" name="booking_comment" class="form-input" rows="2" maxlength="2000" placeholder="Удобное время связи, вопросы…"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group form-group--turnstile">
+                            <div id="turnstile-widget" class="turnstile-widget"></div>
+                        </div>
                         <div class="form-group">
                             <input type="text" id="name" name="name" class="form-input" placeholder="Ваше имя" required aria-describedby="name-error" aria-invalid="false" autocomplete="name">
                             <span class="form-icon form-icon--success" id="name-success-icon" aria-hidden="true">
@@ -631,6 +645,7 @@
                 <p><strong>Результат:</strong> На основе данных составляется персональная карта оздоровления: диета, режим дня, физические нагрузки и процедуры.</p>
                 
                 <p>Диагностику проводит <strong>Юлия Чернобаева</strong> — сертифицированный специалист по аюрведе, йоге и медитации, член НАМА.</p>
+                <p class="modal__cta"><button type="button" class="btn btn--primary js-booking-from-modal" data-procedure="Диагностика организма и «Веда Пульс»">Записаться на процедуру</button></p>
             </div>
         </div>
     </div>
@@ -652,6 +667,7 @@
                 </ul>
                 
                 <p>Все препараты направлены на борьбу с вирусами, бактериями и грибками, восстанавливая природную чистоту тела.</p>
+                <p class="modal__cta"><button type="button" class="btn btn--primary js-booking-from-modal" data-procedure="Аюрведическая терапия (препараты)">Записаться на процедуру</button></p>
             </div>
         </div>
     </div>
@@ -673,6 +689,7 @@
                 </ul>
                 
                 <p><strong>Важное условие:</strong> Соблюдение циркадных ритмов и отход ко сну до 22:00.</p>
+                <p class="modal__cta"><button type="button" class="btn btn--primary js-booking-from-modal" data-procedure="Detox-питание">Записаться на процедуру</button></p>
             </div>
         </div>
     </div>
@@ -694,6 +711,7 @@
                 </ul>
                 
                 <p>Инструктор <strong>Дмитрий Врубель</strong> разрабатывает индивидуальные программы, подбирая асаны, идеально подходящие вашей физиологии (по результатам Веда Пульс).</p>
+                <p class="modal__cta"><button type="button" class="btn btn--primary js-booking-from-modal" data-procedure="Йога и медитация">Записаться на процедуру</button></p>
             </div>
         </div>
     </div>
@@ -715,6 +733,7 @@
                 </ul>
                 
                 <p>Для мужчин предусмотрена программа «Бала» с препаратами для повышения иммунитета и энергии.</p>
+                <p class="modal__cta"><button type="button" class="btn btn--primary js-booking-from-modal" data-procedure="Клеточное омоложение (процедуры)">Записаться на процедуру</button></p>
             </div>
         </div>
     </div>
@@ -735,6 +754,7 @@
                 </ul>
                 
                 <p><strong>Финал программы:</strong> Вторая диагностика на комплексе «Веда Пульс», которая наглядно показывает позитивные изменения на физиологическом уровне.</p>
+                <p class="modal__cta"><button type="button" class="btn btn--primary js-booking-from-modal" data-procedure="Сопровождение экспертов">Записаться на процедуру</button></p>
             </div>
         </div>
     </div>

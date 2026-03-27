@@ -1,4 +1,6 @@
+from datetime import datetime
 from uuid import UUID
+
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
@@ -17,10 +19,22 @@ def list_leads(
     limit: int = Query(50, ge=1, le=100),
     offset: int = Query(0, ge=0),
     type_filter: str | None = Query(None, alias="type"),
+    created_after: datetime | None = Query(
+        None,
+        description="ISO 8601, заявки с created_at >= этого момента (UTC)",
+    ),
+    created_before: datetime | None = Query(
+        None,
+        description="ISO 8601, заявки с created_at <= этого момента (UTC)",
+    ),
 ):
     q = db.query(Lead).order_by(Lead.created_at.desc())
     if type_filter:
         q = q.filter(Lead.type == type_filter)
+    if created_after is not None:
+        q = q.filter(Lead.created_at >= created_after)
+    if created_before is not None:
+        q = q.filter(Lead.created_at <= created_before)
     leads = q.offset(offset).limit(limit).all()
     return leads
 

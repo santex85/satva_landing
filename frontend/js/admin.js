@@ -27,6 +27,10 @@
     loginMessage: null,
     leadsTableBody: null,
     leadsFilter: null,
+    dateFrom: null,
+    dateTo: null,
+    applyFiltersBtn: null,
+    clearDatesBtn: null,
     paginationPrev: null,
     paginationNext: null,
     paginationInfo: null,
@@ -40,20 +44,14 @@
   var state = {
     offset: 0,
     typeFilter: "",
+    createdAfter: "",
+    createdBefore: "",
     leadsData: [],
   };
 
   function apiUrl(path) {
-    var base = "";
-    if (typeof window !== "undefined" && window.location && window.location.pathname) {
-      var parts = window.location.pathname.split("/");
-      if (parts[parts.length - 1] && parts[parts.length - 1].indexOf(".html") !== -1) {
-        base = window.location.origin + window.location.pathname.replace(/\/[^/]+$/, "");
-      } else {
-        base = window.location.origin;
-      }
-    }
-    return (base || "") + "/api" + path;
+    var origin = typeof window !== "undefined" && window.location ? window.location.origin : "";
+    return origin + "/api" + path;
   }
 
   function showBlock(name) {
@@ -101,6 +99,12 @@
     params.set("offset", String(state.offset));
     if (state.typeFilter) {
       params.set("type", state.typeFilter);
+    }
+    if (state.createdAfter) {
+      params.set("created_after", state.createdAfter);
+    }
+    if (state.createdBefore) {
+      params.set("created_before", state.createdBefore);
     }
     var url = apiUrl("/leads") + "?" + params.toString();
     fetch(url, {
@@ -272,6 +276,10 @@
     els.loginMessage = document.getElementById("admin-login-message");
     els.leadsTableBody = document.getElementById("admin-leads-tbody");
     els.leadsFilter = document.getElementById("admin-leads-filter");
+    els.dateFrom = document.getElementById("admin-date-from");
+    els.dateTo = document.getElementById("admin-date-to");
+    els.applyFiltersBtn = document.getElementById("admin-apply-filters");
+    els.clearDatesBtn = document.getElementById("admin-clear-dates");
     els.paginationPrev = document.getElementById("admin-pagination-prev");
     els.paginationNext = document.getElementById("admin-pagination-next");
     els.paginationInfo = document.getElementById("admin-pagination-info");
@@ -338,6 +346,33 @@
     if (els.leadsFilter) {
       els.leadsFilter.addEventListener("change", function () {
         state.typeFilter = els.leadsFilter.value || "";
+        state.offset = 0;
+        loadLeads();
+      });
+    }
+
+    function datetimeLocalToIso(value) {
+      if (!value) return "";
+      var d = new Date(value);
+      if (isNaN(d.getTime())) return "";
+      return d.toISOString();
+    }
+
+    if (els.applyFiltersBtn) {
+      els.applyFiltersBtn.addEventListener("click", function () {
+        state.createdAfter = els.dateFrom && els.dateFrom.value ? datetimeLocalToIso(els.dateFrom.value) : "";
+        state.createdBefore = els.dateTo && els.dateTo.value ? datetimeLocalToIso(els.dateTo.value) : "";
+        state.offset = 0;
+        loadLeads();
+      });
+    }
+
+    if (els.clearDatesBtn) {
+      els.clearDatesBtn.addEventListener("click", function () {
+        if (els.dateFrom) els.dateFrom.value = "";
+        if (els.dateTo) els.dateTo.value = "";
+        state.createdAfter = "";
+        state.createdBefore = "";
         state.offset = 0;
         loadLeads();
       });

@@ -36,7 +36,15 @@
                     <select id="admin-leads-filter" class="admin-filter-select" aria-label="Фильтр по типу заявки">
                         <option value="">Все</option>
                         <option value="contact">contact</option>
+                        <option value="procedure_booking">procedure_booking</option>
+                        <option value="package_choice">package_choice</option>
                     </select>
+                    <div class="admin-date-filters" role="group" aria-label="Фильтр по дате создания">
+                        <label class="admin-date-label">с <input type="datetime-local" id="admin-date-from" class="admin-date-input"></label>
+                        <label class="admin-date-label">по <input type="datetime-local" id="admin-date-to" class="admin-date-input"></label>
+                        <button type="button" id="admin-apply-filters" class="admin-btn admin-btn--small">Применить</button>
+                        <button type="button" id="admin-clear-dates" class="admin-btn admin-btn--small admin-btn--secondary">Сбросить даты</button>
+                    </div>
                     <button type="button" id="admin-logout" class="admin-btn admin-btn--secondary">Выйти</button>
                 </div>
             </div>

@@ -7,7 +7,7 @@ from slowapi.middleware import SlowAPIMiddleware
 from app.config import settings
 from app.core.logging_config import setup_logging
 from app.core.middleware import RequestIdMiddleware
-from app.api import health, contact, auth, leads
+from app.api import health, contact, auth, leads, public_config, booking, package_request
 
 setup_logging(debug=settings.DEBUG)
 
@@ -28,7 +28,10 @@ app.add_middleware(
 )
 
 app.include_router(health.router, prefix="/api", tags=["health"])
+app.include_router(public_config.router, prefix="/api", tags=["config"])
 app.include_router(contact.router, prefix="/api", tags=["contact"])
+app.include_router(booking.router, prefix="/api", tags=["booking"])
+app.include_router(package_request.router, prefix="/api", tags=["package"])
 app.include_router(auth.router, prefix="/api", tags=["auth"])
 app.include_router(leads.router, prefix="/api", tags=["leads"])
 from app.core.rate_limit import limiter

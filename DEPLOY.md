@@ -9,13 +9,75 @@
 - **Хост:** `152.42.186.191`
 - **Пользователь:** `root` (SSH по ключу)
 - **Домен:** https://satvasamui.site
-- **Каталог проекта на сервере:** `/var/www/satva-landing`
-- **Владелец файлов:** `www-data:www-data` (для nginx)
-- **Веб-сервер:** nginx
+- **Каталог проекта на сервере:** `/var/www/satva-landing` (или иной путь к клону репозитория)
+- **Владелец файлов:** при раздаче только статики — `www-data`; при Docker — файлы репо могут принадлежать root/deploy-пользователю
+- **Веб-сервер:** nginx на хосте (TLS, Certbot) + опционально стек в Docker (см. ниже)
 
 ---
 
-## Шаги деплоя
+## Прод: Docker (`docker-compose.prod.yml`) + nginx на хосте
+
+Полный стек как в ТЗ: **Postgres + FastAPI + nginx в контейнерах**. Наружу на хосте публикуется только **127.0.0.1:9080** (контейнерный nginx). TLS и домен остаются на **системном nginx** с `proxy_pass` на `http://127.0.0.1:9080`.
+
+### 1. На сервере
+
+- Установлены **Docker** и **Docker Compose v2**.
+- В корне репозитория лежат `docker-compose.prod.yml`, `frontend/`, `server/`, `nginx.conf`.
+
+### 2. Секреты
+
+Создай файл **`server/.env`** (не в git): `JWT_SECRET`, `SMTP_*`, `TURNSTILE_SECRET_KEY`, `TURNSTILE_SITE_KEY`, `CORS_ORIGINS=https://satvasamui.site`, и т.д. (см. `server/.env.example`).
+
+Для Postgres задай пароль при запуске compose, например файл **`.env.deploy`** в корне репо (не коммитить):
+
+```env
+POSTGRES_USER=satva
+POSTGRES_PASSWORD=сгенерируй-надёжный-пароль
+POSTGRES_DB=satva
+```
+
+Переменная `DATABASE_URL` в сервисе `app` в `docker-compose.prod.yml` собирается из этих значений и должна совпадать с пользователем/паролем БД.
+
+### 3. Запуск
+
+```bash
+cd /path/to/satva_landing
+docker compose -f docker-compose.prod.yml --env-file .env.deploy up -d --build
+```
+
+Миграции Alembic выполняются при старте контейнера `app` (`docker-entrypoint.sh`).
+
+### 4. Nginx на хосте (HTTPS)
+
+Для `server_name satvasamui.site` вместо `root` на статику используй прокси на контейнер:
+
+```nginx
+location / {
+    proxy_pass http://127.0.0.1:9080;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+```
+
+Проверка: `nginx -t && systemctl reload nginx`.
+
+### 5. Капча Cloudflare Turnstile
+
+В панели Turnstile добавь хосты: `satvasamui.site`, при отладке — `localhost`. Ключи прописать в `server/.env`. Если секрет задан, а ключ сайта нет — виджет не появится; в проде должны быть оба.
+
+### 6. Обновление кода
+
+```bash
+git pull
+docker compose -f docker-compose.prod.yml --env-file .env.deploy up -d --build
+```
+
+---
+
+## Шаги деплоя (только статика, без Docker API)
 
 ### 1. Подключиться по SSH
 
@@ -46,22 +108,22 @@ git config --global --add safe.directory /var/www/satva-landing
 
 ### 4. Собрать CSS (обязательно)
 
-Проект использует SCSS; на сервере должен быть установлен `sass`. Сборка через Makefile:
+Статика в каталоге **`frontend/`**. SCSS собирается так:
 
 ```bash
-make css
+cd frontend && make css
 ```
 
-Или вручную:
+Или:
 
 ```bash
-sass css/main.scss css/main.css --style=expanded
+cd frontend && sass css/main.scss css/main.css --style=expanded
 ```
 
-Для production-сборки (минифицированный CSS):
+Production (минификация):
 
 ```bash
-make build-prod
+cd frontend && make build-prod
 ```
 
 ### 5. Права на файлы
@@ -87,13 +149,13 @@ nginx -t && systemctl reload nginx
 С локального компьютера (при настроенном доступе по SSH):
 
 ```bash
-ssh root@152.42.186.191 "cd /var/www/satva-landing && git config --global --add safe.directory /var/www/satva-landing 2>/dev/null; git fetch origin && git pull origin main && make css && chown -R www-data:www-data /var/www/satva-landing && nginx -t && systemctl reload nginx && echo Deploy OK"
+ssh root@152.42.186.191 "cd /var/www/satva-landing && git config --global --add safe.directory /var/www/satva-landing 2>/dev/null; git fetch origin && git pull origin main && cd frontend && make css && cd .. && chown -R www-data:www-data /var/www/satva-landing && nginx -t && systemctl reload nginx && echo Deploy OK"
 ```
 
 `safe.directory` выполняется один раз; при повторных деплоях можно использовать короткий вариант:
 
 ```bash
-ssh root@152.42.186.191 "cd /var/www/satva-landing && git pull origin main && make css && chown -R www-data:www-data /var/www/satva-landing && systemctl reload nginx && echo Deploy OK"
+ssh root@152.42.186.191 "cd /var/www/satva-landing && git pull origin main && cd frontend && make css && cd .. && chown -R www-data:www-data /var/www/satva-landing && systemctl reload nginx && echo Deploy OK"
 ```
 
 ---
@@ -117,7 +179,7 @@ ssh root@152.42.186.191 "cd /var/www/satva-landing && git pull origin main && ma
 - **sass** (Dart Sass) — для сборки CSS (`make css`). Установка, если нет:  
   - через npm: `npm install -g sass`  
   - или пакетом, если есть в репозитории ОС
-- **nginx** — раздача статики из `/var/www/satva-landing`
+- **nginx** — раздача статики из `/var/www/satva-landing/frontend` (актуальная вёрстка) или прокси на Docker (см. выше)
 
 ---
 

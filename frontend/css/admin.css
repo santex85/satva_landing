@@ -116,6 +116,27 @@
   gap: 1rem;
 }
 
+.admin-date-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+.admin-date-label {
+  font-size: 0.85rem;
+  color: #2d3436;
+}
+
+.admin-date-input {
+  margin-left: 0.25rem;
+  padding: 0.35rem 0.5rem;
+  border: 2px solid rgba(15, 76, 92, 0.25);
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+}
+
 .admin-filter-select {
   padding: 0.5rem 2rem 0.5rem 0.75rem;
   border: 2px solid rgba(15, 76, 92, 0.25);

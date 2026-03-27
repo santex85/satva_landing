@@ -27,12 +27,9 @@ class Settings(BaseSettings):
     SMTP_FROM: str = ""
     SMTP_TO: str = ""
 
-    # amoCRM
-    AMOCRM_SUBDOMAIN: str = ""
-    AMOCRM_CLIENT_ID: str = ""
-    AMOCRM_CLIENT_SECRET: str = ""
-    AMOCRM_ACCESS_TOKEN: str = ""
-    AMOCRM_REFRESH_TOKEN: str = ""
+    # Cloudflare Turnstile (empty secret + DEBUG=true = skip verification)
+    TURNSTILE_SECRET_KEY: str = ""
+    TURNSTILE_SITE_KEY: str = ""
 
     # Policy version for consents
     POLICY_VERSION: str = "2026-01-01"
