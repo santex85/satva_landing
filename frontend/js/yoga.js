@@ -161,11 +161,19 @@
             heroFades.forEach(function (el) { el.classList.add('is-visible'); });
         }
 
-        // Hero zoom-out — после полной загрузки картинки
+        // Hero zoom-out — после полной загрузки картинки (LCP: <img> внутри .yoga-hero__bg)
         var heroBg = document.querySelector('.yoga-hero__bg');
         if (heroBg) {
             var activate = function () { heroBg.classList.add('is-loaded'); };
-            if (document.readyState === 'complete') {
+            var heroImg = heroBg.querySelector('img');
+            if (heroImg) {
+                if (heroImg.complete) {
+                    activate();
+                } else {
+                    heroImg.addEventListener('load', activate, { once: true });
+                    heroImg.addEventListener('error', activate, { once: true });
+                }
+            } else if (document.readyState === 'complete') {
                 activate();
             } else {
                 window.addEventListener('load', activate, { once: true });
@@ -400,13 +408,13 @@
             }
         }
 
-        var openers = document.querySelectorAll('.js-open-yoga-privacy');
-        for (var oi = 0; oi < openers.length; oi++) {
-            openers[oi].addEventListener('click', function (e) {
-                e.preventDefault();
-                openModal();
-            });
-        }
+        document.addEventListener('click', function (e) {
+            var t = e.target;
+            var opener = t.closest ? t.closest('.js-open-yoga-privacy') : null;
+            if (!opener) return;
+            e.preventDefault();
+            openModal();
+        });
 
         if (overlay) {
             overlay.addEventListener('click', closeModal);

@@ -11,7 +11,7 @@ PORT ?= 8765
 
 .PHONY: css build watch serve run stop-port clean build-prod \
         yoga-css yoga-watch yoga-build-prod build-all yoga-clean \
-        optimize-images help
+        yoga-webp yoga-hero-variants optimize-images help
 
 # Собрать CSS из SCSS (по умолчанию)
 css build:
@@ -42,6 +42,23 @@ yoga-build-prod:
 
 yoga-clean:
 	rm -f $(YOGA_OUT) $(YOGA_OUT).map
+
+# Варианты hero для srcset: @1x = исходник, @2x = 2560px по длинной стороне
+yoga-hero-variants:
+	@test -f img/yoga_tour/hero_sunset.jpg || { echo "missing img/yoga_tour/hero_sunset.jpg"; exit 1; }
+	@cp -f img/yoga_tour/hero_sunset.jpg img/yoga_tour/hero_sunset@1x.jpg
+	@sips -Z 2560 img/yoga_tour/hero_sunset.jpg --out img/yoga_tour/hero_sunset@2x.jpg
+	@echo "✓ hero_sunset@1x.jpg, hero_sunset@2x.jpg (затем make yoga-webp)"
+
+# WebP для йога-тура: brew install webp
+yoga-webp:
+	@command -v cwebp >/dev/null 2>&1 || { echo "Install: brew install webp"; exit 1; }
+	@for f in img/yoga_tour/*.jpg img/yoga_tour/*.png; do \
+		[ -f "$$f" ] || continue; \
+		[ -s "$$f" ] || continue; \
+		cwebp -q 82 "$$f" -o "$${f%.*}.webp" -quiet; \
+	done
+	@echo "✓ WebP в img/yoga_tour/"
 
 # Удобный суммарный таргет: оба проекта (dev)
 build-all: build yoga-css
@@ -93,6 +110,7 @@ help:
 	@echo "    make yoga-css        — пересобрать yoga.css из SCSS"
 	@echo "    make yoga-watch      — watch-режим для yoga.scss"
 	@echo "    make yoga-build-prod — минифицированный yoga.css"
+	@echo "    make yoga-webp      — cwebp: *.webp рядом с jpg/png в img/yoga_tour/"
 	@echo "    make yoga-clean      — удалить yoga.css и .map"
 	@echo ""
 	@echo "  Общее:"

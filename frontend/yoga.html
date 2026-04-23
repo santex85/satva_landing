@@ -26,8 +26,12 @@
     <link rel="canonical" href="https://satvasamui.com/yoga">
     <link rel="icon" type="image/png" href="favicon.png">
 
-    <!-- Preload hero (основное изображение above-the-fold) -->
-    <link rel="preload" as="image" href="img/yoga_tour/hero_sunset.jpg">
+    <link rel="preconnect" href="https://challenges.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://embed.tawk.to" crossorigin>
+    <link rel="dns-prefetch" href="https://challenges.cloudflare.com">
+
+    <!-- Preload hero (LCP) — WebP + JPEG fallback в <picture> -->
+    <link rel="preload" as="image" href="img/yoga_tour/hero_sunset@1x.webp" type="image/webp">
 
     <link rel="stylesheet" href="css/yoga.css">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
@@ -104,8 +108,12 @@
 
     <!-- 02. Hero -->
     <section id="yogaHero" class="yoga-hero">
-        <div class="yoga-hero__bg"
-             style="background-image: url('img/yoga_tour/hero_sunset.jpg');"></div>
+        <div class="yoga-hero__bg">
+            <picture>
+                <source type="image/webp" srcset="img/yoga_tour/hero_sunset@1x.webp 1280w, img/yoga_tour/hero_sunset@2x.webp 2560w" sizes="100vw">
+                <img class="yoga-hero__bg-img" src="img/yoga_tour/hero_sunset@1x.jpg" srcset="img/yoga_tour/hero_sunset@1x.jpg 1280w, img/yoga_tour/hero_sunset@2x.jpg 2560w" sizes="100vw" alt="" width="1280" height="792" fetchpriority="high" decoding="async">
+            </picture>
+        </div>
         <div class="yoga-hero__overlay"></div>
         <div class="yoga-hero__content">
             <div class="yoga-hero__logo yoga-fade-in">
@@ -231,7 +239,7 @@
         </div>
 
         <div class="yoga-beach__photo yoga-parallax"
-             style="background-image: url('img/yoga_tour/beach_day.jpg');">
+             style="background-size: cover; background-repeat: no-repeat; background-position: center; background-image: image-set(url('img/yoga_tour/beach_day.webp') type('image/webp'), url('img/yoga_tour/beach_day.jpg') type('image/jpeg'));">
             <div class="yoga-beach__photo-overlay"></div>
         </div>
 
@@ -256,9 +264,12 @@
         <div class="yoga-program__container">
             <div class="yoga-program__block yoga-fade-in">
                 <div class="yoga-program__photo">
-                    <img src="img/yoga_tour/yoga_platform.jpg"
-                         alt="Йога-площадка на берегу моря в Satva Samui"
-                         loading="lazy">
+                    <picture>
+                        <source type="image/webp" srcset="img/yoga_tour/yoga_platform.webp">
+                        <img src="img/yoga_tour/yoga_platform.jpg"
+                             alt="Йога-площадка на берегу моря в Satva Samui"
+                             loading="lazy" width="2000" height="1236">
+                    </picture>
                 </div>
                 <div class="yoga-program__text">
                     <span class="yoga-program__label">Занятия йогой</span>
@@ -285,9 +296,12 @@
     <section id="yogaFood" class="yoga-food">
         <div class="yoga-food__container">
             <div class="yoga-food__photo yoga-fade-in">
-                <img src="img/yoga_tour/food_healthy.jpg"
-                     alt="Здоровое питание в Satva Samui"
-                     loading="lazy">
+                <picture>
+                    <source type="image/webp" srcset="img/yoga_tour/food_healthy.webp">
+                    <img src="img/yoga_tour/food_healthy.jpg"
+                         alt="Здоровое питание в Satva Samui"
+                         loading="lazy" width="4740" height="3164">
+                </picture>
             </div>
             <div class="yoga-food__text yoga-fade-in">
                 <span class="yoga-food__label">Питание</span>
@@ -321,9 +335,12 @@
             <div class="yoga-rooms__grid">
                 <div class="yoga-rooms__card yoga-fade-in">
                     <div class="yoga-rooms__photo">
-                        <img src="img/yoga_tour/room_twin.jpg"
-                             alt="Стандартный номер Twin"
-                             loading="lazy">
+                        <picture>
+                            <source type="image/webp" srcset="img/yoga_tour/room_twin.webp">
+                            <img src="img/yoga_tour/room_twin.jpg"
+                                 alt="Стандартный номер Twin"
+                                 loading="lazy" width="1200" height="960">
+                        </picture>
                     </div>
                     <div class="yoga-rooms__info">
                         <h3>Стандарт (Twin)</h3>
@@ -339,9 +356,12 @@
 
                 <div class="yoga-rooms__card yoga-fade-in">
                     <div class="yoga-rooms__photo">
-                        <img src="img/yoga_tour/room_superior.jpg"
-                             alt="Номер Superior с балдахином"
-                             loading="lazy">
+                        <picture>
+                            <source type="image/webp" srcset="img/yoga_tour/room_superior.webp">
+                            <img src="img/yoga_tour/room_superior.jpg"
+                                 alt="Номер Superior с балдахином"
+                                 loading="lazy" width="3000" height="2241">
+                        </picture>
                     </div>
                     <div class="yoga-rooms__info">
                         <h3>Superior</h3>
@@ -485,7 +505,10 @@
             <div class="yoga-team__grid">
                 <article class="yoga-team__card yoga-fade-in">
                     <div class="yoga-team__photo">
-                        <img src="img/yoga_tour/team_yulia.jpg" alt="Юлия" loading="lazy" width="800" height="1000">
+                        <picture>
+                            <source type="image/webp" srcset="img/yoga_tour/team_yulia.webp">
+                            <img src="img/yoga_tour/team_yulia.jpg" alt="Юлия" loading="lazy" width="800" height="1000">
+                        </picture>
                     </div>
                     <div class="yoga-team__body">
                         <h3 class="yoga-team__name">Юлия</h3>
@@ -495,7 +518,10 @@
                 </article>
                 <article class="yoga-team__card yoga-fade-in">
                     <div class="yoga-team__photo">
-                        <img src="img/yoga_tour/team_dmitry.jpg" alt="Дмитрий" loading="lazy" width="800" height="1000">
+                        <picture>
+                            <source type="image/webp" srcset="img/yoga_tour/team_dmitry.webp">
+                            <img src="img/yoga_tour/team_dmitry.jpg" alt="Дмитрий" loading="lazy" width="800" height="1000">
+                        </picture>
                     </div>
                     <div class="yoga-team__body">
                         <h3 class="yoga-team__name">Дмитрий</h3>
@@ -505,7 +531,10 @@
                 </article>
                 <article class="yoga-team__card yoga-fade-in">
                     <div class="yoga-team__photo">
-                        <img src="img/yoga_tour/team_galina.jpg" alt="Галина" loading="lazy" width="800" height="1000">
+                        <picture>
+                            <source type="image/webp" srcset="img/yoga_tour/team_galina.webp">
+                            <img src="img/yoga_tour/team_galina.jpg" alt="Галина" loading="lazy" width="800" height="1000">
+                        </picture>
                     </div>
                     <div class="yoga-team__body">
                         <h3 class="yoga-team__name">Галина</h3>
@@ -515,7 +544,10 @@
                 </article>
                 <article class="yoga-team__card yoga-fade-in">
                     <div class="yoga-team__photo">
-                        <img src="img/yoga_tour/team_kirill.jpg" alt="Кирилл" loading="lazy" width="800" height="1000">
+                        <picture>
+                            <source type="image/webp" srcset="img/yoga_tour/team_kirill.webp">
+                            <img src="img/yoga_tour/team_kirill.jpg" alt="Кирилл" loading="lazy" width="800" height="1000">
+                        </picture>
                     </div>
                     <div class="yoga-team__body">
                         <h3 class="yoga-team__name">Кирилл</h3>
@@ -525,7 +557,10 @@
                 </article>
                 <article class="yoga-team__card yoga-fade-in">
                     <div class="yoga-team__photo">
-                        <img src="img/yoga_tour/team_jet_li.jpg" alt="Jet Li" loading="lazy" width="800" height="1000">
+                        <picture>
+                            <source type="image/webp" srcset="img/yoga_tour/team_jet_li.webp">
+                            <img src="img/yoga_tour/team_jet_li.jpg" alt="Jet Li" loading="lazy" width="800" height="1000">
+                        </picture>
                     </div>
                     <div class="yoga-team__body">
                         <h3 class="yoga-team__name">Jet Li</h3>
@@ -547,7 +582,10 @@
         <div class="yoga-activities__container">
             <div class="yoga-activities__block yoga-activities__block--beige">
                 <div class="yoga-activities__photo">
-                    <img src="img/yoga_tour/excursion_temple.jpg" alt="Храм и природа Самуи" loading="lazy" width="1200" height="800">
+                    <picture>
+                        <source type="image/webp" srcset="img/yoga_tour/excursion_temple.webp">
+                        <img src="img/yoga_tour/excursion_temple.jpg" alt="Храм и природа Самуи" loading="lazy" width="1500" height="1028">
+                    </picture>
                 </div>
                 <div class="yoga-activities__text">
                     <h2>Остров, который удивляет</h2>
@@ -556,7 +594,10 @@
             </div>
             <div class="yoga-activities__block yoga-activities__block--mint yoga-activities__block--reverse">
                 <div class="yoga-activities__photo">
-                    <img src="img/yoga_tour/club_evening.jpg" alt="Сатва-клуб вечером" loading="lazy" width="1200" height="800">
+                    <picture>
+                        <source type="image/webp" srcset="img/yoga_tour/club_evening.webp">
+                        <img src="img/yoga_tour/club_evening.jpg" alt="Сатва-клуб вечером" loading="lazy" width="2008" height="3008">
+                    </picture>
                 </div>
                 <div class="yoga-activities__text">
                     <h2>Каждый вечер — живая атмосфера</h2>
@@ -616,7 +657,7 @@
 
     <!-- 14. Финальная форма -->
     <section id="yogaForm" class="yoga-form" aria-labelledby="yogaFormTitle">
-        <div class="yoga-form__bg" style="background-image: url('img/yoga_tour/cta_sunset.jpg');" role="presentation"></div>
+        <div class="yoga-form__bg" style="background-size: cover; background-repeat: no-repeat; background-position: center; background-image: image-set(url('img/yoga_tour/cta_sunset.webp') type('image/webp'), url('img/yoga_tour/cta_sunset.jpg') type('image/jpeg'));" role="presentation"></div>
         <div class="yoga-form__overlay" role="presentation"></div>
         <div class="yoga-form__container">
             <div class="yoga-form__panel yoga-fade-in">
@@ -692,5 +733,17 @@
         </div>
     </div>
 
+    <!-- Tawk.to — онлайн-чат (тот же виджет, что на главной) -->
+    <script>
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = "https://embed.tawk.to/69c64bd90c50e01c367c2f38/1jkn9gj36";
+            s1.charset = "UTF-8";
+            s1.setAttribute("crossorigin", "*");
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
 </body>
 </html>

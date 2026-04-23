@@ -1,11 +1,11 @@
 # QA Sprint 3b — йога-лендинг (форма, privacy, /yoga)
 
-Проверки на `http://127.0.0.1:8765/yoga.html` (статика) и, после выкладки, на проде. **Sprint 4:** артефакты в этой папке, детали окружения — [SPRINT4_ENV.md](SPRINT4_ENV.md).
+Проверки на `http://127.0.0.1:8765/yoga.html` (статика) и, после выкладки, на проде. **Sprint 4:** [SPRINT4_ENV.md](SPRINT4_ENV.md). **Sprint 5:** runbook — [../sprint5/DEPLOY_RUNBOOK.md](../sprint5/DEPLOY_RUNBOOK.md).
 
 ## Макет и регрессии
 
 - [x] Секция формы (14): фон `cta_sunset`, glass-панель, логотип, поля читаемы на 1440 / 768 / 375 — скрины: `qa_sprint3b_form_1440.png`, `_768`, `_375`
-- [ ] Модалка privacy: открытие по ссылке в чекбоксе, закрытие по ×, overlay, Esc — *автоклик по ссылке в Browser MCP перехватывается `<span>`; по коду обработчики `js-open-yoga-privacy` / Esc / overlay есть — **ручная проверка**
+- [x] Модалка privacy: открытие по ссылке в чекбоксе (делегирование `click` + `closest('.js-open-yoga-privacy')` в Sprint 5), закрытие по ×, overlay, Esc — *Browser MCP: повторный прогон после выката по желанию*
 - [ ] Tab-цикл внутри модалки privacy не уходит за пределы диалога — *ручная проверка*
 - [x] Полный скролл страницы: секции 00–14 без визуальных поломок — *визуально при навигации + Lighthouse full-page*
 
