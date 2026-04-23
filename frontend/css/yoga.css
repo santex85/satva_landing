@@ -1400,22 +1400,257 @@ a {
   margin: 0;
 }
 
-.yoga-form--placeholder {
-  min-height: 120px;
+.yoga-form {
+  position: relative;
+  padding: clamp(60px, 10vw, 100px) 24px;
+  overflow: hidden;
+}
+.yoga-form__bg {
+  position: absolute;
+  inset: 0;
+  background: #0F4C5C center/cover no-repeat;
+  z-index: 0;
+}
+.yoga-form__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(15, 76, 92, 0.88) 0%, rgba(15, 76, 92, 0.65) 50%, rgba(44, 110, 122, 0.55) 100%);
+  z-index: 1;
+}
+.yoga-form__container {
+  position: relative;
+  z-index: 2;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.yoga-form__panel {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 24px;
+  padding: clamp(24px, 4vw, 40px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+.yoga-form__logo {
+  margin: 0 auto 16px;
+  display: block;
+}
+.yoga-form h2 {
+  color: #FFFFFF;
+  text-align: center;
+  margin: 0 0 8px;
+  font-size: clamp(1.4rem, 3vw, 1.75rem);
+  line-height: 1.2;
+}
+.yoga-form__lead {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+.yoga-form .is-hidden {
+  display: none !important;
+}
+.yoga-form__status {
+  padding: 1rem 1.1rem;
+  border-radius: 1rem;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.yoga-form__status--success {
+  background: rgba(74, 124, 89, 0.95);
+  color: #FFFFFF;
+}
+.yoga-form__status--error {
+  background: rgba(220, 53, 69, 0.95);
+  color: #FFFFFF;
+}
+.yoga-form__turnstile {
+  min-height: 72px;
+  margin-bottom: 1rem;
+}
+.yoga-form__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.yoga-form__row {
+  margin-bottom: 1rem;
+}
+.yoga-form__label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+.yoga-form__input, .yoga-form__textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.9rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.yoga-form__input::placeholder, .yoga-form__textarea::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+.yoga-form__input:focus, .yoga-form__textarea:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
+}
+.yoga-form__input--error, .yoga-form__textarea--error {
+  border-color: #f5a5a5;
+  background: rgba(220, 53, 69, 0.15);
+}
+.yoga-form__textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+.yoga-form__error-text {
+  display: block;
+  min-height: 1.1rem;
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  color: #ffd0d0;
+}
+.yoga-form__checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+}
+.yoga-form__checkbox a {
+  color: #FF8E72;
+  text-decoration: underline;
+}
+.yoga-form__checkbox a:hover {
+  color: rgb(255, 166.5234042553, 144.6);
+}
+.yoga-form__checkbox input {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+.yoga-form .btn-yoga-primary--block {
+  display: block;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+.yoga-form .btn-yoga-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.yoga-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 24px;
-  text-align: center;
-  background: #0F4C5C;
-  color: rgba(255, 255, 255, 0.92);
-  font-size: 1.02rem;
+  padding: 16px;
+  box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
-.yoga-form--placeholder .yoga-form__inner {
-  max-width: 520px;
+.yoga-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
-.yoga-form--placeholder p {
+.yoga-modal[hidden] {
+  display: none !important;
+}
+.yoga-modal.is-open {
+  display: flex !important;
+}
+.yoga-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 76, 92, 0.78);
+}
+.yoga-modal__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  max-height: min(88vh, 720px);
+  background: #F7F5F2;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.yoga-modal__content--wide {
+  max-width: min(720px, 100vw - 32px);
+}
+.yoga-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(15, 76, 92, 0.12);
+  color: #0F4C5C;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+.yoga-modal__close:hover {
+  background: rgba(15, 76, 92, 0.2);
+}
+.yoga-modal__title {
   margin: 0;
+  padding: 1.25rem 3rem 0.5rem 1.25rem;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  color: #0F4C5C;
+  flex-shrink: 0;
+}
+.yoga-modal__body {
+  padding: 0.5rem 1.25rem 1.5rem;
+  color: #2D3436;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.yoga-modal__body h3 {
+  color: #0F4C5C;
+  font-size: 1.05rem;
+  margin: 1rem 0 0.4rem;
+}
+.yoga-modal__body ul {
+  margin: 0.25rem 0 0.5rem 1.1rem;
+}
+.yoga-modal__body p {
+  margin: 0.5rem 0;
+}
+.yoga-modal__body--scroll {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /*# sourceMappingURL=yoga.css.map */

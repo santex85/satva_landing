@@ -82,7 +82,10 @@ location / {
 
 ### 6. Капча Cloudflare Turnstile
 
-В панели Turnstile добавь хосты: `satvasamui.site`, при отладке — `localhost`. Ключи прописать в `server/.env`. Если секрет задан, а ключ сайта нет — виджет не появится; в проде должны быть оба.
+В панели Cloudflare Turnstile в списке **доменов сайта** (allowed hostnames) должны быть: **`satvasamui.site`**, а для локальной отладки — **`localhost`**, **`127.0.0.1`**.  
+Страница **йога-тура** (`/yoga` и `/yoga.html`) использует тот же `turnstileSiteKey` с бэкенда (`GET /api/public-config`); отдельный ключ не нужен.
+
+Ключи прописать в `server/.env`. Если секрет задан, а ключ сайта нет — виджет не появится; в проде должны быть оба.
 
 Локально при открытии сайта как `http://localhost/…` или `http://127.0.0.1/…` бэкенд **не требует** Turnstile (проверка отключена по заголовку `Host`). На бою с реальным доменом капча обязательна, если задан `TURNSTILE_SECRET_KEY`.
 
@@ -173,8 +176,10 @@ ssh root@152.42.186.191 "cd /var/www/satva-landing && git config --global --add 
 `safe.directory` выполняется один раз; при повторных деплоях можно использовать короткий вариант:
 
 ```bash
-ssh root@152.42.186.191 "cd /var/www/satva-landing && git pull origin main && cd frontend && make css && cd .. && chown -R www-data:www-data /var/www/satva-landing && systemctl reload nginx && echo Deploy OK"
+ssh root@152.42.186.191 "cd /var/www/satva-landing && git pull origin main && cd frontend && make css && make yoga-css && cd .. && chown -R www-data:www-data /var/www/satva-landing && systemctl reload nginx && echo Deploy OK"
 ```
+
+Для продакшн-CSS (минификация): `make build-prod && make yoga-build-prod` вместо `make css && make yoga-css`.
 
 ---
 
@@ -188,6 +193,15 @@ ssh root@152.42.186.191 "cd /var/www/satva-landing && git pull origin main && cd
 ## Карта в футере
 
 В футере отображаются **иконка и ссылка** на точку Satva Samui в Google Maps (открывается на стороне Google). Отдельный API-ключ Google Maps и эндпоинт `/api/config` **не используются**.
+
+---
+
+## Лендинг йога-тура (`/yoga`)
+
+- **Файл:** `frontend/yoga.html`; статика: `css/yoga.css`, `js/yoga.js`, `img/yoga_tour/`, `video/`.
+- **Nginx (Docker):** в корневом `nginx.conf` задано `location = /yoga { rewrite ^ /yoga.html last; }` — открытие `https://домен/yoga` без `.html`.
+- **Сборка CSS в проде:** из каталога `frontend/`: `make yoga-build-prod` (минифицированный `yoga.css`). В составной деплой имеет смысл включать и `make build-prod` (главный лендинг), и `make yoga-build-prod`.
+- **Форма** на лендинге шлёт `POST /api/booking` (JSON) — тот же бэкенд, что и форма бронирования на `index.html`.
 
 ---
 
