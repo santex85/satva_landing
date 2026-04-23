@@ -43,14 +43,13 @@ yoga-build-prod:
 yoga-clean:
 	rm -f $(YOGA_OUT) $(YOGA_OUT).map
 
-# Варианты hero для srcset: @1x = исходник, @2x = 2560px по длинной стороне
+# Копия hero для HTML: исходник max 1280px — @2x не делаем (апскейл ухудшает качество)
 yoga-hero-variants:
 	@test -f img/yoga_tour/hero_sunset.jpg || { echo "missing img/yoga_tour/hero_sunset.jpg"; exit 1; }
 	@cp -f img/yoga_tour/hero_sunset.jpg img/yoga_tour/hero_sunset@1x.jpg
-	@sips -Z 2560 img/yoga_tour/hero_sunset.jpg --out img/yoga_tour/hero_sunset@2x.jpg
-	@echo "✓ hero_sunset@1x.jpg, hero_sunset@2x.jpg (затем make yoga-webp)"
+	@echo "✓ hero_sunset@1x.jpg (затем: cwebp -q 90 hero_sunset@1x.jpg -o hero_sunset@1x.webp && make yoga-webp)"
 
-# WebP для йога-тура: brew install webp
+# WebP для йога-тура: brew install webp (по умолчанию -q 82; hero/большие градиенты — пересобрать вручную: cwebp -q 90 hero_sunset.jpg -o hero_sunset.webp)
 yoga-webp:
 	@command -v cwebp >/dev/null 2>&1 || { echo "Install: brew install webp"; exit 1; }
 	@for f in img/yoga_tour/*.jpg img/yoga_tour/*.png; do \

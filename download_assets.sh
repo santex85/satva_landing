@@ -88,8 +88,7 @@ declare -A PHOTOS=(
   ["club_evening.jpg"]="https://static.wixstatic.com/media/04a618_3a1dc61c6d7e41a499618b392de94df2~mv2.jpg"
   ["club_dance.jpg"]="https://static.wixstatic.com/media/04a618_2d9ec3ff7e2441cd87f251808c350aa3~mv2.jpg"
 
-  # Финальный CTA
-  ["cta_sunset.jpg"]="https://static.wixstatic.com/media/1c4919_42e38cb27f854e6b8cc8cec78c937f8c~mv2.png"
+  # Финальный CTA в yoga.html: фон формы — beach_sunset (не cta_sunset; старый PNG с wix давал битый/пустой файл)
 )
 
 for name in "${!PHOTOS[@]}"; do

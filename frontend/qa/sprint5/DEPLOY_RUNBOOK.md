@@ -1,5 +1,15 @@
 # Runbook: деплой satva_landing (Docker + prod smoke)
 
+## Диагностика до выката (Sprint 6)
+
+Вставьте вывод трёх команд в тикет / чат (см. также [../sprint6/PROD_SMOKE.md](../sprint6/PROD_SMOKE.md)):
+
+```bash
+ssh root@152.42.186.191 "ls -la /var/www/satva-landing/frontend/yoga.html"
+ssh root@152.42.186.191 "docker ps"
+ssh root@152.42.186.191 "grep -R server_name /etc/nginx/sites-enabled/ 2>/dev/null | head -20"
+```
+
 ## Быстрый выкат (Docker на хосте)
 
 ```bash
