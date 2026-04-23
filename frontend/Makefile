@@ -3,9 +3,15 @@
 SASS := sass
 CSS_SRC := css/main.scss
 CSS_OUT := css/main.css
+
+YOGA_SRC := css/yoga.scss
+YOGA_OUT := css/yoga.css
+
 PORT ?= 8765
 
-.PHONY: css build watch serve run stop-port clean build-prod optimize-images help
+.PHONY: css build watch serve run stop-port clean build-prod \
+        yoga-css yoga-watch yoga-build-prod build-all yoga-clean \
+        optimize-images help
 
 # Собрать CSS из SCSS (по умолчанию)
 css build:
@@ -21,6 +27,27 @@ build-prod:
 watch:
 	$(SASS) $(CSS_SRC) $(CSS_OUT) --watch --style=expanded
 
+# --- Yoga tour (yoga.html) ---------------------------------------------------
+
+yoga-css:
+	$(SASS) $(YOGA_SRC) $(YOGA_OUT) --style=expanded
+	@echo "✓ $(YOGA_OUT) собран"
+
+yoga-watch:
+	$(SASS) $(YOGA_SRC) $(YOGA_OUT) --watch --style=expanded
+
+yoga-build-prod:
+	$(SASS) $(YOGA_SRC) $(YOGA_OUT) --style=compressed --no-source-map
+	@echo "✓ $(YOGA_OUT) (production) собран"
+
+yoga-clean:
+	rm -f $(YOGA_OUT) $(YOGA_OUT).map
+
+# Удобный суммарный таргет: оба проекта (dev)
+build-all: build yoga-css
+
+# -----------------------------------------------------------------------------
+
 # Освободить порт, если занят (убить процесс на $(PORT))
 stop-port:
 	@pid=$$(lsof -ti :$(PORT) 2>/dev/null); \
@@ -35,12 +62,13 @@ serve:
 	python3 -m http.server $(PORT)
 	@echo "→ http://localhost:$(PORT)/"
 
-# Собрать CSS, освободить порт при необходимости и запустить сервер
-run: css stop-port serve
+# Собрать CSS (оба проекта), освободить порт при необходимости и запустить сервер
+run: build-all stop-port serve
 
 # Удалить сгенерированный CSS
 clean:
 	rm -f css/main.css css/main.css.map
+	rm -f css/yoga.css css/yoga.css.map
 
 # Оптимизация больших изображений (resize + JPEG 80%) — процедуры и команда
 IMG_OPT := img/Shirodhara.png img/adbhianga.png img/antiage.png img/ayurvedic_therapy.png img/diagnostic.png img/doctor.png img/pinndasvedana.png img/smuthi.png img/udvartana.png img/yog_lady.png img/yog_man.png img/yoga.png img/relax2.png
@@ -55,13 +83,23 @@ optimize-images:
 
 help:
 	@echo "Satva Landing — команды:"
-	@echo "  make        — собрать CSS (то же что make css)"
-	@echo "  make css    — пересобрать стили из SCSS"
-	@echo "  make watch  — следить за SCSS и пересобирать"
-	@echo "  make serve     — запустить сервер на порту $(PORT)"
-	@echo "  make stop-port — освободить порт $(PORT) (остановить процесс, если занят)"
-	@echo "  make run       — собрать CSS, освободить порт и запустить сервер"
-	@echo "  make clean  — удалить main.css и .map"
-	@echo "  make optimize-images — создать JPG из больших PNG (1200px, 80%%)"
-	@echo "  make build-prod   — собрать минифицированный CSS"
-	@echo "  make help   — эта справка"
+	@echo ""
+	@echo "  Основной лендинг (index.html):"
+	@echo "    make / make css      — пересобрать main.css из SCSS"
+	@echo "    make watch           — watch-режим для main.scss"
+	@echo "    make build-prod      — минифицированный main.css"
+	@echo ""
+	@echo "  Йога-тур (yoga.html):"
+	@echo "    make yoga-css        — пересобрать yoga.css из SCSS"
+	@echo "    make yoga-watch      — watch-режим для yoga.scss"
+	@echo "    make yoga-build-prod — минифицированный yoga.css"
+	@echo "    make yoga-clean      — удалить yoga.css и .map"
+	@echo ""
+	@echo "  Общее:"
+	@echo "    make build-all       — собрать main.css + yoga.css (dev)"
+	@echo "    make serve           — запустить сервер на порту $(PORT)"
+	@echo "    make stop-port       — освободить порт $(PORT)"
+	@echo "    make run             — build-all + освободить порт + запустить сервер"
+	@echo "    make clean           — удалить все сгенерированные CSS"
+	@echo "    make optimize-images — создать JPG из больших PNG (1200px, 80%%)"
+	@echo "    make help            — эта справка"

@@ -1,0 +1,144 @@
+// ============================================================
+// 02. Hero
+// Fullscreen (100vh) с фоном hero_sunset.jpg, тиловым оверлеем,
+// логотипом, заголовком, ценой, двумя CTA и скролл-хинтом внизу.
+// ============================================================
+
+.yoga-hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+
+    &__bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center 30%;
+        transform: scale(1.05);
+        transition: transform 8s ease;
+
+        &.is-loaded { transform: scale(1); }
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            160deg,
+            rgba(92, 29, 58, 0.75) 0%,
+            rgba(15, 76, 92, 0.60) 50%,
+            rgba(9, 54, 66, 0.80) 100%
+        );
+    }
+
+    &__content {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+        padding: 0 24px;
+        color: $color-white;
+    }
+
+    &__logo {
+        margin-bottom: 32px;
+
+        img {
+            height: 80px;
+            width: auto;
+            margin: 0 auto;
+        }
+    }
+
+    &__title {
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        font-weight: 700;
+        line-height: 1.15;
+        margin: 0 0 20px;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+
+        span {
+            display: block;
+            font-size: 0.65em;
+            font-weight: 600;
+            opacity: 0.9;
+            letter-spacing: 0.05em;
+            margin-top: 8px;
+        }
+    }
+
+    &__subtitle {
+        font-size: clamp(1rem, 2vw, 1.15rem);
+        line-height: 1.7;
+        opacity: 0.9;
+        margin: 0 0 40px;
+    }
+
+    &__price {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 48px;
+
+        &-value {
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 700;
+            color: $color-accent;
+            line-height: 1;
+            text-shadow: 0 2px 20px rgba(255, 142, 114, 0.4);
+        }
+
+        &-label {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        &-note {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    &__scroll-hint {
+        position: absolute;
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        pointer-events: none;
+    }
+
+    &__scroll-arrow {
+        width: 16px;
+        height: 16px;
+        border-right: 2px solid rgba(255, 255, 255, 0.6);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+        transform: rotate(45deg);
+        animation: yogaScrollBounce 1.5s ease-in-out infinite;
+    }
+}
+
+@keyframes yogaScrollBounce {
+    0%, 100% { transform: rotate(45deg) translate(0, 0); }
+    50%       { transform: rotate(45deg) translate(4px, 4px); }
+}

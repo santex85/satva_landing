@@ -1,0 +1,510 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-on-scroll {
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.animate-on-scroll.animated {
+  opacity: 1;
+}
+.animate-on-scroll.slide-up {
+  transform: translateY(30px);
+}
+.animate-on-scroll.slide-up.animated {
+  transform: translateY(0);
+}
+.animate-on-scroll.slide-left {
+  transform: translateX(-30px);
+}
+.animate-on-scroll.slide-left.animated {
+  transform: translateX(0);
+}
+.animate-on-scroll.slide-right {
+  transform: translateX(30px);
+}
+.animate-on-scroll.slide-right.animated {
+  transform: translateX(0);
+}
+.animate-on-scroll.fade-scale {
+  transform: scale(0.9);
+}
+.animate-on-scroll.fade-scale.animated {
+  transform: scale(1);
+}
+
+.animate-delay-1 {
+  transition-delay: 0.1s;
+}
+
+.animate-delay-2 {
+  transition-delay: 0.2s;
+}
+
+.animate-delay-3 {
+  transition-delay: 0.3s;
+}
+
+.animate-delay-4 {
+  transition-delay: 0.4s;
+}
+
+.animate-delay-5 {
+  transition-delay: 0.5s;
+}
+
+.animate-delay-6 {
+  transition-delay: 0.6s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #2D3436;
+  background: #F7F5F2;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+.yoga-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.yoga-container--wide {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.yoga-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.yoga-fade-in.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.btn-yoga-primary {
+  display: inline-block;
+  background: #FF8E72;
+  color: #FFFFFF;
+  padding: 16px 40px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(255, 142, 114, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.btn-yoga-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255, 142, 114, 0.5);
+}
+.btn-yoga-primary.btn--small {
+  padding: 10px 22px;
+  font-size: 0.85rem;
+}
+
+.btn-yoga-secondary {
+  display: inline-block;
+  background: transparent;
+  color: #FFFFFF;
+  padding: 14px 32px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.btn-yoga-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #FFFFFF;
+}
+
+.yoga-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: #FF8E72;
+  z-index: 9999;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+.yoga-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  background: transparent;
+  transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+}
+.yoga-header--scrolled {
+  background: #0F4C5C;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  padding: 12px 0;
+}
+.yoga-header__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.yoga-header__logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+.yoga-header__logo img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+.yoga-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.yoga-header__nav a {
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+.yoga-header__nav a:hover {
+  opacity: 1;
+}
+.yoga-header__nav a.btn-yoga-primary {
+  opacity: 1;
+}
+.yoga-header__burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.yoga-header__burger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #FFFFFF;
+  margin: 0 auto;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+@media (max-width: 768px) {
+  .yoga-header__burger {
+    display: flex;
+  }
+}
+.yoga-header__burger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.yoga-header__burger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.yoga-header__burger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .yoga-header__nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    max-width: 85vw;
+    height: 100vh;
+    background: #0F4C5C;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 24px;
+    padding: 40px;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+    transition: right 0.3s ease;
+  }
+  .yoga-header__nav.is-open {
+    right: 0;
+  }
+  .yoga-header__nav a {
+    font-size: 1.2rem;
+    padding: 12px 0;
+    width: 100%;
+  }
+}
+.yoga-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+.yoga-hero__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 30%;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+}
+.yoga-hero__bg.is-loaded {
+  transform: scale(1);
+}
+.yoga-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(92, 29, 58, 0.75) 0%, rgba(15, 76, 92, 0.6) 50%, rgba(9, 54, 66, 0.8) 100%);
+}
+.yoga-hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  padding: 0 24px;
+  color: #FFFFFF;
+}
+.yoga-hero__logo {
+  margin-bottom: 32px;
+}
+.yoga-hero__logo img {
+  height: 80px;
+  width: auto;
+  margin: 0 auto;
+}
+.yoga-hero__title {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 20px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+.yoga-hero__title span {
+  display: block;
+  font-size: 0.65em;
+  font-weight: 600;
+  opacity: 0.9;
+  letter-spacing: 0.05em;
+  margin-top: 8px;
+}
+.yoga-hero__subtitle {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.7;
+  opacity: 0.9;
+  margin: 0 0 40px;
+}
+.yoga-hero__price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 48px;
+}
+.yoga-hero__price-value {
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 700;
+  color: #FF8E72;
+  line-height: 1;
+  text-shadow: 0 2px 20px rgba(255, 142, 114, 0.4);
+}
+.yoga-hero__price-label {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.yoga-hero__price-note {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+.yoga-hero__buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.yoga-hero__scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.yoga-hero__scroll-arrow {
+  width: 16px;
+  height: 16px;
+  border-right: 2px solid rgba(255, 255, 255, 0.6);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+  transform: rotate(45deg);
+  animation: yogaScrollBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes yogaScrollBounce {
+  0%, 100% {
+    transform: rotate(45deg) translate(0, 0);
+  }
+  50% {
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+}
+.yoga-offer-banner {
+  background: #0F4C5C;
+  padding: clamp(16px, 3vw, 24px);
+}
+.yoga-offer-banner__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.yoga-offer-banner__text {
+  color: #FFFFFF;
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.95;
+}
+.yoga-offer-banner__text strong {
+  color: #FF8E72;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.yoga-offer-banner__cta {
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 1px solid #FF8E72;
+  padding-bottom: 2px;
+  transition: color 0.2s ease;
+}
+.yoga-offer-banner__cta:hover {
+  color: #FF8E72;
+}
+
+/*# sourceMappingURL=yoga.css.map */

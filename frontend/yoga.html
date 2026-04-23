@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0F4C5C">
+
+    <title>Satva Samui — Йога-тур на Самуи | 70$ всё включено</title>
+    <meta name="description" content="Йога-тур на острове Самуи от 70$ в сутки. Всё включено: проживание у моря, 2 занятия йогой в день, питание, аюрведические процедуры. Отель Satva Samui.">
+    <meta name="keywords" content="йога тур Самуи, йога отдых Таиланд, Satva Samui, йога отель, всё включено Самуи">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://satvasamui.com/yoga">
+    <meta property="og:title" content="Satva Samui — Йога-тур на Самуи | 70$ всё включено">
+    <meta property="og:description" content="Йога, пляж, аюрведа и полное отключение от суеты. От 70$ в сутки, всё включено.">
+    <meta property="og:image" content="https://satvasamui.com/img/yoga_tour/hero_sunset.jpg">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Satva Samui — Йога-тур на Самуи | 70$ всё включено">
+    <meta name="twitter:description" content="Йога, пляж, аюрведа и полное отключение от суеты. От 70$ в сутки, всё включено.">
+    <meta name="twitter:image" content="https://satvasamui.com/img/yoga_tour/hero_sunset.jpg">
+
+    <link rel="canonical" href="https://satvasamui.com/yoga">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Preload hero (основное изображение above-the-fold) -->
+    <link rel="preload" as="image" href="img/yoga_tour/hero_sunset.jpg">
+
+    <!-- Structured Data: LodgingBusiness (упрощённая версия; расширим в второй рывок) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LodgingBusiness",
+        "name": "Satva Samui Retreat Hotel",
+        "description": "Йога-отель на острове Самуи, Таиланд",
+        "url": "https://satvasamui.com/yoga",
+        "image": "https://satvasamui.com/img/yoga_tour/hero_sunset.jpg",
+        "priceRange": "$$",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Самуи",
+            "addressCountry": "TH"
+        },
+        "telephone": "+66950165058"
+    }
+    </script>
+
+    <link rel="stylesheet" href="css/yoga.css">
+    <script defer src="js/yoga.js"></script>
+</head>
+<body>
+
+    <!-- 00. Scroll Progress Bar -->
+    <div id="yogaScrollProgress" class="yoga-scroll-progress"></div>
+
+    <!-- 01. Header -->
+    <header id="yogaHeader" class="yoga-header">
+        <div class="yoga-header__inner">
+            <a href="#yogaHero" class="yoga-header__logo" aria-label="Satva Samui">
+                <img src="img/yoga_tour/logo.png" alt="Satva Samui" width="120">
+            </a>
+            <button type="button"
+                    id="yogaBurger"
+                    class="yoga-header__burger"
+                    aria-label="Открыть меню"
+                    aria-expanded="false"
+                    aria-controls="yogaNav">
+                <span></span><span></span><span></span>
+            </button>
+            <nav id="yogaNav" class="yoga-header__nav" aria-label="Основная навигация">
+                <a href="#yogaIncludes">Что включено</a>
+                <a href="#yogaProgram">Программа</a>
+                <a href="#yogaRooms">Номера</a>
+                <a href="#yogaTeam">Команда</a>
+                <a href="#yogaForm" class="btn-yoga-primary btn--small">Забронировать</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 02. Hero -->
+    <section id="yogaHero" class="yoga-hero">
+        <div class="yoga-hero__bg"
+             style="background-image: url('img/yoga_tour/hero_sunset.jpg');"></div>
+        <div class="yoga-hero__overlay"></div>
+        <div class="yoga-hero__content">
+            <div class="yoga-hero__logo yoga-fade-in">
+                <img src="img/yoga_tour/logo.png" alt="Satva Samui Retreat Hotel" height="80">
+            </div>
+            <h1 class="yoga-hero__title yoga-fade-in">
+                Йога-тур на Самуи<br>
+                <span>на ваши даты</span>
+            </h1>
+            <p class="yoga-hero__subtitle yoga-fade-in">
+                Утренняя йога у моря · Здоровое питание · Аюрведические процедуры<br>
+                Ваш полный перезапуск на острове мечты
+            </p>
+            <div class="yoga-hero__price yoga-fade-in">
+                <span class="yoga-hero__price-value">70&nbsp;$</span>
+                <span class="yoga-hero__price-label">в сутки · всё включено</span>
+                <span class="yoga-hero__price-note">при двухместном размещении</span>
+            </div>
+            <div class="yoga-hero__buttons yoga-fade-in">
+                <a href="#yogaForm" class="btn-yoga-primary">Оставить заявку на даты</a>
+                <a href="#yogaIncludes" class="btn-yoga-secondary">Что входит в тур</a>
+            </div>
+        </div>
+        <div class="yoga-hero__scroll-hint" aria-hidden="true">
+            <span>листать</span>
+            <div class="yoga-hero__scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- 03. Offer Banner -->
+    <div id="yogaOfferBanner" class="yoga-offer-banner">
+        <div class="yoga-offer-banner__inner">
+            <p class="yoga-offer-banner__text">
+                <strong>70&nbsp;$ в сутки · Всё включено</strong>
+                &nbsp;—&nbsp;
+                проживание, 2 занятия йогой в день, завтрак и обед, аюрведические процедуры
+            </p>
+            <a href="#yogaForm" class="yoga-offer-banner__cta">Забронировать →</a>
+        </div>
+    </div>
+
+    <!-- 04. Что включено -->
+    <section id="yogaIncludes" class="yoga-includes"></section>
+
+    <!-- 05. Пляж -->
+    <section id="yogaBeach" class="yoga-beach"></section>
+
+    <!-- 06. Йога / программа -->
+    <section id="yogaProgram" class="yoga-program"></section>
+
+    <!-- 07. Питание -->
+    <section id="yogaFood" class="yoga-food"></section>
+
+    <!-- 08. Номера -->
+    <section id="yogaRooms" class="yoga-rooms"></section>
+
+    <!-- 09. Видео-отзывы -->
+    <section id="yogaReviews" class="yoga-reviews"></section>
+
+    <!-- 10. Urgency CTA -->
+    <section id="yogaUrgency" class="yoga-urgency"></section>
+
+    <!-- 11. Команда -->
+    <section id="yogaTeam" class="yoga-team"></section>
+
+    <!-- 12. Экскурсии + Клуб -->
+    <section id="yogaActivities" class="yoga-activities"></section>
+
+    <!-- 13. Контакты и соцсети -->
+    <section id="yogaContacts" class="yoga-contacts"></section>
+
+    <!-- 14. Финальная форма -->
+    <section id="yogaForm" class="yoga-form"></section>
+
+    <!-- Модалка политики конфиденциальности -->
+    <div id="yogaModalPrivacy" class="yoga-modal" hidden></div>
+
+</body>
+</html>

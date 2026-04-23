@@ -1,0 +1,106 @@
+// ============================================================
+// Satva Samui — Yoga Tour landing (yoga.html)
+// Главный SCSS. Не используется на index.html.
+// ============================================================
+
+@import 'variables';
+@import 'mixins';
+@import 'animations';
+
+// ---------- base ----------
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    font-family: $font-family-primary;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: $color-dark;
+    background: $color-bg-main;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; }
+
+// ---------- utilities ----------
+.yoga-container        { max-width: 900px;  margin: 0 auto; padding: 0 24px; }
+.yoga-container--wide  { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.yoga-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+
+    &.is-visible {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+// ---------- buttons ----------
+.btn-yoga-primary {
+    display: inline-block;
+    background: $color-accent;
+    color: $color-white;
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(255, 142, 114, 0.4);
+    transition:
+        transform $transition-fast,
+        box-shadow $transition-fast,
+        background $transition-fast;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(255, 142, 114, 0.5);
+    }
+
+    &.btn--small {
+        padding: 10px 22px;
+        font-size: 0.85rem;
+    }
+}
+
+.btn-yoga-secondary {
+    display: inline-block;
+    background: transparent;
+    color: $color-white;
+    padding: 14px 32px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        background $transition-fast,
+        border-color $transition-fast,
+        color $transition-fast;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: $color-white;
+    }
+}
+
+// ---------- sections ----------
+@import 'yoga/scroll-progress';
+@import 'yoga/header';
+@import 'yoga/hero';
+@import 'yoga/offer-banner';
