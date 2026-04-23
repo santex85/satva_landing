@@ -1,0 +1,128 @@
+// 13. Контакты + подвал
+.yoga-contacts {
+    background: $color-bg-main;
+    padding: clamp(60px, 8vw, 100px) 24px 0;
+
+    &__container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    &__header {
+        text-align: center;
+        margin-bottom: 40px;
+
+        h2 {
+            color: $color-primary;
+            margin: 0 0 12px;
+            font-size: $font-size-h2;
+        }
+
+        p {
+            margin: 0;
+            color: $color-text-light;
+            font-size: 1.05rem;
+        }
+    }
+
+    &__grid {
+        list-style: none;
+        margin: 0 auto 48px;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        max-width: 480px;
+
+        & > li {
+            margin: 0;
+        }
+
+        @media (min-width: 640px) {
+            grid-template-columns: repeat(4, 1fr);
+            max-width: 640px;
+        }
+    }
+
+    &__link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: $color-text;
+        font-size: 0.9rem;
+        font-weight: $font-weight-semibold;
+        text-align: center;
+        transition: color $transition-fast, transform $transition-fast;
+        -webkit-tap-highlight-color: transparent;
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover,
+            &:focus-visible {
+                color: $color-primary;
+                transform: translateY(-2px);
+            }
+        }
+    }
+
+    &__icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: $color-white;
+        box-shadow: $shadow-sm;
+        color: $color-primary;
+
+        svg {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    &__note {
+        text-align: center;
+        font-size: $font-size-small;
+        color: $color-text-light;
+        max-width: 32rem;
+        margin: 0 auto 32px;
+    }
+}
+
+// Минималистичный подвал (после контактов)
+.yoga-site-footer {
+    border-top: 1px solid rgba(15, 76, 92, 0.1);
+    margin-top: 40px;
+    padding: 24px 0 32px;
+    text-align: center;
+    color: $color-text-light;
+    font-size: $font-size-small;
+
+    p {
+        margin: 0;
+    }
+}
+
+// Заглушка формы (Sprint 3b)
+.yoga-form--placeholder {
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+    background: $color-primary;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.02rem;
+
+    .yoga-form__inner {
+        max-width: 520px;
+    }
+
+    p {
+        margin: 0;
+    }
+}

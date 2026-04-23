@@ -1,0 +1,56 @@
+// 10. Urgency CTA
+.yoga-urgency {
+    background: $color-primary;
+    color: $color-white;
+    padding: clamp(72px, 10vw, 120px) 24px;
+    text-align: center;
+
+    &__inner {
+        max-width: 720px;
+        margin: 0 auto;
+    }
+
+    &__badge {
+        display: inline-block;
+        margin-bottom: 20px;
+        padding: 8px 18px;
+        font-size: 0.8rem;
+        font-weight: $font-weight-bold;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: $color-primary;
+        background: $color-bg-secondary;
+        border-radius: 999px;
+    }
+
+    h2 {
+        margin: 0 0 16px;
+        font-size: $font-size-h2;
+        line-height: $line-height-tight;
+    }
+
+    &__sub {
+        margin: 0 0 32px;
+        font-size: clamp(1rem, 2vw, 1.15rem);
+        line-height: $line-height-body;
+        opacity: 0.95;
+    }
+
+    .btn-yoga-primary.is-pulse {
+        @media (prefers-reduced-motion: no-preference) {
+            animation: yoga-pulse-cta 2.2s ease-in-out infinite;
+        }
+    }
+}
+
+@keyframes yoga-pulse-cta {
+    0%,
+    100% {
+        box-shadow: 0 4px 20px rgba(255, 142, 114, 0.45);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 8px 36px rgba(255, 142, 114, 0.65);
+        transform: scale(1.04);
+    }
+}

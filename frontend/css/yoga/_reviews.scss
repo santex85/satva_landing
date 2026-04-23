@@ -1,0 +1,203 @@
+// 09. Видео-отзывы
+.yoga-reviews {
+    position: relative;
+    background: $color-bg-secondary;
+    padding: clamp(60px, 8vw, 100px) 24px;
+
+    &__container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    &__header {
+        text-align: center;
+        margin-bottom: 48px;
+
+        h2 {
+            color: $color-primary;
+            margin: 0 0 12px;
+            font-size: $font-size-h2;
+            line-height: $line-height-tight;
+        }
+
+        p {
+            color: $color-text-light;
+            font-size: 1.05rem;
+            margin: 0;
+            max-width: 38rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+
+        @media (min-width: 640px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    &__card {
+        position: relative;
+        display: block;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        width: 100%;
+        text-align: left;
+        background: $color-primary-dark;
+        border-radius: 16px;
+        overflow: hidden;
+        cursor: pointer;
+        color: inherit;
+        font: inherit;
+        box-shadow: $shadow-sm;
+        transition: transform $transition-fast, box-shadow $transition-fast;
+        -webkit-tap-highlight-color: transparent;
+        aspect-ratio: 9 / 16;
+        @media (hover: hover) and (pointer: fine) {
+            &:hover,
+            &:focus-visible {
+                transform: translateY(-4px);
+                box-shadow: $shadow-md;
+            }
+        }
+        &:focus-visible {
+            outline: 3px solid $color-primary;
+            outline-offset: 2px;
+        }
+    }
+
+    &__thumb {
+        position: absolute;
+        inset: 0;
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background: $color-primary-dark;
+        }
+    }
+
+    &__play {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: rgba(15, 76, 92, 0.55);
+        color: $color-white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        transition: background $transition-fast, transform $transition-fast;
+        .yoga-reviews__card:hover &,
+        .yoga-reviews__card:focus-visible & {
+            background: rgba(15, 76, 92, 0.75);
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+        svg {
+            width: 28px;
+            height: 28px;
+            display: block;
+            margin-left: 4px;
+        }
+    }
+
+    &__caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0;
+        padding: 10px 12px 12px;
+        font-size: 0.8125rem;
+        font-weight: $font-weight-semibold;
+        color: $color-white;
+        background: linear-gradient(transparent, rgba(15, 76, 92, 0.85));
+    }
+}
+
+// Модалка плеера (внутри секции)
+.yoga-video-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 12000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity $transition-normal, visibility $transition-normal;
+
+    &.is-open {
+        pointer-events: auto;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &[hidden] {
+        display: none !important;
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 76, 92, 0.72);
+    }
+
+    &__inner {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: min(420px, 100vw - 32px);
+        max-height: min(90vh, 820px);
+        background: $color-dark;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: $shadow-lg;
+    }
+
+    &__close {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        z-index: 2;
+        width: 44px;
+        height: 44px;
+        border: 0;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.45);
+        color: $color-white;
+        font-size: 1.5rem;
+        line-height: 1;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background $transition-fast;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.65);
+        }
+    }
+
+    &__player {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: min(90vh - 32px, 800px);
+        vertical-align: bottom;
+    }
+}

@@ -209,6 +209,137 @@
         update();
     }
 
+    // --- 09. Превью видео через canvas (кадр на ~1 с) -------------------------
+    function initVideoThumbnails() {
+        var section = document.getElementById('yogaReviews');
+        if (!section) return;
+        var videos = section.querySelectorAll('.yoga-reviews__card video');
+        if (!videos.length) return;
+
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+
+        function finishVideo(v) {
+            try {
+                v.removeAttribute('src');
+                v.load();
+            } catch (e) { /* noop */ }
+        }
+
+        function snapFrame(v) {
+            v.addEventListener('seeked', function onSeeked() {
+                v.removeEventListener('seeked', onSeeked);
+                if (!ctx) {
+                    finishVideo(v);
+                    return;
+                }
+                try {
+                    var w = v.videoWidth;
+                    var h = v.videoHeight;
+                    if (w > 0 && h > 0) {
+                        canvas.width = w;
+                        canvas.height = h;
+                        ctx.drawImage(v, 0, 0, w, h);
+                        v.poster = canvas.toDataURL('image/jpeg', 0.8);
+                    }
+                } catch (e) {
+                    /* tainted canvas / Safari */
+                }
+                finishVideo(v);
+            });
+
+            var t = 1;
+            try {
+                if (v.duration && !isNaN(v.duration) && v.duration < 1.5) {
+                    t = Math.max(0.08, v.duration * 0.25);
+                }
+            } catch (e) { /* noop */ }
+            try {
+                v.currentTime = t;
+            } catch (e) {
+                finishVideo(v);
+            }
+        }
+
+        for (var i = 0; i < videos.length; i++) {
+            (function (v) {
+                if (v.readyState >= 1) {
+                    snapFrame(v);
+                } else {
+                    v.addEventListener('loadedmetadata', function onMetaOnce() {
+                        v.removeEventListener('loadedmetadata', onMetaOnce);
+                        snapFrame(v);
+                    });
+                }
+            }(videos[i]));
+        }
+    }
+
+    // --- 09b. Модалка видео-отзыва --------------------------------------------
+    function initVideoModal() {
+        var section = document.getElementById('yogaReviews');
+        var modal = document.getElementById('yogaVideoModal');
+        var player = document.getElementById('yogaVideoPlayer');
+        if (!section || !modal || !player) return;
+
+        var overlay = modal.querySelector('.yoga-video-modal__overlay');
+        var closeBtn = modal.querySelector('.yoga-video-modal__close');
+
+        function openModal(src) {
+            player.src = src;
+            modal.removeAttribute('hidden');
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            var p = player.play();
+            if (p && typeof p.catch === 'function') p.catch(function () {});
+        }
+
+        function closeModal() {
+            player.pause();
+            player.removeAttribute('src');
+            try { player.load(); } catch (e) { /* noop */ }
+            modal.classList.remove('is-open');
+            modal.setAttribute('hidden', '');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        section.addEventListener('click', function (e) {
+            var card = e.target.closest('.yoga-reviews__card');
+            if (!card) return;
+            var src = card.getAttribute('data-video');
+            if (src) openModal(src);
+        });
+
+        section.addEventListener('keydown', function (e) {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            var card = e.target.closest('.yoga-reviews__card');
+            if (!card) return;
+            e.preventDefault();
+            var src = card.getAttribute('data-video');
+            if (src) openModal(src);
+        });
+
+        if (overlay) overlay.addEventListener('click', closeModal);
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+                closeModal();
+            }
+        });
+    }
+
+    // --- 10. Пульсация CTA: класс .is-pulse + keyframes в _urgency.scss --------
+
+    // --- 13. Год в подвале ---------------------------------------------------
+    function initCopyrightYear() {
+        var el = document.getElementById('yogaFooterYear');
+        if (!el) return;
+        el.textContent = String(new Date().getFullYear());
+    }
+
     function boot() {
         initScrollProgress();
         initHeader();
@@ -216,6 +347,9 @@
         initSmoothScroll();
         initFadeIn();
         initParallax();
+        initVideoThumbnails();
+        initVideoModal();
+        initCopyrightYear();
     }
 
     if (document.readyState === 'loading') {
