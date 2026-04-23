@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "Montserrat";
   src: url("../assets/fonts/Montserrat-Bold.ttf") format("truetype");
@@ -504,6 +505,398 @@ a {
   transition: color 0.2s ease;
 }
 .yoga-offer-banner__cta:hover {
+  color: #FF8E72;
+}
+
+.yoga-includes {
+  background: #F7F5F2;
+  padding: clamp(60px, 8vw, 100px) 24px;
+}
+.yoga-includes__container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.yoga-includes__header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.yoga-includes__header h2 {
+  color: #0F4C5C;
+  margin-bottom: 16px;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.2;
+}
+.yoga-includes__header p {
+  font-size: 1.1rem;
+  color: #666666;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.yoga-includes__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+@media (min-width: 640px) {
+  .yoga-includes__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.yoga-includes__card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 28px 20px;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid rgba(15, 76, 92, 0.08);
+}
+.yoga-includes__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(15, 76, 92, 0.12);
+}
+.yoga-includes__card h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0F4C5C;
+  margin: 12px 0 8px;
+  line-height: 1.3;
+}
+.yoga-includes__card p {
+  font-size: 0.85rem;
+  color: #666666;
+  line-height: 1.5;
+  margin: 0;
+}
+.yoga-includes__icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto;
+  background: #BEE3DB;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.yoga-includes__icon img,
+.yoga-includes__icon svg {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+.yoga-includes__icon svg {
+  color: #0F4C5C;
+  fill: currentColor;
+}
+
+.yoga-beach__banner {
+  background: #0F4C5C;
+  padding: 20px 24px;
+  text-align: center;
+}
+.yoga-beach__banner p {
+  color: #FFFFFF;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-weight: 600;
+  margin: 0 auto;
+  max-width: 700px;
+  line-height: 1.4;
+}
+.yoga-beach__photo {
+  height: 70vh;
+  min-height: 400px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.yoga-beach__photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(15, 76, 92, 0.1) 0%, rgba(15, 76, 92, 0.35) 100%);
+}
+.yoga-beach__text-block {
+  background: #BEE3DB;
+  padding: clamp(48px, 6vw, 80px) 24px;
+}
+.yoga-beach__text-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.yoga-beach__text-inner h2 {
+  color: #0F4C5C;
+  margin-bottom: 24px;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.2;
+}
+.yoga-beach__text-inner p {
+  color: #2D3436;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin: 0 0 16px;
+}
+.yoga-beach__text-inner p:last-child {
+  margin-bottom: 0;
+}
+
+.yoga-program {
+  background: #FFFFFF;
+  padding: clamp(60px, 8vw, 100px) 24px;
+}
+.yoga-program__container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+.yoga-program__block {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .yoga-program__block {
+    grid-template-columns: 1fr 1fr;
+  }
+  .yoga-program__block:nth-child(even) .yoga-program__photo {
+    order: 2;
+  }
+  .yoga-program__block:nth-child(even) .yoga-program__text {
+    order: 1;
+  }
+}
+.yoga-program__photo {
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.yoga-program__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.yoga-program__photo:hover img {
+  transform: scale(1.03);
+}
+.yoga-program__label {
+  display: inline-block;
+  background: #BEE3DB;
+  color: #0F4C5C;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+}
+.yoga-program__text h2 {
+  color: #0F4C5C;
+  margin: 0 0 20px;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.2;
+}
+.yoga-program__text p {
+  color: #2D3436;
+  line-height: 1.7;
+  margin: 0 0 20px;
+}
+.yoga-program__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+}
+.yoga-program__list li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 12px;
+  color: #2D3436;
+  line-height: 1.5;
+}
+.yoga-program__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  background: #FF8E72;
+  border-radius: 50%;
+}
+.yoga-program__note {
+  font-size: 0.9rem;
+  color: #666666;
+  font-style: italic;
+  margin: 0 !important;
+}
+
+.yoga-food {
+  background: #E8DCC6;
+  padding: clamp(60px, 8vw, 100px) 24px;
+}
+.yoga-food__container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .yoga-food__container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.yoga-food__photo {
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.yoga-food__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.yoga-food__label {
+  display: inline-block;
+  background: #FFFFFF;
+  color: #0F4C5C;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+}
+.yoga-food__text h2 {
+  color: #0F4C5C;
+  margin: 0 0 20px;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.2;
+}
+.yoga-food__text p {
+  color: #2D3436;
+  line-height: 1.7;
+  margin: 0 0 20px;
+}
+.yoga-food__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.yoga-food__tags span {
+  background: #FFFFFF;
+  color: #0F4C5C;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+
+.yoga-rooms {
+  background: #F7F5F2;
+  padding: clamp(60px, 8vw, 100px) 24px;
+}
+.yoga-rooms__container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.yoga-rooms__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.yoga-rooms__header h2 {
+  color: #0F4C5C;
+  margin: 0 0 12px;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.2;
+}
+.yoga-rooms__header p {
+  color: #666666;
+  font-size: 1.05rem;
+  margin: 0;
+}
+.yoga-rooms__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+@media (min-width: 640px) {
+  .yoga-rooms__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.yoga-rooms__card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(15, 76, 92, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+.yoga-rooms__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(15, 76, 92, 0.12);
+}
+.yoga-rooms__photo {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.yoga-rooms__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.yoga-rooms__info {
+  padding: 24px;
+}
+.yoga-rooms__info h3 {
+  color: #0F4C5C;
+  font-size: 1.1rem;
+  margin: 0 0 16px;
+}
+.yoga-rooms__info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.yoga-rooms__info ul li {
+  padding: 8px 0;
+  border-bottom: 1px solid #F7F5F2;
+  color: #2D3436;
+  font-size: 0.9rem;
+}
+.yoga-rooms__info ul li:last-child {
+  border-bottom: none;
+}
+.yoga-rooms__info ul li::before {
+  content: "✓ ";
+  color: #FF8E72;
+  font-weight: 700;
+}
+.yoga-rooms__urgency {
+  background: #0F4C5C;
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.yoga-rooms__urgency p {
+  color: #FFFFFF;
+  font-size: 1.05rem;
+  margin: 0;
+  flex: 1 1 320px;
+}
+.yoga-rooms__urgency p strong {
   color: #FF8E72;
 }
 

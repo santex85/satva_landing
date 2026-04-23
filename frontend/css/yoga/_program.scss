@@ -1,0 +1,104 @@
+// 06. Йога / программа
+.yoga-program {
+    background: $color-white;
+    padding: clamp(60px, 8vw, 100px) 24px;
+
+    &__container {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+    }
+
+    &__block {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        align-items: center;
+
+        @media (min-width: 768px) {
+            grid-template-columns: 1fr 1fr;
+
+            &:nth-child(even) .yoga-program__photo { order: 2; }
+            &:nth-child(even) .yoga-program__text  { order: 1; }
+        }
+    }
+
+    &__photo {
+        border-radius: 20px;
+        overflow: hidden;
+        aspect-ratio: 4 / 3;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        &:hover img {
+            transform: scale(1.03);
+        }
+    }
+
+    &__label {
+        display: inline-block;
+        background: $color-bg-secondary;
+        color: $color-primary;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 6px 14px;
+        border-radius: 50px;
+        margin-bottom: 16px;
+    }
+
+    &__text {
+        h2 {
+            color: $color-primary;
+            margin: 0 0 20px;
+            font-size: $font-size-h2;
+            line-height: $line-height-tight;
+        }
+
+        p {
+            color: $color-dark;
+            line-height: 1.7;
+            margin: 0 0 20px;
+        }
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 20px;
+
+        li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            color: $color-dark;
+            line-height: 1.5;
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 8px;
+                width: 8px;
+                height: 8px;
+                background: $color-accent;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    &__note {
+        font-size: 0.9rem;
+        color: $color-text-light;
+        font-style: italic;
+        margin: 0 !important;
+    }
+}

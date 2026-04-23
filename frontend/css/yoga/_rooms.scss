@@ -1,0 +1,120 @@
+// 08. Номера
+.yoga-rooms {
+    background: $color-bg-main;
+    padding: clamp(60px, 8vw, 100px) 24px;
+
+    &__container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    &__header {
+        text-align: center;
+        margin-bottom: 48px;
+
+        h2 {
+            color: $color-primary;
+            margin: 0 0 12px;
+            font-size: $font-size-h2;
+            line-height: $line-height-tight;
+        }
+
+        p {
+            color: $color-text-light;
+            font-size: 1.05rem;
+            margin: 0;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-bottom: 48px;
+
+        @media (min-width: 640px) {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    &__card {
+        background: $color-white;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(15, 76, 92, 0.08);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        display: flex;
+        flex-direction: column;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(15, 76, 92, 0.12);
+        }
+    }
+
+    &__photo {
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__info {
+        padding: 24px;
+
+        h3 {
+            color: $color-primary;
+            font-size: 1.1rem;
+            margin: 0 0 16px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+                padding: 8px 0;
+                border-bottom: 1px solid $color-bg-main;
+                color: $color-dark;
+                font-size: 0.9rem;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                &::before {
+                    content: '✓ ';
+                    color: $color-accent;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+
+    &__urgency {
+        background: $color-primary;
+        border-radius: 20px;
+        padding: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+
+        p {
+            color: $color-white;
+            font-size: 1.05rem;
+            margin: 0;
+            flex: 1 1 320px;
+
+            strong {
+                color: $color-accent;
+            }
+        }
+    }
+}

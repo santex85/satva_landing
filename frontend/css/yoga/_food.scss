@@ -1,0 +1,74 @@
+// 07. Питание
+.yoga-food {
+    background: $color-secondary;
+    padding: clamp(60px, 8vw, 100px) 24px;
+
+    &__container {
+        max-width: 900px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        align-items: center;
+
+        @media (min-width: 768px) {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    &__photo {
+        border-radius: 20px;
+        overflow: hidden;
+        aspect-ratio: 4 / 3;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__label {
+        display: inline-block;
+        background: $color-white;
+        color: $color-primary;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 6px 14px;
+        border-radius: 50px;
+        margin-bottom: 16px;
+    }
+
+    &__text {
+        h2 {
+            color: $color-primary;
+            margin: 0 0 20px;
+            font-size: $font-size-h2;
+            line-height: $line-height-tight;
+        }
+
+        p {
+            color: $color-dark;
+            line-height: 1.7;
+            margin: 0 0 20px;
+        }
+    }
+
+    &__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        span {
+            background: $color-white;
+            color: $color-primary;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 50px;
+            white-space: nowrap;
+        }
+    }
+}
