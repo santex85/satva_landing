@@ -636,7 +636,7 @@
                 consent: consent ? consent.checked : false,
                 website: (websiteHp && websiteHp.value) ? websiteHp.value : '',
                 captcha_token: getCaptchaToken() || null,
-                procedure: 'Йога-тур на Самуи',
+                procedure: 'Йога-тур в Таиланд',
                 preferred_date: pDate || null,
                 comment: cmt || null,
             };

@@ -12,7 +12,7 @@
 ## Форма и API
 
 - [ ] `GET /api/public-config` возвращает `turnstileSiteKey` — *локально не поднимался API; на проде сейчас HTML вместо JSON — см. SPRINT4_ENV.md*
-- [ ] Успешная отправка: `POST /api/booking` с `procedure: "Йога-тур на Самуи"`, в ответ 2xx — *нужен docker или прод с рабочим /api/*
+- [ ] Успешная отправка: `POST /api/booking` с `procedure: "Йога-тур в Таиланд"`, в ответ 2xx — *нужен docker или прод с рабочим /api/*
 - [ ] Ошибка сети / 4xx / 5xx → красный блок `#yogaFormError`, Turnstile сброшен — *не гонялось в Sprint 4 (нет бэка)*
 
 ## Валидация и безопасность
