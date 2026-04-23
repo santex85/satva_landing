@@ -347,13 +347,13 @@ a {
 }
 .yoga-hero {
   position: relative;
-  height: 100vh;
-  min-height: 600px;
+  min-height: max(600px, 100dvh);
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   overflow: hidden;
+  padding-bottom: max(24px, env(safe-area-inset-bottom, 0));
 }
 .yoga-hero__bg {
   position: absolute;
@@ -385,6 +385,7 @@ a {
   position: relative;
   z-index: 2;
   max-width: 700px;
+  width: 100%;
   padding: 0 24px;
   color: #FFFFFF;
 }
@@ -447,14 +448,11 @@ a {
   flex-wrap: wrap;
 }
 .yoga-hero__scroll-hint {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  margin-top: 28px;
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.75rem;
   letter-spacing: 0.1em;
