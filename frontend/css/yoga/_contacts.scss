@@ -1,7 +1,7 @@
 // 13. Контакты + подвал
 .yoga-contacts {
     background: $color-bg-main;
-    padding: clamp(60px, 8vw, 100px) 24px 0;
+    padding: clamp(60px, 8vw, 100px) 24px clamp(40px, 5vw, 56px);
 
     &__container {
         max-width: 900px;
@@ -92,11 +92,12 @@
     }
 }
 
-// Минималистичный подвал (после контактов)
+// Подвал страницы — под секцией формы (раньше был внутри контактов)
 .yoga-site-footer {
+    background: $color-bg-main;
     border-top: 1px solid rgba(15, 76, 92, 0.1);
-    margin-top: 40px;
-    padding: 24px 0 32px;
+    margin-top: 0;
+    padding: 28px 0 36px;
     text-align: center;
     color: $color-text-light;
     font-size: $font-size-small;

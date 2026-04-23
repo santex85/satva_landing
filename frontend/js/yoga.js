@@ -195,12 +195,13 @@
             var viewportH = window.innerHeight || document.documentElement.clientHeight;
             for (var i = 0; i < els.length; i++) {
                 var el = els[i];
-                var rect = el.getBoundingClientRect();
-                // Активен, только если элемент попал во вьюпорт (оптимизация).
+                // Видимую рамку берём с контейнера (экран пляжа), а не с увеличенного bg-слоя.
+                var parallaxRoot = el.closest('.yoga-beach__photo') || el;
+                var rect = parallaxRoot.getBoundingClientRect();
                 if (rect.bottom < 0 || rect.top > viewportH) continue;
-                // Смещение картинки относительно центра вьюпорта, слабый коэффициент.
-                var delta = (rect.top - viewportH / 2) * 0.2;
-                el.style.backgroundPosition = 'center calc(50% + ' + delta + 'px)';
+                // translate вместо background-position — с cover не остаётся пустот по кромке.
+                var delta = (rect.top - viewportH / 2) * 0.1;
+                el.style.transform = 'translate3d(0, ' + delta + 'px, 0)';
             }
             ticking = false;
         }

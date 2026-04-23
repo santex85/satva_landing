@@ -19,16 +19,28 @@
         height: 70vh;
         min-height: 400px;
         position: relative;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+        overflow: hidden; // parallax: обрез лишнего фона, без «серых» полос
+    }
 
-        // Точка сдвига для параллакса задаётся через inline style background-position-y в JS.
-        // prefers-reduced-motion: JS пропускает активацию, картинка остаётся статичной.
+    // Слой больше окна: transform в JS, без пустот при cover
+    &__photo-bg {
+        position: absolute;
+        z-index: 0;
+        top: -12%;
+        left: -4%;
+        width: 108%;
+        height: 128%;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        will-change: transform;
+        backface-visibility: hidden;
+        transform: translate3d(0, 0, 0);
     }
 
     &__photo-overlay {
         position: absolute;
+        z-index: 1;
         inset: 0;
         background: linear-gradient(
             to bottom,
