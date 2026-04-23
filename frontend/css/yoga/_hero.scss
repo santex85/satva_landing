@@ -48,7 +48,7 @@
         margin-bottom: 32px;
 
         img {
-            height: 80px;
+            height: clamp(90px, 14vw, 140px);
             width: auto;
             margin: 0 auto;
         }
