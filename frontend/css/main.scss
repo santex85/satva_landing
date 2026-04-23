@@ -478,7 +478,8 @@ h3 {
         margin-bottom: $spacing-xxl;
         text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
         animation: slideUp 0.8s ease-out 0.4s both;
-        max-width: 800px;
+        // ~60–80 знаков в строке (ширина «0» в текущем шрифте — удобная колонка для чтения)
+        max-width: min(100%, 72ch);
         margin-left: auto;
         margin-right: auto;
         opacity: 0.95;
@@ -540,6 +541,24 @@ h3 {
             
             &:hover {
                 transform: translateY(-10px);
+            }
+        }
+        
+        // CTA «Хит продаж» — яркая залитая кнопка (остальные карточки остаются outline)
+        .package-card__footer .btn.btn--outline {
+            background: $gradient-accent;
+            color: $color-white;
+            border: 2px solid transparent;
+            font-weight: $font-weight-bold;
+            box-shadow: 0 6px 24px rgba(255, 142, 114, 0.55);
+            
+            &:hover {
+                background: $gradient-accent;
+                color: $color-white;
+                border-color: transparent;
+                filter: brightness(1.07);
+                box-shadow: 0 9px 32px rgba(255, 142, 114, 0.65);
+                transform: translateY(-2px);
             }
         }
     }
@@ -644,6 +663,19 @@ h3 {
         strong {
             color: $color-primary;
         }
+        
+        // Первая строка «включено из предыдущего тарифа» — визуально как «база»
+        strong.package-list__base {
+            font-style: italic;
+            color: $color-accent;
+            font-weight: $font-weight-bold;
+        }
+        
+        .package-list__note {
+            font-size: 0.9em;
+            font-weight: $font-weight-regular;
+            color: $color-text-light;
+        }
     }
 }
 
@@ -652,13 +684,26 @@ h3 {
     padding: $spacing-xxl 0;
     background-color: #f8f9f8;
     
+    .section-title {
+        margin-bottom: $spacing-md;
+        
+        @include mobile {
+            margin-bottom: $spacing-sm;
+        }
+    }
+    
     &__text {
         font-size: clamp(1rem, 2vw, 1.125rem);
-        line-height: $line-height-body;
+        line-height: 1.8;
         text-align: center;
-        max-width: 900px;
+        max-width: min(100%, 50rem); // ~800px — удобная колонка для чтения
         margin: 0 auto $spacing-xl;
         color: $color-text-light;
+        
+        .concept__text-em {
+            color: $color-primary;
+            font-weight: $font-weight-bold;
+        }
     }
     
     &__features {
@@ -677,29 +722,47 @@ h3 {
         
         h3 {
             font-size: clamp(1.25rem, 2.5vw, 1.65rem);
-            margin-top: $spacing-md;
+            margin-top: $spacing-lg;
+            margin-bottom: $spacing-xs;
             overflow-wrap: break-word;
             word-break: break-word;
             max-width: 100%;
         }
+        
+        .concept__feature-caption {
+            font-size: clamp(0.9375rem, 1.8vw, 1.0625rem);
+            line-height: $line-height-body;
+            color: $color-text-light;
+            margin: 0 auto;
+            max-width: 22rem;
+        }
     }
     
     &__icon {
-        width: 100px;
-        height: 100px;
-        margin: 0 auto $spacing-md;
+        width: 118px;
+        height: 118px;
+        margin: 0 auto $spacing-lg;
+        padding: 1.125rem;
+        box-sizing: border-box;
+        border-radius: 1.5rem;
+        background: rgba(190, 227, 219, 0.42);
+        border: 1px solid rgba(15, 76, 92, 0.07);
         display: flex;
         align-items: center;
         justify-content: center;
         
         @include mobile {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
+            padding: 0.875rem;
+            margin-bottom: $spacing-md;
         }
         
         img {
             width: 100%;
             height: 100%;
+            max-width: 72px;
+            max-height: 72px;
             object-fit: contain;
         }
     }

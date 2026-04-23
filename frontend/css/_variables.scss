@@ -28,7 +28,8 @@ $color-text: #2D3436;
 $color-text-light: #666666;
 
 // Градиенты
-$gradient-overlay: linear-gradient(135deg, rgba(15, 76, 92, 0.85) 0%, rgba(44, 110, 122, 0.72) 100%);
+// Hero: заметный тиловый фильтр + чуть больше «воздуха» внизу, чем в первых 0.85/0.72 — море всё ещё читается
+$gradient-overlay: linear-gradient(135deg, rgba(15, 76, 92, 0.76) 0%, rgba(44, 110, 122, 0.52) 45%, rgba(15, 76, 92, 0.44) 100%);
 $gradient-button: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
 $gradient-hero: linear-gradient(135deg, #0F4C5C 0%, #2C6E7A 100%);
 $gradient-accent: linear-gradient(135deg, #FF8E72 0%, #FFB09C 100%);
