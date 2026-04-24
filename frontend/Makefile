@@ -12,7 +12,7 @@ PORT ?= 8765
 # Корень репозитория (frontend/Makefile → на уровень выше)
 GIT_ROOT := $(abspath $(CURDIR)/..)
 
-.PHONY: pull sync css build watch serve run stop-port clean build-prod \
+.PHONY: pull sync deploy-dev css build watch serve run stop-port clean build-prod \
         yoga-css yoga-watch yoga-build-prod build-all yoga-clean \
         yoga-webp yoga-hero-variants optimize-images help
 
@@ -23,6 +23,10 @@ pull:
 
 # git pull + оба CSS (main + yoga)
 sync: pull build-all
+
+# Локальный стек (Docker + API): то же, что «make deploy-dev» из корня репозитория (включая git pull)
+deploy-dev:
+	$(MAKE) -C $(GIT_ROOT) deploy-dev
 
 # Собрать CSS из SCSS (по умолчанию)
 css build:
@@ -124,6 +128,7 @@ help:
 	@echo "    make yoga-clean      — удалить yoga.css и .map"
 	@echo ""
 	@echo "  Общее:"
+	@echo "    make deploy-dev      — из корня: git pull + build-all + docker compose up (локальный стек)"
 	@echo "    make pull            — git pull origin main (из корня репозитория)"
 	@echo "    make sync            — pull + build-all (обновить и пересобрать CSS)"
 	@echo "    make build-all       — собрать main.css + yoga.css (dev)"
