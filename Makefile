@@ -32,9 +32,11 @@ deploy-dev:
 	echo "✓ frontend/css/yoga.css собран"; \
 	$(COMPOSE) up -d --build; \
 	echo ""; \
-	echo "Готово: http://localhost/"; \
+	echo "Готово (только этот компьютер): http://localhost/"; \
 	echo "Health:  http://localhost/api/health"; \
-	echo "Админка: http://localhost/admin.html"
+	echo "Админка: http://localhost/admin.html"; \
+	echo ""; \
+	echo "Сайт в интернете не обновляется этой командой. Прод: make deploy-prod"
 
 deploy-dev-down:
 	$(COMPOSE) down
