@@ -145,6 +145,16 @@
   text-align: center;
 }
 
+.yoga-trust-bar__header .yoga-chip-title,
+.yoga-includes__header .yoga-chip-title,
+.yoga-beach__banner .yoga-chip-title,
+.yoga-reviews__header .yoga-chip-title,
+.yoga-rooms__header .yoga-chip-title,
+.yoga-team__header .yoga-chip-title {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 *,
 *::before,
 *::after {
@@ -194,6 +204,21 @@ a {
 }
 .yoga-fade-in.is-visible {
   transform: none;
+}
+
+.yoga-includes__card.yoga-fade-in,
+.yoga-reviews__item.yoga-fade-in,
+.yoga-team__card.yoga-fade-in,
+.yoga-rooms__card.yoga-fade-in {
+  transform: none;
+  opacity: 0;
+  transition: opacity 0.65s ease;
+}
+.yoga-includes__card.yoga-fade-in.is-visible,
+.yoga-reviews__item.yoga-fade-in.is-visible,
+.yoga-team__card.yoga-fade-in.is-visible,
+.yoga-rooms__card.yoga-fade-in.is-visible {
+  opacity: 1;
 }
 
 .btn-yoga-primary {

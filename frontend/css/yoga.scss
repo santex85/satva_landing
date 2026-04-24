@@ -45,6 +45,20 @@ a { color: inherit; }
     }
 }
 
+// Сетки карточек: без translateY при появлении — ровные ряды на десктопе
+.yoga-includes__card.yoga-fade-in,
+.yoga-reviews__item.yoga-fade-in,
+.yoga-team__card.yoga-fade-in,
+.yoga-rooms__card.yoga-fade-in {
+    transform: none;
+    opacity: 0;
+    transition: opacity 0.65s ease;
+
+    &.is-visible {
+        opacity: 1;
+    }
+}
+
 // ---------- buttons ----------
 .btn-yoga-primary {
     display: inline-block;

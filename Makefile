@@ -1,6 +1,6 @@
 # Корневой Makefile: локальный стек (Docker) и быстрый деплой статики на прод (SSH).
 #
-#   make deploy-dev         — git pull, main+yoga CSS, Postgres + API + nginx локально
+#   make deploy-dev         — один shell: pull, sass main+yoga, docker compose up (локально)
 #   make deploy-prod        — на сервере: сброс собранного CSS при конфликте, pull, build-all, nginx
 #   make deploy-prod-min    — то же, с минифицированным CSS (build-prod, yoga-build-prod)
 #
@@ -12,24 +12,29 @@
 .PHONY: deploy-dev deploy-dev-down deploy-dev-logs deploy-prod deploy-prod-min
 
 COMPOSE := docker compose
+SASS    ?= sass
 
 DEPLOY_USER ?= root
 DEPLOY_HOST ?= 152.42.186.191
 DEPLOY_PATH ?= /var/www/satva-landing
 
-# Поднять всё: git pull, при первом запуске — server/.env из примера, сборка main.css + yoga.css, Docker.
+# Один проход shell: pull → .env → оба CSS → docker compose (запускать из корня репозитория).
 deploy-dev:
-	git pull origin main
-	@if [ ! -f server/.env ]; then \
+	set -e; \
+	git pull origin main; \
+	if [ ! -f server/.env ]; then \
 		cp server/.env.example server/.env; \
 		echo "→ Создан server/.env из server/.env.example (при необходимости отредактируйте)"; \
-	fi
-	$(MAKE) -C frontend build-all
-	$(COMPOSE) up -d --build
-	@echo ""
-	@echo "Готово: http://localhost/"
-	@echo "Health:  http://localhost/api/health"
-	@echo "Админка: http://localhost/admin.html"
+	fi; \
+	$(SASS) frontend/css/main.scss frontend/css/main.css --style=expanded; \
+	echo "✓ frontend/css/main.css собран"; \
+	$(SASS) frontend/css/yoga.scss frontend/css/yoga.css --style=expanded; \
+	echo "✓ frontend/css/yoga.css собран"; \
+	$(COMPOSE) up -d --build; \
+	echo ""; \
+	echo "Готово: http://localhost/"; \
+	echo "Health:  http://localhost/api/health"; \
+	echo "Админка: http://localhost/admin.html"
 
 deploy-dev-down:
 	$(COMPOSE) down
