@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'mixins';
 @import 'animations';
+@import 'chip-title';
 
 // Reset и базовые стили
 * {
@@ -1464,10 +1465,41 @@ h3 {
     }
 }
 
+@import 'trust-bar';
+
 // Testimonials Section
 .testimonials {
     padding: $spacing-xxl 0;
     background-color: #f8f9f8;
+
+    &__summary {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: $spacing-sm;
+        margin-bottom: $spacing-xl;
+        text-align: center;
+    }
+
+    &__rating-value {
+        font-size: clamp(1.75rem, 5vw, 2.25rem);
+        font-weight: $font-weight-bold;
+        color: $color-primary;
+    }
+
+    &__rating-stars {
+        color: $color-accent;
+        font-size: 1.25rem;
+        letter-spacing: 0.05em;
+    }
+
+    &__rating-label {
+        flex-basis: 100%;
+        width: 100%;
+        font-size: 0.95rem;
+        color: $color-text-light;
+    }
 }
 
 .testimonials-slider {
@@ -1496,16 +1528,6 @@ h3 {
     padding: $spacing-xl;
     box-shadow: $shadow-md;
     text-align: center;
-    
-    &__rating {
-        margin-bottom: $spacing-md;
-        
-        .star {
-            color: #FFD700;
-            font-size: 1.5rem;
-            margin: 0 2px;
-        }
-    }
     
     &__text {
         font-size: 1.125rem;

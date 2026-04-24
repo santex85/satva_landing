@@ -149,11 +149,39 @@
         </div>
     </section>
 
+    <section class="yoga-trust-bar" id="yoga-trust" aria-label="Цифры и рейтинг">
+        <div class="yoga-trust-bar__container">
+            <ul class="yoga-trust-bar__list">
+                <li class="yoga-trust-bar__item">
+                    <span class="yoga-trust-bar__value">12</span>
+                    <span class="yoga-trust-bar__label">лет работы на Самуи</span>
+                </li>
+                <li class="yoga-trust-bar__item">
+                    <span class="yoga-trust-bar__value">8000+</span>
+                    <span class="yoga-trust-bar__label">гостей прошли программы</span>
+                </li>
+                <li class="yoga-trust-bar__item yoga-trust-bar__item--rating">
+                    <span class="yoga-trust-bar__value">
+                        4.8
+                        <span class="yoga-trust-bar__stars" aria-hidden="true">★★★★★</span>
+                    </span>
+                    <span class="yoga-trust-bar__label">
+                        средний рейтинг в Google
+                        <a href="https://www.google.com/maps/place/?q=place_id:ChIJjbAD17T3VDARzjn1mEam1lg"
+                           target="_blank" rel="noopener noreferrer"
+                           class="yoga-trust-bar__link">смотреть отзывы</a>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
     <!-- 03. Что включено -->
     <section id="yogaIncludes" class="yoga-includes" aria-labelledby="yogaIncludesTitle">
         <div class="yoga-includes__container">
             <div class="yoga-includes__header yoga-fade-in">
-                <h2 id="yogaIncludesTitle">Всё, что входит в ваш тур</h2>
+                <p class="yoga-chip-title">Пакет</p>
+                <h2 id="yogaIncludesTitle">Что входит</h2>
                 <p>По пунктам: что уже в стоимости, а за что — по желанию (например, экскурсии). Дальше — только даты и перелёт.</p>
             </div>
             <div class="yoga-includes__grid">
@@ -324,6 +352,7 @@
     <section id="yogaRooms" class="yoga-rooms" aria-labelledby="yogaRoomsTitle">
         <div class="yoga-rooms__container">
             <div class="yoga-rooms__header yoga-fade-in">
+                <p class="yoga-chip-title">Номера</p>
                 <h2 id="yogaRoomsTitle">Номера в 10–30 метрах от моря</h2>
                 <p>Уютные, чистые, с хорошей вентиляцией. Просто, но всё что нужно — есть.</p>
             </div>
@@ -374,8 +403,8 @@
 
             <div class="yoga-rooms__urgency yoga-fade-in">
                 <p>
-                    <strong>В отеле всего 20 номеров.</strong>
-                    В высокий сезон мест почти не остаётся.
+                    <strong>В нашем уютном отеле всего 20 номеров.</strong>
+                    Успейте забронировать свой.
                 </p>
                 <a href="#yogaForm" class="btn-yoga-primary">Забронировать номер</a>
             </div>
@@ -386,6 +415,7 @@
     <section id="yogaReviews" class="yoga-reviews" aria-labelledby="yogaReviewsTitle">
         <div class="yoga-reviews__container">
             <div class="yoga-reviews__header yoga-fade-in">
+                <p class="yoga-chip-title">Живой рейтинг 4.8</p>
                 <h2 id="yogaReviewsTitle">Отзывы гостей</h2>
                 <p>Короткие истории о том, как проходит отдых в Satva — от тех, кто уже был в туре.</p>
             </div>
@@ -508,7 +538,7 @@
     <!-- 09. Urgency CTA -->
     <section id="yogaUrgency" class="yoga-urgency" aria-labelledby="yogaUrgencyTitle">
         <div class="yoga-urgency__inner yoga-fade-in">
-            <span class="yoga-urgency__badge">Ограниченное число мест</span>
+            <span class="yoga-urgency__badge">20 номеров · камерный формат</span>
             <h2 id="yogaUrgencyTitle">В отеле всего 20 номеров. В высокий сезон — разбирают быстро</h2>
             <p class="yoga-urgency__sub">Оставьте заявку — поможем с датами и ответим на вопросы о программе.</p>
             <a href="#yogaForm" class="btn-yoga-primary is-pulse">Оставить заявку</a>
@@ -519,7 +549,8 @@
     <section id="yogaTeam" class="yoga-team" aria-labelledby="yogaTeamTitle">
         <div class="yoga-team__container">
             <div class="yoga-team__header yoga-fade-in">
-                <h2 id="yogaTeamTitle">Команда Satva</h2>
+                <p class="yoga-chip-title">Кто работает с вами</p>
+                <h2 id="yogaTeamTitle">Команда</h2>
                 <p>Те, кто создаёт для вас практику, питание и атмосферу — каждый день на берегу.</p>
             </div>
             <div class="yoga-team__grid">
@@ -718,7 +749,7 @@
                 <p class="yoga-form__lead">Оставьте контакты — подберём даты и ответим на вопросы о программе.</p>
 
                 <div id="yogaFormSuccess" class="yoga-form__status yoga-form__status--success is-hidden" role="status">
-                    Спасибо! Мы свяжемся с вами в ближайшее время.
+                    Спасибо, заявка принята. Свяжемся с вами в ближайшее время.
                 </div>
                 <div id="yogaFormError" class="yoga-form__status yoga-form__status--error is-hidden" role="alert" aria-live="assertive"></div>
 

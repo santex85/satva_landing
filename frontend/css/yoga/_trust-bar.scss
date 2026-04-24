@@ -1,0 +1,88 @@
+// Блок доверия под yoga-hero (те же смыслы, BEM-префикс yoga-trust-bar)
+
+.yoga-trust-bar {
+    padding: clamp(32px, 5vw, 48px) 24px;
+    background-color: $color-white;
+
+    &__container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    &__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        align-items: stretch;
+
+        @include mobile {
+            display: flex;
+            flex-direction: column;
+            gap: $spacing-sm;
+        }
+    }
+
+    &__item {
+        padding: $spacing-md $spacing-lg;
+        text-align: center;
+
+        @include mobile {
+            background: $color-bg-main;
+            border-radius: $border-radius-md;
+            box-shadow: $shadow-sm;
+            padding: $spacing-md;
+        }
+
+        &:not(:first-child) {
+            border-left: 1px solid rgba($color-primary, 0.12);
+
+            @include mobile {
+                border-left: none;
+            }
+        }
+    }
+
+    &__value {
+        font-size: clamp(2rem, 6vw, 3rem);
+        font-weight: $font-weight-bold;
+        color: $color-primary;
+        line-height: 1.15;
+    }
+
+    &__item--rating &__value {
+        display: inline-flex;
+        align-items: baseline;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.2em;
+    }
+
+    &__stars {
+        color: $color-accent;
+        font-size: 0.65em;
+        letter-spacing: 0.05em;
+    }
+
+    &__label {
+        display: block;
+        margin-top: $spacing-sm;
+        font-size: 0.95rem;
+        color: $color-text-light;
+        line-height: 1.4;
+    }
+
+    &__link {
+        color: $color-primary;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        margin-left: 0.25em;
+        white-space: nowrap;
+
+        &:hover {
+            color: $color-primary-dark;
+        }
+    }
+}
