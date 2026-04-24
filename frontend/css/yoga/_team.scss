@@ -18,7 +18,7 @@
             font-size: $font-size-h2;
         }
 
-        p {
+        p:not(.yoga-chip-title) {
             color: $color-text-light;
             font-size: 1.05rem;
             margin: 0;

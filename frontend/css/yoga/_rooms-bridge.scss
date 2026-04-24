@@ -1,6 +1,5 @@
-// Мост к быстрой заявке после блока номеров / доп. CTA
+// Мост к быстрой заявке (попап lead) после отзывов
 
-.yoga-rooms-bridge,
 .yoga-lead-bridge {
     background: rgba(15, 76, 92, 0.06);
     padding: clamp(40px, 6vw, 56px) 24px;
@@ -16,5 +15,17 @@
         font-size: 1.05rem;
         line-height: $line-height-body;
         color: $color-text;
+    }
+}
+
+// На светлом фоне .btn-yoga-secondary (белый текст с hero) нечитаем — тиловый контур и текст
+.yoga-lead-bridge .btn-yoga-secondary {
+    color: $color-primary;
+    border-color: rgba($color-primary, 0.55);
+
+    &:hover {
+        background: rgba($color-primary, 0.08);
+        border-color: $color-primary;
+        color: $color-primary-dark;
     }
 }

@@ -124,29 +124,25 @@
   }
 }
 .yoga-chip-title {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4em;
-  padding: 0.35em 0.9em;
-  background: #E8DCC6;
-  color: #5C1D3A;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: none;
-  margin-bottom: 1rem;
-}
-
-.yoga-includes__header .yoga-chip-title,
-.yoga-rooms__header .yoga-chip-title,
-.yoga-reviews__header .yoga-chip-title,
-.yoga-team__header .yoga-chip-title {
-  display: flex;
+  display: block;
   width: fit-content;
   max-width: 100%;
-  margin-left: auto;
+  margin-top: 0;
+  margin-left: 0;
   margin-right: auto;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  background: #BEE3DB;
+  color: #0F4C5C;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 50px;
+  text-align: center;
 }
 
 *,
@@ -380,9 +376,12 @@ a {
   overflow: hidden;
   padding-bottom: max(24px, env(safe-area-inset-bottom, 0));
 }
-@media (max-width: 639px) {
+@media (max-width: 768px) {
   .yoga-hero {
-    padding-bottom: calc(96px + max(24px, env(safe-area-inset-bottom, 0px)));
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: calc(52px + max(12px, env(safe-area-inset-bottom, 0px)));
   }
 }
 .yoga-hero__bg {
@@ -419,6 +418,18 @@ a {
   padding: 0 24px;
   color: #FFFFFF;
 }
+@media (max-width: 768px) {
+  .yoga-hero__content {
+    padding: calc(env(safe-area-inset-top, 0px) + 5.75rem) 28px 0;
+    box-sizing: border-box;
+    flex: 1 1 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: calc(100dvh - 52px - max(12px, env(safe-area-inset-bottom, 0px)));
+  }
+}
 .yoga-hero__logo {
   margin-bottom: 32px;
 }
@@ -447,11 +458,26 @@ a {
   letter-spacing: 0.05em;
   margin-top: 8px;
 }
+@media (max-width: 768px) {
+  .yoga-hero__title {
+    font-size: clamp(1.55rem, 4.2vw + 0.85rem, 2.35rem);
+    line-height: 1.18;
+    margin-bottom: 0;
+    padding: 0 4px;
+    max-width: 100%;
+  }
+}
 .yoga-hero__subtitle {
   font-size: clamp(1rem, 2vw, 1.15rem);
   line-height: 1.7;
   opacity: 0.9;
   margin: 0 0 40px;
+}
+@media (max-width: 768px) {
+  .yoga-hero__subtitle {
+    margin-bottom: 0;
+    font-size: clamp(0.9rem, 2.4vw, 1.05rem);
+  }
 }
 .yoga-hero__price {
   display: flex;
@@ -476,22 +502,39 @@ a {
   opacity: 0.7;
   margin-top: 4px;
 }
-.yoga-hero__price-extra {
-  display: block;
-  max-width: 26rem;
-  font-size: 0.8rem;
-  line-height: 1.45;
-  opacity: 0.75;
-  margin-top: 10px;
-}
-.yoga-hero__policy-hint {
-  max-width: 32rem;
-  margin: 12px auto 28px;
-  padding: 0 8px;
-  font-size: 0.8rem;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.82);
+.yoga-hero__details-trigger {
+  margin: 12px 0 24px;
+  padding: 0;
   text-align: center;
+}
+@media (max-width: 768px) {
+  .yoga-hero__details-trigger {
+    margin: 0;
+  }
+}
+.yoga-hero__details-link {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.45);
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+.yoga-hero__details-link:hover {
+  color: #fff;
+  text-decoration-color: rgba(255, 255, 255, 0.75);
+}
+.yoga-hero__details-link:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.65);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 .yoga-hero__buttons {
   display: flex;
@@ -500,6 +543,12 @@ a {
   flex-wrap: wrap;
   margin-top: 8px;
   margin-bottom: 48px;
+}
+@media (max-width: 768px) {
+  .yoga-hero__buttons {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 .yoga-hero__scroll-hint {
   display: flex;
@@ -512,6 +561,12 @@ a {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   pointer-events: none;
+}
+@media (max-width: 768px) {
+  .yoga-hero__scroll-hint {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 .yoga-hero__scroll-arrow {
   width: 16px;
@@ -543,17 +598,39 @@ a {
   }
 }
 .yoga-trust-bar {
-  padding: clamp(32px, 5vw, 48px) 24px;
+  padding: clamp(40px, 6vw, 56px) 24px clamp(44px, 6vw, 64px);
   background-color: #FFFFFF;
+  border-bottom: 1px solid rgba(15, 76, 92, 0.1);
+  box-shadow: 0 12px 32px rgba(15, 76, 92, 0.06);
 }
 @media (max-width: 767px) {
   .yoga-trust-bar {
-    padding: 2rem 24px;
+    padding: 3rem 24px 3rem;
   }
 }
 .yoga-trust-bar__container {
   max-width: 1200px;
   margin: 0 auto;
+}
+.yoga-trust-bar__header {
+  text-align: center;
+  margin-bottom: clamp(28px, 4vw, 40px);
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.yoga-trust-bar__header h2 {
+  color: #0F4C5C;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+.yoga-trust-bar__lead {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #666666;
 }
 .yoga-trust-bar__list {
   list-style: none;
@@ -645,7 +722,7 @@ a {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   line-height: 1.2;
 }
-.yoga-includes__header p {
+.yoga-includes__header p:not(.yoga-chip-title) {
   font-size: 1.1rem;
   color: #666666;
   max-width: 500px;
@@ -720,16 +797,6 @@ a {
   background: #0F4C5C;
   padding: clamp(20px, 4vw, 28px) 24px;
   text-align: center;
-}
-.yoga-beach__banner .yoga-beach__chip {
-  display: flex;
-  width: fit-content;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  background: rgba(255, 255, 255, 0.14);
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.28);
 }
 .yoga-beach__banner .yoga-beach__headline {
   color: #FFFFFF;
@@ -844,16 +911,25 @@ a {
   transform: scale(1.03);
 }
 .yoga-program__label {
-  display: inline-block;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: auto;
+  margin-bottom: 16px;
+  box-sizing: border-box;
   background: #BEE3DB;
   color: #0F4C5C;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 0.8rem;
   font-weight: 700;
+  line-height: 1.25;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 6px 14px;
   border-radius: 50px;
-  margin-bottom: 16px;
+  text-align: center;
 }
 .yoga-program__text h2 {
   color: #0F4C5C;
@@ -928,16 +1004,25 @@ a {
   object-fit: cover;
 }
 .yoga-food__label {
-  display: inline-block;
-  background: #FFFFFF;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: auto;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  background: #BEE3DB;
   color: #0F4C5C;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 0.8rem;
   font-weight: 700;
+  line-height: 1.25;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 6px 14px;
   border-radius: 50px;
-  margin-bottom: 16px;
+  text-align: center;
 }
 .yoga-food__text h2 {
   color: #0F4C5C;
@@ -983,7 +1068,7 @@ a {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   line-height: 1.2;
 }
-.yoga-rooms__header p {
+.yoga-rooms__header p:not(.yoga-chip-title) {
   color: #666666;
   font-size: 1.05rem;
   margin: 0;
@@ -1073,23 +1158,30 @@ a {
   color: #FF8E72;
 }
 
-.yoga-rooms-bridge,
 .yoga-lead-bridge {
   background: rgba(15, 76, 92, 0.06);
   padding: clamp(40px, 6vw, 56px) 24px;
   text-align: center;
 }
-.yoga-rooms-bridge__inner,
 .yoga-lead-bridge__inner {
   max-width: 36rem;
   margin: 0 auto;
 }
-.yoga-rooms-bridge__text,
 .yoga-lead-bridge__text {
   margin: 0 0 1.25rem;
   font-size: 1.05rem;
   line-height: 1.6;
   color: #2D3436;
+}
+
+.yoga-lead-bridge .btn-yoga-secondary {
+  color: #0F4C5C;
+  border-color: rgba(15, 76, 92, 0.55);
+}
+.yoga-lead-bridge .btn-yoga-secondary:hover {
+  background: rgba(15, 76, 92, 0.08);
+  border-color: #0F4C5C;
+  color: #093642;
 }
 
 .yoga-reviews {
@@ -1111,13 +1203,18 @@ a {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   line-height: 1.2;
 }
-.yoga-reviews__header p {
+.yoga-reviews__header p:not(.yoga-chip-title) {
   color: #666666;
   font-size: 1.05rem;
   margin: 0;
   max-width: 38rem;
   margin-left: auto;
   margin-right: auto;
+}
+.yoga-reviews__header .yoga-chip-title {
+  background: #FFFFFF;
+  color: #0F4C5C;
+  box-shadow: 0 1px 4px rgba(15, 76, 92, 0.12);
 }
 .yoga-reviews__grid {
   display: grid;
@@ -1288,60 +1385,6 @@ a {
   vertical-align: bottom;
 }
 
-.yoga-urgency {
-  background: #0F4C5C;
-  color: #FFFFFF;
-  padding: clamp(72px, 10vw, 120px) 24px;
-  text-align: center;
-}
-.yoga-urgency__inner {
-  max-width: 720px;
-  margin: 0 auto;
-}
-.yoga-urgency__badge {
-  display: inline-block;
-  margin-bottom: 20px;
-  padding: 8px 18px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #0F4C5C;
-  background: #BEE3DB;
-  border-radius: 999px;
-}
-.yoga-urgency h2 {
-  margin: 0 0 16px;
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  line-height: 1.2;
-}
-.yoga-urgency__sub {
-  margin: 0 0 32px;
-  font-size: clamp(1rem, 2vw, 1.15rem);
-  line-height: 1.6;
-  opacity: 0.95;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .yoga-urgency .btn-yoga-primary.is-pulse {
-    animation: yoga-pulse-cta 2.2s ease-in-out infinite;
-  }
-}
-
-@keyframes yoga-pulse-cta {
-  0%, 100% {
-    box-shadow: 0 4px 20px rgba(255, 142, 114, 0.45);
-    transform: scale(1);
-  }
-  50% {
-    box-shadow: 0 8px 36px rgba(255, 142, 114, 0.65);
-    transform: scale(1.04);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .yoga-urgency .btn-yoga-primary.is-pulse {
-    animation: none;
-  }
-}
 .yoga-team {
   background: #E8DCC6;
   padding: clamp(60px, 8vw, 100px) 24px;
@@ -1359,7 +1402,7 @@ a {
   margin: 0 0 12px;
   font-size: clamp(1.75rem, 4vw, 2.5rem);
 }
-.yoga-team__header p {
+.yoga-team__header p:not(.yoga-chip-title) {
   color: #666666;
   font-size: 1.05rem;
   margin: 0;

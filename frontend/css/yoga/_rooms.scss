@@ -19,7 +19,7 @@
             line-height: $line-height-tight;
         }
 
-        p {
+        p:not(.yoga-chip-title) {
             color: $color-text-light;
             font-size: 1.05rem;
             margin: 0;

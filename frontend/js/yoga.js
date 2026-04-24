@@ -348,8 +348,6 @@
         });
     }
 
-    // --- 10. Пульсация CTA: класс .is-pulse + keyframes в _urgency.scss --------
-
     // --- 13. Год в подвале ---------------------------------------------------
     function initCopyrightYear() {
         var el = document.getElementById('yogaFooterYear');
@@ -357,7 +355,89 @@
         el.textContent = String(new Date().getFullYear());
     }
 
-    // --- 14a. Модалка политики конфиденциальности -----------------------------
+    // --- 14a. Hero: условия и пакет (попап «Подробнее») ----------------------
+    function initHeroDetailsModal() {
+        var modal = document.getElementById('yogaModalHeroDetails');
+        if (!modal) return;
+        var overlay = modal.querySelector('.yoga-modal__overlay');
+        var closeBtn = modal.querySelector('.yoga-modal__close');
+        var panel = modal.querySelector('.yoga-modal__content');
+        var previousActive = null;
+        var trapHandler = null;
+
+        function getFocusable() {
+            if (!panel) return [];
+            return panel.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+        }
+
+        function openModal() {
+            previousActive = document.activeElement;
+            modal.removeAttribute('hidden');
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            var list = getFocusable();
+            if (list.length) {
+                list[0].focus();
+            }
+            var first = list[0];
+            var last = list[list.length - 1];
+            trapHandler = function (e) {
+                if (e.key !== 'Tab' || !list.length) return;
+                if (e.shiftKey) {
+                    if (document.activeElement === first) {
+                        e.preventDefault();
+                        last.focus();
+                    }
+                } else {
+                    if (document.activeElement === last) {
+                        e.preventDefault();
+                        first.focus();
+                    }
+                }
+            };
+            modal.addEventListener('keydown', trapHandler);
+        }
+
+        function closeModal() {
+            if (trapHandler) {
+                modal.removeEventListener('keydown', trapHandler);
+                trapHandler = null;
+            }
+            modal.classList.remove('is-open');
+            modal.setAttribute('hidden', '');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            if (previousActive && previousActive.focus) {
+                previousActive.focus();
+            }
+        }
+
+        document.addEventListener('click', function (e) {
+            var opener = e.target.closest ? e.target.closest('.js-open-yoga-hero-details') : null;
+            if (!opener) return;
+            e.preventDefault();
+            e.stopPropagation();
+            openModal();
+        });
+
+        if (overlay) {
+            overlay.addEventListener('click', closeModal);
+        }
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeModal);
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key !== 'Escape') return;
+            if (!modal.classList.contains('is-open')) return;
+            closeModal();
+        });
+    }
+
+    // --- 14b. Модалка политики конфиденциальности -----------------------------
     function initPrivacyModal() {
         var modal = document.getElementById('yogaModalPrivacy');
         if (!modal) return;
@@ -1027,6 +1107,7 @@
         initVideoThumbnails();
         initVideoModal();
         initCopyrightYear();
+        initHeroDetailsModal();
         initPrivacyModal();
         initYogaLeadModal();
         initForm();

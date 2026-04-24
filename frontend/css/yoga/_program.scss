@@ -49,16 +49,7 @@
     }
 
     &__label {
-        display: inline-block;
-        background: $color-bg-secondary;
-        color: $color-primary;
-        font-size: 0.8rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        padding: 6px 14px;
-        border-radius: 50px;
-        margin-bottom: 16px;
+        @include yoga-pill-label;
     }
 
     &__text {

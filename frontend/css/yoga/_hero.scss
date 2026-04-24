@@ -4,6 +4,9 @@
 // логотипом, заголовком, ценой, двумя CTA и скролл-хинтом внизу.
 // ============================================================
 
+// Высота шапки (fixed): padding-y + логотип; запас под бургер ~44px
+$yoga-hero-header-offset: 5.75rem;
+
 .yoga-hero {
     position: relative;
     min-height: max(600px, 100dvh);
@@ -12,11 +15,14 @@
     justify-content: center;
     text-align: center;
     overflow: hidden;
-    // Запас под плавающую кнопку Tawk.to на узких экранах (не перекрывать CTA)
+    // Запас под Tawk.to — без лишнего «воздуха» под хинтом скролла
     padding-bottom: max(24px, env(safe-area-inset-bottom, 0));
 
-    @media (max-width: 639px) {
-        padding-bottom: calc(96px + max(24px, env(safe-area-inset-bottom, 0px)));
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-bottom: calc(52px + max(12px, env(safe-area-inset-bottom, 0px)));
     }
 
     &__bg {
@@ -60,6 +66,19 @@
         width: 100%;
         padding: 0 24px;
         color: $color-white;
+
+        @media (max-width: 768px) {
+            // Не даём заголовку заезжать под fixed header и бургер
+            padding: calc(env(safe-area-inset-top, 0px) + #{$yoga-hero-header-offset}) 28px 0;
+            box-sizing: border-box;
+            // Растягиваем колонку на высоту hero: «воздух» распределяется между блоками, а не скапливается снизу
+            flex: 1 1 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: calc(100dvh - 52px - max(12px, env(safe-area-inset-bottom, 0px)));
+        }
     }
 
     &__logo {
@@ -91,6 +110,15 @@
             letter-spacing: 0.05em;
             margin-top: 8px;
         }
+
+        @media (max-width: 768px) {
+            // Меньше шрифт и запас по бокам — не наезжать на лого/бургер
+            font-size: clamp(1.55rem, 4.2vw + 0.85rem, 2.35rem);
+            line-height: 1.18;
+            margin-bottom: 0;
+            padding: 0 4px;
+            max-width: 100%;
+        }
     }
 
     &__subtitle {
@@ -98,6 +126,11 @@
         line-height: 1.7;
         opacity: 0.9;
         margin: 0 0 40px;
+
+        @media (max-width: 768px) {
+            margin-bottom: 0;
+            font-size: clamp(0.9rem, 2.4vw, 1.05rem);
+        }
     }
 
     &__price {
@@ -125,25 +158,43 @@
             opacity: 0.7;
             margin-top: 4px;
         }
+    }
 
-        &-extra {
-            display: block;
-            max-width: 26rem;
-            font-size: 0.8rem;
-            line-height: 1.45;
-            opacity: 0.75;
-            margin-top: 10px;
+    &__details-trigger {
+        margin: 12px 0 24px;
+        padding: 0;
+        text-align: center;
+
+        @media (max-width: 768px) {
+            margin: 0;
         }
     }
 
-    &__policy-hint {
-        max-width: 32rem;
-        margin: 12px auto 28px;
-        padding: 0 8px;
-        font-size: 0.8rem;
-        line-height: 1.5;
-        color: rgba(255, 255, 255, 0.82);
-        text-align: center;
+    &__details-link {
+        display: inline;
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: none;
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 0.85rem;
+        line-height: 1.4;
+        text-decoration: underline;
+        text-decoration-color: rgba(255, 255, 255, 0.45);
+        text-underline-offset: 3px;
+        cursor: pointer;
+        transition: opacity $transition-fast, color $transition-fast;
+
+        &:hover {
+            color: #fff;
+            text-decoration-color: rgba(255, 255, 255, 0.75);
+        }
+
+        &:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.65);
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
     }
 
     &__buttons {
@@ -153,6 +204,11 @@
         flex-wrap: wrap;
         margin-top: 8px;
         margin-bottom: 48px;
+
+        @media (max-width: 768px) {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
     }
 
     &__scroll-hint {
@@ -166,6 +222,11 @@
         letter-spacing: 0.1em;
         text-transform: uppercase;
         pointer-events: none;
+
+        @media (max-width: 768px) {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
     }
 
     &__scroll-arrow {

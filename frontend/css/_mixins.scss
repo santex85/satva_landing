@@ -104,3 +104,26 @@
         transform: translateY(-5px);
     }
 }
+
+// Плашка-секции yoga.html: мятный фон, тиловый текст, влево
+@mixin yoga-pill-label {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: auto;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    background: $color-bg-secondary;
+    color: $color-primary;
+    font-family: $font-family-primary;
+    font-size: 0.8rem;
+    font-weight: $font-weight-bold;
+    line-height: 1.25;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 50px;
+    text-align: center;
+}

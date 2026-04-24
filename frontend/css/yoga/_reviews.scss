@@ -20,13 +20,20 @@
             line-height: $line-height-tight;
         }
 
-        p {
+        p:not(.yoga-chip-title) {
             color: $color-text-light;
             font-size: 1.05rem;
             margin: 0;
             max-width: 38rem;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        // Плашка на мятном фоне секции — не сливать с $color-bg-secondary
+        .yoga-chip-title {
+            background: $color-white;
+            color: $color-primary;
+            box-shadow: 0 1px 4px rgba(15, 76, 92, 0.12);
         }
     }
 

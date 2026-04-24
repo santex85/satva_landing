@@ -19,7 +19,7 @@
             line-height: $line-height-tight;
         }
 
-        p {
+        p:not(.yoga-chip-title) {
             font-size: 1.1rem;
             color: $color-text-light;
             max-width: 500px;
