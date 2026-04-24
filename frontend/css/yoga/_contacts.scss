@@ -82,14 +82,6 @@
             height: 30px;
         }
     }
-
-    &__note {
-        text-align: center;
-        font-size: $font-size-small;
-        color: $color-text-light;
-        max-width: 32rem;
-        margin: 0 auto 32px;
-    }
 }
 
 // Подвал страницы — под секцией формы (раньше был внутри контактов)

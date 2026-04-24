@@ -397,6 +397,11 @@ a {
   width: auto;
   margin: 0 auto;
 }
+@media (max-width: 768px) {
+  .yoga-hero__logo {
+    display: none;
+  }
+}
 .yoga-hero__title {
   font-size: clamp(2.2rem, 5vw, 3.8rem);
   font-weight: 700;
@@ -1398,13 +1403,6 @@ a {
 .yoga-contacts__icon svg {
   width: 30px;
   height: 30px;
-}
-.yoga-contacts__note {
-  text-align: center;
-  font-size: 0.875rem;
-  color: #666666;
-  max-width: 32rem;
-  margin: 0 auto 32px;
 }
 
 .yoga-site-footer {
