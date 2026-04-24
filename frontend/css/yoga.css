@@ -546,6 +546,11 @@ a {
   padding: clamp(32px, 5vw, 48px) 24px;
   background-color: #FFFFFF;
 }
+@media (max-width: 767px) {
+  .yoga-trust-bar {
+    padding: 2rem 24px;
+  }
+}
 .yoga-trust-bar__container {
   max-width: 1200px;
   margin: 0 auto;
@@ -713,16 +718,33 @@ a {
 
 .yoga-beach__banner {
   background: #0F4C5C;
-  padding: 20px 24px;
+  padding: clamp(20px, 4vw, 28px) 24px;
   text-align: center;
 }
-.yoga-beach__banner p {
+.yoga-beach__banner .yoga-beach__chip {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(255, 255, 255, 0.14);
   color: #FFFFFF;
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
-  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+}
+.yoga-beach__banner .yoga-beach__headline {
+  color: #FFFFFF;
+  font-size: clamp(1.15rem, 3.5vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 1rem auto;
+  max-width: 40rem;
+}
+.yoga-beach__banner .yoga-beach__subline {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+  line-height: 1.6;
   margin: 0 auto;
-  max-width: 700px;
-  line-height: 1.4;
+  max-width: 36rem;
 }
 .yoga-beach__photo {
   height: 70vh;
@@ -1517,15 +1539,21 @@ a {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  max-width: 480px;
+  max-width: 520px;
 }
 .yoga-contacts__grid > li {
   margin: 0;
 }
 @media (min-width: 640px) {
   .yoga-contacts__grid {
-    grid-template-columns: repeat(4, 1fr);
-    max-width: 640px;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 520px;
+  }
+}
+@media (min-width: 900px) {
+  .yoga-contacts__grid {
+    grid-template-columns: repeat(5, 1fr);
+    max-width: 900px;
   }
 }
 .yoga-contacts__link {
