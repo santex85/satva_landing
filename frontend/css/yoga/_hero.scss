@@ -15,8 +15,8 @@ $yoga-hero-header-offset: 5.75rem;
     justify-content: center;
     text-align: center;
     overflow: hidden;
-    // Запас под Tawk.to — без лишнего «воздуха» под хинтом скролла
-    padding-bottom: max(24px, env(safe-area-inset-bottom, 0));
+    // Запас под safe-area на всех ширинах; на мобайле — доп. место под Tawk.to
+    padding-bottom: max(28px, env(safe-area-inset-bottom, 0));
 
     @media (max-width: 768px) {
         flex-direction: column;
@@ -96,9 +96,10 @@ $yoga-hero-header-offset: 5.75rem;
     }
 
     &__title {
-        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        // Один clamp для всех ширин — без скачка на 768px (моб. минимум + десктоп max)
+        font-size: clamp(1.55rem, 2.8vw + 1rem, 3.8rem);
         font-weight: 700;
-        line-height: 1.15;
+        line-height: 1.16;
         margin: 0 0 20px;
         text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 
@@ -112,8 +113,6 @@ $yoga-hero-header-offset: 5.75rem;
         }
 
         @media (max-width: 768px) {
-            // Меньше шрифт и запас по бокам — не наезжать на лого/бургер
-            font-size: clamp(1.55rem, 4.2vw + 0.85rem, 2.35rem);
             line-height: 1.18;
             margin-bottom: 0;
             padding: 0 4px;
@@ -122,14 +121,13 @@ $yoga-hero-header-offset: 5.75rem;
     }
 
     &__subtitle {
-        font-size: clamp(1rem, 2vw, 1.15rem);
+        font-size: clamp(0.9rem, 1.8vw + 0.55rem, 1.15rem);
         line-height: 1.7;
         opacity: 0.9;
         margin: 0 0 40px;
 
         @media (max-width: 768px) {
             margin-bottom: 0;
-            font-size: clamp(0.9rem, 2.4vw, 1.05rem);
         }
     }
 

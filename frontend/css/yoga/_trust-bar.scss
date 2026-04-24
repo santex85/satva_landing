@@ -43,35 +43,22 @@
         margin: 0;
         padding: 0;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0;
+        grid-template-columns: 1fr;
+        gap: $spacing-sm;
         align-items: stretch;
 
-        @include mobile {
-            display: flex;
-            flex-direction: column;
-            gap: $spacing-sm;
+        @media (min-width: 640px) {
+            grid-template-columns: repeat(3, 1fr);
+            gap: $spacing-md;
         }
     }
 
     &__item {
-        padding: $spacing-md $spacing-lg;
+        padding: $spacing-md;
         text-align: center;
-
-        @include mobile {
-            background: $color-bg-main;
-            border-radius: $border-radius-md;
-            box-shadow: $shadow-sm;
-            padding: $spacing-md;
-        }
-
-        &:not(:first-child) {
-            border-left: 1px solid rgba($color-primary, 0.12);
-
-            @include mobile {
-                border-left: none;
-            }
-        }
+        background: $color-bg-main;
+        border-radius: $border-radius-md;
+        box-shadow: $shadow-sm;
     }
 
     &__value {

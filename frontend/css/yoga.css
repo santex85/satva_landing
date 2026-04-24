@@ -374,7 +374,7 @@ a {
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  padding-bottom: max(24px, env(safe-area-inset-bottom, 0));
+  padding-bottom: max(28px, env(safe-area-inset-bottom, 0));
 }
 @media (max-width: 768px) {
   .yoga-hero {
@@ -444,9 +444,9 @@ a {
   }
 }
 .yoga-hero__title {
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-size: clamp(1.55rem, 2.8vw + 1rem, 3.8rem);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.16;
   margin: 0 0 20px;
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
@@ -460,7 +460,6 @@ a {
 }
 @media (max-width: 768px) {
   .yoga-hero__title {
-    font-size: clamp(1.55rem, 4.2vw + 0.85rem, 2.35rem);
     line-height: 1.18;
     margin-bottom: 0;
     padding: 0 4px;
@@ -468,7 +467,7 @@ a {
   }
 }
 .yoga-hero__subtitle {
-  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-size: clamp(0.9rem, 1.8vw + 0.55rem, 1.15rem);
   line-height: 1.7;
   opacity: 0.9;
   margin: 0 0 40px;
@@ -476,7 +475,6 @@ a {
 @media (max-width: 768px) {
   .yoga-hero__subtitle {
     margin-bottom: 0;
-    font-size: clamp(0.9rem, 2.4vw, 1.05rem);
   }
 }
 .yoga-hero__price {
@@ -637,36 +635,22 @@ a {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
+  grid-template-columns: 1fr;
+  gap: 1rem;
   align-items: stretch;
 }
-@media (max-width: 767px) {
+@media (min-width: 640px) {
   .yoga-trust-bar__list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
   }
 }
 .yoga-trust-bar__item {
-  padding: 2rem 3rem;
+  padding: 2rem;
   text-align: center;
-}
-@media (max-width: 767px) {
-  .yoga-trust-bar__item {
-    background: #F7F5F2;
-    border-radius: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
-  }
-}
-.yoga-trust-bar__item:not(:first-child) {
-  border-left: 1px solid rgba(15, 76, 92, 0.12);
-}
-@media (max-width: 767px) {
-  .yoga-trust-bar__item:not(:first-child) {
-    border-left: none;
-  }
+  background: #F7F5F2;
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .yoga-trust-bar__value {
   font-size: clamp(2rem, 6vw, 3rem);
