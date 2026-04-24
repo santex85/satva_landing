@@ -1073,6 +1073,25 @@ a {
   color: #FF8E72;
 }
 
+.yoga-rooms-bridge,
+.yoga-lead-bridge {
+  background: rgba(15, 76, 92, 0.06);
+  padding: clamp(40px, 6vw, 56px) 24px;
+  text-align: center;
+}
+.yoga-rooms-bridge__inner,
+.yoga-lead-bridge__inner {
+  max-width: 36rem;
+  margin: 0 auto;
+}
+.yoga-rooms-bridge__text,
+.yoga-lead-bridge__text {
+  margin: 0 0 1.25rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #2D3436;
+}
+
 .yoga-reviews {
   position: relative;
   background: #BEE3DB;
@@ -1848,6 +1867,37 @@ a {
   transform: none;
 }
 
+form.yoga-form.yoga-form--modal-light {
+  margin: 0;
+  padding: 0;
+}
+form.yoga-form.yoga-form--modal-light .yoga-form__label {
+  color: #2D3436;
+}
+form.yoga-form.yoga-form--modal-light .yoga-form__input {
+  border: 2px solid rgba(15, 76, 92, 0.2);
+  background: #FFFFFF;
+  color: #2D3436;
+}
+form.yoga-form.yoga-form--modal-light .yoga-form__input::placeholder {
+  color: #666666;
+}
+form.yoga-form.yoga-form--modal-light .yoga-form__input:focus {
+  border-color: #0F4C5C;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.12);
+}
+form.yoga-form.yoga-form--modal-light .yoga-form__checkbox {
+  color: #2D3436;
+}
+form.yoga-form.yoga-form--modal-light .yoga-form__error-text {
+  color: #b02a37;
+}
+form.yoga-form.yoga-form--modal-light .yoga-form__turnstile {
+  min-height: 68px;
+  margin-bottom: 0.75rem;
+}
+
 .yoga-modal {
   position: fixed;
   inset: 0;
@@ -1894,6 +1944,10 @@ a {
 .yoga-modal__content--wide {
   max-width: min(720px, 100vw - 32px);
 }
+.yoga-modal__content--compact {
+  max-width: min(480px, 100vw - 32px);
+  max-height: min(90vh, 640px);
+}
 .yoga-modal__close {
   position: absolute;
   top: 10px;
@@ -1922,6 +1976,11 @@ a {
   font-size: clamp(1.2rem, 2.5vw, 1.5rem);
   color: #0F4C5C;
   flex-shrink: 0;
+}
+.yoga-modal__body--compact {
+  padding: 0 1.25rem 1.25rem;
+  overflow-y: auto;
+  max-height: min(70vh, 520px);
 }
 .yoga-modal__body {
   padding: 0.5rem 1.25rem 1.5rem;

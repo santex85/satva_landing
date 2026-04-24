@@ -143,4 +143,11 @@ document.addEventListener('DOMContentLoaded', function() {
             openModal('modal-privacy');
         });
     });
+
+    document.querySelectorAll('[data-open-modal]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var id = btn.getAttribute('data-open-modal');
+            if (id) openModal(id);
+        });
+    });
 });

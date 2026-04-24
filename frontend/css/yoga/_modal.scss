@@ -50,6 +50,11 @@
         max-width: min(720px, 100vw - 32px);
     }
 
+    &__content--compact {
+        max-width: min(480px, 100vw - 32px);
+        max-height: min(90vh, 640px);
+    }
+
     &__close {
         position: absolute;
         top: 10px;
@@ -79,6 +84,12 @@
         font-size: clamp(1.2rem, 2.5vw, 1.5rem);
         color: $color-primary;
         flex-shrink: 0;
+    }
+
+    &__body--compact {
+        padding: 0 1.25rem 1.25rem;
+        overflow-y: auto;
+        max-height: min(70vh, 520px);
     }
 
     &__body {

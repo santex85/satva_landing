@@ -413,6 +413,13 @@
         </div>
     </section>
 
+    <section class="yoga-rooms-bridge" aria-label="Быстрая заявка">
+        <div class="yoga-rooms-bridge__inner">
+            <p class="yoga-rooms-bridge__text">Нужны даты или вопрос по номеру — оставьте телефон, ответим и поможем с бронированием.</p>
+            <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Быстрая заявка</button>
+        </div>
+    </section>
+
     <!-- 08. Видео-отзывы -->
     <section id="yogaReviews" class="yoga-reviews" aria-labelledby="yogaReviewsTitle">
         <div class="yoga-reviews__container">
@@ -544,6 +551,13 @@
             <h2 id="yogaUrgencyTitle">В отеле всего 20 номеров. В высокий сезон — разбирают быстро</h2>
             <p class="yoga-urgency__sub">Оставьте заявку — поможем с датами и ответим на вопросы о программе.</p>
             <a href="#yogaForm" class="btn-yoga-primary is-pulse">Оставить заявку</a>
+        </div>
+    </section>
+
+    <section class="yoga-lead-bridge" aria-label="Быстрая заявка">
+        <div class="yoga-lead-bridge__inner">
+            <p class="yoga-lead-bridge__text">Удобнее короткая форма — имя и телефон, без прокрутки к блоку внизу страницы.</p>
+            <button type="button" class="btn-yoga-secondary" data-open-modal="modal-lead">Оставить контакты</button>
         </div>
     </section>
 
@@ -763,7 +777,7 @@
                 </div>
                 <div id="yogaFormError" class="yoga-form__status yoga-form__status--error is-hidden" role="alert" aria-live="assertive"></div>
 
-                <form id="yogaContactForm" action="/api/booking" method="post" novalidate>
+                <form id="yogaContactForm" action="/api/booking" method="post" novalidate data-source="landing">
                     <input type="hidden" name="procedure" value="Йога-тур в Таиланд">
                     <input type="text" name="website" id="yogaWebsite" class="yoga-form__hp" tabindex="-1" autocomplete="off" aria-hidden="true" value="">
 
@@ -804,6 +818,37 @@
             <p>&copy; <span id="yogaFooterYear">2026</span> Satva Samui Retreat · Йога-тур</p>
         </div>
     </footer>
+
+    <div id="modal-lead" class="yoga-modal" hidden aria-hidden="true">
+        <div class="yoga-modal__overlay" tabindex="-1"></div>
+        <div class="yoga-modal__content yoga-modal__content--compact" role="dialog" aria-modal="true" aria-labelledby="yogaModalLeadTitle">
+            <button type="button" class="yoga-modal__close" aria-label="Закрыть">&times;</button>
+            <h2 class="yoga-modal__title" id="yogaModalLeadTitle">Быстрая заявка</h2>
+            <div class="yoga-modal__body yoga-modal__body--compact">
+                <form id="yogaLeadFormModal" class="yoga-form yoga-form--modal-light" action="/api/booking" method="post" data-source="popup" novalidate>
+                    <input type="hidden" name="procedure" value="Быстрая заявка с йога-лендинга">
+                    <input type="text" name="website" id="yogaLeadModalWebsite" class="yoga-form__hp" tabindex="-1" autocomplete="off" aria-hidden="true" value="">
+                    <div id="yogaTurnstileWidgetLead" class="yoga-form__turnstile" aria-label="Проверка «Я не робот»"></div>
+                    <div class="yoga-form__row">
+                        <label class="yoga-form__label" for="yogaLeadModalName">Имя</label>
+                        <input class="yoga-form__input" type="text" id="yogaLeadModalName" name="name" required autocomplete="name" maxlength="200" placeholder="Как к вам обращаться">
+                        <span id="yogaLeadModalNameErr" class="yoga-form__error-text" role="alert"></span>
+                    </div>
+                    <div class="yoga-form__row">
+                        <label class="yoga-form__label" for="yogaLeadModalPhone">Телефон / WhatsApp</label>
+                        <input class="yoga-form__input" type="tel" id="yogaLeadModalPhone" name="phone" required autocomplete="tel" inputmode="tel" placeholder="+66 …">
+                        <span id="yogaLeadModalPhoneErr" class="yoga-form__error-text" role="alert"></span>
+                    </div>
+                    <label class="yoga-form__checkbox">
+                        <input type="checkbox" id="yogaLeadModalConsent" name="consent" value="true" required>
+                        <span>Я согласен с <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">политикой конфиденциальности</button></span>
+                    </label>
+                    <div id="yogaLeadFormError" class="yoga-form__status yoga-form__status--error is-hidden" role="alert" aria-live="assertive"></div>
+                    <button type="submit" class="btn-yoga-primary btn-yoga-primary--block" id="yogaLeadModalSubmit">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Модалка политики конфиденциальности -->
     <div id="yogaModalPrivacy" class="yoga-modal" hidden aria-hidden="true">

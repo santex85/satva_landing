@@ -3,6 +3,8 @@ from enum import Enum
 
 from pydantic import BaseModel, Field, field_validator
 
+_LEAD_SOURCE_WHITELIST = frozenset({"landing", "popup", "footer", "yoga-bridge"})
+
 
 class LeadSubmissionBase(BaseModel):
     """Общие поля для публичных форм заявок."""
@@ -12,6 +14,7 @@ class LeadSubmissionBase(BaseModel):
     consent: bool = Field(..., description="Must be true")
     website: str | None = Field(None, description="Honeypot - must be empty")
     captcha_token: str | None = Field(None, description="Cloudflare Turnstile token")
+    source: str | None = Field(None, max_length=32)
 
     @field_validator("name")
     @classmethod
@@ -38,6 +41,14 @@ class LeadSubmissionBase(BaseModel):
         if v is not True:
             raise ValueError("Необходимо согласие с политикой конфиденциальности")
         return v
+
+    @field_validator("source", mode="before")
+    @classmethod
+    def source_whitelist(cls, v):
+        if v is None or (isinstance(v, str) and not v.strip()):
+            return None
+        s = str(v).strip()
+        return s if s in _LEAD_SOURCE_WHITELIST else None
 
 
 class ContactRequest(LeadSubmissionBase):

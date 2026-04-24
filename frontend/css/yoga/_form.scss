@@ -202,3 +202,42 @@
         transform: none;
     }
 }
+
+// Компактная форма в модалке (светлый фон панели)
+form.yoga-form.yoga-form--modal-light {
+    margin: 0;
+    padding: 0;
+
+    .yoga-form__label {
+        color: $color-text;
+    }
+
+    .yoga-form__input {
+        border: 2px solid rgba(15, 76, 92, 0.2);
+        background: $color-white;
+        color: $color-text;
+
+        &::placeholder {
+            color: $color-text-light;
+        }
+
+        &:focus {
+            border-color: $color-primary;
+            background: $color-white;
+            box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.12);
+        }
+    }
+
+    .yoga-form__checkbox {
+        color: $color-text;
+    }
+
+    .yoga-form__error-text {
+        color: #b02a37;
+    }
+
+    .yoga-form__turnstile {
+        min-height: 68px;
+        margin-bottom: 0.75rem;
+    }
+}

@@ -205,6 +205,13 @@
         </div>
     </section>
 
+    <div class="section-bridge" aria-label="Быстрая заявка">
+        <div class="container">
+            <p class="section-bridge__text">Подберём программу под ваши даты — оставьте контакты, и мы свяжемся с вами.</p>
+            <button type="button" class="btn btn--primary section-bridge__btn" data-open-modal="modal-lead">Оставить контакты</button>
+        </div>
+    </div>
+
     <!-- Блок 2: Concept -->
     <section class="concept" id="concept">
         <div class="container">
@@ -495,6 +502,13 @@
         </div>
     </section>
 
+    <div class="section-bridge" aria-label="Быстрая заявка">
+        <div class="container">
+            <p class="section-bridge__text">Хотите такие же результаты — обсудим формат и даты в одном сообщении.</p>
+            <button type="button" class="btn btn--primary section-bridge__btn" data-open-modal="modal-lead">Обсудить программу</button>
+        </div>
+    </div>
+
     <!-- Блок 7: Отзывы -->
     <section class="testimonials" id="testimonials">
         <div class="container">
@@ -560,6 +574,9 @@
                     <button class="testimonial-nav__btn testimonial-nav__btn--next" aria-label="Следующий отзыв">›</button>
                 </div>
             </div>
+            <div class="testimonials__cta">
+                <button type="button" class="btn btn--primary" data-open-modal="modal-lead">Забронировать даты</button>
+            </div>
         </div>
     </section>
 
@@ -570,7 +587,7 @@
                 <div class="footer__cta">
                     <h2 class="footer__title">Начните путь к обновлению уже сегодня</h2>
                     <p class="footer__subtitle">Индивидуальная программа оздоровления уже включена в стоимость тура.</p>
-                    <form class="contact-form" id="contactForm" action="/api/contact" method="POST">
+                    <form class="contact-form" id="contactForm" action="/api/contact" method="POST" data-source="footer">
                         <input type="text" name="website" id="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
                         <p id="formModeHint" class="form-mode-hint is-hidden" aria-live="polite"></p>
                         <div id="formBookingExtra" class="form-booking-extra is-hidden">
@@ -821,6 +838,50 @@
                 <p>Мы можем обновлять эту политику. Актуальная версия всегда доступна на этой странице.</p>
                 <p><em>Дата последнего обновления: январь 2026.</em></p>
             </div>
+        </div>
+    </div>
+
+    <div class="modal modal--lead" id="modal-lead" role="dialog" aria-modal="true" aria-labelledby="modal-lead-title">
+        <div class="modal__overlay"></div>
+        <div class="modal__content modal__content--compact">
+            <button type="button" class="modal__close" aria-label="Закрыть">&times;</button>
+            <h2 class="modal__title" id="modal-lead-title">Быстрая заявка</h2>
+            <form class="contact-form contact-form--compact" id="leadFormModal" action="/api/contact" method="POST" data-source="popup" novalidate>
+                <input type="text" name="website" id="leadModalWebsite" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+                <div class="form-group form-group--turnstile">
+                    <div id="turnstile-widget-lead" class="turnstile-widget"></div>
+                </div>
+                <div class="form-group">
+                    <label for="leadModalName">Имя</label>
+                    <input type="text" id="leadModalName" name="name" class="form-input" placeholder="Ваше имя" required autocomplete="name" aria-describedby="leadModalName-error" aria-invalid="false">
+                    <span class="form-icon form-icon--success" id="leadModalName-success-icon" aria-hidden="true">
+                        <img src="img/icons/check-circle.svg" alt="">
+                    </span>
+                    <span class="form-icon form-icon--error" id="leadModalName-error-icon" aria-hidden="true">
+                        <img src="img/icons/error-circle.svg" alt="">
+                    </span>
+                    <span class="form-error" id="leadModalName-error" role="alert"></span>
+                </div>
+                <div class="form-group">
+                    <label for="leadModalPhone">Телефон / WhatsApp</label>
+                    <input type="tel" id="leadModalPhone" name="phone" class="form-input" placeholder="+66 …" required autocomplete="tel" inputmode="tel" aria-describedby="leadModalPhone-error" aria-invalid="false">
+                    <span class="form-icon form-icon--success" id="leadModalPhone-success-icon" aria-hidden="true">
+                        <img src="img/icons/check-circle.svg" alt="">
+                    </span>
+                    <span class="form-icon form-icon--error" id="leadModalPhone-error-icon" aria-hidden="true">
+                        <img src="img/icons/error-circle.svg" alt="">
+                    </span>
+                    <span class="form-error" id="leadModalPhone-error" role="alert"></span>
+                </div>
+                <div class="form-group form-group--checkbox">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="consent" id="leadModalConsent" required aria-describedby="leadModalConsent-error">
+                        <span>Я согласен с <a href="#" class="js-open-privacy">политикой конфиденциальности</a></span>
+                    </label>
+                    <span class="form-error" id="leadModalConsent-error" role="alert"></span>
+                </div>
+                <button type="submit" class="btn btn--primary btn--block" id="leadModalSubmit">Отправить</button>
+            </form>
         </div>
     </div>
 

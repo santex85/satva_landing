@@ -14,6 +14,7 @@ def submit_lead(
     lead_type: str,
     payload: dict,
     honeypot: str | None,
+    source: str | None = None,
 ) -> Lead:
     if honeypot and honeypot.strip():
         raise HTTPException(status_code=400, detail="Invalid request")
@@ -21,7 +22,7 @@ def submit_lead(
     lead = Lead(
         type=lead_type,
         payload=payload,
-        source="landing",
+        source=source or "landing",
     )
     db.add(lead)
     db.flush()

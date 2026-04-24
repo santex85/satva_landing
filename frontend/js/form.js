@@ -1,9 +1,17 @@
-// Обработка формы: contact / package-request / booking + Turnstile
+// Обработка формы: contact / package-request / booking + Turnstile; модалка leadFormModal
 document.addEventListener('DOMContentLoaded', function () {
     var contactForm = document.getElementById('contactForm');
-    var nameInput = document.getElementById('name');
-    var phoneInput = document.getElementById('phone');
+    var leadFormModal = document.getElementById('leadFormModal');
+    if (!contactForm && !leadFormModal) return;
+
+    var nameInput = contactForm ? document.getElementById('name') : null;
+    var phoneInput = contactForm ? document.getElementById('phone') : null;
     var submitBtn = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
+
+    var leadModalName = leadFormModal ? document.getElementById('leadModalName') : null;
+    var leadModalPhone = leadFormModal ? document.getElementById('leadModalPhone') : null;
+    var leadModalSubmit = leadFormModal ? document.getElementById('leadModalSubmit') : null;
+
     var lastSubmitTime = 0;
     var SUBMIT_COOLDOWN_MS = 5000;
     var submitTimeoutId = null;
@@ -11,10 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var formMode = 'contact';
     var packageSlug = '';
     var bookingProcedure = '';
-    var turnstileWidgetId = null;
+    var turnstileWidgetIdMain = null;
+    var turnstileWidgetIdLead = null;
     var turnstileSiteKey = '';
-
-    if (!contactForm || !nameInput || !phoneInput) return;
 
     function apiPath(path) {
         return (window.location.origin || '') + '/api' + path;
@@ -70,26 +77,38 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    document.querySelectorAll('.js-package-cta').forEach(function (link) {
-        link.addEventListener('click', function () {
-            var slug = link.getAttribute('data-package-slug') || '';
-            if (slug) setFormMode('package', { slug: slug });
-        });
-    });
+    function closeMainLeadModal() {
+        var m = document.getElementById('modal-lead');
+        if (!m || !m.classList.contains('modal')) return;
+        m.classList.remove('modal--visible');
+        setTimeout(function () {
+            m.classList.remove('modal--active');
+            if (window.scrollLock && window.scrollLock.unlock) window.scrollLock.unlock();
+        }, 300);
+    }
 
-    document.querySelectorAll('.js-booking-from-modal').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            var proc = btn.getAttribute('data-procedure') || '';
-            if (!proc) return;
-            closeActiveModals();
-            setFormMode('booking', { procedure: proc });
-            var el = document.getElementById('contact');
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            setTimeout(function () {
-                if (nameInput) nameInput.focus();
-            }, 400);
+    if (contactForm && nameInput && phoneInput) {
+        document.querySelectorAll('.js-package-cta').forEach(function (link) {
+            link.addEventListener('click', function () {
+                var slug = link.getAttribute('data-package-slug') || '';
+                if (slug) setFormMode('package', { slug: slug });
+            });
         });
-    });
+
+        document.querySelectorAll('.js-booking-from-modal').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var proc = btn.getAttribute('data-procedure') || '';
+                if (!proc) return;
+                closeActiveModals();
+                setFormMode('booking', { procedure: proc });
+                var el = document.getElementById('contact');
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                setTimeout(function () {
+                    if (nameInput) nameInput.focus();
+                }, 400);
+            });
+        });
+    }
 
     function loadTurnstileScript() {
         return new Promise(function (resolve, reject) {
@@ -111,28 +130,29 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function renderTurnstileWidget() {
-        var el = document.getElementById('turnstile-widget');
+    function renderTurnstileIn(elId, setter) {
+        var el = document.getElementById(elId);
         if (!el || !turnstileSiteKey || !window.turnstile) return;
         el.innerHTML = '';
-        turnstileWidgetId = window.turnstile.render(el, {
+        var wid = window.turnstile.render(el, {
             sitekey: turnstileSiteKey,
             theme: 'dark',
         });
+        if (typeof setter === 'function') setter(wid);
     }
 
-    function resetTurnstile() {
-        if (turnstileWidgetId != null && window.turnstile && window.turnstile.reset) {
+    function resetTurnstileWidget(wid) {
+        if (wid != null && window.turnstile && window.turnstile.reset) {
             try {
-                window.turnstile.reset(turnstileWidgetId);
+                window.turnstile.reset(wid);
             } catch (e) {}
         }
     }
 
-    function getCaptchaToken() {
+    function getCaptchaToken(wid) {
         if (!turnstileSiteKey) return '';
-        if (turnstileWidgetId == null || !window.turnstile || !window.turnstile.getResponse) return '';
-        return window.turnstile.getResponse(turnstileWidgetId) || '';
+        if (wid == null || !window.turnstile || !window.turnstile.getResponse) return '';
+        return window.turnstile.getResponse(wid) || '';
     }
 
     fetch(apiPath('/public-config'))
@@ -143,52 +163,19 @@ document.addEventListener('DOMContentLoaded', function () {
             turnstileSiteKey = (data && data.turnstileSiteKey) ? String(data.turnstileSiteKey).trim() : '';
             if (!turnstileSiteKey) return loadTurnstileScript().then(function () {});
             return loadTurnstileScript().then(function () {
-                renderTurnstileWidget();
+                renderTurnstileIn('turnstile-widget', function (id) {
+                    turnstileWidgetIdMain = id;
+                });
+                renderTurnstileIn('turnstile-widget-lead', function (id) {
+                    turnstileWidgetIdLead = id;
+                });
             });
         })
         .catch(function () {});
 
-    // Маска для телефона
-    phoneInput.addEventListener('input', function (e) {
-        var value = e.target.value.replace(/\D/g, '');
-
-        if (value.length > 0) {
-            if (value.startsWith('66')) {
-                value = '+' + value;
-            } else if (!value.startsWith('+')) {
-                value = '+66' + value;
-            }
-
-            if (value.length > 3) {
-                value = value.slice(0, 3) + ' ' + value.slice(3);
-            }
-            if (value.length > 7) {
-                value = value.slice(0, 7) + ' ' + value.slice(7);
-            }
-            if (value.length > 11) {
-                value = value.slice(0, 11) + ' ' + value.slice(11);
-            }
-        }
-
-        e.target.value = value;
-        validateField(e.target);
-    });
-
-    nameInput.addEventListener('blur', function () {
-        validateField(this);
-    });
-
-    nameInput.addEventListener('input', function () {
-        clearFieldError(this);
-    });
-
-    phoneInput.addEventListener('blur', function () {
-        validateField(this);
-    });
-
-    phoneInput.addEventListener('input', function () {
-        clearFieldError(this);
-    });
+    function fieldBaseId(field) {
+        return field.id || field.name;
+    }
 
     function validateField(field) {
         var value = field.value.trim();
@@ -241,10 +228,10 @@ document.addEventListener('DOMContentLoaded', function () {
         field.classList.add('form-input--error');
         field.classList.remove('form-input--success');
 
-        var fieldName = field.name;
-        var errorEl = document.getElementById(fieldName + '-error');
-        var errorIcon = document.getElementById(fieldName + '-error-icon');
-        var successIcon = document.getElementById(fieldName + '-success-icon');
+        var bid = fieldBaseId(field);
+        var errorEl = document.getElementById(bid + '-error');
+        var errorIcon = document.getElementById(bid + '-error-icon');
+        var successIcon = document.getElementById(bid + '-success-icon');
 
         if (errorEl) errorEl.textContent = message;
         if (errorIcon) errorIcon.style.display = 'block';
@@ -255,10 +242,10 @@ document.addEventListener('DOMContentLoaded', function () {
         field.classList.add('form-input--success');
         field.classList.remove('form-input--error');
 
-        var fieldName = field.name;
-        var errorEl = document.getElementById(fieldName + '-error');
-        var errorIcon = document.getElementById(fieldName + '-error-icon');
-        var successIcon = document.getElementById(fieldName + '-success-icon');
+        var bid = fieldBaseId(field);
+        var errorEl = document.getElementById(bid + '-error');
+        var errorIcon = document.getElementById(bid + '-error-icon');
+        var successIcon = document.getElementById(bid + '-success-icon');
 
         if (errorEl) errorEl.textContent = '';
         if (errorIcon) errorIcon.style.display = 'none';
@@ -266,14 +253,79 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function clearFieldError(field) {
-        var fieldName = field.name;
-        var errorEl = document.getElementById(fieldName + '-error');
-        var errorIcon = document.getElementById(fieldName + '-error-icon');
-        var successIcon = document.getElementById(fieldName + '-success-icon');
+        var bid = fieldBaseId(field);
+        var errorEl = document.getElementById(bid + '-error');
+        var errorIcon = document.getElementById(bid + '-error-icon');
+        var successIcon = document.getElementById(bid + '-success-icon');
 
         if (errorEl) errorEl.textContent = '';
         if (errorIcon) errorIcon.style.display = 'none';
         if (successIcon) successIcon.style.display = 'none';
+    }
+
+    function attachPhoneMask(input) {
+        if (!input) return;
+        input.addEventListener('input', function (e) {
+            var value = e.target.value.replace(/\D/g, '');
+
+            if (value.length > 0) {
+                if (value.startsWith('66')) {
+                    value = '+' + value;
+                } else if (!value.startsWith('+')) {
+                    value = '+66' + value;
+                }
+
+                if (value.length > 3) {
+                    value = value.slice(0, 3) + ' ' + value.slice(3);
+                }
+                if (value.length > 7) {
+                    value = value.slice(0, 7) + ' ' + value.slice(7);
+                }
+                if (value.length > 11) {
+                    value = value.slice(0, 11) + ' ' + value.slice(11);
+                }
+            }
+
+            e.target.value = value;
+            validateField(e.target);
+        });
+    }
+
+    if (contactForm && nameInput && phoneInput) {
+        attachPhoneMask(phoneInput);
+
+        nameInput.addEventListener('blur', function () {
+            validateField(this);
+        });
+
+        nameInput.addEventListener('input', function () {
+            clearFieldError(this);
+        });
+
+        phoneInput.addEventListener('blur', function () {
+            validateField(this);
+        });
+
+        phoneInput.addEventListener('input', function () {
+            clearFieldError(this);
+        });
+    }
+
+    if (leadFormModal && leadModalName && leadModalPhone) {
+        attachPhoneMask(leadModalPhone);
+
+        leadModalName.addEventListener('blur', function () {
+            validateField(this);
+        });
+        leadModalName.addEventListener('input', function () {
+            clearFieldError(this);
+        });
+        leadModalPhone.addEventListener('blur', function () {
+            validateField(this);
+        });
+        leadModalPhone.addEventListener('input', function () {
+            clearFieldError(this);
+        });
     }
 
     var GENERIC_SUBMIT_ERROR = 'Ошибка отправки. Попробуйте позже или свяжитесь с нами по телефону.';
@@ -296,132 +348,15 @@ document.addEventListener('DOMContentLoaded', function () {
         return null;
     }
 
-    contactForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        var now = Date.now();
-        if (now - lastSubmitTime < SUBMIT_COOLDOWN_MS) {
-            showMessage('Пожалуйста, подождите перед повторной отправкой', 'warning');
-            return;
-        }
-
-        var consentCheck = document.getElementById('consent');
-        var isNameValid = validateField(nameInput);
-        var isPhoneValid = validateField(phoneInput);
-        if (consentCheck && !consentCheck.checked) {
-            showMessage('Необходимо согласие с политикой конфиденциальности', 'error');
-            return;
-        }
-
-        if (!isNameValid || !isPhoneValid) {
-            showMessage('Пожалуйста, исправьте ошибки в форме', 'error');
-            if (!isNameValid) nameInput.focus();
-            else if (!isPhoneValid) phoneInput.focus();
-            return;
-        }
-
-        if (turnstileSiteKey && !getCaptchaToken()) {
-            showMessage('Пройдите проверку «Я не робот»', 'error');
-            return;
-        }
-
-        lastSubmitTime = now;
-        setFormLoading(true);
-
-        var formData = new FormData(contactForm);
-        var captchaToken = getCaptchaToken();
-        var actionPath = contactForm.getAttribute('action') || '/api/contact';
-        var url = (window.location.origin || '') + actionPath;
-
-        var payload;
-        if (formMode === 'package') {
-            payload = {
-                name: formData.get('name'),
-                phone: formData.get('phone'),
-                consent: consentCheck ? consentCheck.checked : false,
-                website: formData.get('website') || '',
-                captcha_token: captchaToken || null,
-                package_slug: packageSlug,
-            };
-        } else if (formMode === 'booking') {
-            var pd = document.getElementById('preferred_date');
-            var bc = document.getElementById('booking_comment');
-            var pval = pd && pd.value ? pd.value : null;
-            var cval = bc && bc.value.trim() ? bc.value.trim() : null;
-            payload = {
-                name: formData.get('name'),
-                phone: formData.get('phone'),
-                consent: consentCheck ? consentCheck.checked : false,
-                website: formData.get('website') || '',
-                captcha_token: captchaToken || null,
-                procedure: bookingProcedure,
-                preferred_date: pval,
-                comment: cval,
-            };
-        } else {
-            payload = {
-                name: formData.get('name'),
-                phone: formData.get('phone'),
-                consent: consentCheck ? consentCheck.checked : false,
-                website: formData.get('website') || '',
-                captcha_token: captchaToken || null,
-            };
-        }
-
-        fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-        })
-            .then(function (response) {
-                return response.text().then(function (text) {
-                    var body = null;
-                    if (text) {
-                        try {
-                            body = JSON.parse(text);
-                        } catch (err) {
-                            body = null;
-                        }
-                    }
-                    return { ok: response.ok, status: response.status, body: body };
-                });
-            })
-            .then(function (r) {
-                setFormLoading(false);
-                if (r.ok) {
-                    if (window.SatvaAnalytics) window.SatvaAnalytics.trackEvent('form', 'submit', formMode);
-                    showMessage('Спасибо! Мы свяжемся с вами в ближайшее время.', 'success');
-                    contactForm.reset();
-                    nameInput.classList.remove('form-input--success', 'form-input--error');
-                    phoneInput.classList.remove('form-input--success', 'form-input--error');
-                    nameInput.setAttribute('aria-invalid', 'false');
-                    phoneInput.setAttribute('aria-invalid', 'false');
-                    clearFieldError(nameInput);
-                    clearFieldError(phoneInput);
-                    if (consentCheck) consentCheck.checked = false;
-                    setFormMode('contact');
-                    resetTurnstile();
-                } else {
-                    var apiMsg = messageFromApiError(r.status, r.body);
-                    showMessage(apiMsg || GENERIC_SUBMIT_ERROR, 'error');
-                    resetTurnstile();
-                }
-            })
-            .catch(function () {
-                setFormLoading(false);
-                showMessage('Не удалось отправить заявку. Проверьте интернет и попробуйте снова.', 'error');
-                resetTurnstile();
-            });
-    });
-
-    function setFormLoading(loading) {
-        if (!submitBtn) return;
-        submitBtn.disabled = loading;
-        submitBtn.textContent = loading ? 'Отправка…' : 'Рассчитать программу';
+    function appendSource(payload, form) {
+        if (!form || !form.dataset) return;
+        var s = form.dataset.source;
+        if (s) payload.source = s;
     }
 
-    function showMessage(message, type) {
-        var existingMessage = document.querySelector('#contactForm .form-message');
+    function showMessageInForm(formEl, message, type) {
+        if (!formEl) return;
+        var existingMessage = formEl.querySelector(':scope > .form-message');
         if (existingMessage) existingMessage.remove();
 
         var messageEl = document.createElement('div');
@@ -430,18 +365,239 @@ document.addEventListener('DOMContentLoaded', function () {
         messageEl.setAttribute('role', 'alert');
         messageEl.setAttribute('aria-live', 'polite');
 
-        if (contactForm) {
-            contactForm.appendChild(messageEl);
-            messageEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        formEl.appendChild(messageEl);
+        messageEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-            if (submitTimeoutId) clearTimeout(submitTimeoutId);
-            submitTimeoutId = setTimeout(function () {
-                messageEl.style.opacity = '0';
-                messageEl.style.transition = 'opacity 0.3s';
-                setTimeout(function () {
-                    messageEl.remove();
-                }, 300);
-            }, 5000);
-        }
+        if (submitTimeoutId) clearTimeout(submitTimeoutId);
+        submitTimeoutId = setTimeout(function () {
+            messageEl.style.opacity = '0';
+            messageEl.style.transition = 'opacity 0.3s';
+            setTimeout(function () {
+                messageEl.remove();
+            }, 300);
+        }, 5000);
+    }
+
+    if (contactForm && nameInput && phoneInput) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            var now = Date.now();
+            if (now - lastSubmitTime < SUBMIT_COOLDOWN_MS) {
+                showMessageInForm(contactForm, 'Пожалуйста, подождите перед повторной отправкой', 'warning');
+                return;
+            }
+
+            var consentCheck = document.getElementById('consent');
+            var isNameValid = validateField(nameInput);
+            var isPhoneValid = validateField(phoneInput);
+            if (consentCheck && !consentCheck.checked) {
+                showMessageInForm(contactForm, 'Необходимо согласие с политикой конфиденциальности', 'error');
+                return;
+            }
+
+            if (!isNameValid || !isPhoneValid) {
+                showMessageInForm(contactForm, 'Пожалуйста, исправьте ошибки в форме', 'error');
+                if (!isNameValid) nameInput.focus();
+                else if (!isPhoneValid) phoneInput.focus();
+                return;
+            }
+
+            if (turnstileSiteKey && !getCaptchaToken(turnstileWidgetIdMain)) {
+                showMessageInForm(contactForm, 'Пройдите проверку «Я не робот»', 'error');
+                return;
+            }
+
+            lastSubmitTime = now;
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Отправка…';
+            }
+
+            var formData = new FormData(contactForm);
+            var captchaToken = getCaptchaToken(turnstileWidgetIdMain);
+            var actionPath = contactForm.getAttribute('action') || '/api/contact';
+            var url = (window.location.origin || '') + actionPath;
+
+            var payload;
+            if (formMode === 'package') {
+                payload = {
+                    name: formData.get('name'),
+                    phone: formData.get('phone'),
+                    consent: consentCheck ? consentCheck.checked : false,
+                    website: formData.get('website') || '',
+                    captcha_token: captchaToken || null,
+                    package_slug: packageSlug,
+                };
+            } else if (formMode === 'booking') {
+                var pd = document.getElementById('preferred_date');
+                var bc = document.getElementById('booking_comment');
+                var pval = pd && pd.value ? pd.value : null;
+                var cval = bc && bc.value.trim() ? bc.value.trim() : null;
+                payload = {
+                    name: formData.get('name'),
+                    phone: formData.get('phone'),
+                    consent: consentCheck ? consentCheck.checked : false,
+                    website: formData.get('website') || '',
+                    captcha_token: captchaToken || null,
+                    procedure: bookingProcedure,
+                    preferred_date: pval,
+                    comment: cval,
+                };
+            } else {
+                payload = {
+                    name: formData.get('name'),
+                    phone: formData.get('phone'),
+                    consent: consentCheck ? consentCheck.checked : false,
+                    website: formData.get('website') || '',
+                    captcha_token: captchaToken || null,
+                };
+            }
+            appendSource(payload, contactForm);
+
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            })
+                .then(function (response) {
+                    return response.text().then(function (text) {
+                        var body = null;
+                        if (text) {
+                            try {
+                                body = JSON.parse(text);
+                            } catch (err) {
+                                body = null;
+                            }
+                        }
+                        return { ok: response.ok, status: response.status, body: body };
+                    });
+                })
+                .then(function (r) {
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Рассчитать программу';
+                    }
+                    if (r.ok) {
+                        if (window.SatvaAnalytics) window.SatvaAnalytics.trackEvent('form', 'submit', formMode);
+                        showMessageInForm(contactForm, 'Спасибо! Мы свяжемся с вами в ближайшее время.', 'success');
+                        contactForm.reset();
+                        nameInput.classList.remove('form-input--success', 'form-input--error');
+                        phoneInput.classList.remove('form-input--success', 'form-input--error');
+                        nameInput.setAttribute('aria-invalid', 'false');
+                        phoneInput.setAttribute('aria-invalid', 'false');
+                        clearFieldError(nameInput);
+                        clearFieldError(phoneInput);
+                        if (consentCheck) consentCheck.checked = false;
+                        setFormMode('contact');
+                        resetTurnstileWidget(turnstileWidgetIdMain);
+                    } else {
+                        var apiMsg = messageFromApiError(r.status, r.body);
+                        showMessageInForm(contactForm, apiMsg || GENERIC_SUBMIT_ERROR, 'error');
+                        resetTurnstileWidget(turnstileWidgetIdMain);
+                    }
+                })
+                .catch(function () {
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Рассчитать программу';
+                    }
+                    showMessageInForm(contactForm, 'Не удалось отправить заявку. Проверьте интернет и попробуйте снова.', 'error');
+                    resetTurnstileWidget(turnstileWidgetIdMain);
+                });
+        });
+    }
+
+    if (leadFormModal && leadModalName && leadModalPhone && leadModalSubmit) {
+        leadFormModal.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            var now = Date.now();
+            if (now - lastSubmitTime < SUBMIT_COOLDOWN_MS) {
+                showMessageInForm(leadFormModal, 'Пожалуйста, подождите перед повторной отправкой', 'warning');
+                return;
+            }
+
+            var consentCheck = document.getElementById('leadModalConsent');
+            var isNameValid = validateField(leadModalName);
+            var isPhoneValid = validateField(leadModalPhone);
+            if (consentCheck && !consentCheck.checked) {
+                showMessageInForm(leadFormModal, 'Необходимо согласие с политикой конфиденциальности', 'error');
+                return;
+            }
+
+            if (!isNameValid || !isPhoneValid) {
+                showMessageInForm(leadFormModal, 'Пожалуйста, исправьте ошибки в форме', 'error');
+                if (!isNameValid) leadModalName.focus();
+                else if (!isPhoneValid) leadModalPhone.focus();
+                return;
+            }
+
+            if (turnstileSiteKey && !getCaptchaToken(turnstileWidgetIdLead)) {
+                showMessageInForm(leadFormModal, 'Пройдите проверку «Я не робот»', 'error');
+                return;
+            }
+
+            lastSubmitTime = now;
+            leadModalSubmit.disabled = true;
+            leadModalSubmit.textContent = 'Отправка…';
+
+            var formData = new FormData(leadFormModal);
+            var captchaToken = getCaptchaToken(turnstileWidgetIdLead);
+            var url = (window.location.origin || '') + '/api/contact';
+
+            var payload = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                consent: consentCheck ? consentCheck.checked : false,
+                website: formData.get('website') || '',
+                captcha_token: captchaToken || null,
+            };
+            appendSource(payload, leadFormModal);
+
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            })
+                .then(function (response) {
+                    return response.text().then(function (text) {
+                        var body = null;
+                        if (text) {
+                            try {
+                                body = JSON.parse(text);
+                            } catch (err) {
+                                body = null;
+                            }
+                        }
+                        return { ok: response.ok, status: response.status, body: body };
+                    });
+                })
+                .then(function (r) {
+                    leadModalSubmit.disabled = false;
+                    leadModalSubmit.textContent = 'Отправить';
+                    if (r.ok) {
+                        if (window.SatvaAnalytics) window.SatvaAnalytics.trackEvent('form', 'submit', 'popup');
+                        leadFormModal.reset();
+                        leadModalName.classList.remove('form-input--success', 'form-input--error');
+                        leadModalPhone.classList.remove('form-input--success', 'form-input--error');
+                        clearFieldError(leadModalName);
+                        clearFieldError(leadModalPhone);
+                        if (consentCheck) consentCheck.checked = false;
+                        resetTurnstileWidget(turnstileWidgetIdLead);
+                        closeMainLeadModal();
+                    } else {
+                        var apiMsg = messageFromApiError(r.status, r.body);
+                        showMessageInForm(leadFormModal, apiMsg || GENERIC_SUBMIT_ERROR, 'error');
+                        resetTurnstileWidget(turnstileWidgetIdLead);
+                    }
+                })
+                .catch(function () {
+                    leadModalSubmit.disabled = false;
+                    leadModalSubmit.textContent = 'Отправить';
+                    showMessageInForm(leadFormModal, 'Не удалось отправить заявку. Проверьте интернет и попробуйте снова.', 'error');
+                    resetTurnstileWidget(turnstileWidgetIdLead);
+                });
+        });
     }
 });

@@ -2,6 +2,7 @@
 @import 'mixins';
 @import 'animations';
 @import 'chip-title';
+@import 'section-bridge';
 
 // Reset и базовые стили
 * {
@@ -1571,6 +1572,16 @@ h3 {
             color: $color-white;
         }
     }
+
+    &--compact {
+        .form-group {
+            margin-bottom: $spacing-sm;
+        }
+
+        .form-group--turnstile {
+            min-height: 65px;
+        }
+    }
 }
 
 @import 'trust-bar';
@@ -2122,6 +2133,15 @@ h3 {
         &--wide {
             max-width: 800px;
         }
+
+        &--compact {
+            max-width: 480px;
+            padding: $spacing-lg;
+
+            @include mobile {
+                padding: $spacing-md;
+            }
+        }
     }
 
     &__body--scroll {
@@ -2201,6 +2221,60 @@ h3 {
     &__cta {
         margin-top: $spacing-lg;
         margin-bottom: 0;
+    }
+}
+
+.modal--lead {
+    .contact-form {
+        .form-group > label {
+            display: block;
+            margin-bottom: $spacing-xs;
+            font-size: $font-size-small;
+            font-weight: $font-weight-semibold;
+            color: $color-text;
+        }
+
+        .form-booking-extra label {
+            color: $color-text;
+        }
+
+        .form-input {
+            border: 2px solid rgba($color-primary, 0.22);
+            background: $color-bg-main;
+            color: $color-text;
+
+            &::placeholder {
+                color: $color-text-light;
+            }
+
+            &:focus {
+                border-color: $color-primary;
+                background: $color-white;
+                box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.12);
+            }
+
+            &--error {
+                border-color: #dc3545;
+                background: rgba(220, 53, 69, 0.06);
+            }
+
+            &--success {
+                border-color: #4A7C59;
+                background: rgba(74, 124, 89, 0.08);
+            }
+        }
+
+        .form-group--checkbox .checkbox-label {
+            color: $color-text;
+        }
+
+        .form-error {
+            color: #b02a37;
+        }
+    }
+
+    .modal__title {
+        margin-bottom: $spacing-md;
     }
 }
 

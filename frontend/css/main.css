@@ -151,6 +151,43 @@
   margin-right: auto;
 }
 
+.section-bridge {
+  padding: 3rem 0;
+  background: rgba(15, 76, 92, 0.06);
+}
+@media (max-width: 767px) {
+  .section-bridge {
+    padding: 2rem 0;
+  }
+}
+.section-bridge .container {
+  text-align: center;
+  max-width: 40rem;
+}
+.section-bridge__text {
+  margin: 0 0 2rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #2D3436;
+}
+.section-bridge__btn {
+  min-width: 220px;
+}
+
+.testimonials__cta {
+  text-align: center;
+  margin-top: 4rem;
+  padding-top: 2rem;
+}
+@media (max-width: 767px) {
+  .testimonials__cta {
+    margin-top: 3rem;
+  }
+}
+.testimonials__cta .btn {
+  min-width: 220px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -1601,6 +1638,12 @@ h3 {
   background-color: #e6a23c;
   color: #FFFFFF;
 }
+.contact-form--compact .form-group {
+  margin-bottom: 1rem;
+}
+.contact-form--compact .form-group--turnstile {
+  min-height: 65px;
+}
 
 .trust-bar {
   padding: 3rem 0;
@@ -2190,6 +2233,15 @@ h3 {
 .modal__content--wide {
   max-width: 800px;
 }
+.modal__content--compact {
+  max-width: 480px;
+  padding: 3rem;
+}
+@media (max-width: 767px) {
+  .modal__content--compact {
+    padding: 2rem;
+  }
+}
 .modal__body--scroll {
   max-height: 60vh;
   overflow-y: auto;
@@ -2259,6 +2311,47 @@ h3 {
 .modal__cta {
   margin-top: 3rem;
   margin-bottom: 0;
+}
+
+.modal--lead .contact-form .form-group > label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2D3436;
+}
+.modal--lead .contact-form .form-booking-extra label {
+  color: #2D3436;
+}
+.modal--lead .contact-form .form-input {
+  border: 2px solid rgba(15, 76, 92, 0.22);
+  background: #F7F5F2;
+  color: #2D3436;
+}
+.modal--lead .contact-form .form-input::placeholder {
+  color: #666666;
+}
+.modal--lead .contact-form .form-input:focus {
+  border-color: #0F4C5C;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.12);
+}
+.modal--lead .contact-form .form-input--error {
+  border-color: #dc3545;
+  background: rgba(220, 53, 69, 0.06);
+}
+.modal--lead .contact-form .form-input--success {
+  border-color: #4A7C59;
+  background: rgba(74, 124, 89, 0.08);
+}
+.modal--lead .contact-form .form-group--checkbox .checkbox-label {
+  color: #2D3436;
+}
+.modal--lead .contact-form .form-error {
+  color: #b02a37;
+}
+.modal--lead .modal__title {
+  margin-bottom: 2rem;
 }
 
 .step-card[data-modal] {
