@@ -9,9 +9,20 @@ YOGA_OUT := css/yoga.css
 
 PORT ?= 8765
 
-.PHONY: css build watch serve run stop-port clean build-prod \
+# Корень репозитория (frontend/Makefile → на уровень выше)
+GIT_ROOT := $(abspath $(CURDIR)/..)
+
+.PHONY: pull sync css build watch serve run stop-port clean build-prod \
         yoga-css yoga-watch yoga-build-prod build-all yoga-clean \
         yoga-webp yoga-hero-variants optimize-images help
+
+# Обновить ветку с origin (первая операция перед сборкой при работе из frontend/)
+pull:
+	git -C $(GIT_ROOT) pull origin main
+	@echo "✓ git pull: $(GIT_ROOT)"
+
+# git pull + оба CSS (main + yoga)
+sync: pull build-all
 
 # Собрать CSS из SCSS (по умолчанию)
 css build:
@@ -113,6 +124,8 @@ help:
 	@echo "    make yoga-clean      — удалить yoga.css и .map"
 	@echo ""
 	@echo "  Общее:"
+	@echo "    make pull            — git pull origin main (из корня репозитория)"
+	@echo "    make sync            — pull + build-all (обновить и пересобрать CSS)"
 	@echo "    make build-all       — собрать main.css + yoga.css (dev)"
 	@echo "    make serve           — запустить сервер на порту $(PORT)"
 	@echo "    make stop-port       — освободить порт $(PORT)"
