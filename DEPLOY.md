@@ -167,7 +167,17 @@ nginx -t && systemctl reload nginx
 
 ## Одной командой с локальной машины
 
-С локального компьютера (при настроенном доступе по SSH):
+**Короткий путь из корня репозитория** (тот же сценарий, что и SSH-строки ниже; хост и путь можно переопределить: `make deploy-prod DEPLOY_HOST=… DEPLOY_PATH=…`):
+
+```bash
+make deploy-prod
+```
+
+Минифицированный CSS на сервере: `make deploy-prod-min`.
+
+---
+
+С тем же сценарием вручную (при настроенном доступе по SSH):
 
 ```bash
 ssh root@152.42.186.191 "cd /var/www/satva-landing && git config --global --add safe.directory /var/www/satva-landing 2>/dev/null; git fetch origin && git pull origin main && cd frontend && make css && cd .. && chown -R www-data:www-data /var/www/satva-landing && nginx -t && systemctl reload nginx && echo Deploy OK"
@@ -179,7 +189,7 @@ ssh root@152.42.186.191 "cd /var/www/satva-landing && git config --global --add 
 ssh root@152.42.186.191 "cd /var/www/satva-landing && git pull origin main && cd frontend && make css && make yoga-css && cd .. && chown -R www-data:www-data /var/www/satva-landing && systemctl reload nginx && echo Deploy OK"
 ```
 
-Для продакшн-CSS (минификация): `make build-prod && make yoga-build-prod` вместо `make css && make yoga-css`.
+Для продакшн-CSS (минификация): `make build-prod && make yoga-build-prod` вместо `make css && make yoga-css` (или `make deploy-prod-min` с локального корня репо).
 
 ---
 
