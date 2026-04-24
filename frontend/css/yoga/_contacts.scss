@@ -81,6 +81,21 @@
             width: 30px;
             height: 30px;
         }
+
+        @media (min-width: 1024px) {
+            width: 72px;
+            height: 72px;
+
+            svg {
+                width: 34px;
+                height: 34px;
+            }
+
+            img {
+                width: 34px;
+                height: 34px;
+            }
+        }
     }
 }
 

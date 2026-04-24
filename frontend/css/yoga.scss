@@ -33,13 +33,13 @@ a { color: inherit; }
 .yoga-container        { max-width: 900px;  margin: 0 auto; padding: 0 24px; }
 .yoga-container--wide  { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
+// Только transform: промежуточные кадры opacity снижают контраст текста (WCAG 1.4.3)
 .yoga-fade-in {
-    opacity: 0;
+    opacity: 1;
     transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition: transform 0.8s ease;
 
     &.is-visible {
-        opacity: 1;
         transform: none;
     }
 }
@@ -113,6 +113,7 @@ a { color: inherit; }
 @import 'yoga/team';
 @import 'yoga/activities';
 @import 'yoga/contacts';
+@import 'yoga/faq';
 @import 'yoga/form';
 @import 'yoga/modal';
 

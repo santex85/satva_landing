@@ -72,7 +72,9 @@
             "longitude": 100.06
         },
         "sameAs": [
-            "https://www.instagram.com/satvasamui/"
+            "https://www.instagram.com/satvasamui/",
+            "https://t.me/OlgaSatva",
+            "https://vk.com/relaxsatvasamui"
         ]
     }
     </script>
@@ -101,13 +103,14 @@
                 <a href="#yogaProgram">Программа</a>
                 <a href="#yogaRooms">Номера</a>
                 <a href="#yogaTeam">Команда</a>
+                <a href="#yogaFaq">Вопросы</a>
                 <a href="#yogaForm" class="btn-yoga-primary btn--small">Забронировать</a>
             </nav>
         </div>
     </header>
 
     <!-- 02. Hero -->
-    <section id="yogaHero" class="yoga-hero">
+    <section id="yogaHero" class="yoga-hero" aria-labelledby="yogaHeroTitle">
         <div class="yoga-hero__bg">
             <picture>
                 <source type="image/webp" srcset="img/yoga_tour/hero_sunset@1x.webp 1280w" sizes="100vw">
@@ -119,7 +122,7 @@
             <div class="yoga-hero__logo yoga-fade-in">
                 <img src="img/satva-logo.png" alt="Satva Samui Retreat Hotel" width="180" height="120">
             </div>
-            <h1 class="yoga-hero__title yoga-fade-in">
+            <h1 id="yogaHeroTitle" class="yoga-hero__title yoga-fade-in">
                 Йога-тур в Таиланд<br>
                 <span>на ваши даты</span>
             </h1>
@@ -147,10 +150,10 @@
     </section>
 
     <!-- 03. Что включено -->
-    <section id="yogaIncludes" class="yoga-includes">
+    <section id="yogaIncludes" class="yoga-includes" aria-labelledby="yogaIncludesTitle">
         <div class="yoga-includes__container">
             <div class="yoga-includes__header yoga-fade-in">
-                <h2>Всё, что входит в ваш тур</h2>
+                <h2 id="yogaIncludesTitle">Всё, что входит в ваш тур</h2>
                 <p>По пунктам: что уже в стоимости, а за что — по желанию (например, экскурсии). Дальше — только даты и перелёт.</p>
             </div>
             <div class="yoga-includes__grid">
@@ -224,7 +227,7 @@
     </section>
 
     <!-- 04. Пляж -->
-    <section id="yogaBeach" class="yoga-beach">
+    <section id="yogaBeach" class="yoga-beach" aria-labelledby="yogaBeachTitle">
         <div class="yoga-beach__banner yoga-fade-in">
             <p>На нашем пляже — самые красивые закаты на острове Самуи</p>
         </div>
@@ -238,7 +241,7 @@
 
         <div class="yoga-beach__text-block">
             <div class="yoga-beach__text-inner yoga-fade-in">
-                <h2>Спокойный пляж в 10 шагах от номера</h2>
+                <h2 id="yogaBeachTitle">Спокойный пляж в 10 шагах от номера</h2>
                 <p>
                     Мы специально выбрали тихий залив вдали от туристических толп.
                     Здесь можно встречать рассвет в тишине, заниматься йогой прямо у воды
@@ -253,7 +256,7 @@
     </section>
 
     <!-- 05. Йога / программа -->
-    <section id="yogaProgram" class="yoga-program">
+    <section id="yogaProgram" class="yoga-program" aria-labelledby="yogaProgramTitle">
         <div class="yoga-program__container">
             <div class="yoga-program__block yoga-fade-in">
                 <div class="yoga-program__photo">
@@ -266,7 +269,7 @@
                 </div>
                 <div class="yoga-program__text">
                     <span class="yoga-program__label">Занятия йогой</span>
-                    <h2>Йога-площадка прямо на берегу моря</h2>
+                    <h2 id="yogaProgramTitle">Йога-площадка прямо на берегу моря</h2>
                     <p>
                         Два занятия в день — утром на рассвете и вечером на закате.
                         Под открытым небом, с видом на море и шумом волн.
@@ -286,7 +289,7 @@
     </section>
 
     <!-- 06. Питание -->
-    <section id="yogaFood" class="yoga-food">
+    <section id="yogaFood" class="yoga-food" aria-labelledby="yogaFoodTitle">
         <div class="yoga-food__container">
             <div class="yoga-food__photo yoga-fade-in">
                 <picture>
@@ -298,7 +301,7 @@
             </div>
             <div class="yoga-food__text yoga-fade-in">
                 <span class="yoga-food__label">Питание</span>
-                <h2>Еда, которая питает, а не нагружает</h2>
+                <h2 id="yogaFoodTitle">Еда, которая питает, а не нагружает</h2>
                 <p>
                     В тур включены завтрак и обед. Меню составлено врачом аюрведы:
                     тропические фрукты, свежие овощи, блюда, которые поддерживают практику.
@@ -318,10 +321,10 @@
     </section>
 
     <!-- 07. Номера -->
-    <section id="yogaRooms" class="yoga-rooms">
+    <section id="yogaRooms" class="yoga-rooms" aria-labelledby="yogaRoomsTitle">
         <div class="yoga-rooms__container">
             <div class="yoga-rooms__header yoga-fade-in">
-                <h2>Номера в 10–30 метрах от моря</h2>
+                <h2 id="yogaRoomsTitle">Номера в 10–30 метрах от моря</h2>
                 <p>Уютные, чистые, с хорошей вентиляцией. Просто, но всё что нужно — есть.</p>
             </div>
 
@@ -380,92 +383,116 @@
     </section>
 
     <!-- 08. Видео-отзывы -->
-    <section id="yogaReviews" class="yoga-reviews">
+    <section id="yogaReviews" class="yoga-reviews" aria-labelledby="yogaReviewsTitle">
         <div class="yoga-reviews__container">
             <div class="yoga-reviews__header yoga-fade-in">
-                <h2>Отзывы гостей</h2>
+                <h2 id="yogaReviewsTitle">Отзывы гостей</h2>
                 <p>Короткие истории о том, как проходит отдых в Satva — от тех, кто уже был в туре.</p>
             </div>
             <div class="yoga-reviews__grid">
-                <div class="yoga-reviews__card yoga-fade-in" role="button" tabindex="0"
-                     data-video="video/review_1.mp4" aria-label="Открыть видео-отзыв 1">
-                    <div class="yoga-reviews__thumb">
-                        <video src="video/review_1.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                        <span class="yoga-reviews__play" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
+                <div class="yoga-reviews__item yoga-fade-in">
+                    <div class="yoga-reviews__card" role="button" tabindex="0"
+                         data-video="video/review_1.mp4" aria-label="Открыть видео: гость благодарит за атмосферу, йогу у моря и заботу команды">
+                        <div class="yoga-reviews__thumb">
+                            <video src="video/review_1.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                            <span class="yoga-reviews__play" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                        </div>
+                        <p class="yoga-reviews__caption">Видео-отзыв 1</p>
                     </div>
-                    <p class="yoga-reviews__caption">Видео-отзыв 1</p>
+                    <p class="yoga-reviews__summary">Гость благодарит за атмосферу и йогу у моря, отмечает внимательность команды.</p>
                 </div>
-                <div class="yoga-reviews__card yoga-fade-in" role="button" tabindex="0"
-                     data-video="video/review_2.mp4" aria-label="Открыть видео-отзыв 2">
-                    <div class="yoga-reviews__thumb">
-                        <video src="video/review_2.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                        <span class="yoga-reviews__play" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
+                <div class="yoga-reviews__item yoga-fade-in">
+                    <div class="yoga-reviews__card" role="button" tabindex="0"
+                         data-video="video/review_2.mp4" aria-label="Открыть видео: первый йога-тур, комфортно новичкам, понравилось питание">
+                        <div class="yoga-reviews__thumb">
+                            <video src="video/review_2.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                            <span class="yoga-reviews__play" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                        </div>
+                        <p class="yoga-reviews__caption">Видео-отзыв 2</p>
                     </div>
-                    <p class="yoga-reviews__caption">Видео-отзыв 2</p>
+                    <p class="yoga-reviews__summary">Рассказ о первом йога-туре: комфортно новичкам, отдельно хвалит питание по программе.</p>
                 </div>
-                <div class="yoga-reviews__card yoga-fade-in" role="button" tabindex="0"
-                     data-video="video/review_3.mp4" aria-label="Открыть видео-отзыв 3">
-                    <div class="yoga-reviews__thumb">
-                        <video src="video/review_3.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                        <span class="yoga-reviews__play" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
+                <div class="yoga-reviews__item yoga-fade-in">
+                    <div class="yoga-reviews__card" role="button" tabindex="0"
+                         data-video="video/review_3.mp4" aria-label="Открыть видео: впечатления от практик и пляжа, хочет вернуться">
+                        <div class="yoga-reviews__thumb">
+                            <video src="video/review_3.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                            <span class="yoga-reviews__play" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                        </div>
+                        <p class="yoga-reviews__caption">Видео-отзыв 3</p>
                     </div>
-                    <p class="yoga-reviews__caption">Видео-отзыв 3</p>
+                    <p class="yoga-reviews__summary">Впечатления от практик и отдыха у воды; планирует приехать снова.</p>
                 </div>
-                <div class="yoga-reviews__card yoga-fade-in" role="button" tabindex="0"
-                     data-video="video/review_4.mp4" aria-label="Открыть видео-отзыв 4">
-                    <div class="yoga-reviews__thumb">
-                        <video src="video/review_4.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                        <span class="yoga-reviews__play" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
+                <div class="yoga-reviews__item yoga-fade-in">
+                    <div class="yoga-reviews__card" role="button" tabindex="0"
+                         data-video="video/review_4.mp4" aria-label="Открыть видео: организация программы и удобное расположение у моря">
+                        <div class="yoga-reviews__thumb">
+                            <video src="video/review_4.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                            <span class="yoga-reviews__play" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                        </div>
+                        <p class="yoga-reviews__caption">Видео-отзыв 4</p>
                     </div>
-                    <p class="yoga-reviews__caption">Видео-отзыв 4</p>
+                    <p class="yoga-reviews__summary">Хвалит организацию расписания и то, что отель в шаге от пляжа.</p>
                 </div>
-                <div class="yoga-reviews__card yoga-fade-in" role="button" tabindex="0"
-                     data-video="video/review_5.mp4" aria-label="Открыть видео-отзыв 5">
-                    <div class="yoga-reviews__thumb">
-                        <video src="video/review_5.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                        <span class="yoga-reviews__play" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
+                <div class="yoga-reviews__item yoga-fade-in">
+                    <div class="yoga-reviews__card" role="button" tabindex="0"
+                         data-video="video/review_5.mp4" aria-label="Открыть видео: польза для спины и снятие стресса за время тура">
+                        <div class="yoga-reviews__thumb">
+                            <video src="video/review_5.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                            <span class="yoga-reviews__play" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                        </div>
+                        <p class="yoga-reviews__caption">Видео-отзыв 5</p>
                     </div>
-                    <p class="yoga-reviews__caption">Видео-отзыв 5</p>
+                    <p class="yoga-reviews__summary">Отмечает облегчение для спины и меньше напряжения после недельной программы.</p>
                 </div>
-                <div class="yoga-reviews__card yoga-fade-in" role="button" tabindex="0"
-                     data-video="video/review_6.mp4" aria-label="Открыть видео-отзыв 6">
-                    <div class="yoga-reviews__thumb">
-                        <video src="video/review_6.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                        <span class="yoga-reviews__play" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
+                <div class="yoga-reviews__item yoga-fade-in">
+                    <div class="yoga-reviews__card" role="button" tabindex="0"
+                         data-video="video/review_6.mp4" aria-label="Открыть видео: инструкторы и баланс нагрузки и отдыха">
+                        <div class="yoga-reviews__thumb">
+                            <video src="video/review_6.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                            <span class="yoga-reviews__play" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                        </div>
+                        <p class="yoga-reviews__caption">Видео-отзыв 6</p>
                     </div>
-                    <p class="yoga-reviews__caption">Видео-отзыв 6</p>
+                    <p class="yoga-reviews__summary">Подчёркивает дружелюбие преподавателей и спокойный ритм без перегруза.</p>
                 </div>
-                <div class="yoga-reviews__card yoga-fade-in" role="button" tabindex="0"
-                     data-video="video/review_7.mp4" aria-label="Открыть видео-отзыв 7">
-                    <div class="yoga-reviews__thumb">
-                        <video src="video/review_7.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                        <span class="yoga-reviews__play" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
+                <div class="yoga-reviews__item yoga-fade-in">
+                    <div class="yoga-reviews__card" role="button" tabindex="0"
+                         data-video="video/review_7.mp4" aria-label="Открыть видео: рекомендация тем, кто хочет перезагрузиться">
+                        <div class="yoga-reviews__thumb">
+                            <video src="video/review_7.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                            <span class="yoga-reviews__play" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                        </div>
+                        <p class="yoga-reviews__caption">Видео-отзыв 7</p>
                     </div>
-                    <p class="yoga-reviews__caption">Видео-отзыв 7</p>
+                    <p class="yoga-reviews__summary">Рекомендует тур тем, кому нужен отдых без суеты и с йогой «в тему».</p>
                 </div>
-                <div class="yoga-reviews__card yoga-fade-in" role="button" tabindex="0"
-                     data-video="video/review_8.mp4" aria-label="Открыть видео-отзыв 8">
-                    <div class="yoga-reviews__thumb">
-                        <video src="video/review_8.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                        <span class="yoga-reviews__play" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
+                <div class="yoga-reviews__item yoga-fade-in">
+                    <div class="yoga-reviews__card" role="button" tabindex="0"
+                         data-video="video/review_8.mp4" aria-label="Открыть видео: утренние занятия и вечерние закаты на площадке">
+                        <div class="yoga-reviews__thumb">
+                            <video src="video/review_8.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                            <span class="yoga-reviews__play" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                        </div>
+                        <p class="yoga-reviews__caption">Видео-отзыв 8</p>
                     </div>
-                    <p class="yoga-reviews__caption">Видео-отзыв 8</p>
+                    <p class="yoga-reviews__summary">Коротко о утренних практиках и вечерах на йога-площадке у моря.</p>
                 </div>
             </div>
         </div>
@@ -479,20 +506,20 @@
     </section>
 
     <!-- 09. Urgency CTA -->
-    <section id="yogaUrgency" class="yoga-urgency">
+    <section id="yogaUrgency" class="yoga-urgency" aria-labelledby="yogaUrgencyTitle">
         <div class="yoga-urgency__inner yoga-fade-in">
             <span class="yoga-urgency__badge">Ограниченное число мест</span>
-            <h2>В отеле всего 20 номеров. В высокий сезон — разбирают быстро</h2>
+            <h2 id="yogaUrgencyTitle">В отеле всего 20 номеров. В высокий сезон — разбирают быстро</h2>
             <p class="yoga-urgency__sub">Оставьте заявку — поможем с датами и ответим на вопросы о программе.</p>
             <a href="#yogaForm" class="btn-yoga-primary is-pulse">Оставить заявку</a>
         </div>
     </section>
 
     <!-- 10. Команда -->
-    <section id="yogaTeam" class="yoga-team">
+    <section id="yogaTeam" class="yoga-team" aria-labelledby="yogaTeamTitle">
         <div class="yoga-team__container">
             <div class="yoga-team__header yoga-fade-in">
-                <h2>Команда Satva</h2>
+                <h2 id="yogaTeamTitle">Команда Satva</h2>
                 <p>Те, кто создаёт для вас практику, питание и атмосферу — каждый день на берегу.</p>
             </div>
             <div class="yoga-team__grid">
@@ -560,7 +587,6 @@
                         <span class="yoga-team__role">Мастер рейки, акупрессинг</span>
                         <p class="yoga-team__bio">Работает мягко: рейки — для внутреннего баланса и снятия нервного перенапряжения, акупрессурные точки — меридианы, чтобы тело дышало легче после нагрузок. Сессия по согласованию, в спокойном ритме туриста.</p>
                     </div>
-                    </div>
                 </article>
             </div>
             <div class="yoga-team__pancha yoga-fade-in">
@@ -572,7 +598,7 @@
     </section>
 
     <!-- 11. Экскурсии + Клуб -->
-    <section id="yogaActivities" class="yoga-activities">
+    <section id="yogaActivities" class="yoga-activities" aria-label="Экскурсии по острову и вечерний Сатва-клуб">
         <div class="yoga-activities__container">
             <div class="yoga-activities__block yoga-activities__block--beige">
                 <div class="yoga-activities__photo">
@@ -602,15 +628,15 @@
     </section>
 
     <!-- 12. Контакты и соцсети -->
-    <section id="yogaContacts" class="yoga-contacts">
+    <section id="yogaContacts" class="yoga-contacts" aria-labelledby="yogaContactsTitle">
         <div class="yoga-contacts__container">
             <div class="yoga-contacts__header yoga-fade-in">
-                <h2>Свяжитесь с нами</h2>
+                <h2 id="yogaContactsTitle">Свяжитесь с нами</h2>
                 <p>Выберите удобный мессенджер или соцсети — ответим и поможем с датами.</p>
             </div>
             <ul class="yoga-contacts__grid">
                 <li>
-                    <a href="#" class="yoga-contacts__link yoga-fade-in" aria-label="Telegram">
+                    <a href="https://t.me/OlgaSatva" class="yoga-contacts__link yoga-fade-in" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
                         <span class="yoga-contacts__icon" aria-hidden="true">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
                         </span>
@@ -634,7 +660,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="yoga-contacts__link yoga-fade-in" aria-label="ВКонтакте">
+                    <a href="https://vk.com/relaxsatvasamui" class="yoga-contacts__link yoga-fade-in" target="_blank" rel="noopener noreferrer" aria-label="ВКонтакте">
                         <span class="yoga-contacts__icon" aria-hidden="true">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M15.07 2H8.93C3.5 2 2 3.5 2 8.93v6.14C2 20.5 3.5 22 8.93 22h6.14c5.43 0 6.93-1.5 6.93-6.93V8.93C22 3.5 20.5 2 15.07 2zm.89 12.2h-1.53c-.58 0-.77-.5-1.8-1.5-1-1-1.47-.1-1.47.58v1.1c0 .38-.1.8-1.1.8H8.1c-2.2 0-4-1.8-4-4s1.8-4 4-4h1.1c.55 0 1 .1 1.1.75.1.7-.1 1-1.1 1-1.25 0-2.12.4-2.12 1.2 0 1.4 1.2 1.2 1.2 1.2 0 .6.4.7 1.1.5 1.1-.2 1.05.3 1.05.7v1.1c0 .9-1.2 1-1.2 1z"/></svg>
                         </span>
@@ -645,7 +671,43 @@
         </div>
     </section>
 
-    <!-- 13. Финальная форма -->
+    <!-- 13. Частые вопросы -->
+    <section id="yogaFaq" class="yoga-faq" aria-labelledby="yogaFaqTitle">
+        <div class="yoga-faq__container">
+            <div class="yoga-faq__header yoga-fade-in">
+                <h2 id="yogaFaqTitle">Частые вопросы</h2>
+                <p>Коротко о туре, бронировании и заезде. Подробности по датам — в переписке или в заявке.</p>
+            </div>
+            <dl class="yoga-faq__list">
+                <div class="yoga-faq__row yoga-fade-in">
+                    <dt class="yoga-faq__question">Сколько человек обычно в группе йога-тура?</dt>
+                    <dd class="yoga-faq__answer">Группа компактная: в отеле всего 20 номеров, практики проходят в спокойном формате без толпы. Точный состав зависит от дат заезда — уточним при бронировании.</dd>
+                </div>
+                <div class="yoga-faq__row yoga-fade-in">
+                    <dt class="yoga-faq__question">Что входит в стоимость «от 70&nbsp;$ в сутки»?</dt>
+                    <dd class="yoga-faq__answer">Основной пакет включает проживание, питание по программе (завтрак и обед), две йоги в день и сопутствующие активности по расписанию тура. Одноместное размещение и отдельные услуги могут оплачиваться дополнительно — напишите в заявке, пришлём актуальную сетку.</dd>
+                </div>
+                <div class="yoga-faq__row yoga-fade-in">
+                    <dt class="yoga-faq__question">Нужен ли опыт йоги?</dt>
+                    <dd class="yoga-faq__answer">Нет, программа рассчитана на разный уровень: преподаватели дают мягкие варианты и объясняют выравнивание. Опытным практикам тоже будет комфортно.</dd>
+                </div>
+                <div class="yoga-faq__row yoga-fade-in">
+                    <dt class="yoga-faq__question">Есть ли трансфер из аэропорта?</dt>
+                    <dd class="yoga-faq__answer">Организацию трансфера и такси на Самуи можно согласовать с администрацией отеля после бронирования — в заявке укажите рейс и время, подскажем варианты.</dd>
+                </div>
+                <div class="yoga-faq__row yoga-fade-in">
+                    <dt class="yoga-faq__question">Какая минимальная длительность тура и условия отмены?</dt>
+                    <dd class="yoga-faq__answer">Минимальный срок и правила отмены или возврата зависят от сезона и тарифа. Актуальные условия высылаем персонально при подтверждении дат.</dd>
+                </div>
+                <div class="yoga-faq__row yoga-fade-in">
+                    <dt class="yoga-faq__question">Что взять с собой?</dt>
+                    <dd class="yoga-faq__answer">Удобная одежда для практик, купальник, солнцезащита, лёгкая обувь для экскурсий, адаптер для розеток при необходимости. Коврики обычно есть на площадке — уточним в переписке перед выездом.</dd>
+                </div>
+            </dl>
+        </div>
+    </section>
+
+    <!-- 14. Финальная форма -->
     <section id="yogaForm" class="yoga-form" aria-labelledby="yogaFormTitle">
         <div class="yoga-form__bg" style="background-size: cover; background-repeat: no-repeat; background-position: center; background-image: url('img/yoga_tour/beach_sunset.webp');" role="presentation"></div>
         <div class="yoga-form__overlay" role="presentation"></div>

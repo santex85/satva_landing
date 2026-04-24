@@ -166,12 +166,11 @@ a {
 }
 
 .yoga-fade-in {
-  opacity: 0;
+  opacity: 1;
   transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition: transform 0.8s ease;
 }
 .yoga-fade-in.is-visible {
-  opacity: 1;
   transform: none;
 }
 
@@ -354,6 +353,11 @@ a {
   text-align: center;
   overflow: hidden;
   padding-bottom: max(24px, env(safe-area-inset-bottom, 0));
+}
+@media (max-width: 639px) {
+  .yoga-hero {
+    padding-bottom: calc(96px + max(24px, env(safe-area-inset-bottom, 0px)));
+  }
 }
 .yoga-hero__bg {
   position: absolute;
@@ -971,12 +975,24 @@ a {
 .yoga-reviews__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 20px 16px;
 }
 @media (min-width: 640px) {
   .yoga-reviews__grid {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+.yoga-reviews__item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.yoga-reviews__summary {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: #666666;
 }
 .yoga-reviews__card {
   position: relative;
@@ -1440,6 +1456,20 @@ a {
   width: 30px;
   height: 30px;
 }
+@media (min-width: 1024px) {
+  .yoga-contacts__icon {
+    width: 72px;
+    height: 72px;
+  }
+  .yoga-contacts__icon svg {
+    width: 34px;
+    height: 34px;
+  }
+  .yoga-contacts__icon img {
+    width: 34px;
+    height: 34px;
+  }
+}
 
 .yoga-site-footer {
   background: #F7F5F2;
@@ -1452,6 +1482,60 @@ a {
 }
 .yoga-site-footer p {
   margin: 0;
+}
+
+.yoga-faq {
+  background: #BEE3DB;
+  padding: clamp(56px, 7vw, 88px) 24px;
+}
+.yoga-faq__container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.yoga-faq__header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.yoga-faq__header h2 {
+  color: #0F4C5C;
+  margin: 0 0 12px;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.2;
+}
+.yoga-faq__header p {
+  margin: 0;
+  color: #666666;
+  font-size: 1.05rem;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.yoga-faq__list {
+  margin: 0;
+}
+.yoga-faq__row {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(15, 76, 92, 0.12);
+}
+.yoga-faq__row:first-child {
+  padding-top: 0;
+}
+.yoga-faq__row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.yoga-faq__question {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #093642;
+  line-height: 1.2;
+}
+.yoga-faq__answer {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #2D3436;
 }
 
 .yoga-form {

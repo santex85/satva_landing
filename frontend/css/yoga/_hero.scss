@@ -12,7 +12,12 @@
     justify-content: center;
     text-align: center;
     overflow: hidden;
+    // Запас под плавающую кнопку Tawk.to на узких экранах (не перекрывать CTA)
     padding-bottom: max(24px, env(safe-area-inset-bottom, 0));
+
+    @media (max-width: 639px) {
+        padding-bottom: calc(96px + max(24px, env(safe-area-inset-bottom, 0px)));
+    }
 
     &__bg {
         position: absolute;

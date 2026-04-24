@@ -1,0 +1,64 @@
+// FAQ перед формой заявки
+.yoga-faq {
+    background: $color-bg-secondary;
+    padding: clamp(56px, 7vw, 88px) 24px;
+
+    &__container {
+        max-width: 720px;
+        margin: 0 auto;
+    }
+
+    &__header {
+        text-align: center;
+        margin-bottom: 40px;
+
+        h2 {
+            color: $color-primary;
+            margin: 0 0 12px;
+            font-size: $font-size-h2;
+            line-height: $line-height-tight;
+        }
+
+        p {
+            margin: 0;
+            color: $color-text-light;
+            font-size: 1.05rem;
+            max-width: 36rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    &__list {
+        margin: 0;
+    }
+
+    &__row {
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(15, 76, 92, 0.12);
+
+        &:first-child {
+            padding-top: 0;
+        }
+
+        &:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+    }
+
+    &__question {
+        margin: 0 0 10px;
+        font-size: 1.05rem;
+        font-weight: $font-weight-semibold;
+        color: $color-primary-dark;
+        line-height: $line-height-tight;
+    }
+
+    &__answer {
+        margin: 0;
+        font-size: 0.98rem;
+        line-height: 1.65;
+        color: $color-text;
+    }
+}

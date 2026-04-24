@@ -33,11 +33,25 @@
     &__grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
+        gap: 20px 16px;
 
         @media (min-width: 640px) {
             grid-template-columns: repeat(4, 1fr);
         }
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-width: 0;
+    }
+
+    &__summary {
+        margin: 0;
+        font-size: 0.8125rem;
+        line-height: 1.45;
+        color: $color-text-light;
     }
 
     &__card {
