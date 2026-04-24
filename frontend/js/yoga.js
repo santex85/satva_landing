@@ -138,6 +138,17 @@
         });
     }
 
+    // --- 01c2. «Панчакарма» — заглушка до попапа --------------------------------
+    function initPanchaInfoStub() {
+        var btns = document.querySelectorAll('.js-pancha-info-stub');
+        if (!btns.length) return;
+        btns.forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        });
+    }
+
     // --- 01d. Fade-in по скроллу + hero zoom-out -----------------------------
     function initFadeIn() {
         var els = document.querySelectorAll('.yoga-fade-in');
@@ -1102,6 +1113,7 @@
         initHeader();
         initBurgerMenu();
         initSmoothScroll();
+        initPanchaInfoStub();
         initFadeIn();
         initParallax();
         initVideoThumbnails();
