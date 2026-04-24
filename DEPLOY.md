@@ -92,7 +92,9 @@ location / {
 ### 7. Обновление кода
 
 ```bash
-git pull
+git checkout -- frontend/css/main.css frontend/css/yoga.css 2>/dev/null || true
+git pull origin main
+cd frontend && make build-all && cd ..
 docker compose -f docker-compose.prod.yml --env-file .env.deploy up -d --build
 ```
 
@@ -116,6 +118,14 @@ cd /var/www/satva-landing
 
 ### 3. Обновить код из Git
 
+Собранные в репозитории файлы `frontend/css/main.css` и `frontend/css/yoga.css` иногда оказываются с локальными правками на сервере (например после ручного `sass`), и `git pull` прерывается с *«Your local changes would be overwritten»*. Перед pull сбросьте только их (после pull всё равно пересоберите CSS шагом 4):
+
+```bash
+git checkout -- frontend/css/main.css frontend/css/yoga.css
+```
+
+Далее:
+
 ```bash
 git fetch origin
 git pull origin main
@@ -129,16 +139,23 @@ git config --global --add safe.directory /var/www/satva-landing
 
 ### 4. Собрать CSS (обязательно)
 
-Статика в каталоге **`frontend/`**. SCSS собирается так:
+Статика в каталоге **`frontend/`**. Главная отдаёт йога-лендинг и подключает **`css/yoga.css`** — собирайте **оба** бандла:
+
+```bash
+cd frontend && make build-all
+```
+
+Только основной лендинг (legacy `index.legacy.html`, `privacy` и т.д.):
 
 ```bash
 cd frontend && make css
 ```
 
-Или:
+Или вручную:
 
 ```bash
 cd frontend && sass css/main.scss css/main.css --style=expanded
+sass css/yoga.scss css/yoga.css --style=expanded
 ```
 
 Production (минификация):
@@ -180,13 +197,13 @@ make deploy-prod
 С тем же сценарием вручную (при настроенном доступе по SSH):
 
 ```bash
-ssh root@152.42.186.191 "cd /var/www/satva-landing && git config --global --add safe.directory /var/www/satva-landing 2>/dev/null; git fetch origin && git pull origin main && cd frontend && make css && cd .. && chown -R www-data:www-data /var/www/satva-landing && nginx -t && systemctl reload nginx && echo Deploy OK"
+ssh root@152.42.186.191 "cd /var/www/satva-landing && git config --global --add safe.directory /var/www/satva-landing 2>/dev/null; git fetch origin && git checkout -- frontend/css/main.css frontend/css/yoga.css 2>/dev/null || true && git pull origin main && cd frontend && make build-all && cd .. && chown -R www-data:www-data /var/www/satva-landing && nginx -t && systemctl reload nginx && echo Deploy OK"
 ```
 
 `safe.directory` выполняется один раз; при повторных деплоях можно использовать короткий вариант:
 
 ```bash
-ssh root@152.42.186.191 "cd /var/www/satva-landing && git pull origin main && cd frontend && make css && make yoga-css && cd .. && chown -R www-data:www-data /var/www/satva-landing && systemctl reload nginx && echo Deploy OK"
+ssh root@152.42.186.191 "cd /var/www/satva-landing && git checkout -- frontend/css/main.css frontend/css/yoga.css 2>/dev/null || true && git pull origin main && cd frontend && make build-all && cd .. && chown -R www-data:www-data /var/www/satva-landing && systemctl reload nginx && echo Deploy OK"
 ```
 
 Для продакшн-CSS (минификация): `make build-prod && make yoga-build-prod` вместо `make css && make yoga-css` (или `make deploy-prod-min` с локального корня репо).
