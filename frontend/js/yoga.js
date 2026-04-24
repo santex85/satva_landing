@@ -137,8 +137,11 @@
     // --- 01d. Fade-in по скроллу + hero zoom-out -----------------------------
     function initFadeIn() {
         var els = document.querySelectorAll('.yoga-fade-in');
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        if ('IntersectionObserver' in window) {
+        if (reduceMotion) {
+            els.forEach(function (el) { el.classList.add('is-visible'); });
+        } else if ('IntersectionObserver' in window) {
             var io = new IntersectionObserver(function (entries, observer) {
                 entries.forEach(function (entry) {
                     if (entry.isIntersecting) {
@@ -150,15 +153,16 @@
 
             els.forEach(function (el) { io.observe(el); });
         } else {
-            // Фолбэк: показать сразу
             els.forEach(function (el) { el.classList.add('is-visible'); });
         }
 
         // Hero — показываем контент сразу, без ожидания скролла
-        var hero = document.querySelector('.yoga-hero');
-        if (hero) {
-            var heroFades = hero.querySelectorAll('.yoga-fade-in');
-            heroFades.forEach(function (el) { el.classList.add('is-visible'); });
+        if (!reduceMotion) {
+            var hero = document.querySelector('.yoga-hero');
+            if (hero) {
+                var heroFades = hero.querySelectorAll('.yoga-fade-in');
+                heroFades.forEach(function (el) { el.classList.add('is-visible'); });
+            }
         }
 
         // Hero zoom-out — после полной загрузки картинки (LCP: <img> внутри .yoga-hero__bg)
@@ -414,6 +418,7 @@
             var opener = t.closest ? t.closest('.js-open-yoga-privacy') : null;
             if (!opener) return;
             e.preventDefault();
+            e.stopPropagation();
             openModal();
         });
 

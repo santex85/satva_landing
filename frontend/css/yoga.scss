@@ -115,3 +115,17 @@ a { color: inherit; }
 @import 'yoga/contacts';
 @import 'yoga/form';
 @import 'yoga/modal';
+
+// ---------- доступность: уважение prefers-reduced-motion ----------
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .yoga-fade-in,
+    .yoga-fade-in.is-visible {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}

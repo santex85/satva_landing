@@ -54,3 +54,9 @@
         transform: scale(1.04);
     }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .yoga-urgency .btn-yoga-primary.is-pulse {
+        animation: none;
+    }
+}

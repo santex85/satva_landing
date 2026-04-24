@@ -427,7 +427,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 48px;
+  margin-bottom: 0;
 }
 .yoga-hero__price-value {
   font-size: clamp(3rem, 7vw, 5rem);
@@ -446,11 +446,30 @@ a {
   opacity: 0.7;
   margin-top: 4px;
 }
+.yoga-hero__price-extra {
+  display: block;
+  max-width: 26rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  opacity: 0.75;
+  margin-top: 10px;
+}
+.yoga-hero__policy-hint {
+  max-width: 32rem;
+  margin: 12px auto 28px;
+  padding: 0 8px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+  text-align: center;
+}
 .yoga-hero__buttons {
   display: flex;
   gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: 8px;
+  margin-bottom: 48px;
 }
 .yoga-hero__scroll-hint {
   display: flex;
@@ -479,6 +498,18 @@ a {
   }
   50% {
     transform: rotate(45deg) translate(4px, 4px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .yoga-hero__bg {
+    transform: scale(1);
+    transition: none;
+  }
+  .yoga-hero__bg.is-loaded {
+    transform: scale(1);
+  }
+  .yoga-hero__scroll-arrow {
+    animation: none;
   }
 }
 .yoga-includes {
@@ -1143,6 +1174,11 @@ a {
     transform: scale(1.04);
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  .yoga-urgency .btn-yoga-primary.is-pulse {
+    animation: none;
+  }
+}
 .yoga-team {
   background: #E8DCC6;
   padding: clamp(60px, 8vw, 100px) 24px;
@@ -1562,6 +1598,26 @@ a {
   margin-top: 0.2rem;
   flex-shrink: 0;
 }
+.yoga-form__privacy-btn {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: #FF8E72;
+  text-decoration: underline;
+  cursor: pointer;
+  text-align: left;
+  vertical-align: baseline;
+}
+.yoga-form__privacy-btn:hover {
+  color: #ff9d80;
+}
+.yoga-form__privacy-btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 2px;
+}
 .yoga-form .btn-yoga-primary--block {
   display: block;
   width: 100%;
@@ -1669,6 +1725,18 @@ a {
 .yoga-modal__body--scroll {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .yoga-fade-in,
+  .yoga-fade-in.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /*# sourceMappingURL=yoga.css.map */
