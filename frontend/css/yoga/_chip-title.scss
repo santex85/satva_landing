@@ -4,13 +4,15 @@
     @include yoga-pill-label;
 }
 
-// Секции с text-align: center на шапке — плашка по центру, как заголовок
+// Секции с text-align: center на шапке — на десктопе плашка по центру; на мобайле влево (как миксин)
 .yoga-trust-bar__header .yoga-chip-title,
 .yoga-includes__header .yoga-chip-title,
 .yoga-beach__banner .yoga-chip-title,
 .yoga-reviews__header .yoga-chip-title,
 .yoga-rooms__header .yoga-chip-title,
 .yoga-team__header .yoga-chip-title {
-    margin-left: auto;
-    margin-right: auto;
+    @media (min-width: $breakpoint-mobile) {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
