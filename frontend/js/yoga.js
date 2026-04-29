@@ -12,6 +12,25 @@
     var yogaTurnstileLeadWidgetId = null;
     var yogaTurnstileSiteKey = '';
 
+    /** Необязательный email: пусто допустимо, иначе простая проверка формата */
+    function validateOptionalEmailRow(raw, errEl, inputEl) {
+        var v = raw ? String(raw).trim() : '';
+        if (!v) {
+            if (errEl) errEl.textContent = '';
+            if (inputEl) inputEl.classList.remove('yoga-form__input--error');
+            return true;
+        }
+        var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+        if (!ok) {
+            if (errEl) errEl.textContent = 'Некорректный email';
+            if (inputEl) inputEl.classList.add('yoga-form__input--error');
+            return false;
+        }
+        if (errEl) errEl.textContent = '';
+        if (inputEl) inputEl.classList.remove('yoga-form__input--error');
+        return true;
+    }
+
     // --- 00. Scroll Progress Bar ---------------------------------------------
     function initScrollProgress() {
         var bar = document.getElementById('yogaScrollProgress');
@@ -623,12 +642,14 @@
 
         var nameIn = document.getElementById('yogaLeadModalName');
         var phoneIn = document.getElementById('yogaLeadModalPhone');
+        var emailIn = document.getElementById('yogaLeadModalEmail');
         var consent = document.getElementById('yogaLeadModalConsent');
         var websiteHp = document.getElementById('yogaLeadModalWebsite');
         var submitBtn = document.getElementById('yogaLeadModalSubmit');
         var errBox = document.getElementById('yogaLeadFormError');
         var nameErr = document.getElementById('yogaLeadModalNameErr');
         var phoneErr = document.getElementById('yogaLeadModalPhoneErr');
+        var emailErr = document.getElementById('yogaLeadModalEmailErr');
 
         var lastSubmitTime = 0;
         var SUBMIT_COOLDOWN_MS = 5000;
@@ -654,8 +675,10 @@
         function clearNamePhoneErrors() {
             if (nameIn) nameIn.classList.remove('yoga-form__input--error');
             if (phoneIn) phoneIn.classList.remove('yoga-form__input--error');
+            if (emailIn) emailIn.classList.remove('yoga-form__input--error');
             if (nameErr) nameErr.textContent = '';
             if (phoneErr) phoneErr.textContent = '';
+            if (emailErr) emailErr.textContent = '';
         }
 
         function validateName() {
@@ -755,6 +778,12 @@
                 if (phoneErr) phoneErr.textContent = '';
             });
         }
+        if (emailIn) {
+            emailIn.addEventListener('input', function () {
+                emailIn.classList.remove('yoga-form__input--error');
+                if (emailErr) emailErr.textContent = '';
+            });
+        }
 
         form.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -774,10 +803,13 @@
             clearNamePhoneErrors();
             var okN = validateName();
             var okP = validatePhone();
-            if (!okN || !okP) {
+            var rawEmailLead = emailIn ? emailIn.value : '';
+            var okE = validateOptionalEmailRow(rawEmailLead, emailErr, emailIn);
+            if (!okN || !okP || !okE) {
                 showFormError('Проверьте поля выше.');
                 if (!okN && nameIn) nameIn.focus();
-                else if (phoneIn) phoneIn.focus();
+                else if (!okP && phoneIn) phoneIn.focus();
+                else if (emailIn) emailIn.focus();
                 return;
             }
 
@@ -802,6 +834,8 @@
                 preferred_date: null,
                 comment: null,
             };
+            var emLeadTrim = (emailIn && emailIn.value) ? emailIn.value.trim() : '';
+            if (emLeadTrim) payload.email = emLeadTrim;
 
             var src = (form.dataset && form.dataset.source) ? String(form.dataset.source).trim() : '';
             if (src) payload.source = src;
@@ -852,6 +886,7 @@
 
         var nameIn = document.getElementById('yogaName');
         var phoneIn = document.getElementById('yogaPhone');
+        var emailIn = document.getElementById('yogaEmail');
         var consent = document.getElementById('yogaConsent');
         var preferredDate = document.getElementById('yogaPreferredDate');
         var comment = document.getElementById('yogaComment');
@@ -862,6 +897,7 @@
         var turnstileEl = document.getElementById('yogaTurnstileWidget');
         var nameErr = document.getElementById('yogaNameErr');
         var phoneErr = document.getElementById('yogaPhoneErr');
+        var emailErr = document.getElementById('yogaEmailErr');
 
         var lastSubmitTime = 0;
         var SUBMIT_COOLDOWN_MS = 5000;
@@ -893,8 +929,12 @@
             if (phoneIn) {
                 phoneIn.classList.remove('yoga-form__input--error');
             }
+            if (emailIn) {
+                emailIn.classList.remove('yoga-form__input--error');
+            }
             if (nameErr) nameErr.textContent = '';
             if (phoneErr) phoneErr.textContent = '';
+            if (emailErr) emailErr.textContent = '';
         }
 
         function validateName() {
@@ -1019,6 +1059,12 @@
                 if (phoneErr) phoneErr.textContent = '';
             });
         }
+        if (emailIn) {
+            emailIn.addEventListener('input', function () {
+                emailIn.classList.remove('yoga-form__input--error');
+                if (emailErr) emailErr.textContent = '';
+            });
+        }
 
         form.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -1038,10 +1084,13 @@
             clearNamePhoneErrors();
             var okN = validateName();
             var okP = validatePhone();
-            if (!okN || !okP) {
+            var rawEmailMain = emailIn ? emailIn.value : '';
+            var okE = validateOptionalEmailRow(rawEmailMain, emailErr, emailIn);
+            if (!okN || !okP || !okE) {
                 showFormError('Проверьте поля выше.');
                 if (!okN && nameIn) nameIn.focus();
-                else if (phoneIn) phoneIn.focus();
+                else if (!okP && phoneIn) phoneIn.focus();
+                else if (emailIn) emailIn.focus();
                 return;
             }
 
@@ -1067,6 +1116,8 @@
                 preferred_date: pDate || null,
                 comment: cmt || null,
             };
+            var emMainTrim = (emailIn && emailIn.value) ? emailIn.value.trim() : '';
+            if (emMainTrim) payload.email = emMainTrim;
             var src = (form.dataset && form.dataset.source) ? String(form.dataset.source).trim() : '';
             if (src) payload.source = src;
 

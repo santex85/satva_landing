@@ -27,6 +27,8 @@ def booking(
         "preferred_date": body.preferred_date,
         "comment": body.comment,
     }
+    if body.email:
+        payload["email"] = body.email
     submit_lead(
         db,
         request,

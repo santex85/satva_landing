@@ -19,11 +19,14 @@ def contact(
     db: Session = Depends(get_db),
 ):
     verify_turnstile_or_skip(request, body.captcha_token)
+    payload = {"name": body.name, "phone": body.phone}
+    if body.email:
+        payload["email"] = body.email
     submit_lead(
         db,
         request,
         LeadType.CONTACT,
-        {"name": body.name, "phone": body.phone},
+        payload,
         body.website,
         source=body.source,
     )

@@ -614,7 +614,7 @@
                             <span class="form-error" id="name-error" role="alert"></span>
                         </div>
                         <div class="form-group">
-                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="Телефон / WhatsApp" required aria-describedby="phone-error" aria-invalid="false" autocomplete="tel" inputmode="tel">
+                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="Телефон / WhatsApp / MAX / Telegram" required aria-describedby="phone-error" aria-invalid="false" autocomplete="tel" inputmode="tel">
                             <span class="form-icon form-icon--success" id="phone-success-icon" aria-hidden="true">
                                 <img src="img/icons/check-circle.svg" alt="">
                             </span>
@@ -622,6 +622,16 @@
                                 <img src="img/icons/error-circle.svg" alt="">
                             </span>
                             <span class="form-error" id="phone-error" role="alert"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" class="form-input" placeholder="Email (необязательно)" autocomplete="email" maxlength="254" inputmode="email" aria-describedby="email-error" aria-invalid="false">
+                            <span class="form-icon form-icon--success" id="email-success-icon" aria-hidden="true">
+                                <img src="img/icons/check-circle.svg" alt="">
+                            </span>
+                            <span class="form-icon form-icon--error" id="email-error-icon" aria-hidden="true">
+                                <img src="img/icons/error-circle.svg" alt="">
+                            </span>
+                            <span class="form-error" id="email-error" role="alert"></span>
                         </div>
                         <div class="form-group form-group--checkbox">
                             <label class="checkbox-label">
@@ -863,7 +873,7 @@
                     <span class="form-error" id="leadModalName-error" role="alert"></span>
                 </div>
                 <div class="form-group">
-                    <label for="leadModalPhone">Телефон / WhatsApp</label>
+                    <label for="leadModalPhone">Телефон / WhatsApp / MAX / Telegram</label>
                     <input type="tel" id="leadModalPhone" name="phone" class="form-input" placeholder="+66 …" required autocomplete="tel" inputmode="tel" aria-describedby="leadModalPhone-error" aria-invalid="false">
                     <span class="form-icon form-icon--success" id="leadModalPhone-success-icon" aria-hidden="true">
                         <img src="img/icons/check-circle.svg" alt="">
@@ -872,6 +882,17 @@
                         <img src="img/icons/error-circle.svg" alt="">
                     </span>
                     <span class="form-error" id="leadModalPhone-error" role="alert"></span>
+                </div>
+                <div class="form-group">
+                    <label for="leadModalEmail">Email (необязательно)</label>
+                    <input type="email" id="leadModalEmail" name="email" class="form-input" placeholder="name@example.com" autocomplete="email" maxlength="254" inputmode="email" aria-describedby="leadModalEmail-error" aria-invalid="false">
+                    <span class="form-icon form-icon--success" id="leadModalEmail-success-icon" aria-hidden="true">
+                        <img src="img/icons/check-circle.svg" alt="">
+                    </span>
+                    <span class="form-icon form-icon--error" id="leadModalEmail-error-icon" aria-hidden="true">
+                        <img src="img/icons/error-circle.svg" alt="">
+                    </span>
+                    <span class="form-error" id="leadModalEmail-error" role="alert"></span>
                 </div>
                 <div class="form-group form-group--checkbox">
                     <label class="checkbox-label">

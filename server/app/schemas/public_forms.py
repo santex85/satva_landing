@@ -1,7 +1,7 @@
 import re
 from enum import Enum
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, EmailStr, Field, field_validator
 
 _LEAD_SOURCE_WHITELIST = frozenset({"landing", "popup", "footer", "yoga-bridge"})
 
@@ -15,6 +15,16 @@ class LeadSubmissionBase(BaseModel):
     website: str | None = Field(None, description="Honeypot - must be empty")
     captcha_token: str | None = Field(None, description="Cloudflare Turnstile token")
     source: str | None = Field(None, max_length=32)
+    email: EmailStr | None = Field(None, description="Необязательный email для связи")
+
+    @field_validator("email", mode="before")
+    @classmethod
+    def empty_email_to_none(cls, v):
+        if v is None:
+            return None
+        if isinstance(v, str) and not v.strip():
+            return None
+        return v
 
     @field_validator("name")
     @classmethod

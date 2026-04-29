@@ -25,6 +25,8 @@ def package_request(
         "phone": body.phone,
         "package_slug": body.package_slug.value,
     }
+    if body.email:
+        payload["email"] = body.email
     submit_lead(
         db,
         request,

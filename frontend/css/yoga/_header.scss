@@ -88,6 +88,10 @@
 
         @media (max-width: 768px) {
             display: flex;
+            // Панель меню идёт после бургера в DOM и перекрывает его тем же слоем —
+            // поднимаем крестик над выезжающим drawer.
+            position: relative;
+            z-index: 1005;
         }
 
         // Крестик при открытом меню (анимация опциональна — см. ТЗ)
@@ -105,6 +109,7 @@
         position: fixed;
         top: 0;
         right: -100%;
+        z-index: 1001;
         width: 280px;
         max-width: 85vw;
         height: 100vh;

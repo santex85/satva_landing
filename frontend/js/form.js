@@ -6,10 +6,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var nameInput = contactForm ? document.getElementById('name') : null;
     var phoneInput = contactForm ? document.getElementById('phone') : null;
+    var emailInput = contactForm ? document.getElementById('email') : null;
     var submitBtn = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
 
     var leadModalName = leadFormModal ? document.getElementById('leadModalName') : null;
     var leadModalPhone = leadFormModal ? document.getElementById('leadModalPhone') : null;
+    var leadModalEmail = leadFormModal ? document.getElementById('leadModalEmail') : null;
     var leadModalSubmit = leadFormModal ? document.getElementById('leadModalSubmit') : null;
 
     var lastSubmitTime = 0;
@@ -211,6 +213,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 isValid = false;
                 errorMessage = 'Введите корректный тайский номер (+66, затем 9 цифр, начиная с 6, 8 или 9)';
             }
+        } else if (fieldName === 'email') {
+            if (!value) {
+                field.classList.remove('form-input--success', 'form-input--error');
+                field.setAttribute('aria-invalid', 'false');
+                return true;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                isValid = false;
+                errorMessage = 'Некорректный email';
+            }
         }
 
         if (!isValid) {
@@ -311,6 +323,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    if (contactForm && emailInput) {
+        emailInput.addEventListener('blur', function () {
+            validateField(this);
+        });
+        emailInput.addEventListener('input', function () {
+            clearFieldError(this);
+        });
+    }
+
     if (leadFormModal && leadModalName && leadModalPhone) {
         attachPhoneMask(leadModalPhone);
 
@@ -324,6 +345,15 @@ document.addEventListener('DOMContentLoaded', function () {
             validateField(this);
         });
         leadModalPhone.addEventListener('input', function () {
+            clearFieldError(this);
+        });
+    }
+
+    if (leadFormModal && leadModalEmail) {
+        leadModalEmail.addEventListener('blur', function () {
+            validateField(this);
+        });
+        leadModalEmail.addEventListener('input', function () {
             clearFieldError(this);
         });
     }
@@ -352,6 +382,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!form || !form.dataset) return;
         var s = form.dataset.source;
         if (s) payload.source = s;
+    }
+
+    function appendOptionalEmail(payload, formData) {
+        if (!formData || !formData.get) return;
+        var raw = formData.get('email');
+        if (raw != null && String(raw).trim()) {
+            payload.email = String(raw).trim();
+        }
     }
 
     function showMessageInForm(formEl, message, type) {
@@ -391,15 +429,17 @@ document.addEventListener('DOMContentLoaded', function () {
             var consentCheck = document.getElementById('consent');
             var isNameValid = validateField(nameInput);
             var isPhoneValid = validateField(phoneInput);
+            var isEmailValid = emailInput ? validateField(emailInput) : true;
             if (consentCheck && !consentCheck.checked) {
                 showMessageInForm(contactForm, 'Необходимо согласие с политикой конфиденциальности', 'error');
                 return;
             }
 
-            if (!isNameValid || !isPhoneValid) {
+            if (!isNameValid || !isPhoneValid || !isEmailValid) {
                 showMessageInForm(contactForm, 'Пожалуйста, исправьте ошибки в форме', 'error');
                 if (!isNameValid) nameInput.focus();
                 else if (!isPhoneValid) phoneInput.focus();
+                else if (emailInput) emailInput.focus();
                 return;
             }
 
@@ -453,6 +493,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     captcha_token: captchaToken || null,
                 };
             }
+            appendOptionalEmail(payload, formData);
             appendSource(payload, contactForm);
 
             fetch(url, {
@@ -488,6 +529,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         phoneInput.setAttribute('aria-invalid', 'false');
                         clearFieldError(nameInput);
                         clearFieldError(phoneInput);
+                        if (emailInput) {
+                            emailInput.classList.remove('form-input--success', 'form-input--error');
+                            emailInput.setAttribute('aria-invalid', 'false');
+                            clearFieldError(emailInput);
+                        }
                         if (consentCheck) consentCheck.checked = false;
                         setFormMode('contact');
                         resetTurnstileWidget(turnstileWidgetIdMain);
@@ -521,15 +567,17 @@ document.addEventListener('DOMContentLoaded', function () {
             var consentCheck = document.getElementById('leadModalConsent');
             var isNameValid = validateField(leadModalName);
             var isPhoneValid = validateField(leadModalPhone);
+            var isEmailValid = leadModalEmail ? validateField(leadModalEmail) : true;
             if (consentCheck && !consentCheck.checked) {
                 showMessageInForm(leadFormModal, 'Необходимо согласие с политикой конфиденциальности', 'error');
                 return;
             }
 
-            if (!isNameValid || !isPhoneValid) {
+            if (!isNameValid || !isPhoneValid || !isEmailValid) {
                 showMessageInForm(leadFormModal, 'Пожалуйста, исправьте ошибки в форме', 'error');
                 if (!isNameValid) leadModalName.focus();
                 else if (!isPhoneValid) leadModalPhone.focus();
+                else if (leadModalEmail) leadModalEmail.focus();
                 return;
             }
 
@@ -553,6 +601,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 website: formData.get('website') || '',
                 captcha_token: captchaToken || null,
             };
+            appendOptionalEmail(payload, formData);
             appendSource(payload, leadFormModal);
 
             fetch(url, {
@@ -583,6 +632,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         leadModalPhone.classList.remove('form-input--success', 'form-input--error');
                         clearFieldError(leadModalName);
                         clearFieldError(leadModalPhone);
+                        if (leadModalEmail) {
+                            leadModalEmail.classList.remove('form-input--success', 'form-input--error');
+                            leadModalEmail.setAttribute('aria-invalid', 'false');
+                            clearFieldError(leadModalEmail);
+                        }
                         if (consentCheck) consentCheck.checked = false;
                         resetTurnstileWidget(turnstileWidgetIdLead);
                         closeMainLeadModal();
