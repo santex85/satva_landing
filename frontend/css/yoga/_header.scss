@@ -27,9 +27,17 @@
         max-width: 900px;
         margin: 0 auto;
         padding: 0 24px;
-        display: flex;
+        // Сетка вместо space-between: при узком десктопе навигация не наезжает на логотип
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
         align-items: center;
-        justify-content: space-between;
+        column-gap: clamp(12px, 2vw, 24px);
+
+        @media (max-width: 768px) {
+            display: flex;
+            justify-content: space-between;
+            column-gap: 0;
+        }
     }
 
     &__logo {
@@ -47,7 +55,9 @@
     &__nav {
         display: flex;
         align-items: center;
-        gap: 32px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: 12px clamp(16px, 2.5vw, 32px);
 
         a {
             color: $color-white;
@@ -129,5 +139,7 @@
             padding: 12px 0;
             width: 100%;
         }
+
+        flex-wrap: nowrap;
     }
 }

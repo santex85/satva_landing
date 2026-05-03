@@ -67,6 +67,13 @@ $yoga-hero-header-offset: 5.75rem;
         padding: 0 24px;
         color: $color-white;
 
+        // Десктоп: контент hero не заходит под прозрачный fixed header — иначе крупный логотип
+        // визуально «съезжает» с навигацией.
+        @media (min-width: 769px) {
+            padding-top: calc(env(safe-area-inset-top, 0px) + #{$yoga-hero-header-offset});
+            box-sizing: border-box;
+        }
+
         @media (max-width: 768px) {
             // Не даём заголовку заезжать под fixed header и бургер
             padding: calc(env(safe-area-inset-top, 0px) + #{$yoga-hero-header-offset}) 28px 0;
