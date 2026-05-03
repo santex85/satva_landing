@@ -56,32 +56,4 @@
             rgba(15, 76, 92, 0.35) 100%
         );
     }
-
-    &__text-block {
-        background: $color-bg-secondary;
-        padding: clamp(48px, 6vw, 80px) 24px;
-    }
-
-    &__text-inner {
-        max-width: 700px;
-        margin: 0 auto;
-
-        h2 {
-            color: $color-primary;
-            margin-bottom: 24px;
-            font-size: $font-size-h2;
-            line-height: $line-height-tight;
-        }
-
-        p {
-            color: $color-dark;
-            font-size: 1.05rem;
-            line-height: 1.75;
-            margin: 0 0 16px;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
-    }
 }
