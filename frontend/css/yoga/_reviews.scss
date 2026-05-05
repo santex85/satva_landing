@@ -37,6 +37,35 @@
         }
     }
 
+    &__text-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 40px;
+
+        @media (min-width: 640px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    &__quote {
+        margin: 0;
+        padding: 0;
+        background: $color-white;
+        border-radius: 16px;
+        padding: 20px;
+        border: 1px solid rgba(15, 76, 92, 0.1);
+        box-shadow: $shadow-sm;
+
+        blockquote {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: $line-height-body;
+            color: $color-text;
+            font-style: italic;
+        }
+    }
+
     &__grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);

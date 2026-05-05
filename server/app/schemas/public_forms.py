@@ -10,7 +10,7 @@ class LeadSubmissionBase(BaseModel):
     """Общие поля для публичных форм заявок."""
 
     name: str = Field(..., min_length=2, max_length=200)
-    phone: str = Field(..., min_length=10, max_length=20)
+    phone: str = Field(..., min_length=10, max_length=48)
     consent: bool = Field(..., description="Must be true")
     website: str | None = Field(None, description="Honeypot - must be empty")
     captcha_token: str | None = Field(None, description="Cloudflare Turnstile token")
@@ -74,6 +74,7 @@ class PackageSlug(str, Enum):
 class BookingRequest(LeadSubmissionBase):
     procedure: str = Field(..., min_length=1, max_length=300)
     preferred_date: str | None = Field(None, max_length=64)
+    departure_date: str | None = Field(None, max_length=64)
     comment: str | None = Field(None, max_length=2000)
 
     @field_validator("procedure")

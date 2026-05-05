@@ -137,6 +137,60 @@
         resize: vertical;
     }
 
+    &__label-hint {
+        font-weight: 400;
+        opacity: 0.88;
+        font-size: 0.78em;
+    }
+
+    &__phone-row {
+        display: flex;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    &__select {
+        flex: 0 0 auto;
+        min-width: 130px;
+        padding: 0.9rem 0.6rem;
+        border: 2px solid rgba(255, 255, 255, 0.35);
+        border-radius: $border-radius-md;
+        background: rgba(255, 255, 255, 0.12);
+        color: $color-white;
+        font-family: $font-family-primary;
+        font-size: 0.95rem;
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.75);
+        }
+
+        option {
+            color: $color-text;
+            background: $color-white;
+        }
+    }
+
+    &__input--phone-national {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    &__row--split {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+
+        @media (min-width: 480px) {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    &__row-inner .yoga-form__label {
+        margin-bottom: 0.4rem;
+    }
+
     &__error-text {
         display: block;
         min-height: 1.1rem;
@@ -225,6 +279,16 @@ form.yoga-form.yoga-form--modal-light {
             border-color: $color-primary;
             background: $color-white;
             box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.12);
+        }
+    }
+
+    .yoga-form__select {
+        border: 2px solid rgba(15, 76, 92, 0.2);
+        background: $color-white;
+        color: $color-text;
+
+        &:focus {
+            border-color: $color-primary;
         }
     }
 

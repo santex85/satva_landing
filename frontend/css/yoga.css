@@ -151,7 +151,9 @@
   .yoga-beach__banner .yoga-chip-title,
   .yoga-reviews__header .yoga-chip-title,
   .yoga-rooms__header .yoga-chip-title,
-  .yoga-team__header .yoga-chip-title {
+  .yoga-team__header .yoga-chip-title,
+  .yoga-wellness__header .yoga-chip-title,
+  .yoga-team-group__header .yoga-chip-title {
     margin-left: auto;
     margin-right: auto;
   }
@@ -199,6 +201,18 @@ a {
   padding: 0 24px;
 }
 
+.yoga-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .yoga-fade-in {
   opacity: 1;
   transform: translateY(20px);
@@ -210,16 +224,28 @@ a {
 
 .yoga-includes__card.yoga-fade-in,
 .yoga-reviews__item.yoga-fade-in,
+.yoga-reviews__quote.yoga-fade-in,
 .yoga-team__card.yoga-fade-in,
-.yoga-rooms__card.yoga-fade-in {
+.yoga-wellness__card.yoga-fade-in,
+.yoga-rooms-carousel.yoga-fade-in,
+.yoga-rooms__everywhere.yoga-fade-in,
+.yoga-rooms__urgency.yoga-fade-in,
+.yoga-pancha .yoga-fade-in,
+.yoga-fade-in {
   transform: none;
   opacity: 0;
   transition: opacity 0.65s ease;
 }
 .yoga-includes__card.yoga-fade-in.is-visible,
 .yoga-reviews__item.yoga-fade-in.is-visible,
+.yoga-reviews__quote.yoga-fade-in.is-visible,
 .yoga-team__card.yoga-fade-in.is-visible,
-.yoga-rooms__card.yoga-fade-in.is-visible {
+.yoga-wellness__card.yoga-fade-in.is-visible,
+.yoga-rooms-carousel.yoga-fade-in.is-visible,
+.yoga-rooms__everywhere.yoga-fade-in.is-visible,
+.yoga-rooms__urgency.yoga-fade-in.is-visible,
+.yoga-pancha .yoga-fade-in.is-visible,
+.yoga-fade-in.is-visible {
   opacity: 1;
 }
 
@@ -378,6 +404,7 @@ a {
 .yoga-header__burger.is-open span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
 }
+
 @media (max-width: 768px) {
   .yoga-header__nav {
     position: fixed;
@@ -391,7 +418,6 @@ a {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    flex-wrap: nowrap;
     gap: 24px;
     padding: 40px;
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
@@ -404,6 +430,9 @@ a {
     font-size: 1.2rem;
     padding: 12px 0;
     width: 100%;
+  }
+  .yoga-header__nav {
+    flex-wrap: nowrap;
   }
 }
 .yoga-hero {
@@ -521,6 +550,21 @@ a {
 @media (max-width: 768px) {
   .yoga-hero__subtitle {
     margin-bottom: 0;
+  }
+}
+.yoga-hero__tagline {
+  font-size: clamp(0.95rem, 1.6vw + 0.5rem, 1.2rem);
+  font-weight: 600;
+  line-height: 1.55;
+  margin: -8px auto 20px;
+  max-width: 38rem;
+  opacity: 0.94;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+}
+@media (max-width: 768px) {
+  .yoga-hero__tagline {
+    margin-top: 12px;
+    margin-bottom: 16px;
   }
 }
 .yoga-hero__price {
@@ -822,6 +866,50 @@ a {
   color: #FFFFFF;
   fill: currentColor;
 }
+.yoga-includes__amenities {
+  margin-top: 40px;
+  padding: 24px 22px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 76, 92, 0.08);
+  text-align: center;
+}
+.yoga-includes__amenities-title {
+  font-weight: 700;
+  color: #0F4C5C;
+  margin: 0 0 14px;
+  font-size: 1rem;
+}
+.yoga-includes__amenities-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  justify-content: center;
+}
+.yoga-includes__amenities-list li {
+  background: #F7F5F2;
+  color: #2D3436;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+.yoga-includes__optional-banner {
+  margin-top: 24px;
+  padding: 18px 20px;
+  background: rgba(255, 142, 114, 0.14);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 142, 114, 0.35);
+  font-size: 0.95rem;
+  color: #2D3436;
+  line-height: 1.6;
+  text-align: center;
+}
+.yoga-includes__optional-banner strong {
+  color: #0F4C5C;
+}
 
 .yoga-beach__banner {
   background: #0F4C5C;
@@ -869,6 +957,7 @@ a {
   inset: 0;
   background: linear-gradient(to bottom, rgba(15, 76, 92, 0.1) 0%, rgba(15, 76, 92, 0.35) 100%);
 }
+
 .yoga-program {
   background: #FFFFFF;
   padding: clamp(60px, 8vw, 100px) 24px;
@@ -1061,7 +1150,7 @@ a {
   padding: clamp(60px, 8vw, 100px) 24px;
 }
 .yoga-rooms__container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 .yoga-rooms__header {
@@ -1077,72 +1166,8 @@ a {
 .yoga-rooms__header p:not(.yoga-chip-title) {
   color: #666666;
   font-size: 1.05rem;
-  margin: 0;
-}
-.yoga-rooms__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  margin-bottom: 48px;
-}
-@media (min-width: 640px) {
-  .yoga-rooms__grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-.yoga-rooms__card {
-  background: #FFFFFF;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(15, 76, 92, 0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  display: flex;
-  flex-direction: column;
-}
-.yoga-rooms__card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(15, 76, 92, 0.12);
-}
-.yoga-rooms__photo {
-  aspect-ratio: 4/3;
-  overflow: hidden;
-}
-.yoga-rooms__photo picture {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.yoga-rooms__photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.yoga-rooms__info {
-  padding: 24px;
-}
-.yoga-rooms__info h3 {
-  color: #0F4C5C;
-  font-size: 1.1rem;
-  margin: 0 0 16px;
-}
-.yoga-rooms__info ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.yoga-rooms__info ul li {
-  padding: 8px 0;
-  border-bottom: 1px solid #F7F5F2;
-  color: #2D3436;
-  font-size: 0.9rem;
-}
-.yoga-rooms__info ul li:last-child {
-  border-bottom: none;
-}
-.yoga-rooms__info ul li::before {
-  content: "✓ ";
-  color: #FF8E72;
-  font-weight: 700;
+  margin: 0 auto;
+  max-width: 36rem;
 }
 .yoga-rooms__urgency {
   background: #0F4C5C;
@@ -1162,6 +1187,213 @@ a {
 }
 .yoga-rooms__urgency p strong {
   color: #FF8E72;
+}
+
+.yoga-rooms-carousel {
+  margin-bottom: 40px;
+}
+.yoga-rooms-carousel__viewport {
+  outline: none;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(15, 76, 92, 0.1);
+  background: #FFFFFF;
+}
+.yoga-rooms-carousel__track {
+  position: relative;
+}
+.yoga-rooms-carousel__slide {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+@media (min-width: 720px) {
+  .yoga-rooms-carousel__slide {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: stretch;
+  }
+}
+.yoga-rooms-carousel__slide:not(.is-active) {
+  display: none;
+}
+.yoga-rooms-carousel__media {
+  aspect-ratio: 16/9;
+  min-height: 200px;
+  background: linear-gradient(135deg, rgba(15, 76, 92, 0.15), rgba(190, 227, 219, 0.5));
+}
+.yoga-rooms-carousel__media--placeholder {
+  background: linear-gradient(135deg, rgba(15, 76, 92, 0.08) 0%, rgba(44, 110, 122, 0.12) 100%);
+  position: relative;
+}
+.yoga-rooms-carousel__media--placeholder::after {
+  content: "Фото номера";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(15, 76, 92, 0.45);
+}
+.yoga-rooms-carousel__body {
+  padding: clamp(20px, 3vw, 28px);
+}
+.yoga-rooms-carousel__body h3 {
+  margin: 0 0 10px;
+  color: #0F4C5C;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+}
+.yoga-rooms-carousel__body p {
+  margin: 0 0 14px;
+  color: #666666;
+  line-height: 1.6;
+}
+.yoga-rooms-carousel__body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+}
+.yoga-rooms-carousel__body ul li {
+  padding: 6px 0;
+  padding-left: 1.1rem;
+  position: relative;
+  font-size: 0.9rem;
+  color: #2D3436;
+}
+.yoga-rooms-carousel__body ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #FF8E72;
+}
+.yoga-rooms-carousel__body .btn-yoga-primary {
+  font-size: 0.85rem;
+  padding: 12px 28px;
+}
+.yoga-rooms-carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.yoga-rooms-carousel__btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #0F4C5C;
+  background: #FFFFFF;
+  color: #0F4C5C;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  position: relative;
+}
+.yoga-rooms-carousel__btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 10px;
+  height: 10px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+}
+.yoga-rooms-carousel__btn--prev::before {
+  transform: rotate(45deg);
+  margin-left: 14px;
+}
+.yoga-rooms-carousel__btn--next::before {
+  transform: rotate(-135deg);
+  margin-right: 14px;
+}
+.yoga-rooms-carousel__btn:hover {
+  background: #0F4C5C;
+  color: #FFFFFF;
+}
+.yoga-rooms-carousel__btn:focus-visible {
+  outline: 3px solid #FF8E72;
+  outline-offset: 2px;
+}
+.yoga-rooms-carousel__dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.yoga-rooms-carousel__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: rgba(15, 76, 92, 0.25);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.yoga-rooms-carousel__dot.is-active {
+  background: #0F4C5C;
+  transform: scale(1.15);
+}
+.yoga-rooms-carousel__dot:focus-visible {
+  outline: 2px solid #FF8E72;
+  outline-offset: 2px;
+}
+.yoga-rooms-carousel__note {
+  text-align: center;
+  font-size: 0.88rem;
+  color: #666666;
+  margin: 16px 0 0;
+}
+
+.yoga-rooms__everywhere {
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: clamp(24px, 3vw, 32px);
+  margin-bottom: 40px;
+  border: 1px solid rgba(15, 76, 92, 0.08);
+}
+
+.yoga-rooms__everywhere-title {
+  margin: 0 0 16px;
+  text-align: center;
+  color: #0F4C5C;
+  font-size: 1.15rem;
+}
+
+.yoga-rooms__everywhere-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px 12px;
+}
+@media (min-width: 560px) {
+  .yoga-rooms__everywhere-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.yoga-rooms__everywhere-list li {
+  padding: 8px 12px 8px 2rem;
+  position: relative;
+  background: #F7F5F2;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: #2D3436;
+}
+.yoga-rooms__everywhere-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 10px;
+  color: #FF8E72;
+  font-weight: 700;
 }
 
 .yoga-lead-bridge {
@@ -1221,6 +1453,33 @@ a {
   background: #FFFFFF;
   color: #0F4C5C;
   box-shadow: 0 1px 4px rgba(15, 76, 92, 0.12);
+}
+.yoga-reviews__text-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+@media (min-width: 640px) {
+  .yoga-reviews__text-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.yoga-reviews__quote {
+  margin: 0;
+  padding: 0;
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(15, 76, 92, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.yoga-reviews__quote blockquote {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #2D3436;
+  font-style: italic;
 }
 .yoga-reviews__grid {
   display: grid;
@@ -1416,28 +1675,37 @@ a {
 .yoga-team__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
-  margin-bottom: 40px;
-}
-@media (min-width: 560px) {
-  .yoga-team__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 900px) {
-  .yoga-team__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  gap: 20px;
+  margin-bottom: 24px;
 }
 .yoga-team__card {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
   background: #FFFFFF;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-height: 0;
+}
+@media (max-width: 640px) {
+  .yoga-team__card {
+    flex-direction: column;
+  }
 }
 .yoga-team__photo {
-  aspect-ratio: 3/4;
+  flex: 0 0 42%;
+  max-width: 320px;
+  aspect-ratio: 4/3;
   background: #093642;
+}
+@media (max-width: 640px) {
+  .yoga-team__photo {
+    flex: none;
+    max-width: none;
+    width: 100%;
+    aspect-ratio: 16/10;
+  }
 }
 .yoga-team__photo picture {
   display: block;
@@ -1453,7 +1721,12 @@ a {
   object-position: 38% 50%;
 }
 .yoga-team__body {
-  padding: 20px 20px 24px;
+  flex: 1 1 auto;
+  padding: 18px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
 }
 .yoga-team__name {
   margin: 0 0 4px;
@@ -1475,26 +1748,223 @@ a {
   line-height: 1.6;
   color: #2D3436;
 }
-.yoga-team__pancha {
-  margin-top: 8px;
-  padding: 28px 24px;
-  border-radius: 20px;
+
+.yoga-wellness {
   background: #F7F5F2;
-  border: 1px solid rgba(15, 76, 92, 0.12);
-  text-align: center;
+  padding: clamp(60px, 8vw, 100px) 24px;
 }
-.yoga-team__pancha h3 {
-  margin: 0 0 10px;
-  font-size: clamp(1.2rem, 2.4vw, 1.4rem);
+.yoga-wellness__container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.yoga-wellness__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.yoga-wellness__header h2 {
+  color: #0F4C5C;
+  margin: 0 0 12px;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+.yoga-wellness__header p:not(.yoga-chip-title) {
+  color: #666666;
+  font-size: 1.05rem;
+  margin: 0 auto;
+  max-width: 36rem;
+}
+.yoga-wellness__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 720px) {
+  .yoga-wellness__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .yoga-wellness__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.yoga-wellness__card {
+  background: #FFFFFF;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(15, 76, 92, 0.08);
+  padding: 0 0 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.yoga-wellness__card h3 {
+  margin: 0 16px 8px;
+  font-size: 1rem;
   color: #0F4C5C;
 }
-.yoga-team__pancha p {
-  margin: 0 0 20px;
+.yoga-wellness__card > p {
+  margin: 0 16px;
+  font-size: 0.9rem;
   color: #666666;
   line-height: 1.6;
 }
-.yoga-team__pancha a {
+.yoga-wellness__card .yoga-wellness__text h3 {
+  margin: 0 0 8px;
+}
+.yoga-wellness__card .yoga-wellness__text p {
+  margin: 0 0 10px;
+}
+.yoga-wellness__card .yoga-wellness__text .yoga-wellness__badge {
+  margin: 0 0 12px;
+}
+.yoga-wellness__card .yoga-wellness__text .yoga-wellness__link {
+  margin: 12px 0 0;
+}
+.yoga-wellness__card--featured {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 2px solid rgba(255, 142, 114, 0.55);
+  padding: 0;
+}
+@media (min-width: 800px) {
+  .yoga-wellness__card--featured {
+    grid-template-columns: minmax(200px, 340px) 1fr;
+  }
+}
+.yoga-wellness__card--featured .yoga-wellness__text {
+  padding: 24px 24px 28px;
+}
+.yoga-wellness__visual {
+  min-height: 160px;
+  background: linear-gradient(160deg, rgba(15, 76, 92, 0.2), rgba(190, 227, 219, 0.6));
+}
+.yoga-wellness__visual--placeholder::after {
+  content: "";
+  display: block;
+  min-height: 160px;
+}
+.yoga-wellness__badge {
   display: inline-block;
+  margin: 0 16px 10px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #0F4C5C;
+  background: rgba(255, 142, 114, 0.25);
+  border-radius: 999px;
+}
+.yoga-wellness__link {
+  display: inline-block;
+  margin: 14px 16px 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #0F4C5C;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.yoga-wellness__link:hover {
+  color: #FF8E72;
+}
+
+.yoga-pancha {
+  padding: 0 24px clamp(60px, 8vw, 96px);
+}
+.yoga-pancha__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(125deg, #093642 0%, #0f4c5c 45%, #1a5c6c 100%);
+  color: #FFFFFF;
+  box-shadow: 0 20px 50px rgba(15, 76, 92, 0.35);
+}
+@media (min-width: 880px) {
+  .yoga-pancha__inner {
+    grid-template-columns: 1.15fr minmax(260px, 1fr);
+  }
+}
+.yoga-pancha__content {
+  padding: clamp(28px, 4vw, 44px);
+}
+.yoga-pancha__chip.yoga-chip-title {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+.yoga-pancha h2 {
+  margin: 12px 0 16px;
+  font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+  line-height: 1.2;
+  color: #FFFFFF;
+}
+.yoga-pancha__lead {
+  margin: 0 0 16px;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+}
+.yoga-pancha__list {
+  margin: 0 0 24px;
+  padding-left: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+.yoga-pancha__list li {
+  margin-bottom: 8px;
+}
+.yoga-pancha .btn-yoga-primary {
+  box-shadow: 0 4px 24px rgba(255, 142, 114, 0.45);
+}
+.yoga-pancha__visual {
+  min-height: 220px;
+  background: rgba(0, 0, 0, 0.15);
+}
+.yoga-pancha__visual--placeholder {
+  background: radial-gradient(circle at 30% 30%, rgba(255, 142, 114, 0.25), transparent 50%), linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.2));
+}
+
+.yoga-team-group {
+  background: #E8DCC6;
+  padding: clamp(56px, 7vw, 92px) 24px;
+}
+.yoga-team-group__container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.yoga-team-group__header {
+  margin-bottom: 32px;
+}
+.yoga-team-group__header h2 {
+  color: #0F4C5C;
+  margin: 0 0 12px;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+.yoga-team-group__header p:not(.yoga-chip-title) {
+  color: #666666;
+  font-size: 1.05rem;
+  margin: 0 auto;
+  max-width: 36rem;
+  line-height: 1.6;
+}
+.yoga-team-group__photo-placeholder {
+  width: 100%;
+  aspect-ratio: 16/9;
+  max-height: 420px;
+  margin: 0 auto;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(15, 76, 92, 0.12), rgba(255, 142, 114, 0.18));
+  border: 2px dashed rgba(15, 76, 92, 0.2);
+}
+.yoga-team-group__caption {
+  margin: 12px 0 0;
+  font-size: 0.85rem;
+  color: #666666;
 }
 
 .yoga-activities {
@@ -1577,6 +2047,17 @@ a {
   line-height: 1.75;
   color: #2D3436;
 }
+.yoga-activities__text .yoga-activities__optional-note {
+  margin-top: 16px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #666666;
+}
+.yoga-activities__text .yoga-activities__optional-note .yoga-includes__optional {
+  display: inline-block;
+  margin-right: 6px;
+  vertical-align: middle;
+}
 
 .yoga-contacts {
   background: #F7F5F2;
@@ -1620,8 +2101,8 @@ a {
 }
 @media (min-width: 900px) {
   .yoga-contacts__grid {
-    grid-template-columns: repeat(6, 1fr);
-    max-width: 1080px;
+    grid-template-columns: repeat(5, 1fr);
+    max-width: 900px;
   }
 }
 .yoga-contacts__link {
@@ -1658,10 +2139,6 @@ a {
   width: 30px;
   height: 30px;
 }
-.yoga-contacts__icon img {
-  width: 30px;
-  height: 30px;
-}
 @media (min-width: 1024px) {
   .yoga-contacts__icon {
     width: 72px;
@@ -1681,13 +2158,39 @@ a {
   background: #F7F5F2;
   border-top: 1px solid rgba(15, 76, 92, 0.1);
   margin-top: 0;
-  padding: 28px 0 36px;
+  padding: 28px 24px 36px;
   text-align: center;
   color: #666666;
   font-size: 0.875rem;
 }
-.yoga-site-footer p {
+.yoga-site-footer__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.yoga-site-footer__copy {
+  margin: 0 0 10px;
+}
+.yoga-site-footer__legal {
   margin: 0;
+  line-height: 1.65;
+}
+.yoga-site-footer__link {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: #0F4C5C;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.yoga-site-footer__link:hover {
+  color: #FF8E72;
+}
+.yoga-site-footer a.yoga-site-footer__link {
+  text-decoration: underline;
 }
 
 .yoga-faq {
@@ -1861,6 +2364,53 @@ a {
   min-height: 90px;
   resize: vertical;
 }
+.yoga-form__label-hint {
+  font-weight: 400;
+  opacity: 0.88;
+  font-size: 0.78em;
+}
+.yoga-form__phone-row {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+.yoga-form__select {
+  flex: 0 0 auto;
+  min-width: 130px;
+  padding: 0.9rem 0.6rem;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.yoga-form__select:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.75);
+}
+.yoga-form__select option {
+  color: #2D3436;
+  background: #FFFFFF;
+}
+.yoga-form__input--phone-national {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.yoga-form__row--split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 480px) {
+  .yoga-form__row--split {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.yoga-form__row-inner .yoga-form__label {
+  margin-bottom: 0.4rem;
+}
 .yoga-form__error-text {
   display: block;
   min-height: 1.1rem;
@@ -1939,6 +2489,14 @@ form.yoga-form.yoga-form--modal-light .yoga-form__input:focus {
   border-color: #0F4C5C;
   background: #FFFFFF;
   box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.12);
+}
+form.yoga-form.yoga-form--modal-light .yoga-form__select {
+  border: 2px solid rgba(15, 76, 92, 0.2);
+  background: #FFFFFF;
+  color: #2D3436;
+}
+form.yoga-form.yoga-form--modal-light .yoga-form__select:focus {
+  border-color: #0F4C5C;
 }
 form.yoga-form.yoga-form--modal-light .yoga-form__checkbox {
   color: #2D3436;

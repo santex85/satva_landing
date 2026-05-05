@@ -31,6 +31,42 @@
         return true;
     }
 
+    /** Собирает телефон из кода страны и национальной части в скрытое поле (для API и проверки). */
+    function yogaSyncPhoneHidden(codeEl, nationalEl, hiddenEl) {
+        if (!hiddenEl) return '';
+        var code = (codeEl && codeEl.value) ? String(codeEl.value).trim() : '';
+        var digitsNat = (nationalEl && nationalEl.value) ? String(nationalEl.value).replace(/\D/g, '') : '';
+        if (!code) code = '+';
+        if (!digitsNat) {
+            hiddenEl.value = '';
+            return '';
+        }
+        hiddenEl.value = code + ' ' + digitsNat;
+        return hiddenEl.value;
+    }
+
+    /** Проверка номера: минимум 10 цифр суммарно; для +66 — тайское правило. */
+    function yogaValidateIntlPhone(hiddenVal, phoneErr, errInput) {
+        var raw = hiddenVal || '';
+        var digits = raw.replace(/\D/g, '');
+        if (digits.length < 10) {
+            if (phoneErr) phoneErr.textContent = 'Минимум 10 цифр в номере';
+            if (errInput) errInput.classList.add('yoga-form__input--error');
+            return false;
+        }
+        if (digits.length > 15) {
+            if (phoneErr) phoneErr.textContent = 'Слишком длинный номер';
+            if (errInput) errInput.classList.add('yoga-form__input--error');
+            return false;
+        }
+        if (/^66/.test(digits) && !/^66[689]\d{8}$/.test(digits)) {
+            if (phoneErr) phoneErr.textContent = 'Проверьте тайский номер (+66 …)';
+            if (errInput) errInput.classList.add('yoga-form__input--error');
+            return false;
+        }
+        return true;
+    }
+
     // --- 00. Scroll Progress Bar ---------------------------------------------
     function initScrollProgress() {
         var bar = document.getElementById('yogaScrollProgress');
@@ -550,6 +586,164 @@
         });
     }
 
+    /** Модалки: публичная оферта и условия отмены (тот же UX, что у политики). */
+    function initYogaOfferCancellationModals() {
+        var configs = [
+            ['yogaModalOffer', '.js-open-yoga-offer'],
+            ['yogaModalCancellation', '.js-open-yoga-cancellation'],
+        ];
+        configs.forEach(function (cfg) {
+            (function () {
+                var modal = document.getElementById(cfg[0]);
+                var openerSel = cfg[1];
+                if (!modal) return;
+                var overlay = modal.querySelector('.yoga-modal__overlay');
+                var closeBtn = modal.querySelector('.yoga-modal__close');
+                var panel = modal.querySelector('.yoga-modal__content');
+                var previousActive = null;
+                var trapHandler = null;
+
+                function getFocusable() {
+                    if (!panel) return [];
+                    return panel.querySelectorAll(
+                        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                    );
+                }
+
+                function openModal() {
+                    previousActive = document.activeElement;
+                    modal.removeAttribute('hidden');
+                    modal.classList.add('is-open');
+                    modal.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+                    var list = getFocusable();
+                    if (list.length) list[0].focus();
+                    var first = list[0];
+                    var last = list[list.length - 1];
+                    trapHandler = function (e) {
+                        if (e.key !== 'Tab' || !list.length) return;
+                        if (e.shiftKey) {
+                            if (document.activeElement === first) {
+                                e.preventDefault();
+                                last.focus();
+                            }
+                        } else if (document.activeElement === last) {
+                            e.preventDefault();
+                            first.focus();
+                        }
+                    };
+                    modal.addEventListener('keydown', trapHandler);
+                }
+
+                function closeModal() {
+                    if (trapHandler) {
+                        modal.removeEventListener('keydown', trapHandler);
+                        trapHandler = null;
+                    }
+                    modal.classList.remove('is-open');
+                    modal.setAttribute('hidden', '');
+                    modal.setAttribute('aria-hidden', 'true');
+                    document.body.style.overflow = '';
+                    if (previousActive && previousActive.focus) previousActive.focus();
+                }
+
+                document.addEventListener('click', function (e) {
+                    var opener = e.target.closest ? e.target.closest(openerSel) : null;
+                    if (!opener) return;
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openModal();
+                });
+
+                if (overlay) overlay.addEventListener('click', closeModal);
+                if (closeBtn) closeBtn.addEventListener('click', closeModal);
+                document.addEventListener('keydown', function (e) {
+                    if (e.key !== 'Escape') return;
+                    if (!modal.classList.contains('is-open')) return;
+                    closeModal();
+                });
+            }());
+        });
+    }
+
+    function initTextReviewsShuffle() {
+        var root = document.getElementById('yogaTextReviews');
+        if (!root) return;
+        var nodes = Array.prototype.slice.call(root.querySelectorAll('[data-text-review]'));
+        for (var i = nodes.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var t = nodes[i];
+            nodes[i] = nodes[j];
+            nodes[j] = t;
+        }
+        nodes.forEach(function (n) {
+            root.appendChild(n);
+        });
+    }
+
+    function initRoomsCarousel() {
+        var root = document.getElementById('yogaRoomsCarousel');
+        if (!root) return;
+        var viewport = root.querySelector('.yoga-rooms-carousel__viewport');
+        var slides = Array.prototype.slice.call(root.querySelectorAll('.yoga-rooms-carousel__slide'));
+        var prevBtn = root.querySelector('.yoga-rooms-carousel__btn--prev');
+        var nextBtn = root.querySelector('.yoga-rooms-carousel__btn--next');
+        var dotsRoot = root.querySelector('.yoga-rooms-carousel__dots');
+        var idx = 0;
+        var total = slides.length;
+        if (!total || !dotsRoot) return;
+
+        slides.forEach(function (_, i) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'yoga-rooms-carousel__dot' + (i === 0 ? ' is-active' : '');
+            b.setAttribute('aria-label', 'Показать тип размещения ' + (i + 1) + ' из ' + total);
+            (function (slideIndex) {
+                b.addEventListener('click', function () {
+                    go(slideIndex);
+                });
+            }(i));
+            dotsRoot.appendChild(b);
+        });
+        var dots = dotsRoot.querySelectorAll('.yoga-rooms-carousel__dot');
+
+        function go(i) {
+            idx = (i + total) % total;
+            slides.forEach(function (s, j) {
+                var on = j === idx;
+                s.classList.toggle('is-active', on);
+                s.hidden = !on;
+                s.setAttribute('aria-hidden', on ? 'false' : 'true');
+                if (dots[j]) dots[j].classList.toggle('is-active', on);
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function () {
+                go(idx - 1);
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function () {
+                go(idx + 1);
+            });
+        }
+        var startX = null;
+        if (viewport) {
+            viewport.addEventListener('touchstart', function (e) {
+                startX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            viewport.addEventListener('touchend', function (e) {
+                if (startX == null) return;
+                var dx = e.changedTouches[0].screenX - startX;
+                startX = null;
+                if (Math.abs(dx) < 45) return;
+                if (dx < 0) go(idx + 1); else go(idx - 1);
+            }, { passive: true });
+        }
+        go(0);
+    }
+
     // --- 14c. Модалка быстрой заявки (#modal-lead) ----------------------------
     function initYogaLeadModal() {
         var modal = document.getElementById('modal-lead');
@@ -642,6 +836,8 @@
 
         var nameIn = document.getElementById('yogaLeadModalName');
         var phoneIn = document.getElementById('yogaLeadModalPhone');
+        var phoneCode = document.getElementById('yogaLeadModalPhoneCode');
+        var phoneNat = document.getElementById('yogaLeadModalPhoneNational');
         var emailIn = document.getElementById('yogaLeadModalEmail');
         var consent = document.getElementById('yogaLeadModalConsent');
         var websiteHp = document.getElementById('yogaLeadModalWebsite');
@@ -674,7 +870,7 @@
 
         function clearNamePhoneErrors() {
             if (nameIn) nameIn.classList.remove('yoga-form__input--error');
-            if (phoneIn) phoneIn.classList.remove('yoga-form__input--error');
+            if (phoneNat) phoneNat.classList.remove('yoga-form__input--error');
             if (emailIn) emailIn.classList.remove('yoga-form__input--error');
             if (nameErr) nameErr.textContent = '';
             if (phoneErr) phoneErr.textContent = '';
@@ -697,24 +893,8 @@
         }
 
         function validatePhone() {
-            var raw = (phoneIn && phoneIn.value) ? phoneIn.value : '';
-            var digits = raw.replace(/\D/g, '');
-            if (digits.length < 10) {
-                if (phoneErr) phoneErr.textContent = 'Минимум 10 цифр';
-                if (phoneIn) phoneIn.classList.add('yoga-form__input--error');
-                return false;
-            }
-            if (digits.length > 15) {
-                if (phoneErr) phoneErr.textContent = 'Слишком длинный номер';
-                if (phoneIn) phoneIn.classList.add('yoga-form__input--error');
-                return false;
-            }
-            if (/^66/.test(digits) && !/^66[689]\d{8}$/.test(digits)) {
-                if (phoneErr) phoneErr.textContent = 'Проверьте тайский номер (+66 …)';
-                if (phoneIn) phoneIn.classList.add('yoga-form__input--error');
-                return false;
-            }
-            return true;
+            yogaSyncPhoneHidden(phoneCode, phoneNat, phoneIn);
+            return yogaValidateIntlPhone(phoneIn && phoneIn.value, phoneErr, phoneNat);
         }
 
         function getCaptchaToken() {
@@ -749,33 +929,21 @@
             return null;
         }
 
-        if (phoneIn) {
-            phoneIn.addEventListener('input', function (e) {
-                var value = e.target.value.replace(/\D/g, '');
-                if (value.length > 0) {
-                    if (value.startsWith('66')) {
-                        value = '+' + value;
-                    } else if (value.charAt(0) !== '+') {
-                        value = '+66' + value;
-                    }
-                    if (value.length > 3) value = value.slice(0, 3) + ' ' + value.slice(3);
-                    if (value.length > 7) value = value.slice(0, 7) + ' ' + value.slice(7);
-                    if (value.length > 11) value = value.slice(0, 11) + ' ' + value.slice(11);
-                }
-                e.target.value = value;
-            });
+        function bindLeadPhoneSync() {
+            function onPhonePartChange() {
+                yogaSyncPhoneHidden(phoneCode, phoneNat, phoneIn);
+                if (phoneNat) phoneNat.classList.remove('yoga-form__input--error');
+                if (phoneErr) phoneErr.textContent = '';
+            }
+            if (phoneCode) phoneCode.addEventListener('change', onPhonePartChange);
+            if (phoneNat) phoneNat.addEventListener('input', onPhonePartChange);
         }
+        bindLeadPhoneSync();
 
         if (nameIn) {
             nameIn.addEventListener('input', function () {
                 nameIn.classList.remove('yoga-form__input--error');
                 if (nameErr) nameErr.textContent = '';
-            });
-        }
-        if (phoneIn) {
-            phoneIn.addEventListener('input', function () {
-                phoneIn.classList.remove('yoga-form__input--error');
-                if (phoneErr) phoneErr.textContent = '';
             });
         }
         if (emailIn) {
@@ -796,11 +964,12 @@
             }
 
             if (consent && !consent.checked) {
-                showFormError('Нужно согласие с политикой конфиденциальности.');
+                showFormError('Нужно согласие с политикой конфиденциальности, публичной офертой и условиями отмены бронирования.');
                 return;
             }
 
             clearNamePhoneErrors();
+            yogaSyncPhoneHidden(phoneCode, phoneNat, phoneIn);
             var okN = validateName();
             var okP = validatePhone();
             var rawEmailLead = emailIn ? emailIn.value : '';
@@ -808,7 +977,7 @@
             if (!okN || !okP || !okE) {
                 showFormError('Проверьте поля выше.');
                 if (!okN && nameIn) nameIn.focus();
-                else if (!okP && phoneIn) phoneIn.focus();
+                else if (!okP && phoneNat) phoneNat.focus();
                 else if (emailIn) emailIn.focus();
                 return;
             }
@@ -886,9 +1055,12 @@
 
         var nameIn = document.getElementById('yogaName');
         var phoneIn = document.getElementById('yogaPhone');
+        var phoneCode = document.getElementById('yogaPhoneCode');
+        var phoneNat = document.getElementById('yogaPhoneNational');
         var emailIn = document.getElementById('yogaEmail');
         var consent = document.getElementById('yogaConsent');
-        var preferredDate = document.getElementById('yogaPreferredDate');
+        var arrivalDate = document.getElementById('yogaArrivalDate');
+        var departureDate = document.getElementById('yogaDepartureDate');
         var comment = document.getElementById('yogaComment');
         var websiteHp = document.getElementById('yogaWebsite');
         var submitBtn = document.getElementById('yogaSubmitBtn');
@@ -926,8 +1098,8 @@
             if (nameIn) {
                 nameIn.classList.remove('yoga-form__input--error');
             }
-            if (phoneIn) {
-                phoneIn.classList.remove('yoga-form__input--error');
+            if (phoneNat) {
+                phoneNat.classList.remove('yoga-form__input--error');
             }
             if (emailIn) {
                 emailIn.classList.remove('yoga-form__input--error');
@@ -953,21 +1125,20 @@
         }
 
         function validatePhone() {
-            var raw = (phoneIn && phoneIn.value) ? phoneIn.value : '';
-            var digits = raw.replace(/\D/g, '');
-            if (digits.length < 10) {
-                if (phoneErr) phoneErr.textContent = 'Минимум 10 цифр';
-                if (phoneIn) phoneIn.classList.add('yoga-form__input--error');
+            yogaSyncPhoneHidden(phoneCode, phoneNat, phoneIn);
+            return yogaValidateIntlPhone(phoneIn && phoneIn.value, phoneErr, phoneNat);
+        }
+
+        function validateStayDates() {
+            var a = (arrivalDate && arrivalDate.value) ? arrivalDate.value.trim() : '';
+            var d = (departureDate && departureDate.value) ? departureDate.value.trim() : '';
+            if (!a && !d) return true;
+            if ((a && !d) || (!a && d)) {
+                showFormError('Укажите обе даты заезда и выезда или оставьте поля пустыми.');
                 return false;
             }
-            if (digits.length > 15) {
-                if (phoneErr) phoneErr.textContent = 'Слишком длинный номер';
-                if (phoneIn) phoneIn.classList.add('yoga-form__input--error');
-                return false;
-            }
-            if (/^66/.test(digits) && !/^66[689]\d{8}$/.test(digits)) {
-                if (phoneErr) phoneErr.textContent = 'Проверьте тайский номер (+66 …)';
-                if (phoneIn) phoneIn.classList.add('yoga-form__input--error');
+            if (d < a) {
+                showFormError('Дата выезда не может быть раньше даты заезда.');
                 return false;
             }
             return true;
@@ -1030,33 +1201,21 @@
             })
             .catch(function () { /* noop */ });
 
-        if (phoneIn) {
-            phoneIn.addEventListener('input', function (e) {
-                var value = e.target.value.replace(/\D/g, '');
-                if (value.length > 0) {
-                    if (value.startsWith('66')) {
-                        value = '+' + value;
-                    } else if (value.charAt(0) !== '+') {
-                        value = '+66' + value;
-                    }
-                    if (value.length > 3) value = value.slice(0, 3) + ' ' + value.slice(3);
-                    if (value.length > 7) value = value.slice(0, 7) + ' ' + value.slice(7);
-                    if (value.length > 11) value = value.slice(0, 11) + ' ' + value.slice(11);
-                }
-                e.target.value = value;
-            });
+        function bindMainPhoneSync() {
+            function onPhonePartChange() {
+                yogaSyncPhoneHidden(phoneCode, phoneNat, phoneIn);
+                if (phoneNat) phoneNat.classList.remove('yoga-form__input--error');
+                if (phoneErr) phoneErr.textContent = '';
+            }
+            if (phoneCode) phoneCode.addEventListener('change', onPhonePartChange);
+            if (phoneNat) phoneNat.addEventListener('input', onPhonePartChange);
         }
+        bindMainPhoneSync();
 
         if (nameIn) {
             nameIn.addEventListener('input', function () {
                 nameIn.classList.remove('yoga-form__input--error');
                 if (nameErr) nameErr.textContent = '';
-            });
-        }
-        if (phoneIn) {
-            phoneIn.addEventListener('input', function () {
-                phoneIn.classList.remove('yoga-form__input--error');
-                if (phoneErr) phoneErr.textContent = '';
             });
         }
         if (emailIn) {
@@ -1077,20 +1236,27 @@
             }
 
             if (consent && !consent.checked) {
-                showFormError('Нужно согласие с политикой конфиденциальности.');
+                showFormError('Нужно согласие с политикой конфиденциальности, публичной офертой и условиями отмены бронирования.');
                 return;
             }
 
             clearNamePhoneErrors();
+            yogaSyncPhoneHidden(phoneCode, phoneNat, phoneIn);
             var okN = validateName();
             var okP = validatePhone();
+            var okD = validateStayDates();
             var rawEmailMain = emailIn ? emailIn.value : '';
             var okE = validateOptionalEmailRow(rawEmailMain, emailErr, emailIn);
-            if (!okN || !okP || !okE) {
-                showFormError('Проверьте поля выше.');
+            if (!okN || !okP || !okE || !okD) {
+                if (!okD) {
+                    /* сообщение уже в showFormError */
+                } else {
+                    showFormError('Проверьте поля выше.');
+                }
                 if (!okN && nameIn) nameIn.focus();
-                else if (!okP && phoneIn) phoneIn.focus();
-                else if (emailIn) emailIn.focus();
+                else if (!okP && phoneNat) phoneNat.focus();
+                else if (!okE && emailIn) emailIn.focus();
+                else if (!okD && arrivalDate) arrivalDate.focus();
                 return;
             }
 
@@ -1102,7 +1268,8 @@
             lastSubmitTime = now;
             setFormLoading(true);
 
-            var pDate = (preferredDate && preferredDate.value) ? preferredDate.value.trim() : '';
+            var pDate = (arrivalDate && arrivalDate.value) ? arrivalDate.value.trim() : '';
+            var depDate = (departureDate && departureDate.value) ? departureDate.value.trim() : '';
             var cmt = (comment && comment.value) ? comment.value.trim() : '';
             var procEl = form.querySelector('input[name="procedure"]');
             var procedure = (procEl && procEl.value) ? procEl.value.trim() : 'Йога-тур в Таиланд';
@@ -1114,6 +1281,7 @@
                 captcha_token: getCaptchaToken() || null,
                 procedure: procedure,
                 preferred_date: pDate || null,
+                departure_date: depDate || null,
                 comment: cmt || null,
             };
             var emMainTrim = (emailIn && emailIn.value) ? emailIn.value.trim() : '';
@@ -1169,9 +1337,12 @@
         initParallax();
         initVideoThumbnails();
         initVideoModal();
+        initTextReviewsShuffle();
+        initRoomsCarousel();
         initCopyrightYear();
         initHeroDetailsModal();
         initPrivacyModal();
+        initYogaOfferCancellationModals();
         initYogaLeadModal();
         initForm();
         initYogaLeadForm();

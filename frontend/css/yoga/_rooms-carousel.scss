@@ -1,0 +1,237 @@
+// Карусель типов номеров (ТЗ §9)
+.yoga-rooms-carousel {
+    margin-bottom: 40px;
+
+    &__viewport {
+        outline: none;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(15, 76, 92, 0.1);
+        background: $color-white;
+    }
+
+    &__track {
+        position: relative;
+    }
+
+    &__slide {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+
+        @media (min-width: 720px) {
+            grid-template-columns: 1.1fr 1fr;
+            align-items: stretch;
+        }
+
+        &:not(.is-active) {
+            display: none;
+        }
+    }
+
+    &__media {
+        aspect-ratio: 16 / 9;
+        min-height: 200px;
+        background: linear-gradient(135deg, rgba(15, 76, 92, 0.15), rgba(190, 227, 219, 0.5));
+
+        &--placeholder {
+            background:
+                linear-gradient(135deg, rgba(15, 76, 92, 0.08) 0%, rgba(44, 110, 122, 0.12) 100%);
+            position: relative;
+
+            &::after {
+                content: 'Фото номера';
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.9rem;
+                font-weight: $font-weight-semibold;
+                color: rgba(15, 76, 92, 0.45);
+            }
+        }
+    }
+
+    &__body {
+        padding: clamp(20px, 3vw, 28px);
+
+        h3 {
+            margin: 0 0 10px;
+            color: $color-primary;
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+        }
+
+        p {
+            margin: 0 0 14px;
+            color: $color-text-light;
+            line-height: $line-height-body;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px;
+
+            li {
+                padding: 6px 0;
+                padding-left: 1.1rem;
+                position: relative;
+                font-size: 0.9rem;
+                color: $color-text;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0.7rem;
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background: $color-accent;
+                }
+            }
+        }
+
+        .btn-yoga-primary {
+            font-size: 0.85rem;
+            padding: 12px 28px;
+        }
+    }
+
+    &__controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+    }
+
+    &__btn {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 2px solid $color-primary;
+        background: $color-white;
+        color: $color-primary;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition:
+            background $transition-fast,
+            color $transition-fast,
+            transform $transition-fast;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            width: 10px;
+            height: 10px;
+            border-left: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+        }
+
+        &--prev::before {
+            transform: rotate(45deg);
+            margin-left: 14px;
+        }
+
+        &--next::before {
+            transform: rotate(-135deg);
+            margin-right: 14px;
+        }
+
+        &:hover {
+            background: $color-primary;
+            color: $color-white;
+        }
+
+        &:focus-visible {
+            outline: 3px solid $color-accent;
+            outline-offset: 2px;
+        }
+    }
+
+    &__dots {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    &__dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: none;
+        padding: 0;
+        background: rgba(15, 76, 92, 0.25);
+        cursor: pointer;
+        transition: transform $transition-fast, background $transition-fast;
+
+        &.is-active {
+            background: $color-primary;
+            transform: scale(1.15);
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-accent;
+            outline-offset: 2px;
+        }
+    }
+
+    &__note {
+        text-align: center;
+        font-size: 0.88rem;
+        color: $color-text-light;
+        margin: 16px 0 0;
+    }
+}
+
+.yoga-rooms__everywhere {
+    background: $color-white;
+    border-radius: 20px;
+    padding: clamp(24px, 3vw, 32px);
+    margin-bottom: 40px;
+    border: 1px solid rgba(15, 76, 92, 0.08);
+}
+
+.yoga-rooms__everywhere-title {
+    margin: 0 0 16px;
+    text-align: center;
+    color: $color-primary;
+    font-size: 1.15rem;
+}
+
+.yoga-rooms__everywhere-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px 12px;
+
+    @media (min-width: 560px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    li {
+        padding: 8px 12px 8px 2rem;
+        position: relative;
+        background: $color-bg-main;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        color: $color-text;
+
+        &::before {
+            content: '✓';
+            position: absolute;
+            left: 10px;
+            color: $color-accent;
+            font-weight: 700;
+        }
+    }
+}

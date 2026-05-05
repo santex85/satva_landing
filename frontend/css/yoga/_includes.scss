@@ -1,4 +1,6 @@
 // 04. Что включено (features grid)
+@use 'sass:color';
+
 .yoga-includes {
     background: $color-bg-main;
     padding: clamp(60px, 8vw, 100px) 24px;
@@ -81,7 +83,7 @@
         height: 56px;
         margin: 0 auto;
         // Чуть темнее мяты, чем $color-bg-secondary — лучше контраст с белой карточкой и иконками
-        background: mix($color-primary, $color-bg-secondary, 22%);
+        background: color.mix($color-primary, $color-bg-secondary, 22%);
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -97,6 +99,56 @@
         svg {
             color: $color-white;
             fill: currentColor;
+        }
+    }
+
+    &__amenities {
+        margin-top: 40px;
+        padding: 24px 22px;
+        background: $color-white;
+        border-radius: 16px;
+        border: 1px solid rgba(15, 76, 92, 0.08);
+        text-align: center;
+    }
+
+    &__amenities-title {
+        font-weight: $font-weight-bold;
+        color: $color-primary;
+        margin: 0 0 14px;
+        font-size: 1rem;
+    }
+
+    &__amenities-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 12px;
+        justify-content: center;
+
+        li {
+            background: $color-bg-main;
+            color: $color-text;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+        }
+    }
+
+    &__optional-banner {
+        margin-top: 24px;
+        padding: 18px 20px;
+        background: rgba(255, 142, 114, 0.14);
+        border-radius: 14px;
+        border: 1px solid rgba(255, 142, 114, 0.35);
+        font-size: 0.95rem;
+        color: $color-text;
+        line-height: $line-height-body;
+        text-align: center;
+
+        strong {
+            color: $color-primary;
         }
     }
 }

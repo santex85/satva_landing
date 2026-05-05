@@ -10,7 +10,9 @@
 .yoga-beach__banner .yoga-chip-title,
 .yoga-reviews__header .yoga-chip-title,
 .yoga-rooms__header .yoga-chip-title,
-.yoga-team__header .yoga-chip-title {
+.yoga-team__header .yoga-chip-title,
+.yoga-wellness__header .yoga-chip-title,
+.yoga-team-group__header .yoga-chip-title {
     @media (min-width: $breakpoint-mobile) {
         margin-left: auto;
         margin-right: auto;

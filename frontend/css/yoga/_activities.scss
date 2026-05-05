@@ -85,5 +85,18 @@
             line-height: $line-height-relaxed;
             color: $color-text;
         }
+
+        .yoga-activities__optional-note {
+            margin-top: 16px;
+            font-size: 0.92rem;
+            line-height: $line-height-body;
+            color: $color-text-light;
+
+            .yoga-includes__optional {
+                display: inline-block;
+                margin-right: 6px;
+                vertical-align: middle;
+            }
+        }
     }
 }

@@ -34,6 +34,18 @@ a { color: inherit; }
 .yoga-container        { max-width: 900px;  margin: 0 auto; padding: 0 24px; }
 .yoga-container--wide  { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
+.yoga-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 // Только transform: промежуточные кадры opacity снижают контраст текста (WCAG 1.4.3)
 .yoga-fade-in {
     opacity: 1;
@@ -48,8 +60,14 @@ a { color: inherit; }
 // Сетки карточек: без translateY при появлении — ровные ряды на десктопе
 .yoga-includes__card.yoga-fade-in,
 .yoga-reviews__item.yoga-fade-in,
+.yoga-reviews__quote.yoga-fade-in,
 .yoga-team__card.yoga-fade-in,
-.yoga-rooms__card.yoga-fade-in {
+.yoga-wellness__card.yoga-fade-in,
+.yoga-rooms-carousel.yoga-fade-in,
+.yoga-rooms__everywhere.yoga-fade-in,
+.yoga-rooms__urgency.yoga-fade-in,
+.yoga-pancha .yoga-fade-in,
+.yoga-fade-in {
     transform: none;
     opacity: 0;
     transition: opacity 0.65s ease;
@@ -124,9 +142,13 @@ a { color: inherit; }
 @import 'yoga/program';
 @import 'yoga/food';
 @import 'yoga/rooms';
+@import 'yoga/rooms-carousel';
 @import 'yoga/rooms-bridge';
 @import 'yoga/reviews';
 @import 'yoga/team';
+@import 'yoga/wellness';
+@import 'yoga/pancha';
+@import 'yoga/team-group';
 @import 'yoga/activities';
 @import 'yoga/contacts';
 @import 'yoga/faq';

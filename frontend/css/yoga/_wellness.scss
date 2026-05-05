@@ -1,0 +1,136 @@
+// Оздоровительные процедуры (ТЗ §5.2)
+.yoga-wellness {
+    background: $color-bg-main;
+    padding: clamp(60px, 8vw, 100px) 24px;
+
+    &__container {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    &__header {
+        text-align: center;
+        margin-bottom: 48px;
+
+        h2 {
+            color: $color-primary;
+            margin: 0 0 12px;
+            font-size: $font-size-h2;
+        }
+
+        p:not(.yoga-chip-title) {
+            color: $color-text-light;
+            font-size: 1.05rem;
+            margin: 0 auto;
+            max-width: 36rem;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+
+        @media (min-width: 720px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (min-width: 1024px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    &__card {
+        background: $color-white;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid rgba(15, 76, 92, 0.08);
+        padding: 0 0 20px;
+        box-shadow: $shadow-sm;
+
+        h3 {
+            margin: 0 16px 8px;
+            font-size: 1rem;
+            color: $color-primary;
+        }
+
+        > p {
+            margin: 0 16px;
+            font-size: 0.9rem;
+            color: $color-text-light;
+            line-height: $line-height-body;
+        }
+
+        .yoga-wellness__text {
+            h3 {
+                margin: 0 0 8px;
+            }
+
+            p {
+                margin: 0 0 10px;
+            }
+
+            .yoga-wellness__badge {
+                margin: 0 0 12px;
+            }
+
+            .yoga-wellness__link {
+                margin: 12px 0 0;
+            }
+        }
+
+        &--featured {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr;
+            border: 2px solid rgba(255, 142, 114, 0.55);
+            padding: 0;
+
+            @media (min-width: 800px) {
+                grid-template-columns: minmax(200px, 340px) 1fr;
+            }
+
+            .yoga-wellness__text {
+                padding: 24px 24px 28px;
+            }
+        }
+    }
+
+    &__visual {
+        min-height: 160px;
+        background: linear-gradient(160deg, rgba(15, 76, 92, 0.2), rgba(190, 227, 219, 0.6));
+
+        &--placeholder::after {
+            content: '';
+            display: block;
+            min-height: 160px;
+        }
+    }
+
+    &__badge {
+        display: inline-block;
+        margin: 0 16px 10px;
+        padding: 4px 10px;
+        font-size: 0.72rem;
+        font-weight: $font-weight-bold;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: $color-primary;
+        background: rgba(255, 142, 114, 0.25);
+        border-radius: 999px;
+    }
+
+    &__link {
+        display: inline-block;
+        margin: 14px 16px 0;
+        font-weight: $font-weight-semibold;
+        font-size: 0.9rem;
+        color: $color-primary;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+
+        &:hover {
+            color: $color-accent;
+        }
+    }
+}

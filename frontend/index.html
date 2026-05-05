@@ -103,6 +103,7 @@
                 <a href="#yogaProgram">Программа</a>
                 <a href="#yogaRooms">Номера</a>
                 <a href="#yogaTeam">Специалисты</a>
+                <a href="#yogaReviews">Отзывы</a>
                 <a href="#yogaFaq">Вопросы</a>
                 <a href="#yogaForm" class="btn-yoga-primary btn--small">Забронировать</a>
             </nav>
@@ -126,6 +127,7 @@
                 Йога-тур в Таиланд<br>
                 <span>на ваши даты</span>
             </h1>
+            <p class="yoga-hero__tagline yoga-fade-in">Сатва Самуи&nbsp;— больше, чем просто отдых у моря. Отдых для души и тела</p>
             <p class="yoga-hero__subtitle yoga-fade-in">
                 Йога на рассвете и закате · Сбалансированное питание · Диагностика здоровья по пульсу
             </p>
@@ -148,45 +150,13 @@
         </div>
     </section>
 
-    <section class="yoga-trust-bar" id="yoga-trust" aria-labelledby="yogaTrustTitle">
-        <div class="yoga-trust-bar__container">
-            <header class="yoga-trust-bar__header yoga-fade-in">
-                <p class="yoga-chip-title">Цифры и опыт</p>
-                <h2 id="yogaTrustTitle">Почему нам доверяют</h2>
-                <p class="yoga-trust-bar__lead">Большой опыт работы на Самуи, сплочённая команда и довольные гости — лучшее доказательство профессиональной работы.</p>
-            </header>
-            <ul class="yoga-trust-bar__list">
-                <li class="yoga-trust-bar__item">
-                    <span class="yoga-trust-bar__value">12</span>
-                    <span class="yoga-trust-bar__label">лет работы на Самуи</span>
-                </li>
-                <li class="yoga-trust-bar__item">
-                    <span class="yoga-trust-bar__value">8000+</span>
-                    <span class="yoga-trust-bar__label">гостей прошли программы</span>
-                </li>
-                <li class="yoga-trust-bar__item yoga-trust-bar__item--rating">
-                    <span class="yoga-trust-bar__value">
-                        4.8
-                        <span class="yoga-trust-bar__stars" aria-hidden="true">★★★★★</span>
-                    </span>
-                    <span class="yoga-trust-bar__label">
-                        средний рейтинг в Google
-                        <a href="https://www.google.com/maps/place/?q=place_id:ChIJjbAD17T3VDARzjn1mEam1lg"
-                           target="_blank" rel="noopener noreferrer"
-                           class="yoga-trust-bar__link">смотреть отзывы</a>
-                    </span>
-                </li>
-            </ul>
-        </div>
-    </section>
-
     <!-- 03. Что включено -->
     <section id="yogaIncludes" class="yoga-includes" aria-labelledby="yogaIncludesTitle">
         <div class="yoga-includes__container">
             <div class="yoga-includes__header yoga-fade-in">
                 <p class="yoga-chip-title">Пакет</p>
                 <h2 id="yogaIncludesTitle">Что входит</h2>
-                <p>По пунктам: что уже в стоимости, а за что — по желанию (например, экскурсии). Дальше — только даты и перелёт.</p>
+                <p>В основной пакет включено: проживание, завтрак и обед, йога 2 раза в день, вечерние медитации. При бронировании от 7 дней также включена диагностика здоровья по пульсу и индивидуальные рекомендации специалиста по питанию и очищению.</p>
             </div>
             <div class="yoga-includes__grid">
                 <div class="yoga-includes__card yoga-fade-in">
@@ -225,8 +195,8 @@
                     <div class="yoga-includes__icon">
                         <img src="img/yoga_tour/icon_health.webp" alt="" loading="lazy" width="150" height="150" decoding="async">
                     </div>
-                    <h3>Программа здоровья</h3>
-                    <p>Диагностика для подбора индивидуальной программы оздоровления и процедур.</p>
+                    <h3>Программа здоровья <span class="yoga-includes__optional">дополнительно</span></h3>
+                    <p>Расширенные оздоровительные программы и процедуры — по запросу, с подбором после диагностики.</p>
                 </div>
 
                 <div class="yoga-includes__card yoga-fade-in">
@@ -243,10 +213,21 @@
                             <path d="M12 2 14.39 8.26 21 9.27l-4.5 4.39 1.06 6.18L12 16.9l-5.56 2.94L7.5 13.66 3 9.27l6.61-1.01L12 2z"/>
                         </svg>
                     </div>
-                    <h3>Экскурсии <span class="yoga-includes__optional">опционально</span></h3>
+                    <h3>Экскурсии <span class="yoga-includes__optional">дополнительно</span></h3>
                     <p>По запросу поможем с экскурсиями по острову: храмы, водопады, рыбный рынок, смотровые площадки. В стоимость тура не входит, оплачивается отдельно.</p>
                 </div>
             </div>
+            <div class="yoga-includes__amenities yoga-fade-in" aria-label="Инфраструктура, включённая в пакет">
+                <p class="yoga-includes__amenities-title">На территории курорта для гостей тура</p>
+                <ul class="yoga-includes__amenities-list">
+                    <li>2 сауны</li>
+                    <li>Тренажёрный зал</li>
+                    <li>3 бассейна</li>
+                    <li>Каяки</li>
+                    <li>Падлборды</li>
+                </ul>
+            </div>
+            <p class="yoga-includes__optional-banner yoga-fade-in"><strong>Дополнительно оплачиваются:</strong> оздоровительные программы (помимо включённой диагностики при 7+ днях), экскурсии, перелёт, трансфер.</p>
         </div>
     </section>
 
@@ -337,52 +318,112 @@
         <div class="yoga-rooms__container">
             <div class="yoga-rooms__header yoga-fade-in">
                 <p class="yoga-chip-title">Номера</p>
-                <h2 id="yogaRoomsTitle">Номера рядом с морем</h2>
-                <p>Уютные, чистые, с хорошей вентиляцией. Просто, но всё что нужно — есть.</p>
+                <h2 id="yogaRoomsTitle">Проживание у моря</h2>
+                <p>Шесть типов размещения — от уютного стандарта до виллы и бунгало. Фото — плейсхолдеры до загрузки материалов отеля.</p>
             </div>
 
-            <div class="yoga-rooms__grid">
-                <div class="yoga-rooms__card yoga-fade-in">
-                    <div class="yoga-rooms__photo">
-                        <picture>
-                            <source type="image/webp" srcset="img/yoga_tour/tween_room.webp">
-                            <img src="img/yoga_tour/tween_room.webp"
-                                 alt="Стандартный номер Twin"
-                                 loading="lazy" width="3000" height="2003">
-                        </picture>
-                    </div>
-                    <div class="yoga-rooms__info">
-                        <h3>Стандарт (Twin)</h3>
-                        <ul>
-                            <li>2 раздельные кровати</li>
-                            <li>Кондиционер</li>
-                            <li>Вентилятор</li>
-                            <li>Горячий душ</li>
-                            <li>Wi-Fi</li>
-                        </ul>
+            <div class="yoga-rooms-carousel yoga-fade-in" id="yogaRoomsCarousel" aria-roledescription="карусель">
+                <div class="yoga-rooms-carousel__viewport" role="region" aria-live="polite" aria-label="Типы номеров" tabindex="0">
+                    <div class="yoga-rooms-carousel__track">
+                        <article class="yoga-rooms-carousel__slide is-active" role="group" aria-roledescription="слайд" aria-label="1 из 6" data-slide="0">
+                            <div class="yoga-rooms-carousel__media yoga-rooms-carousel__media--placeholder" aria-hidden="true"></div>
+                            <div class="yoga-rooms-carousel__body">
+                                <h3>Номер стандарт</h3>
+                                <p>Одна большая кровать или раздельные, веранда, 5–20&nbsp;м от моря.</p>
+                                <ul>
+                                    <li>Веранда</li>
+                                    <li>Выбор конфигурации кровати</li>
+                                    <li>В шаге от пляжа</li>
+                                </ul>
+                                <a href="#yogaForm" class="btn-yoga-primary">Узнать стоимость</a>
+                            </div>
+                        </article>
+                        <article class="yoga-rooms-carousel__slide" role="group" aria-roledescription="слайд" aria-label="2 из 6" data-slide="1" hidden>
+                            <div class="yoga-rooms-carousel__media yoga-rooms-carousel__media--placeholder" aria-hidden="true"></div>
+                            <div class="yoga-rooms-carousel__body">
+                                <h3>Номер стандарт с видом на море</h3>
+                                <p>Одна кровать, веранда с видом на море и закаты, пляж в 3&nbsp;м.</p>
+                                <ul>
+                                    <li>Панорама моря с веранды</li>
+                                    <li>Закаты с номера</li>
+                                    <li>Прямой выход к пляжу</li>
+                                </ul>
+                                <a href="#yogaForm" class="btn-yoga-primary">Узнать стоимость</a>
+                            </div>
+                        </article>
+                        <article class="yoga-rooms-carousel__slide" role="group" aria-roledescription="слайд" aria-label="3 из 6" data-slide="2" hidden>
+                            <div class="yoga-rooms-carousel__media yoga-rooms-carousel__media--placeholder" aria-hidden="true"></div>
+                            <div class="yoga-rooms-carousel__body">
+                                <h3>Домик стандарт</h3>
+                                <p>Одна большая кровать, уютный домик с верандой и шезлонгом.</p>
+                                <ul>
+                                    <li>Отдельный домик</li>
+                                    <li>Веранда и шезлонги</li>
+                                    <li>Уют для двоих</li>
+                                </ul>
+                                <a href="#yogaForm" class="btn-yoga-primary">Узнать стоимость</a>
+                            </div>
+                        </article>
+                        <article class="yoga-rooms-carousel__slide" role="group" aria-roledescription="слайд" aria-label="4 из 6" data-slide="3" hidden>
+                            <div class="yoga-rooms-carousel__media yoga-rooms-carousel__media--placeholder" aria-hidden="true"></div>
+                            <div class="yoga-rooms-carousel__body">
+                                <h3>Вилла 2-комнатная</h3>
+                                <p>Для семьи или друзей: 2 комнаты с отдельными санузлами, общая гостиная и веранда, рядом бассейн, ~30&nbsp;м до моря.</p>
+                                <ul>
+                                    <li>Две спальни и две ванные</li>
+                                    <li>Общая гостиная</li>
+                                    <li>Бассейн рядом</li>
+                                </ul>
+                                <a href="#yogaForm" class="btn-yoga-primary">Узнать стоимость</a>
+                            </div>
+                        </article>
+                        <article class="yoga-rooms-carousel__slide" role="group" aria-roledescription="слайд" aria-label="5 из 6" data-slide="4" hidden>
+                            <div class="yoga-rooms-carousel__media yoga-rooms-carousel__media--placeholder" aria-hidden="true"></div>
+                            <div class="yoga-rooms-carousel__body">
+                                <h3>Коттедж</h3>
+                                <p>Европейский стиль, пальмовая роща, 2 мин до моря, большой бассейн с шезлонгами, диван для ребёнка.</p>
+                                <ul>
+                                    <li>Простор и приватность</li>
+                                    <li>Бассейн на территории</li>
+                                    <li>Подходит для отдыха с детьми</li>
+                                </ul>
+                                <a href="#yogaForm" class="btn-yoga-primary">Узнать стоимость</a>
+                            </div>
+                        </article>
+                        <article class="yoga-rooms-carousel__slide" role="group" aria-roledescription="слайд" aria-label="6 из 6" data-slide="5" hidden>
+                            <div class="yoga-rooms-carousel__media yoga-rooms-carousel__media--placeholder" aria-hidden="true"></div>
+                            <div class="yoga-rooms-carousel__body">
+                                <h3>Бунгало</h3>
+                                <p>Большая кровать или раздельные, диван для ребёнка, душ и ванна, два шезлонга на веранде.</p>
+                                <ul>
+                                    <li>Ванна и душ</li>
+                                    <li>Два шезлонга на веранде</li>
+                                    <li>Гибкая конфигурация спален</li>
+                                </ul>
+                                <a href="#yogaForm" class="btn-yoga-primary">Узнать стоимость</a>
+                            </div>
+                        </article>
                     </div>
                 </div>
+                <div class="yoga-rooms-carousel__controls">
+                    <button type="button" class="yoga-rooms-carousel__btn yoga-rooms-carousel__btn--prev" aria-controls="yogaRoomsCarousel" aria-label="Предыдущий тип номера"></button>
+                    <div class="yoga-rooms-carousel__dots" role="tablist" aria-label="Выбор слайда"></div>
+                    <button type="button" class="yoga-rooms-carousel__btn yoga-rooms-carousel__btn--next" aria-controls="yogaRoomsCarousel" aria-label="Следующий тип номера"></button>
+                </div>
+                <p class="yoga-rooms-carousel__note">Стоимость при одноместном размещении уточняется при бронировании.</p>
+            </div>
 
-                <div class="yoga-rooms__card yoga-fade-in">
-                    <div class="yoga-rooms__photo">
-                        <picture>
-                            <source type="image/webp" srcset="img/yoga_tour/superior_room.webp">
-                            <img src="img/yoga_tour/superior_room.webp"
-                                 alt="Номер Superior с балдахином"
-                                 loading="lazy" width="4740" height="3164">
-                        </picture>
-                    </div>
-                    <div class="yoga-rooms__info">
-                        <h3>Superior</h3>
-                        <ul>
-                            <li>Двуспальная кровать с балдахином</li>
-                            <li>Кондиционер</li>
-                            <li>Диван-зона</li>
-                            <li>Горячий душ</li>
-                            <li>Wi-Fi</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="yoga-rooms__everywhere yoga-fade-in">
+                <h3 class="yoga-rooms__everywhere-title">В каждом номере есть</h3>
+                <ul class="yoga-rooms__everywhere-list">
+                    <li>Душ с горячей водой</li>
+                    <li>Стабильный Wi-Fi</li>
+                    <li>Кондиционер</li>
+                    <li>Чайник</li>
+                    <li>Сейф</li>
+                    <li>Полотенца (пляжные и для номера)</li>
+                    <li>Фен</li>
+                </ul>
             </div>
 
             <div class="yoga-rooms__urgency yoga-fade-in">
@@ -395,13 +436,232 @@
         </div>
     </section>
 
-    <!-- 08. Видео-отзывы -->
+    <!-- 10. Специалисты -->
+    <section id="yogaTeam" class="yoga-team" aria-labelledby="yogaTeamTitle">
+        <div class="yoga-team__container">
+            <div class="yoga-team__header yoga-fade-in">
+                <p class="yoga-chip-title">Практика и забота</p>
+                <h2 id="yogaTeamTitle">Специалисты</h2>
+                <p>Те, кто ведёт для вас практику, питание и сопровождение по программе — каждый день на берегу.</p>
+            </div>
+            <div class="yoga-team__grid">
+                <article class="yoga-team__card yoga-fade-in">
+                    <div class="yoga-team__photo">
+                        <picture>
+                            <source type="image/webp" srcset="img/yoga_tour/yulia.webp">
+                            <img src="img/yoga_tour/yulia.webp" alt="Юлия" loading="lazy" width="2008" height="3008">
+                        </picture>
+                    </div>
+                    <div class="yoga-team__body">
+                        <h3 class="yoga-team__name">Юлия</h3>
+                        <span class="yoga-team__role">Основатель, аюрведа</span>
+                        <p class="yoga-team__bio">Собирает программу так, чтобы сочетались йога, питание и аюрведические практики. Более 10 лет ведёт группы на Самуи — знает, как сделать отдых и глубоким, и ощутимо заземлённым.</p>
+                    </div>
+                </article>
+                <article class="yoga-team__card yoga-fade-in">
+                    <div class="yoga-team__photo">
+                        <picture>
+                            <source type="image/webp" srcset="img/yoga_tour/dmitriy.webp">
+                            <img src="img/yoga_tour/dmitriy.webp" alt="Дмитрий" loading="lazy" width="1420" height="1004">
+                        </picture>
+                    </div>
+                    <div class="yoga-team__body">
+                        <h3 class="yoga-team__name">Дмитрий</h3>
+                        <span class="yoga-team__role">Йога, пранаяма</span>
+                        <p class="yoga-team__bio">Собирает утренние и вечерние практики под разный уровень: от мягкого входа в тело до глубокой серии. Объясняет просто, без пафоса — и новичкам, и опытным практикам комфортно.</p>
+                    </div>
+                </article>
+                <article class="yoga-team__card yoga-fade-in">
+                    <div class="yoga-team__photo">
+                        <picture>
+                            <source type="image/webp" srcset="img/yoga_tour/galina.webp">
+                            <img src="img/yoga_tour/galina.webp" alt="Галина" loading="lazy" width="1200" height="960">
+                        </picture>
+                    </div>
+                    <div class="yoga-team__body">
+                        <h3 class="yoga-team__name">Галина</h3>
+                        <span class="yoga-team__role">Преподаватель йоги</span>
+                        <p class="yoga-team__bio">Ведёт практику для разного уровня: подсказывает выравнивание, дыхание и мягкие вариации, чтобы и новичкам, и опытным было комфортно. Бережно, без соревнования с соседним ковриком.</p>
+                    </div>
+                </article>
+                <article class="yoga-team__card yoga-fade-in">
+                    <div class="yoga-team__photo">
+                        <picture>
+                            <source type="image/webp" srcset="img/yoga_tour/kirill.webp">
+                            <img src="img/yoga_tour/kirill.webp" alt="Кирилл" loading="lazy" width="1280" height="960">
+                        </picture>
+                    </div>
+                    <div class="yoga-team__body">
+                        <h3 class="yoga-team__name">Кирилл</h3>
+                        <span class="yoga-team__role">Лечебный массаж, врач-невролог</span>
+                        <p class="yoga-team__bio">Проводит лечебный массаж с опорой на врачебный, неврологический взгляд: внимателен к ощущениям в теле, снимает зажимы и лишнее напряжение после практик. По запросу — разбор, что усилит восстановление в туре, а к чему стоит отнестись бережно.</p>
+                    </div>
+                </article>
+                <article class="yoga-team__card yoga-fade-in">
+                    <div class="yoga-team__photo yoga-team__photo--center-subject">
+                        <picture>
+                            <source type="image/webp" srcset="img/yoga_tour/jet_lee.webp">
+                            <img src="img/yoga_tour/jet_lee.webp" alt="Jet Li" loading="lazy" width="3000" height="2241">
+                        </picture>
+                    </div>
+                    <div class="yoga-team__body">
+                        <h3 class="yoga-team__name">Jet Li</h3>
+                        <span class="yoga-team__role">Мастер рейки, акупрессинг</span>
+                        <p class="yoga-team__bio">Работает мягко: рейки — для внутреннего баланса и снятия нервного перенапряжения, акупрессурные точки — меридианы, чтобы тело дышало легче после нагрузок. Сессия по согласованию, в спокойном ритме туриста.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Оздоровительные процедуры -->
+    <section id="yogaWellness" class="yoga-wellness" aria-labelledby="yogaWellnessTitle">
+        <div class="yoga-wellness__container">
+            <div class="yoga-wellness__header yoga-fade-in">
+                <p class="yoga-chip-title">Велнес</p>
+                <h2 id="yogaWellnessTitle">Оздоровительные процедуры</h2>
+                <p>Дополняют йога-тур по запросу — подберём формат под ваши цели и самочувствие.</p>
+            </div>
+            <div class="yoga-wellness__grid">
+                <article class="yoga-wellness__card yoga-wellness__card--featured yoga-fade-in">
+                    <div class="yoga-wellness__visual yoga-wellness__visual--placeholder" aria-hidden="true"></div>
+                    <div class="yoga-wellness__text">
+                        <h3>Панчакарма</h3>
+                        <p class="yoga-wellness__badge">ключевая программа</p>
+                        <p>Классическое аюрведическое очищение на клеточном уровне под наблюдением врачей. Текстовые детали методик заказчик добавит после сдачи вёрстки.</p>
+                        <a href="#yogaPancha" class="yoga-wellness__link">Подробнее о формате</a>
+                    </div>
+                </article>
+                <article class="yoga-wellness__card yoga-fade-in">
+                    <div class="yoga-wellness__visual yoga-wellness__visual--placeholder" aria-hidden="true"></div>
+                    <h3>Травяной аюрведический детокс</h3>
+                    <p>Мягкое поддержание очищения организма с травяными сборами и режимом, согласованным со специалистом.</p>
+                </article>
+                <article class="yoga-wellness__card yoga-fade-in">
+                    <div class="yoga-wellness__visual yoga-wellness__visual--placeholder" aria-hidden="true"></div>
+                    <h3>Смузи-детокс</h3>
+                    <p>Сбалансированные напитки и лёгкий режим питания для облегчения и энергии в процессе тура.</p>
+                </article>
+                <article class="yoga-wellness__card yoga-fade-in">
+                    <div class="yoga-wellness__visual yoga-wellness__visual--placeholder" aria-hidden="true"></div>
+                    <h3>Массажи</h3>
+                    <p>Разные техники — от расслабляющих до терапевтических, по показаниям и договорённости.</p>
+                </article>
+                <article class="yoga-wellness__card yoga-fade-in">
+                    <div class="yoga-wellness__visual yoga-wellness__visual--placeholder" aria-hidden="true"></div>
+                    <h3>Акупунктура</h3>
+                    <p>Работа с точками для баланса энергии и поддержки восстановления — по записи.</p>
+                </article>
+                <article class="yoga-wellness__card yoga-fade-in">
+                    <div class="yoga-wellness__visual yoga-wellness__visual--placeholder" aria-hidden="true"></div>
+                    <h3>Рейки</h3>
+                    <p>Мягкая энергетическая практика для спокойствия и внутреннего равновесия.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="yogaPancha" class="yoga-pancha" aria-labelledby="yogaPanchaTitle">
+        <div class="yoga-pancha__inner yoga-fade-in">
+            <div class="yoga-pancha__content">
+                <p class="yoga-chip-title yoga-pancha__chip">Аюрведа</p>
+                <h2 id="yogaPanchaTitle">Панчакарма в Satva Samui</h2>
+                <p class="yoga-pancha__lead">Полная программа очищения и восстановления: диагностика, индивидуальный план и сопровождение. Здесь будет развёрнутый текст от заказчика о методике, длительности этапов и том, чем тур отличается от йога-отдыха.</p>
+                <ul class="yoga-pancha__list">
+                    <li>Подготовительный этап и согласование с врачом</li>
+                    <li>Процедуры в комфортном ритме курорта</li>
+                    <li>Рекомендации после программы</li>
+                </ul>
+                <button type="button" class="btn-yoga-primary js-pancha-info-stub">Запросить консультацию по Панчакарме</button>
+            </div>
+            <div class="yoga-pancha__visual yoga-pancha__visual--placeholder" role="img" aria-label="Место под фото Панчакармы"></div>
+        </div>
+    </section>
+
+    <section id="yogaTeamGroup" class="yoga-team-group" aria-labelledby="yogaTeamGroupTitle">
+        <div class="yoga-team-group__container">
+            <div class="yoga-team-group__header yoga-fade-in">
+                <p class="yoga-chip-title">Satva Samui</p>
+                <h2 id="yogaTeamGroupTitle">Наша команда</h2>
+                <p>Команда курорта — это не только специалисты по йоге и процедурам, но и вся «большая семья», которая делает ваш отдых тёплым и безупречным в деталях.</p>
+            </div>
+            <div class="yoga-team-group__photo yoga-fade-in">
+                <div class="yoga-team-group__photo-placeholder" role="img" aria-label="Групповое фото команды — изображение будет добавлено"></div>
+                <p class="yoga-team-group__caption">Место под групповое фото: файл пришлёт заказчик в Telegram после вёрстки.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Экскурсии + Клуб -->
+    <section id="yogaActivities" class="yoga-activities" aria-label="Экскурсии по острову и вечерний Сатва-клуб">
+        <div class="yoga-activities__container">
+            <div class="yoga-activities__block yoga-activities__block--beige">
+                <div class="yoga-activities__photo">
+                    <picture>
+                        <source type="image/webp" srcset="img/yoga_tour/tour.webp">
+                        <img src="img/yoga_tour/tour.webp" alt="Храм и природа Самуи" loading="lazy" width="3000" height="2400">
+                    </picture>
+                </div>
+                <div class="yoga-activities__text">
+                    <h2>Остров, который удивляет</h2>
+                    <p>
+                        <strong>Храмы, горы, водопады!</strong><br>
+                        Приезжайте — будем рады!<br><br>
+                        Мы организуем для вас незабываемые экскурсии, покажем вам самые красивые и необычные места острова, о которых знают не все турагентства.
+                        Смотровые площадки в горах, бурлящие водопады, морские путешествия на соседние острова, древние храмы.
+                        С вами будет русскоговорящий переводчик, который сделает яркие фотографии на память.
+                    </p>
+                    <p class="yoga-activities__optional-note"><span class="yoga-includes__optional">дополнительно</span> Экскурсии оплачиваются отдельно и не входят в базовый пакет йога-тура.</p>
+                </div>
+            </div>
+            <div class="yoga-activities__block yoga-activities__block--mint yoga-activities__block--reverse">
+                <div class="yoga-activities__photo">
+                    <picture>
+                        <source type="image/webp" srcset="img/yoga_tour/evening.webp">
+                        <img src="img/yoga_tour/evening.webp" alt="Сатва-клуб вечером" loading="lazy" width="1500" height="1028">
+                    </picture>
+                </div>
+                <div class="yoga-activities__text">
+                    <h2>Каждый вечер — живая атмосфера</h2>
+                    <p>Наш Сатва-клуб на берегу: ужин по отдельному меню, музыка и общение без спешки. Не обязателен к посещению, но гости часто возвращаются сами — «как в гости к друзьям у моря».</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 08. Видео- и текстовые отзывы -->
     <section id="yogaReviews" class="yoga-reviews" aria-labelledby="yogaReviewsTitle">
         <div class="yoga-reviews__container">
             <div class="yoga-reviews__header yoga-fade-in">
                 <p class="yoga-chip-title">Отзывы</p>
                 <h2 id="yogaReviewsTitle">Отзывы гостей</h2>
                 <p>90% гостей — повторные. Многие из них приезжают в отель уже 5–6 раз, рекомендуют нас своим друзьям и с радостью делятся своими впечатлениями об отдыхе.</p>
+            </div>
+            <div class="yoga-reviews__text-grid" id="yogaTextReviews" aria-label="Текстовые отзывы">
+                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
+                    <blockquote>Первая поездка в йога-тур, потрясающее погружение в йогу. Море, природа, команда, атмосфера — крутейший опыт. Первый такой отдых за 20 лет</blockquote>
+                </figure>
+                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
+                    <blockquote>Второй раз приехала в Сатва Самуи. Набралась силы, спокойствия, баланса, энергии. Благодарна всем, кто его создаёт</blockquote>
+                </figure>
+                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
+                    <blockquote>Второй раз отдыхаем тут, всё очень нравится. Панчакарма даёт прекрасные результаты. Обязательно приедем снова</blockquote>
+                </figure>
+                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
+                    <blockquote>Уникальное место для отдыха и занятий йогой. Всё волшебное — природа, воздух, море, атмосфера</blockquote>
+                </figure>
+                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
+                    <blockquote>Море твоё! Много воздуха, зелени, спокойствия. Очень дружелюбный персонал. Индивидуальный подход</blockquote>
+                </figure>
+                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
+                    <blockquote>Мы попали в рай — звуки, запахи, столько зелени вокруг. Мантра-медитация — открытие для меня</blockquote>
+                </figure>
+                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
+                    <blockquote>Отдых полезный для здоровья, для души и тела. Панчакарма, массажи, замечательные специалисты</blockquote>
+                </figure>
+                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
+                    <blockquote>Рекомендую всем. Волшебный отдых — спокойно, красиво, замечательная команда. Я в восторге!</blockquote>
+                </figure>
             </div>
             <div class="yoga-reviews__grid">
                 <div class="yoga-reviews__item yoga-fade-in">
@@ -519,129 +779,34 @@
         </div>
     </section>
 
-    <section class="yoga-lead-bridge" aria-label="Быстрая заявка">
-        <div class="yoga-lead-bridge__inner">
-            <p class="yoga-lead-bridge__text">Если у вас есть вопросы, мы с радостью ответим на них. Оставьте имя и номер телефона — мы свяжемся с вами в рабочее время и подскажем по программе и датам.</p>
-            <button type="button" class="btn-yoga-secondary" data-open-modal="modal-lead">Оставить контакты</button>
-        </div>
-    </section>
-
-    <!-- 10. Специалисты -->
-    <section id="yogaTeam" class="yoga-team" aria-labelledby="yogaTeamTitle">
-        <div class="yoga-team__container">
-            <div class="yoga-team__header yoga-fade-in">
-                <p class="yoga-chip-title">Наша команда</p>
-                <h2 id="yogaTeamTitle">Специалисты</h2>
-                <p>Те, кто создаёт для вас практику, питание и атмосферу — каждый день на берегу.</p>
-            </div>
-            <div class="yoga-team__grid">
-                <article class="yoga-team__card yoga-fade-in">
-                    <div class="yoga-team__photo">
-                        <picture>
-                            <source type="image/webp" srcset="img/yoga_tour/yulia.webp">
-                            <img src="img/yoga_tour/yulia.webp" alt="Юлия" loading="lazy" width="2008" height="3008">
-                        </picture>
-                    </div>
-                    <div class="yoga-team__body">
-                        <h3 class="yoga-team__name">Юлия</h3>
-                        <span class="yoga-team__role">Основатель, аюрведа</span>
-                        <p class="yoga-team__bio">Собирает программу так, чтобы сочетались йога, питание и аюрведические практики. Более 10 лет ведёт группы на Самуи — знает, как сделать отдых и глубоким, и ощутимо заземлённым.</p>
-                    </div>
-                </article>
-                <article class="yoga-team__card yoga-fade-in">
-                    <div class="yoga-team__photo">
-                        <picture>
-                            <source type="image/webp" srcset="img/yoga_tour/dmitriy.webp">
-                            <img src="img/yoga_tour/dmitriy.webp" alt="Дмитрий" loading="lazy" width="1420" height="1004">
-                        </picture>
-                    </div>
-                    <div class="yoga-team__body">
-                        <h3 class="yoga-team__name">Дмитрий</h3>
-                        <span class="yoga-team__role">Йога, пранаяма</span>
-                        <p class="yoga-team__bio">Собирает утренние и вечерние практики под разный уровень: от мягкого входа в тело до глубокой серии. Объясняет просто, без пафоса — и новичкам, и опытным практикам комфортно.</p>
-                    </div>
-                </article>
-                <article class="yoga-team__card yoga-fade-in">
-                    <div class="yoga-team__photo">
-                        <picture>
-                            <source type="image/webp" srcset="img/yoga_tour/galina.webp">
-                            <img src="img/yoga_tour/galina.webp" alt="Галина" loading="lazy" width="1200" height="960">
-                        </picture>
-                    </div>
-                    <div class="yoga-team__body">
-                        <h3 class="yoga-team__name">Галина</h3>
-                        <span class="yoga-team__role">Преподаватель йоги</span>
-                        <p class="yoga-team__bio">Ведёт практику для разного уровня: подсказывает выравнивание, дыхание и мягкие вариации, чтобы и новичкам, и опытным было комфортно. Бережно, без соревнования с соседним ковриком.</p>
-                    </div>
-                </article>
-                <article class="yoga-team__card yoga-fade-in">
-                    <div class="yoga-team__photo">
-                        <picture>
-                            <source type="image/webp" srcset="img/yoga_tour/kirill.webp">
-                            <img src="img/yoga_tour/kirill.webp" alt="Кирилл" loading="lazy" width="1280" height="960">
-                        </picture>
-                    </div>
-                    <div class="yoga-team__body">
-                        <h3 class="yoga-team__name">Кирилл</h3>
-                        <span class="yoga-team__role">Лечебный массаж, врач-невролог</span>
-                        <p class="yoga-team__bio">Проводит лечебный массаж с опорой на врачебный, неврологический взгляд: внимателен к ощущениям в теле, снимает зажимы и лишнее напряжение после практик. По запросу — разбор, что усилит восстановление в туре, а к чему стоит отнестись бережно.</p>
-                    </div>
-                </article>
-                <article class="yoga-team__card yoga-fade-in">
-                    <div class="yoga-team__photo yoga-team__photo--center-subject">
-                        <picture>
-                            <source type="image/webp" srcset="img/yoga_tour/jet_lee.webp">
-                            <img src="img/yoga_tour/jet_lee.webp" alt="Jet Li" loading="lazy" width="3000" height="2241">
-                        </picture>
-                    </div>
-                    <div class="yoga-team__body">
-                        <h3 class="yoga-team__name">Jet Li</h3>
-                        <span class="yoga-team__role">Мастер рейки, акупрессинг</span>
-                        <p class="yoga-team__bio">Работает мягко: рейки — для внутреннего баланса и снятия нервного перенапряжения, акупрессурные точки — меридианы, чтобы тело дышало легче после нагрузок. Сессия по согласованию, в спокойном ритме туриста.</p>
-                    </div>
-                </article>
-            </div>
-            <div class="yoga-team__pancha yoga-fade-in">
-                <h3>Хотите глубже, чем йога-тур?</h3>
-                <p>На курорте Satva Samui проходит полная аюрведическая программа Панчакарма — с диагностикой и сопровождением врачей.</p>
-                <a href="#" class="btn-yoga-primary js-pancha-info-stub" role="button">Узнать о Панчакарме</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 11. Экскурсии + Клуб -->
-    <section id="yogaActivities" class="yoga-activities" aria-label="Экскурсии по острову и вечерний Сатва-клуб">
-        <div class="yoga-activities__container">
-            <div class="yoga-activities__block yoga-activities__block--beige">
-                <div class="yoga-activities__photo">
-                    <picture>
-                        <source type="image/webp" srcset="img/yoga_tour/tour.webp">
-                        <img src="img/yoga_tour/tour.webp" alt="Храм и природа Самуи" loading="lazy" width="3000" height="2400">
-                    </picture>
-                </div>
-                <div class="yoga-activities__text">
-                    <h2>Остров, который удивляет</h2>
-                    <p>
-                        <strong>Храмы, горы, водопады!</strong><br>
-                        Приезжайте — будем рады!<br><br>
-                        Мы организуем для вас незабываемые экскурсии, покажем вам самые красивые и необычные места острова, о которых знают не все турагентства.
-                        Смотровые площадки в горах, бурлящие водопады, морские путешествия на соседние острова, древние храмы.
-                        С вами будет русскоговорящий переводчик, который сделает яркие фотографии на память.
-                    </p>
-                </div>
-            </div>
-            <div class="yoga-activities__block yoga-activities__block--mint yoga-activities__block--reverse">
-                <div class="yoga-activities__photo">
-                    <picture>
-                        <source type="image/webp" srcset="img/yoga_tour/evening.webp">
-                        <img src="img/yoga_tour/evening.webp" alt="Сатва-клуб вечером" loading="lazy" width="1500" height="1028">
-                    </picture>
-                </div>
-                <div class="yoga-activities__text">
-                    <h2>Каждый вечер — живая атмосфера</h2>
-                    <p>Наш Сатва-клуб на берегу: ужин по отдельному меню, музыка и общение без спешки. Не обязателен к посещению, но гости часто возвращаются сами — «как в гости к друзьям у моря».</p>
-                </div>
-            </div>
+    <section class="yoga-trust-bar" id="yoga-trust" aria-labelledby="yogaTrustTitle">
+        <div class="yoga-trust-bar__container">
+            <header class="yoga-trust-bar__header yoga-fade-in">
+                <p class="yoga-chip-title">Цифры и опыт</p>
+                <h2 id="yogaTrustTitle">Почему нам доверяют</h2>
+                <p class="yoga-trust-bar__lead">Большой опыт работы на Самуи, сплочённая команда и довольные гости — лучшее доказательство профессиональной работы.</p>
+            </header>
+            <ul class="yoga-trust-bar__list">
+                <li class="yoga-trust-bar__item">
+                    <span class="yoga-trust-bar__value">12</span>
+                    <span class="yoga-trust-bar__label">лет работы на Самуи</span>
+                </li>
+                <li class="yoga-trust-bar__item">
+                    <span class="yoga-trust-bar__value">8000+</span>
+                    <span class="yoga-trust-bar__label">гостей прошли программы</span>
+                </li>
+                <li class="yoga-trust-bar__item yoga-trust-bar__item--rating">
+                    <span class="yoga-trust-bar__value">
+                        4.8
+                        <span class="yoga-trust-bar__stars" aria-hidden="true">★★★★★</span>
+                    </span>
+                    <span class="yoga-trust-bar__label">
+                        средний рейтинг в Google —
+                        <a href="#yogaReviews"
+                           class="yoga-trust-bar__link">смотреть отзывы гостей</a>
+                    </span>
+                </li>
+            </ul>
         </div>
     </section>
 
@@ -650,7 +815,7 @@
         <div class="yoga-contacts__container">
             <div class="yoga-contacts__header yoga-fade-in">
                 <h2 id="yogaContactsTitle">Свяжитесь с нами</h2>
-                <p>Напишите нам удобным для вас способом — мы с радостью ответим на все вопросы, поможем забронировать тур и подскажем по перелёту.</p>
+                <p>Напишите нам удобным для вас способом, и мы с радостью ответим на все вопросы, поможем забронировать тур и подскажем по перелёту.</p>
             </div>
             <ul class="yoga-contacts__grid">
                 <li>
@@ -710,34 +875,49 @@
         <div class="yoga-faq__container">
             <div class="yoga-faq__header yoga-fade-in">
                 <h2 id="yogaFaqTitle">Частые вопросы</h2>
-                <p>Коротко о туре, бронировании и заезде. Подробности по датам — в переписке или в заявке.</p>
+                <p>Бронирование, заезд и бытовые детали. Если не нашли ответ — напишите в заявке или мессенджер.</p>
             </div>
             <dl class="yoga-faq__list">
                 <div class="yoga-faq__row yoga-fade-in">
-                    <dt class="yoga-faq__question">Сколько человек обычно в группе йога-тура?</dt>
-                    <dd class="yoga-faq__answer">Группа компактная: в отеле всего 20 номеров, практики проходят в спокойном формате без толпы. Точный состав зависит от дат заезда — уточним при бронировании.</dd>
+                    <dt class="yoga-faq__question">Что входит в стоимость от 70&nbsp;$ в сутки?</dt>
+                    <dd class="yoga-faq__answer">Проживание, завтрак и обед, йога 2 раза в день, вечерние медитации. При бронировании от 7 дней — диагностика здоровья по пульсу и рекомендации специалиста по питанию и очищению, плюс инфраструктура курорта: сауны, зал, бассейны, каяки и падлборды. Дополнительно оплачиваются расширенные оздоровительные программы, экскурсии, перелёт и трансфер.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
-                    <dt class="yoga-faq__question">Что входит в стоимость «от 70&nbsp;$ в сутки»?</dt>
-                    <dd class="yoga-faq__answer">Основной пакет включает проживание, питание по программе (завтрак и обед), две йоги в день и сопутствующие активности по расписанию тура. Одноместное размещение и отдельные услуги могут оплачиваться дополнительно — напишите в заявке, пришлём актуальную сетку.</dd>
-                </div>
-                <div class="yoga-faq__row yoga-fade-in">
-                    <dt class="yoga-faq__question">Нужен ли опыт йоги?</dt>
-                    <dd class="yoga-faq__answer">Нет, программа рассчитана на разный уровень: преподаватели дают мягкие варианты и объясняют выравнивание. Опытным практикам тоже будет комфортно.</dd>
+                    <dt class="yoga-faq__question">Какая минимальная длительность?</dt>
+                    <dd class="yoga-faq__answer">Рекомендуем от 10 дней. При бронировании от 7 дней в пакет уже входит диагностика по пульсу и индивидуальные рекомендации специалиста.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__question">Есть ли трансфер из аэропорта?</dt>
-                    <dd class="yoga-faq__answer">Организацию трансфера и такси на Самуи можно согласовать с администрацией отеля после бронирования — в заявке укажите рейс и время, подскажем варианты.</dd>
+                    <dd class="yoga-faq__answer">Да. Трансфер из аэропорта стоит 30&nbsp;$, встречаем вас в отеле после согласования рейса и времени.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
-                    <dt class="yoga-faq__question">Какая минимальная длительность тура и условия отмены?</dt>
-                    <dd class="yoga-faq__answer">Минимальный срок и правила отмены или возврата зависят от сезона и тарифа. Актуальные условия высылаем персонально при подтверждении дат.</dd>
+                    <dt class="yoga-faq__question">Условия бронирования?</dt>
+                    <dd class="yoga-faq__answer">Депозит 100&nbsp;$ за номер при бронировании; остаток оплачивается по приезде. Подробности отмены и переноса — в разделе «Условия отмены» и в переписке по вашим датам.</dd>
+                </div>
+                <div class="yoga-faq__row yoga-fade-in">
+                    <dt class="yoga-faq__question">Нужен ли опыт йоги?</dt>
+                    <dd class="yoga-faq__answer">Нет. Программа подходит для любого уровня: преподаватели дают мягкие варианты и простые объяснения. Опытным практикам тоже комфортно.</dd>
+                </div>
+                <div class="yoga-faq__row yoga-fade-in">
+                    <dt class="yoga-faq__question">Сколько стоит перелёт?</dt>
+                    <dd class="yoga-faq__answer">Зависит от города вылета и сезона. Напишите нам — рассчитаем ориентиры и подскажем удобные варианты.</dd>
+                </div>
+                <div class="yoga-faq__row yoga-fade-in">
+                    <dt class="yoga-faq__question">Когда лучший сезон?</dt>
+                    <dd class="yoga-faq__answer">На Самуи комфортно круглый год: можно выбирать даты, ориентируясь на свой график, без жёсткой привязки к «сезону».</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__question">Что взять с собой?</dt>
-                    <dd class="yoga-faq__answer">Удобная одежда для практик, купальник, солнцезащита, лёгкая обувь для экскурсий, адаптер для розеток при необходимости. Коврики обычно есть на площадке — уточним в переписке перед выездом.</dd>
+                    <dd class="yoga-faq__answer">Удобная одежда для практик, плавательные принадлежности, солнцезащита, лёгкая обувь для прогулок. Коврики для йоги и пляжные полотенца есть в отеле.</dd>
                 </div>
             </dl>
+        </div>
+    </section>
+
+    <section class="yoga-lead-bridge" aria-label="Быстрая заявка">
+        <div class="yoga-lead-bridge__inner">
+            <p class="yoga-lead-bridge__text">Если у вас есть вопросы, мы с радостью ответим на них. Оставьте имя и номер телефона — мы свяжемся с вами в рабочее время и подскажем по программе и датам.</p>
+            <button type="button" class="btn-yoga-secondary" data-open-modal="modal-lead">Оставить контакты</button>
         </div>
     </section>
 
@@ -766,18 +946,39 @@
                         <span id="yogaNameErr" class="yoga-form__error-text" role="alert"></span>
                     </div>
                     <div class="yoga-form__row">
-                        <label class="yoga-form__label" for="yogaPhone">Телефон / WhatsApp / MAX / Telegram</label>
-                        <input class="yoga-form__input" type="tel" id="yogaPhone" name="phone" required autocomplete="tel" inputmode="tel" placeholder="+66 …">
+                        <label class="yoga-form__label" for="yogaPhoneNational">Телефон / WhatsApp / MAX / Telegram</label>
+                        <div class="yoga-form__phone-row">
+                            <label class="yoga-visually-hidden" for="yogaPhoneCode">Код страны</label>
+                            <select id="yogaPhoneCode" class="yoga-form__select" autocomplete="tel-country-code">
+                                <option value="+7">+7 (RU/KZ)</option>
+                                <option value="+380">+380 (UA)</option>
+                                <option value="+375">+375 (BY)</option>
+                                <option value="+66">+66 (TH)</option>
+                                <option value="+994">+994 (AZ)</option>
+                                <option value="+374">+374 (AM)</option>
+                                <option value="+49">+49 (DE)</option>
+                                <option value="+44">+44 (UK)</option>
+                                <option value="+1">+1 (US/CA)</option>
+                            </select>
+                            <input class="yoga-form__input yoga-form__input--phone-national" type="tel" id="yogaPhoneNational" autocomplete="tel-national" inputmode="tel" placeholder="999 000-00-00" aria-describedby="yogaPhoneErr">
+                        </div>
+                        <input type="hidden" id="yogaPhone" name="phone" value="">
                         <span id="yogaPhoneErr" class="yoga-form__error-text" role="alert"></span>
                     </div>
                     <div class="yoga-form__row">
-                        <label class="yoga-form__label" for="yogaEmail">Email (необязательно)</label>
+                        <label class="yoga-form__label" for="yogaEmail">Email <span class="yoga-form__label-hint">(необязательно, но желательно&nbsp;— если хотите получать от нас рассылки о скидках и акциях)</span></label>
                         <input class="yoga-form__input" type="email" id="yogaEmail" name="email" autocomplete="email" maxlength="254" inputmode="email" placeholder="name@example.com">
                         <span id="yogaEmailErr" class="yoga-form__error-text" role="alert"></span>
                     </div>
-                    <div class="yoga-form__row">
-                        <label class="yoga-form__label" for="yogaPreferredDate">Желаемые даты (необязательно)</label>
-                        <input class="yoga-form__input" type="date" id="yogaPreferredDate" name="preferred_date" autocomplete="off">
+                    <div class="yoga-form__row yoga-form__row--split">
+                        <div class="yoga-form__row-inner">
+                            <label class="yoga-form__label" for="yogaArrivalDate">Дата заезда <span class="yoga-form__label-hint">(необязательно)</span></label>
+                            <input class="yoga-form__input" type="date" id="yogaArrivalDate" name="preferred_date" autocomplete="off">
+                        </div>
+                        <div class="yoga-form__row-inner">
+                            <label class="yoga-form__label" for="yogaDepartureDate">Дата выезда <span class="yoga-form__label-hint">(необязательно)</span></label>
+                            <input class="yoga-form__input" type="date" id="yogaDepartureDate" name="departure_date" autocomplete="off">
+                        </div>
                     </div>
                     <div class="yoga-form__row">
                         <label class="yoga-form__label" for="yogaComment">Комментарий (необязательно)</label>
@@ -788,7 +989,7 @@
 
                     <label class="yoga-form__checkbox">
                         <input type="checkbox" id="yogaConsent" name="consent" value="true" required>
-                        <span>Я согласен с <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">политикой конфиденциальности</button></span>
+                        <span>Я согласен с <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">политикой конфиденциальности</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">публичной офертой</button> и <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">условиями отмены бронирования</button></span>
                     </label>
 
                     <button type="submit" class="btn-yoga-primary btn-yoga-primary--block" id="yogaSubmitBtn">Отправить заявку</button>
@@ -798,8 +999,13 @@
     </section>
 
     <footer class="yoga-site-footer" role="contentinfo">
-        <div class="yoga-contacts__container">
-            <p>&copy; <span id="yogaFooterYear">2026</span> Satva Samui Retreat · Йога-тур</p>
+        <div class="yoga-contacts__container yoga-site-footer__inner">
+            <p class="yoga-site-footer__copy">&copy; <span id="yogaFooterYear">2026</span> Satva Samui Retreat · Йога-тур</p>
+            <p class="yoga-site-footer__legal">
+                <button type="button" class="yoga-site-footer__link js-open-yoga-privacy">Политика конфиденциальности</button>
+                · <a href="oferta.html" class="yoga-site-footer__link">Публичная оферта</a>
+                · <button type="button" class="yoga-site-footer__link js-open-yoga-cancellation">Условия отмены</button>
+            </p>
         </div>
     </footer>
 
@@ -819,18 +1025,33 @@
                         <span id="yogaLeadModalNameErr" class="yoga-form__error-text" role="alert"></span>
                     </div>
                     <div class="yoga-form__row">
-                        <label class="yoga-form__label" for="yogaLeadModalPhone">Телефон / WhatsApp / MAX / Telegram</label>
-                        <input class="yoga-form__input" type="tel" id="yogaLeadModalPhone" name="phone" required autocomplete="tel" inputmode="tel" placeholder="+66 …">
+                        <label class="yoga-form__label" for="yogaLeadModalPhoneNational">Телефон / WhatsApp / MAX / Telegram</label>
+                        <div class="yoga-form__phone-row">
+                            <label class="yoga-visually-hidden" for="yogaLeadModalPhoneCode">Код страны</label>
+                            <select id="yogaLeadModalPhoneCode" class="yoga-form__select" autocomplete="tel-country-code">
+                                <option value="+7">+7 (RU/KZ)</option>
+                                <option value="+380">+380 (UA)</option>
+                                <option value="+375">+375 (BY)</option>
+                                <option value="+66">+66 (TH)</option>
+                                <option value="+994">+994 (AZ)</option>
+                                <option value="+374">+374 (AM)</option>
+                                <option value="+49">+49 (DE)</option>
+                                <option value="+44">+44 (UK)</option>
+                                <option value="+1">+1 (US/CA)</option>
+                            </select>
+                            <input class="yoga-form__input yoga-form__input--phone-national" type="tel" id="yogaLeadModalPhoneNational" autocomplete="tel-national" inputmode="tel" placeholder="999 000-00-00" aria-describedby="yogaLeadModalPhoneErr">
+                        </div>
+                        <input type="hidden" id="yogaLeadModalPhone" name="phone" value="">
                         <span id="yogaLeadModalPhoneErr" class="yoga-form__error-text" role="alert"></span>
                     </div>
                     <div class="yoga-form__row">
-                        <label class="yoga-form__label" for="yogaLeadModalEmail">Email (необязательно)</label>
+                        <label class="yoga-form__label" for="yogaLeadModalEmail">Email <span class="yoga-form__label-hint">(необязательно)</span></label>
                         <input class="yoga-form__input" type="email" id="yogaLeadModalEmail" name="email" autocomplete="email" maxlength="254" inputmode="email" placeholder="name@example.com">
                         <span id="yogaLeadModalEmailErr" class="yoga-form__error-text" role="alert"></span>
                     </div>
                     <label class="yoga-form__checkbox">
                         <input type="checkbox" id="yogaLeadModalConsent" name="consent" value="true" required>
-                        <span>Я согласен с <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">политикой конфиденциальности</button></span>
+                        <span>Я согласен с <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">политикой конфиденциальности</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">публичной офертой</button> и <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">условиями отмены бронирования</button></span>
                     </label>
                     <div id="yogaLeadFormError" class="yoga-form__status yoga-form__status--error is-hidden" role="alert" aria-live="assertive"></div>
                     <button type="submit" class="btn-yoga-primary btn-yoga-primary--block" id="yogaLeadModalSubmit">Отправить</button>
@@ -876,6 +1097,36 @@
                 <h3>5. Изменения политики</h3>
                 <p>Мы можем обновлять эту политику. Актуальная версия всегда доступна на этой странице.</p>
                 <p><em>Дата последнего обновления: январь 2026.</em></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="yogaModalOffer" class="yoga-modal" hidden aria-hidden="true">
+        <div class="yoga-modal__overlay" tabindex="-1"></div>
+        <div class="yoga-modal__content yoga-modal__content--wide" role="dialog" aria-modal="true" aria-labelledby="yogaModalOfferTitle">
+            <button type="button" class="yoga-modal__close" aria-label="Закрыть">&times;</button>
+            <h2 class="yoga-modal__title" id="yogaModalOfferTitle">Публичная оферта</h2>
+            <div class="yoga-modal__body yoga-modal__body--scroll">
+                <p>Здесь будет полный текст публичной оферты. Satva Samui подготовит юридически согласованный документ — на этапе вёрстки используется заглушка.</p>
+                <p>Также доступна <a href="oferta.html" target="_blank" rel="noopener noreferrer">страница оферты</a> для печати и отдельного просмотра.</p>
+                <p><em>Текст от заказчика — май 2026.</em></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="yogaModalCancellation" class="yoga-modal" hidden aria-hidden="true">
+        <div class="yoga-modal__overlay" tabindex="-1"></div>
+        <div class="yoga-modal__content yoga-modal__content--wide" role="dialog" aria-modal="true" aria-labelledby="yogaModalCancellationTitle">
+            <button type="button" class="yoga-modal__close" aria-label="Закрыть">&times;</button>
+            <h2 class="yoga-modal__title" id="yogaModalCancellationTitle">Условия отмены бронирования</h2>
+            <div class="yoga-modal__body yoga-modal__body--scroll">
+                <p>Здесь будут изложены условия отмены и переноса, размеры удержаний из депозита и сроки уведомления. Депозит за номер при бронировании — 100&nbsp;$, остаток оплачивается по приезде; финальные формулировки предоставит заказчик.</p>
+                <ul>
+                    <li>Плейсхолдер: сроки бесплатной отмены до заезда</li>
+                    <li>Плейсхолдер: удержания при поздней отмене</li>
+                    <li>Плейсхолдер: форс-мажор и перенос дат</li>
+                </ul>
+                <p><em>Текст от заказчика — май 2026.</em></p>
             </div>
         </div>
     </div>
