@@ -35,8 +35,8 @@
     function yogaSyncPhoneHidden(codeEl, nationalEl, hiddenEl) {
         if (!hiddenEl) return '';
         var code = (codeEl && codeEl.value) ? String(codeEl.value).trim() : '';
-        var digitsNat = (nationalEl && nationalEl.value) ? String(nationalEl.value).replace(/\D/g, '') : '';
         if (!code) code = '+';
+        var digitsNat = (nationalEl && nationalEl.value) ? String(nationalEl.value).replace(/\D/g, '') : '';
         if (!digitsNat) {
             hiddenEl.value = '';
             return '';
@@ -681,6 +681,22 @@
         });
     }
 
+    function initFaqAccordion() {
+        var root = document.getElementById('yogaFaq');
+        if (!root) return;
+        var toggles = root.querySelectorAll('.yoga-faq__question');
+        toggles.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var isOpen = btn.getAttribute('aria-expanded') === 'true';
+                var open = !isOpen;
+                btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                var panelId = btn.getAttribute('aria-controls');
+                var panel = panelId ? document.getElementById(panelId) : null;
+                if (panel) panel.hidden = !open;
+            });
+        });
+    }
+
     function initRoomsCarousel() {
         var root = document.getElementById('yogaRoomsCarousel');
         if (!root) return;
@@ -729,19 +745,121 @@
             });
         }
         var startX = null;
+        var swipeStartedOnGalleryStage = false;
         if (viewport) {
             viewport.addEventListener('touchstart', function (e) {
                 startX = e.changedTouches[0].screenX;
+                swipeStartedOnGalleryStage = !!(
+                    e.target &&
+                    typeof e.target.closest === 'function' &&
+                    e.target.closest('[data-room-gallery]')
+                );
             }, { passive: true });
             viewport.addEventListener('touchend', function (e) {
                 if (startX == null) return;
+                var fromGalleryStage = swipeStartedOnGalleryStage;
+                swipeStartedOnGalleryStage = false;
                 var dx = e.changedTouches[0].screenX - startX;
                 startX = null;
                 if (Math.abs(dx) < 45) return;
-                if (dx < 0) go(idx + 1); else go(idx - 1);
+                if (fromGalleryStage) return;
+                if (dx < 0) go(idx + 1);
+                else go(idx - 1);
             }, { passive: true });
         }
         go(0);
+    }
+
+    function initRoomsInnerGalleries() {
+        var car = document.getElementById('yogaRoomsCarousel');
+        if (!car) return;
+        var galleries = car.querySelectorAll('[data-room-gallery]');
+        if (!galleries.length) return;
+
+        galleries.forEach(function (root) {
+            var stage = root.querySelector('.yoga-rooms-gallery__stage');
+            var panes = Array.prototype.slice.call(root.querySelectorAll('[data-gallery-pane]'));
+            var thumbs = Array.prototype.slice.call(root.querySelectorAll('[data-gallery-thumb]'));
+            var prevBtn = root.querySelector('[data-gallery-prev]');
+            var nextBtn = root.querySelector('[data-gallery-next]');
+            var n = panes.length;
+            if (!n || !thumbs.length) return;
+
+            var gi = 0;
+
+            function goInner(i) {
+                gi = (i + n) % n;
+                panes.forEach(function (p, j) {
+                    var on = j === gi;
+                    p.classList.toggle('is-active', on);
+                    p.setAttribute('aria-hidden', on ? 'false' : 'true');
+                });
+                thumbs.forEach(function (t, j) {
+                    var on = j === gi;
+                    t.classList.toggle('is-active', on);
+                    t.setAttribute('aria-selected', on ? 'true' : 'false');
+                    t.setAttribute('tabindex', on ? '0' : '-1');
+                });
+            }
+
+            thumbs.forEach(function (t, j) {
+                t.addEventListener('click', function () {
+                    goInner(j);
+                });
+            });
+
+            var tablist = root.querySelector('.yoga-rooms-gallery__thumbs');
+            if (tablist) {
+                tablist.addEventListener('keydown', function (e) {
+                    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+                    var fi = thumbs.indexOf(document.activeElement);
+                    if (fi < 0) return;
+                    e.preventDefault();
+                    if (e.key === 'ArrowLeft') goInner(fi - 1);
+                    else goInner(fi + 1);
+                    if (thumbs[gi]) thumbs[gi].focus();
+                });
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function () {
+                    goInner(gi - 1);
+                });
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function () {
+                    goInner(gi + 1);
+                });
+            }
+
+            var sx = null;
+            if (stage) {
+                stage.addEventListener('touchstart', function (e) {
+                    sx = e.changedTouches[0].screenX;
+                }, { passive: true });
+                stage.addEventListener('touchend', function (e) {
+                    if (sx == null) return;
+                    var dx = e.changedTouches[0].screenX - sx;
+                    sx = null;
+                    if (Math.abs(dx) < 45) return;
+                    e.stopPropagation();
+                    if (dx < 0) goInner(gi + 1);
+                    else goInner(gi - 1);
+                }, { passive: true });
+
+                stage.addEventListener('keydown', function (e) {
+                    if (e.key === 'ArrowLeft') {
+                        e.preventDefault();
+                        goInner(gi - 1);
+                    } else if (e.key === 'ArrowRight') {
+                        e.preventDefault();
+                        goInner(gi + 1);
+                    }
+                });
+            }
+
+            goInner(0);
+        });
     }
 
     // --- 14c. Модалка быстрой заявки (#modal-lead) ----------------------------
@@ -1338,7 +1456,9 @@
         initVideoThumbnails();
         initVideoModal();
         initTextReviewsShuffle();
+        initFaqAccordion();
         initRoomsCarousel();
+        initRoomsInnerGalleries();
         initCopyrightYear();
         initHeroDetailsModal();
         initPrivacyModal();

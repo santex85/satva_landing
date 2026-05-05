@@ -47,18 +47,74 @@
         }
     }
 
+    &__term {
+        margin: 0;
+    }
+
     &__question {
-        margin: 0 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font: inherit;
         font-size: 1.05rem;
         font-weight: $font-weight-semibold;
         color: $color-primary-dark;
         line-height: $line-height-tight;
+        text-align: left;
+        border-radius: 8px;
+        transition: color $transition-fast;
+
+        &:hover {
+            color: $color-primary;
+        }
+
+        &:focus-visible {
+            outline: 3px solid $color-accent;
+            outline-offset: 4px;
+        }
+
+        &-label {
+            flex: 1;
+            min-width: 0;
+        }
+    }
+
+    &__chevron {
+        flex-shrink: 0;
+        display: block;
+        width: 10px;
+        height: 10px;
+        margin-top: 2px;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: rotate(45deg);
+        opacity: 0.75;
+        transition:
+            transform 0.22s ease,
+            opacity $transition-fast;
+    }
+
+    &__question[aria-expanded='true'] .yoga-faq__chevron {
+        transform: rotate(-135deg);
+        margin-top: 6px;
     }
 
     &__answer {
         margin: 0;
+        margin-top: 12px;
         font-size: 0.98rem;
         line-height: 1.65;
         color: $color-text;
+
+        &[hidden] {
+            display: none;
+        }
     }
 }

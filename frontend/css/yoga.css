@@ -477,7 +477,7 @@ a {
 .yoga-hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(160deg, rgba(92, 29, 58, 0.75) 0%, rgba(15, 76, 92, 0.6) 50%, rgba(9, 54, 66, 0.8) 100%);
+  background: linear-gradient(160deg, rgba(92, 29, 58, 0.52) 0%, rgba(15, 76, 92, 0.4) 50%, rgba(9, 54, 66, 0.55) 100%);
 }
 .yoga-hero__content {
   position: relative;
@@ -866,6 +866,24 @@ a {
   color: #FFFFFF;
   fill: currentColor;
 }
+.yoga-includes__icon svg.yoga-includes__icon-pulse {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.85;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.yoga-includes__icon svg.yoga-includes__icon-asana {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.yoga-includes__icon svg.yoga-includes__icon-asana circle {
+  fill: currentColor;
+  stroke: none;
+}
 .yoga-includes__amenities {
   margin-top: 40px;
   padding: 24px 22px;
@@ -1216,26 +1234,6 @@ a {
 .yoga-rooms-carousel__slide:not(.is-active) {
   display: none;
 }
-.yoga-rooms-carousel__media {
-  aspect-ratio: 16/9;
-  min-height: 200px;
-  background: linear-gradient(135deg, rgba(15, 76, 92, 0.15), rgba(190, 227, 219, 0.5));
-}
-.yoga-rooms-carousel__media--placeholder {
-  background: linear-gradient(135deg, rgba(15, 76, 92, 0.08) 0%, rgba(44, 110, 122, 0.12) 100%);
-  position: relative;
-}
-.yoga-rooms-carousel__media--placeholder::after {
-  content: "Фото номера";
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: rgba(15, 76, 92, 0.45);
-}
 .yoga-rooms-carousel__body {
   padding: clamp(20px, 3vw, 28px);
 }
@@ -1350,6 +1348,139 @@ a {
   font-size: 0.88rem;
   color: #666666;
   margin: 16px 0 0;
+}
+
+.yoga-rooms-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  align-self: stretch;
+}
+.yoga-rooms-gallery__stage-wrap {
+  position: relative;
+  border-radius: 20px 0 0 20px;
+  overflow: hidden;
+}
+@media (max-width: 719px) {
+  .yoga-rooms-gallery__stage-wrap {
+    border-radius: 20px 20px 0 0;
+  }
+}
+.yoga-rooms-gallery__stage {
+  outline: none;
+}
+.yoga-rooms-gallery__stage:focus-visible {
+  outline: 3px solid #FF8E72;
+  outline-offset: -3px;
+}
+.yoga-rooms-gallery__panes {
+  position: relative;
+  aspect-ratio: 16/9;
+  min-height: 200px;
+  background: rgba(15, 76, 92, 0.04);
+}
+.yoga-rooms-gallery__pane {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+.yoga-rooms-gallery__pane.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+.yoga-rooms-gallery__pane--placeholder {
+  background: linear-gradient(135deg, rgba(15, 76, 92, 0.08) 0%, rgba(44, 110, 122, 0.12) 100%);
+  position: absolute;
+}
+.yoga-rooms-gallery__pane--placeholder::after {
+  content: "Фото " attr(data-photo-index);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(15, 76, 92, 0.45);
+}
+.yoga-rooms-gallery__nav {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  gap: 8px;
+}
+.yoga-rooms-gallery__nav-btn {
+  pointer-events: auto;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  background: rgba(15, 76, 92, 0.45);
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(15, 76, 92, 0.2);
+}
+.yoga-rooms-gallery__nav-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+}
+.yoga-rooms-gallery__nav-btn--prev::before {
+  transform: rotate(45deg);
+  margin-left: 13px;
+}
+.yoga-rooms-gallery__nav-btn--next::before {
+  transform: rotate(-135deg);
+  margin-right: 13px;
+}
+.yoga-rooms-gallery__nav-btn:hover {
+  background: rgba(15, 76, 92, 0.72);
+}
+.yoga-rooms-gallery__nav-btn:focus-visible {
+  outline: 3px solid #FF8E72;
+  outline-offset: 2px;
+}
+.yoga-rooms-gallery__thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  padding: 0 8px 4px;
+}
+.yoga-rooms-gallery__thumb {
+  width: 52px;
+  height: 36px;
+  border-radius: 8px;
+  border: 2px solid rgba(15, 76, 92, 0.15);
+  padding: 0;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(15, 76, 92, 0.12) 0%, rgba(190, 227, 219, 0.35) 100%);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.yoga-rooms-gallery__thumb.is-active {
+  border-color: #0F4C5C;
+  box-shadow: 0 0 0 1px rgba(15, 76, 92, 0.08);
+  transform: scale(1.05);
+}
+.yoga-rooms-gallery__thumb:focus-visible {
+  outline: 3px solid #FF8E72;
+  outline-offset: 2px;
 }
 
 .yoga-rooms__everywhere {
@@ -2233,18 +2364,65 @@ a {
   border-bottom: none;
   padding-bottom: 0;
 }
+.yoga-faq__term {
+  margin: 0;
+}
 .yoga-faq__question {
-  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
   font-size: 1.05rem;
   font-weight: 600;
   color: #093642;
   line-height: 1.2;
+  text-align: left;
+  border-radius: 8px;
+  transition: color 0.2s ease;
+}
+.yoga-faq__question:hover {
+  color: #0F4C5C;
+}
+.yoga-faq__question:focus-visible {
+  outline: 3px solid #FF8E72;
+  outline-offset: 4px;
+}
+.yoga-faq__question-label {
+  flex: 1;
+  min-width: 0;
+}
+.yoga-faq__chevron {
+  flex-shrink: 0;
+  display: block;
+  width: 10px;
+  height: 10px;
+  margin-top: 2px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  opacity: 0.75;
+  transition: transform 0.22s ease, opacity 0.2s ease;
+}
+.yoga-faq__question[aria-expanded=true] .yoga-faq__chevron {
+  transform: rotate(-135deg);
+  margin-top: 6px;
 }
 .yoga-faq__answer {
   margin: 0;
+  margin-top: 12px;
   font-size: 0.98rem;
   line-height: 1.65;
   color: #2D3436;
+}
+.yoga-faq__answer[hidden] {
+  display: none;
 }
 
 .yoga-form {
@@ -2371,6 +2549,7 @@ a {
 }
 .yoga-form__phone-row {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   align-items: stretch;
 }
@@ -2393,6 +2572,11 @@ a {
 .yoga-form__select option {
   color: #2D3436;
   background: #FFFFFF;
+}
+.yoga-form__select--phone-code {
+  flex: 1 1 9rem;
+  min-width: 8.5rem;
+  max-width: 12rem;
 }
 .yoga-form__input--phone-national {
   flex: 1 1 auto;

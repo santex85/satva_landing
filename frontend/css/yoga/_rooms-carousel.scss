@@ -29,30 +29,6 @@
         }
     }
 
-    &__media {
-        aspect-ratio: 16 / 9;
-        min-height: 200px;
-        background: linear-gradient(135deg, rgba(15, 76, 92, 0.15), rgba(190, 227, 219, 0.5));
-
-        &--placeholder {
-            background:
-                linear-gradient(135deg, rgba(15, 76, 92, 0.08) 0%, rgba(44, 110, 122, 0.12) 100%);
-            position: relative;
-
-            &::after {
-                content: 'Фото номера';
-                position: absolute;
-                inset: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 0.9rem;
-                font-weight: $font-weight-semibold;
-                color: rgba(15, 76, 92, 0.45);
-            }
-        }
-    }
-
     &__body {
         padding: clamp(20px, 3vw, 28px);
 
@@ -188,6 +164,168 @@
         font-size: 0.88rem;
         color: $color-text-light;
         margin: 16px 0 0;
+    }
+}
+
+// Вложенная галерея фото внутри слайда типа номера
+.yoga-rooms-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    align-self: stretch;
+
+    &__stage-wrap {
+        position: relative;
+        border-radius: 20px 0 0 20px;
+        overflow: hidden;
+
+        @media (max-width: 719px) {
+            border-radius: 20px 20px 0 0;
+        }
+    }
+
+    &__stage {
+        outline: none;
+
+        &:focus-visible {
+            outline: 3px solid $color-accent;
+            outline-offset: -3px;
+        }
+    }
+
+    &__panes {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        min-height: 200px;
+        background: rgba(15, 76, 92, 0.04);
+    }
+
+    &__pane {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.28s ease,
+            visibility 0.28s ease;
+
+        &.is-active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        &--placeholder {
+            background:
+                linear-gradient(135deg, rgba(15, 76, 92, 0.08) 0%, rgba(44, 110, 122, 0.12) 100%);
+            position: absolute;
+
+            &::after {
+                content: 'Фото ' attr(data-photo-index);
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.9rem;
+                font-weight: $font-weight-semibold;
+                color: rgba(15, 76, 92, 0.45);
+            }
+        }
+    }
+
+    &__nav {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        pointer-events: none;
+        gap: 8px;
+    }
+
+    &__nav-btn {
+        pointer-events: auto;
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.95);
+        background: rgba(15, 76, 92, 0.45);
+        color: $color-white;
+        cursor: pointer;
+        transition:
+            background $transition-fast,
+            transform $transition-fast,
+            border-color $transition-fast;
+        position: relative;
+        box-shadow: 0 2px 8px rgba(15, 76, 92, 0.2);
+
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            width: 8px;
+            height: 8px;
+            border-left: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+        }
+
+        &--prev::before {
+            transform: rotate(45deg);
+            margin-left: 13px;
+        }
+
+        &--next::before {
+            transform: rotate(-135deg);
+            margin-right: 13px;
+        }
+
+        &:hover {
+            background: rgba(15, 76, 92, 0.72);
+        }
+
+        &:focus-visible {
+            outline: 3px solid $color-accent;
+            outline-offset: 2px;
+        }
+    }
+
+    &__thumbs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        padding: 0 8px 4px;
+    }
+
+    &__thumb {
+        width: 52px;
+        height: 36px;
+        border-radius: 8px;
+        border: 2px solid rgba(15, 76, 92, 0.15);
+        padding: 0;
+        cursor: pointer;
+        background:
+            linear-gradient(135deg, rgba(15, 76, 92, 0.12) 0%, rgba(190, 227, 219, 0.35) 100%);
+        transition:
+            border-color $transition-fast,
+            transform $transition-fast,
+            box-shadow $transition-fast;
+
+        &.is-active {
+            border-color: $color-primary;
+            box-shadow: 0 0 0 1px rgba(15, 76, 92, 0.08);
+            transform: scale(1.05);
+        }
+
+        &:focus-visible {
+            outline: 3px solid $color-accent;
+            outline-offset: 2px;
+        }
     }
 }
 

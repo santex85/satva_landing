@@ -169,10 +169,13 @@
 
                 <div class="yoga-includes__card yoga-fade-in">
                     <div class="yoga-includes__icon">
-                        <img src="img/yoga_tour/icon_yoga.webp" alt="" loading="lazy" width="100" height="100" decoding="async">
+                        <svg class="yoga-includes__icon-asana" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <circle cx="12" cy="4.35" r="1.35"/>
+                            <path fill="none" d="M12 5.85v5.35M5.35 8.1h13.3M12 11.15l-4.6 7.9M12 11.15l5.6 7.5"/>
+                        </svg>
                     </div>
                     <h3>Йога на рассвете и закате</h3>
-                    <p>Занятия проходят прямо на берегу моря. Йога для любого уровня подготовки. Четыре опытных йога-инструктора позаботятся, чтобы ваши практики были незабываемыми.</p>
+                    <p>Занятия проходят прямо на берегу моря. Йога для любого уровня подготовки. Опытные йога-инструкторы позаботятся, чтобы ваши практики были незабываемыми.</p>
                 </div>
 
                 <div class="yoga-includes__card yoga-fade-in">
@@ -185,7 +188,7 @@
 
                 <div class="yoga-includes__card yoga-fade-in">
                     <div class="yoga-includes__icon">
-                        <img src="img/yoga_tour/icon_meditation.webp" alt="" loading="lazy" width="150" height="135" decoding="async">
+                        <img src="img/yoga_tour/icon_yoga.webp" alt="" loading="lazy" width="100" height="100" decoding="async">
                     </div>
                     <h3>Медитация</h3>
                     <p>Мантра-медитация — простая и приятная практика медитации, которая успокаивает ум, избавляет от стресса и бессонницы. Практика пробуждает в нас лучшие качества, наполняя сердце радостью.</p>
@@ -193,18 +196,12 @@
 
                 <div class="yoga-includes__card yoga-fade-in">
                     <div class="yoga-includes__icon">
-                        <img src="img/yoga_tour/icon_health.webp" alt="" loading="lazy" width="150" height="150" decoding="async">
+                        <svg class="yoga-includes__icon-pulse" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M3 12h3.2l1.6-4.8 2.6 9.2 2.8-12.8 2.4 8.4H21"/>
+                        </svg>
                     </div>
-                    <h3>Программа здоровья <span class="yoga-includes__optional">дополнительно</span></h3>
-                    <p>Расширенные оздоровительные программы и процедуры — по запросу, с подбором после диагностики.</p>
-                </div>
-
-                <div class="yoga-includes__card yoga-fade-in">
-                    <div class="yoga-includes__icon">
-                        <img src="img/yoga_tour/icon_music.webp" alt="" loading="lazy" width="100" height="100" decoding="async">
-                    </div>
-                    <h3>Сатва-клуб</h3>
-                    <p>Каждый вечер — живая музыка, танцевальные шоу и вкусный ужин по отдельному меню.</p>
+                    <h3>Диагностика здоровья по пульсу</h3>
+                    <p>Индивидуальная программа здоровья от специалиста аюрведы, рекомендации по питанию и очищению организма.</p>
                 </div>
 
                 <div class="yoga-includes__card yoga-fade-in">
@@ -214,7 +211,15 @@
                         </svg>
                     </div>
                     <h3>Экскурсии <span class="yoga-includes__optional">дополнительно</span></h3>
-                    <p>По запросу поможем с экскурсиями по острову: храмы, водопады, рыбный рынок, смотровые площадки. В стоимость тура не входит, оплачивается отдельно.</p>
+                    <p>Самые красивые места острова, морские прогулки, водопады.</p>
+                </div>
+
+                <div class="yoga-includes__card yoga-fade-in">
+                    <div class="yoga-includes__icon">
+                        <img src="img/yoga_tour/icon_health.webp" alt="" loading="lazy" width="150" height="150" decoding="async">
+                    </div>
+                    <h3>Оздоровительные программы <span class="yoga-includes__optional">дополнительно</span></h3>
+                    <p>Панчакарма — очищение на клеточном уровне, травяной аюрведический детокс, массажи, акупунктура, рейки. Проведите отдых с пользой для души и тела.</p>
                 </div>
             </div>
             <div class="yoga-includes__amenities yoga-fade-in" aria-label="Инфраструктура, включённая в пакет">
@@ -326,9 +331,28 @@
                 <div class="yoga-rooms-carousel__viewport" role="region" aria-live="polite" aria-label="Типы номеров" tabindex="0">
                     <div class="yoga-rooms-carousel__track">
                         <article class="yoga-rooms-carousel__slide is-active" role="group" aria-roledescription="слайд" aria-label="1 из 6" data-slide="0">
-                            <div class="yoga-rooms-carousel__media yoga-rooms-carousel__media--placeholder" aria-hidden="true"></div>
+                            <div class="yoga-rooms-gallery" data-room-gallery>
+                                <div class="yoga-rooms-gallery__stage-wrap">
+                                    <div class="yoga-rooms-gallery__stage" role="region" aria-roledescription="галерея" aria-labelledby="yogaRoomsSlide0Title" tabindex="0">
+                                        <div class="yoga-rooms-gallery__panes">
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder is-active" data-gallery-pane aria-hidden="false" data-photo-index="1"></div>
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder" data-gallery-pane aria-hidden="true" data-photo-index="2"></div>
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder" data-gallery-pane aria-hidden="true" data-photo-index="3"></div>
+                                        </div>
+                                    </div>
+                                    <div class="yoga-rooms-gallery__nav" aria-label="Листание фото в текущем типе номера">
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--prev" data-gallery-prev aria-label="Предыдущее фото: номер стандарт"></button>
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--next" data-gallery-next aria-label="Следующее фото: номер стандарт"></button>
+                                    </div>
+                                </div>
+                                <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Фотографии: номер стандарт">
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Номер стандарт, фото 1 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Номер стандарт, фото 2 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Номер стандарт, фото 3 из 3"></button>
+                                </div>
+                            </div>
                             <div class="yoga-rooms-carousel__body">
-                                <h3>Номер стандарт</h3>
+                                <h3 id="yogaRoomsSlide0Title">Номер стандарт</h3>
                                 <p>Одна большая кровать или раздельные, веранда, 5–20&nbsp;м от моря.</p>
                                 <ul>
                                     <li>Веранда</li>
@@ -339,9 +363,28 @@
                             </div>
                         </article>
                         <article class="yoga-rooms-carousel__slide" role="group" aria-roledescription="слайд" aria-label="2 из 6" data-slide="1" hidden>
-                            <div class="yoga-rooms-carousel__media yoga-rooms-carousel__media--placeholder" aria-hidden="true"></div>
+                            <div class="yoga-rooms-gallery" data-room-gallery>
+                                <div class="yoga-rooms-gallery__stage-wrap">
+                                    <div class="yoga-rooms-gallery__stage" role="region" aria-roledescription="галерея" aria-labelledby="yogaRoomsSlide1Title" tabindex="0">
+                                        <div class="yoga-rooms-gallery__panes">
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder is-active" data-gallery-pane aria-hidden="false" data-photo-index="1"></div>
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder" data-gallery-pane aria-hidden="true" data-photo-index="2"></div>
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder" data-gallery-pane aria-hidden="true" data-photo-index="3"></div>
+                                        </div>
+                                    </div>
+                                    <div class="yoga-rooms-gallery__nav" aria-label="Листание фото в текущем типе номера">
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--prev" data-gallery-prev aria-label="Предыдущее фото: номер стандарт с видом на море"></button>
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--next" data-gallery-next aria-label="Следующее фото: номер стандарт с видом на море"></button>
+                                    </div>
+                                </div>
+                                <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Фотографии: номер стандарт с видом на море">
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Номер стандарт с видом на море, фото 1 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Номер стандарт с видом на море, фото 2 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Номер стандарт с видом на море, фото 3 из 3"></button>
+                                </div>
+                            </div>
                             <div class="yoga-rooms-carousel__body">
-                                <h3>Номер стандарт с видом на море</h3>
+                                <h3 id="yogaRoomsSlide1Title">Номер стандарт с видом на море</h3>
                                 <p>Одна кровать, веранда с видом на море и закаты, пляж в 3&nbsp;м.</p>
                                 <ul>
                                     <li>Панорама моря с веранды</li>
@@ -352,9 +395,28 @@
                             </div>
                         </article>
                         <article class="yoga-rooms-carousel__slide" role="group" aria-roledescription="слайд" aria-label="3 из 6" data-slide="2" hidden>
-                            <div class="yoga-rooms-carousel__media yoga-rooms-carousel__media--placeholder" aria-hidden="true"></div>
+                            <div class="yoga-rooms-gallery" data-room-gallery>
+                                <div class="yoga-rooms-gallery__stage-wrap">
+                                    <div class="yoga-rooms-gallery__stage" role="region" aria-roledescription="галерея" aria-labelledby="yogaRoomsSlide2Title" tabindex="0">
+                                        <div class="yoga-rooms-gallery__panes">
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder is-active" data-gallery-pane aria-hidden="false" data-photo-index="1"></div>
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder" data-gallery-pane aria-hidden="true" data-photo-index="2"></div>
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder" data-gallery-pane aria-hidden="true" data-photo-index="3"></div>
+                                        </div>
+                                    </div>
+                                    <div class="yoga-rooms-gallery__nav" aria-label="Листание фото в текущем типе номера">
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--prev" data-gallery-prev aria-label="Предыдущее фото: домик стандарт"></button>
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--next" data-gallery-next aria-label="Следующее фото: домик стандарт"></button>
+                                    </div>
+                                </div>
+                                <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Фотографии: домик стандарт">
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Домик стандарт, фото 1 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Домик стандарт, фото 2 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Домик стандарт, фото 3 из 3"></button>
+                                </div>
+                            </div>
                             <div class="yoga-rooms-carousel__body">
-                                <h3>Домик стандарт</h3>
+                                <h3 id="yogaRoomsSlide2Title">Домик стандарт</h3>
                                 <p>Одна большая кровать, уютный домик с верандой и шезлонгом.</p>
                                 <ul>
                                     <li>Отдельный домик</li>
@@ -365,9 +427,28 @@
                             </div>
                         </article>
                         <article class="yoga-rooms-carousel__slide" role="group" aria-roledescription="слайд" aria-label="4 из 6" data-slide="3" hidden>
-                            <div class="yoga-rooms-carousel__media yoga-rooms-carousel__media--placeholder" aria-hidden="true"></div>
+                            <div class="yoga-rooms-gallery" data-room-gallery>
+                                <div class="yoga-rooms-gallery__stage-wrap">
+                                    <div class="yoga-rooms-gallery__stage" role="region" aria-roledescription="галерея" aria-labelledby="yogaRoomsSlide3Title" tabindex="0">
+                                        <div class="yoga-rooms-gallery__panes">
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder is-active" data-gallery-pane aria-hidden="false" data-photo-index="1"></div>
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder" data-gallery-pane aria-hidden="true" data-photo-index="2"></div>
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder" data-gallery-pane aria-hidden="true" data-photo-index="3"></div>
+                                        </div>
+                                    </div>
+                                    <div class="yoga-rooms-gallery__nav" aria-label="Листание фото в текущем типе номера">
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--prev" data-gallery-prev aria-label="Предыдущее фото: вилла 2-комнатная"></button>
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--next" data-gallery-next aria-label="Следующее фото: вилла 2-комнатная"></button>
+                                    </div>
+                                </div>
+                                <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Фотографии: вилла 2-комнатная">
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Вилла 2-комнатная, фото 1 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Вилла 2-комнатная, фото 2 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Вилла 2-комнатная, фото 3 из 3"></button>
+                                </div>
+                            </div>
                             <div class="yoga-rooms-carousel__body">
-                                <h3>Вилла 2-комнатная</h3>
+                                <h3 id="yogaRoomsSlide3Title">Вилла 2-комнатная</h3>
                                 <p>Для семьи или друзей: 2 комнаты с отдельными санузлами, общая гостиная и веранда, рядом бассейн, ~30&nbsp;м до моря.</p>
                                 <ul>
                                     <li>Две спальни и две ванные</li>
@@ -378,9 +459,28 @@
                             </div>
                         </article>
                         <article class="yoga-rooms-carousel__slide" role="group" aria-roledescription="слайд" aria-label="5 из 6" data-slide="4" hidden>
-                            <div class="yoga-rooms-carousel__media yoga-rooms-carousel__media--placeholder" aria-hidden="true"></div>
+                            <div class="yoga-rooms-gallery" data-room-gallery>
+                                <div class="yoga-rooms-gallery__stage-wrap">
+                                    <div class="yoga-rooms-gallery__stage" role="region" aria-roledescription="галерея" aria-labelledby="yogaRoomsSlide4Title" tabindex="0">
+                                        <div class="yoga-rooms-gallery__panes">
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder is-active" data-gallery-pane aria-hidden="false" data-photo-index="1"></div>
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder" data-gallery-pane aria-hidden="true" data-photo-index="2"></div>
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder" data-gallery-pane aria-hidden="true" data-photo-index="3"></div>
+                                        </div>
+                                    </div>
+                                    <div class="yoga-rooms-gallery__nav" aria-label="Листание фото в текущем типе номера">
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--prev" data-gallery-prev aria-label="Предыдущее фото: коттедж"></button>
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--next" data-gallery-next aria-label="Следующее фото: коттедж"></button>
+                                    </div>
+                                </div>
+                                <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Фотографии: коттедж">
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Коттедж, фото 1 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Коттедж, фото 2 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Коттедж, фото 3 из 3"></button>
+                                </div>
+                            </div>
                             <div class="yoga-rooms-carousel__body">
-                                <h3>Коттедж</h3>
+                                <h3 id="yogaRoomsSlide4Title">Коттедж</h3>
                                 <p>Европейский стиль, пальмовая роща, 2 мин до моря, большой бассейн с шезлонгами, диван для ребёнка.</p>
                                 <ul>
                                     <li>Простор и приватность</li>
@@ -391,9 +491,28 @@
                             </div>
                         </article>
                         <article class="yoga-rooms-carousel__slide" role="group" aria-roledescription="слайд" aria-label="6 из 6" data-slide="5" hidden>
-                            <div class="yoga-rooms-carousel__media yoga-rooms-carousel__media--placeholder" aria-hidden="true"></div>
+                            <div class="yoga-rooms-gallery" data-room-gallery>
+                                <div class="yoga-rooms-gallery__stage-wrap">
+                                    <div class="yoga-rooms-gallery__stage" role="region" aria-roledescription="галерея" aria-labelledby="yogaRoomsSlide5Title" tabindex="0">
+                                        <div class="yoga-rooms-gallery__panes">
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder is-active" data-gallery-pane aria-hidden="false" data-photo-index="1"></div>
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder" data-gallery-pane aria-hidden="true" data-photo-index="2"></div>
+                                            <div class="yoga-rooms-gallery__pane yoga-rooms-gallery__pane--placeholder" data-gallery-pane aria-hidden="true" data-photo-index="3"></div>
+                                        </div>
+                                    </div>
+                                    <div class="yoga-rooms-gallery__nav" aria-label="Листание фото в текущем типе номера">
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--prev" data-gallery-prev aria-label="Предыдущее фото: бунгало"></button>
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--next" data-gallery-next aria-label="Следующее фото: бунгало"></button>
+                                    </div>
+                                </div>
+                                <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Фотографии: бунгало">
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Бунгало, фото 1 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Бунгало, фото 2 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Бунгало, фото 3 из 3"></button>
+                                </div>
+                            </div>
                             <div class="yoga-rooms-carousel__body">
-                                <h3>Бунгало</h3>
+                                <h3 id="yogaRoomsSlide5Title">Бунгало</h3>
                                 <p>Большая кровать или раздельные, диван для ребёнка, душ и ванна, два шезлонга на веранде.</p>
                                 <ul>
                                     <li>Ванна и душ</li>
@@ -482,19 +601,6 @@
                         <h3 class="yoga-team__name">Галина</h3>
                         <span class="yoga-team__role">Преподаватель йоги</span>
                         <p class="yoga-team__bio">Ведёт практику для разного уровня: подсказывает выравнивание, дыхание и мягкие вариации, чтобы и новичкам, и опытным было комфортно. Бережно, без соревнования с соседним ковриком.</p>
-                    </div>
-                </article>
-                <article class="yoga-team__card yoga-fade-in">
-                    <div class="yoga-team__photo">
-                        <picture>
-                            <source type="image/webp" srcset="img/yoga_tour/kirill.webp">
-                            <img src="img/yoga_tour/kirill.webp" alt="Кирилл" loading="lazy" width="1280" height="960">
-                        </picture>
-                    </div>
-                    <div class="yoga-team__body">
-                        <h3 class="yoga-team__name">Кирилл</h3>
-                        <span class="yoga-team__role">Лечебный массаж, врач-невролог</span>
-                        <p class="yoga-team__bio">Проводит лечебный массаж с опорой на врачебный, неврологический взгляд: внимателен к ощущениям в теле, снимает зажимы и лишнее напряжение после практик. По запросу — разбор, что усилит восстановление в туре, а к чему стоит отнестись бережно.</p>
                     </div>
                 </article>
                 <article class="yoga-team__card yoga-fade-in">
@@ -623,7 +729,7 @@
                 </div>
                 <div class="yoga-activities__text">
                     <h2>Каждый вечер — живая атмосфера</h2>
-                    <p>Наш Сатва-клуб на берегу: ужин по отдельному меню, музыка и общение без спешки. Не обязателен к посещению, но гости часто возвращаются сами — «как в гости к друзьям у моря».</p>
+                    <p>Каждый вечер для вас живая музыка и мантра-медитация, которая успокаивает ум и благоприятно влияет на физическое, ментальное и душевное здоровье.</p>
                 </div>
             </div>
         </div>
@@ -637,36 +743,10 @@
                 <h2 id="yogaReviewsTitle">Отзывы гостей</h2>
                 <p>90% гостей — повторные. Многие из них приезжают в отель уже 5–6 раз, рекомендуют нас своим друзьям и с радостью делятся своими впечатлениями об отдыхе.</p>
             </div>
-            <div class="yoga-reviews__text-grid" id="yogaTextReviews" aria-label="Текстовые отзывы">
-                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
-                    <blockquote>Первая поездка в йога-тур, потрясающее погружение в йогу. Море, природа, команда, атмосфера — крутейший опыт. Первый такой отдых за 20 лет</blockquote>
-                </figure>
-                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
-                    <blockquote>Второй раз приехала в Сатва Самуи. Набралась силы, спокойствия, баланса, энергии. Благодарна всем, кто его создаёт</blockquote>
-                </figure>
-                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
-                    <blockquote>Второй раз отдыхаем тут, всё очень нравится. Панчакарма даёт прекрасные результаты. Обязательно приедем снова</blockquote>
-                </figure>
-                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
-                    <blockquote>Уникальное место для отдыха и занятий йогой. Всё волшебное — природа, воздух, море, атмосфера</blockquote>
-                </figure>
-                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
-                    <blockquote>Море твоё! Много воздуха, зелени, спокойствия. Очень дружелюбный персонал. Индивидуальный подход</blockquote>
-                </figure>
-                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
-                    <blockquote>Мы попали в рай — звуки, запахи, столько зелени вокруг. Мантра-медитация — открытие для меня</blockquote>
-                </figure>
-                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
-                    <blockquote>Отдых полезный для здоровья, для души и тела. Панчакарма, массажи, замечательные специалисты</blockquote>
-                </figure>
-                <figure class="yoga-reviews__quote yoga-fade-in" data-text-review>
-                    <blockquote>Рекомендую всем. Волшебный отдых — спокойно, красиво, замечательная команда. Я в восторге!</blockquote>
-                </figure>
-            </div>
             <div class="yoga-reviews__grid">
                 <div class="yoga-reviews__item yoga-fade-in">
                     <div class="yoga-reviews__card" role="button" tabindex="0"
-                         data-video="video/review_1.mp4" aria-label="Открыть видео: гость благодарит за атмосферу, йогу у моря и заботу команды">
+                         data-video="video/review_1.mp4" aria-label="Открыть видео: первая поездка в йога-тур, погружение в практику, море, природа и команда">
                         <div class="yoga-reviews__thumb">
                             <video src="video/review_1.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
                             <span class="yoga-reviews__play" aria-hidden="true">
@@ -675,11 +755,11 @@
                         </div>
                         <p class="yoga-reviews__caption">Видео-отзыв 1</p>
                     </div>
-                    <p class="yoga-reviews__summary">Гость благодарит за атмосферу и йогу у моря, отмечает внимательность команды.</p>
+                    <p class="yoga-reviews__summary">Первая поездка в йога-тур, потрясающее погружение в йогу. Море, природа, команда, атмосфера – крутейший опыт. Первый такой отдых за 20 лет</p>
                 </div>
                 <div class="yoga-reviews__item yoga-fade-in">
                     <div class="yoga-reviews__card" role="button" tabindex="0"
-                         data-video="video/review_2.mp4" aria-label="Открыть видео: первый йога-тур, комфортно новичкам, понравилось питание">
+                         data-video="video/review_2.mp4" aria-label="Открыть видео: второй визит в Сатва Самуи, силы и баланс, благодарность команде">
                         <div class="yoga-reviews__thumb">
                             <video src="video/review_2.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
                             <span class="yoga-reviews__play" aria-hidden="true">
@@ -688,11 +768,11 @@
                         </div>
                         <p class="yoga-reviews__caption">Видео-отзыв 2</p>
                     </div>
-                    <p class="yoga-reviews__summary">Рассказ о первом йога-туре: комфортно новичкам, отдельно хвалит питание по программе.</p>
+                    <p class="yoga-reviews__summary">Второй раз приехала в Сатва Самуи. Набралась силы, спокойствия, баланса, энергии. Благодарна всем, кто его создаёт</p>
                 </div>
                 <div class="yoga-reviews__item yoga-fade-in">
                     <div class="yoga-reviews__card" role="button" tabindex="0"
-                         data-video="video/review_3.mp4" aria-label="Открыть видео: впечатления от практик и пляжа, хочет вернуться">
+                         data-video="video/review_3.mp4" aria-label="Открыть видео: второй отдых в Сатва, йога и ощущение тела, панчакарма, гости приедут снова">
                         <div class="yoga-reviews__thumb">
                             <video src="video/review_3.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
                             <span class="yoga-reviews__play" aria-hidden="true">
@@ -701,11 +781,11 @@
                         </div>
                         <p class="yoga-reviews__caption">Видео-отзыв 3</p>
                     </div>
-                    <p class="yoga-reviews__summary">Впечатления от практик и отдыха у воды; планирует приехать снова.</p>
+                    <p class="yoga-reviews__summary">Второй раз отдыхаем тут, всё очень нравится. Благодарность за йогу, снова почувствовали своё тело, как в 20 лет. Панчакарма — даёт прекрасные результаты. Обязательно приедем снова</p>
                 </div>
                 <div class="yoga-reviews__item yoga-fade-in">
                     <div class="yoga-reviews__card" role="button" tabindex="0"
-                         data-video="video/review_4.mp4" aria-label="Открыть видео: организация программы и удобное расположение у моря">
+                         data-video="video/review_4.mp4" aria-label="Открыть видео: уникальное место для йоги, природа и море, спокойная атмосфера">
                         <div class="yoga-reviews__thumb">
                             <video src="video/review_4.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
                             <span class="yoga-reviews__play" aria-hidden="true">
@@ -714,11 +794,11 @@
                         </div>
                         <p class="yoga-reviews__caption">Видео-отзыв 4</p>
                     </div>
-                    <p class="yoga-reviews__summary">Хвалит организацию расписания и то, что отель в шаге от пляжа.</p>
+                    <p class="yoga-reviews__summary">Уникальное место для отдыха и занятий йогой. Всё волшебное — природа, воздух, море, атмосфера. Здесь спокойно, душевно, каждый найдёт то, что хочет</p>
                 </div>
                 <div class="yoga-reviews__item yoga-fade-in">
                     <div class="yoga-reviews__card" role="button" tabindex="0"
-                         data-video="video/review_5.mp4" aria-label="Открыть видео: польза для спины и снятие стресса за время тура">
+                         data-video="video/review_5.mp4" aria-label="Открыть видео: море и природа, дружелюбный персонал и индивидуальный подход">
                         <div class="yoga-reviews__thumb">
                             <video src="video/review_5.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
                             <span class="yoga-reviews__play" aria-hidden="true">
@@ -727,11 +807,11 @@
                         </div>
                         <p class="yoga-reviews__caption">Видео-отзыв 5</p>
                     </div>
-                    <p class="yoga-reviews__summary">Отмечает облегчение для спины и меньше напряжения после недельной программы.</p>
+                    <p class="yoga-reviews__summary">Море твоё! Много воздуха, зелени, спокойствия. Очень дружелюбный персонал. К вам относятся внимательно и с индивидуальным подходом, что очень ценно</p>
                 </div>
                 <div class="yoga-reviews__item yoga-fade-in">
                     <div class="yoga-reviews__card" role="button" tabindex="0"
-                         data-video="video/review_6.mp4" aria-label="Открыть видео: инструкторы и баланс нагрузки и отдыха">
+                         data-video="video/review_6.mp4" aria-label="Открыть видео: атмосфера и природа как рай, мантра-медитация, гость продолжит практику">
                         <div class="yoga-reviews__thumb">
                             <video src="video/review_6.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
                             <span class="yoga-reviews__play" aria-hidden="true">
@@ -740,11 +820,11 @@
                         </div>
                         <p class="yoga-reviews__caption">Видео-отзыв 6</p>
                     </div>
-                    <p class="yoga-reviews__summary">Подчёркивает дружелюбие преподавателей и спокойный ритм без перегруза.</p>
+                    <p class="yoga-reviews__summary">Мы попали в рай — звуки, запахи, столько зелени вокруг. Мантра-медитация — открытие для меня, буду продолжать практиковать</p>
                 </div>
                 <div class="yoga-reviews__item yoga-fade-in">
                     <div class="yoga-reviews__card" role="button" tabindex="0"
-                         data-video="video/review_7.mp4" aria-label="Открыть видео: рекомендация тем, кто хочет перезагрузиться">
+                         data-video="video/review_7.mp4" aria-label="Открыть видео: отдых для здоровья, души и тела, панчакарма, массажи и специалисты">
                         <div class="yoga-reviews__thumb">
                             <video src="video/review_7.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
                             <span class="yoga-reviews__play" aria-hidden="true">
@@ -753,11 +833,11 @@
                         </div>
                         <p class="yoga-reviews__caption">Видео-отзыв 7</p>
                     </div>
-                    <p class="yoga-reviews__summary">Рекомендует тур тем, кому нужен отдых без суеты и с йогой «в тему».</p>
+                    <p class="yoga-reviews__summary">Отдых полезный для здоровья, для души и тела. Сделали Панчакарму, массажи, замечательные специалисты</p>
                 </div>
                 <div class="yoga-reviews__item yoga-fade-in">
                     <div class="yoga-reviews__card" role="button" tabindex="0"
-                         data-video="video/review_8.mp4" aria-label="Открыть видео: утренние занятия и вечерние закаты на площадке">
+                         data-video="video/review_8.mp4" aria-label="Открыть видео: рекомендация приехать, спокойный отдых, команда, гость в восторге">
                         <div class="yoga-reviews__thumb">
                             <video src="video/review_8.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
                             <span class="yoga-reviews__play" aria-hidden="true">
@@ -766,7 +846,7 @@
                         </div>
                         <p class="yoga-reviews__caption">Видео-отзыв 8</p>
                     </div>
-                    <p class="yoga-reviews__summary">Коротко о утренних практиках и вечерах на йога-площадке у моря.</p>
+                    <p class="yoga-reviews__summary">Рекомендую всем приехать сюда. Волшебный отдых — спокойно, красиво, замечательная команда. Я в восторге!</p>
                 </div>
             </div>
         </div>
@@ -875,40 +955,79 @@
         <div class="yoga-faq__container">
             <div class="yoga-faq__header yoga-fade-in">
                 <h2 id="yogaFaqTitle">Частые вопросы</h2>
-                <p>Бронирование, заезд и бытовые детали. Если не нашли ответ — напишите в заявке или мессенджер.</p>
             </div>
             <dl class="yoga-faq__list">
                 <div class="yoga-faq__row yoga-fade-in">
-                    <dt class="yoga-faq__question">Что входит в стоимость от 70&nbsp;$ в сутки?</dt>
-                    <dd class="yoga-faq__answer">Проживание, завтрак и обед, йога 2 раза в день, вечерние медитации. При бронировании от 7 дней — диагностика здоровья по пульсу и рекомендации специалиста по питанию и очищению, плюс инфраструктура курорта: сауны, зал, бассейны, каяки и падлборды. Дополнительно оплачиваются расширенные оздоровительные программы, экскурсии, перелёт и трансфер.</dd>
+                    <dt class="yoga-faq__term">
+                        <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA1" id="yogaFaqQ1">
+                            <span class="yoga-faq__question-label">Что входит в стоимость от 70&nbsp;$ в сутки?</span>
+                            <span class="yoga-faq__chevron" aria-hidden="true"></span>
+                        </button>
+                    </dt>
+                    <dd class="yoga-faq__answer" id="yogaFaqA1" role="region" aria-labelledby="yogaFaqQ1" hidden>Проживание, завтрак и обед, йога 2 раза в день, вечерние медитации. При бронировании от 7 дней — диагностика здоровья по пульсу и рекомендации специалиста по питанию и очищению, плюс инфраструктура курорта: сауны, зал, бассейны, каяки и падлборды. Дополнительно оплачиваются расширенные оздоровительные программы, экскурсии, перелёт и трансфер.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
-                    <dt class="yoga-faq__question">Какая минимальная длительность?</dt>
-                    <dd class="yoga-faq__answer">Рекомендуем от 10 дней. При бронировании от 7 дней в пакет уже входит диагностика по пульсу и индивидуальные рекомендации специалиста.</dd>
+                    <dt class="yoga-faq__term">
+                        <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA2" id="yogaFaqQ2">
+                            <span class="yoga-faq__question-label">Какая минимальная длительность?</span>
+                            <span class="yoga-faq__chevron" aria-hidden="true"></span>
+                        </button>
+                    </dt>
+                    <dd class="yoga-faq__answer" id="yogaFaqA2" role="region" aria-labelledby="yogaFaqQ2" hidden>Рекомендуем от 10 дней. При бронировании от 7 дней в пакет уже входит диагностика по пульсу и индивидуальные рекомендации специалиста.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
-                    <dt class="yoga-faq__question">Есть ли трансфер из аэропорта?</dt>
-                    <dd class="yoga-faq__answer">Да. Трансфер из аэропорта стоит 30&nbsp;$, встречаем вас в отеле после согласования рейса и времени.</dd>
+                    <dt class="yoga-faq__term">
+                        <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA3" id="yogaFaqQ3">
+                            <span class="yoga-faq__question-label">Есть ли трансфер из аэропорта?</span>
+                            <span class="yoga-faq__chevron" aria-hidden="true"></span>
+                        </button>
+                    </dt>
+                    <dd class="yoga-faq__answer" id="yogaFaqA3" role="region" aria-labelledby="yogaFaqQ3" hidden>Да. Трансфер из аэропорта стоит 30&nbsp;$, встречаем вас в отеле после согласования рейса и времени.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
-                    <dt class="yoga-faq__question">Условия бронирования?</dt>
-                    <dd class="yoga-faq__answer">Депозит 100&nbsp;$ за номер при бронировании; остаток оплачивается по приезде. Подробности отмены и переноса — в разделе «Условия отмены» и в переписке по вашим датам.</dd>
+                    <dt class="yoga-faq__term">
+                        <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA4" id="yogaFaqQ4">
+                            <span class="yoga-faq__question-label">Условия бронирования?</span>
+                            <span class="yoga-faq__chevron" aria-hidden="true"></span>
+                        </button>
+                    </dt>
+                    <dd class="yoga-faq__answer" id="yogaFaqA4" role="region" aria-labelledby="yogaFaqQ4" hidden>Депозит 100&nbsp;$ за номер при бронировании; остаток оплачивается по приезде. Подробности отмены и переноса — в разделе «Условия отмены» и в переписке по вашим датам.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
-                    <dt class="yoga-faq__question">Нужен ли опыт йоги?</dt>
-                    <dd class="yoga-faq__answer">Нет. Программа подходит для любого уровня: преподаватели дают мягкие варианты и простые объяснения. Опытным практикам тоже комфортно.</dd>
+                    <dt class="yoga-faq__term">
+                        <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA5" id="yogaFaqQ5">
+                            <span class="yoga-faq__question-label">Нужен ли опыт йоги?</span>
+                            <span class="yoga-faq__chevron" aria-hidden="true"></span>
+                        </button>
+                    </dt>
+                    <dd class="yoga-faq__answer" id="yogaFaqA5" role="region" aria-labelledby="yogaFaqQ5" hidden>Нет. Программа подходит для любого уровня: преподаватели дают мягкие варианты и простые объяснения. Опытным практикам тоже комфортно.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
-                    <dt class="yoga-faq__question">Сколько стоит перелёт?</dt>
-                    <dd class="yoga-faq__answer">Зависит от города вылета и сезона. Напишите нам — рассчитаем ориентиры и подскажем удобные варианты.</dd>
+                    <dt class="yoga-faq__term">
+                        <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA6" id="yogaFaqQ6">
+                            <span class="yoga-faq__question-label">Сколько стоит перелёт?</span>
+                            <span class="yoga-faq__chevron" aria-hidden="true"></span>
+                        </button>
+                    </dt>
+                    <dd class="yoga-faq__answer" id="yogaFaqA6" role="region" aria-labelledby="yogaFaqQ6" hidden>Зависит от города вылета и сезона. Напишите нам — рассчитаем ориентиры и подскажем удобные варианты.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
-                    <dt class="yoga-faq__question">Когда лучший сезон?</dt>
-                    <dd class="yoga-faq__answer">На Самуи комфортно круглый год: можно выбирать даты, ориентируясь на свой график, без жёсткой привязки к «сезону».</dd>
+                    <dt class="yoga-faq__term">
+                        <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA7" id="yogaFaqQ7">
+                            <span class="yoga-faq__question-label">Когда лучший сезон?</span>
+                            <span class="yoga-faq__chevron" aria-hidden="true"></span>
+                        </button>
+                    </dt>
+                    <dd class="yoga-faq__answer" id="yogaFaqA7" role="region" aria-labelledby="yogaFaqQ7" hidden>На Самуи комфортно круглый год: можно выбирать даты, ориентируясь на свой график, без жёсткой привязки к «сезону».</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
-                    <dt class="yoga-faq__question">Что взять с собой?</dt>
-                    <dd class="yoga-faq__answer">Удобная одежда для практик, плавательные принадлежности, солнцезащита, лёгкая обувь для прогулок. Коврики для йоги и пляжные полотенца есть в отеле.</dd>
+                    <dt class="yoga-faq__term">
+                        <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA8" id="yogaFaqQ8">
+                            <span class="yoga-faq__question-label">Что взять с собой?</span>
+                            <span class="yoga-faq__chevron" aria-hidden="true"></span>
+                        </button>
+                    </dt>
+                    <dd class="yoga-faq__answer" id="yogaFaqA8" role="region" aria-labelledby="yogaFaqQ8" hidden>Удобная одежда для практик, плавательные принадлежности, солнцезащита, лёгкая обувь для прогулок. Коврики для йоги и пляжные полотенца есть в отеле.</dd>
                 </div>
             </dl>
         </div>
@@ -916,7 +1035,7 @@
 
     <section class="yoga-lead-bridge" aria-label="Быстрая заявка">
         <div class="yoga-lead-bridge__inner">
-            <p class="yoga-lead-bridge__text">Если у вас есть вопросы, мы с радостью ответим на них. Оставьте имя и номер телефона — мы свяжемся с вами в рабочее время и подскажем по программе и датам.</p>
+            <p class="yoga-lead-bridge__text">Если у вас есть вопросы, мы с радостью ответим на них. Оставьте имя и номер телефона и мы свяжемся с вами в рабочее время и подскажем.</p>
             <button type="button" class="btn-yoga-secondary" data-open-modal="modal-lead">Оставить контакты</button>
         </div>
     </section>
@@ -929,7 +1048,7 @@
             <div class="yoga-form__panel yoga-fade-in">
                 <img class="yoga-form__logo" src="img/satva-logo.png" alt="" width="120" height="80" loading="lazy">
                 <h2 id="yogaFormTitle">Заявка на йога-тур</h2>
-                <p class="yoga-form__lead">Оставьте контакты — подберём даты и ответим на вопросы о программе.</p>
+                <p class="yoga-form__lead">Оставьте ваши контакты – мы свяжемся с вами, ответим на все вопросы, поможем с бронированием и перелетом.</p>
 
                 <div id="yogaFormSuccess" class="yoga-form__status yoga-form__status--success is-hidden" role="status">
                     Спасибо, заявка принята. Свяжемся с вами в ближайшее время.
@@ -949,16 +1068,134 @@
                         <label class="yoga-form__label" for="yogaPhoneNational">Телефон / WhatsApp / MAX / Telegram</label>
                         <div class="yoga-form__phone-row">
                             <label class="yoga-visually-hidden" for="yogaPhoneCode">Код страны</label>
-                            <select id="yogaPhoneCode" class="yoga-form__select" autocomplete="tel-country-code">
-                                <option value="+7">+7 (RU/KZ)</option>
-                                <option value="+380">+380 (UA)</option>
-                                <option value="+375">+375 (BY)</option>
-                                <option value="+66">+66 (TH)</option>
-                                <option value="+994">+994 (AZ)</option>
-                                <option value="+374">+374 (AM)</option>
-                                <option value="+49">+49 (DE)</option>
-                                <option value="+44">+44 (UK)</option>
-                                <option value="+1">+1 (US/CA)</option>
+                            <select id="yogaPhoneCode" class="yoga-form__select yoga-form__select--phone-code" autocomplete="tel-country-code">
+                                <optgroup label="Часто выбирают">
+                                    <option value="+7">+7 (RU/KZ)</option>
+                                    <option value="+380">+380 (UA)</option>
+                                    <option value="+375">+375 (BY)</option>
+                                    <option value="+66">+66 (TH)</option>
+                                    <option value="+1">+1 (US/CA/PR и др.)</option>
+                                    <option value="+44">+44 (UK)</option>
+                                    <option value="+49">+49 (DE)</option>
+                                    <option value="+971">+971 (AE)</option>
+                                    <option value="+972">+972 (IL)</option>
+                                </optgroup>
+                                <optgroup label="СНГ и соседи">
+                                    <option value="+373">+373 (MD)</option>
+                                    <option value="+374">+374 (AM)</option>
+                                    <option value="+994">+994 (AZ)</option>
+                                    <option value="+995">+995 (GE)</option>
+                                    <option value="+996">+996 (KG)</option>
+                                    <option value="+998">+998 (UZ)</option>
+                                    <option value="+992">+992 (TJ)</option>
+                                    <option value="+993">+993 (TM)</option>
+                                </optgroup>
+                                <optgroup label="Европа">
+                                    <option value="+355">+355 (AL)</option>
+                                    <option value="+43">+43 (AT)</option>
+                                    <option value="+32">+32 (BE)</option>
+                                    <option value="+387">+387 (BA)</option>
+                                    <option value="+359">+359 (BG)</option>
+                                    <option value="+385">+385 (HR)</option>
+                                    <option value="+420">+420 (CZ)</option>
+                                    <option value="+45">+45 (DK)</option>
+                                    <option value="+372">+372 (EE)</option>
+                                    <option value="+358">+358 (FI)</option>
+                                    <option value="+33">+33 (FR)</option>
+                                    <option value="+30">+30 (GR)</option>
+                                    <option value="+36">+36 (HU)</option>
+                                    <option value="+354">+354 (IS)</option>
+                                    <option value="+353">+353 (IE)</option>
+                                    <option value="+39">+39 (IT)</option>
+                                    <option value="+383">+383 (XK)</option>
+                                    <option value="+371">+371 (LV)</option>
+                                    <option value="+423">+423 (LI)</option>
+                                    <option value="+370">+370 (LT)</option>
+                                    <option value="+352">+352 (LU)</option>
+                                    <option value="+356">+356 (MT)</option>
+                                    <option value="+377">+377 (MC)</option>
+                                    <option value="+382">+382 (ME)</option>
+                                    <option value="+389">+389 (MK)</option>
+                                    <option value="+31">+31 (NL)</option>
+                                    <option value="+47">+47 (NO)</option>
+                                    <option value="+48">+48 (PL)</option>
+                                    <option value="+351">+351 (PT)</option>
+                                    <option value="+40">+40 (RO)</option>
+                                    <option value="+381">+381 (RS)</option>
+                                    <option value="+378">+378 (SM)</option>
+                                    <option value="+421">+421 (SK)</option>
+                                    <option value="+386">+386 (SI)</option>
+                                    <option value="+34">+34 (ES)</option>
+                                    <option value="+46">+46 (SE)</option>
+                                    <option value="+41">+41 (CH)</option>
+                                    <option value="+90">+90 (TR)</option>
+                                    <option value="+357">+357 (CY)</option>
+                                </optgroup>
+                                <optgroup label="Азия и Океания">
+                                    <option value="+61">+61 (AU)</option>
+                                    <option value="+880">+880 (BD)</option>
+                                    <option value="+975">+975 (BT)</option>
+                                    <option value="+855">+855 (KH)</option>
+                                    <option value="+86">+86 (CN)</option>
+                                    <option value="+852">+852 (HK)</option>
+                                    <option value="+91">+91 (IN)</option>
+                                    <option value="+62">+62 (ID)</option>
+                                    <option value="+81">+81 (JP)</option>
+                                    <option value="+82">+82 (KR)</option>
+                                    <option value="+856">+856 (LA)</option>
+                                    <option value="+853">+853 (MO)</option>
+                                    <option value="+60">+60 (MY)</option>
+                                    <option value="+976">+976 (MN)</option>
+                                    <option value="+95">+95 (MM)</option>
+                                    <option value="+64">+64 (NZ)</option>
+                                    <option value="+92">+92 (PK)</option>
+                                    <option value="+63">+63 (PH)</option>
+                                    <option value="+65">+65 (SG)</option>
+                                    <option value="+94">+94 (LK)</option>
+                                    <option value="+886">+886 (TW)</option>
+                                    <option value="+84">+84 (VN)</option>
+                                </optgroup>
+                                <optgroup label="Ближний Восток и Африка">
+                                    <option value="+213">+213 (DZ)</option>
+                                    <option value="+20">+20 (EG)</option>
+                                    <option value="+964">+964 (IQ)</option>
+                                    <option value="+98">+98 (IR)</option>
+                                    <option value="+962">+962 (JO)</option>
+                                    <option value="+965">+965 (KW)</option>
+                                    <option value="+961">+961 (LB)</option>
+                                    <option value="+218">+218 (LY)</option>
+                                    <option value="+212">+212 (MA)</option>
+                                    <option value="+234">+234 (NG)</option>
+                                    <option value="+968">+968 (OM)</option>
+                                    <option value="+970">+970 (PS)</option>
+                                    <option value="+974">+974 (QA)</option>
+                                    <option value="+966">+966 (SA)</option>
+                                    <option value="+27">+27 (ZA)</option>
+                                    <option value="+249">+249 (SD)</option>
+                                    <option value="+216">+216 (TN)</option>
+                                    <option value="+967">+967 (YE)</option>
+                                    <option value="+254">+254 (KE)</option>
+                                </optgroup>
+                                <optgroup label="Америка">
+                                    <option value="+54">+54 (AR)</option>
+                                    <option value="+591">+591 (BO)</option>
+                                    <option value="+55">+55 (BR)</option>
+                                    <option value="+56">+56 (CL)</option>
+                                    <option value="+57">+57 (CO)</option>
+                                    <option value="+506">+506 (CR)</option>
+                                    <option value="+53">+53 (CU)</option>
+                                    <option value="+593">+593 (EC)</option>
+                                    <option value="+502">+502 (GT)</option>
+                                    <option value="+504">+504 (HN)</option>
+                                    <option value="+52">+52 (MX)</option>
+                                    <option value="+505">+505 (NI)</option>
+                                    <option value="+507">+507 (PA)</option>
+                                    <option value="+595">+595 (PY)</option>
+                                    <option value="+51">+51 (PE)</option>
+                                    <option value="+597">+597 (SR)</option>
+                                    <option value="+598">+598 (UY)</option>
+                                    <option value="+58">+58 (VE)</option>
+                                </optgroup>
                             </select>
                             <input class="yoga-form__input yoga-form__input--phone-national" type="tel" id="yogaPhoneNational" autocomplete="tel-national" inputmode="tel" placeholder="999 000-00-00" aria-describedby="yogaPhoneErr">
                         </div>
@@ -1028,16 +1265,134 @@
                         <label class="yoga-form__label" for="yogaLeadModalPhoneNational">Телефон / WhatsApp / MAX / Telegram</label>
                         <div class="yoga-form__phone-row">
                             <label class="yoga-visually-hidden" for="yogaLeadModalPhoneCode">Код страны</label>
-                            <select id="yogaLeadModalPhoneCode" class="yoga-form__select" autocomplete="tel-country-code">
-                                <option value="+7">+7 (RU/KZ)</option>
-                                <option value="+380">+380 (UA)</option>
-                                <option value="+375">+375 (BY)</option>
-                                <option value="+66">+66 (TH)</option>
-                                <option value="+994">+994 (AZ)</option>
-                                <option value="+374">+374 (AM)</option>
-                                <option value="+49">+49 (DE)</option>
-                                <option value="+44">+44 (UK)</option>
-                                <option value="+1">+1 (US/CA)</option>
+                            <select id="yogaLeadModalPhoneCode" class="yoga-form__select yoga-form__select--phone-code" autocomplete="tel-country-code">
+                                <optgroup label="Часто выбирают">
+                                    <option value="+7">+7 (RU/KZ)</option>
+                                    <option value="+380">+380 (UA)</option>
+                                    <option value="+375">+375 (BY)</option>
+                                    <option value="+66">+66 (TH)</option>
+                                    <option value="+1">+1 (US/CA/PR и др.)</option>
+                                    <option value="+44">+44 (UK)</option>
+                                    <option value="+49">+49 (DE)</option>
+                                    <option value="+971">+971 (AE)</option>
+                                    <option value="+972">+972 (IL)</option>
+                                </optgroup>
+                                <optgroup label="СНГ и соседи">
+                                    <option value="+373">+373 (MD)</option>
+                                    <option value="+374">+374 (AM)</option>
+                                    <option value="+994">+994 (AZ)</option>
+                                    <option value="+995">+995 (GE)</option>
+                                    <option value="+996">+996 (KG)</option>
+                                    <option value="+998">+998 (UZ)</option>
+                                    <option value="+992">+992 (TJ)</option>
+                                    <option value="+993">+993 (TM)</option>
+                                </optgroup>
+                                <optgroup label="Европа">
+                                    <option value="+355">+355 (AL)</option>
+                                    <option value="+43">+43 (AT)</option>
+                                    <option value="+32">+32 (BE)</option>
+                                    <option value="+387">+387 (BA)</option>
+                                    <option value="+359">+359 (BG)</option>
+                                    <option value="+385">+385 (HR)</option>
+                                    <option value="+420">+420 (CZ)</option>
+                                    <option value="+45">+45 (DK)</option>
+                                    <option value="+372">+372 (EE)</option>
+                                    <option value="+358">+358 (FI)</option>
+                                    <option value="+33">+33 (FR)</option>
+                                    <option value="+30">+30 (GR)</option>
+                                    <option value="+36">+36 (HU)</option>
+                                    <option value="+354">+354 (IS)</option>
+                                    <option value="+353">+353 (IE)</option>
+                                    <option value="+39">+39 (IT)</option>
+                                    <option value="+383">+383 (XK)</option>
+                                    <option value="+371">+371 (LV)</option>
+                                    <option value="+423">+423 (LI)</option>
+                                    <option value="+370">+370 (LT)</option>
+                                    <option value="+352">+352 (LU)</option>
+                                    <option value="+356">+356 (MT)</option>
+                                    <option value="+377">+377 (MC)</option>
+                                    <option value="+382">+382 (ME)</option>
+                                    <option value="+389">+389 (MK)</option>
+                                    <option value="+31">+31 (NL)</option>
+                                    <option value="+47">+47 (NO)</option>
+                                    <option value="+48">+48 (PL)</option>
+                                    <option value="+351">+351 (PT)</option>
+                                    <option value="+40">+40 (RO)</option>
+                                    <option value="+381">+381 (RS)</option>
+                                    <option value="+378">+378 (SM)</option>
+                                    <option value="+421">+421 (SK)</option>
+                                    <option value="+386">+386 (SI)</option>
+                                    <option value="+34">+34 (ES)</option>
+                                    <option value="+46">+46 (SE)</option>
+                                    <option value="+41">+41 (CH)</option>
+                                    <option value="+90">+90 (TR)</option>
+                                    <option value="+357">+357 (CY)</option>
+                                </optgroup>
+                                <optgroup label="Азия и Океания">
+                                    <option value="+61">+61 (AU)</option>
+                                    <option value="+880">+880 (BD)</option>
+                                    <option value="+975">+975 (BT)</option>
+                                    <option value="+855">+855 (KH)</option>
+                                    <option value="+86">+86 (CN)</option>
+                                    <option value="+852">+852 (HK)</option>
+                                    <option value="+91">+91 (IN)</option>
+                                    <option value="+62">+62 (ID)</option>
+                                    <option value="+81">+81 (JP)</option>
+                                    <option value="+82">+82 (KR)</option>
+                                    <option value="+856">+856 (LA)</option>
+                                    <option value="+853">+853 (MO)</option>
+                                    <option value="+60">+60 (MY)</option>
+                                    <option value="+976">+976 (MN)</option>
+                                    <option value="+95">+95 (MM)</option>
+                                    <option value="+64">+64 (NZ)</option>
+                                    <option value="+92">+92 (PK)</option>
+                                    <option value="+63">+63 (PH)</option>
+                                    <option value="+65">+65 (SG)</option>
+                                    <option value="+94">+94 (LK)</option>
+                                    <option value="+886">+886 (TW)</option>
+                                    <option value="+84">+84 (VN)</option>
+                                </optgroup>
+                                <optgroup label="Ближний Восток и Африка">
+                                    <option value="+213">+213 (DZ)</option>
+                                    <option value="+20">+20 (EG)</option>
+                                    <option value="+964">+964 (IQ)</option>
+                                    <option value="+98">+98 (IR)</option>
+                                    <option value="+962">+962 (JO)</option>
+                                    <option value="+965">+965 (KW)</option>
+                                    <option value="+961">+961 (LB)</option>
+                                    <option value="+218">+218 (LY)</option>
+                                    <option value="+212">+212 (MA)</option>
+                                    <option value="+234">+234 (NG)</option>
+                                    <option value="+968">+968 (OM)</option>
+                                    <option value="+970">+970 (PS)</option>
+                                    <option value="+974">+974 (QA)</option>
+                                    <option value="+966">+966 (SA)</option>
+                                    <option value="+27">+27 (ZA)</option>
+                                    <option value="+249">+249 (SD)</option>
+                                    <option value="+216">+216 (TN)</option>
+                                    <option value="+967">+967 (YE)</option>
+                                    <option value="+254">+254 (KE)</option>
+                                </optgroup>
+                                <optgroup label="Америка">
+                                    <option value="+54">+54 (AR)</option>
+                                    <option value="+591">+591 (BO)</option>
+                                    <option value="+55">+55 (BR)</option>
+                                    <option value="+56">+56 (CL)</option>
+                                    <option value="+57">+57 (CO)</option>
+                                    <option value="+506">+506 (CR)</option>
+                                    <option value="+53">+53 (CU)</option>
+                                    <option value="+593">+593 (EC)</option>
+                                    <option value="+502">+502 (GT)</option>
+                                    <option value="+504">+504 (HN)</option>
+                                    <option value="+52">+52 (MX)</option>
+                                    <option value="+505">+505 (NI)</option>
+                                    <option value="+507">+507 (PA)</option>
+                                    <option value="+595">+595 (PY)</option>
+                                    <option value="+51">+51 (PE)</option>
+                                    <option value="+597">+597 (SR)</option>
+                                    <option value="+598">+598 (UY)</option>
+                                    <option value="+58">+58 (VE)</option>
+                                </optgroup>
                             </select>
                             <input class="yoga-form__input yoga-form__input--phone-national" type="tel" id="yogaLeadModalPhoneNational" autocomplete="tel-national" inputmode="tel" placeholder="999 000-00-00" aria-describedby="yogaLeadModalPhoneErr">
                         </div>
@@ -1066,9 +1421,9 @@
             <button type="button" class="yoga-modal__close" aria-label="Закрыть">&times;</button>
             <h2 class="yoga-modal__title" id="yogaModalHeroDetailsTitle">Условия и пакет</h2>
             <div class="yoga-modal__body">
-                <p>Одноместное размещение — доплата уточняется при бронировании.</p>
-                <p>В пакет входят проживание, питание по программе и йога; экскурсии и отдельные услуги — по желанию, оплачиваются дополнительно.</p>
-                <p>Минимальная длительность тура и условия отмены или возврата согласовываются при бронировании — напишите в заявке, и мы пришлём актуальные условия.</p>
+                <p>В пакет тура включено: проживание, питание, йога, медитация.</p>
+                <p>Дополнительно вы можете приобрести программу очищения и оздоровительные процедуры: детокс, панчакарма, массаж, а также экскурсии.</p>
+                <p>Минимальная длительность тура и условия бронирования и другие вопросы вы можете задать в заявке, и мы пришлём актуальные условия.</p>
             </div>
         </div>
     </div>

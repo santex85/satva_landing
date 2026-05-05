@@ -100,6 +100,27 @@
             color: $color-white;
             fill: currentColor;
         }
+
+        svg.yoga-includes__icon-pulse {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.85;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        svg.yoga-includes__icon-asana {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+
+            circle {
+                fill: currentColor;
+                stroke: none;
+            }
+        }
     }
 
     &__amenities {

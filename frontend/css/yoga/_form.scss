@@ -145,6 +145,7 @@
 
     &__phone-row {
         display: flex;
+        flex-wrap: wrap;
         gap: 10px;
         align-items: stretch;
     }
@@ -169,6 +170,12 @@
         option {
             color: $color-text;
             background: $color-white;
+        }
+
+        &--phone-code {
+            flex: 1 1 9rem;
+            min-width: 8.5rem;
+            max-width: 12rem;
         }
     }
 
