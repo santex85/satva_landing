@@ -914,20 +914,6 @@ a {
   border-radius: 999px;
   font-size: 0.85rem;
 }
-.yoga-includes__optional-banner {
-  margin-top: 24px;
-  padding: 18px 20px;
-  background: rgba(255, 142, 114, 0.14);
-  border-radius: 14px;
-  border: 1px solid rgba(255, 142, 114, 0.35);
-  font-size: 0.95rem;
-  color: #2D3436;
-  line-height: 1.6;
-  text-align: center;
-}
-.yoga-includes__optional-banner strong {
-  color: #0F4C5C;
-}
 
 .yoga-beach__banner {
   background: #0F4C5C;

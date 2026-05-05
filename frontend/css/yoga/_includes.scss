@@ -156,20 +156,4 @@
             font-size: 0.85rem;
         }
     }
-
-    &__optional-banner {
-        margin-top: 24px;
-        padding: 18px 20px;
-        background: rgba(255, 142, 114, 0.14);
-        border-radius: 14px;
-        border: 1px solid rgba(255, 142, 114, 0.35);
-        font-size: 0.95rem;
-        color: $color-text;
-        line-height: $line-height-body;
-        text-align: center;
-
-        strong {
-            color: $color-primary;
-        }
-    }
 }
