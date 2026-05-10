@@ -73,6 +73,11 @@
                 opacity: 1;
             }
         }
+
+        button.btn-yoga-primary {
+            opacity: 1;
+            font: inherit;
+        }
     }
 
     &__burger {
@@ -134,10 +139,12 @@
 
         &.is-open { right: 0; }
 
-        a {
+        a,
+        button.btn-yoga-primary {
             font-size: 1.2rem;
             padding: 12px 0;
             width: 100%;
+            text-align: left;
         }
 
         flex-wrap: nowrap;

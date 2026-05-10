@@ -158,6 +158,10 @@
                     close();
                     break;
                 }
+                if (target.tagName === 'BUTTON' && target.hasAttribute('data-open-modal')) {
+                    close();
+                    break;
+                }
                 target = target.parentNode;
             }
         });
@@ -193,18 +197,6 @@
         });
     }
 
-    // --- 01c2. «Панчакарма» — заглушка до попапа --------------------------------
-    function initPanchaInfoStub() {
-        var btns = document.querySelectorAll('.js-pancha-info-stub');
-        if (!btns.length) return;
-        btns.forEach(function (btn) {
-            btn.addEventListener('click', function (e) {
-                e.preventDefault();
-            });
-        });
-    }
-
-    // --- 01d. Fade-in по скроллу + hero zoom-out -----------------------------
     function initFadeIn() {
         var els = document.querySelectorAll('.yoga-fade-in');
         var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -421,89 +413,6 @@
         el.textContent = String(new Date().getFullYear());
     }
 
-    // --- 14a. Hero: условия и пакет (попап «Подробнее») ----------------------
-    function initHeroDetailsModal() {
-        var modal = document.getElementById('yogaModalHeroDetails');
-        if (!modal) return;
-        var overlay = modal.querySelector('.yoga-modal__overlay');
-        var closeBtn = modal.querySelector('.yoga-modal__close');
-        var panel = modal.querySelector('.yoga-modal__content');
-        var previousActive = null;
-        var trapHandler = null;
-
-        function getFocusable() {
-            if (!panel) return [];
-            return panel.querySelectorAll(
-                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-            );
-        }
-
-        function openModal() {
-            previousActive = document.activeElement;
-            modal.removeAttribute('hidden');
-            modal.classList.add('is-open');
-            modal.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
-            var list = getFocusable();
-            if (list.length) {
-                list[0].focus();
-            }
-            var first = list[0];
-            var last = list[list.length - 1];
-            trapHandler = function (e) {
-                if (e.key !== 'Tab' || !list.length) return;
-                if (e.shiftKey) {
-                    if (document.activeElement === first) {
-                        e.preventDefault();
-                        last.focus();
-                    }
-                } else {
-                    if (document.activeElement === last) {
-                        e.preventDefault();
-                        first.focus();
-                    }
-                }
-            };
-            modal.addEventListener('keydown', trapHandler);
-        }
-
-        function closeModal() {
-            if (trapHandler) {
-                modal.removeEventListener('keydown', trapHandler);
-                trapHandler = null;
-            }
-            modal.classList.remove('is-open');
-            modal.setAttribute('hidden', '');
-            modal.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
-            if (previousActive && previousActive.focus) {
-                previousActive.focus();
-            }
-        }
-
-        document.addEventListener('click', function (e) {
-            var opener = e.target.closest ? e.target.closest('.js-open-yoga-hero-details') : null;
-            if (!opener) return;
-            e.preventDefault();
-            e.stopPropagation();
-            openModal();
-        });
-
-        if (overlay) {
-            overlay.addEventListener('click', closeModal);
-        }
-        if (closeBtn) {
-            closeBtn.addEventListener('click', closeModal);
-        }
-
-        document.addEventListener('keydown', function (e) {
-            if (e.key !== 'Escape') return;
-            if (!modal.classList.contains('is-open')) return;
-            closeModal();
-        });
-    }
-
-    // --- 14b. Модалка политики конфиденциальности -----------------------------
     function initPrivacyModal() {
         var modal = document.getElementById('yogaModalPrivacy');
         if (!modal) return;
@@ -964,6 +873,9 @@
         var nameErr = document.getElementById('yogaLeadModalNameErr');
         var phoneErr = document.getElementById('yogaLeadModalPhoneErr');
         var emailErr = document.getElementById('yogaLeadModalEmailErr');
+        var arrivalDate = document.getElementById('yogaLeadModalArrivalDate');
+        var departureDate = document.getElementById('yogaLeadModalDepartureDate');
+        var comment = document.getElementById('yogaLeadModalComment');
 
         var lastSubmitTime = 0;
         var SUBMIT_COOLDOWN_MS = 5000;
@@ -977,7 +889,7 @@
         function setFormLoading(loading) {
             if (!submitBtn) return;
             submitBtn.disabled = loading;
-            submitBtn.textContent = loading ? 'Отправка…' : 'Отправить';
+            submitBtn.textContent = loading ? 'Отправка…' : 'Отправить заявку';
         }
 
         function showFormError(msg) {
@@ -1047,6 +959,21 @@
             return null;
         }
 
+        function validateStayDates() {
+            var a = (arrivalDate && arrivalDate.value) ? arrivalDate.value.trim() : '';
+            var d = (departureDate && departureDate.value) ? departureDate.value.trim() : '';
+            if (!a && !d) return true;
+            if ((a && !d) || (!a && d)) {
+                showFormError('Укажите обе даты заезда и выезда или оставьте поля пустыми.');
+                return false;
+            }
+            if (d < a) {
+                showFormError('Дата выезда не может быть раньше даты заезда.');
+                return false;
+            }
+            return true;
+        }
+
         function bindLeadPhoneSync() {
             function onPhonePartChange() {
                 yogaSyncPhoneHidden(phoneCode, phoneNat, phoneIn);
@@ -1090,13 +1017,17 @@
             yogaSyncPhoneHidden(phoneCode, phoneNat, phoneIn);
             var okN = validateName();
             var okP = validatePhone();
+            var okD = validateStayDates();
             var rawEmailLead = emailIn ? emailIn.value : '';
             var okE = validateOptionalEmailRow(rawEmailLead, emailErr, emailIn);
-            if (!okN || !okP || !okE) {
-                showFormError('Проверьте поля выше.');
+            if (!okN || !okP || !okE || !okD) {
+                if (okD) {
+                    showFormError('Проверьте поля выше.');
+                }
                 if (!okN && nameIn) nameIn.focus();
                 else if (!okP && phoneNat) phoneNat.focus();
-                else if (emailIn) emailIn.focus();
+                else if (!okE && emailIn) emailIn.focus();
+                else if (!okD && arrivalDate) arrivalDate.focus();
                 return;
             }
 
@@ -1108,8 +1039,11 @@
             lastSubmitTime = now;
             setFormLoading(true);
 
+            var pDate = (arrivalDate && arrivalDate.value) ? arrivalDate.value.trim() : '';
+            var depDate = (departureDate && departureDate.value) ? departureDate.value.trim() : '';
+            var cmt = (comment && comment.value) ? comment.value.trim() : '';
             var procEl = form.querySelector('input[name="procedure"]');
-            var procedure = (procEl && procEl.value) ? procEl.value.trim() : 'Быстрая заявка с йога-лендинга';
+            var procedure = (procEl && procEl.value) ? procEl.value.trim() : 'Йога-тур в Таиланд';
 
             var payload = {
                 name: (nameIn && nameIn.value) ? nameIn.value.trim() : '',
@@ -1118,8 +1052,9 @@
                 website: (websiteHp && websiteHp.value) ? websiteHp.value : '',
                 captcha_token: getCaptchaToken() || null,
                 procedure: procedure,
-                preferred_date: null,
-                comment: null,
+                preferred_date: pDate || null,
+                departure_date: depDate || null,
+                comment: cmt || null,
             };
             var emLeadTrim = (emailIn && emailIn.value) ? emailIn.value.trim() : '';
             if (emLeadTrim) payload.email = emLeadTrim;
@@ -1450,7 +1385,6 @@
         initHeader();
         initBurgerMenu();
         initSmoothScroll();
-        initPanchaInfoStub();
         initFadeIn();
         initParallax();
         initVideoThumbnails();
@@ -1460,7 +1394,6 @@
         initRoomsCarousel();
         initRoomsInnerGalleries();
         initCopyrightYear();
-        initHeroDetailsModal();
         initPrivacyModal();
         initYogaOfferCancellationModals();
         initYogaLeadModal();

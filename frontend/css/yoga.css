@@ -368,6 +368,10 @@ a {
 .yoga-header__nav a.btn-yoga-primary {
   opacity: 1;
 }
+.yoga-header__nav button.btn-yoga-primary {
+  opacity: 1;
+  font: inherit;
+}
 .yoga-header__burger {
   display: none;
   flex-direction: column;
@@ -426,10 +430,12 @@ a {
   .yoga-header__nav.is-open {
     right: 0;
   }
-  .yoga-header__nav a {
+  .yoga-header__nav a,
+  .yoga-header__nav button.btn-yoga-primary {
     font-size: 1.2rem;
     padding: 12px 0;
     width: 100%;
+    text-align: left;
   }
   .yoga-header__nav {
     flex-wrap: nowrap;
@@ -589,40 +595,10 @@ a {
   font-size: 0.85rem;
   opacity: 0.7;
   margin-top: 4px;
-}
-.yoga-hero__details-trigger {
-  margin: 12px 0 24px;
-  padding: 0;
+  max-width: 36rem;
   text-align: center;
-}
-@media (max-width: 768px) {
-  .yoga-hero__details-trigger {
-    margin: 0;
-  }
-}
-.yoga-hero__details-link {
-  display: inline;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: none;
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 0.85rem;
-  line-height: 1.4;
-  text-decoration: underline;
-  text-decoration-color: rgba(255, 255, 255, 0.45);
-  text-underline-offset: 3px;
-  cursor: pointer;
-  transition: opacity 0.2s ease, color 0.2s ease;
-}
-.yoga-hero__details-link:hover {
-  color: #fff;
-  text-decoration-color: rgba(255, 255, 255, 0.75);
-}
-.yoga-hero__details-link:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.65);
-  outline-offset: 2px;
-  border-radius: 2px;
+  padding: 0 12px;
+  line-height: 1.45;
 }
 .yoga-hero__buttons {
   display: flex;
@@ -845,6 +821,16 @@ a {
   color: #666666;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+.yoga-includes__legend {
+  font-size: 0.8rem;
+  color: #666666;
+  line-height: 1.45;
+  margin: 12px 0 20px;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 .yoga-includes__icon {
   width: 56px;
@@ -1848,13 +1834,14 @@ a {
 .yoga-team__name {
   margin: 0 0 4px;
   font-size: 1.15rem;
+  font-weight: 700;
   color: #0F4C5C;
 }
 .yoga-team__role {
   display: block;
   margin: 0 0 10px;
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 400;
   color: #FF8E72;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -2082,6 +2069,14 @@ a {
   margin: 12px 0 0;
   font-size: 0.85rem;
   color: #666666;
+}
+.yoga-team-group__quote {
+  margin: 18px auto 0;
+  max-width: 36rem;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #0F4C5C;
 }
 
 .yoga-activities {

@@ -105,7 +105,7 @@
                 <a href="#yogaTeam">Специалисты</a>
                 <a href="#yogaReviews">Отзывы</a>
                 <a href="#yogaFaq">Вопросы</a>
-                <a href="#yogaForm" class="btn-yoga-primary btn--small">Забронировать</a>
+                <button type="button" class="btn-yoga-primary btn--small" data-open-modal="modal-lead">Забронировать</button>
             </nav>
         </div>
     </header>
@@ -134,14 +134,10 @@
             <div class="yoga-hero__price yoga-fade-in">
                 <span class="yoga-hero__price-value">70&nbsp;$</span>
                 <span class="yoga-hero__price-label">в сутки · всё включено</span>
-                <span class="yoga-hero__price-note">при двухместном размещении</span>
+                <span class="yoga-hero__price-note">при 2-местном размещении в номере «Стандарт». Стоимость при одноместном размещении — уточняйте.</span>
             </div>
-            <p class="yoga-hero__details-trigger yoga-fade-in">
-                <button type="button" class="yoga-hero__details-link js-open-yoga-hero-details" aria-haspopup="dialog" aria-controls="yogaModalHeroDetails">Подробнее</button>
-            </p>
             <div class="yoga-hero__buttons yoga-fade-in">
-                <a href="#yogaForm" class="btn-yoga-primary">Оставить заявку на даты</a>
-                <a href="#yogaIncludes" class="btn-yoga-secondary">Что входит в тур</a>
+                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Оставить заявку на даты</button>
             </div>
             <div class="yoga-hero__scroll-hint" aria-hidden="true">
                 <span>листать</span>
@@ -207,7 +203,7 @@
                     <div class="yoga-includes__icon">
                         <img src="img/yoga_tour/icon_health.webp" alt="" loading="lazy" width="150" height="150" decoding="async">
                     </div>
-                    <h3>Оздоровительные программы <span class="yoga-includes__optional">дополнительно</span></h3>
+                    <h3>Оздоровительные программы <span class="yoga-includes__optional">*</span></h3>
                     <p>Панчакарма — очищение на клеточном уровне, травяной аюрведический детокс, массажи, акупунктура, рейки. Проведите отдых с пользой для души и тела.</p>
                 </div>
 
@@ -217,15 +213,26 @@
                             <path d="M12 2 14.39 8.26 21 9.27l-4.5 4.39 1.06 6.18L12 16.9l-5.56 2.94L7.5 13.66 3 9.27l6.61-1.01L12 2z"/>
                         </svg>
                     </div>
-                    <h3>Экскурсии <span class="yoga-includes__optional">дополнительно</span></h3>
+                    <h3>Экскурсии <span class="yoga-includes__optional">*</span></h3>
                     <p>Самые красивые места острова, морские прогулки, водопады.</p>
                 </div>
+
+                <div class="yoga-includes__card yoga-fade-in">
+                    <div class="yoga-includes__icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path fill="currentColor" d="M9 2 7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg>
+                    </div>
+                    <h3>Русскоговорящий гид-фотограф</h3>
+                    <p>На экскурсиях вас сопровождает русскоговорящий гид-фотограф — поможет с маршрутом и сделает яркие фотографии на память.</p>
+                </div>
             </div>
+            <p class="yoga-includes__legend yoga-fade-in"><span class="yoga-includes__optional">*</span>&nbsp;— оплачивается отдельно, не входит в базовый пакет тура.</p>
             <div class="yoga-includes__amenities yoga-fade-in" aria-label="Инфраструктура, включённая в пакет">
-                <p class="yoga-includes__amenities-title">На территории курорта для гостей тура</p>
+                <p class="yoga-includes__amenities-title">На территории отеля для гостей тура</p>
                 <ul class="yoga-includes__amenities-list">
                     <li>2 сауны</li>
-                    <li>Тренажёрный зал</li>
+                    <li>Тренажерный зал</li>
                     <li>3 бассейна</li>
                     <li>Каяки</li>
                     <li>Падлборды</li>
@@ -339,25 +346,25 @@
                                         </div>
                                     </div>
                                     <div class="yoga-rooms-gallery__nav" aria-label="Листание фото в текущем типе номера">
-                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--prev" data-gallery-prev aria-label="Предыдущее фото: номер стандарт"></button>
-                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--next" data-gallery-next aria-label="Следующее фото: номер стандарт"></button>
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--prev" data-gallery-prev aria-label="Предыдущее фото: Стандарт"></button>
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--next" data-gallery-next aria-label="Следующее фото: Стандарт"></button>
                                     </div>
                                 </div>
-                                <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Фотографии: номер стандарт">
-                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Номер стандарт, фото 1 из 3"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Номер стандарт, фото 2 из 3"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Номер стандарт, фото 3 из 3"></button>
+                                <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Фотографии: Стандарт">
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Стандарт, фото 1 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Стандарт, фото 2 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Стандарт, фото 3 из 3"></button>
                                 </div>
                             </div>
                             <div class="yoga-rooms-carousel__body">
-                                <h3 id="yogaRoomsSlide0Title">Номер стандарт</h3>
+                                <h3 id="yogaRoomsSlide0Title">Стандарт</h3>
                                 <p>Одна большая кровать или раздельные, веранда, 5–20&nbsp;м от моря.</p>
                                 <ul>
                                     <li>Веранда</li>
                                     <li>Выбор конфигурации кровати</li>
                                     <li>В шаге от пляжа</li>
                                 </ul>
-                                <a href="#yogaForm" class="btn-yoga-primary">Узнать стоимость</a>
+                                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Узнать стоимость</button>
                             </div>
                         </article>
                         <article class="yoga-rooms-carousel__slide" role="group" aria-roledescription="слайд" aria-label="2 из 6" data-slide="1" hidden>
@@ -371,25 +378,25 @@
                                         </div>
                                     </div>
                                     <div class="yoga-rooms-gallery__nav" aria-label="Листание фото в текущем типе номера">
-                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--prev" data-gallery-prev aria-label="Предыдущее фото: номер стандарт с видом на море"></button>
-                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--next" data-gallery-next aria-label="Следующее фото: номер стандарт с видом на море"></button>
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--prev" data-gallery-prev aria-label="Предыдущее фото: Стандарт с видом на море"></button>
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--next" data-gallery-next aria-label="Следующее фото: Стандарт с видом на море"></button>
                                     </div>
                                 </div>
-                                <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Фотографии: номер стандарт с видом на море">
-                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Номер стандарт с видом на море, фото 1 из 3"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Номер стандарт с видом на море, фото 2 из 3"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Номер стандарт с видом на море, фото 3 из 3"></button>
+                                <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Фотографии: Стандарт с видом на море">
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Стандарт с видом на море, фото 1 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Стандарт с видом на море, фото 2 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Стандарт с видом на море, фото 3 из 3"></button>
                                 </div>
                             </div>
                             <div class="yoga-rooms-carousel__body">
-                                <h3 id="yogaRoomsSlide1Title">Номер стандарт с видом на море</h3>
+                                <h3 id="yogaRoomsSlide1Title">Стандарт с видом на море</h3>
                                 <p>Одна кровать, веранда с видом на море и закаты, пляж в 3&nbsp;м.</p>
                                 <ul>
                                     <li>Панорама моря с веранды</li>
                                     <li>Закаты с номера</li>
                                     <li>Прямой выход к пляжу</li>
                                 </ul>
-                                <a href="#yogaForm" class="btn-yoga-primary">Узнать стоимость</a>
+                                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Узнать стоимость</button>
                             </div>
                         </article>
                         <article class="yoga-rooms-carousel__slide" role="group" aria-roledescription="слайд" aria-label="3 из 6" data-slide="2" hidden>
@@ -403,25 +410,25 @@
                                         </div>
                                     </div>
                                     <div class="yoga-rooms-gallery__nav" aria-label="Листание фото в текущем типе номера">
-                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--prev" data-gallery-prev aria-label="Предыдущее фото: домик стандарт"></button>
-                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--next" data-gallery-next aria-label="Следующее фото: домик стандарт"></button>
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--prev" data-gallery-prev aria-label="Предыдущее фото: Домик Стандарт"></button>
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--next" data-gallery-next aria-label="Следующее фото: Домик Стандарт"></button>
                                     </div>
                                 </div>
-                                <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Фотографии: домик стандарт">
-                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Домик стандарт, фото 1 из 3"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Домик стандарт, фото 2 из 3"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Домик стандарт, фото 3 из 3"></button>
+                                <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Фотографии: Домик Стандарт">
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Домик Стандарт, фото 1 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Домик Стандарт, фото 2 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Домик Стандарт, фото 3 из 3"></button>
                                 </div>
                             </div>
                             <div class="yoga-rooms-carousel__body">
-                                <h3 id="yogaRoomsSlide2Title">Домик стандарт</h3>
+                                <h3 id="yogaRoomsSlide2Title">Домик Стандарт</h3>
                                 <p>Одна большая кровать, уютный домик с верандой и шезлонгом.</p>
                                 <ul>
                                     <li>Отдельный домик</li>
                                     <li>Веранда и шезлонги</li>
                                     <li>Уют для двоих</li>
                                 </ul>
-                                <a href="#yogaForm" class="btn-yoga-primary">Узнать стоимость</a>
+                                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Узнать стоимость</button>
                             </div>
                         </article>
                         <article class="yoga-rooms-carousel__slide" role="group" aria-roledescription="слайд" aria-label="4 из 6" data-slide="3" hidden>
@@ -435,25 +442,25 @@
                                         </div>
                                     </div>
                                     <div class="yoga-rooms-gallery__nav" aria-label="Листание фото в текущем типе номера">
-                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--prev" data-gallery-prev aria-label="Предыдущее фото: вилла 2-комнатная"></button>
-                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--next" data-gallery-next aria-label="Следующее фото: вилла 2-комнатная"></button>
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--prev" data-gallery-prev aria-label="Предыдущее фото: Семейная вилла"></button>
+                                        <button type="button" class="yoga-rooms-gallery__nav-btn yoga-rooms-gallery__nav-btn--next" data-gallery-next aria-label="Следующее фото: Семейная вилла"></button>
                                     </div>
                                 </div>
-                                <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Фотографии: вилла 2-комнатная">
-                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Вилла 2-комнатная, фото 1 из 3"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Вилла 2-комнатная, фото 2 из 3"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Вилла 2-комнатная, фото 3 из 3"></button>
+                                <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Фотографии: Семейная вилла">
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Семейная вилла, фото 1 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Семейная вилла, фото 2 из 3"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Семейная вилла, фото 3 из 3"></button>
                                 </div>
                             </div>
                             <div class="yoga-rooms-carousel__body">
-                                <h3 id="yogaRoomsSlide3Title">Вилла 2-комнатная</h3>
+                                <h3 id="yogaRoomsSlide3Title">Семейная вилла</h3>
                                 <p>Для семьи или друзей: 2 комнаты с отдельными санузлами, общая гостиная и веранда, рядом бассейн, ~30&nbsp;м до моря.</p>
                                 <ul>
                                     <li>Две спальни и две ванные</li>
                                     <li>Общая гостиная</li>
                                     <li>Бассейн рядом</li>
                                 </ul>
-                                <a href="#yogaForm" class="btn-yoga-primary">Узнать стоимость</a>
+                                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Узнать стоимость</button>
                             </div>
                         </article>
                         <article class="yoga-rooms-carousel__slide" role="group" aria-roledescription="слайд" aria-label="5 из 6" data-slide="4" hidden>
@@ -485,7 +492,7 @@
                                     <li>Бассейн на территории</li>
                                     <li>Подходит для отдыха с детьми</li>
                                 </ul>
-                                <a href="#yogaForm" class="btn-yoga-primary">Узнать стоимость</a>
+                                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Узнать стоимость</button>
                             </div>
                         </article>
                         <article class="yoga-rooms-carousel__slide" role="group" aria-roledescription="слайд" aria-label="6 из 6" data-slide="5" hidden>
@@ -517,7 +524,7 @@
                                     <li>Два шезлонга на веранде</li>
                                     <li>Гибкая конфигурация спален</li>
                                 </ul>
-                                <a href="#yogaForm" class="btn-yoga-primary">Узнать стоимость</a>
+                                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Узнать стоимость</button>
                             </div>
                         </article>
                     </div>
@@ -536,6 +543,7 @@
                     <li>Душ с горячей водой</li>
                     <li>Стабильный Wi-Fi</li>
                     <li>Кондиционер</li>
+                    <li>Розетки стандартные</li>
                     <li>Чайник</li>
                     <li>Сейф</li>
                     <li>Полотенца (пляжные и для номера)</li>
@@ -557,9 +565,9 @@
     <section id="yogaTeam" class="yoga-team" aria-labelledby="yogaTeamTitle">
         <div class="yoga-team__container">
             <div class="yoga-team__header yoga-fade-in">
-                <p class="yoga-chip-title">Практика и забота</p>
+                <p class="yoga-chip-title">Специалисты Satva</p>
                 <h2 id="yogaTeamTitle">Специалисты</h2>
-                <p>Те, кто ведёт для вас практику, питание и сопровождение по программе — каждый день на берегу.</p>
+                <p>Наши мастера и специалисты позаботятся, чтоб ваш отдых прошёл с максимальной пользой для здоровья.</p>
             </div>
             <div class="yoga-team__grid">
                 <article class="yoga-team__card yoga-fade-in">
@@ -618,6 +626,23 @@
         </div>
     </section>
 
+    <section id="yogaPancha" class="yoga-pancha" aria-labelledby="yogaPanchaTitle">
+        <div class="yoga-pancha__inner yoga-fade-in">
+            <div class="yoga-pancha__content">
+                <p class="yoga-chip-title yoga-pancha__chip">Аюрведа</p>
+                <h2 id="yogaPanchaTitle">Панчакарма в Satva Samui</h2>
+                <p class="yoga-pancha__lead">Полная программа очищения и восстановления: диагностика, индивидуальный план и сопровождение. Здесь будет развёрнутый текст от заказчика о методике, длительности этапов и том, чем тур отличается от йога-отдыха.</p>
+                <ul class="yoga-pancha__list">
+                    <li>Подготовительный этап и согласование с врачом</li>
+                    <li>Процедуры в комфортном ритме курорта</li>
+                    <li>Рекомендации после программы</li>
+                </ul>
+                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Запросить консультацию по Панчакарме</button>
+            </div>
+            <div class="yoga-pancha__visual yoga-pancha__visual--placeholder" role="img" aria-label="Место под фото Панчакармы"></div>
+        </div>
+    </section>
+
     <!-- Оздоровительные процедуры -->
     <section id="yogaWellness" class="yoga-wellness" aria-labelledby="yogaWellnessTitle">
         <div class="yoga-wellness__container">
@@ -630,16 +655,10 @@
                 <article class="yoga-wellness__card yoga-wellness__card--featured yoga-fade-in">
                     <div class="yoga-wellness__visual yoga-wellness__visual--placeholder" aria-hidden="true"></div>
                     <div class="yoga-wellness__text">
-                        <h3>Панчакарма</h3>
+                        <h3>Травяной аюрведический детокс</h3>
                         <p class="yoga-wellness__badge">ключевая программа</p>
-                        <p>Классическое аюрведическое очищение на клеточном уровне под наблюдением врачей. Текстовые детали методик заказчик добавит после сдачи вёрстки.</p>
-                        <a href="#yogaPancha" class="yoga-wellness__link">Подробнее о формате</a>
+                        <p>Мягкое поддержание очищения организма с травяными сборами и режимом, согласованным со специалистом.</p>
                     </div>
-                </article>
-                <article class="yoga-wellness__card yoga-fade-in">
-                    <div class="yoga-wellness__visual yoga-wellness__visual--placeholder" aria-hidden="true"></div>
-                    <h3>Травяной аюрведический детокс</h3>
-                    <p>Мягкое поддержание очищения организма с травяными сборами и режимом, согласованным со специалистом.</p>
                 </article>
                 <article class="yoga-wellness__card yoga-fade-in">
                     <div class="yoga-wellness__visual yoga-wellness__visual--placeholder" aria-hidden="true"></div>
@@ -649,7 +668,7 @@
                 <article class="yoga-wellness__card yoga-fade-in">
                     <div class="yoga-wellness__visual yoga-wellness__visual--placeholder" aria-hidden="true"></div>
                     <h3>Массажи</h3>
-                    <p>Разные техники — от расслабляющих до терапевтических, по показаниям и договорённости.</p>
+                    <p>С вами работают опытные массажистки — Таня, Нина и Алёна. Подбираем технику под ваши задачи и самочувствие.</p>
                 </article>
                 <article class="yoga-wellness__card yoga-fade-in">
                     <div class="yoga-wellness__visual yoga-wellness__visual--placeholder" aria-hidden="true"></div>
@@ -665,29 +684,13 @@
         </div>
     </section>
 
-    <section id="yogaPancha" class="yoga-pancha" aria-labelledby="yogaPanchaTitle">
-        <div class="yoga-pancha__inner yoga-fade-in">
-            <div class="yoga-pancha__content">
-                <p class="yoga-chip-title yoga-pancha__chip">Аюрведа</p>
-                <h2 id="yogaPanchaTitle">Панчакарма в Satva Samui</h2>
-                <p class="yoga-pancha__lead">Полная программа очищения и восстановления: диагностика, индивидуальный план и сопровождение. Здесь будет развёрнутый текст от заказчика о методике, длительности этапов и том, чем тур отличается от йога-отдыха.</p>
-                <ul class="yoga-pancha__list">
-                    <li>Подготовительный этап и согласование с врачом</li>
-                    <li>Процедуры в комфортном ритме курорта</li>
-                    <li>Рекомендации после программы</li>
-                </ul>
-                <button type="button" class="btn-yoga-primary js-pancha-info-stub">Запросить консультацию по Панчакарме</button>
-            </div>
-            <div class="yoga-pancha__visual yoga-pancha__visual--placeholder" role="img" aria-label="Место под фото Панчакармы"></div>
-        </div>
-    </section>
-
     <section id="yogaTeamGroup" class="yoga-team-group" aria-labelledby="yogaTeamGroupTitle">
         <div class="yoga-team-group__container">
             <div class="yoga-team-group__header yoga-fade-in">
                 <p class="yoga-chip-title">Satva Samui</p>
                 <h2 id="yogaTeamGroupTitle">Наша команда</h2>
-                <p>Команда курорта — это не только специалисты по йоге и процедурам, но и вся «большая семья», которая делает ваш отдых тёплым и безупречным в деталях.</p>
+                <p>Команда отеля — это не только специалисты по йоге и процедурам, но и вся «большая семья», которая делает ваш отдых тёплым и безупречным в деталях.</p>
+                <p class="yoga-team-group__quote">«Мы позаботимся о том, чтоб ваш отдых был по-настоящему комфортным, насыщенным, незабываемым»</p>
             </div>
             <div class="yoga-team-group__photo yoga-fade-in">
                 <div class="yoga-team-group__photo-placeholder" role="img" aria-label="Групповое фото команды — изображение будет добавлено"></div>
@@ -713,9 +716,9 @@
                         Приезжайте — будем рады!<br><br>
                         Мы организуем для вас незабываемые экскурсии, покажем вам самые красивые и необычные места острова, о которых знают не все турагентства.
                         Смотровые площадки в горах, бурлящие водопады, морские путешествия на соседние острова, древние храмы.
-                        С вами будет русскоговорящий переводчик, который сделает яркие фотографии на память.
+                        С вами будет русскоговорящий гид-фотограф, который сделает яркие фотографии на память.
                     </p>
-                    <p class="yoga-activities__optional-note"><span class="yoga-includes__optional">дополнительно</span> Экскурсии оплачиваются отдельно и не входят в базовый пакет йога-тура.</p>
+                    <p class="yoga-activities__optional-note"><span class="yoga-includes__optional">*</span> Экскурсии оплачиваются отдельно и не входят в базовый пакет йога-тура.</p>
                 </div>
             </div>
             <div class="yoga-activities__block yoga-activities__block--mint yoga-activities__block--reverse">
@@ -726,7 +729,7 @@
                     </picture>
                 </div>
                 <div class="yoga-activities__text">
-                    <h2>Каждый вечер — живая атмосфера</h2>
+                    <h2>Каждый вечер — медитация и живая музыка</h2>
                     <p>Каждый вечер для вас живая музыка и мантра-медитация, которая успокаивает ум и благоприятно влияет на физическое, ментальное и душевное здоровье.</p>
                 </div>
             </div>
@@ -962,7 +965,7 @@
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA1" role="region" aria-labelledby="yogaFaqQ1" hidden>Проживание, завтрак и обед, йога 2 раза в день, вечерние медитации. При бронировании от 7 дней — диагностика здоровья по пульсу и рекомендации специалиста по питанию и очищению, плюс инфраструктура курорта: сауны, зал, бассейны, каяки и падлборды. Дополнительно оплачиваются расширенные оздоровительные программы, экскурсии, перелёт и трансфер.</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA1" role="region" aria-labelledby="yogaFaqQ1" hidden>Проживание, завтрак и обед, йога 2 раза в день, вечерние медитации. При бронировании от 7 дней — диагностика здоровья по пульсу и рекомендации специалиста по питанию и очищению, плюс инфраструктура отеля: сауны, зал, бассейны, каяки и падлборды. Отдельно оплачиваются оздоровительные программы, экскурсии, перелёт и трансфер. 70&nbsp;$ в сутки — при 2-местном размещении в номере «Стандарт»; стоимость при одноместном размещении уточняйте при бронировании.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__term">
@@ -971,7 +974,7 @@
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA2" role="region" aria-labelledby="yogaFaqQ2" hidden>Рекомендуем от 10 дней. При бронировании от 7 дней в пакет уже входит диагностика по пульсу и индивидуальные рекомендации специалиста.</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA2" role="region" aria-labelledby="yogaFaqQ2" hidden>Мы рекомендуем от 10 дней и больше. При бронировании от 7 дней для вас также включена диагностика здоровья по пульсу и консультация специалиста аюрведы. Но вы можете приехать на любое количество дней.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__term">
@@ -980,7 +983,7 @@
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA3" role="region" aria-labelledby="yogaFaqQ3" hidden>Да. Трансфер из аэропорта стоит 30&nbsp;$, встречаем вас в отеле после согласования рейса и времени.</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA3" role="region" aria-labelledby="yogaFaqQ3" hidden>Мы организуем для вас трансфер и встретим вас в отеле (стоимость трансфера 30$).</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__term">
@@ -989,7 +992,7 @@
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA4" role="region" aria-labelledby="yogaFaqQ4" hidden>Депозит 100&nbsp;$ за номер при бронировании; остаток оплачивается по приезде. Подробности отмены и переноса — в разделе «Условия отмены» и в переписке по вашим датам.</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA4" role="region" aria-labelledby="yogaFaqQ4" hidden>Для бронирования нужно оплатить депозит в размере, эквивалентном 100$ за номер (есть разные способы оплаты). Остальное оплачивается в отеле в день заезда удобным для вас способом.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__term">
@@ -998,7 +1001,7 @@
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA5" role="region" aria-labelledby="yogaFaqQ5" hidden>Нет. Программа подходит для любого уровня: преподаватели дают мягкие варианты и простые объяснения. Опытным практикам тоже комфортно.</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA5" role="region" aria-labelledby="yogaFaqQ5" hidden>Многие наши гости — новички в йоге. Программа рассчитана на разный уровень: от начинающего до продвинутого. Преподаватели позаботятся, чтоб вам было комфортно на занятиях, и вы получили нужный результат.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__term">
@@ -1007,7 +1010,7 @@
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA6" role="region" aria-labelledby="yogaFaqQ6" hidden>Зависит от города вылета и сезона. Напишите нам — рассчитаем ориентиры и подскажем удобные варианты.</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA6" role="region" aria-labelledby="yogaFaqQ6" hidden>Зависит от города вылета и сезона. Напишите, когда вы хотели бы приехать и откуда летите. Мы рассчитаем примерную стоимость перелёта и поможем с билетами.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__term">
@@ -1016,7 +1019,7 @@
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA7" role="region" aria-labelledby="yogaFaqQ7" hidden>На Самуи комфортно круглый год: можно выбирать даты, ориентируясь на свой график, без жёсткой привязки к «сезону».</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA7" role="region" aria-labelledby="yogaFaqQ7" hidden>На Самуи комфортная и приятная погода круглый год. Море около нашего отеля всегда без отливов и сильных волн. Выбирайте удобные для вас даты без привязки к сезону.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__term">
@@ -1025,7 +1028,7 @@
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA8" role="region" aria-labelledby="yogaFaqQ8" hidden>Удобная одежда для практик, плавательные принадлежности, солнцезащита, лёгкая обувь для прогулок. Коврики для йоги и пляжные полотенца есть в отеле.</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA8" role="region" aria-labelledby="yogaFaqQ8" hidden>Одежда для занятий, купальник, удобная обувь для экскурсий. Дополнительные вещи сможете купить в магазинчике рядом с отелем. Коврики для йоги, пляжные полотенца есть в отеле.</dd>
                 </div>
             </dl>
         </div>
@@ -1059,7 +1062,7 @@
 
                     <div class="yoga-form__row">
                         <label class="yoga-form__label" for="yogaName">Имя</label>
-                        <input class="yoga-form__input" type="text" id="yogaName" name="name" required autocomplete="name" maxlength="200" placeholder="Как к вам обращаться">
+                        <input class="yoga-form__input" type="text" id="yogaName" name="name" required autocomplete="name" maxlength="200">
                         <span id="yogaNameErr" class="yoga-form__error-text" role="alert"></span>
                     </div>
                     <div class="yoga-form__row">
@@ -1195,14 +1198,14 @@
                                     <option value="+58">+58 (VE)</option>
                                 </optgroup>
                             </select>
-                            <input class="yoga-form__input yoga-form__input--phone-national" type="tel" id="yogaPhoneNational" autocomplete="tel-national" inputmode="tel" placeholder="999 000-00-00" aria-describedby="yogaPhoneErr">
+                            <input class="yoga-form__input yoga-form__input--phone-national" type="tel" id="yogaPhoneNational" autocomplete="tel-national" inputmode="tel" aria-describedby="yogaPhoneErr">
                         </div>
                         <input type="hidden" id="yogaPhone" name="phone" value="">
                         <span id="yogaPhoneErr" class="yoga-form__error-text" role="alert"></span>
                     </div>
                     <div class="yoga-form__row">
                         <label class="yoga-form__label" for="yogaEmail">Email <span class="yoga-form__label-hint">(необязательно, но желательно&nbsp;— если хотите получать от нас рассылки о скидках и акциях)</span></label>
-                        <input class="yoga-form__input" type="email" id="yogaEmail" name="email" autocomplete="email" maxlength="254" inputmode="email" placeholder="name@example.com">
+                        <input class="yoga-form__input" type="email" id="yogaEmail" name="email" autocomplete="email" maxlength="254" inputmode="email">
                         <span id="yogaEmailErr" class="yoga-form__error-text" role="alert"></span>
                     </div>
                     <div class="yoga-form__row yoga-form__row--split">
@@ -1217,7 +1220,7 @@
                     </div>
                     <div class="yoga-form__row">
                         <label class="yoga-form__label" for="yogaComment">Комментарий (необязательно)</label>
-                        <textarea class="yoga-form__textarea" id="yogaComment" name="comment" maxlength="2000" rows="3" placeholder="Вопросы, пожелания по номеру…"></textarea>
+                        <textarea class="yoga-form__textarea" id="yogaComment" name="comment" maxlength="2000" rows="3"></textarea>
                     </div>
 
                     <div id="yogaTurnstileWidget" class="yoga-form__turnstile" aria-label="Проверка «Я не робот»"></div>
@@ -1246,17 +1249,16 @@
 
     <div id="modal-lead" class="yoga-modal" hidden aria-hidden="true">
         <div class="yoga-modal__overlay" tabindex="-1"></div>
-        <div class="yoga-modal__content yoga-modal__content--compact" role="dialog" aria-modal="true" aria-labelledby="yogaModalLeadTitle">
+        <div class="yoga-modal__content" role="dialog" aria-modal="true" aria-labelledby="yogaModalLeadTitle">
             <button type="button" class="yoga-modal__close" aria-label="Закрыть">&times;</button>
-            <h2 class="yoga-modal__title" id="yogaModalLeadTitle">Быстрая заявка</h2>
-            <div class="yoga-modal__body yoga-modal__body--compact">
+            <h2 class="yoga-modal__title" id="yogaModalLeadTitle">Заявка на йога-тур</h2>
+            <div class="yoga-modal__body yoga-modal__body--scroll">
                 <form id="yogaLeadFormModal" class="yoga-form yoga-form--modal-light" action="/api/booking" method="post" data-source="popup" novalidate>
-                    <input type="hidden" name="procedure" value="Быстрая заявка с йога-лендинга">
+                    <input type="hidden" name="procedure" value="Йога-тур в Таиланд">
                     <input type="text" name="website" id="yogaLeadModalWebsite" class="yoga-form__hp" tabindex="-1" autocomplete="off" aria-hidden="true" value="">
-                    <div id="yogaTurnstileWidgetLead" class="yoga-form__turnstile" aria-label="Проверка «Я не робот»"></div>
                     <div class="yoga-form__row">
                         <label class="yoga-form__label" for="yogaLeadModalName">Имя</label>
-                        <input class="yoga-form__input" type="text" id="yogaLeadModalName" name="name" required autocomplete="name" maxlength="200" placeholder="Как к вам обращаться">
+                        <input class="yoga-form__input" type="text" id="yogaLeadModalName" name="name" required autocomplete="name" maxlength="200">
                         <span id="yogaLeadModalNameErr" class="yoga-form__error-text" role="alert"></span>
                     </div>
                     <div class="yoga-form__row">
@@ -1392,41 +1394,42 @@
                                     <option value="+58">+58 (VE)</option>
                                 </optgroup>
                             </select>
-                            <input class="yoga-form__input yoga-form__input--phone-national" type="tel" id="yogaLeadModalPhoneNational" autocomplete="tel-national" inputmode="tel" placeholder="999 000-00-00" aria-describedby="yogaLeadModalPhoneErr">
+                            <input class="yoga-form__input yoga-form__input--phone-national" type="tel" id="yogaLeadModalPhoneNational" autocomplete="tel-national" inputmode="tel" aria-describedby="yogaLeadModalPhoneErr">
                         </div>
                         <input type="hidden" id="yogaLeadModalPhone" name="phone" value="">
                         <span id="yogaLeadModalPhoneErr" class="yoga-form__error-text" role="alert"></span>
                     </div>
                     <div class="yoga-form__row">
                         <label class="yoga-form__label" for="yogaLeadModalEmail">Email <span class="yoga-form__label-hint">(необязательно)</span></label>
-                        <input class="yoga-form__input" type="email" id="yogaLeadModalEmail" name="email" autocomplete="email" maxlength="254" inputmode="email" placeholder="name@example.com">
+                        <input class="yoga-form__input" type="email" id="yogaLeadModalEmail" name="email" autocomplete="email" maxlength="254" inputmode="email">
                         <span id="yogaLeadModalEmailErr" class="yoga-form__error-text" role="alert"></span>
                     </div>
+                    <div class="yoga-form__row yoga-form__row--split">
+                        <div class="yoga-form__row-inner">
+                            <label class="yoga-form__label" for="yogaLeadModalArrivalDate">Дата заезда <span class="yoga-form__label-hint">(необязательно)</span></label>
+                            <input class="yoga-form__input" type="date" id="yogaLeadModalArrivalDate" name="preferred_date" autocomplete="off">
+                        </div>
+                        <div class="yoga-form__row-inner">
+                            <label class="yoga-form__label" for="yogaLeadModalDepartureDate">Дата выезда <span class="yoga-form__label-hint">(необязательно)</span></label>
+                            <input class="yoga-form__input" type="date" id="yogaLeadModalDepartureDate" name="departure_date" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="yoga-form__row">
+                        <label class="yoga-form__label" for="yogaLeadModalComment">Комментарий (необязательно)</label>
+                        <textarea class="yoga-form__textarea" id="yogaLeadModalComment" name="comment" maxlength="2000" rows="3"></textarea>
+                    </div>
+                    <div id="yogaTurnstileWidgetLead" class="yoga-form__turnstile" aria-label="Проверка «Я не робот»"></div>
                     <label class="yoga-form__checkbox">
                         <input type="checkbox" id="yogaLeadModalConsent" name="consent" value="true" required>
                         <span>Я согласен с <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">политикой конфиденциальности</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">публичной офертой</button> и <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">условиями отмены бронирования</button></span>
                     </label>
                     <div id="yogaLeadFormError" class="yoga-form__status yoga-form__status--error is-hidden" role="alert" aria-live="assertive"></div>
-                    <button type="submit" class="btn-yoga-primary btn-yoga-primary--block" id="yogaLeadModalSubmit">Отправить</button>
+                    <button type="submit" class="btn-yoga-primary btn-yoga-primary--block" id="yogaLeadModalSubmit">Отправить заявку</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <div id="yogaModalHeroDetails" class="yoga-modal" hidden aria-hidden="true">
-        <div class="yoga-modal__overlay" tabindex="-1"></div>
-        <div class="yoga-modal__content" role="dialog" aria-modal="true" aria-labelledby="yogaModalHeroDetailsTitle">
-            <button type="button" class="yoga-modal__close" aria-label="Закрыть">&times;</button>
-            <h2 class="yoga-modal__title" id="yogaModalHeroDetailsTitle">Условия и пакет</h2>
-            <div class="yoga-modal__body">
-                <p>В пакет тура включено: проживание, питание, йога, медитация.</p>
-                <p>Дополнительно вы можете приобрести программу очищения и оздоровительные процедуры: детокс, панчакарма, массаж, а также экскурсии.</p>
-                <p>Минимальная длительность тура и условия бронирования и другие вопросы вы можете задать в заявке, и мы пришлём актуальные условия.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Модалка политики конфиденциальности -->
     <div id="yogaModalPrivacy" class="yoga-modal" hidden aria-hidden="true">
         <div class="yoga-modal__overlay" tabindex="-1"></div>
         <div class="yoga-modal__content yoga-modal__content--wide" role="dialog" aria-modal="true" aria-labelledby="yogaModalPrivacyTitle">
@@ -1473,13 +1476,7 @@
             <button type="button" class="yoga-modal__close" aria-label="Закрыть">&times;</button>
             <h2 class="yoga-modal__title" id="yogaModalCancellationTitle">Условия отмены бронирования</h2>
             <div class="yoga-modal__body yoga-modal__body--scroll">
-                <p>Здесь будут изложены условия отмены и переноса, размеры удержаний из депозита и сроки уведомления. Депозит за номер при бронировании — 100&nbsp;$, остаток оплачивается по приезде; финальные формулировки предоставит заказчик.</p>
-                <ul>
-                    <li>Плейсхолдер: сроки бесплатной отмены до заезда</li>
-                    <li>Плейсхолдер: удержания при поздней отмене</li>
-                    <li>Плейсхолдер: форс-мажор и перенос дат</li>
-                </ul>
-                <p><em>Текст от заказчика — май 2026.</em></p>
+                <p>Для бронирования нужно оплатить депозит в размере, эквивалентном 100&nbsp;$ за каждый забронированный номер. Остальная сумма оплачивается в отеле в день заезда. При отмене бронирования за 14 и более дней до приезда депозит не возвращается, но сохраняется на вашем счету — можете воспользоваться им в течение года. Перенос бронирования с сохранением депозита возможен только 1 раз. При отмене менее чем за 14 дней до приезда депозит не возвращается. Вся сумма за тур оплачивается полностью в день заезда. Если по какой-то причине вы выезжаете раньше, оплата за оставшиеся дни не возвращается.</p>
             </div>
         </div>
     </div>

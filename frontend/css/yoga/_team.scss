@@ -89,6 +89,7 @@
     &__name {
         margin: 0 0 4px;
         font-size: 1.15rem;
+        font-weight: $font-weight-bold;
         color: $color-primary;
     }
 
@@ -96,7 +97,7 @@
         display: block;
         margin: 0 0 10px;
         font-size: 0.85rem;
-        font-weight: $font-weight-bold;
+        font-weight: $font-weight-regular;
         color: $color-accent;
         text-transform: uppercase;
         letter-spacing: 0.06em;

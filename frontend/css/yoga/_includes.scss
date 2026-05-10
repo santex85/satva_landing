@@ -78,6 +78,17 @@
         text-transform: uppercase;
     }
 
+    &__legend {
+        font-size: 0.8rem;
+        color: $color-text-light;
+        line-height: 1.45;
+        margin: 12px 0 20px;
+        max-width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
     &__icon {
         width: 56px;
         height: 56px;
