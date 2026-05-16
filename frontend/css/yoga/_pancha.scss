@@ -1,17 +1,17 @@
 .yoga-pancha {
-    padding: 0 24px clamp(60px, 8vw, 96px);
+    padding: 0 $space-h clamp(60px, 8vw, 96px);
 
     &__inner {
-        max-width: 1100px;
+        max-width: $container-base;
         margin: 0 auto;
         display: grid;
         grid-template-columns: 1fr;
         gap: 0;
         border-radius: 24px;
         overflow: hidden;
-        background: linear-gradient(125deg, #093642 0%, #0f4c5c 45%, #1a5c6c 100%);
+        background: linear-gradient(125deg, $color-primary-dark 0%, $color-primary 45%, $color-primary-light 100%);
         color: $color-white;
-        box-shadow: 0 20px 50px rgba(15, 76, 92, 0.35);
+        box-shadow: 0 20px 50px rgba($color-primary, 0.35);
 
         @media (min-width: 880px) {
             grid-template-columns: 1.15fr minmax(260px, 1fr);
@@ -55,7 +55,7 @@
     }
 
     .btn-yoga-primary {
-        box-shadow: 0 4px 24px rgba(255, 142, 114, 0.45);
+        box-shadow: 0 4px 24px rgba($color-accent, 0.45);
     }
 
     &__visual {
@@ -64,7 +64,7 @@
 
         &--placeholder {
             background:
-                radial-gradient(circle at 30% 30%, rgba(255, 142, 114, 0.25), transparent 50%),
+                radial-gradient(circle at 30% 30%, rgba($color-accent, 0.25), transparent 50%),
                 linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.2));
         }
     }

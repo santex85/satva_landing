@@ -3,10 +3,10 @@
 
 .yoga-includes {
     background: $color-bg-main;
-    padding: clamp(60px, 8vw, 100px) 24px;
+    padding: clamp(60px, 8vw, 100px) $space-h;
 
     &__container {
-        max-width: 900px;
+        max-width: $container-base;
         margin: 0 auto;
     }
 
@@ -44,12 +44,12 @@
         border-radius: 16px;
         padding: 28px 20px;
         text-align: center;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-        border: 1px solid rgba(15, 76, 92, 0.08);
+        transition: transform $duration-base ease, box-shadow $duration-base ease;
+        border: 1px solid rgba($color-primary, 0.08);
 
         &:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(15, 76, 92, 0.12);
+            box-shadow: 0 12px 32px rgba($color-primary, 0.12);
         }
 
         h3 {
@@ -159,10 +159,10 @@
 
     &__amenities {
         margin-top: 40px;
-        padding: 24px 22px;
+        padding: $space-h 22px;
         background: $color-white;
         border-radius: 16px;
-        border: 1px solid rgba(15, 76, 92, 0.08);
+        border: 1px solid rgba($color-primary, 0.08);
         text-align: center;
     }
 
@@ -186,7 +186,7 @@
             background: $color-bg-main;
             color: $color-text;
             padding: 8px 14px;
-            border-radius: 999px;
+            border-radius: $radius-pill;
             font-size: 0.85rem;
         }
     }

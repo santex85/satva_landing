@@ -1,10 +1,10 @@
 // 06. Йога / программа
 .yoga-program {
     background: $color-white;
-    padding: clamp(60px, 8vw, 100px) 24px;
+    padding: $space-section $space-h;
 
     &__container {
-        max-width: 900px;
+        max-width: $container-base;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -40,7 +40,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform $duration-slow ease;
         }
 
         &:hover img {
@@ -49,7 +49,7 @@
     }
 
     &__label {
-        @include yoga-pill-label;
+        @extend %yoga-pill-label;
     }
 
     &__text {
@@ -74,7 +74,7 @@
 
         li {
             position: relative;
-            padding-left: 24px;
+            padding-left: $space-h;
             margin-bottom: 12px;
             color: $color-dark;
             line-height: 1.5;

@@ -13,9 +13,9 @@
     padding: 20px 0;
     background: transparent;
     transition:
-        background 0.3s ease,
-        box-shadow 0.3s ease,
-        padding 0.3s ease;
+        background $transition-normal,
+        box-shadow $transition-normal,
+        padding $transition-normal;
 
     &--scrolled {
         background: $color-primary;
@@ -24,9 +24,9 @@
     }
 
     &__inner {
-        max-width: 900px;
+        max-width: $container-base;
         margin: 0 auto;
-        padding: 0 24px;
+        padding: 0 $space-h;
         // Сетка вместо space-between: при узком десктопе навигация не наезжает на логотип
         display: grid;
         grid-template-columns: auto minmax(0, 1fr);
@@ -65,7 +65,7 @@
             font-size: 0.9rem;
             text-decoration: none;
             opacity: 0.9;
-            transition: opacity 0.2s ease;
+            transition: opacity $transition-fast;
 
             &:hover { opacity: 1; }
 
@@ -98,7 +98,7 @@
             height: 2px;
             background: $color-white;
             margin: 0 auto;
-            transition: transform 0.3s ease, opacity 0.2s ease;
+            transition: transform $transition-normal, opacity $transition-fast;
         }
 
         @media (max-width: 768px) {
@@ -135,7 +135,7 @@
         gap: 24px;
         padding: 40px;
         box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
-        transition: right 0.3s ease;
+        transition: right $transition-normal;
 
         &.is-open { right: 0; }
 

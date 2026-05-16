@@ -1,7 +1,7 @@
 // 14. Финальная форма (glass + beach_sunset фон, см. yoga.html image-set)
 .yoga-form {
     position: relative;
-    padding: clamp(60px, 10vw, 100px) 24px;
+    padding: $space-section $space-h;
     overflow: hidden;
 
     &__bg {
@@ -16,9 +16,9 @@
         inset: 0;
         background: linear-gradient(
             135deg,
-            rgba(15, 76, 92, 0.88) 0%,
-            rgba(15, 76, 92, 0.65) 50%,
-            rgba(44, 110, 122, 0.55) 100%
+            rgba($color-primary, 0.88) 0%,
+            rgba($color-primary, 0.65) 50%,
+            rgba($color-teal-mid, 0.55) 100%
         );
         z-index: 1;
     }
@@ -117,14 +117,22 @@
         font-family: $font-family-primary;
         font-size: 1rem;
         transition: border-color $transition-fast, background $transition-fast, box-shadow $transition-fast;
+        outline: transparent;
         &::placeholder {
             color: rgba(255, 255, 255, 0.55);
         }
         &:focus {
-            outline: none;
             border-color: rgba(255, 255, 255, 0.75);
             background: rgba(255, 255, 255, 0.18);
             box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
+        }
+        &:focus-visible {
+            outline: 2px solid $color-primary;
+            outline-offset: 2px;
+        }
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         &--error {
             border-color: #f5a5a5;
@@ -161,10 +169,20 @@
         font-family: $font-family-primary;
         font-size: 0.95rem;
         cursor: pointer;
+        outline: transparent;
 
         &:focus {
-            outline: none;
             border-color: rgba(255, 255, 255, 0.75);
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-primary;
+            outline-offset: 2px;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         option {
@@ -258,9 +276,10 @@
     }
 
     .btn-yoga-primary:disabled {
-        opacity: 0.7;
+        opacity: 0.5;
         cursor: not-allowed;
         transform: none;
+        pointer-events: none;
     }
 }
 
@@ -274,7 +293,7 @@ form.yoga-form.yoga-form--modal-light {
     }
 
     .yoga-form__input {
-        border: 2px solid rgba(15, 76, 92, 0.2);
+        border: 2px solid rgba($color-primary, 0.2);
         background: $color-white;
         color: $color-text;
 
@@ -285,17 +304,38 @@ form.yoga-form.yoga-form--modal-light {
         &:focus {
             border-color: $color-primary;
             background: $color-white;
-            box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.12);
+            box-shadow: 0 0 0 3px rgba($color-primary, 0.12);
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-primary;
+            outline-offset: 2px;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
     }
 
     .yoga-form__select {
-        border: 2px solid rgba(15, 76, 92, 0.2);
+        border: 2px solid rgba($color-primary, 0.2);
         background: $color-white;
         color: $color-text;
+        outline: transparent;
 
         &:focus {
             border-color: $color-primary;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-primary;
+            outline-offset: 2px;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
     }
 

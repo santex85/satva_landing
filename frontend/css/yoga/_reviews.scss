@@ -2,10 +2,10 @@
 .yoga-reviews {
     position: relative;
     background: $color-bg-secondary;
-    padding: clamp(60px, 8vw, 100px) 24px;
+    padding: clamp(60px, 8vw, 100px) $space-h;
 
     &__container {
-        max-width: 1200px;
+        max-width: $container-wide;
         margin: 0 auto;
     }
 
@@ -33,7 +33,7 @@
         .yoga-chip-title {
             background: $color-white;
             color: $color-primary;
-            box-shadow: 0 1px 4px rgba(15, 76, 92, 0.12);
+            box-shadow: 0 1px 4px rgba($color-primary, 0.12);
         }
     }
 
@@ -54,7 +54,7 @@
         background: $color-white;
         border-radius: 16px;
         padding: 20px;
-        border: 1px solid rgba(15, 76, 92, 0.1);
+        border: 1px solid rgba($color-primary, 0.1);
         box-shadow: $shadow-sm;
 
         blockquote {
@@ -104,6 +104,8 @@
         cursor: pointer;
         color: inherit;
         font: inherit;
+        appearance: none;
+        -webkit-appearance: none;
         box-shadow: $shadow-sm;
         transition: transform $transition-fast, box-shadow $transition-fast;
         -webkit-tap-highlight-color: transparent;
@@ -142,7 +144,7 @@
         width: 56px;
         height: 56px;
         border-radius: 50%;
-        background: rgba(15, 76, 92, 0.55);
+        background: rgba($color-primary, 0.55);
         color: $color-white;
         display: flex;
         align-items: center;
@@ -151,7 +153,7 @@
         transition: background $transition-fast, transform $transition-fast;
         .yoga-reviews__card:hover &,
         .yoga-reviews__card:focus-visible & {
-            background: rgba(15, 76, 92, 0.75);
+            background: rgba($color-primary, 0.75);
             transform: translate(-50%, -50%) scale(1.05);
         }
         svg {
@@ -172,7 +174,7 @@
         font-size: 0.8125rem;
         font-weight: $font-weight-semibold;
         color: $color-white;
-        background: linear-gradient(transparent, rgba(15, 76, 92, 0.85));
+        background: linear-gradient(transparent, rgba($color-primary, 0.85));
     }
 }
 
@@ -204,7 +206,7 @@
     &__overlay {
         position: absolute;
         inset: 0;
-        background: rgba(15, 76, 92, 0.72);
+        background: rgba($color-primary, 0.72);
     }
 
     &__inner {

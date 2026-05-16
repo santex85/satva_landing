@@ -1,10 +1,10 @@
 // 11. Команда
 .yoga-team {
     background: $color-secondary;
-    padding: clamp(60px, 8vw, 100px) 24px;
+    padding: clamp(60px, 8vw, 100px) $space-h;
 
     &__container {
-        max-width: 1100px;
+        max-width: $container-base;
         margin: 0 auto;
     }
 

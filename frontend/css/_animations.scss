@@ -46,7 +46,7 @@
 // Классы для анимаций
 .animate-on-scroll {
     opacity: 0;
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity $duration-slow ease, transform $duration-slow ease;
     
     &.animated {
         opacity: 1;

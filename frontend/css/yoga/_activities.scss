@@ -1,10 +1,10 @@
 // 12. Экскурсии + Сатва-клуб
 .yoga-activities {
     background: $color-bg-main;
-    padding: 0 24px clamp(60px, 8vw, 100px);
+    padding: 0 $space-h clamp(60px, 8vw, 100px);
 
     &__container {
-        max-width: 1000px;
+        max-width: $container-base;
         margin: 0 auto;
     }
 
@@ -68,7 +68,7 @@
     }
 
     &__text {
-        padding: 28px 24px 32px;
+        padding: 28px $space-h 32px;
         @media (min-width: 800px) {
             padding: 36px 32px 40px;
         }

@@ -2,7 +2,7 @@
 .yoga-beach {
     &__banner {
         background: $color-primary;
-        padding: clamp(20px, 4vw, 28px) 24px;
+        padding: clamp(20px, 4vw, 28px) $space-h;
         text-align: center;
 
         .yoga-beach__headline {
@@ -19,7 +19,7 @@
             font-size: clamp(0.95rem, 2.2vw, 1.05rem);
             line-height: $line-height-body;
             margin: 0 auto;
-            max-width: 36rem;
+            max-width: $container-text;
         }
     }
 
@@ -30,7 +30,6 @@
         overflow: hidden; // parallax: обрез лишнего фона, без «серых» полос
     }
 
-    // Слой больше окна: transform в JS, без пустот при cover
     &__photo-bg {
         position: absolute;
         z-index: 0;
@@ -38,6 +37,7 @@
         left: -4%;
         width: 108%;
         height: 128%;
+        background-image: url('../img/yoga_tour/beach_day.webp');
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
@@ -52,8 +52,8 @@
         inset: 0;
         background: linear-gradient(
             to bottom,
-            rgba(15, 76, 92, 0.10) 0%,
-            rgba(15, 76, 92, 0.35) 100%
+            rgba($color-primary, 0.1) 0%,
+            rgba($color-primary, 0.35) 100%
         );
     }
 }

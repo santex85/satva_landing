@@ -1,7 +1,7 @@
 // Плашка-заголовок для секций yoga.html (единый стиль с .yoga-program__label)
 
 .yoga-chip-title {
-    @include yoga-pill-label;
+    @extend %yoga-pill-label;
 }
 
 // Секции с text-align: center на шапке — на десктопе плашка по центру; на мобайле влево (как миксин)

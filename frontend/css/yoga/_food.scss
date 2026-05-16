@@ -1,10 +1,10 @@
 // 07. Питание
 .yoga-food {
     background: $color-secondary;
-    padding: clamp(60px, 8vw, 100px) 24px;
+    padding: $space-section $space-h;
 
     &__container {
-        max-width: 900px;
+        max-width: $container-base;
         margin: 0 auto;
         display: grid;
         grid-template-columns: 1fr;
@@ -35,7 +35,7 @@
     }
 
     &__label {
-        @include yoga-pill-label;
+        @extend %yoga-pill-label;
     }
 
     &__text {
@@ -64,7 +64,7 @@
             font-size: 0.8rem;
             font-weight: 600;
             padding: 6px 14px;
-            border-radius: 50px;
+            border-radius: $radius-pill;
             white-space: nowrap;
         }
     }

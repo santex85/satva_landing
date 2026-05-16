@@ -11,6 +11,6 @@
     width: 0%;
     background: $color-accent;
     z-index: 9999;
-    transition: width 0.1s linear;
+    transition: width $duration-fast linear;
     pointer-events: none;
 }

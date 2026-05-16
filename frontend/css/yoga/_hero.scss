@@ -53,9 +53,9 @@ $yoga-hero-header-offset: 5.75rem;
         inset: 0;
         background: linear-gradient(
             160deg,
-            rgba(92, 29, 58, 0.52) 0%,
-            rgba(15, 76, 92, 0.40) 50%,
-            rgba(9, 54, 66, 0.55) 100%
+            rgba($yoga-burgundy, 0.52) 0%,
+            rgba($color-primary, 0.4) 50%,
+            rgba($color-primary-dark, 0.55) 100%
         );
     }
 
@@ -64,7 +64,7 @@ $yoga-hero-header-offset: 5.75rem;
         z-index: 2;
         max-width: 700px;
         width: 100%;
-        padding: 0 24px;
+        padding: 0 $space-h;
         color: $color-white;
 
         // Десктоп: контент hero не заходит под прозрачный fixed header — иначе крупный логотип
@@ -164,7 +164,7 @@ $yoga-hero-header-offset: 5.75rem;
             font-weight: 700;
             color: $color-accent;
             line-height: 1;
-            text-shadow: 0 2px 20px rgba(255, 142, 114, 0.4);
+            text-shadow: 0 2px 20px rgba($color-accent, 0.4);
         }
 
         &-label {
@@ -177,7 +177,7 @@ $yoga-hero-header-offset: 5.75rem;
             font-size: 0.85rem;
             opacity: 0.7;
             margin-top: 4px;
-            max-width: 36rem;
+            max-width: $container-text;
             text-align: center;
             padding: 0 12px;
             line-height: 1.45;

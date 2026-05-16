@@ -387,15 +387,6 @@
             if (src) openModal(src);
         });
 
-        section.addEventListener('keydown', function (e) {
-            if (e.key !== 'Enter' && e.key !== ' ') return;
-            var card = e.target.closest('.yoga-reviews__card');
-            if (!card) return;
-            e.preventDefault();
-            var src = card.getAttribute('data-video');
-            if (src) openModal(src);
-        });
-
         if (overlay) overlay.addEventListener('click', closeModal);
         if (closeBtn) closeBtn.addEventListener('click', closeModal);
 

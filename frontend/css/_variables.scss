@@ -1,8 +1,8 @@
-// Шрифты
+// Шрифты (полное множество — чтобы корректно материализовались все нужные начертания).
 @font-face {
     font-family: 'Montserrat';
-    src: url('../assets/fonts/Montserrat-Bold.ttf') format('truetype');
-    font-weight: 700;
+    src: url('../assets/fonts/Montserrat-Regular.woff2') format('woff2');
+    font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
@@ -15,27 +15,54 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../assets/fonts/Montserrat-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 // Цветовая палитра
-$color-primary: #0F4C5C;      // Глубокий морской (Тиловый)
-$color-primary-dark: #093642; // Ховер для primary
-$color-secondary: #E8DCC6;    // Бежевый
-$color-accent: #FF8E72;       // Коралловый
-$color-bg-secondary: #BEE3DB; // Мятно-голубой
-$color-bg-main: #F7F5F2;      // Жемчужный
-$color-white: #FFFFFF;
-$color-dark: #2D3436;
-$color-text: #2D3436;
+$color-primary: #0f4c5c; // Глубокий морской (Тиловый)
+$color-primary-dark: #093642; // Ховер / тёмный стоп градиентов
+$color-primary-light: #1a5c6c; // светлый тиловый стоп (Pancha и т.п.)
+$color-secondary: #e8dcc6; // Бежевый («песок» секции команды и т.п.)
+$color-accent: #ff8e72; // Коралловый — основной CTA-палитры
+$color-accent-mid: #ffb09c; // второй стоп градиента accent
+$cta-color: #c55032; // опциональный акцент CTA (контрастнее); визуал кнопок пока на $color-accent
+
+$color-bg-secondary: #bee3db; // Мятно-голубой («mint»)
+$color-bg-main: #f7f5f2; // Жемчужный фон страницы
+$color-white: #ffffff;
+$color-dark: #2d3436;
+$color-text: #2d3436;
 $color-text-light: #666666;
 
-// Градиенты
-// Hero: заметный тиловый фильтр + чуть больше «воздуха» внизу, чем в первых 0.85/0.72 — море всё ещё читается
-$gradient-overlay: linear-gradient(135deg, rgba(15, 76, 92, 0.76) 0%, rgba(44, 110, 122, 0.52) 45%, rgba(15, 76, 92, 0.44) 100%);
+// Второй оттенок teal для градиента hero (между primary и более светлым)
+$color-teal-mid: #2c6e7a;
+
+// Градиенты (цвета только через переменные выше)
+$gradient-overlay: linear-gradient(
+    135deg,
+    rgba($color-primary, 0.76) 0%,
+    rgba($color-teal-mid, 0.52) 45%,
+    rgba($color-primary, 0.44) 100%
+);
 $gradient-button: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
-$gradient-hero: linear-gradient(135deg, #0F4C5C 0%, #2C6E7A 100%);
-$gradient-accent: linear-gradient(135deg, #FF8E72 0%, #FFB09C 100%);
+$gradient-hero: linear-gradient(135deg, $color-primary 0%, $color-teal-mid 100%);
+$gradient-accent: linear-gradient(135deg, $color-accent 0%, $color-accent-mid 100%);
 
 // Типографика
-$font-family-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-primary:
+    'Montserrat',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
 $font-weight-bold: 700;
 $font-weight-semibold: 600;
 $font-weight-regular: 400;
@@ -50,7 +77,7 @@ $font-size-small: 0.875rem;
 // Line heights
 $line-height-tight: 1.2;
 $line-height-normal: 1.5;
-$line-height-body: 1.6;   // Описания и текст блоков — «воздух»
+$line-height-body: 1.6; // Описания и текст блоков — «воздух»
 $line-height-relaxed: 1.75;
 
 // Breakpoints
@@ -58,7 +85,7 @@ $breakpoint-mobile: 768px;
 $breakpoint-tablet: 1024px;
 $breakpoint-desktop: 1440px;
 
-// Spacing
+// Spacing (legacy)
 $spacing-xs: 0.5rem;
 $spacing-sm: 1rem;
 $spacing-md: 2rem;
@@ -66,25 +93,44 @@ $spacing-lg: 3rem;
 $spacing-xl: 4rem;
 $spacing-xxl: 6rem;
 
-// Border radius
+// Токены layout (дизайн-система landing yoga)
+$space-section: clamp(60px, 8vw, 100px);
+$space-h: 24px;
+
+$container-base: 900px;
+$container-wide: 1200px;
+$container-narrow: 720px;
+$container-text: 36rem;
+
+// Контейнер legacy (main.scss) — ширина шире «базовой» колонки текста
+$container-max-width: $container-wide;
+$container-padding: 1.5rem;
+
+// Радиусы
+$radius-pill: 999px;
+$radius-card: 16px;
+$radius-circle: 50%;
+
+// Legacy радиусы → токены (совместимость со старым кодом)
 $border-radius-sm: 0.5rem;
-$border-radius-md: 1rem;
+$border-radius-md: $radius-card;
 $border-radius-lg: 1.5rem;
 
-// Transitions
-$transition-fast: 0.2s ease;
-$transition-normal: 0.3s ease;
-$transition-slow: 0.5s ease;
+// Длительности анимаций (3 ступени; hero 1.5s/8s остаются локально в _hero)
+$duration-fast: 0.2s;
+$duration-base: 0.3s;
+$duration-slow: 0.65s;
+
+// Transitions (алиасы)
+$transition-fast: $duration-fast ease;
+$transition-normal: $duration-base ease;
+$transition-slow: $duration-slow ease;
 
 // Shadows
 $shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
 $shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
 $shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
 
-// Container
-$container-max-width: 1200px;
-$container-padding: 1.5rem;
-
 // Yoga tour (yoga.scss only)
-$yoga-burgundy: #5C1D3A;
-$yoga-overlay:  rgba(15, 76, 92, 0.72);
+$yoga-burgundy: #5c1d3a;
+$yoga-overlay: rgba($color-primary, 0.72);

@@ -1,10 +1,10 @@
 // Оздоровительные процедуры (ТЗ §5.2)
 .yoga-wellness {
     background: $color-bg-main;
-    padding: clamp(60px, 8vw, 100px) 24px;
+    padding: clamp(60px, 8vw, 100px) $space-h;
 
     &__container {
-        max-width: 1100px;
+        max-width: $container-base;
         margin: 0 auto;
     }
 
@@ -22,7 +22,7 @@
             color: $color-text-light;
             font-size: 1.05rem;
             margin: 0 auto;
-            max-width: 36rem;
+            max-width: $container-text;
         }
     }
 
@@ -44,7 +44,7 @@
         background: $color-white;
         border-radius: 18px;
         overflow: hidden;
-        border: 1px solid rgba(15, 76, 92, 0.08);
+        border: 1px solid rgba($color-primary, 0.08);
         padding: 0 0 20px;
         box-shadow: $shadow-sm;
 
@@ -83,7 +83,7 @@
             grid-column: 1 / -1;
             display: grid;
             grid-template-columns: 1fr;
-            border: 2px solid rgba(255, 142, 114, 0.55);
+            border: 2px solid rgba($color-accent, 0.55);
             padding: 0;
 
             @media (min-width: 800px) {
@@ -91,14 +91,14 @@
             }
 
             .yoga-wellness__text {
-                padding: 24px 24px 28px;
+                padding: $space-h $space-h 28px;
             }
         }
     }
 
     &__visual {
         min-height: 160px;
-        background: linear-gradient(160deg, rgba(15, 76, 92, 0.2), rgba(190, 227, 219, 0.6));
+        background: linear-gradient(160deg, rgba($color-primary, 0.2), rgba($color-bg-secondary, 0.6));
 
         &--placeholder::after {
             content: '';
@@ -116,8 +116,8 @@
         text-transform: uppercase;
         letter-spacing: 0.06em;
         color: $color-primary;
-        background: rgba(255, 142, 114, 0.25);
-        border-radius: 999px;
+        background: rgba($color-accent, 0.25);
+        border-radius: $radius-pill;
     }
 
     &__link {

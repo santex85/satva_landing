@@ -124,6 +124,10 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 6px 14px;
-    border-radius: 50px;
+    border-radius: $radius-pill;
     text-align: center;
+}
+
+%yoga-pill-label {
+    @include yoga-pill-label;
 }

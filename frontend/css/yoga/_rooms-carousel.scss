@@ -6,7 +6,7 @@
         outline: none;
         border-radius: 20px;
         overflow: hidden;
-        border: 1px solid rgba(15, 76, 92, 0.1);
+        border: 1px solid rgba($color-primary, 0.1);
         background: $color-white;
     }
 
@@ -139,16 +139,27 @@
     }
 
     &__dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        border: none;
+        width: 44px; // WCAG 2.5.5 target minimum
+        height: 44px;
         padding: 0;
-        background: rgba(15, 76, 92, 0.25);
+        border: none;
+        border-radius: $radius-circle;
+        background: transparent;
         cursor: pointer;
-        transition: transform $transition-fast, background $transition-fast;
+        position: relative;
+        flex-shrink: 0;
+        transition: transform $transition-fast;
 
-        &.is-active {
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 17px; // визуальный круг ~10px при 44×44
+            border-radius: $radius-circle;
+            background: rgba($color-primary, 0.25);
+            transition: transform $transition-fast, background $transition-fast;
+        }
+
+        &.is-active::after {
             background: $color-primary;
             transform: scale(1.15);
         }
@@ -198,7 +209,7 @@
         position: relative;
         aspect-ratio: 16 / 9;
         min-height: 200px;
-        background: rgba(15, 76, 92, 0.04);
+        background: rgba($color-primary, 0.04);
     }
 
     &__pane {
@@ -207,8 +218,8 @@
         opacity: 0;
         visibility: hidden;
         transition:
-            opacity 0.28s ease,
-            visibility 0.28s ease;
+            opacity $duration-base ease,
+            visibility $duration-base ease;
 
         &.is-active {
             opacity: 1;
@@ -224,7 +235,7 @@
 
         &--placeholder {
             background:
-                linear-gradient(135deg, rgba(15, 76, 92, 0.08) 0%, rgba(44, 110, 122, 0.12) 100%);
+                linear-gradient(135deg, rgba($color-primary, 0.08) 0%, rgba($color-teal-mid, 0.12) 100%);
             position: absolute;
 
             &::after {
@@ -236,7 +247,7 @@
                 justify-content: center;
                 font-size: 0.9rem;
                 font-weight: $font-weight-semibold;
-                color: rgba(15, 76, 92, 0.45);
+                color: rgba($color-primary, 0.45);
             }
         }
     }
@@ -260,7 +271,7 @@
         height: 40px;
         border-radius: 50%;
         border: 2px solid rgba(255, 255, 255, 0.95);
-        background: rgba(15, 76, 92, 0.45);
+        background: rgba($color-primary, 0.45);
         color: $color-white;
         cursor: pointer;
         transition:
@@ -268,7 +279,7 @@
             transform $transition-fast,
             border-color $transition-fast;
         position: relative;
-        box-shadow: 0 2px 8px rgba(15, 76, 92, 0.2);
+        box-shadow: 0 2px 8px rgba($color-primary, 0.2);
 
         &::before {
             content: '';
@@ -292,7 +303,7 @@
         }
 
         &:hover {
-            background: rgba(15, 76, 92, 0.72);
+            background: rgba($color-primary, 0.72);
         }
 
         &:focus-visible {
@@ -313,12 +324,12 @@
         width: 52px;
         height: 36px;
         border-radius: 8px;
-        border: 2px solid rgba(15, 76, 92, 0.15);
+        border: 2px solid rgba($color-primary, 0.15);
         padding: 0;
         cursor: pointer;
         overflow: hidden;
         background:
-            linear-gradient(135deg, rgba(15, 76, 92, 0.12) 0%, rgba(190, 227, 219, 0.35) 100%);
+            linear-gradient(135deg, rgba($color-primary, 0.12) 0%, rgba($color-bg-secondary, 0.35) 100%);
         transition:
             border-color $transition-fast,
             transform $transition-fast,
@@ -333,7 +344,7 @@
 
         &.is-active {
             border-color: $color-primary;
-            box-shadow: 0 0 0 1px rgba(15, 76, 92, 0.08);
+            box-shadow: 0 0 0 1px rgba($color-primary, 0.08);
             transform: scale(1.05);
         }
 
@@ -349,7 +360,7 @@
     border-radius: 20px;
     padding: clamp(24px, 3vw, 32px);
     margin-bottom: 40px;
-    border: 1px solid rgba(15, 76, 92, 0.08);
+    border: 1px solid rgba($color-primary, 0.08);
 }
 
 .yoga-rooms__everywhere-title {

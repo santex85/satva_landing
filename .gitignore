@@ -62,3 +62,6 @@ env/
 # Wix static proxy names: неудачные curl в download_assets.sh оставляли 0-byte мусор
 frontend/img/yoga_tour/*~mv2.*
 frontend/img/yoga_tour/*f000.jpg
+
+# Локальный аудит доступности (не в репозиторий)
+accessibility-audit.md

@@ -1,12 +1,12 @@
 // Мост к быстрой заявке (попап lead) после отзывов
 
 .yoga-lead-bridge {
-    background: rgba(15, 76, 92, 0.06);
-    padding: clamp(40px, 6vw, 56px) 24px;
+    background: rgba($color-primary, 0.06);
+    padding: clamp(40px, 6vw, 56px) $space-h;
     text-align: center;
 
     &__inner {
-        max-width: 36rem;
+        max-width: $container-text;
         margin: 0 auto;
     }
 
