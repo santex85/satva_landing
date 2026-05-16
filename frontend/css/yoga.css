@@ -1604,32 +1604,6 @@ a {
   font-weight: 700;
 }
 
-.yoga-lead-bridge {
-  background: rgba(15, 76, 92, 0.06);
-  padding: clamp(40px, 6vw, 56px) 24px;
-  text-align: center;
-}
-.yoga-lead-bridge__inner {
-  max-width: 36rem;
-  margin: 0 auto;
-}
-.yoga-lead-bridge__text {
-  margin: 0 0 1.25rem;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: #2d3436;
-}
-
-.yoga-lead-bridge .btn-yoga-secondary {
-  color: #0f4c5c;
-  border-color: rgba(15, 76, 92, 0.55);
-}
-.yoga-lead-bridge .btn-yoga-secondary:hover {
-  background: rgba(15, 76, 92, 0.08);
-  border-color: #0f4c5c;
-  color: #093642;
-}
-
 .yoga-reviews {
   position: relative;
   background: #bee3db;
