@@ -108,5 +108,25 @@
         font-size: 0.95rem;
         line-height: $line-height-body;
         color: $color-text;
+
+        & + & {
+            margin-top: 12px;
+        }
+    }
+
+    &__bio-list {
+        margin: 8px 0 0;
+        padding-left: 1.25em;
+        font-size: 0.95rem;
+        line-height: $line-height-body;
+        color: $color-text;
+
+        li {
+            margin-bottom: 6px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
     }
 }

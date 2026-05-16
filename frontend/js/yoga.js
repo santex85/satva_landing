@@ -812,6 +812,89 @@
         }, true);
     }
 
+    // --- 14ca. Модалка «Подробнее» о Панчакарме ------------------------------
+    function initYogaPanchaInfoModal() {
+        var modal = document.getElementById('modal-pancha-info');
+        if (!modal || !modal.classList.contains('yoga-modal')) return;
+
+        var overlay = modal.querySelector('.yoga-modal__overlay');
+        var closeBtn = modal.querySelector('.yoga-modal__close');
+        var panel = modal.querySelector('.yoga-modal__content');
+        var previousActive = null;
+        var trapHandler = null;
+
+        function getFocusable() {
+            if (!panel) return [];
+            return panel.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+        }
+
+        function openModal() {
+            previousActive = document.activeElement;
+            modal.removeAttribute('hidden');
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            var list = getFocusable();
+            if (list.length) {
+                list[0].focus();
+            }
+            var first = list[0];
+            var last = list[list.length - 1];
+            trapHandler = function (e) {
+                if (e.key !== 'Tab' || !list.length) return;
+                if (e.shiftKey) {
+                    if (document.activeElement === first) {
+                        e.preventDefault();
+                        last.focus();
+                    }
+                } else {
+                    if (document.activeElement === last) {
+                        e.preventDefault();
+                        first.focus();
+                    }
+                }
+            };
+            modal.addEventListener('keydown', trapHandler);
+        }
+
+        function closeModal() {
+            if (trapHandler) {
+                modal.removeEventListener('keydown', trapHandler);
+                trapHandler = null;
+            }
+            modal.classList.remove('is-open');
+            modal.setAttribute('hidden', '');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            if (previousActive && previousActive.focus) {
+                previousActive.focus();
+            }
+        }
+
+        document.addEventListener('click', function (e) {
+            var btn = e.target.closest ? e.target.closest('[data-open-modal]') : null;
+            if (!btn || btn.getAttribute('data-open-modal') !== 'modal-pancha-info') return;
+            e.preventDefault();
+            openModal();
+        });
+
+        if (overlay) {
+            overlay.addEventListener('click', closeModal);
+        }
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeModal);
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key !== 'Escape') return;
+            if (!modal.classList.contains('is-open')) return;
+            e.preventDefault();
+            closeModal();
+        }, true);
+    }
+
     // --- 14d. Форма в модалке быстрой заявки ---------------------------------
     function initYogaLeadForm() {
         var form = document.getElementById('yogaLeadFormModal');
@@ -1352,6 +1435,7 @@
         initPrivacyModal();
         initYogaOfferCancellationModals();
         initYogaLeadModal();
+        initYogaPanchaInfoModal();
         initForm();
         initYogaLeadForm();
     }

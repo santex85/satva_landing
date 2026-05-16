@@ -59,13 +59,21 @@
     }
 
     &__visual {
-        min-height: 220px;
-        background: rgba(0, 0, 0, 0.15);
+        align-self: center;
+        justify-self: stretch;
+        width: 100%;
+        padding: 0;
+        box-sizing: border-box;
 
-        &--placeholder {
-            background:
-                radial-gradient(circle at 30% 30%, rgba($color-accent, 0.25), transparent 50%),
-                linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.2));
+        picture {
+            display: block;
+            margin: 0;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
         }
     }
 }
