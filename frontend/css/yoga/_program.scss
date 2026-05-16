@@ -48,10 +48,6 @@
         }
     }
 
-    &__label {
-        @extend %yoga-pill-label;
-    }
-
     &__text {
         h2 {
             color: $color-primary;

@@ -28,9 +28,11 @@ $color-primary: #0f4c5c; // Глубокий морской (Тиловый)
 $color-primary-dark: #093642; // Ховер / тёмный стоп градиентов
 $color-primary-light: #1a5c6c; // светлый тиловый стоп (Pancha и т.п.)
 $color-secondary: #e8dcc6; // Бежевый («песок» секции команды и т.п.)
-$color-accent: #ff8e72; // Коралловый — основной CTA-палитры
+$color-accent: #ff8e72; // Коралловый — ссылки, акценты в тексте, вторичные заливки
 $color-accent-mid: #ffb09c; // второй стоп градиента accent
-$cta-color: #c55032; // опциональный акцент CTA (контрастнее); визуал кнопок пока на $color-accent
+$cta-color: #c55032; // Контрастный акцент для основных CTA (с белым текстом ~4.6:1)
+// Фон заполненной кнопки `.btn-yoga-primary` (тот же оттенок, что и $cta-color)
+$btn-yoga-primary-bg: $cta-color;
 
 $color-bg-secondary: #bee3db; // Мятно-голубой («mint»)
 $color-bg-main: #f7f5f2; // Жемчужный фон страницы
@@ -134,3 +136,94 @@ $shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
 // Yoga tour (yoga.scss only)
 $yoga-burgundy: #5c1d3a;
 $yoga-overlay: rgba($color-primary, 0.72);
+
+// ---------------------------------------------------------------------------
+// CSS custom properties — те же значения, что и SCSS-токены выше (для DevTools,
+// runtime и постепенного перехода на var(--*)). Имена в kebab-case.
+// ---------------------------------------------------------------------------
+:root {
+    // Палитра
+    --color-primary: #{$color-primary};
+    --color-primary-dark: #{$color-primary-dark};
+    --color-primary-light: #{$color-primary-light};
+    --color-secondary: #{$color-secondary};
+    --color-accent: #{$color-accent};
+    --color-accent-mid: #{$color-accent-mid};
+    --color-cta: #{$cta-color};
+    --color-btn-yoga-primary-bg: #{$btn-yoga-primary-bg};
+    --color-bg-secondary: #{$color-bg-secondary};
+    --color-bg-main: #{$color-bg-main};
+    --color-white: #{$color-white};
+    --color-dark: #{$color-dark};
+    --color-text: #{$color-text};
+    --color-text-light: #{$color-text-light};
+    --color-teal-mid: #{$color-teal-mid};
+    --color-yoga-burgundy: #{$yoga-burgundy};
+
+    // Градиенты (целые значения)
+    --gradient-overlay: #{$gradient-overlay};
+    --gradient-button: #{$gradient-button};
+    --gradient-hero: #{$gradient-hero};
+    --gradient-accent: #{$gradient-accent};
+
+    // Типографика (стек синхронен с $font-family-primary выше)
+    --font-family-primary: #{'"Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'};
+    --font-weight-regular: #{$font-weight-regular};
+    --font-weight-semibold: #{$font-weight-semibold};
+    --font-weight-bold: #{$font-weight-bold};
+    --font-size-h1: #{$font-size-h1};
+    --font-size-h2: #{$font-size-h2};
+    --font-size-h3: #{$font-size-h3};
+    --font-size-body: #{$font-size-body};
+    --font-size-small: #{$font-size-small};
+    --line-height-tight: #{$line-height-tight};
+    --line-height-normal: #{$line-height-normal};
+    --line-height-body: #{$line-height-body};
+    --line-height-relaxed: #{$line-height-relaxed};
+
+    // Брейкпоинты
+    --breakpoint-mobile: #{$breakpoint-mobile};
+    --breakpoint-tablet: #{$breakpoint-tablet};
+    --breakpoint-desktop: #{$breakpoint-desktop};
+
+    // Отступы и контейнеры
+    --spacing-xs: #{$spacing-xs};
+    --spacing-sm: #{$spacing-sm};
+    --spacing-md: #{$spacing-md};
+    --spacing-lg: #{$spacing-lg};
+    --spacing-xl: #{$spacing-xl};
+    --spacing-xxl: #{$spacing-xxl};
+    --space-section: #{$space-section};
+    --space-h: #{$space-h};
+    --container-base: #{$container-base};
+    --container-wide: #{$container-wide};
+    --container-narrow: #{$container-narrow};
+    --container-text: #{$container-text};
+    --container-max-width: #{$container-max-width};
+    --container-padding: #{$container-padding};
+
+    // Радиусы
+    --radius-pill: #{$radius-pill};
+    --radius-card: #{$radius-card};
+    --radius-circle: #{$radius-circle};
+    --border-radius-sm: #{$border-radius-sm};
+    --border-radius-md: #{$border-radius-md};
+    --border-radius-lg: #{$border-radius-lg};
+
+    // Анимации
+    --duration-fast: #{$duration-fast};
+    --duration-base: #{$duration-base};
+    --duration-slow: #{$duration-slow};
+    --ease-default: ease;
+    --transition-fast: #{$transition-fast};
+    --transition-normal: #{$transition-normal};
+    --transition-slow: #{$transition-slow};
+
+    // Тени
+    --shadow-sm: #{$shadow-sm};
+    --shadow-md: #{$shadow-md};
+    --shadow-lg: #{$shadow-lg};
+
+    // Прочее (yoga)
+    --yoga-overlay: #{$yoga-overlay};
+}

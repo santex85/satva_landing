@@ -166,12 +166,14 @@
             }
         });
 
-        // Закрытие по Esc
+        // Закрытие по Esc (capture: раньше всплытия, пока фокус внутри выезжающего меню)
         document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && nav.classList.contains('is-open')) {
-                close();
-            }
-        });
+            if (e.key !== 'Escape') return;
+            if (!nav.classList.contains('is-open')) return;
+            e.preventDefault();
+            close();
+            if (burger.focus) burger.focus();
+        }, true);
     }
 
     // --- 01c. Плавный скролл по якорям ---------------------------------------
