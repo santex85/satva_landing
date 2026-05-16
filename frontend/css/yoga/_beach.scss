@@ -24,36 +24,31 @@
     }
 
     &__photo {
+        color: rgba($color-dark, 0);
+        background-color: $color-white;
         height: 70vh;
         min-height: 400px;
         position: relative;
-        overflow: hidden; // parallax: обрез лишнего фона, без «серых» полос
+        overflow: hidden;
+
+        // На узких экранах высота по пропорции beach_day.webp (2820×2068), чтобы cover не срезал кадр.
+        @media (max-width: ($breakpoint-mobile - 1px)) {
+            height: auto;
+            min-height: 0;
+            aspect-ratio: 2820 / 2068;
+        }
     }
 
     &__photo-bg {
         position: absolute;
         z-index: 0;
-        top: -12%;
-        left: -4%;
-        width: 108%;
-        height: 128%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background-image: url('../img/yoga_tour/beach_day.webp');
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
-        will-change: transform;
-        backface-visibility: hidden;
-        transform: translate3d(0, 0, 0);
-    }
-
-    &__photo-overlay {
-        position: absolute;
-        z-index: 1;
-        inset: 0;
-        background: linear-gradient(
-            to bottom,
-            rgba($color-primary, 0.1) 0%,
-            rgba($color-primary, 0.35) 100%
-        );
     }
 }

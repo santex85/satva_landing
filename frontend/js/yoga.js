@@ -249,43 +249,6 @@
         }
     }
 
-    // --- 05. Parallax для .yoga-parallax -------------------------------------
-    function initParallax() {
-        var els = document.querySelectorAll('.yoga-parallax');
-        if (!els.length) return;
-
-        // Уважаем prefers-reduced-motion: reduce — пропускаем активацию.
-        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-        var ticking = false;
-
-        function update() {
-            var viewportH = window.innerHeight || document.documentElement.clientHeight;
-            for (var i = 0; i < els.length; i++) {
-                var el = els[i];
-                // Видимую рамку берём с контейнера (экран пляжа), а не с увеличенного bg-слоя.
-                var parallaxRoot = el.closest('.yoga-beach__photo') || el;
-                var rect = parallaxRoot.getBoundingClientRect();
-                if (rect.bottom < 0 || rect.top > viewportH) continue;
-                // translate вместо background-position — с cover не остаётся пустот по кромке.
-                var delta = (rect.top - viewportH / 2) * 0.1;
-                el.style.transform = 'translate3d(0, ' + delta + 'px, 0)';
-            }
-            ticking = false;
-        }
-
-        function onScroll() {
-            if (!ticking) {
-                ticking = true;
-                window.requestAnimationFrame(update);
-            }
-        }
-
-        window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', onScroll, { passive: true });
-        update();
-    }
-
     // --- 09. Превью видео через canvas (кадр на ~1 с) -------------------------
     function initVideoThumbnails() {
         var section = document.getElementById('yogaReviews');
@@ -1379,7 +1342,6 @@
         initBurgerMenu();
         initSmoothScroll();
         initFadeIn();
-        initParallax();
         initVideoThumbnails();
         initVideoModal();
         initTextReviewsShuffle();
