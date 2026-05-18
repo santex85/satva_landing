@@ -1330,14 +1330,15 @@ a {
 .yoga-rooms-carousel__controls {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 16px;
+  justify-content: space-between;
+  gap: 8px;
   margin-top: 20px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  width: 100%;
 }
 .yoga-rooms-carousel__btn {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 2px solid #0f4c5c;
   background: #ffffff;
@@ -1359,11 +1360,11 @@ a {
 }
 .yoga-rooms-carousel__btn--prev::before {
   transform: rotate(45deg);
-  margin-left: 14px;
+  margin-left: 12px;
 }
 .yoga-rooms-carousel__btn--next::before {
   transform: rotate(-135deg);
-  margin-right: 14px;
+  margin-right: 12px;
 }
 .yoga-rooms-carousel__btn:hover {
   background: #0f4c5c;
@@ -1375,9 +1376,20 @@ a {
 }
 .yoga-rooms-carousel__dots {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-wrap: nowrap;
+  gap: 6px;
   justify-content: center;
+  align-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  padding: 4px 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.yoga-rooms-carousel__dots::-webkit-scrollbar {
+  display: none;
 }
 .yoga-rooms-carousel__dot {
   width: 44px;
