@@ -261,8 +261,8 @@
 
         function finishVideo(v) {
             try {
-                v.removeAttribute('src');
-                v.load();
+                v.pause();
+                v.currentTime = 0;
             } catch (e) { /* noop */ }
         }
 

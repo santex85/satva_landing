@@ -1952,7 +1952,7 @@ a {
 
 .yoga-wellness {
   background: #f7f5f2;
-  padding: clamp(60px, 8vw, 100px) 24px;
+  padding: clamp(32px, 4vw, 56px) 24px clamp(60px, 8vw, 100px);
 }
 .yoga-wellness__container {
   max-width: 900px;
@@ -1967,11 +1967,66 @@ a {
   margin: 0 0 12px;
   font-size: clamp(1.75rem, 4vw, 2.5rem);
 }
-.yoga-wellness__header p:not(.yoga-chip-title) {
+.yoga-wellness__header p:not(.yoga-chip-title):not(.yoga-wellness__lead) {
   color: #666666;
   font-size: 1.05rem;
   margin: 0 auto;
   max-width: 36rem;
+}
+.yoga-wellness__lead {
+  margin: 0 auto 1.75rem;
+  max-width: 36rem;
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #2d3436;
+}
+.yoga-wellness__levels {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: left;
+}
+@media (min-width: 880px) {
+  .yoga-wellness__levels {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px 18px;
+    align-items: stretch;
+  }
+}
+.yoga-wellness__pillar {
+  margin: 0;
+  padding: 1.15rem 1.15rem 1.05rem;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 76, 92, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.yoga-wellness__pillar-label {
+  margin: 0 0 12px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255, 142, 114, 0.42);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0f4c5c;
+  line-height: 1.25;
+}
+.yoga-wellness__pillar-list {
+  margin: 0;
+  padding: 0 0 0 1.2rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #666666;
+}
+.yoga-wellness__pillar-list li {
+  margin-bottom: 0.45rem;
+}
+.yoga-wellness__pillar-list li:last-child {
+  margin-bottom: 0;
 }
 .yoga-wellness__grid {
   display: grid;
@@ -2069,7 +2124,7 @@ a {
 }
 
 .yoga-pancha {
-  padding: 0 24px clamp(60px, 8vw, 96px);
+  padding: 0 24px clamp(32px, 4vw, 56px);
 }
 .yoga-pancha__inner {
   max-width: 900px;
@@ -2107,16 +2162,6 @@ a {
   font-size: 1.02rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.92);
-}
-.yoga-pancha__list {
-  margin: 0 0 24px;
-  padding-left: 1.2rem;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.95rem;
-  line-height: 1.65;
-}
-.yoga-pancha__list li {
-  margin-bottom: 8px;
 }
 .yoga-pancha .btn-yoga-primary {
   box-shadow: 0 4px 24px rgba(197, 80, 50, 0.45);

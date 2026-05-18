@@ -1,5 +1,5 @@
 .yoga-pancha {
-    padding: 0 $space-h clamp(60px, 8vw, 96px);
+    padding: 0 $space-h clamp(32px, 4vw, 56px);
 
     &__inner {
         max-width: $container-base;
@@ -40,18 +40,6 @@
         font-size: 1.02rem;
         line-height: $line-height-body;
         color: rgba(255, 255, 255, 0.92);
-    }
-
-    &__list {
-        margin: 0 0 24px;
-        padding-left: 1.2rem;
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 0.95rem;
-        line-height: 1.65;
-
-        li {
-            margin-bottom: 8px;
-        }
     }
 
     .btn-yoga-primary {
