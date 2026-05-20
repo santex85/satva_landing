@@ -392,6 +392,38 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function setTawkVisitor(attrs) {
+        if (!attrs || (!attrs.name && !attrs.phone && !attrs.email)) return;
+        var payload = {};
+        if (attrs.name) payload.name = String(attrs.name).trim();
+        if (attrs.email) payload.email = String(attrs.email).trim();
+        if (attrs.phone) payload.phone = String(attrs.phone).trim();
+        if (!Object.keys(payload).length) return;
+
+        function apply() {
+            try {
+                window.Tawk_API.setAttributes(payload, function (err) {
+                    if (err && window.console) console.warn('Tawk setAttributes error:', err);
+                });
+            } catch (e) {}
+        }
+
+        if (window.Tawk_API && typeof window.Tawk_API.setAttributes === 'function') {
+            apply();
+            return;
+        }
+        window.Tawk_API = window.Tawk_API || {};
+        var prev = window.Tawk_API.onLoad;
+        window.Tawk_API.onLoad = function () {
+            if (typeof prev === 'function') {
+                try {
+                    prev();
+                } catch (e) {}
+            }
+            apply();
+        };
+    }
+
     function showMessageInForm(formEl, message, type) {
         if (!formEl) return;
         var existingMessage = formEl.querySelector(':scope > .form-message');
@@ -520,6 +552,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         submitBtn.textContent = 'Рассчитать программу';
                     }
                     if (r.ok) {
+                        setTawkVisitor({ name: payload.name, phone: payload.phone, email: payload.email });
                         if (window.SatvaAnalytics) window.SatvaAnalytics.trackEvent('form', 'submit', formMode);
                         showMessageInForm(contactForm, 'Спасибо! Мы свяжемся с вами в ближайшее время.', 'success');
                         contactForm.reset();
@@ -626,6 +659,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     leadModalSubmit.disabled = false;
                     leadModalSubmit.textContent = 'Отправить';
                     if (r.ok) {
+                        setTawkVisitor({ name: payload.name, phone: payload.phone, email: payload.email });
                         if (window.SatvaAnalytics) window.SatvaAnalytics.trackEvent('form', 'submit', 'popup');
                         leadFormModal.reset();
                         leadModalName.classList.remove('form-input--success', 'form-input--error');

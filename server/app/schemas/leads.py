@@ -19,7 +19,6 @@ class LeadOut(BaseModel):
     payload: dict
     created_at: datetime
     source: str | None
-    amocrm_lead_id: int | None
 
     class Config:
         from_attributes = True

@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from sqlalchemy import String, DateTime, ForeignKey, Text, Integer
+from sqlalchemy import String, DateTime, ForeignKey, Text
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -21,7 +21,6 @@ class Lead(Base):
     payload: Mapped[dict] = mapped_column(JSONB, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow)
     source: Mapped[str | None] = mapped_column(String(64), nullable=True)
-    amocrm_lead_id: Mapped[int | None] = mapped_column(Integer, nullable=True)
 
     consents: Mapped[list["Consent"]] = relationship("Consent", back_populates="lead", cascade="all, delete-orphan")
 
