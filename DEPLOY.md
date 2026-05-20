@@ -73,7 +73,7 @@ location / {
 | Переменная | Назначение |
 |------------|------------|
 | `RESEND_API_KEY` | API-ключ из [Resend Dashboard](https://resend.com/api-keys) |
-| `RESEND_FROM` | Адрес «От» с подтверждённым доменом, напр. `Satva Samui <noreply@satvasamui.site>` |
+| `RESEND_FROM` | Адрес «От» с подтверждённым доменом, напр. `Satva Samui <hello@satvasamui.site>` (не используйте `noreply@`) |
 | `RESEND_TO` | Кому дублировать заявки (один или несколько адресов через запятую) |
 
 Домен отправителя нужно подтвердить в Resend ([DNS-записи](https://resend.com/domains)). Ошибки отправки пишутся в лог контейнера `app`; при сбое доставки заявка в PostgreSQL уже сохранена.
