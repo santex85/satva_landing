@@ -1,3 +1,6 @@
+@use '../core' as *;
+
+
 .yoga-pancha {
     background: $color-white;
     padding: clamp(32px, 4vw, 56px) $space-h clamp(32px, 4vw, 56px);

@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 // Миксины для медиа-запросов
 @mixin mobile {
     @media (max-width: #{$breakpoint-mobile - 1px}) {

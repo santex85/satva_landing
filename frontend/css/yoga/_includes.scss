@@ -1,6 +1,7 @@
-// 04. Что включено (features grid)
 @use 'sass:color';
+@use '../core' as *;
 
+// 04. Что включено (features grid)
 .yoga-includes {
     background: $color-bg-main;
     padding: clamp(60px, 8vw, 100px) $space-h;

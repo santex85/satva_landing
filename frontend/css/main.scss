@@ -1,8 +1,7 @@
-@import 'variables';
-@import 'mixins';
-@import 'animations';
-@import 'chip-title';
-@import 'section-bridge';
+@use 'core' as *;
+@use 'chip-title';
+@use 'section-bridge';
+@use 'trust-bar';
 
 // Reset и базовые стили
 * {
@@ -1583,8 +1582,6 @@ h3 {
         }
     }
 }
-
-@import 'trust-bar';
 
 // Testimonials Section
 .testimonials {

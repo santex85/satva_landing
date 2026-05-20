@@ -3,206 +3,29 @@
 // Главный SCSS. Не используется на index.html.
 // ============================================================
 
-@import 'variables';
-@import 'mixins';
-@import 'animations';
-@import 'yoga/chip-title';
-
-// ---------- base ----------
-*,
-*::before,
-*::after { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-    margin: 0;
-    font-family: $font-family-primary;
-    font-size: 1rem;
-    line-height: 1.65;
-    color: $color-dark;
-    background: $color-bg-main;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-img { max-width: 100%; display: block; }
-
-a { color: inherit; }
-
-// ---------- utilities ----------
-.yoga-container        { max-width: $container-base; margin: 0 auto; padding: 0 $space-h; }
-.yoga-container--wide  { max-width: $container-wide; margin: 0 auto; padding: 0 $space-h; }
-
-.yoga-visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-// Skip link (WCAG 2.4.1) — первый фокусируемый элемент в <body>
-.yoga-skip-link {
-    position: absolute;
-    top: -100px;
-    left: 0;
-    background: $color-primary;
-    color: $color-white;
-    padding: $spacing-sm $spacing-md;
-    text-decoration: none;
-    z-index: 10002;
-    font-weight: $font-weight-semibold;
-    border-radius: 0 0 $border-radius-md 0;
-    transition: top $transition-normal;
-
-    &:focus,
-    &:focus-visible {
-        top: 0;
-        outline: 3px solid $color-accent;
-        outline-offset: 2px;
-    }
-}
-
-// Только transform: промежуточные кадры opacity снижают контраст текста (WCAG 1.4.3)
-.yoga-fade-in {
-    opacity: 1;
-    transform: translateY(20px);
-    transition: transform $duration-slow ease;
-
-    &.is-visible {
-        transform: none;
-    }
-}
-
-// Сетки карточек: без translateY при появлении — ровные ряды на десктопе
-.yoga-includes__card.yoga-fade-in,
-.yoga-reviews__item.yoga-fade-in,
-.yoga-reviews__quote.yoga-fade-in,
-.yoga-team__card.yoga-fade-in,
-.yoga-wellness__card.yoga-fade-in,
-.yoga-rooms-carousel.yoga-fade-in,
-.yoga-rooms__everywhere.yoga-fade-in,
-.yoga-rooms__urgency.yoga-fade-in,
-.yoga-pancha .yoga-fade-in,
-.yoga-fade-in {
-    transform: none;
-    opacity: 0;
-    transition: opacity $duration-slow ease;
-
-    &.is-visible {
-        opacity: 1;
-    }
-}
-
-// ---------- buttons ----------
-.btn-yoga-primary {
-    display: inline-block;
-    background: $btn-yoga-primary-bg;
-    color: $color-white;
-    padding: 16px 40px;
-    border-radius: $radius-pill;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba($btn-yoga-primary-bg, 0.4);
-    transition:
-        transform $transition-fast,
-        box-shadow $transition-fast,
-        background $transition-fast;
-
-    &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 30px rgba($btn-yoga-primary-bg, 0.5);
-    }
-
-    &:focus-visible {
-        outline: 3px solid $color-primary;
-        outline-offset: 3px;
-    }
-
-    &:disabled,
-    &[aria-disabled='true'] {
-        opacity: 0.5;
-        cursor: not-allowed;
-        transform: none;
-        box-shadow: none;
-        pointer-events: none;
-    }
-
-    &.btn--small {
-        padding: 10px 22px;
-        font-size: 0.85rem;
-    }
-}
-
-.btn-yoga-secondary {
-    display: inline-block;
-    background: transparent;
-    color: $color-white;
-    padding: 14px 32px;
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    border-radius: $radius-pill;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    transition:
-        background $transition-fast,
-        border-color $transition-fast,
-        color $transition-fast;
-
-    &:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: $color-white;
-    }
-
-    &:focus-visible {
-        outline: 3px solid $color-white;
-        outline-offset: 3px;
-    }
-
-    &:disabled,
-    &[aria-disabled='true'] {
-        opacity: 0.5;
-        cursor: not-allowed;
-        transform: none;
-        box-shadow: none;
-        pointer-events: none;
-    }
-}
-
-// ---------- sections ----------
-@import 'yoga/scroll-progress';
-@import 'yoga/header';
-@import 'yoga/hero';
-@import 'yoga/trust-bar';
-@import 'yoga/includes';
-@import 'yoga/beach';
-@import 'yoga/program';
-@import 'yoga/food';
-@import 'yoga/rooms';
-@import 'yoga/rooms-carousel';
-@import 'yoga/reviews';
-@import 'yoga/team';
-@import 'yoga/wellness';
-@import 'yoga/pancha';
-@import 'yoga/team-group';
-@import 'yoga/activities';
-@import 'yoga/contacts';
-@import 'yoga/faq';
-@import 'yoga/form';
-@import 'yoga/modal';
+@use 'core' as *;
+@use 'yoga/chip-title';
+@use 'yoga/base';
+@use 'yoga/scroll-progress';
+@use 'yoga/header';
+@use 'yoga/hero';
+@use 'yoga/trust-bar';
+@use 'yoga/includes';
+@use 'yoga/beach';
+@use 'yoga/program';
+@use 'yoga/food';
+@use 'yoga/rooms';
+@use 'yoga/rooms-carousel';
+@use 'yoga/reviews';
+@use 'yoga/team';
+@use 'yoga/wellness';
+@use 'yoga/pancha';
+@use 'yoga/team-group';
+@use 'yoga/activities';
+@use 'yoga/contacts';
+@use 'yoga/faq';
+@use 'yoga/form';
+@use 'yoga/modal';
 
 // ---------- доступность: уважение prefers-reduced-motion ----------
 @media (prefers-reduced-motion: reduce) {
