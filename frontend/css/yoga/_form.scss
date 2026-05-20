@@ -290,15 +290,18 @@
 form.yoga-form.yoga-form--modal-light {
     margin: 0;
     padding: 0;
+    overflow: visible;
 
     .yoga-form__label {
         color: $color-text;
     }
 
-    .yoga-form__input {
+    .yoga-form__input,
+    .yoga-form__textarea {
         border: 2px solid rgba($color-primary, 0.2);
         background: $color-white;
         color: $color-text;
+        max-width: 100%;
 
         &::placeholder {
             color: $color-text-light;
@@ -319,6 +322,16 @@ form.yoga-form.yoga-form--modal-light {
             opacity: 0.5;
             cursor: not-allowed;
         }
+    }
+
+    .yoga-form__textarea {
+        min-height: 80px;
+        resize: vertical;
+    }
+
+    .yoga-form__row,
+    .yoga-form__row-inner {
+        min-width: 0;
     }
 
     .yoga-form__select {

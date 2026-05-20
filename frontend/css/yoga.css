@@ -2857,30 +2857,45 @@ a {
 form.yoga-form.yoga-form--modal-light {
   margin: 0;
   padding: 0;
+  overflow: visible;
 }
 form.yoga-form.yoga-form--modal-light .yoga-form__label {
   color: #2d3436;
 }
-form.yoga-form.yoga-form--modal-light .yoga-form__input {
+form.yoga-form.yoga-form--modal-light .yoga-form__input,
+form.yoga-form.yoga-form--modal-light .yoga-form__textarea {
   border: 2px solid rgba(15, 76, 92, 0.2);
   background: #ffffff;
   color: #2d3436;
+  max-width: 100%;
 }
-form.yoga-form.yoga-form--modal-light .yoga-form__input::placeholder {
+form.yoga-form.yoga-form--modal-light .yoga-form__input::placeholder,
+form.yoga-form.yoga-form--modal-light .yoga-form__textarea::placeholder {
   color: #666666;
 }
-form.yoga-form.yoga-form--modal-light .yoga-form__input:focus {
+form.yoga-form.yoga-form--modal-light .yoga-form__input:focus,
+form.yoga-form.yoga-form--modal-light .yoga-form__textarea:focus {
   border-color: #0f4c5c;
   background: #ffffff;
   box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.12);
 }
-form.yoga-form.yoga-form--modal-light .yoga-form__input:focus-visible {
+form.yoga-form.yoga-form--modal-light .yoga-form__input:focus-visible,
+form.yoga-form.yoga-form--modal-light .yoga-form__textarea:focus-visible {
   outline: 2px solid #0f4c5c;
   outline-offset: 2px;
 }
-form.yoga-form.yoga-form--modal-light .yoga-form__input:disabled {
+form.yoga-form.yoga-form--modal-light .yoga-form__input:disabled,
+form.yoga-form.yoga-form--modal-light .yoga-form__textarea:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+form.yoga-form.yoga-form--modal-light .yoga-form__textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+form.yoga-form.yoga-form--modal-light .yoga-form__row,
+form.yoga-form.yoga-form--modal-light .yoga-form__row-inner {
+  min-width: 0;
 }
 form.yoga-form.yoga-form--modal-light .yoga-form__select {
   border: 2px solid rgba(15, 76, 92, 0.2);
@@ -3012,6 +3027,8 @@ form.yoga-form.yoga-form--modal-light .yoga-form__turnstile {
   margin: 0.5rem 0;
 }
 .yoga-modal__body--scroll {
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
