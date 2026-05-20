@@ -225,7 +225,6 @@
 @media (min-width: 768px) {
   .yoga-trust-bar__header .yoga-chip-title,
   .yoga-includes__header .yoga-chip-title,
-  .yoga-beach__banner .yoga-chip-title,
   .yoga-reviews__header .yoga-chip-title,
   .yoga-rooms__header .yoga-chip-title,
   .yoga-team__header .yoga-chip-title,
@@ -1038,56 +1037,59 @@ a {
   font-size: 0.85rem;
 }
 
-.yoga-beach__banner {
-  background: #0f4c5c;
-  padding: clamp(20px, 4vw, 28px) 24px;
-  text-align: center;
+.yoga-beach {
+  background: #ffffff;
+  padding: clamp(60px, 8vw, 100px) 24px;
 }
-.yoga-beach__banner .yoga-beach__headline {
-  color: #ffffff;
-  font-size: clamp(1.15rem, 3.5vw, 1.65rem);
-  font-weight: 700;
-  line-height: 1.2;
-  margin: 1rem auto;
-  max-width: 40rem;
-}
-.yoga-beach__banner .yoga-beach__subline {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: clamp(0.95rem, 2.2vw, 1.05rem);
-  line-height: 1.6;
+.yoga-beach__container {
+  max-width: 900px;
   margin: 0 auto;
-  max-width: 36rem;
 }
-.yoga-beach__photo {
-  color: rgba(45, 52, 54, 0);
-  background-color: #ffffff;
-  height: 70vh;
-  min-height: 400px;
-  position: relative;
-  overflow: hidden;
+.yoga-beach__block {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
 }
-@media (max-width: 767px) {
-  .yoga-beach__photo {
-    height: auto;
-    min-height: 0;
-    aspect-ratio: 2820/2068;
+@media (min-width: 768px) {
+  .yoga-beach__block {
+    grid-template-columns: 1fr 1fr;
   }
 }
-.yoga-beach__photo-bg {
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  left: 0;
+.yoga-beach__photo {
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.yoga-beach__photo picture {
+  display: block;
   width: 100%;
   height: 100%;
-  background-image: url("../img/yoga_tour/beach_day.webp");
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+}
+.yoga-beach__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.65s ease;
+}
+.yoga-beach__photo:hover img {
+  transform: scale(1.03);
+}
+.yoga-beach__text h2 {
+  color: #0f4c5c;
+  margin: 0 0 20px;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.2;
+}
+.yoga-beach__text p {
+  color: #2d3436;
+  line-height: 1.7;
+  margin: 0;
 }
 
 .yoga-program {
-  background: #ffffff;
+  background: #f7f5f2;
   padding: clamp(60px, 8vw, 100px) 24px;
 }
 .yoga-program__container {
@@ -2173,7 +2175,8 @@ a {
 }
 
 .yoga-pancha {
-  padding: 0 24px clamp(32px, 4vw, 56px);
+  background: #ffffff;
+  padding: clamp(32px, 4vw, 56px) 24px clamp(32px, 4vw, 56px);
 }
 .yoga-pancha__inner {
   max-width: 900px;
@@ -2280,7 +2283,7 @@ a {
 }
 
 .yoga-activities {
-  background: #f7f5f2;
+  background: #ffffff;
   padding: 0 24px clamp(60px, 8vw, 100px);
 }
 .yoga-activities__container {

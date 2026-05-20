@@ -1,5 +1,6 @@
 .yoga-pancha {
-    padding: 0 $space-h clamp(32px, 4vw, 56px);
+    background: $color-white;
+    padding: clamp(32px, 4vw, 56px) $space-h clamp(32px, 4vw, 56px);
 
     &__inner {
         max-width: $container-base;

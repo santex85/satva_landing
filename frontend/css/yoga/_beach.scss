@@ -1,54 +1,60 @@
-// 05. Пляж
+// 04. Пляж (сетка как у yoga-program)
 .yoga-beach {
-    &__banner {
-        background: $color-primary;
-        padding: clamp(20px, 4vw, 28px) $space-h;
-        text-align: center;
+    background: $color-white;
+    padding: $space-section $space-h;
 
-        .yoga-beach__headline {
-            color: $color-white;
-            font-size: clamp(1.15rem, 3.5vw, 1.65rem);
-            font-weight: $font-weight-bold;
-            line-height: $line-height-tight;
-            margin: $spacing-sm auto;
-            max-width: 40rem;
-        }
+    &__container {
+        max-width: $container-base;
+        margin: 0 auto;
+    }
 
-        .yoga-beach__subline {
-            color: rgba($color-white, 0.9);
-            font-size: clamp(0.95rem, 2.2vw, 1.05rem);
-            line-height: $line-height-body;
-            margin: 0 auto;
-            max-width: $container-text;
+    &__block {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        align-items: center;
+
+        @media (min-width: 768px) {
+            grid-template-columns: 1fr 1fr;
         }
     }
 
     &__photo {
-        color: rgba($color-dark, 0);
-        background-color: $color-white;
-        height: 70vh;
-        min-height: 400px;
-        position: relative;
+        border-radius: 20px;
         overflow: hidden;
+        aspect-ratio: 4 / 3;
 
-        // На узких экранах высота по пропорции beach_day.webp (2820×2068), чтобы cover не срезал кадр.
-        @media (max-width: ($breakpoint-mobile - 1px)) {
-            height: auto;
-            min-height: 0;
-            aspect-ratio: 2820 / 2068;
+        picture {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform $duration-slow ease;
+        }
+
+        &:hover img {
+            transform: scale(1.03);
         }
     }
 
-    &__photo-bg {
-        position: absolute;
-        z-index: 0;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('../img/yoga_tour/beach_day.webp');
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
+    &__text {
+        h2 {
+            color: $color-primary;
+            margin: 0 0 20px;
+            font-size: $font-size-h2;
+            line-height: $line-height-tight;
+        }
+
+        p {
+            color: $color-dark;
+            line-height: 1.7;
+            margin: 0;
+        }
     }
 }
