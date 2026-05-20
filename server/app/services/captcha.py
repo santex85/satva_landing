@@ -42,8 +42,9 @@ def verify_turnstile_or_skip(request: Request, captcha_token: str | None) -> Non
         return
 
     secret = (settings.TURNSTILE_SECRET_KEY or "").strip()
+    site_key = (settings.TURNSTILE_SITE_KEY or "").strip()
     if not secret:
-        if settings.DEBUG:
+        if settings.DEBUG or not site_key:
             return
         logger.error("TURNSTILE_SECRET_KEY not set in production")
         raise HTTPException(
