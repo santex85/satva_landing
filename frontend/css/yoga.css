@@ -1183,17 +1183,22 @@ a {
   display: grid;
   grid-template-columns: 1fr;
   gap: 40px;
-  align-items: center;
+  align-items: start;
 }
 @media (min-width: 768px) {
   .yoga-food__container {
     grid-template-columns: 1fr 1fr;
   }
 }
+.yoga-food__photos {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 .yoga-food__photo {
+  margin: 0;
   border-radius: 20px;
   overflow: hidden;
-  aspect-ratio: 4/3;
 }
 .yoga-food__photo picture {
   display: block;
@@ -1201,9 +1206,16 @@ a {
   height: 100%;
 }
 .yoga-food__photo img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.yoga-food__photo--primary {
+  aspect-ratio: 4/3;
+}
+.yoga-food__photo--secondary {
+  aspect-ratio: 3/2;
 }
 .yoga-food__text h2 {
   color: #0f4c5c;
@@ -2062,9 +2074,11 @@ a {
   border: 1px solid rgba(15, 76, 92, 0.08);
   padding: 0 0 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 .yoga-wellness__card h3 {
-  margin: 0 16px 8px;
+  margin: 16px 16px 8px;
   font-size: 1rem;
   color: #0f4c5c;
 }
@@ -2102,13 +2116,36 @@ a {
   padding: 24px 24px 28px;
 }
 .yoga-wellness__visual {
-  min-height: 160px;
+  flex-shrink: 0;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
   background: linear-gradient(160deg, rgba(15, 76, 92, 0.2), rgba(190, 227, 219, 0.6));
+}
+.yoga-wellness__visual picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.yoga-wellness__visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+@media (min-width: 800px) {
+  .yoga-wellness__card--featured .yoga-wellness__visual {
+    aspect-ratio: auto;
+    min-height: 100%;
+    height: 100%;
+  }
 }
 .yoga-wellness__visual--placeholder::after {
   content: "";
   display: block;
-  min-height: 160px;
+  width: 100%;
+  height: 100%;
 }
 .yoga-wellness__badge {
   display: inline-block;
