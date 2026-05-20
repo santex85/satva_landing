@@ -26,7 +26,7 @@
 
 ### 2. Секреты
 
-Создай файл **`server/.env`** (не в git): `JWT_SECRET`, `SMTP_*`, `TURNSTILE_SECRET_KEY`, `TURNSTILE_SITE_KEY`, `CORS_ORIGINS=https://satvasamui.site`, и т.д. (см. `server/.env.example`).
+Создай файл **`server/.env`** (не в git): `JWT_SECRET`, `RESEND_*`, `TURNSTILE_SECRET_KEY`, `TURNSTILE_SITE_KEY`, `CORS_ORIGINS=https://satvasamui.site`, и т.д. (см. `server/.env.example`).
 
 Для Postgres задай пароль при запуске compose, например файл **`.env.deploy`** в корне репо (не коммитить):
 
@@ -64,21 +64,19 @@ location / {
 
 Проверка: `nginx -t && systemctl reload nginx`.
 
-### 5. SMTP (письма о заявках)
+### 5. Email-уведомления (Resend)
 
-После сохранения заявки в БД приложение шлёт письмо на `SMTP_TO` (можно несколько адресов через запятую). Обязательны **`SMTP_HOST`** и **`SMTP_TO`**; при пустых значениях почта просто не отправляется, ответ пользователю остаётся успешным.
+После сохранения заявки в БД приложение шлёт письмо на `RESEND_TO` (можно несколько адресов через запятую). Обязательны **`RESEND_API_KEY`**, **`RESEND_FROM`** и **`RESEND_TO`**; при пустых значениях почта просто не отправляется, ответ пользователю остаётся успешным.
 
 Заполни в **`server/.env`:**
 
 | Переменная | Назначение |
 |------------|------------|
-| `SMTP_HOST`, `SMTP_PORT` | Хост и порт (часто **587** — STARTTLS, **465** — сразу TLS) |
-| `SMTP_USER`, `SMTP_PASSWORD` | Логин SMTP и пароль (у Gmail — [пароль приложения](https://support.google.com/accounts/answer/185833)) |
-| `SMTP_FROM` | Адрес «От» (часто совпадает с `SMTP_USER`) |
-| `SMTP_TO` | Кому дублировать заявки |
-| `SMTP_USE_SSL` | `true`, если провайдер требует implicit TLS на нестандартном порту; порт **465** обрабатывается автоматически |
+| `RESEND_API_KEY` | API-ключ из [Resend Dashboard](https://resend.com/api-keys) |
+| `RESEND_FROM` | Адрес «От» с подтверждённым доменом, напр. `Satva Samui <noreply@satvasamui.site>` |
+| `RESEND_TO` | Кому дублировать заявки (один или несколько адресов через запятую) |
 
-Порты: **587** — соединение без TLS, затем `STARTTLS` и при наличии логина — авторизация. **465** — `SMTP_SSL` сразу. Ошибки SMTP пишутся в лог контейнера `app`; при сбое доставки заявка в PostgreSQL уже сохранена.
+Домен отправителя нужно подтвердить в Resend ([DNS-записи](https://resend.com/domains)). Ошибки отправки пишутся в лог контейнера `app`; при сбое доставки заявка в PostgreSQL уже сохранена.
 
 ### 6. Капча Cloudflare Turnstile
 

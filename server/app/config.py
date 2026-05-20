@@ -19,15 +19,11 @@ class Settings(BaseSettings):
     # CORS
     CORS_ORIGINS: str = "http://localhost,http://127.0.0.1"
 
-    # SMTP (см. server/.env.example и DEPLOY.md)
-    SMTP_HOST: str = ""
-    SMTP_PORT: int = 587
-    SMTP_USER: str = ""
-    SMTP_PASSWORD: str = ""
-    SMTP_FROM: str = ""
-    SMTP_TO: str = ""
-    # Порт 465 даёт implicit TLS автоматически; для нестандартных хостов можно включить явно
-    SMTP_USE_SSL: bool = False
+    # Resend (email-уведомления о заявках). Без RESEND_API_KEY письма не шлются —
+    # заявка всё равно сохраняется в БД, ответ пользователю остаётся успешным.
+    RESEND_API_KEY: str = ""
+    RESEND_FROM: str = ""
+    RESEND_TO: str = ""
 
     # Cloudflare Turnstile (на Host localhost/127.0.0.1 проверка отключена; пустой secret + DEBUG=true — тоже пропуск)
     TURNSTILE_SECRET_KEY: str = ""
