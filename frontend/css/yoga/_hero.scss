@@ -92,17 +92,7 @@ $yoga-hero-header-offset: 5.75rem;
     }
 
     &__logo {
-        margin-bottom: 32px;
-
-        img {
-            height: clamp(90px, 14vw, 140px);
-            width: auto;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 768px) {
-            display: none;
-        }
+        display: none;
     }
 
     &__title {
