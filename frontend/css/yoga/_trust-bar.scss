@@ -4,16 +4,38 @@
 // Блок доверия под yoga-hero (те же смыслы, BEM-префикс yoga-trust-bar)
 
 .yoga-trust-bar {
+    position: relative;
+    isolation: isolate;
     padding: clamp(40px, 6vw, 56px) $space-h clamp(44px, 6vw, 64px);
-    background-color: $color-white;
-    border-bottom: 1px solid rgba($color-primary, 0.1);
-    box-shadow: 0 12px 32px rgba($color-primary, 0.06);
+    background-color: $color-bg-main;
+    background-image: url('../img/yoga_tour/trust_sea.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background: linear-gradient(
+            180deg,
+            rgba($color-white, 0.78) 0%,
+            rgba($color-white, 0.72) 42%,
+            rgba($color-bg-main, 0.52) 68%,
+            rgba($color-bg-main, 0.88) 86%,
+            $color-bg-main 100%
+        );
+    }
 
     @include mobile {
         padding: $spacing-lg $space-h $spacing-lg;
     }
 
     &__container {
+        position: relative;
+        z-index: 1;
         max-width: $container-wide;
         margin: 0 auto;
     }
