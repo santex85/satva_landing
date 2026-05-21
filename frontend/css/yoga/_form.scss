@@ -44,8 +44,10 @@
     }
 
     &__logo {
-        margin: 0 auto 16px;
+        margin: 0 auto 20px;
         display: block;
+        width: clamp(150px, 32vw, 200px);
+        height: auto;
     }
 
     h2 {

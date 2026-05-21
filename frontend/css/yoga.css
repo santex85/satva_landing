@@ -748,14 +748,14 @@ a {
   }
 }
 .yoga-hero__price-value {
-  font-size: clamp(3rem, 7vw, 5rem);
+  font-size: clamp(2.15rem, 5.2vw, 3.65rem);
   font-weight: 700;
   color: #ff8e72;
-  line-height: 1;
+  line-height: 1.05;
   text-shadow: 0 2px 20px rgba(255, 142, 114, 0.4);
 }
 .yoga-hero__price-label {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 600;
   margin-top: 8px;
 }
@@ -1241,7 +1241,7 @@ a {
 }
 
 .yoga-food {
-  background: #e8dcc6;
+  background: rgb(241.3, 235.5, 225.28);
   padding: clamp(60px, 8vw, 100px) 24px;
 }
 .yoga-food__container {
@@ -1326,15 +1326,17 @@ a {
   padding: 32px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 24px;
   flex-wrap: wrap;
+  text-align: center;
 }
 .yoga-rooms__urgency p {
   color: #ffffff;
   font-size: 1.05rem;
   margin: 0;
-  flex: 1 1 320px;
+  flex: 0 1 auto;
+  text-align: center;
 }
 .yoga-rooms__urgency p strong {
   color: #ff8e72;
@@ -2707,8 +2709,10 @@ a {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
 }
 .yoga-form__logo {
-  margin: 0 auto 16px;
+  margin: 0 auto 20px;
   display: block;
+  width: clamp(150px, 32vw, 200px);
+  height: auto;
 }
 .yoga-form h2 {
   color: #ffffff;

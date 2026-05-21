@@ -1,9 +1,10 @@
+@use 'sass:color';
 @use '../core' as *;
 
 
 // 07. Питание
 .yoga-food {
-    background: $color-secondary;
+    background: color.mix($color-secondary, $color-bg-main, 38%);
     padding: $space-section $space-h;
 
     &__container {

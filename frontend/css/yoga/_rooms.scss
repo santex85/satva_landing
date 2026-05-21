@@ -36,15 +36,17 @@
         padding: 32px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         gap: 24px;
         flex-wrap: wrap;
+        text-align: center;
 
         p {
             color: $color-white;
             font-size: 1.05rem;
             margin: 0;
-            flex: 1 1 320px;
+            flex: 0 1 auto;
+            text-align: center;
 
             strong {
                 color: $color-accent;

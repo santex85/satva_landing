@@ -164,15 +164,15 @@ $yoga-hero-header-offset: 5.75rem;
         }
 
         &-value {
-            font-size: clamp(3rem, 7vw, 5rem);
+            font-size: clamp(2.15rem, 5.2vw, 3.65rem);
             font-weight: 700;
             color: $color-accent;
-            line-height: 1;
+            line-height: 1.05;
             text-shadow: 0 2px 20px rgba($color-accent, 0.4);
         }
 
         &-label {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             font-weight: 600;
             margin-top: 8px;
         }
