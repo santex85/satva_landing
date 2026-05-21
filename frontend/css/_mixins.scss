@@ -135,14 +135,19 @@
 }
 
 // Секции с фото моря и белым оверлеем (trust-bar, includes)
-@mixin yoga-sea-section-bg {
+@mixin yoga-sea-section-bg($fade-to-white: false) {
     position: relative;
     isolation: isolate;
-    background-color: $color-bg-main;
     background-image: url('../img/yoga_tour/trust_sea.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
+    @if $fade-to-white {
+        background-color: $color-white;
+    } @else {
+        background-color: $color-bg-main;
+    }
 
     &::before {
         content: '';
@@ -150,6 +155,17 @@
         inset: 0;
         z-index: 0;
         pointer-events: none;
-        background: rgba($color-white, 0.72);
+
+        @if $fade-to-white {
+            background: linear-gradient(
+                180deg,
+                rgba($color-white, 0.72) 0%,
+                rgba($color-white, 0.72) 42%,
+                rgba($color-white, 0.88) 72%,
+                $color-white 100%
+            );
+        } @else {
+            background: rgba($color-white, 0.72);
+        }
     }
 }
