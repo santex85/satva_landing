@@ -397,7 +397,9 @@ document.addEventListener('DOMContentLoaded', function () {
         var payload = {};
         if (attrs.name) payload.name = String(attrs.name).trim();
         if (attrs.email) payload.email = String(attrs.email).trim();
-        if (attrs.phone) payload.phone = String(attrs.phone).trim();
+        var phone = String(attrs.phone || '').replace(/[^\d+]/g, '');
+        if (phone && phone.charAt(0) !== '+') phone = '+' + phone.replace(/^\+/, '');
+        if (phone) payload.phone = phone;
         if (!Object.keys(payload).length) return;
 
         function apply() {

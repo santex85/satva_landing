@@ -31,6 +31,59 @@
         return true;
     }
 
+    /** E.164 для Tawk.to: только + и цифры, без пробелов. */
+    function normalizeTawkPhone(phone) {
+        if (!phone) return '';
+        var cleaned = String(phone).replace(/[^\d+]/g, '');
+        if (!cleaned) return '';
+        if (cleaned.charAt(0) !== '+') cleaned = '+' + cleaned.replace(/^\+/, '');
+        return cleaned;
+    }
+
+    /** Передаёт имя/телефон/email посетителя в Tawk.to после успешной заявки. */
+    function setTawkVisitor(attrs) {
+        if (!attrs) return;
+        var payload = {};
+        if (attrs.name) payload.name = String(attrs.name).trim();
+        if (attrs.email) payload.email = String(attrs.email).trim();
+        var phone = normalizeTawkPhone(attrs.phone);
+        if (phone) payload.phone = phone;
+        if (!Object.keys(payload).length) return;
+
+        function apply() {
+            if (!window.Tawk_API || typeof window.Tawk_API.setAttributes !== 'function') return;
+            try {
+                window.Tawk_API.setAttributes(payload, function (err) {
+                    if (err && window.console) console.warn('Tawk setAttributes:', err);
+                });
+                if (typeof window.Tawk_API.addEvent === 'function') {
+                    window.Tawk_API.addEvent('lead-form-submit', {
+                        name: payload.name || '',
+                        phone: payload.phone || '',
+                        email: payload.email || '',
+                    }, function () {});
+                }
+            } catch (e) {
+                if (window.console) console.warn('Tawk visitor sync failed:', e);
+            }
+        }
+
+        if (window.Tawk_API && typeof window.Tawk_API.setAttributes === 'function') {
+            apply();
+            return;
+        }
+        window.Tawk_API = window.Tawk_API || {};
+        var prev = window.Tawk_API.onLoad;
+        window.Tawk_API.onLoad = function () {
+            if (typeof prev === 'function') {
+                try {
+                    prev();
+                } catch (e) {}
+            }
+            apply();
+        };
+    }
+
     /** Собирает телефон из кода страны и национальной части в скрытое поле (для API и проверки). */
     function yogaSyncPhoneHidden(codeEl, nationalEl, hiddenEl) {
         if (!hiddenEl) return '';
@@ -1123,6 +1176,7 @@
                     setFormLoading(false);
                     resetTurnstileLead();
                     if (r.ok) {
+                        setTawkVisitor({ name: payload.name, phone: payload.phone, email: payload.email });
                         form.reset();
                         clearNamePhoneErrors();
                         showFormError('');
@@ -1403,6 +1457,7 @@
                     setFormLoading(false);
                     resetTurnstile();
                     if (r.ok) {
+                        setTawkVisitor({ name: payload.name, phone: payload.phone, email: payload.email });
                         if (successBox) successBox.classList.remove('is-hidden');
                         form.classList.add('is-hidden');
                         form.reset();
