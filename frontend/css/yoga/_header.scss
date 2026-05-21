@@ -55,6 +55,32 @@
         }
     }
 
+    &__slogan {
+        display: none;
+        text-decoration: none;
+        color: $color-white;
+    }
+
+    &__slogan-title {
+        display: block;
+        font-weight: 700;
+        font-size: 0.95rem;
+        line-height: 1.1;
+
+        span {
+            opacity: 0.5;
+            margin: 0 4px;
+        }
+    }
+
+    &__slogan-sub {
+        display: block;
+        margin-top: 2px;
+        font-size: 0.7rem;
+        font-weight: 400;
+        opacity: 0.85;
+    }
+
     &__nav {
         display: flex;
         align-items: center;
@@ -123,6 +149,25 @@
 
 // ---------- Мобильное меню ----------
 @media (max-width: 768px) {
+    .yoga-header__inner {
+        position: relative;
+    }
+
+    .yoga-header__logo {
+        display: none;
+    }
+
+    .yoga-header__slogan {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        max-width: calc(100% - 56px);
+        text-align: center;
+        pointer-events: auto;
+    }
+
     .yoga-header__nav {
         position: fixed;
         top: 0;
