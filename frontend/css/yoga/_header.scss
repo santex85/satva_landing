@@ -38,8 +38,9 @@
 
         @media (max-width: 768px) {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             column-gap: 0;
+            padding: 0 16px;
         }
     }
 
@@ -163,9 +164,24 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        max-width: calc(100% - 56px);
+        max-width: calc(100% - 48px);
+        padding: 0 2px;
         text-align: center;
         pointer-events: auto;
+    }
+
+    .yoga-header__slogan-title {
+        white-space: nowrap;
+        font-size: clamp(0.76rem, 3.4vw, 0.95rem);
+        letter-spacing: -0.01em;
+
+        span {
+            margin: 0 2px;
+        }
+    }
+
+    .yoga-header__slogan-sub {
+        font-size: clamp(0.62rem, 2.8vw, 0.7rem);
     }
 
     .yoga-header__nav {
