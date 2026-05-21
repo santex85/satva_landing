@@ -40,28 +40,50 @@
         return cleaned;
     }
 
-    /** Передаёт имя/телефон/email посетителя в Tawk.to после успешной заявки. */
-    function setTawkVisitor(attrs) {
-        if (!attrs) return;
-        var payload = {};
-        if (attrs.name) payload.name = String(attrs.name).trim();
-        if (attrs.email) payload.email = String(attrs.email).trim();
-        var phone = normalizeTawkPhone(attrs.phone);
-        if (phone) payload.phone = phone;
-        if (!Object.keys(payload).length) return;
+    /** Метаданные для addEvent — без ключей phone/email (Tawk оборачивает их в HTML). */
+    function buildTawkEventMeta(lead) {
+        if (!lead || typeof lead !== 'object') return {};
+        var meta = {};
+        function add(key, val) {
+            if (val == null) return;
+            var s = String(val).trim();
+            if (s) meta[key] = s;
+        }
+        add('name', lead.name);
+        add('phone-number', normalizeTawkPhone(lead.phone) || lead.phone);
+        add('email-address', lead.email);
+        add('arrival-date', lead.preferred_date);
+        add('departure-date', lead.departure_date);
+        add('comment', lead.comment);
+        add('procedure', lead.procedure);
+        add('package', lead.package_slug);
+        add('source', lead.source);
+        return meta;
+    }
+
+    /** Передаёт данные посетителя в Tawk.to после успешной заявки. */
+    function setTawkVisitor(lead) {
+        if (!lead || typeof lead !== 'object') return;
+        var attrs = {};
+        if (lead.name) attrs.name = String(lead.name).trim();
+        if (lead.email) attrs.email = String(lead.email).trim();
+        var phone = normalizeTawkPhone(lead.phone);
+        if (phone) attrs.phone = phone;
+        var eventMeta = buildTawkEventMeta(lead);
+        if (!Object.keys(attrs).length && !Object.keys(eventMeta).length) return;
 
         function apply() {
-            if (!window.Tawk_API || typeof window.Tawk_API.setAttributes !== 'function') return;
+            if (!window.Tawk_API) return;
             try {
-                window.Tawk_API.setAttributes(payload, function (err) {
-                    if (err && window.console) console.warn('Tawk setAttributes:', err);
-                });
-                if (typeof window.Tawk_API.addEvent === 'function') {
-                    window.Tawk_API.addEvent('lead-form-submit', {
-                        name: payload.name || '',
-                        phone: payload.phone || '',
-                        email: payload.email || '',
-                    }, function () {});
+                if (Object.keys(attrs).length && typeof window.Tawk_API.setAttributes === 'function') {
+                    window.Tawk_API.setAttributes(attrs, function (err) {
+                        if (err && window.console) console.warn('Tawk setAttributes:', err);
+                    });
+                }
+                if (Object.keys(eventMeta).length && typeof window.Tawk_API.addEvent === 'function') {
+                    window.Tawk_API.addEvent('lead-form-submit', eventMeta, function (err) {
+                        if (err && window.console) console.warn('Tawk addEvent:', err);
+                    });
                 }
             } catch (e) {
                 if (window.console) console.warn('Tawk visitor sync failed:', e);
@@ -1176,7 +1198,7 @@
                     setFormLoading(false);
                     resetTurnstileLead();
                     if (r.ok) {
-                        setTawkVisitor({ name: payload.name, phone: payload.phone, email: payload.email });
+                        setTawkVisitor(payload);
                         form.reset();
                         clearNamePhoneErrors();
                         showFormError('');
@@ -1457,7 +1479,7 @@
                     setFormLoading(false);
                     resetTurnstile();
                     if (r.ok) {
-                        setTawkVisitor({ name: payload.name, phone: payload.phone, email: payload.email });
+                        setTawkVisitor(payload);
                         if (successBox) successBox.classList.remove('is-hidden');
                         form.classList.add('is-hidden');
                         form.reset();

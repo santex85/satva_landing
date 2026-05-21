@@ -392,21 +392,57 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function setTawkVisitor(attrs) {
-        if (!attrs || (!attrs.name && !attrs.phone && !attrs.email)) return;
-        var payload = {};
-        if (attrs.name) payload.name = String(attrs.name).trim();
-        if (attrs.email) payload.email = String(attrs.email).trim();
-        var phone = String(attrs.phone || '').replace(/[^\d+]/g, '');
-        if (phone && phone.charAt(0) !== '+') phone = '+' + phone.replace(/^\+/, '');
-        if (phone) payload.phone = phone;
-        if (!Object.keys(payload).length) return;
+    function normalizeTawkPhone(phone) {
+        if (!phone) return '';
+        var cleaned = String(phone).replace(/[^\d+]/g, '');
+        if (!cleaned) return '';
+        if (cleaned.charAt(0) !== '+') cleaned = '+' + cleaned.replace(/^\+/, '');
+        return cleaned;
+    }
+
+    function buildTawkEventMeta(lead) {
+        if (!lead || typeof lead !== 'object') return {};
+        var meta = {};
+        function add(key, val) {
+            if (val == null) return;
+            var s = String(val).trim();
+            if (s) meta[key] = s;
+        }
+        add('name', lead.name);
+        add('phone-number', normalizeTawkPhone(lead.phone) || lead.phone);
+        add('email-address', lead.email);
+        add('arrival-date', lead.preferred_date);
+        add('departure-date', lead.departure_date);
+        add('comment', lead.comment);
+        add('procedure', lead.procedure);
+        add('package', lead.package_slug);
+        add('source', lead.source);
+        return meta;
+    }
+
+    function setTawkVisitor(lead) {
+        if (!lead || typeof lead !== 'object') return;
+        var attrs = {};
+        if (lead.name) attrs.name = String(lead.name).trim();
+        if (lead.email) attrs.email = String(lead.email).trim();
+        var phone = normalizeTawkPhone(lead.phone);
+        if (phone) attrs.phone = phone;
+        var eventMeta = buildTawkEventMeta(lead);
+        if (!Object.keys(attrs).length && !Object.keys(eventMeta).length) return;
 
         function apply() {
+            if (!window.Tawk_API) return;
             try {
-                window.Tawk_API.setAttributes(payload, function (err) {
-                    if (err && window.console) console.warn('Tawk setAttributes error:', err);
-                });
+                if (Object.keys(attrs).length && typeof window.Tawk_API.setAttributes === 'function') {
+                    window.Tawk_API.setAttributes(attrs, function (err) {
+                        if (err && window.console) console.warn('Tawk setAttributes error:', err);
+                    });
+                }
+                if (Object.keys(eventMeta).length && typeof window.Tawk_API.addEvent === 'function') {
+                    window.Tawk_API.addEvent('lead-form-submit', eventMeta, function (err) {
+                        if (err && window.console) console.warn('Tawk addEvent error:', err);
+                    });
+                }
             } catch (e) {}
         }
 
@@ -554,7 +590,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         submitBtn.textContent = 'Рассчитать программу';
                     }
                     if (r.ok) {
-                        setTawkVisitor({ name: payload.name, phone: payload.phone, email: payload.email });
+                        setTawkVisitor(payload);
                         if (window.SatvaAnalytics) window.SatvaAnalytics.trackEvent('form', 'submit', formMode);
                         showMessageInForm(contactForm, 'Спасибо! Мы свяжемся с вами в ближайшее время.', 'success');
                         contactForm.reset();
@@ -661,7 +697,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     leadModalSubmit.disabled = false;
                     leadModalSubmit.textContent = 'Отправить';
                     if (r.ok) {
-                        setTawkVisitor({ name: payload.name, phone: payload.phone, email: payload.email });
+                        setTawkVisitor(payload);
                         if (window.SatvaAnalytics) window.SatvaAnalytics.trackEvent('form', 'submit', 'popup');
                         leadFormModal.reset();
                         leadModalName.classList.remove('form-input--success', 'form-input--error');
