@@ -749,7 +749,7 @@ a {
 }
 .yoga-hero__price-value {
   font-size: clamp(2.15rem, 5.2vw, 3.65rem);
-  font-weight: 700;
+  font-weight: 600;
   color: #ff8e72;
   line-height: 1.05;
   text-shadow: 0 2px 20px rgba(255, 142, 114, 0.4);
