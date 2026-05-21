@@ -937,10 +937,26 @@ a {
 }
 
 .yoga-includes {
-  background: #f7f5f2;
+  position: relative;
+  isolation: isolate;
   padding: clamp(60px, 8vw, 100px) 24px;
+  background-color: #f7f5f2;
+  background-image: url("../img/yoga_tour/trust_sea.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.yoga-includes::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.72) 42%, rgba(247, 245, 242, 0.52) 68%, rgba(247, 245, 242, 0.88) 86%, #f7f5f2 100%);
 }
 .yoga-includes__container {
+  position: relative;
+  z-index: 1;
   max-width: 900px;
   margin: 0 auto;
 }
