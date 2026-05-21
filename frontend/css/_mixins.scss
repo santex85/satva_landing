@@ -133,3 +133,23 @@
 %yoga-pill-label {
     @include yoga-pill-label;
 }
+
+// Секции с фото моря и белым оверлеем (trust-bar, includes)
+@mixin yoga-sea-section-bg {
+    position: relative;
+    isolation: isolate;
+    background-color: $color-bg-main;
+    background-image: url('../img/yoga_tour/trust_sea.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background: rgba($color-white, 0.72);
+    }
+}

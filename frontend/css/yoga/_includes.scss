@@ -3,10 +3,12 @@
 
 // 04. Что включено (features grid)
 .yoga-includes {
-    background: $color-bg-main;
+    @include yoga-sea-section-bg;
     padding: clamp(60px, 8vw, 100px) $space-h;
 
     &__container {
+        position: relative;
+        z-index: 1;
         max-width: $container-base;
         margin: 0 auto;
     }
