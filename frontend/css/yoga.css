@@ -481,10 +481,14 @@ a {
 }
 .yoga-header__slogan-sub {
   display: block;
-  margin-top: 2px;
-  font-size: 0.7rem;
+  margin-top: 3px;
+  font-size: 0.85rem;
   font-weight: 400;
+  line-height: 1.25;
   opacity: 0.85;
+}
+.yoga-header__slogan-sub strong {
+  font-weight: 700;
 }
 .yoga-header__nav {
   display: flex;
@@ -549,6 +553,12 @@ a {
 }
 
 @media (max-width: 768px) {
+  .yoga-header {
+    padding: 26px 0;
+  }
+  .yoga-header--scrolled {
+    padding: 14px 0;
+  }
   .yoga-header__inner {
     position: relative;
   }
@@ -575,7 +585,7 @@ a {
     margin: 0 2px;
   }
   .yoga-header__slogan-sub {
-    font-size: clamp(0.62rem, 2.8vw, 0.7rem);
+    font-size: clamp(0.74rem, 3.4vw, 0.85rem);
   }
   .yoga-header__nav {
     position: fixed;
@@ -749,7 +759,7 @@ a {
 }
 .yoga-hero__price-value {
   font-size: clamp(2.15rem, 5.2vw, 3.65rem);
-  font-weight: 600;
+  font-weight: 700;
   color: #ff8e72;
   line-height: 1.05;
   text-shadow: 0 2px 20px rgba(255, 142, 114, 0.4);
@@ -937,26 +947,10 @@ a {
 }
 
 .yoga-includes {
-  position: relative;
-  isolation: isolate;
+  background: #f7f5f2;
   padding: clamp(60px, 8vw, 100px) 24px;
-  background-color: #f7f5f2;
-  background-image: url("../img/yoga_tour/trust_sea.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.yoga-includes::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.72) 42%, rgba(247, 245, 242, 0.52) 68%, rgba(247, 245, 242, 0.88) 86%, #f7f5f2 100%);
 }
 .yoga-includes__container {
-  position: relative;
-  z-index: 1;
   max-width: 900px;
   margin: 0 auto;
 }
