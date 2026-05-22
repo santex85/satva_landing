@@ -62,36 +62,75 @@
         return meta;
     }
 
-    /** Синхронизирует посетителя Tawk + custom event. Inbox-тикеты создаёт сервер (TAWK_TICKET_FORWARD_EMAIL). */
-    function setTawkVisitor(lead) {
-        if (!lead || typeof lead !== 'object') return;
-        var attrs = {};
-        if (lead.name) attrs.name = String(lead.name).trim();
-        if (lead.email) attrs.email = String(lead.email).trim();
-        var phone = normalizeTawkPhone(lead.phone);
-        if (phone) attrs.phone = phone;
+    function trackTawkLeadEvent(lead) {
         var eventMeta = buildTawkEventMeta(lead);
-        if (!Object.keys(attrs).length && !Object.keys(eventMeta).length) return;
+        if (!Object.keys(eventMeta).length) return;
+        if (typeof window.Tawk_API.addEvent === 'function') {
+            window.Tawk_API.addEvent('lead-form-submit', eventMeta, function (err) {
+                if (err && window.console) console.warn('Tawk addEvent:', err);
+            });
+        }
+    }
+
+    /** Синхронизирует контакт Tawk (login + event). Inbox-тикеты — на сервере. */
+    function setTawkVisitor(lead, tawkLogin) {
+        if (!lead || typeof lead !== 'object') return;
+
+        function applySetAttributes() {
+            var attrs = {};
+            if (lead.name) attrs.name = String(lead.name).trim();
+            if (lead.email) attrs.email = String(lead.email).trim();
+            var phone = normalizeTawkPhone(tawkLogin && tawkLogin.phone ? tawkLogin.phone : lead.phone);
+            if (phone) attrs.phone = phone;
+            if (!Object.keys(attrs).length) {
+                trackTawkLeadEvent(lead);
+                return;
+            }
+            if (typeof window.Tawk_API.setAttributes === 'function') {
+                window.Tawk_API.setAttributes(attrs, function (err) {
+                    if (err && window.console) console.warn('Tawk setAttributes:', err);
+                    trackTawkLeadEvent(lead);
+                });
+            } else {
+                trackTawkLeadEvent(lead);
+            }
+        }
 
         function apply() {
             if (!window.Tawk_API) return;
             try {
-                if (Object.keys(attrs).length && typeof window.Tawk_API.setAttributes === 'function') {
-                    window.Tawk_API.setAttributes(attrs, function (err) {
-                        if (err && window.console) console.warn('Tawk setAttributes:', err);
+                if (
+                    tawkLogin &&
+                    tawkLogin.userId &&
+                    tawkLogin.hash &&
+                    typeof window.Tawk_API.login === 'function'
+                ) {
+                    var loginData = {
+                        userId: String(tawkLogin.userId),
+                        hash: String(tawkLogin.hash),
+                    };
+                    if (tawkLogin.name || lead.name) {
+                        loginData.name = String(tawkLogin.name || lead.name).trim();
+                    }
+                    if (tawkLogin.email || lead.email) {
+                        loginData.email = String(tawkLogin.email || lead.email).trim();
+                    }
+                    var loginPhone = normalizeTawkPhone(tawkLogin.phone || lead.phone);
+                    if (loginPhone) loginData.phone = loginPhone;
+
+                    window.Tawk_API.login(loginData, function (err) {
+                        if (err && window.console) console.warn('Tawk login:', err);
+                        trackTawkLeadEvent(lead);
                     });
+                    return;
                 }
-                if (Object.keys(eventMeta).length && typeof window.Tawk_API.addEvent === 'function') {
-                    window.Tawk_API.addEvent('lead-form-submit', eventMeta, function (err) {
-                        if (err && window.console) console.warn('Tawk addEvent:', err);
-                    });
-                }
+                applySetAttributes();
             } catch (e) {
                 if (window.console) console.warn('Tawk visitor sync failed:', e);
             }
         }
 
-        if (window.Tawk_API && typeof window.Tawk_API.setAttributes === 'function') {
+        if (window.Tawk_API && (typeof window.Tawk_API.login === 'function' || typeof window.Tawk_API.setAttributes === 'function')) {
             apply();
             return;
         }
@@ -1199,7 +1238,7 @@
                     setFormLoading(false);
                     resetTurnstileLead();
                     if (r.ok) {
-                        setTawkVisitor(payload);
+                        setTawkVisitor(payload, r.body && r.body.tawk_login);
                         form.reset();
                         clearNamePhoneErrors();
                         showFormError('');
@@ -1480,7 +1519,7 @@
                     setFormLoading(false);
                     resetTurnstile();
                     if (r.ok) {
-                        setTawkVisitor(payload);
+                        setTawkVisitor(payload, r.body && r.body.tawk_login);
                         if (successBox) successBox.classList.remove('is-hidden');
                         form.classList.add('is-hidden');
                         form.reset();

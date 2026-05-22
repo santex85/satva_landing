@@ -7,6 +7,7 @@ from app.models import LeadType
 from app.schemas.contact import ContactRequest, ContactResponse
 from app.services.captcha import verify_turnstile_or_skip
 from app.services.lead_submission import submit_lead
+from app.services.tawk import contact_response_with_tawk
 
 router = APIRouter()
 
@@ -30,4 +31,4 @@ def contact(
         body.website,
         source=body.source,
     )
-    return ContactResponse()
+    return contact_response_with_tawk(body.name, body.email, body.phone)

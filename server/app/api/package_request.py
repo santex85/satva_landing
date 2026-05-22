@@ -8,6 +8,7 @@ from app.schemas.contact import ContactResponse
 from app.schemas.public_forms import PackageRequest
 from app.services.captcha import verify_turnstile_or_skip
 from app.services.lead_submission import submit_lead
+from app.services.tawk import contact_response_with_tawk
 
 router = APIRouter()
 
@@ -35,4 +36,4 @@ def package_request(
         body.website,
         source=body.source,
     )
-    return ContactResponse()
+    return contact_response_with_tawk(body.name, body.email, body.phone)

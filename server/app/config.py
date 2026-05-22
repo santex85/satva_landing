@@ -29,6 +29,10 @@ class Settings(BaseSettings):
     # Каждая заявка уходит письмом → появляется отдельный тикет в Inbox Tawk.
     TAWK_TICKET_FORWARD_EMAIL: str = ""
 
+    # Tawk JavaScript API key (Administration → Overview → JavaScript API → Key).
+    # Нужен для login() с hash — телефон попадает в поле Contact (E.164).
+    TAWK_JS_API_KEY: str = ""
+
     # Cloudflare Turnstile (на Host localhost/127.0.0.1 проверка отключена; пустой secret + DEBUG=true — тоже пропуск)
     TURNSTILE_SECRET_KEY: str = ""
     TURNSTILE_SITE_KEY: str = ""

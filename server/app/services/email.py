@@ -187,7 +187,10 @@ def send_tawk_ticket_notification(
 
     name = (payload.get("name") or "").strip() or "Гость"
     procedure = (payload.get("procedure") or "").strip()
+    phone = (payload.get("phone") or "").strip()
     subject = f"Заявка с сайта — {name}"
+    if phone:
+        subject = f"{subject} — {phone}"
     if procedure:
         subject = f"{subject} — {procedure[:120]}"
 
