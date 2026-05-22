@@ -311,3 +311,176 @@
   color: #b02a37;
   font-weight: 600;
 }
+
+/* Navigation */
+.admin-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(15, 76, 92, 0.15);
+}
+
+.admin-nav__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.admin-nav__tab {
+  padding: 0.5rem 1rem;
+  border: 2px solid rgba(15, 76, 92, 0.25);
+  border-radius: 0.75rem;
+  background: #fff;
+  color: #0F4C5C;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-nav__tab:hover {
+  background: rgba(15, 76, 92, 0.06);
+}
+
+.admin-nav__tab--active {
+  background: linear-gradient(135deg, #0F4C5C 0%, #093642 100%);
+  color: #fff;
+  border-color: transparent;
+}
+
+/* Settings */
+.admin-settings-header h1 {
+  margin: 0 0 1.5rem;
+  font-size: 1.75rem;
+  color: #0F4C5C;
+}
+
+.admin-settings-card {
+  background: #fff;
+  border: 1px solid rgba(15, 76, 92, 0.15);
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(15, 76, 92, 0.06);
+}
+
+.admin-settings-card h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+  color: #0F4C5C;
+}
+
+.admin-settings-hint {
+  margin: 0 0 1rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.admin-settings-account {
+  margin: 0;
+  color: #2D3436;
+}
+
+.admin-settings-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(15, 76, 92, 0.25);
+  border-radius: 1rem;
+  background: #fff;
+  color: #2D3436;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+}
+
+.admin-settings-input:focus {
+  outline: none;
+  border-color: #0F4C5C;
+  box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.15);
+}
+
+.admin-settings-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.admin-settings-form label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  color: #0F4C5C;
+  font-size: 0.9rem;
+}
+
+.admin-email-list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.admin-email-list__empty {
+  color: #666;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.admin-email-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.5rem 0.35rem 0.75rem;
+  background: rgba(15, 76, 92, 0.08);
+  border: 1px solid rgba(15, 76, 92, 0.2);
+  border-radius: 2rem;
+  font-size: 0.9rem;
+  color: #2D3436;
+}
+
+.admin-email-chip__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(15, 76, 92, 0.15);
+  color: #0F4C5C;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.admin-email-chip__remove:hover {
+  background: rgba(220, 53, 69, 0.2);
+  color: #b02a37;
+}
+
+.admin-email-add {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.admin-email-add .admin-settings-input {
+  flex: 1 1 200px;
+}
+
+.form-message--success {
+  background: rgba(25, 135, 84, 0.12);
+  color: #146c43;
+  border: 1px solid rgba(25, 135, 84, 0.25);
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}

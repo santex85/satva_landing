@@ -1,0 +1,37 @@
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+
+from app.api.deps import get_current_user_id
+from app.core.database import get_db
+from app.schemas.admin_settings import AdminSettingsOut, AdminSettingsUpdate
+from app.services.app_settings import (
+    ensure_lead_notification_emails_initialized,
+    get_lead_notification_emails,
+    set_lead_notification_emails,
+)
+
+router = APIRouter()
+
+
+@router.get("/admin/settings", response_model=AdminSettingsOut)
+def get_admin_settings(
+    db: Session = Depends(get_db),
+    _: int = Depends(get_current_user_id),
+):
+    emails = ensure_lead_notification_emails_initialized(db)
+    if not emails:
+        emails = get_lead_notification_emails(db)
+    return AdminSettingsOut(lead_notification_emails=emails)
+
+
+@router.put("/admin/settings", response_model=AdminSettingsOut)
+def update_admin_settings(
+    body: AdminSettingsUpdate,
+    db: Session = Depends(get_db),
+    _: int = Depends(get_current_user_id),
+):
+    try:
+        emails = set_lead_notification_emails(db, [str(email) for email in body.lead_notification_emails])
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return AdminSettingsOut(lead_notification_emails=emails)

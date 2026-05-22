@@ -2,8 +2,10 @@ import logging
 from datetime import date, datetime
 
 import resend
+from sqlalchemy.orm import Session
 
 from app.config import settings
+from app.services.app_settings import get_lead_notification_emails
 
 logger = logging.getLogger(__name__)
 
@@ -141,14 +143,15 @@ def send_lead_notification(
     payload: dict,
     created_at: datetime | None = None,
     source: str | None = None,
+    db: Session | None = None,
 ) -> None:
     if not settings.RESEND_API_KEY or not settings.RESEND_FROM:
         logger.warning("Resend not configured, skipping email")
         return
 
-    recipients = _recipients()
+    recipients = get_lead_notification_emails(db) if db is not None else _recipients()
     if not recipients:
-        logger.warning("RESEND_TO has no recipients, skipping email")
+        logger.warning("No lead notification recipients configured, skipping email")
         return
 
     subject = f"Новая заявка с сайта — {_lead_type_label(lead_type)}"

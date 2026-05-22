@@ -13,6 +13,13 @@ def get_current_user_id(
     credentials: HTTPAuthorizationCredentials | None = Depends(security),
     db: Session = Depends(get_db),
 ) -> int:
+    return get_current_user(credentials, db).id
+
+
+def get_current_user(
+    credentials: HTTPAuthorizationCredentials | None = Depends(security),
+    db: Session = Depends(get_db),
+) -> AdminUser:
     if not credentials or credentials.credentials is None:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
     sub = decode_access_token(credentials.credentials)
@@ -25,4 +32,4 @@ def get_current_user_id(
     user = db.query(AdminUser).filter(AdminUser.id == user_id, AdminUser.is_active == True).first()
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
-    return user_id
+    return user

@@ -10,6 +10,14 @@
 </head>
 <body class="admin-page">
     <div class="admin-container">
+        <nav id="admin-nav" class="admin-nav admin-hidden" aria-label="Навигация админки">
+            <div class="admin-nav__tabs">
+                <button type="button" id="admin-nav-leads" class="admin-nav__tab admin-nav__tab--active" data-nav="leads">Заявки</button>
+                <button type="button" id="admin-nav-settings" class="admin-nav__tab" data-nav="settings">Настройки</button>
+            </div>
+            <button type="button" id="admin-logout" class="admin-btn admin-btn--secondary admin-btn--small">Выйти</button>
+        </nav>
+
         <!-- 1. Блок входа -->
         <section id="admin-login" class="admin-block">
             <h1>Вход в админку</h1>
@@ -45,7 +53,6 @@
                         <button type="button" id="admin-apply-filters" class="admin-btn admin-btn--small">Применить</button>
                         <button type="button" id="admin-clear-dates" class="admin-btn admin-btn--small admin-btn--secondary">Сбросить даты</button>
                     </div>
-                    <button type="button" id="admin-logout" class="admin-btn admin-btn--secondary">Выйти</button>
                 </div>
             </div>
             <div class="admin-table-wrap">
@@ -85,6 +92,51 @@
             <div class="admin-detail-section">
                 <h2>Согласия</h2>
                 <div id="admin-detail-consents"></div>
+            </div>
+        </section>
+
+        <!-- 4. Блок настроек -->
+        <section id="admin-settings" class="admin-block admin-hidden">
+            <div class="admin-settings-header">
+                <h1>Настройки</h1>
+            </div>
+
+            <div class="admin-settings-card">
+                <h2>Уведомления о заявках</h2>
+                <p class="admin-settings-hint">На эти адреса приходит письмо при каждой новой заявке с сайта.</p>
+                <ul id="admin-email-list" class="admin-email-list" aria-live="polite"></ul>
+                <div class="admin-email-add">
+                    <label for="admin-email-input" class="visually-hidden">Email получателя</label>
+                    <input type="email" id="admin-email-input" class="form-input admin-settings-input" placeholder="email@example.com" autocomplete="email">
+                    <button type="button" id="admin-email-add" class="admin-btn admin-btn--secondary admin-btn--small">Добавить</button>
+                </div>
+                <button type="button" id="admin-settings-save" class="admin-btn admin-btn--primary">Сохранить</button>
+                <div id="admin-settings-message" class="form-message" role="alert" aria-live="polite"></div>
+            </div>
+
+            <div class="admin-settings-card">
+                <h2>Аккаунт</h2>
+                <p class="admin-settings-account">Email: <strong id="admin-me-email">—</strong></p>
+            </div>
+
+            <div class="admin-settings-card">
+                <h2>Смена пароля</h2>
+                <form id="admin-password-form" class="admin-settings-form">
+                    <div class="form-group">
+                        <label for="admin-current-password">Текущий пароль</label>
+                        <input type="password" id="admin-current-password" class="form-input admin-settings-input" required autocomplete="current-password">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-new-password">Новый пароль</label>
+                        <input type="password" id="admin-new-password" class="form-input admin-settings-input" required autocomplete="new-password" minlength="8">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-confirm-password">Подтверждение пароля</label>
+                        <input type="password" id="admin-confirm-password" class="form-input admin-settings-input" required autocomplete="new-password" minlength="8">
+                    </div>
+                    <button type="submit" class="admin-btn admin-btn--primary">Изменить пароль</button>
+                    <div id="admin-password-message" class="form-message" role="alert" aria-live="polite"></div>
+                </form>
             </div>
         </section>
     </div>

@@ -45,7 +45,7 @@ def submit_lead(
     db.refresh(lead)
 
     try:
-        send_lead_notification(lead_type, lead.payload, lead.created_at, source=source)
+        send_lead_notification(lead_type, lead.payload, lead.created_at, source=source, db=db)
     except Exception:
         pass
 

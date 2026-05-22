@@ -44,9 +44,9 @@ deploy-dev-down:
 deploy-dev-logs:
 	$(COMPOSE) logs -f
 
-# Статика на прод-сервере: сброс сгенерированных *.css (чтобы pull не падал на «local changes»), pull, build-all, nginx
+# Статика + API на прод-сервере: pull, build CSS, docker rebuild (миграции в entrypoint)
 deploy-prod:
-	ssh $(DEPLOY_USER)@$(DEPLOY_HOST) 'cd $(DEPLOY_PATH) && git checkout -- frontend/css/main.css frontend/css/yoga.css 2>/dev/null || true && git pull origin main && cd frontend && make build-all && cd .. && chown -R www-data:www-data . && nginx -t && systemctl reload nginx && echo Deploy OK'
+	ssh $(DEPLOY_USER)@$(DEPLOY_HOST) 'cd $(DEPLOY_PATH) && git checkout -- frontend/css/main.css frontend/css/yoga.css 2>/dev/null || true && git pull origin main && cd frontend && make build-all && cd .. && docker compose -f docker-compose.prod.yml --env-file .env.deploy up -d --build && chown -R www-data:www-data frontend && nginx -t && systemctl reload nginx && echo Deploy OK'
 
 # То же с минифицированным CSS (как рекомендовано в DEPLOY.md для production)
 deploy-prod-min:
