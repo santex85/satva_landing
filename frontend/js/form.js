@@ -417,28 +417,20 @@ document.addEventListener('DOMContentLoaded', function () {
         add('procedure', lead.procedure);
         add('package', lead.package_slug);
         add('source', lead.source);
+        add('submitted-at', new Date().toISOString());
         return meta;
     }
 
+    /** Записывает заявку в Tawk как custom event (без setAttributes — иначе в одной сессии перезаписывается один контакт). */
     function setTawkVisitor(lead) {
         if (!lead || typeof lead !== 'object') return;
-        var attrs = {};
-        if (lead.name) attrs.name = String(lead.name).trim();
-        if (lead.email) attrs.email = String(lead.email).trim();
-        var phone = normalizeTawkPhone(lead.phone);
-        if (phone) attrs.phone = phone;
         var eventMeta = buildTawkEventMeta(lead);
-        if (!Object.keys(attrs).length && !Object.keys(eventMeta).length) return;
+        if (!Object.keys(eventMeta).length) return;
 
         function apply() {
             if (!window.Tawk_API) return;
             try {
-                if (Object.keys(attrs).length && typeof window.Tawk_API.setAttributes === 'function') {
-                    window.Tawk_API.setAttributes(attrs, function (err) {
-                        if (err && window.console) console.warn('Tawk setAttributes error:', err);
-                    });
-                }
-                if (Object.keys(eventMeta).length && typeof window.Tawk_API.addEvent === 'function') {
+                if (typeof window.Tawk_API.addEvent === 'function') {
                     window.Tawk_API.addEvent('lead-form-submit', eventMeta, function (err) {
                         if (err && window.console) console.warn('Tawk addEvent error:', err);
                     });
@@ -446,7 +438,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } catch (e) {}
         }
 
-        if (window.Tawk_API && typeof window.Tawk_API.setAttributes === 'function') {
+        if (window.Tawk_API && typeof window.Tawk_API.addEvent === 'function') {
             apply();
             return;
         }
