@@ -94,9 +94,17 @@ git checkout -- frontend/css/main.css frontend/css/yoga.css 2>/dev/null || true
 git pull origin main
 cd frontend && make build-all && cd ..
 docker compose -f docker-compose.prod.yml --env-file .env.deploy up -d --build
+docker compose -f docker-compose.prod.yml restart nginx
 ```
 
----
+### Админка
+
+Панель заявок **не** доступна по `/admin.html` (404). Рабочий URL:
+
+**https://satvasamui.site/samui-ctl-x7f2**
+
+Файл в репозитории: `frontend/samui-ctl-x7f2.html`. Прямой доступ к `*.html` этого пути тоже закрыт в nginx.
+
 
 ## Шаги деплоя (только статика, без Docker API)
 
