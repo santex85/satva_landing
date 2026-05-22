@@ -25,6 +25,10 @@ class Settings(BaseSettings):
     RESEND_FROM: str = ""
     RESEND_TO: str = ""
 
+    # Tawk.to: адрес «Ticket forwarding email» (Administration → Overview).
+    # Каждая заявка уходит письмом → появляется отдельный тикет в Inbox Tawk.
+    TAWK_TICKET_FORWARD_EMAIL: str = ""
+
     # Cloudflare Turnstile (на Host localhost/127.0.0.1 проверка отключена; пустой secret + DEBUG=true — тоже пропуск)
     TURNSTILE_SECRET_KEY: str = ""
     TURNSTILE_SITE_KEY: str = ""

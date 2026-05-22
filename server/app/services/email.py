@@ -169,3 +169,46 @@ def send_lead_notification(
             extra={"lead_type": lead_type, "error": str(e)},
             exc_info=True,
         )
+
+
+def send_tawk_ticket_notification(
+    lead_type: str,
+    payload: dict,
+    created_at: datetime | None = None,
+    source: str | None = None,
+) -> None:
+    """Создаёт тикет в Tawk Inbox через ticket forwarding email (официальный обход без REST API)."""
+    forward = (settings.TAWK_TICKET_FORWARD_EMAIL or "").strip()
+    if not forward:
+        return
+    if not settings.RESEND_API_KEY or not settings.RESEND_FROM:
+        logger.warning("TAWK_TICKET_FORWARD_EMAIL set but Resend is not configured")
+        return
+
+    name = (payload.get("name") or "").strip() or "Гость"
+    procedure = (payload.get("procedure") or "").strip()
+    subject = f"Заявка с сайта — {name}"
+    if procedure:
+        subject = f"{subject} — {procedure[:120]}"
+
+    body = _build_body(lead_type, payload, created_at, source)
+    message: dict = {
+        "from": settings.RESEND_FROM,
+        "to": [forward],
+        "subject": subject,
+        "text": body,
+    }
+    email = (payload.get("email") or "").strip()
+    if email:
+        message["reply_to"] = email
+
+    resend.api_key = settings.RESEND_API_KEY
+    try:
+        resend.Emails.send(message)
+        logger.info("Tawk ticket email sent", extra={"lead_type": lead_type, "name": name})
+    except Exception as e:
+        logger.error(
+            "Failed to send Tawk ticket email",
+            extra={"lead_type": lead_type, "error": str(e)},
+            exc_info=True,
+        )

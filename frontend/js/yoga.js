@@ -62,16 +62,26 @@
         return meta;
     }
 
-    /** Записывает заявку в Tawk как custom event (без setAttributes — иначе в одной сессии перезаписывается один контакт). */
+    /** Синхронизирует посетителя Tawk + custom event. Inbox-тикеты создаёт сервер (TAWK_TICKET_FORWARD_EMAIL). */
     function setTawkVisitor(lead) {
         if (!lead || typeof lead !== 'object') return;
+        var attrs = {};
+        if (lead.name) attrs.name = String(lead.name).trim();
+        if (lead.email) attrs.email = String(lead.email).trim();
+        var phone = normalizeTawkPhone(lead.phone);
+        if (phone) attrs.phone = phone;
         var eventMeta = buildTawkEventMeta(lead);
-        if (!Object.keys(eventMeta).length) return;
+        if (!Object.keys(attrs).length && !Object.keys(eventMeta).length) return;
 
         function apply() {
             if (!window.Tawk_API) return;
             try {
-                if (typeof window.Tawk_API.addEvent === 'function') {
+                if (Object.keys(attrs).length && typeof window.Tawk_API.setAttributes === 'function') {
+                    window.Tawk_API.setAttributes(attrs, function (err) {
+                        if (err && window.console) console.warn('Tawk setAttributes:', err);
+                    });
+                }
+                if (Object.keys(eventMeta).length && typeof window.Tawk_API.addEvent === 'function') {
                     window.Tawk_API.addEvent('lead-form-submit', eventMeta, function (err) {
                         if (err && window.console) console.warn('Tawk addEvent:', err);
                     });
@@ -81,7 +91,7 @@
             }
         }
 
-        if (window.Tawk_API && typeof window.Tawk_API.addEvent === 'function') {
+        if (window.Tawk_API && typeof window.Tawk_API.setAttributes === 'function') {
             apply();
             return;
         }

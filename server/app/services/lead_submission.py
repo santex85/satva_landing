@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.config import settings
 from app.models import Consent, Lead
-from app.services.email import send_lead_notification
+from app.services.email import send_lead_notification, send_tawk_ticket_notification
 
 
 def submit_lead(
@@ -46,6 +46,11 @@ def submit_lead(
 
     try:
         send_lead_notification(lead_type, lead.payload, lead.created_at, source=source)
+    except Exception:
+        pass
+
+    try:
+        send_tawk_ticket_notification(lead_type, lead.payload, lead.created_at, source=source)
     except Exception:
         pass
 
