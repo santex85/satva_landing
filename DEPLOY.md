@@ -94,7 +94,14 @@ git checkout -- frontend/css/main.css frontend/css/yoga.css 2>/dev/null || true
 git pull origin main
 cd frontend && make build-all && cd ..
 docker compose -f docker-compose.prod.yml --env-file .env.deploy up -d --build
-docker compose -f docker-compose.prod.yml restart nginx
+docker compose -f docker-compose.prod.yml --env-file .env.deploy restart nginx
+```
+
+На сервере **хостовый nginx** раздаёт `frontend/` напрямую (не через Docker). После изменений в `deploy/nginx-host-satvasamui.site.conf`:
+
+```bash
+cp deploy/nginx-host-satvasamui.site.conf /etc/nginx/sites-available/satvasamui.site
+nginx -t && systemctl reload nginx
 ```
 
 ### Админка

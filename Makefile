@@ -46,7 +46,7 @@ deploy-dev-logs:
 
 # Статика + API на прод-сервере: pull, build CSS, docker rebuild (миграции в entrypoint)
 deploy-prod:
-	ssh $(DEPLOY_USER)@$(DEPLOY_HOST) 'cd $(DEPLOY_PATH) && git checkout -- frontend/css/main.css frontend/css/yoga.css 2>/dev/null || true && git pull origin main && cd frontend && make build-all && cd .. && docker compose -f docker-compose.prod.yml --env-file .env.deploy up -d --build && docker compose -f docker-compose.prod.yml restart nginx && chown -R www-data:www-data frontend && nginx -t && systemctl reload nginx && echo Deploy OK'
+	ssh $(DEPLOY_USER)@$(DEPLOY_HOST) 'cd $(DEPLOY_PATH) && git checkout -- frontend/css/main.css frontend/css/yoga.css 2>/dev/null || true && git pull origin main && cd frontend && make build-all && cd .. && docker compose -f docker-compose.prod.yml --env-file .env.deploy up -d --build && docker compose -f docker-compose.prod.yml --env-file .env.deploy restart nginx && cp deploy/nginx-host-satvasamui.site.conf /etc/nginx/sites-available/satvasamui.site && chown -R www-data:www-data frontend && nginx -t && systemctl reload nginx && echo Deploy OK'
 
 # То же с минифицированным CSS (как рекомендовано в DEPLOY.md для production)
 deploy-prod-min:
