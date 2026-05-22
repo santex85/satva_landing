@@ -82,6 +82,10 @@
     return false;
   }
 
+  function setLoggedIn(isLoggedIn) {
+    document.body.classList.toggle("admin-logged-in", isLoggedIn);
+  }
+
   function showBlock(name) {
     Object.keys(blocks).forEach(function (key) {
       if (blocks[key]) {
@@ -92,6 +96,7 @@
       var showNav = name !== "login";
       els.nav.classList.toggle("admin-hidden", !showNav);
     }
+    setLoggedIn(name !== "login");
     updateNavTabs(name);
   }
 
@@ -106,6 +111,7 @@
   }
 
   function showLogin() {
+    setLoggedIn(false);
     showBlock("login");
     if (els.loginMessage) {
       els.loginMessage.textContent = "";

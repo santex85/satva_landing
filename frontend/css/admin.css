@@ -15,7 +15,11 @@
   display: none !important;
 }
 
-.admin-page body {
+body.admin-page:not(.admin-logged-in) .admin-nav {
+  display: none !important;
+}
+
+body.admin-page {
   padding-top: 2rem;
 }
 
@@ -320,8 +324,14 @@
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(15, 76, 92, 0.15);
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(15, 76, 92, 0.15);
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(15, 76, 92, 0.08);
+  position: sticky;
+  top: 0.75rem;
+  z-index: 10;
 }
 
 .admin-nav__tabs {
