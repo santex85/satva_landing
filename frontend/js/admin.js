@@ -23,10 +23,20 @@
     settings: null,
   };
 
+  var PAGE_TITLES = {
+    leads: "Заявки",
+    detail: "Заявка",
+    settings: "Настройки",
+  };
+
   var els = {
     nav: null,
     navLeads: null,
     navSettings: null,
+    topbar: null,
+    pageTitle: null,
+    sidebarToggle: null,
+    sidebarOverlay: null,
     loginForm: null,
     loginMessage: null,
     leadsTableBody: null,
@@ -86,18 +96,62 @@
     document.body.classList.toggle("admin-logged-in", isLoggedIn);
   }
 
+  function closeSidebar() {
+    document.body.classList.remove("admin-sidebar-open");
+    if (els.sidebarToggle) {
+      els.sidebarToggle.setAttribute("aria-expanded", "false");
+      els.sidebarToggle.setAttribute("aria-label", "Открыть меню");
+    }
+    if (els.sidebarOverlay) {
+      els.sidebarOverlay.classList.add("admin-hidden");
+      els.sidebarOverlay.setAttribute("aria-hidden", "true");
+    }
+  }
+
+  function openSidebar() {
+    document.body.classList.add("admin-sidebar-open");
+    if (els.sidebarToggle) {
+      els.sidebarToggle.setAttribute("aria-expanded", "true");
+      els.sidebarToggle.setAttribute("aria-label", "Закрыть меню");
+    }
+    if (els.sidebarOverlay) {
+      els.sidebarOverlay.classList.remove("admin-hidden");
+      els.sidebarOverlay.setAttribute("aria-hidden", "false");
+    }
+  }
+
+  function toggleSidebar() {
+    if (document.body.classList.contains("admin-sidebar-open")) {
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
+  }
+
+  function updatePageTitle(name) {
+    if (!els.pageTitle) return;
+    els.pageTitle.textContent = PAGE_TITLES[name] || "Админка";
+  }
+
   function showBlock(name) {
     Object.keys(blocks).forEach(function (key) {
       if (blocks[key]) {
         blocks[key].classList.toggle("admin-hidden", key !== name);
       }
     });
+    var showNav = name !== "login";
     if (els.nav) {
-      var showNav = name !== "login";
       els.nav.classList.toggle("admin-hidden", !showNav);
     }
-    setLoggedIn(name !== "login");
+    if (els.topbar) {
+      els.topbar.classList.toggle("admin-hidden", !showNav);
+    }
+    setLoggedIn(showNav);
     updateNavTabs(name);
+    updatePageTitle(name);
+    if (showNav) {
+      closeSidebar();
+    }
   }
 
   function updateNavTabs(name) {
@@ -197,7 +251,7 @@
       })
       .catch(function (err) {
         if (els.leadsTableBody) {
-          els.leadsTableBody.innerHTML = "<tr><td colspan=\"5\" class=\"admin-error-msg\">" + (err.message || "Ошибка загрузки") + "</td></tr>";
+          els.leadsTableBody.innerHTML = "<tr><td colspan=\"5\" class=\"admin-table__empty admin-error-msg\">" + (err.message || "Ошибка загрузки") + "</td></tr>";
         }
       });
   }
@@ -207,7 +261,7 @@
     if (!tbody) return;
     var rows = state.leadsData;
     if (!rows.length) {
-      tbody.innerHTML = "<tr><td colspan=\"5\">Нет заявок</td></tr>";
+      tbody.innerHTML = "<tr><td colspan=\"5\" class=\"admin-table__empty\">Нет заявок</td></tr>";
       return;
     }
     tbody.innerHTML = rows
@@ -219,7 +273,7 @@
         return (
           "<tr>" +
           "<td>" + formatDate(lead.created_at) + "</td>" +
-          "<td>" + (lead.type || "—") + "</td>" +
+          "<td><span class=\"admin-type-badge\">" + escapeHtml(lead.type || "—") + "</span></td>" +
           "<td>" + escapeHtml(name) + "</td>" +
           "<td>" + escapeHtml(phone) + "</td>" +
           "<td><button type=\"button\" class=\"admin-btn admin-btn--primary admin-btn--small\" data-lead-id=\"" + escapeAttr(String(id)) + "\">Подробнее</button></td>" +
@@ -455,6 +509,10 @@
     els.nav = document.getElementById("admin-nav");
     els.navLeads = document.getElementById("admin-nav-leads");
     els.navSettings = document.getElementById("admin-nav-settings");
+    els.topbar = document.getElementById("admin-topbar");
+    els.pageTitle = document.getElementById("admin-page-title");
+    els.sidebarToggle = document.getElementById("admin-sidebar-toggle");
+    els.sidebarOverlay = document.getElementById("admin-sidebar-overlay");
     els.loginForm = document.getElementById("admin-login-form");
     els.loginMessage = document.getElementById("admin-login-message");
     els.leadsTableBody = document.getElementById("admin-leads-tbody");
@@ -594,8 +652,17 @@
     if (els.logoutBtn) {
       els.logoutBtn.addEventListener("click", function () {
         clearToken();
+        closeSidebar();
         showLogin();
       });
+    }
+
+    if (els.sidebarToggle) {
+      els.sidebarToggle.addEventListener("click", toggleSidebar);
+    }
+
+    if (els.sidebarOverlay) {
+      els.sidebarOverlay.addEventListener("click", closeSidebar);
     }
 
     if (els.emailAddBtn) {

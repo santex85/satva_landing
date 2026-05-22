@@ -6,140 +6,217 @@
     <title>Админка — Satva</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/admin.css?v=2">
+    <link rel="stylesheet" href="css/admin.css?v=3">
 </head>
 <body class="admin-page">
-    <div class="admin-container">
-        <nav id="admin-nav" class="admin-nav" aria-label="Навигация админки">
-            <div class="admin-nav__tabs">
-                <button type="button" id="admin-nav-leads" class="admin-nav__tab admin-nav__tab--active" data-nav="leads">Заявки</button>
-                <button type="button" id="admin-nav-settings" class="admin-nav__tab" data-nav="settings">Настройки</button>
+    <div class="admin-app">
+        <aside id="admin-nav" class="admin-sidebar admin-hidden" aria-label="Навигация админки">
+            <div class="admin-sidebar__brand">
+                <span class="admin-sidebar__logo">Satva</span>
+                <span class="admin-sidebar__subtitle">Админ-панель</span>
             </div>
-            <button type="button" id="admin-logout" class="admin-btn admin-btn--secondary admin-btn--small">Выйти</button>
-        </nav>
-
-        <!-- 1. Блок входа -->
-        <section id="admin-login" class="admin-block">
-            <h1>Вход в админку</h1>
-            <form id="admin-login-form" class="admin-login-form">
-                <div class="form-group">
-                    <label for="admin-email">Email</label>
-                    <input type="email" id="admin-email" name="email" class="form-input" required autocomplete="email" placeholder="admin@example.com">
-                </div>
-                <div class="form-group">
-                    <label for="admin-password">Пароль</label>
-                    <input type="password" id="admin-password" name="password" class="form-input" required autocomplete="current-password" placeholder="••••••••">
-                </div>
-                <button type="submit" class="btn-submit">Войти</button>
-                <div id="admin-login-message" class="form-message" role="alert" aria-live="polite"></div>
-            </form>
-        </section>
-
-        <!-- 2. Блок списка заявок -->
-        <section id="admin-leads" class="admin-block admin-hidden">
-            <div class="admin-leads-header">
-                <h1>Заявки</h1>
-                <div class="admin-toolbar">
-                    <label for="admin-leads-filter" class="visually-hidden">Фильтр по типу</label>
-                    <select id="admin-leads-filter" class="admin-filter-select" aria-label="Фильтр по типу заявки">
-                        <option value="">Все</option>
-                        <option value="contact">contact</option>
-                        <option value="procedure_booking">procedure_booking</option>
-                        <option value="package_choice">package_choice</option>
-                    </select>
-                    <div class="admin-date-filters" role="group" aria-label="Фильтр по дате создания">
-                        <label class="admin-date-label">с <input type="datetime-local" id="admin-date-from" class="admin-date-input"></label>
-                        <label class="admin-date-label">по <input type="datetime-local" id="admin-date-to" class="admin-date-input"></label>
-                        <button type="button" id="admin-apply-filters" class="admin-btn admin-btn--small">Применить</button>
-                        <button type="button" id="admin-clear-dates" class="admin-btn admin-btn--small admin-btn--secondary">Сбросить даты</button>
-                    </div>
-                </div>
-            </div>
-            <div class="admin-table-wrap">
-                <table class="admin-table" role="grid" aria-label="Список заявок">
-                    <thead>
-                        <tr>
-                            <th>Дата</th>
-                            <th>Тип</th>
-                            <th>Имя</th>
-                            <th>Телефон</th>
-                            <th>Действие</th>
-                        </tr>
-                    </thead>
-                    <tbody id="admin-leads-tbody">
-                        <tr><td colspan="5">Загрузка…</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <nav class="admin-pagination" aria-label="Пагинация">
-                <button type="button" id="admin-pagination-prev" class="admin-btn admin-btn--secondary">Назад</button>
-                <span id="admin-pagination-info" aria-live="polite">—</span>
-                <button type="button" id="admin-pagination-next" class="admin-btn admin-btn--secondary">Вперёд</button>
+            <nav class="admin-sidebar__nav">
+                <button type="button" id="admin-nav-leads" class="admin-sidebar__link admin-nav__tab admin-nav__tab--active" data-nav="leads">
+                    <svg class="admin-sidebar__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    Заявки
+                </button>
+                <button type="button" id="admin-nav-settings" class="admin-sidebar__link admin-nav__tab" data-nav="settings">
+                    <svg class="admin-sidebar__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    Настройки
+                </button>
             </nav>
-        </section>
+            <div class="admin-sidebar__footer">
+                <button type="button" id="admin-logout" class="admin-sidebar__logout">
+                    <svg class="admin-sidebar__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    Выйти
+                </button>
+            </div>
+        </aside>
 
-        <!-- 3. Блок одной заявки -->
-        <section id="admin-lead-detail" class="admin-block admin-hidden">
-            <div class="admin-detail-header">
-                <button type="button" id="admin-detail-back" class="admin-btn admin-btn--secondary">Назад к списку</button>
-                <h1>Заявка</h1>
-            </div>
-            <p id="admin-detail-loading" class="admin-loading">Загрузка…</p>
-            <div class="admin-detail-section">
-                <h2>Данные заявки</h2>
-                <div id="admin-detail-payload" class="admin-detail-payload"></div>
-            </div>
-            <div class="admin-detail-section">
-                <h2>Согласия</h2>
-                <div id="admin-detail-consents"></div>
-            </div>
-        </section>
+        <div id="admin-sidebar-overlay" class="admin-sidebar-overlay admin-hidden" aria-hidden="true"></div>
 
-        <!-- 4. Блок настроек -->
-        <section id="admin-settings" class="admin-block admin-hidden">
-            <div class="admin-settings-header">
-                <h1>Настройки</h1>
-            </div>
+        <div class="admin-main-wrap">
+            <header class="admin-topbar admin-hidden" id="admin-topbar">
+                <button type="button" id="admin-sidebar-toggle" class="admin-sidebar-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="admin-nav">
+                    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+                <span class="admin-topbar__title" id="admin-page-title">Заявки</span>
+            </header>
 
-            <div class="admin-settings-card">
-                <h2>Уведомления о заявках</h2>
-                <p class="admin-settings-hint">На эти адреса приходит письмо при каждой новой заявке с сайта.</p>
-                <ul id="admin-email-list" class="admin-email-list" aria-live="polite"></ul>
-                <div class="admin-email-add">
-                    <label for="admin-email-input" class="visually-hidden">Email получателя</label>
-                    <input type="email" id="admin-email-input" class="form-input admin-settings-input" placeholder="email@example.com" autocomplete="email">
-                    <button type="button" id="admin-email-add" class="admin-btn admin-btn--secondary admin-btn--small">Добавить</button>
-                </div>
-                <button type="button" id="admin-settings-save" class="admin-btn admin-btn--primary">Сохранить</button>
-                <div id="admin-settings-message" class="form-message" role="alert" aria-live="polite"></div>
-            </div>
-
-            <div class="admin-settings-card">
-                <h2>Аккаунт</h2>
-                <p class="admin-settings-account">Email: <strong id="admin-me-email">—</strong></p>
-            </div>
-
-            <div class="admin-settings-card">
-                <h2>Смена пароля</h2>
-                <form id="admin-password-form" class="admin-settings-form">
-                    <div class="form-group">
-                        <label for="admin-current-password">Текущий пароль</label>
-                        <input type="password" id="admin-current-password" class="form-input admin-settings-input" required autocomplete="current-password">
+            <main class="admin-main">
+                <!-- 1. Блок входа -->
+                <section id="admin-login" class="admin-block admin-login-view">
+                    <div class="admin-login-card">
+                        <div class="admin-login-brand">
+                            <span class="admin-login-brand__logo">Satva</span>
+                            <p class="admin-login-brand__tagline">Панель управления</p>
+                        </div>
+                        <h1 class="admin-page-heading">Вход в админку</h1>
+                        <p class="admin-page-subtitle">Введите учётные данные администратора</p>
+                        <form id="admin-login-form" class="admin-login-form">
+                            <div class="form-group">
+                                <label for="admin-email">Email</label>
+                                <input type="email" id="admin-email" name="email" class="form-input admin-input" required autocomplete="email" placeholder="admin@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="admin-password">Пароль</label>
+                                <input type="password" id="admin-password" name="password" class="form-input admin-input" required autocomplete="current-password" placeholder="••••••••">
+                            </div>
+                            <button type="submit" class="admin-btn admin-btn--primary admin-btn--block">Войти</button>
+                            <div id="admin-login-message" class="form-message" role="alert" aria-live="polite"></div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="admin-new-password">Новый пароль</label>
-                        <input type="password" id="admin-new-password" class="form-input admin-settings-input" required autocomplete="new-password" minlength="8">
+                </section>
+
+                <!-- 2. Блок списка заявок -->
+                <section id="admin-leads" class="admin-block admin-hidden">
+                    <header class="admin-page-header">
+                        <div class="admin-page-header__text">
+                            <h1 class="admin-page-heading">Заявки</h1>
+                            <p class="admin-page-subtitle">Все обращения с сайта</p>
+                        </div>
+                    </header>
+
+                    <div class="admin-panel admin-filters-panel">
+                        <h2 class="admin-panel__title">Фильтры</h2>
+                        <div class="admin-toolbar">
+                            <div class="admin-toolbar__group">
+                                <label for="admin-leads-filter" class="admin-label">Тип заявки</label>
+                                <select id="admin-leads-filter" class="admin-select" aria-label="Фильтр по типу заявки">
+                                    <option value="">Все типы</option>
+                                    <option value="contact">contact</option>
+                                    <option value="procedure_booking">procedure_booking</option>
+                                    <option value="package_choice">package_choice</option>
+                                </select>
+                            </div>
+                            <div class="admin-toolbar__group admin-date-filters" role="group" aria-label="Фильтр по дате создания">
+                                <span class="admin-label">Период</span>
+                                <div class="admin-date-row">
+                                    <label class="admin-date-label">с <input type="datetime-local" id="admin-date-from" class="admin-date-input"></label>
+                                    <label class="admin-date-label">по <input type="datetime-local" id="admin-date-to" class="admin-date-input"></label>
+                                </div>
+                                <div class="admin-toolbar__actions">
+                                    <button type="button" id="admin-apply-filters" class="admin-btn admin-btn--primary admin-btn--small">Применить</button>
+                                    <button type="button" id="admin-clear-dates" class="admin-btn admin-btn--ghost admin-btn--small">Сбросить</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="admin-confirm-password">Подтверждение пароля</label>
-                        <input type="password" id="admin-confirm-password" class="form-input admin-settings-input" required autocomplete="new-password" minlength="8">
+
+                    <div class="admin-panel admin-table-panel">
+                        <div class="admin-table-wrap">
+                            <table class="admin-table" role="grid" aria-label="Список заявок">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Дата</th>
+                                        <th scope="col">Тип</th>
+                                        <th scope="col">Имя</th>
+                                        <th scope="col">Телефон</th>
+                                        <th scope="col"><span class="visually-hidden">Действие</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-leads-tbody">
+                                    <tr><td colspan="5" class="admin-table__empty">Загрузка…</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <nav class="admin-pagination" aria-label="Пагинация">
+                            <button type="button" id="admin-pagination-prev" class="admin-btn admin-btn--secondary admin-btn--small" aria-label="Предыдущая страница">Назад</button>
+                            <span id="admin-pagination-info" class="admin-pagination__info" aria-live="polite">—</span>
+                            <button type="button" id="admin-pagination-next" class="admin-btn admin-btn--secondary admin-btn--small" aria-label="Следующая страница">Вперёд</button>
+                        </nav>
                     </div>
-                    <button type="submit" class="admin-btn admin-btn--primary">Изменить пароль</button>
-                    <div id="admin-password-message" class="form-message" role="alert" aria-live="polite"></div>
-                </form>
-            </div>
-        </section>
+                </section>
+
+                <!-- 3. Блок одной заявки -->
+                <section id="admin-lead-detail" class="admin-block admin-hidden">
+                    <header class="admin-page-header admin-page-header--detail">
+                        <button type="button" id="admin-detail-back" class="admin-btn admin-btn--ghost admin-btn--small admin-back-btn">
+                            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                            Назад к списку
+                        </button>
+                        <div class="admin-page-header__text">
+                            <h1 class="admin-page-heading">Заявка</h1>
+                            <p class="admin-page-subtitle">Подробная информация</p>
+                        </div>
+                    </header>
+
+                    <p id="admin-detail-loading" class="admin-loading">Загрузка…</p>
+
+                    <div class="admin-panel admin-detail-section">
+                        <h2 class="admin-panel__title">Данные заявки</h2>
+                        <div id="admin-detail-payload" class="admin-detail-payload"></div>
+                    </div>
+
+                    <div class="admin-panel admin-detail-section">
+                        <h2 class="admin-panel__title">Согласия</h2>
+                        <div id="admin-detail-consents"></div>
+                    </div>
+                </section>
+
+                <!-- 4. Блок настроек -->
+                <section id="admin-settings" class="admin-block admin-hidden">
+                    <header class="admin-page-header">
+                        <div class="admin-page-header__text">
+                            <h1 class="admin-page-heading">Настройки</h1>
+                            <p class="admin-page-subtitle">Уведомления и учётная запись</p>
+                        </div>
+                    </header>
+
+                    <div class="admin-settings-grid">
+                        <div class="admin-panel admin-settings-card admin-settings-card--wide">
+                            <h2 class="admin-panel__title">Уведомления о заявках</h2>
+                            <p class="admin-settings-hint">На эти адреса приходит письмо при каждой новой заявке с сайта.</p>
+                            <ul id="admin-email-list" class="admin-email-list" aria-live="polite"></ul>
+                            <div class="admin-email-add">
+                                <label for="admin-email-input" class="visually-hidden">Email получателя</label>
+                                <input type="email" id="admin-email-input" class="form-input admin-input" placeholder="email@example.com" autocomplete="email">
+                                <button type="button" id="admin-email-add" class="admin-btn admin-btn--secondary admin-btn--small">Добавить</button>
+                            </div>
+                            <div class="admin-settings-card__footer">
+                                <button type="button" id="admin-settings-save" class="admin-btn admin-btn--primary">Сохранить</button>
+                                <div id="admin-settings-message" class="form-message" role="alert" aria-live="polite"></div>
+                            </div>
+                        </div>
+
+                        <div class="admin-panel admin-settings-card">
+                            <h2 class="admin-panel__title">Аккаунт</h2>
+                            <p class="admin-settings-hint">Вы вошли как администратор</p>
+                            <div class="admin-account-info">
+                                <span class="admin-account-info__label">Email</span>
+                                <span class="admin-account-info__value" id="admin-me-email">—</span>
+                            </div>
+                        </div>
+
+                        <div class="admin-panel admin-settings-card admin-settings-card--wide">
+                            <h2 class="admin-panel__title">Смена пароля</h2>
+                            <p class="admin-settings-hint">Минимум 8 символов. После смены используйте новый пароль при входе.</p>
+                            <form id="admin-password-form" class="admin-settings-form">
+                                <div class="admin-form-grid">
+                                    <div class="form-group">
+                                        <label for="admin-current-password">Текущий пароль</label>
+                                        <input type="password" id="admin-current-password" class="form-input admin-input" required autocomplete="current-password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="admin-new-password">Новый пароль</label>
+                                        <input type="password" id="admin-new-password" class="form-input admin-input" required autocomplete="new-password" minlength="8">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="admin-confirm-password">Подтверждение пароля</label>
+                                        <input type="password" id="admin-confirm-password" class="form-input admin-input" required autocomplete="new-password" minlength="8">
+                                    </div>
+                                </div>
+                                <div class="admin-settings-card__footer">
+                                    <button type="submit" class="admin-btn admin-btn--primary">Изменить пароль</button>
+                                    <div id="admin-password-message" class="form-message" role="alert" aria-live="polite"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
     </div>
-    <script src="js/admin.js?v=2"></script>
+    <script src="js/admin.js?v=3"></script>
 </body>
 </html>
