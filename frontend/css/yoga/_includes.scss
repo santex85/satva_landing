@@ -68,7 +68,7 @@
         }
 
         p {
-            font-size: 0.85rem;
+            font-size: 1rem;
             color: $color-text-light;
             line-height: 1.5;
             margin: 0;
@@ -113,6 +113,15 @@
         margin-left: auto;
         margin-right: auto;
         text-align: center;
+    }
+
+    &__image {
+        display: block;
+        width: 142px;
+        height: 96px;
+        margin: 0 auto;
+        object-fit: contain;
+        object-position: center;
     }
 
     &__icon {
@@ -166,13 +175,13 @@
         background: $color-white;
         border-radius: 16px;
         border: 1px solid rgba($color-primary, 0.08);
-        text-align: center;
+        text-align: left;
     }
 
     &__amenities-title {
         font-weight: $font-weight-bold;
         color: $color-primary;
-        margin: 0 0 14px;
+        margin: 0 0 16px;
         font-size: 1rem;
     }
 
@@ -180,17 +189,29 @@
         list-style: none;
         padding: 0;
         margin: 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px 12px;
-        justify-content: center;
 
         li {
-            background: $color-bg-main;
-            color: $color-text;
-            padding: 8px 14px;
-            border-radius: $radius-pill;
-            font-size: 0.85rem;
+            position: relative;
+            padding-left: $space-h;
+            margin-bottom: 12px;
+            color: $color-dark;
+            line-height: 1.5;
+            font-size: 1rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 8px;
+                width: 8px;
+                height: 8px;
+                background: $color-accent;
+                border-radius: 50%;
+            }
         }
     }
 }

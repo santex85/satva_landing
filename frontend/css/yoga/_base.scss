@@ -23,6 +23,11 @@ img { max-width: 100%; display: block; }
 
 a { color: inherit; }
 
+// Заголовки секций лендинга — по центру
+section[id^='yoga'] h2 {
+    text-align: center;
+}
+
 // ---------- utilities ----------
 .yoga-container        { max-width: $container-base; margin: 0 auto; padding: 0 $space-h; }
 .yoga-container--wide  { max-width: $container-wide; margin: 0 auto; padding: 0 $space-h; }

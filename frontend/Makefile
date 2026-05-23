@@ -1,9 +1,6 @@
 # Satva Landing — быстрые команды
 
 SASS := sass
-CSS_SRC := css/main.scss
-CSS_OUT := css/main.css
-
 YOGA_SRC := css/yoga.scss
 YOGA_OUT := css/yoga.css
 
@@ -14,49 +11,33 @@ GIT_ROOT := $(abspath $(CURDIR)/..)
 
 .PHONY: pull sync deploy-dev css build watch serve run stop-port clean build-prod \
         yoga-css yoga-watch yoga-build-prod build-all yoga-clean \
-        yoga-webp yoga-hero-variants optimize-images help
+        yoga-webp yoga-hero-variants help
 
 # Обновить ветку с origin (первая операция перед сборкой при работе из frontend/)
 pull:
 	git -C $(GIT_ROOT) pull origin main
 	@echo "✓ git pull: $(GIT_ROOT)"
 
-# git pull + оба CSS (main + yoga)
+# git pull + yoga.css
 sync: pull build-all
 
 # Локальный стек (Docker + API): то же, что «make deploy-dev» из корня репозитория (включая git pull)
 deploy-dev:
 	$(MAKE) -C $(GIT_ROOT) deploy-dev
 
-# Собрать CSS из SCSS (по умолчанию)
-css build:
-	$(SASS) $(CSS_SRC) $(CSS_OUT) --style=expanded
-	@echo "✓ $(CSS_OUT) собран"
-
-# Production: минифицированный CSS
-build-prod:
-	$(SASS) $(CSS_SRC) $(CSS_OUT) --style=compressed --no-source-map
-	@echo "✓ $(CSS_OUT) (production) собран"
-
-# Следить за изменениями и пересобирать
-watch:
-	$(SASS) $(CSS_SRC) $(CSS_OUT) --watch --style=expanded
-
-# --- Yoga tour (yoga.html) ---------------------------------------------------
-
-yoga-css:
+# Собрать yoga.css из SCSS (по умолчанию)
+css build yoga-css:
 	$(SASS) $(YOGA_SRC) $(YOGA_OUT) --style=expanded
 	@echo "✓ $(YOGA_OUT) собран"
 
-yoga-watch:
-	$(SASS) $(YOGA_SRC) $(YOGA_OUT) --watch --style=expanded
-
-yoga-build-prod:
+# Production: минифицированный CSS
+build-prod yoga-build-prod:
 	$(SASS) $(YOGA_SRC) $(YOGA_OUT) --style=compressed --no-source-map
 	@echo "✓ $(YOGA_OUT) (production) собран"
 
-yoga-clean:
-	rm -f $(YOGA_OUT) $(YOGA_OUT).map
+# Следить за изменениями и пересобирать
+watch yoga-watch:
+	$(SASS) $(YOGA_SRC) $(YOGA_OUT) --watch --style=expanded
 
 # Копия hero для HTML: исходник max 1280px — @2x не делаем (апскейл ухудшает качество)
 yoga-hero-variants:
@@ -64,7 +45,7 @@ yoga-hero-variants:
 	@cp -f img/yoga_tour/hero_sunset.jpg img/yoga_tour/hero_sunset@1x.jpg
 	@echo "✓ hero_sunset@1x.jpg (затем: cwebp -q 90 hero_sunset@1x.jpg -o hero_sunset@1x.webp && make yoga-webp)"
 
-# WebP для йога-тура: brew install webp (по умолчанию -q 82; hero/большие градиенты — пересобрать вручную: cwebp -q 90 hero_sunset.jpg -o hero_sunset.webp)
+# WebP для йога-тура: brew install webp
 yoga-webp:
 	@command -v cwebp >/dev/null 2>&1 || { echo "Install: brew install webp"; exit 1; }
 	@for f in img/yoga_tour/*.jpg img/yoga_tour/*.png; do \
@@ -74,10 +55,10 @@ yoga-webp:
 	done
 	@echo "✓ WebP в img/yoga_tour/"
 
-# Удобный суммарный таргет: оба проекта (dev)
-build-all: build yoga-css
+build-all: build
 
-# -----------------------------------------------------------------------------
+yoga-clean clean:
+	rm -f $(YOGA_OUT) $(YOGA_OUT).map
 
 # Освободить порт, если занят (убить процесс на $(PORT))
 stop-port:
@@ -93,48 +74,24 @@ serve:
 	python3 -m http.server $(PORT)
 	@echo "→ http://localhost:$(PORT)/"
 
-# Собрать CSS (оба проекта), освободить порт при необходимости и запустить сервер
+# Собрать CSS, освободить порт при необходимости и запустить сервер
 run: build-all stop-port serve
-
-# Удалить сгенерированный CSS
-clean:
-	rm -f css/main.css css/main.css.map
-	rm -f css/yoga.css css/yoga.css.map
-
-# Оптимизация больших изображений (resize + JPEG 80%) — процедуры и команда
-IMG_OPT := img/Shirodhara.png img/adbhianga.png img/antiage.png img/ayurvedic_therapy.png img/diagnostic.png img/doctor.png img/pinndasvedana.png img/smuthi.png img/udvartana.png img/yog_lady.png img/yog_man.png img/yoga.png img/relax2.png
-optimize-images:
-	@for f in $(IMG_OPT); do \
-		if [ -f "$$f" ]; then \
-			out="$${f%.png}.jpg"; \
-			sips -s format jpeg -s formatOptions 80 -Z 1200 "$$f" --out "$$out" 2>/dev/null && echo "✓ $$out" || echo "skip $$f"; \
-		fi; \
-	done
-	@echo "✓ Оптимизированные JPG созданы. Обновите index.html на .jpg для этих изображений."
 
 help:
 	@echo "Satva Landing — команды:"
 	@echo ""
-	@echo "  Основной лендинг (index.html):"
-	@echo "    make / make css      — пересобрать main.css из SCSS"
-	@echo "    make watch           — watch-режим для main.scss"
-	@echo "    make build-prod      — минифицированный main.css"
-	@echo ""
-	@echo "  Йога-тур (yoga.html):"
-	@echo "    make yoga-css        — пересобрать yoga.css из SCSS"
-	@echo "    make yoga-watch      — watch-режим для yoga.scss"
-	@echo "    make yoga-build-prod — минифицированный yoga.css"
-	@echo "    make yoga-webp      — cwebp: *.webp рядом с jpg/png в img/yoga_tour/"
-	@echo "    make yoga-clean      — удалить yoga.css и .map"
+	@echo "  Йога-тур (index.html):"
+	@echo "    make / make css      — пересобрать yoga.css из SCSS"
+	@echo "    make watch           — watch-режим для yoga.scss"
+	@echo "    make build-prod      — минифицированный yoga.css"
+	@echo "    make yoga-webp       — cwebp: *.webp рядом с jpg/png в img/yoga_tour/"
 	@echo ""
 	@echo "  Общее:"
-	@echo "    make deploy-dev      — из корня: git pull + build-all + docker compose up (локальный стек)"
-	@echo "    make pull            — git pull origin main (из корня репозитория)"
-	@echo "    make sync            — pull + build-all (обновить и пересобрать CSS)"
-	@echo "    make build-all       — собрать main.css + yoga.css (dev)"
+	@echo "    make deploy-dev      — из корня: git pull + yoga.css + docker compose up"
+	@echo "    make pull            — git pull origin main"
+	@echo "    make sync            — pull + build-all"
 	@echo "    make serve           — запустить сервер на порту $(PORT)"
 	@echo "    make stop-port       — освободить порт $(PORT)"
 	@echo "    make run             — build-all + освободить порт + запустить сервер"
-	@echo "    make clean           — удалить все сгенерированные CSS"
-	@echo "    make optimize-images — создать JPG из больших PNG (1200px, 80%%)"
+	@echo "    make clean           — удалить yoga.css и .map"
 	@echo "    make help            — эта справка"

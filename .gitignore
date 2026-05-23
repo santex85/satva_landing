@@ -4,8 +4,7 @@ package-lock.json
 yarn.lock
 
 # Build outputs
-css/main.css
-css/main.css.map
+css/yoga.css.map
 *.css.map
 
 # OS files

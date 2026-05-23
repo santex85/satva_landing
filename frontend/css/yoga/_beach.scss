@@ -58,6 +58,41 @@
             color: $color-dark;
             line-height: 1.7;
             margin: 0;
+            font-size: 1rem;
+        }
+    }
+
+    &__lead {
+        margin-bottom: 16px;
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            position: relative;
+            padding-left: $space-h;
+            margin-bottom: 12px;
+            color: $color-dark;
+            line-height: 1.5;
+            font-size: 1rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 8px;
+                width: 8px;
+                height: 8px;
+                background: $color-accent;
+                border-radius: 50%;
+            }
         }
     }
 }
