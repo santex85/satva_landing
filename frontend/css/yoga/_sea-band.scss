@@ -1,0 +1,28 @@
+@use '../core' as *;
+
+// Общий фон trust-bar + includes (одно фото, один градиент — без стыка между секциями)
+.yoga-sea-band {
+    position: relative;
+    isolation: isolate;
+    background-image: url('../img/yoga_tour/trust_sea.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: $color-white;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background: linear-gradient(
+            180deg,
+            rgba($color-white, 0.72) 0%,
+            rgba($color-white, 0.72) 28%,
+            rgba($color-white, 0.78) 48%,
+            rgba($color-white, 0.88) 72%,
+            $color-white 100%
+        );
+    }
+}

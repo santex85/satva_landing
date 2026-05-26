@@ -134,7 +134,7 @@
     @include yoga-pill-label;
 }
 
-// Секции с фото моря и белым оверлеем (trust-bar, includes)
+// Секции с фото моря и белым оверлеем (trust-bar + includes — см. .yoga-sea-band)
 @mixin yoga-sea-section-bg($fade-to-white: false) {
     position: relative;
     isolation: isolate;

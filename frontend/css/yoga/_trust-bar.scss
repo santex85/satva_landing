@@ -4,7 +4,8 @@
 // Блок доверия под yoga-hero (те же смыслы, BEM-префикс yoga-trust-bar)
 
 .yoga-trust-bar {
-    @include yoga-sea-section-bg;
+    position: relative;
+    z-index: 1;
     padding: clamp(40px, 6vw, 56px) $space-h clamp(44px, 6vw, 64px);
 
     @include mobile {

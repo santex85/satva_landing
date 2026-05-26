@@ -843,24 +843,27 @@ section[id^=yoga] h2 {
     animation: none;
   }
 }
-.yoga-trust-bar {
+.yoga-sea-band {
   position: relative;
   isolation: isolate;
   background-image: url("../img/yoga_tour/trust_sea.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #f7f5f2;
+  background-color: #ffffff;
 }
-.yoga-trust-bar::before {
+.yoga-sea-band::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: rgba(255, 255, 255, 0.72);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.72) 28%, rgba(255, 255, 255, 0.78) 48%, rgba(255, 255, 255, 0.88) 72%, #ffffff 100%);
 }
+
 .yoga-trust-bar {
+  position: relative;
+  z-index: 1;
   padding: clamp(40px, 6vw, 56px) 24px clamp(44px, 6vw, 64px);
 }
 @media (max-width: 767px) {
@@ -954,22 +957,7 @@ section[id^=yoga] h2 {
 
 .yoga-includes {
   position: relative;
-  isolation: isolate;
-  background-image: url("../img/yoga_tour/trust_sea.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #ffffff;
-}
-.yoga-includes::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.72) 42%, rgba(255, 255, 255, 0.88) 72%, #ffffff 100%);
-}
-.yoga-includes {
+  z-index: 1;
   padding: clamp(60px, 8vw, 100px) 24px;
 }
 .yoga-includes__container {
