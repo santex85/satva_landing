@@ -64,6 +64,7 @@
   --spacing-xl: 4rem;
   --spacing-xxl: 6rem;
   --space-section: clamp(60px, 8vw, 100px);
+  --space-header-bottom: clamp(32px, 4vw, 48px);
   --space-h: 24px;
   --container-base: 900px;
   --container-wide: 1200px;
@@ -850,6 +851,7 @@ section[id^=yoga] h2 {
 .yoga-sea-band {
   position: relative;
   isolation: isolate;
+  padding: clamp(60px, 8vw, 100px) 0;
   background-image: url("../img/yoga_tour/trust_sea.jpg");
   background-size: cover;
   background-position: center;
@@ -868,12 +870,7 @@ section[id^=yoga] h2 {
 .yoga-trust-bar {
   position: relative;
   z-index: 1;
-  padding: clamp(40px, 6vw, 56px) 24px clamp(44px, 6vw, 64px);
-}
-@media (max-width: 767px) {
-  .yoga-trust-bar {
-    padding: 3rem 24px 3rem;
-  }
+  padding: 0 24px;
 }
 .yoga-trust-bar__container {
   position: relative;
@@ -883,7 +880,7 @@ section[id^=yoga] h2 {
 }
 .yoga-trust-bar__header {
   text-align: center;
-  margin-bottom: clamp(28px, 4vw, 40px);
+  margin-bottom: clamp(60px, 8vw, 100px);
   max-width: 36rem;
   margin-left: auto;
   margin-right: auto;
@@ -962,7 +959,8 @@ section[id^=yoga] h2 {
 .yoga-includes {
   position: relative;
   z-index: 1;
-  padding: clamp(60px, 8vw, 100px) 24px;
+  padding: 0 24px;
+  margin-top: clamp(60px, 8vw, 100px);
 }
 .yoga-includes__container {
   position: relative;
@@ -972,7 +970,7 @@ section[id^=yoga] h2 {
 }
 .yoga-includes__header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: clamp(60px, 8vw, 100px);
 }
 .yoga-includes__header h2 {
   color: #0f4c5c;
@@ -1380,7 +1378,7 @@ section[id^=yoga] h2 {
 }
 .yoga-rooms__header {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: clamp(60px, 8vw, 100px);
 }
 .yoga-rooms__header h2 {
   color: #0f4c5c;
@@ -1782,7 +1780,7 @@ section[id^=yoga] h2 {
 }
 .yoga-reviews__header {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: clamp(60px, 8vw, 100px);
 }
 .yoga-reviews__header h2 {
   color: #0f4c5c;
@@ -2128,7 +2126,7 @@ section[id^=yoga] h2 {
 }
 .yoga-team__header {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: clamp(60px, 8vw, 100px);
 }
 .yoga-team__header h2 {
   color: #0f4c5c;
@@ -2144,7 +2142,6 @@ section[id^=yoga] h2 {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
-  margin-bottom: 24px;
 }
 .yoga-team__card {
   display: flex;
@@ -2236,7 +2233,7 @@ section[id^=yoga] h2 {
 
 .yoga-wellness {
   background: #f7f5f2;
-  padding: clamp(32px, 4vw, 56px) 24px clamp(60px, 8vw, 100px);
+  padding: clamp(60px, 8vw, 100px) 24px;
 }
 .yoga-wellness__container {
   max-width: 900px;
@@ -2244,7 +2241,7 @@ section[id^=yoga] h2 {
 }
 .yoga-wellness__header {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: clamp(60px, 8vw, 100px);
 }
 .yoga-wellness__header h2 {
   color: #0f4c5c;
@@ -2484,7 +2481,7 @@ section[id^=yoga] h2 {
 
 .yoga-team-group {
   background: #e8dcc6;
-  padding: clamp(56px, 7vw, 92px) 24px;
+  padding: clamp(60px, 8vw, 100px) 24px;
 }
 .yoga-team-group__container {
   max-width: 900px;
@@ -2492,7 +2489,7 @@ section[id^=yoga] h2 {
   text-align: center;
 }
 .yoga-team-group__header {
-  margin-bottom: 32px;
+  margin-bottom: clamp(60px, 8vw, 100px);
 }
 .yoga-team-group__header h2 {
   color: #0f4c5c;
@@ -2623,7 +2620,7 @@ section[id^=yoga] h2 {
 
 .yoga-contacts {
   background: #f7f5f2;
-  padding: clamp(60px, 8vw, 100px) 24px clamp(40px, 5vw, 56px);
+  padding: clamp(60px, 8vw, 100px) 24px;
 }
 .yoga-contacts__container {
   max-width: 900px;
@@ -2631,7 +2628,7 @@ section[id^=yoga] h2 {
 }
 .yoga-contacts__header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: clamp(60px, 8vw, 100px);
 }
 .yoga-contacts__header h2 {
   color: #0f4c5c;
@@ -2757,7 +2754,7 @@ section[id^=yoga] h2 {
 
 .yoga-faq {
   background: #bee3db;
-  padding: clamp(56px, 7vw, 88px) 24px;
+  padding: clamp(60px, 8vw, 100px) 24px;
 }
 .yoga-faq__container {
   max-width: 720px;
@@ -2765,7 +2762,7 @@ section[id^=yoga] h2 {
 }
 .yoga-faq__header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: clamp(60px, 8vw, 100px);
 }
 .yoga-faq__header h2 {
   color: #0f4c5c;

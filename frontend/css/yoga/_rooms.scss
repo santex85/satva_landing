@@ -4,7 +4,7 @@
 // 07. Номера (заголовок, карусель — в _rooms-carousel.scss)
 .yoga-rooms {
     background: $color-bg-main;
-    padding: clamp(60px, 8vw, 100px) $space-h;
+    padding: $space-section $space-h;
 
     &__container {
         max-width: $container-base;
@@ -13,7 +13,7 @@
 
     &__header {
         text-align: center;
-        margin-bottom: 48px;
+        margin-bottom: $space-section;
 
         h2 {
             color: $color-primary;

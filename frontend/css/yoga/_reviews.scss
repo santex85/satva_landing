@@ -5,7 +5,7 @@
 .yoga-reviews {
     position: relative;
     background: $color-bg-secondary;
-    padding: clamp(60px, 8vw, 100px) $space-h;
+    padding: $space-section $space-h;
 
     &__container {
         max-width: $container-wide;
@@ -14,7 +14,7 @@
 
     &__header {
         text-align: center;
-        margin-bottom: 48px;
+        margin-bottom: $space-section;
 
         h2 {
             color: $color-primary;

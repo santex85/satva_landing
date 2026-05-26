@@ -5,7 +5,8 @@
 .yoga-includes {
     position: relative;
     z-index: 1;
-    padding: clamp(60px, 8vw, 100px) $space-h;
+    padding: 0 $space-h;
+    margin-top: $space-section;
 
     &__container {
         position: relative;
@@ -16,7 +17,7 @@
 
     &__header {
         text-align: center;
-        margin-bottom: 60px;
+        margin-bottom: $space-section;
 
         h2 {
             color: $color-primary;

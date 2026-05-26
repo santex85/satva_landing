@@ -4,7 +4,7 @@
 // 13. Контакты + подвал
 .yoga-contacts {
     background: $color-bg-main;
-    padding: clamp(60px, 8vw, 100px) $space-h clamp(40px, 5vw, 56px);
+    padding: $space-section $space-h;
 
     &__container {
         max-width: $container-base;
@@ -13,7 +13,7 @@
 
     &__header {
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: $space-section;
 
         h2 {
             color: $color-primary;

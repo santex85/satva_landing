@@ -97,6 +97,7 @@ $spacing-xxl: 6rem;
 
 // Токены layout (дизайн-система landing yoga)
 $space-section: clamp(60px, 8vw, 100px);
+$space-header-bottom: clamp(32px, 4vw, 48px);
 $space-h: 24px;
 
 $container-base: 900px;
@@ -194,6 +195,7 @@ $yoga-overlay: rgba($color-primary, 0.72);
     --spacing-xl: #{$spacing-xl};
     --spacing-xxl: #{$spacing-xxl};
     --space-section: #{$space-section};
+    --space-header-bottom: #{$space-header-bottom};
     --space-h: #{$space-h};
     --container-base: #{$container-base};
     --container-wide: #{$container-wide};

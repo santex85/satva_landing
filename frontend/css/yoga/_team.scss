@@ -4,7 +4,7 @@
 // 11. Команда
 .yoga-team {
     background: $color-secondary;
-    padding: clamp(60px, 8vw, 100px) $space-h;
+    padding: $space-section $space-h;
 
     &__container {
         max-width: $container-base;
@@ -13,7 +13,7 @@
 
     &__header {
         text-align: center;
-        margin-bottom: 48px;
+        margin-bottom: $space-section;
 
         h2 {
             color: $color-primary;
@@ -32,7 +32,6 @@
         display: grid;
         grid-template-columns: 1fr;
         gap: 20px;
-        margin-bottom: 24px;
     }
 
     &__card {

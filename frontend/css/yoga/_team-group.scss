@@ -3,7 +3,7 @@
 
 .yoga-team-group {
     background: $color-secondary;
-    padding: clamp(56px, 7vw, 92px) $space-h;
+    padding: $space-section $space-h;
 
     &__container {
         max-width: $container-base;
@@ -12,7 +12,7 @@
     }
 
     &__header {
-        margin-bottom: 32px;
+        margin-bottom: $space-section;
 
         h2 {
             color: $color-primary;

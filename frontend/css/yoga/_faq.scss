@@ -4,7 +4,7 @@
 // FAQ перед формой заявки
 .yoga-faq {
     background: $color-bg-secondary;
-    padding: clamp(56px, 7vw, 88px) $space-h;
+    padding: $space-section $space-h;
 
     &__container {
         max-width: $container-narrow;
@@ -13,7 +13,7 @@
 
     &__header {
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: $space-section;
 
         h2 {
             color: $color-primary;
