@@ -12,6 +12,69 @@
     var yogaTurnstileLeadWidgetId = null;
     var yogaTurnstileSiteKey = '';
 
+    var LANG = (document.documentElement.lang || 'ru').toLowerCase().indexOf('en') === 0 ? 'en' : 'ru';
+    var STRINGS = {
+        ru: {
+            invalidEmail: 'Некорректный email',
+            phoneMinDigits: 'Минимум 10 цифр в номере',
+            phoneTooLong: 'Слишком длинный номер',
+            phoneThaiInvalid: 'Проверьте тайский номер (+66 …)',
+            menuClose: 'Закрыть меню',
+            menuOpen: 'Открыть меню',
+            roomSlideLabel: 'Показать тип размещения {n} из {total}',
+            genericErr: 'Ошибка отправки. Попробуйте позже или напишите в мессенджер.',
+            submitting: 'Отправка…',
+            submitButton: 'Отправить заявку',
+            nameMin: 'Минимум 2 символа',
+            nameChars: 'Только буквы, дефис и пробел',
+            rateLimit: 'Слишком много запросов. Подождите минуту.',
+            datesBothOrEmpty: 'Укажите обе даты заезда и выезда или оставьте поля пустыми.',
+            departureBeforeArrival: 'Дата выезда не может быть раньше даты заезда.',
+            cooldown: 'Подождите несколько секунд перед повторной отправкой.',
+            consentRequired: 'Нужно согласие с политикой конфиденциальности, публичной офертой и условиями отмены бронирования.',
+            checkFields: 'Проверьте поля выше.',
+            captchaRequired: 'Пройдите проверку «Я не робот».',
+            defaultProcedure: 'Йога-тур в Таиланд',
+            networkError: 'Не удалось отправить. Проверьте сеть и попробуйте снова.',
+        },
+        en: {
+            invalidEmail: 'Invalid email address',
+            phoneMinDigits: 'Enter at least 10 digits',
+            phoneTooLong: 'Phone number is too long',
+            phoneThaiInvalid: 'Check the Thai number (+66 …)',
+            menuClose: 'Close menu',
+            menuOpen: 'Open menu',
+            roomSlideLabel: 'Show accommodation type {n} of {total}',
+            genericErr: 'Something went wrong. Please try again later or message us on WhatsApp.',
+            submitting: 'Sending…',
+            submitButton: 'Send Enquiry',
+            nameMin: 'At least 2 characters',
+            nameChars: 'Letters, hyphens and spaces only',
+            rateLimit: 'Too many requests. Please wait a minute.',
+            datesBothOrEmpty: 'Enter both arrival and departure dates, or leave both empty.',
+            departureBeforeArrival: 'Departure date cannot be before arrival date.',
+            cooldown: 'Please wait a few seconds before submitting again.',
+            consentRequired: 'Please agree to the Privacy Policy, Terms & Conditions and Cancellation Policy.',
+            checkFields: 'Please check the fields above.',
+            captchaRequired: 'Please complete the security check.',
+            defaultProcedure: 'Yoga Retreat in Thailand',
+            networkError: 'Could not send your enquiry. Check your connection and try again.',
+        },
+    };
+
+    function t(key) {
+        var bucket = STRINGS[LANG] || STRINGS.ru;
+        return bucket[key] != null ? bucket[key] : (STRINGS.ru[key] || key);
+    }
+
+    function tFmt(key, vars) {
+        var s = t(key);
+        if (!vars) return s;
+        return s.replace(/\{(\w+)\}/g, function (_, k) {
+            return vars[k] != null ? String(vars[k]) : '';
+        });
+    }
+
     /** Необязательный email: пусто допустимо, иначе простая проверка формата */
     function validateOptionalEmailRow(raw, errEl, inputEl) {
         var v = raw ? String(raw).trim() : '';
@@ -22,7 +85,7 @@
         }
         var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
         if (!ok) {
-            if (errEl) errEl.textContent = 'Некорректный email';
+            if (errEl) errEl.textContent = t('invalidEmail');
             if (inputEl) inputEl.classList.add('yoga-form__input--error');
             return false;
         }
@@ -165,17 +228,17 @@
         var raw = hiddenVal || '';
         var digits = raw.replace(/\D/g, '');
         if (digits.length < 10) {
-            if (phoneErr) phoneErr.textContent = 'Минимум 10 цифр в номере';
+            if (phoneErr) phoneErr.textContent = t('phoneMinDigits');
             if (errInput) errInput.classList.add('yoga-form__input--error');
             return false;
         }
         if (digits.length > 15) {
-            if (phoneErr) phoneErr.textContent = 'Слишком длинный номер';
+            if (phoneErr) phoneErr.textContent = t('phoneTooLong');
             if (errInput) errInput.classList.add('yoga-form__input--error');
             return false;
         }
         if (/^66/.test(digits) && !/^66[689]\d{8}$/.test(digits)) {
-            if (phoneErr) phoneErr.textContent = 'Проверьте тайский номер (+66 …)';
+            if (phoneErr) phoneErr.textContent = t('phoneThaiInvalid');
             if (errInput) errInput.classList.add('yoga-form__input--error');
             return false;
         }
@@ -246,14 +309,14 @@
             nav.classList.add('is-open');
             burger.classList.add('is-open');
             burger.setAttribute('aria-expanded', 'true');
-            burger.setAttribute('aria-label', 'Закрыть меню');
+            burger.setAttribute('aria-label', t('menuClose'));
         }
 
         function close() {
             nav.classList.remove('is-open');
             burger.classList.remove('is-open');
             burger.setAttribute('aria-expanded', 'false');
-            burger.setAttribute('aria-label', 'Открыть меню');
+            burger.setAttribute('aria-label', t('menuOpen'));
         }
 
         function toggle() {
@@ -693,7 +756,7 @@
             var b = document.createElement('button');
             b.type = 'button';
             b.className = 'yoga-rooms-carousel__dot' + (i === 0 ? ' is-active' : '');
-            b.setAttribute('aria-label', 'Показать тип размещения ' + (i + 1) + ' из ' + total);
+            b.setAttribute('aria-label', tFmt('roomSlideLabel', { n: i + 1, total: total }));
             (function (slideIndex) {
                 b.addEventListener('click', function () {
                     go(slideIndex);
@@ -1034,7 +1097,7 @@
         var lastSubmitTime = 0;
         var SUBMIT_COOLDOWN_MS = 5000;
 
-        var GENERIC_ERR = 'Ошибка отправки. Попробуйте позже или напишите в мессенджер.';
+        var GENERIC_ERR = t('genericErr');
 
         function apiPath(p) {
             return (window.location.origin || '') + '/api' + p;
@@ -1043,7 +1106,7 @@
         function setFormLoading(loading) {
             if (!submitBtn) return;
             submitBtn.disabled = loading;
-            submitBtn.textContent = loading ? 'Отправка…' : 'Отправить заявку';
+            submitBtn.textContent = loading ? t('submitting') : t('submitButton');
         }
 
         function showFormError(msg) {
@@ -1064,12 +1127,12 @@
         function validateName() {
             var v = (nameIn && nameIn.value) ? nameIn.value.trim() : '';
             if (v.length < 2) {
-                if (nameErr) nameErr.textContent = 'Минимум 2 символа';
+                if (nameErr) nameErr.textContent = t('nameMin');
                 if (nameIn) nameIn.classList.add('yoga-form__input--error');
                 return false;
             }
             if (!/^[а-яА-ЯёЁa-zA-Z\s-]+$/.test(v)) {
-                if (nameErr) nameErr.textContent = 'Только буквы, дефис и пробел';
+                if (nameErr) nameErr.textContent = t('nameChars');
                 if (nameIn) nameIn.classList.add('yoga-form__input--error');
                 return false;
             }
@@ -1098,7 +1161,7 @@
 
         function msgFromApi(status, body) {
             if (status === 429) {
-                return 'Слишком много запросов. Подождите минуту.';
+                return t('rateLimit');
             }
             if (!body || typeof body !== 'object') return null;
             var d = body.detail;
@@ -1118,11 +1181,11 @@
             var d = (departureDate && departureDate.value) ? departureDate.value.trim() : '';
             if (!a && !d) return true;
             if ((a && !d) || (!a && d)) {
-                showFormError('Укажите обе даты заезда и выезда или оставьте поля пустыми.');
+                showFormError(t('datesBothOrEmpty'));
                 return false;
             }
             if (d < a) {
-                showFormError('Дата выезда не может быть раньше даты заезда.');
+                showFormError(t('departureBeforeArrival'));
                 return false;
             }
             return true;
@@ -1158,12 +1221,12 @@
 
             var now = Date.now();
             if (now - lastSubmitTime < SUBMIT_COOLDOWN_MS) {
-                showFormError('Подождите несколько секунд перед повторной отправкой.');
+                showFormError(t('cooldown'));
                 return;
             }
 
             if (consent && !consent.checked) {
-                showFormError('Нужно согласие с политикой конфиденциальности, публичной офертой и условиями отмены бронирования.');
+                showFormError(t('consentRequired'));
                 return;
             }
 
@@ -1176,7 +1239,7 @@
             var okE = validateOptionalEmailRow(rawEmailLead, emailErr, emailIn);
             if (!okN || !okP || !okE || !okD) {
                 if (okD) {
-                    showFormError('Проверьте поля выше.');
+                    showFormError(t('checkFields'));
                 }
                 if (!okN && nameIn) nameIn.focus();
                 else if (!okP && phoneNat) phoneNat.focus();
@@ -1186,7 +1249,7 @@
             }
 
             if (yogaTurnstileSiteKey && !getCaptchaToken()) {
-                showFormError('Пройдите проверку «Я не робот».');
+                showFormError(t('captchaRequired'));
                 return;
             }
 
@@ -1197,7 +1260,7 @@
             var depDate = (departureDate && departureDate.value) ? departureDate.value.trim() : '';
             var cmt = (comment && comment.value) ? comment.value.trim() : '';
             var procEl = form.querySelector('input[name="procedure"]');
-            var procedure = (procEl && procEl.value) ? procEl.value.trim() : 'Йога-тур в Таиланд';
+            var procedure = (procEl && procEl.value) ? procEl.value.trim() : t('defaultProcedure');
 
             var payload = {
                 name: (nameIn && nameIn.value) ? nameIn.value.trim() : '',
@@ -1251,7 +1314,7 @@
                 .catch(function () {
                     setFormLoading(false);
                     resetTurnstileLead();
-                    showFormError('Не удалось отправить. Проверьте сеть и попробуйте снова.');
+                    showFormError(t('networkError'));
                 });
         });
     }
@@ -1284,7 +1347,7 @@
         var turnstileWidgetId = null;
         var turnstileSiteKey = '';
 
-        var GENERIC_ERR = 'Ошибка отправки. Попробуйте позже или напишите в мессенджер.';
+        var GENERIC_ERR = t('genericErr');
 
         function apiPath(p) {
             return (window.location.origin || '') + '/api' + p;
@@ -1293,7 +1356,7 @@
         function setFormLoading(loading) {
             if (!submitBtn) return;
             submitBtn.disabled = loading;
-            submitBtn.textContent = loading ? 'Отправка…' : 'Отправить заявку';
+            submitBtn.textContent = loading ? t('submitting') : t('submitButton');
         }
 
         function showFormError(msg) {
@@ -1320,12 +1383,12 @@
         function validateName() {
             var v = (nameIn && nameIn.value) ? nameIn.value.trim() : '';
             if (v.length < 2) {
-                if (nameErr) nameErr.textContent = 'Минимум 2 символа';
+                if (nameErr) nameErr.textContent = t('nameMin');
                 if (nameIn) nameIn.classList.add('yoga-form__input--error');
                 return false;
             }
             if (!/^[а-яА-ЯёЁa-zA-Z\s-]+$/.test(v)) {
-                if (nameErr) nameErr.textContent = 'Только буквы, дефис и пробел';
+                if (nameErr) nameErr.textContent = t('nameChars');
                 if (nameIn) nameIn.classList.add('yoga-form__input--error');
                 return false;
             }
@@ -1342,11 +1405,11 @@
             var d = (departureDate && departureDate.value) ? departureDate.value.trim() : '';
             if (!a && !d) return true;
             if ((a && !d) || (!a && d)) {
-                showFormError('Укажите обе даты заезда и выезда или оставьте поля пустыми.');
+                showFormError(t('datesBothOrEmpty'));
                 return false;
             }
             if (d < a) {
-                showFormError('Дата выезда не может быть раньше даты заезда.');
+                showFormError(t('departureBeforeArrival'));
                 return false;
             }
             return true;
@@ -1370,7 +1433,7 @@
 
         function msgFromApi(status, body) {
             if (status === 429) {
-                return 'Слишком много запросов. Подождите минуту.';
+                return t('rateLimit');
             }
             if (!body || typeof body !== 'object') return null;
             var d = body.detail;
@@ -1439,12 +1502,12 @@
 
             var now = Date.now();
             if (now - lastSubmitTime < SUBMIT_COOLDOWN_MS) {
-                showFormError('Подождите несколько секунд перед повторной отправкой.');
+                showFormError(t('cooldown'));
                 return;
             }
 
             if (consent && !consent.checked) {
-                showFormError('Нужно согласие с политикой конфиденциальности, публичной офертой и условиями отмены бронирования.');
+                showFormError(t('consentRequired'));
                 return;
             }
 
@@ -1459,7 +1522,7 @@
                 if (!okD) {
                     /* сообщение уже в showFormError */
                 } else {
-                    showFormError('Проверьте поля выше.');
+                    showFormError(t('checkFields'));
                 }
                 if (!okN && nameIn) nameIn.focus();
                 else if (!okP && phoneNat) phoneNat.focus();
@@ -1469,7 +1532,7 @@
             }
 
             if (turnstileSiteKey && !getCaptchaToken()) {
-                showFormError('Пройдите проверку «Я не робот».');
+                showFormError(t('captchaRequired'));
                 return;
             }
 
@@ -1480,7 +1543,7 @@
             var depDate = (departureDate && departureDate.value) ? departureDate.value.trim() : '';
             var cmt = (comment && comment.value) ? comment.value.trim() : '';
             var procEl = form.querySelector('input[name="procedure"]');
-            var procedure = (procEl && procEl.value) ? procEl.value.trim() : 'Йога-тур в Таиланд';
+            var procedure = (procEl && procEl.value) ? procEl.value.trim() : t('defaultProcedure');
             var payload = {
                 name: (nameIn && nameIn.value) ? nameIn.value.trim() : '',
                 phone: (phoneIn && phoneIn.value) ? phoneIn.value.trim() : '',
@@ -1531,7 +1594,7 @@
                 .catch(function () {
                     setFormLoading(false);
                     resetTurnstile();
-                    showFormError('Не удалось отправить. Проверьте сеть и попробуйте снова.');
+                    showFormError(t('networkError'));
                 });
         });
     }
