@@ -38,7 +38,7 @@ class Settings(BaseSettings):
     TURNSTILE_SITE_KEY: str = ""
 
     # Policy version for consents
-    POLICY_VERSION: str = "2026-01-01"
+    POLICY_VERSION: str = "2026-05-25"
 
 
 settings = Settings()

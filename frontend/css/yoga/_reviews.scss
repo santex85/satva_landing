@@ -40,32 +40,161 @@
         }
     }
 
+    &__google-badge {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 8px 12px;
+        margin: -24px auto 40px;
+        padding: 14px 20px;
+        max-width: 28rem;
+        background: $color-white;
+        border-radius: 999px;
+        border: 1px solid rgba($color-primary, 0.12);
+        box-shadow: $shadow-sm;
+    }
+
+    &__google-icon {
+        flex-shrink: 0;
+        display: block;
+    }
+
+    &__google-rating {
+        font-size: 1.35rem;
+        font-weight: $font-weight-bold;
+        color: $color-primary;
+        line-height: 1;
+    }
+
+    &__google-stars {
+        color: #e8a317;
+        font-size: 1rem;
+        letter-spacing: 0.05em;
+        line-height: 1;
+    }
+
+    &__google-label {
+        flex: 1 1 100%;
+        text-align: center;
+        font-size: 0.8125rem;
+        color: $color-text-light;
+        margin: 0;
+
+        @media (min-width: 480px) {
+            flex: 0 1 auto;
+            text-align: left;
+        }
+    }
+
     &__text-grid {
         display: grid;
         grid-template-columns: 1fr;
         gap: 16px;
-        margin-bottom: 40px;
+        margin-bottom: 32px;
 
         @media (min-width: 640px) {
             grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (min-width: 960px) {
+            grid-template-columns: repeat(3, 1fr);
         }
     }
 
     &__quote {
         margin: 0;
-        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
         background: $color-white;
         border-radius: 16px;
         padding: 20px;
         border: 1px solid rgba($color-primary, 0.1);
         box-shadow: $shadow-sm;
+    }
 
-        blockquote {
-            margin: 0;
-            font-size: 0.95rem;
-            line-height: $line-height-body;
-            color: $color-text;
-            font-style: italic;
+    &__quote-stars {
+        color: #e8a317;
+        font-size: 0.9rem;
+        letter-spacing: 0.08em;
+        line-height: 1;
+    }
+
+    &__quote-text {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: $line-height-body;
+        color: $color-text;
+        font-style: normal;
+        flex: 1;
+    }
+
+    &__quote-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px 10px;
+        margin: 0;
+        padding-top: 4px;
+        border-top: 1px solid rgba($color-primary, 0.08);
+        font-size: 0.8125rem;
+        color: $color-text-light;
+    }
+
+    &__quote-author {
+        font-style: normal;
+        font-weight: $font-weight-semibold;
+        color: $color-primary;
+    }
+
+    &__quote-date::before {
+        content: '·';
+        margin-right: 10px;
+        color: rgba($color-primary, 0.35);
+    }
+
+    &__quote-source {
+        margin-left: auto;
+        flex-shrink: 0;
+        font-size: 0.75rem;
+        font-weight: $font-weight-semibold;
+        color: $color-primary;
+        background: rgba($color-primary, 0.08);
+        padding: 2px 8px;
+        border-radius: 4px;
+    }
+
+    &__cta-wrap {
+        margin: 0;
+        text-align: center;
+    }
+
+    &__cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 28px;
+        font-size: 0.9375rem;
+        font-weight: $font-weight-semibold;
+        color: $color-white;
+        background: $color-primary;
+        border-radius: 999px;
+        text-decoration: none;
+        box-shadow: $shadow-sm;
+        transition: background $transition-fast, transform $transition-fast, box-shadow $transition-fast;
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                background: $color-primary-dark;
+                transform: translateY(-2px);
+                box-shadow: $shadow-md;
+            }
+        }
+
+        &:focus-visible {
+            outline: 3px solid $color-primary;
+            outline-offset: 3px;
         }
     }
 
