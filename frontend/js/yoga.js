@@ -946,6 +946,15 @@
 
         function openModal() {
             previousActive = document.activeElement;
+            var leadForm = document.getElementById('yogaLeadFormModal');
+            var leadSuccess = document.getElementById('yogaLeadFormSuccess');
+            var leadError = document.getElementById('yogaLeadFormError');
+            if (leadForm) leadForm.classList.remove('is-hidden');
+            if (leadSuccess) leadSuccess.classList.add('is-hidden');
+            if (leadError) {
+                leadError.textContent = '';
+                leadError.classList.add('is-hidden');
+            }
             modal.removeAttribute('hidden');
             modal.classList.add('is-open');
             modal.setAttribute('aria-hidden', 'false');
@@ -1108,6 +1117,7 @@
         var websiteHp = document.getElementById('yogaLeadModalWebsite');
         var submitBtn = document.getElementById('yogaLeadModalSubmit');
         var errBox = document.getElementById('yogaLeadFormError');
+        var successBox = document.getElementById('yogaLeadFormSuccess');
         var nameErr = document.getElementById('yogaLeadModalNameErr');
         var phoneErr = document.getElementById('yogaLeadModalPhoneErr');
         var emailErr = document.getElementById('yogaLeadModalEmailErr');
@@ -1329,7 +1339,11 @@
                         clearNamePhoneErrors();
                         showFormError('');
                         if (consent) consent.checked = false;
-                        if (closeYogaLeadModalFn) closeYogaLeadModalFn();
+                        form.classList.add('is-hidden');
+                        if (successBox) successBox.classList.remove('is-hidden');
+                        setTimeout(function () {
+                            if (closeYogaLeadModalFn) closeYogaLeadModalFn();
+                        }, 2500);
                     } else {
                         showFormError(msgFromApi(r.status, r.body) || GENERIC_ERR);
                     }

@@ -38,7 +38,7 @@
 
     <link rel="stylesheet" href="/css/yoga.css">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
-    <script defer src="/js/yoga.js?v=2"></script>
+    <script defer src="/js/yoga.js?v=3"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
 
     <!-- Structured Data: LodgingBusiness (расширенная карточка) -->
@@ -1382,6 +1382,9 @@
             <button type="button" class="yoga-modal__close" aria-label="Close">&times;</button>
             <h2 class="yoga-modal__title" id="yogaModalLeadTitle">Book Your Yoga Retreat</h2>
             <div class="yoga-modal__body yoga-modal__body--scroll">
+                <div id="yogaLeadFormSuccess" class="yoga-form__status yoga-form__status--success is-hidden" role="status">
+                    Thank you! We've received your enquiry and will be in touch shortly.
+                </div>
                 <form id="yogaLeadFormModal" class="yoga-form yoga-form--modal-light" action="/api/booking" method="post" data-source="popup" novalidate>
                     <input type="hidden" name="procedure" value="Yoga Retreat in Thailand">
                     <input type="text" name="website" id="yogaLeadModalWebsite" class="yoga-form__hp" tabindex="-1" autocomplete="off" aria-hidden="true" value="">
