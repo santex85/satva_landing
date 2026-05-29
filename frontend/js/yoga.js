@@ -136,9 +136,14 @@
         }
     }
 
-    /** Синхронизирует контакт Tawk (login + event). Inbox-тикеты — на сервере. */
+    /** Синхронизирует контакт Tawk (login по email + event). Без email — только addEvent. */
     function setTawkVisitor(lead, tawkLogin) {
         if (!lead || typeof lead !== 'object') return;
+
+        if (!lead.email || !String(lead.email).trim()) {
+            trackTawkLeadEvent(lead);
+            return;
+        }
 
         function applySetAttributes() {
             var attrs = {};

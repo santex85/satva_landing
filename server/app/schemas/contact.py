@@ -10,7 +10,7 @@ class TawkLoginPayload(BaseModel):
     hash: str
     name: str | None = None
     email: EmailStr | None = None
-    phone: str
+    phone: str | None = None
 
 
 class ContactResponse(BaseModel):

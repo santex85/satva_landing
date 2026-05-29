@@ -1,4 +1,4 @@
-"""Tawk.to: E.164 phone + HMAC hash for widget login()."""
+"""Tawk.to: email-based userId + HMAC hash for widget login()."""
 
 import hashlib
 import hmac
@@ -6,6 +6,12 @@ import re
 
 from app.config import settings
 from app.schemas.contact import ContactResponse, TawkLoginPayload
+
+
+def normalize_email(email: str | None) -> str:
+    if not email:
+        return ""
+    return str(email).strip().lower()
 
 
 def normalize_phone_e164(phone: str | None) -> str:
@@ -31,17 +37,18 @@ def build_tawk_login_payload(
     if not api_key:
         return None
 
-    e164 = normalize_phone_e164(phone)
-    if not e164:
+    email_norm = normalize_email(email)
+    if not email_norm:
         return None
 
-    user_id = e164
+    user_id = email_norm
+    e164 = normalize_phone_e164(phone)
     return TawkLoginPayload(
         userId=user_id,
         hash=tawk_login_hash(user_id),
         name=(name or "").strip() or None,
-        email=(email or "").strip() or None,
-        phone=e164,
+        email=email_norm,
+        phone=e164 or None,
     )
 
 
