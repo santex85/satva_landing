@@ -267,6 +267,14 @@ body.admin-logged-in .admin-main-wrap {
   margin-bottom: 1.5rem;
 }
 
+.admin-page-header:has(.admin-analytics-range) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .admin-page-header--detail {
   display: flex;
   flex-direction: column;
@@ -639,6 +647,184 @@ body.admin-logged-in .admin-login-view {
   font-size: 0.78rem;
   font-weight: 600;
   white-space: nowrap;
+}
+
+/* ── Lead status badges ── */
+.admin-status-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.admin-status-badge--new {
+  background: #e8f4fd;
+  color: #1565c0;
+  border-color: rgba(21, 101, 192, 0.2);
+}
+
+.admin-status-badge--in_progress {
+  background: #fff3e0;
+  color: #e65100;
+  border-color: rgba(230, 81, 0, 0.2);
+}
+
+.admin-status-badge--contacted {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-color: rgba(46, 125, 50, 0.2);
+}
+
+.admin-status-badge--booked {
+  background: #ede7f6;
+  color: #4527a0;
+  border-color: rgba(69, 39, 160, 0.2);
+}
+
+.admin-status-badge--cancelled {
+  background: #fce4ec;
+  color: #c62828;
+  border-color: rgba(198, 40, 40, 0.2);
+}
+
+.admin-status-badge--spam {
+  background: #eceff1;
+  color: #546e7a;
+  border-color: rgba(84, 110, 122, 0.25);
+}
+
+/* ── Active / Archive tabs ── */
+.admin-archive-tabs,
+.admin-analytics-range {
+  display: inline-flex;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+  padding: 0.25rem;
+  border-radius: var(--admin-radius);
+  background: var(--admin-teal-light);
+  border: 1px solid var(--admin-teal-border);
+}
+
+.admin-page-header .admin-analytics-range {
+  margin-bottom: 0;
+}
+
+.admin-archive-tab {
+  padding: 0.45rem 0.9rem;
+  border: none;
+  border-radius: calc(var(--admin-radius) - 2px);
+  background: transparent;
+  color: var(--admin-teal);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--admin-transition), color var(--admin-transition);
+}
+
+.admin-archive-tab:hover {
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.admin-archive-tab--active {
+  background: var(--admin-surface);
+  color: var(--admin-teal-dark);
+  box-shadow: var(--admin-shadow);
+}
+
+/* ── Lead detail actions ── */
+.admin-lead-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.admin-lead-actions__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* ── Analytics ── */
+.admin-analytics-notice {
+  margin: 0 0 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--admin-radius);
+  background: #fff8e1;
+  border: 1px solid rgba(245, 127, 23, 0.25);
+  color: #8d6e00;
+}
+
+.admin-analytics-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.admin-analytics-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--admin-radius-lg);
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-teal-border);
+  box-shadow: var(--admin-shadow);
+}
+
+.admin-analytics-card__label {
+  font-size: 0.82rem;
+  color: var(--admin-text-muted);
+  font-weight: 600;
+}
+
+.admin-analytics-card__value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--admin-teal-dark);
+  line-height: 1.1;
+}
+
+.admin-analytics-top-list__empty {
+  margin: 0;
+  color: var(--admin-text-muted);
+}
+
+.admin-analytics-top-list__items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.admin-analytics-top-list__items li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--admin-teal-border);
+}
+
+.admin-analytics-top-list__items li:last-child {
+  border-bottom: none;
+}
+
+.admin-analytics-top-list__path {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88rem;
+  color: var(--admin-text);
+  word-break: break-all;
+}
+
+.admin-analytics-top-list__views {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--admin-teal);
 }
 
 /* ── Pagination ── */

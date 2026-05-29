@@ -13,6 +13,27 @@ class LeadType:
     PACKAGE_CHOICE = "package_choice"
 
 
+class LeadStatus:
+    NEW = "new"
+    IN_PROGRESS = "in_progress"
+    CONTACTED = "contacted"
+    BOOKED = "booked"
+    CANCELLED = "cancelled"
+    SPAM = "spam"
+
+
+LEAD_STATUSES = frozenset(
+    {
+        LeadStatus.NEW,
+        LeadStatus.IN_PROGRESS,
+        LeadStatus.CONTACTED,
+        LeadStatus.BOOKED,
+        LeadStatus.CANCELLED,
+        LeadStatus.SPAM,
+    }
+)
+
+
 class Lead(Base):
     __tablename__ = "leads"
 
@@ -21,6 +42,13 @@ class Lead(Base):
     payload: Mapped[dict] = mapped_column(JSONB, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow)
     source: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    status: Mapped[str] = mapped_column(String(32), index=True, nullable=False, default=LeadStatus.NEW)
+    archived_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), index=True, nullable=True)
+    updated_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True),
+        nullable=True,
+        onupdate=datetime.utcnow,
+    )
 
     consents: Mapped[list["Consent"]] = relationship("Consent", back_populates="lead", cascade="all, delete-orphan")
 

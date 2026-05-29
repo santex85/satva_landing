@@ -40,5 +40,10 @@ class Settings(BaseSettings):
     # Policy version for consents
     POLICY_VERSION: str = "2026-05-29"
 
+    # Umami Cloud analytics (admin dashboard proxy)
+    UMAMI_API_KEY: str = ""
+    UMAMI_WEBSITE_ID: str = ""
+    UMAMI_API_BASE: str = "https://api.umami.is/v1"
+
 
 settings = Settings()

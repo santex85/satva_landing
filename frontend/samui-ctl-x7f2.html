@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админка — Satva</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="css/admin.css?v=3">
+    <link rel="stylesheet" href="css/admin.css?v=4">
 </head>
 <body class="admin-page">
     <div class="admin-app">
@@ -18,6 +18,10 @@
                 <button type="button" id="admin-nav-leads" class="admin-sidebar__link admin-nav__tab admin-nav__tab--active" data-nav="leads">
                     <svg class="admin-sidebar__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                     Заявки
+                </button>
+                <button type="button" id="admin-nav-analytics" class="admin-sidebar__link admin-nav__tab" data-nav="analytics">
+                    <svg class="admin-sidebar__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    Аналитика
                 </button>
                 <button type="button" id="admin-nav-settings" class="admin-sidebar__link admin-nav__tab" data-nav="settings">
                     <svg class="admin-sidebar__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -78,6 +82,10 @@
 
                     <div class="admin-panel admin-filters-panel">
                         <h2 class="admin-panel__title">Фильтры</h2>
+                        <div class="admin-archive-tabs" role="tablist" aria-label="Активные или архив">
+                            <button type="button" id="admin-tab-active" class="admin-archive-tab admin-archive-tab--active" role="tab" aria-selected="true">Активные</button>
+                            <button type="button" id="admin-tab-archive" class="admin-archive-tab" role="tab" aria-selected="false">Архив</button>
+                        </div>
                         <div class="admin-toolbar">
                             <div class="admin-toolbar__group">
                                 <label for="admin-leads-filter" class="admin-label">Тип заявки</label>
@@ -86,6 +94,18 @@
                                     <option value="contact">contact</option>
                                     <option value="procedure_booking">procedure_booking</option>
                                     <option value="package_choice">package_choice</option>
+                                </select>
+                            </div>
+                            <div class="admin-toolbar__group">
+                                <label for="admin-status-filter" class="admin-label">Статус</label>
+                                <select id="admin-status-filter" class="admin-select" aria-label="Фильтр по статусу">
+                                    <option value="">Все статусы</option>
+                                    <option value="new">Новый</option>
+                                    <option value="in_progress">В работе</option>
+                                    <option value="contacted">Связались</option>
+                                    <option value="booked">Забронировано</option>
+                                    <option value="cancelled">Отмена</option>
+                                    <option value="spam">Спам</option>
                                 </select>
                             </div>
                             <div class="admin-toolbar__group admin-date-filters" role="group" aria-label="Фильтр по дате создания">
@@ -109,13 +129,14 @@
                                     <tr>
                                         <th scope="col">Дата</th>
                                         <th scope="col">Тип</th>
+                                        <th scope="col">Статус</th>
                                         <th scope="col">Имя</th>
                                         <th scope="col">Телефон</th>
                                         <th scope="col"><span class="visually-hidden">Действие</span></th>
                                     </tr>
                                 </thead>
                                 <tbody id="admin-leads-tbody">
-                                    <tr><td colspan="5" class="admin-table__empty">Загрузка…</td></tr>
+                                    <tr><td colspan="6" class="admin-table__empty">Загрузка…</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -143,6 +164,28 @@
                     <p id="admin-detail-loading" class="admin-loading">Загрузка…</p>
 
                     <div class="admin-panel admin-detail-section">
+                        <h2 class="admin-panel__title">Управление</h2>
+                        <div class="admin-lead-actions">
+                            <div class="admin-toolbar__group">
+                                <label for="admin-detail-status" class="admin-label">Статус</label>
+                                <select id="admin-detail-status" class="admin-select" aria-label="Статус заявки">
+                                    <option value="new">Новый</option>
+                                    <option value="in_progress">В работе</option>
+                                    <option value="contacted">Связались</option>
+                                    <option value="booked">Забронировано</option>
+                                    <option value="cancelled">Отмена</option>
+                                    <option value="spam">Спам</option>
+                                </select>
+                            </div>
+                            <div class="admin-lead-actions__buttons">
+                                <button type="button" id="admin-detail-archive" class="admin-btn admin-btn--secondary admin-btn--small">В архив</button>
+                                <button type="button" id="admin-detail-restore" class="admin-btn admin-btn--ghost admin-btn--small admin-hidden">Восстановить</button>
+                            </div>
+                            <div id="admin-detail-message" class="form-message" role="alert" aria-live="polite"></div>
+                        </div>
+                    </div>
+
+                    <div class="admin-panel admin-detail-section">
                         <h2 class="admin-panel__title">Данные заявки</h2>
                         <div id="admin-detail-payload" class="admin-detail-payload"></div>
                     </div>
@@ -153,7 +196,50 @@
                     </div>
                 </section>
 
-                <!-- 4. Блок настроек -->
+                <!-- 4. Блок аналитики -->
+                <section id="admin-analytics" class="admin-block admin-hidden">
+                    <header class="admin-page-header">
+                        <div class="admin-page-header__text">
+                            <h1 class="admin-page-heading">Аналитика</h1>
+                            <p class="admin-page-subtitle">Сводка посещений сайта (Umami)</p>
+                        </div>
+                        <div class="admin-analytics-range" role="group" aria-label="Период аналитики">
+                            <button type="button" id="admin-analytics-7d" class="admin-archive-tab admin-archive-tab--active" data-range="7d">7 дней</button>
+                            <button type="button" id="admin-analytics-30d" class="admin-archive-tab" data-range="30d">30 дней</button>
+                        </div>
+                    </header>
+
+                    <p id="admin-analytics-loading" class="admin-loading">Загрузка…</p>
+                    <p id="admin-analytics-not-configured" class="admin-analytics-notice admin-hidden">Umami не настроен на сервере. Задайте UMAMI_API_KEY и UMAMI_WEBSITE_ID.</p>
+
+                    <div id="admin-analytics-content" class="admin-hidden">
+                        <div class="admin-analytics-cards">
+                            <div class="admin-analytics-card">
+                                <span class="admin-analytics-card__label">Посетители</span>
+                                <span class="admin-analytics-card__value" id="admin-analytics-visitors">—</span>
+                            </div>
+                            <div class="admin-analytics-card">
+                                <span class="admin-analytics-card__label">Просмотры</span>
+                                <span class="admin-analytics-card__value" id="admin-analytics-pageviews">—</span>
+                            </div>
+                            <div class="admin-analytics-card">
+                                <span class="admin-analytics-card__label">Визиты</span>
+                                <span class="admin-analytics-card__value" id="admin-analytics-visits">—</span>
+                            </div>
+                            <div class="admin-analytics-card">
+                                <span class="admin-analytics-card__label">Отказы</span>
+                                <span class="admin-analytics-card__value" id="admin-analytics-bounces">—</span>
+                            </div>
+                        </div>
+
+                        <div class="admin-panel admin-analytics-top-pages">
+                            <h2 class="admin-panel__title">Топ страниц</h2>
+                            <div id="admin-analytics-top-pages" class="admin-analytics-top-list"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. Блок настроек -->
                 <section id="admin-settings" class="admin-block admin-hidden">
                     <header class="admin-page-header">
                         <div class="admin-page-header__text">
@@ -216,6 +302,6 @@
             </main>
         </div>
     </div>
-    <script src="js/admin.js?v=3"></script>
+    <script src="js/admin.js?v=4"></script>
 </body>
 </html>

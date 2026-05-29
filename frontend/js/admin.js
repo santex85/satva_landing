@@ -20,18 +20,30 @@
     login: null,
     leads: null,
     detail: null,
+    analytics: null,
     settings: null,
   };
 
   var PAGE_TITLES = {
     leads: "Заявки",
     detail: "Заявка",
+    analytics: "Аналитика",
     settings: "Настройки",
+  };
+
+  var _LEAD_STATUS_LABELS = {
+    new: "Новый",
+    in_progress: "В работе",
+    contacted: "Связались",
+    booked: "Забронировано",
+    cancelled: "Отмена",
+    spam: "Спам",
   };
 
   var els = {
     nav: null,
     navLeads: null,
+    navAnalytics: null,
     navSettings: null,
     topbar: null,
     pageTitle: null,
@@ -41,6 +53,9 @@
     loginMessage: null,
     leadsTableBody: null,
     leadsFilter: null,
+    statusFilter: null,
+    tabActive: null,
+    tabArchive: null,
     dateFrom: null,
     dateTo: null,
     applyFiltersBtn: null,
@@ -52,6 +67,10 @@
     detailPayload: null,
     detailConsents: null,
     detailLoading: null,
+    detailStatus: null,
+    detailArchiveBtn: null,
+    detailRestoreBtn: null,
+    detailMessage: null,
     logoutBtn: null,
     emailList: null,
     emailInput: null,
@@ -61,15 +80,30 @@
     meEmail: null,
     passwordForm: null,
     passwordMessage: null,
+    analyticsLoading: null,
+    analyticsNotConfigured: null,
+    analyticsContent: null,
+    analyticsVisitors: null,
+    analyticsPageviews: null,
+    analyticsVisits: null,
+    analyticsBounces: null,
+    analyticsTopPages: null,
+    analyticsRange7d: null,
+    analyticsRange30d: null,
   };
 
   var state = {
     offset: 0,
     typeFilter: "",
+    statusFilter: "",
+    archived: false,
     createdAfter: "",
     createdBefore: "",
     leadsData: [],
     notificationEmails: [],
+    currentLeadId: null,
+    currentLeadArchived: false,
+    analyticsRange: "7d",
   };
 
   function apiUrl(path) {
@@ -159,6 +193,9 @@
     if (els.navLeads) {
       els.navLeads.classList.toggle("admin-nav__tab--active", activeLeads);
     }
+    if (els.navAnalytics) {
+      els.navAnalytics.classList.toggle("admin-nav__tab--active", name === "analytics");
+    }
     if (els.navSettings) {
       els.navSettings.classList.toggle("admin-nav__tab--active", name === "settings");
     }
@@ -185,6 +222,31 @@
     showBlock("settings");
     loadSettings();
     loadMe();
+  }
+
+  function showAnalytics() {
+    showBlock("analytics");
+    loadAnalytics(state.analyticsRange);
+  }
+
+  function statusLabel(status) {
+    return _LEAD_STATUS_LABELS[status] || status || "—";
+  }
+
+  function renderStatusBadge(status) {
+    var key = status || "new";
+    return "<span class=\"admin-status-badge admin-status-badge--" + escapeAttr(key) + "\">" + escapeHtml(statusLabel(key)) + "</span>";
+  }
+
+  function updateArchiveTabs() {
+    if (els.tabActive) {
+      els.tabActive.classList.toggle("admin-archive-tab--active", !state.archived);
+      els.tabActive.setAttribute("aria-selected", state.archived ? "false" : "true");
+    }
+    if (els.tabArchive) {
+      els.tabArchive.classList.toggle("admin-archive-tab--active", state.archived);
+      els.tabArchive.setAttribute("aria-selected", state.archived ? "true" : "false");
+    }
   }
 
   function formatDate(iso) {
@@ -225,6 +287,10 @@
     if (state.typeFilter) {
       params.set("type", state.typeFilter);
     }
+    if (state.statusFilter) {
+      params.set("status", state.statusFilter);
+    }
+    params.set("archived", state.archived ? "true" : "false");
     if (state.createdAfter) {
       params.set("created_after", state.createdAfter);
     }
@@ -251,7 +317,7 @@
       })
       .catch(function (err) {
         if (els.leadsTableBody) {
-          els.leadsTableBody.innerHTML = "<tr><td colspan=\"5\" class=\"admin-table__empty admin-error-msg\">" + (err.message || "Ошибка загрузки") + "</td></tr>";
+          els.leadsTableBody.innerHTML = "<tr><td colspan=\"6\" class=\"admin-table__empty admin-error-msg\">" + (err.message || "Ошибка загрузки") + "</td></tr>";
         }
       });
   }
@@ -261,7 +327,7 @@
     if (!tbody) return;
     var rows = state.leadsData;
     if (!rows.length) {
-      tbody.innerHTML = "<tr><td colspan=\"5\" class=\"admin-table__empty\">Нет заявок</td></tr>";
+      tbody.innerHTML = "<tr><td colspan=\"6\" class=\"admin-table__empty\">" + (state.archived ? "Архив пуст" : "Нет заявок") + "</td></tr>";
       return;
     }
     tbody.innerHTML = rows
@@ -274,6 +340,7 @@
           "<tr>" +
           "<td>" + formatDate(lead.created_at) + "</td>" +
           "<td><span class=\"admin-type-badge\">" + escapeHtml(lead.type || "—") + "</span></td>" +
+          "<td>" + renderStatusBadge(lead.status) + "</td>" +
           "<td>" + escapeHtml(name) + "</td>" +
           "<td>" + escapeHtml(phone) + "</td>" +
           "<td><button type=\"button\" class=\"admin-btn admin-btn--primary admin-btn--small\" data-lead-id=\"" + escapeAttr(String(id)) + "\">Подробнее</button></td>" +
@@ -309,10 +376,12 @@
       showLogin();
       return;
     }
+    state.currentLeadId = id;
     showDetail();
     if (els.detailLoading) els.detailLoading.classList.remove("admin-hidden");
     if (els.detailPayload) els.detailPayload.innerHTML = "";
     if (els.detailConsents) els.detailConsents.innerHTML = "";
+    setFormMessage(els.detailMessage, "", false);
 
     fetch(apiUrl("/leads/" + encodeURIComponent(id)), {
       method: "GET",
@@ -326,6 +395,16 @@
       .then(function (data) {
         if (els.detailLoading) els.detailLoading.classList.add("admin-hidden");
         if (!data) return;
+        state.currentLeadArchived = !!data.archived_at;
+        if (els.detailStatus) {
+          els.detailStatus.value = data.status || "new";
+        }
+        if (els.detailArchiveBtn) {
+          els.detailArchiveBtn.classList.toggle("admin-hidden", state.currentLeadArchived);
+        }
+        if (els.detailRestoreBtn) {
+          els.detailRestoreBtn.classList.toggle("admin-hidden", !state.currentLeadArchived);
+        }
         var payload = data.payload || {};
         var payloadKeys = Object.keys(payload);
         if (payloadKeys.length && els.detailPayload) {
@@ -368,6 +447,129 @@
         if (els.detailLoading) els.detailLoading.classList.add("admin-hidden");
         if (els.detailPayload) els.detailPayload.innerHTML = "<p class=\"admin-error-msg\">" + escapeHtml(err.message || "Ошибка загрузки") + "</p>";
       });
+  }
+
+  function patchLead(body, successMessage) {
+    if (!state.currentLeadId) return Promise.resolve(null);
+    setFormMessage(els.detailMessage, "Сохранение…", false);
+    return fetch(apiUrl("/leads/" + encodeURIComponent(state.currentLeadId)), {
+      method: "PATCH",
+      headers: Object.assign({ "Content-Type": "application/json" }, authHeaders()),
+      body: JSON.stringify(body),
+    })
+      .then(function (res) {
+        if (handleUnauthorized(res)) return null;
+        return res.json().then(function (data) {
+          if (!res.ok) {
+            var detail = data && data.detail ? data.detail : "Ошибка сохранения";
+            throw new Error(typeof detail === "string" ? detail : "Ошибка сохранения");
+          }
+          return data;
+        });
+      })
+      .then(function (data) {
+        if (!data) return null;
+        state.currentLeadArchived = !!data.archived_at;
+        if (els.detailStatus && data.status) {
+          els.detailStatus.value = data.status;
+        }
+        if (els.detailArchiveBtn) {
+          els.detailArchiveBtn.classList.toggle("admin-hidden", state.currentLeadArchived);
+        }
+        if (els.detailRestoreBtn) {
+          els.detailRestoreBtn.classList.toggle("admin-hidden", !state.currentLeadArchived);
+        }
+        setFormMessage(els.detailMessage, successMessage || "Сохранено", false);
+        return data;
+      })
+      .catch(function (err) {
+        setFormMessage(els.detailMessage, err.message || "Ошибка сохранения", true);
+        return null;
+      });
+  }
+
+  function loadAnalytics(range) {
+    var token = getToken();
+    if (!token) {
+      showLogin();
+      return;
+    }
+    state.analyticsRange = range || "7d";
+    if (els.analyticsLoading) els.analyticsLoading.classList.remove("admin-hidden");
+    if (els.analyticsNotConfigured) els.analyticsNotConfigured.classList.add("admin-hidden");
+    if (els.analyticsContent) els.analyticsContent.classList.add("admin-hidden");
+    updateAnalyticsRangeTabs();
+
+    fetch(apiUrl("/admin/analytics/summary?range=" + encodeURIComponent(state.analyticsRange)), {
+      method: "GET",
+      headers: authHeaders(),
+    })
+      .then(function (res) {
+        if (handleUnauthorized(res)) return null;
+        if (!res.ok) throw new Error("Ошибка загрузки аналитики");
+        return res.json();
+      })
+      .then(function (data) {
+        if (els.analyticsLoading) els.analyticsLoading.classList.add("admin-hidden");
+        if (!data) return;
+        renderAnalytics(data);
+      })
+      .catch(function () {
+        if (els.analyticsLoading) els.analyticsLoading.classList.add("admin-hidden");
+        if (els.analyticsNotConfigured) {
+          els.analyticsNotConfigured.textContent = "Не удалось загрузить аналитику";
+          els.analyticsNotConfigured.classList.remove("admin-hidden");
+        }
+      });
+  }
+
+  function updateAnalyticsRangeTabs() {
+    if (els.analyticsRange7d) {
+      els.analyticsRange7d.classList.toggle("admin-archive-tab--active", state.analyticsRange === "7d");
+    }
+    if (els.analyticsRange30d) {
+      els.analyticsRange30d.classList.toggle("admin-archive-tab--active", state.analyticsRange === "30d");
+    }
+  }
+
+  function renderAnalytics(data) {
+    if (!data.configured) {
+      if (els.analyticsNotConfigured) {
+        els.analyticsNotConfigured.textContent = "Umami не настроен на сервере. Задайте UMAMI_API_KEY и UMAMI_WEBSITE_ID.";
+        els.analyticsNotConfigured.classList.remove("admin-hidden");
+      }
+      if (els.analyticsContent) els.analyticsContent.classList.add("admin-hidden");
+      return;
+    }
+
+    if (els.analyticsNotConfigured) els.analyticsNotConfigured.classList.add("admin-hidden");
+    if (els.analyticsContent) els.analyticsContent.classList.remove("admin-hidden");
+    if (els.analyticsVisitors) els.analyticsVisitors.textContent = String(data.visitors != null ? data.visitors : 0);
+    if (els.analyticsPageviews) els.analyticsPageviews.textContent = String(data.pageviews != null ? data.pageviews : 0);
+    if (els.analyticsVisits) els.analyticsVisits.textContent = String(data.visits != null ? data.visits : 0);
+    if (els.analyticsBounces) els.analyticsBounces.textContent = String(data.bounces != null ? data.bounces : 0);
+
+    var pages = data.top_pages || [];
+    if (els.analyticsTopPages) {
+      if (!pages.length) {
+        els.analyticsTopPages.innerHTML = "<p class=\"admin-analytics-top-list__empty\">Нет данных за выбранный период</p>";
+      } else {
+        els.analyticsTopPages.innerHTML =
+          "<ol class=\"admin-analytics-top-list__items\">" +
+          pages
+            .map(function (page) {
+              return (
+                "<li><span class=\"admin-analytics-top-list__path\">" +
+                escapeHtml(page.path || "/") +
+                "</span><span class=\"admin-analytics-top-list__views\">" +
+                escapeHtml(String(page.views != null ? page.views : 0)) +
+                "</span></li>"
+              );
+            })
+            .join("") +
+          "</ol>";
+      }
+    }
   }
 
   function renderEmailList() {
@@ -504,10 +706,12 @@
     blocks.login = document.getElementById("admin-login");
     blocks.leads = document.getElementById("admin-leads");
     blocks.detail = document.getElementById("admin-lead-detail");
+    blocks.analytics = document.getElementById("admin-analytics");
     blocks.settings = document.getElementById("admin-settings");
 
     els.nav = document.getElementById("admin-nav");
     els.navLeads = document.getElementById("admin-nav-leads");
+    els.navAnalytics = document.getElementById("admin-nav-analytics");
     els.navSettings = document.getElementById("admin-nav-settings");
     els.topbar = document.getElementById("admin-topbar");
     els.pageTitle = document.getElementById("admin-page-title");
@@ -517,6 +721,9 @@
     els.loginMessage = document.getElementById("admin-login-message");
     els.leadsTableBody = document.getElementById("admin-leads-tbody");
     els.leadsFilter = document.getElementById("admin-leads-filter");
+    els.statusFilter = document.getElementById("admin-status-filter");
+    els.tabActive = document.getElementById("admin-tab-active");
+    els.tabArchive = document.getElementById("admin-tab-archive");
     els.dateFrom = document.getElementById("admin-date-from");
     els.dateTo = document.getElementById("admin-date-to");
     els.applyFiltersBtn = document.getElementById("admin-apply-filters");
@@ -528,6 +735,10 @@
     els.detailPayload = document.getElementById("admin-detail-payload");
     els.detailConsents = document.getElementById("admin-detail-consents");
     els.detailLoading = document.getElementById("admin-detail-loading");
+    els.detailStatus = document.getElementById("admin-detail-status");
+    els.detailArchiveBtn = document.getElementById("admin-detail-archive");
+    els.detailRestoreBtn = document.getElementById("admin-detail-restore");
+    els.detailMessage = document.getElementById("admin-detail-message");
     els.logoutBtn = document.getElementById("admin-logout");
     els.emailList = document.getElementById("admin-email-list");
     els.emailInput = document.getElementById("admin-email-input");
@@ -537,6 +748,16 @@
     els.meEmail = document.getElementById("admin-me-email");
     els.passwordForm = document.getElementById("admin-password-form");
     els.passwordMessage = document.getElementById("admin-password-message");
+    els.analyticsLoading = document.getElementById("admin-analytics-loading");
+    els.analyticsNotConfigured = document.getElementById("admin-analytics-not-configured");
+    els.analyticsContent = document.getElementById("admin-analytics-content");
+    els.analyticsVisitors = document.getElementById("admin-analytics-visitors");
+    els.analyticsPageviews = document.getElementById("admin-analytics-pageviews");
+    els.analyticsVisits = document.getElementById("admin-analytics-visits");
+    els.analyticsBounces = document.getElementById("admin-analytics-bounces");
+    els.analyticsTopPages = document.getElementById("admin-analytics-top-pages");
+    els.analyticsRange7d = document.getElementById("admin-analytics-7d");
+    els.analyticsRange30d = document.getElementById("admin-analytics-30d");
   }
 
   function bindEvents() {
@@ -593,10 +814,44 @@
       });
     }
 
+    if (els.navAnalytics) {
+      els.navAnalytics.addEventListener("click", function () {
+        showAnalytics();
+      });
+    }
+
     if (els.leadsFilter) {
       els.leadsFilter.addEventListener("change", function () {
         state.typeFilter = els.leadsFilter.value || "";
         state.offset = 0;
+        loadLeads();
+      });
+    }
+
+    if (els.statusFilter) {
+      els.statusFilter.addEventListener("change", function () {
+        state.statusFilter = els.statusFilter.value || "";
+        state.offset = 0;
+        loadLeads();
+      });
+    }
+
+    if (els.tabActive) {
+      els.tabActive.addEventListener("click", function () {
+        if (!state.archived) return;
+        state.archived = false;
+        state.offset = 0;
+        updateArchiveTabs();
+        loadLeads();
+      });
+    }
+
+    if (els.tabArchive) {
+      els.tabArchive.addEventListener("click", function () {
+        if (state.archived) return;
+        state.archived = true;
+        state.offset = 0;
+        updateArchiveTabs();
         loadLeads();
       });
     }
@@ -646,6 +901,43 @@
     if (els.detailBack) {
       els.detailBack.addEventListener("click", function () {
         showLeads();
+        loadLeads();
+      });
+    }
+
+    if (els.detailStatus) {
+      els.detailStatus.addEventListener("change", function () {
+        patchLead({ status: els.detailStatus.value }, "Статус обновлён");
+      });
+    }
+
+    if (els.detailArchiveBtn) {
+      els.detailArchiveBtn.addEventListener("click", function () {
+        patchLead({ archived: true }, "Заявка в архиве").then(function () {
+          showLeads();
+          loadLeads();
+        });
+      });
+    }
+
+    if (els.detailRestoreBtn) {
+      els.detailRestoreBtn.addEventListener("click", function () {
+        patchLead({ archived: false }, "Заявка восстановлена").then(function () {
+          showLeads();
+          loadLeads();
+        });
+      });
+    }
+
+    if (els.analyticsRange7d) {
+      els.analyticsRange7d.addEventListener("click", function () {
+        loadAnalytics("7d");
+      });
+    }
+
+    if (els.analyticsRange30d) {
+      els.analyticsRange30d.addEventListener("click", function () {
+        loadAnalytics("30d");
       });
     }
 
@@ -735,6 +1027,7 @@
   function init() {
     initElements();
     bindEvents();
+    updateArchiveTabs();
     if (getToken()) {
       showLeads();
       loadLeads();
