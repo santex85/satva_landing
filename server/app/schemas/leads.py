@@ -11,6 +11,9 @@ class ConsentOut(BaseModel):
     consent_at: datetime
     policy_version: str
     ip_address: str | None
+    geo_country: str | None = None
+    geo_country_code: str | None = None
+    geo_city: str | None = None
 
     class Config:
         from_attributes = True

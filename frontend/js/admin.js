@@ -150,6 +150,15 @@
     return _LEAD_STATUS_LABELS[status] || status || "—";
   }
 
+  function formatConsentLocation(consent) {
+    if (!consent) return "—";
+    var parts = [];
+    if (consent.geo_city) parts.push(String(consent.geo_city));
+    if (consent.geo_country) parts.push(String(consent.geo_country));
+    if (parts.length) return parts.join(", ");
+    return "—";
+  }
+
   function auditActionLabel(action) {
     return _AUDIT_ACTION_LABELS[action] || action || "—";
   }
@@ -931,9 +940,9 @@
             els.detailConsents.innerHTML = "<p>Нет согласий</p>";
           } else {
             els.detailConsents.innerHTML =
-              "<div class=\"admin-table-wrap\"><table class=\"admin-table\"><thead><tr><th>Дата</th><th>Версия политики</th><th>IP</th></tr></thead><tbody>" +
+              "<div class=\"admin-table-wrap\"><table class=\"admin-table\"><thead><tr><th>Дата</th><th>Версия политики</th><th>IP</th><th>Локация</th></tr></thead><tbody>" +
               consents.map(function (c) {
-                return "<tr><td>" + formatDate(c.consent_at) + "</td><td>" + escapeHtml(String(c.policy_version != null ? c.policy_version : "—")) + "</td><td>" + escapeHtml(String(c.ip_address != null ? c.ip_address : "—")) + "</td></tr>";
+                return "<tr><td>" + formatDate(c.consent_at) + "</td><td>" + escapeHtml(String(c.policy_version != null ? c.policy_version : "—")) + "</td><td>" + escapeHtml(String(c.ip_address != null ? c.ip_address : "—")) + "</td><td>" + escapeHtml(formatConsentLocation(c)) + "</td></tr>";
               }).join("") +
               "</tbody></table></div>";
           }

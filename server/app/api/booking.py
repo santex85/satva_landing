@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Request, BackgroundTasks
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
@@ -18,6 +18,7 @@ router = APIRouter()
 def booking(
     request: Request,
     body: BookingRequest,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
 ):
     verify_turnstile_or_skip(request, body.captcha_token)
@@ -40,5 +41,6 @@ def booking(
         payload,
         body.website,
         source=body.source,
+        background_tasks=background_tasks,
     )
     return contact_response_with_tawk(body.name, body.email, body.phone)

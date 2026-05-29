@@ -1,6 +1,6 @@
 """Create lead + consent in DB, then send email notification."""
 
-from fastapi import HTTPException, Request
+from fastapi import HTTPException, Request, BackgroundTasks
 from sqlalchemy.orm import Session
 
 from app.config import settings
@@ -10,6 +10,7 @@ from app.services.email import (
     send_lead_notification,
     send_tawk_ticket_notification,
 )
+from app.services.geoip import resolve_and_store_geo
 
 
 def submit_lead(
@@ -19,6 +20,7 @@ def submit_lead(
     payload: dict,
     honeypot: str | None,
     source: str | None = None,
+    background_tasks: BackgroundTasks | None = None,
 ) -> Lead:
     if honeypot and honeypot.strip():
         raise HTTPException(status_code=400, detail="Invalid request")
@@ -47,6 +49,10 @@ def submit_lead(
     db.add(consent)
     db.commit()
     db.refresh(lead)
+    db.refresh(consent)
+
+    if background_tasks and ip_address and consent.id:
+        background_tasks.add_task(resolve_and_store_geo, consent.id, ip_address)
 
     try:
         send_lead_notification(lead_type, lead.payload, lead.created_at, source=source, db=db)
