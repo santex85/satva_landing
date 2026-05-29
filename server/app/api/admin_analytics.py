@@ -25,7 +25,7 @@ def analytics_summary(
     _: AdminUser = Depends(get_current_user),
     range: str = Query("7d", pattern="^(7d|30d)$"),
 ):
-    summary = get_analytics_summary(range)
+    summary = get_analytics_summary(range, db=db)
     start, end = _range_bounds(range)
     leads_count = count_leads(
         db,

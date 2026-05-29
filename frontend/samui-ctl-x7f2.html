@@ -6,7 +6,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Админка — Satva</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="css/admin.css?v=7">
+    <link rel="stylesheet" href="css/admin.css?v=8">
 </head>
 <body class="admin-page">
     <div class="admin-app">
@@ -280,7 +280,7 @@
                     </header>
 
                     <p id="admin-analytics-loading" class="admin-loading">Загрузка…</p>
-                    <p id="admin-analytics-not-configured" class="admin-analytics-notice admin-hidden">Umami не настроен на сервере. Задайте UMAMI_API_KEY и UMAMI_WEBSITE_ID.</p>
+                    <p id="admin-analytics-not-configured" class="admin-analytics-notice admin-hidden">Umami не настроен. Укажите API key и Website ID в разделе «Настройки».</p>
 
                     <div id="admin-analytics-content" class="admin-hidden">
                         <div class="admin-analytics-cards">
@@ -327,7 +327,7 @@
                     <header class="admin-page-header">
                         <div class="admin-page-header__text">
                             <h1 class="admin-page-heading">Настройки</h1>
-                            <p class="admin-page-subtitle">Уведомления и учётная запись</p>
+                            <p class="admin-page-subtitle">Уведомления, аналитика и учётная запись</p>
                         </div>
                     </header>
 
@@ -345,6 +345,34 @@
                                 <button type="button" id="admin-settings-save" class="admin-btn admin-btn--primary">Сохранить</button>
                                 <div id="admin-settings-message" class="form-message" role="alert" aria-live="polite"></div>
                             </div>
+                        </div>
+
+                        <div class="admin-panel admin-settings-card admin-settings-card--wide admin-owner-only">
+                            <h2 class="admin-panel__title">Umami Analytics</h2>
+                            <p class="admin-settings-hint">Настройки подключения к Umami для раздела «Аналитика». API key можно получить в <a href="https://cloud.umami.is/settings/api-keys" target="_blank" rel="noopener noreferrer">Umami Cloud → Settings → API keys</a>.</p>
+                            <div id="admin-umami-status" class="admin-umami-status admin-umami-status--pending" aria-live="polite">Загрузка…</div>
+                            <form id="admin-umami-form" class="admin-settings-form">
+                                <div class="admin-form-grid">
+                                    <div class="form-group">
+                                        <label for="admin-umami-website-id">Website ID</label>
+                                        <input type="text" id="admin-umami-website-id" class="form-input admin-input" placeholder="0cc0f862-5822-4abc-bf47-1c8a8af4ac22" autocomplete="off" spellcheck="false">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="admin-umami-api-base">API Base URL</label>
+                                        <input type="url" id="admin-umami-api-base" class="form-input admin-input" placeholder="https://api.umami.is/v1" autocomplete="off" spellcheck="false">
+                                    </div>
+                                    <div class="form-group admin-form-grid__full">
+                                        <label for="admin-umami-api-key">API Key</label>
+                                        <input type="password" id="admin-umami-api-key" class="form-input admin-input" placeholder="Оставьте пустым, чтобы не менять" autocomplete="new-password" spellcheck="false">
+                                        <p id="admin-umami-api-key-hint" class="admin-settings-hint admin-umami-key-hint"></p>
+                                    </div>
+                                </div>
+                                <div class="admin-settings-card__footer">
+                                    <button type="button" id="admin-umami-test" class="admin-btn admin-btn--secondary">Проверить подключение</button>
+                                    <button type="button" id="admin-umami-save" class="admin-btn admin-btn--primary">Сохранить Umami</button>
+                                    <div id="admin-umami-message" class="form-message" role="alert" aria-live="polite"></div>
+                                </div>
+                            </form>
                         </div>
 
                         <div class="admin-panel admin-settings-card">
@@ -529,6 +557,6 @@
         </div>
     </div>
 
-    <script src="js/admin.js?v=7"></script>
+    <script src="js/admin.js?v=8"></script>
 </body>
 </html>

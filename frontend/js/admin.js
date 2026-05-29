@@ -32,6 +32,7 @@
     "user.activate": "Активация пользователя",
     "user.role_change": "Смена роли пользователя",
     "settings.update": "Обновление настроек",
+    "settings.umami_update": "Обновление настроек Umami",
   };
 
   var PAGE_TITLES = {
@@ -186,6 +187,8 @@
           return "Обновлены email для уведомлений: " + meta.emails.join(", ");
         }
         return "Обновлены email для уведомлений (" + (meta.count != null ? meta.count : "—") + ")";
+      case "settings.umami_update":
+        return "Umami: Website ID " + (meta.website_id || "—") + ", API Base " + (meta.api_base || "—") + (meta.configured ? ", подключено" : ", не полностью настроено");
       default:
         break;
     }
@@ -1148,7 +1151,7 @@
   function renderAnalytics(data) {
     if (!data.configured) {
       if (els.analyticsNotConfigured) {
-        els.analyticsNotConfigured.textContent = "Umami не настроен на сервере. Задайте UMAMI_API_KEY и UMAMI_WEBSITE_ID.";
+        els.analyticsNotConfigured.textContent = "Umami не настроен. Укажите API key и Website ID в разделе «Настройки».";
         els.analyticsNotConfigured.classList.remove("admin-hidden");
       }
       if (els.analyticsContent) els.analyticsContent.classList.add("admin-hidden");
@@ -1218,9 +1221,135 @@
         if (!data) return;
         state.notificationEmails = Array.isArray(data.lead_notification_emails) ? data.lead_notification_emails.slice() : [];
         renderEmailList();
+        loadUmamiSettings();
       })
       .catch(function (err) {
         setFormMessage(els.settingsMessage, err.message || "Ошибка загрузки", true);
+      });
+  }
+
+  function renderUmamiStatus(data) {
+    if (!els.umamiStatus) return;
+    var configured = !!(data && data.configured);
+    els.umamiStatus.className = "admin-umami-status " + (configured ? "admin-umami-status--ok" : "admin-umami-status--warn");
+    els.umamiStatus.textContent = configured ? "Подключение настроено" : "Требуется настройка API key и Website ID";
+    if (els.umamiApiKeyHint) {
+      if (data && data.api_key_set && data.api_key_hint) {
+        els.umamiApiKeyHint.textContent = "Текущий ключ: " + data.api_key_hint + ". Введите новый только если нужно заменить.";
+      } else {
+        els.umamiApiKeyHint.textContent = "API key ещё не сохранён.";
+      }
+    }
+  }
+
+  function fillUmamiForm(data) {
+    if (els.umamiWebsiteId) els.umamiWebsiteId.value = data && data.website_id ? data.website_id : "";
+    if (els.umamiApiBase) {
+      els.umamiApiBase.value = data && data.api_base ? data.api_base : "https://api.umami.is/v1";
+    }
+    if (els.umamiApiKey) els.umamiApiKey.value = "";
+    renderUmamiStatus(data || {});
+  }
+
+  function getUmamiFormPayload(includeEmptyApiKey) {
+    var websiteId = els.umamiWebsiteId ? els.umamiWebsiteId.value.trim() : "";
+    var apiBase = els.umamiApiBase ? els.umamiApiBase.value.trim() : "https://api.umami.is/v1";
+    var apiKey = els.umamiApiKey ? els.umamiApiKey.value.trim() : "";
+    var payload = {
+      website_id: websiteId,
+      api_base: apiBase || "https://api.umami.is/v1",
+    };
+    if (includeEmptyApiKey || apiKey) payload.api_key = apiKey;
+    return payload;
+  }
+
+  function loadUmamiSettings() {
+    if (!getToken() || state.role !== "owner") return;
+    setFormMessage(els.umamiMessage, "", false);
+    fetch(apiUrl("/admin/settings/umami"), { method: "GET", headers: authHeaders() })
+      .then(function (res) {
+        if (handleUnauthorized(res)) return null;
+        if (!res.ok) throw new Error("Ошибка загрузки настроек Umami");
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data) return;
+        fillUmamiForm(data);
+      })
+      .catch(function (err) {
+        if (els.umamiStatus) {
+          els.umamiStatus.className = "admin-umami-status admin-umami-status--warn";
+          els.umamiStatus.textContent = "Не удалось загрузить настройки Umami";
+        }
+        setFormMessage(els.umamiMessage, err.message || "Ошибка загрузки", true);
+      });
+  }
+
+  function saveUmamiSettings() {
+    if (!getToken()) {
+      showLogin();
+      return;
+    }
+    var payload = getUmamiFormPayload(false);
+    if (!payload.website_id) {
+      setFormMessage(els.umamiMessage, "Укажите Website ID", true);
+      return;
+    }
+    setFormMessage(els.umamiMessage, "Сохранение…", false);
+    fetch(apiUrl("/admin/settings/umami"), {
+      method: "PUT",
+      headers: Object.assign({ "Content-Type": "application/json" }, authHeaders()),
+      body: JSON.stringify(payload),
+    })
+      .then(function (res) {
+        if (handleUnauthorized(res)) return null;
+        return res.json().then(function (data) {
+          return parseJsonError(res, data, "Ошибка сохранения");
+        });
+      })
+      .then(function (data) {
+        if (!data) return;
+        fillUmamiForm(data);
+        setFormMessage(els.umamiMessage, "Настройки Umami сохранены", false);
+      })
+      .catch(function (err) {
+        setFormMessage(els.umamiMessage, err.message || "Ошибка сохранения", true);
+      });
+  }
+
+  function testUmamiSettings() {
+    if (!getToken()) {
+      showLogin();
+      return;
+    }
+    var payload = getUmamiFormPayload(true);
+    if (!payload.website_id) {
+      setFormMessage(els.umamiMessage, "Укажите Website ID", true);
+      return;
+    }
+    setFormMessage(els.umamiMessage, "Проверка подключения…", false);
+    fetch(apiUrl("/admin/settings/umami/test"), {
+      method: "POST",
+      headers: Object.assign({ "Content-Type": "application/json" }, authHeaders()),
+      body: JSON.stringify(payload),
+    })
+      .then(function (res) {
+        if (handleUnauthorized(res)) return null;
+        return res.json().then(function (data) {
+          return parseJsonError(res, data, "Ошибка проверки");
+        });
+      })
+      .then(function (data) {
+        if (!data) return;
+        if (data.ok) {
+          var suffix = data.visitors != null ? " Посетителей за 7 дней: " + data.visitors + "." : "";
+          setFormMessage(els.umamiMessage, data.message + suffix, false);
+        } else {
+          setFormMessage(els.umamiMessage, data.message || "Не удалось подключиться", true);
+        }
+      })
+      .catch(function (err) {
+        setFormMessage(els.umamiMessage, err.message || "Ошибка проверки", true);
       });
   }
 
@@ -1722,6 +1851,15 @@
     els.emailAddBtn = document.getElementById("admin-email-add");
     els.settingsSaveBtn = document.getElementById("admin-settings-save");
     els.settingsMessage = document.getElementById("admin-settings-message");
+    els.umamiWebsiteId = document.getElementById("admin-umami-website-id");
+    els.umamiApiBase = document.getElementById("admin-umami-api-base");
+    els.umamiApiKey = document.getElementById("admin-umami-api-key");
+    els.umamiApiKeyHint = document.getElementById("admin-umami-api-key-hint");
+    els.umamiStatus = document.getElementById("admin-umami-status");
+    els.umamiSaveBtn = document.getElementById("admin-umami-save");
+    els.umamiTestBtn = document.getElementById("admin-umami-test");
+    els.umamiMessage = document.getElementById("admin-umami-message");
+    els.umamiForm = document.getElementById("admin-umami-form");
     els.meEmail = document.getElementById("admin-me-email");
     els.passwordForm = document.getElementById("admin-password-form");
     els.passwordMessage = document.getElementById("admin-password-message");
@@ -2020,6 +2158,14 @@
       });
     }
     if (els.settingsSaveBtn) els.settingsSaveBtn.addEventListener("click", saveSettings);
+    if (els.umamiSaveBtn) els.umamiSaveBtn.addEventListener("click", saveUmamiSettings);
+    if (els.umamiTestBtn) els.umamiTestBtn.addEventListener("click", testUmamiSettings);
+    if (els.umamiForm) {
+      els.umamiForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        saveUmamiSettings();
+      });
+    }
 
     if (els.passwordForm) {
       els.passwordForm.addEventListener("submit", function (e) {
