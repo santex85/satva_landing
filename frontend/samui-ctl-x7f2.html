@@ -6,7 +6,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Админка — Satva</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="css/admin.css?v=6">
+    <link rel="stylesheet" href="css/admin.css?v=7">
 </head>
 <body class="admin-page">
     <div class="admin-app">
@@ -452,19 +452,27 @@
                         </div>
                     </header>
 
-                    <div class="admin-panel admin-table-panel">
+                    <div class="admin-panel admin-table-panel admin-audit-panel">
                         <div class="admin-table-wrap">
                             <table class="admin-table admin-audit-table" aria-label="Журнал аудита">
+                                <colgroup>
+                                    <col class="admin-audit-table__col-date">
+                                    <col class="admin-audit-table__col-user">
+                                    <col class="admin-audit-table__col-action">
+                                    <col class="admin-audit-table__col-target">
+                                    <col class="admin-audit-table__col-toggle">
+                                </colgroup>
                                 <thead>
                                     <tr>
                                         <th scope="col">Дата</th>
                                         <th scope="col">Пользователь</th>
                                         <th scope="col">Действие</th>
                                         <th scope="col">Объект</th>
+                                        <th scope="col"><span class="visually-hidden">Подробности</span></th>
                                     </tr>
                                 </thead>
                                 <tbody id="admin-audit-tbody">
-                                    <tr><td colspan="4" class="admin-table__empty">Загрузка…</td></tr>
+                                    <tr><td colspan="5" class="admin-table__empty">Загрузка…</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -521,6 +529,6 @@
         </div>
     </div>
 
-    <script src="js/admin.js?v=6"></script>
+    <script src="js/admin.js?v=7"></script>
 </body>
 </html>

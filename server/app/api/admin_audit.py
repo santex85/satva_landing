@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, Response
+from sqlalchemy import func
 from sqlalchemy.orm import Session, joinedload
 
 from app.api.deps import require_role
@@ -11,11 +12,15 @@ router = APIRouter()
 
 @router.get("/admin/audit", response_model=list[AuditLogOut])
 def list_audit(
+    response: Response,
     db: Session = Depends(get_db),
     _: AdminUser = Depends(require_role(AdminRole.OWNER)),
     limit: int = Query(50, ge=1, le=200),
     offset: int = Query(0, ge=0),
 ):
+    total = db.query(func.count(AdminAuditLog.id)).scalar() or 0
+    response.headers["X-Total-Count"] = str(total)
+
     rows = (
         db.query(AdminAuditLog)
         .options(joinedload(AdminAuditLog.actor))
@@ -34,6 +39,7 @@ def list_audit(
                 target_id=row.target_id,
                 meta=row.meta,
                 created_at=row.created_at,
+                actor_id=row.actor_id,
                 actor_email=row.actor.email if row.actor else None,
             )
         )

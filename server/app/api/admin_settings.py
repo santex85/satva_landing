@@ -42,7 +42,7 @@ def update_admin_settings(
         action="settings.update",
         target_type="settings",
         target_id="lead_notification_emails",
-        meta={"count": len(emails)},
+        meta={"count": len(emails), "emails": emails},
     )
     db.commit()
     return AdminSettingsOut(lead_notification_emails=emails)

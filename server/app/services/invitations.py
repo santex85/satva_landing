@@ -180,6 +180,7 @@ def update_user(db: Session, actor: AdminUser, user_id: int, *, role: str | None
             raise HTTPException(status_code=400, detail="Некорректная роль")
         ensure_can_modify_user(db, actor, target, new_role=role)
         if target.role != role:
+            old_role = target.role
             target.role = role
             bump_token_version(target)
             log_audit(
@@ -188,7 +189,7 @@ def update_user(db: Session, actor: AdminUser, user_id: int, *, role: str | None
                 action="user.role_change",
                 target_type="user",
                 target_id=str(target.id),
-                meta={"email": target.email, "role": role},
+                meta={"email": target.email, "from": old_role, "to": role},
             )
 
     if is_active is not None:

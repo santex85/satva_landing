@@ -10,6 +10,7 @@ class AuditLogOut(BaseModel):
     target_id: str | None
     meta: dict | None
     created_at: datetime
+    actor_id: int | None = None
     actor_email: EmailStr | None = None
 
     class Config:

@@ -1372,8 +1372,33 @@ body.admin-role-owner .admin-settings-grid .admin-owner-only {
 }
 
 /* ── v2: Audit table ── */
+.admin-audit-panel .admin-table-wrap {
+  overflow-x: auto;
+}
+
 .admin-audit-table {
-  min-width: 720px;
+  table-layout: fixed;
+  min-width: 920px;
+}
+
+.admin-audit-table__col-date {
+  width: 15%;
+}
+
+.admin-audit-table__col-user {
+  width: 22%;
+}
+
+.admin-audit-table__col-action {
+  width: 22%;
+}
+
+.admin-audit-table__col-target {
+  width: 31%;
+}
+
+.admin-audit-table__col-toggle {
+  width: 10%;
 }
 
 .admin-audit-table td {
@@ -1381,15 +1406,177 @@ body.admin-role-owner .admin-settings-grid .admin-owner-only {
   vertical-align: top;
 }
 
-.admin-audit-table .admin-audit-action {
+.admin-audit-table th:last-child,
+.admin-audit-table td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.admin-audit-row {
+  cursor: pointer;
+}
+
+.admin-audit-row:hover {
+  background: rgba(15, 76, 92, 0.06);
+}
+
+.admin-audit-row--expanded {
+  background: rgba(15, 76, 92, 0.04);
+}
+
+.admin-audit-row--expanded td {
+  border-bottom-color: transparent;
+}
+
+.admin-audit-action {
+  display: inline-block;
   font-weight: 600;
   color: var(--admin-teal);
 }
 
-.admin-audit-table .admin-audit-target {
+.admin-audit-action__code {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--admin-text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.admin-audit-target {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  word-break: break-all;
+  color: var(--admin-text);
+}
+
+.admin-audit-target__type {
+  display: block;
+  margin-bottom: 0.15rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--admin-teal);
+}
+
+.admin-audit-summary {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--admin-text);
+}
+
+.admin-audit-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid var(--admin-teal-border);
+  border-radius: var(--admin-radius);
+  background: var(--admin-surface);
+  color: var(--admin-teal);
+  cursor: pointer;
+  transition: background var(--admin-transition), transform var(--admin-transition);
+}
+
+.admin-audit-toggle:hover {
+  background: var(--admin-teal-light);
+}
+
+.admin-audit-toggle__icon {
+  transition: transform var(--admin-transition);
+}
+
+.admin-audit-row--expanded .admin-audit-toggle__icon {
+  transform: rotate(180deg);
+}
+
+.admin-audit-detail-row td {
+  padding-top: 0;
+  padding-bottom: 1rem;
+  background: rgba(15, 76, 92, 0.025);
+}
+
+.admin-audit-detail {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--admin-teal-border);
+  border-radius: var(--admin-radius);
+  background: var(--admin-surface);
+}
+
+.admin-audit-detail__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.85rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.admin-audit-detail__item {
+  min-width: 0;
+}
+
+.admin-audit-detail__label {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--admin-text-muted);
+}
+
+.admin-audit-detail__value {
+  display: block;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--admin-text);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.admin-audit-detail__value--mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.8rem;
-  word-break: break-all;
+}
+
+.admin-audit-detail__section-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--admin-teal);
+}
+
+.admin-audit-detail__summary {
+  margin-bottom: 1rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--admin-radius);
+  background: var(--admin-teal-light);
+  border: 1px solid var(--admin-teal-border);
+}
+
+.admin-audit-detail__json {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  max-height: 280px;
+  overflow: auto;
+  border-radius: var(--admin-radius);
+  background: #0f172a;
+  color: #e2e8f0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.admin-audit-detail__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 /* ── v2: Analytics chart (CSS bars) ── */

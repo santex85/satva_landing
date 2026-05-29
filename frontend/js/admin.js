@@ -19,6 +19,21 @@
     spam: "Спам",
   };
 
+  var _AUDIT_ACTION_LABELS = {
+    "lead.status_change": "Изменение статуса заявки",
+    "lead.archive": "Заявка отправлена в архив",
+    "lead.restore": "Заявка восстановлена из архива",
+    "auth.login": "Вход в систему",
+    "auth.password_change": "Смена пароля",
+    "user.invite": "Приглашение пользователя",
+    "user.invite_accept": "Принятие приглашения",
+    "user.invite_revoke": "Отзыв приглашения",
+    "user.deactivate": "Деактивация пользователя",
+    "user.activate": "Активация пользователя",
+    "user.role_change": "Смена роли пользователя",
+    "settings.update": "Обновление настроек",
+  };
+
   var PAGE_TITLES = {
     login: "Вход",
     invite: "Приглашение",
@@ -64,6 +79,7 @@
     invitationsData: [],
     auditData: [],
     auditOffset: 0,
+    auditTotal: 0,
     quickEditLeadId: null,
     quickEditReturnFocus: null,
     modalKeydownHandler: null,
@@ -131,6 +147,114 @@
 
   function statusLabel(status) {
     return _LEAD_STATUS_LABELS[status] || status || "—";
+  }
+
+  function auditActionLabel(action) {
+    return _AUDIT_ACTION_LABELS[action] || action || "—";
+  }
+
+  function formatAuditSummary(row) {
+    var meta = row.meta || {};
+    switch (row.action) {
+      case "lead.status_change":
+        return "Статус: " + statusLabel(meta.from) + " → " + statusLabel(meta.to);
+      case "lead.archive":
+        return "Заявка помещена в архив";
+      case "lead.restore":
+        return "Заявка возвращена из архива";
+      case "auth.login":
+        return "Успешный вход в админ-панель";
+      case "auth.password_change":
+        return "Пароль пользователя изменён";
+      case "user.invite":
+        return "Отправлено приглашение на " + (meta.email || "—") + " (" + roleLabel(meta.role) + ")";
+      case "user.invite_accept":
+        return "Пользователь " + (meta.email || "—") + " принял приглашение (" + roleLabel(meta.role) + ")";
+      case "user.invite_revoke":
+        return "Отозвано приглашение для " + (meta.email || "—");
+      case "user.deactivate":
+        return "Пользователь " + (meta.email || "—") + " деактивирован";
+      case "user.activate":
+        return "Пользователь " + (meta.email || "—") + " активирован";
+      case "user.role_change":
+        if (meta.from != null || meta.to != null) {
+          return "Роль пользователя " + (meta.email || "—") + ": " + roleLabel(meta.from) + " → " + roleLabel(meta.to);
+        }
+        return "Роль пользователя " + (meta.email || "—") + " изменена на " + roleLabel(meta.role);
+      case "settings.update":
+        if (meta.emails && meta.emails.length) {
+          return "Обновлены email для уведомлений: " + meta.emails.join(", ");
+        }
+        return "Обновлены email для уведомлений (" + (meta.count != null ? meta.count : "—") + ")";
+      default:
+        break;
+    }
+    if (row.meta && Object.keys(row.meta).length) {
+      return Object.keys(row.meta)
+        .map(function (key) {
+          var value = meta[key];
+          if (value != null && typeof value === "object") {
+            try {
+              value = JSON.stringify(value);
+            } catch (e) {
+              value = String(value);
+            }
+          }
+          return key + ": " + String(value);
+        })
+        .join("; ");
+    }
+    return "—";
+  }
+
+  function formatAuditMetaJson(meta) {
+    if (!meta || !Object.keys(meta).length) return "—";
+    try {
+      return JSON.stringify(meta, null, 2);
+    } catch (e) {
+      return String(meta);
+    }
+  }
+
+  function renderAuditDetailItem(label, value, mono) {
+    return (
+      '<div class="admin-audit-detail__item">' +
+      '<dt class="admin-audit-detail__label">' + escapeHtml(label) + "</dt>" +
+      '<dd class="admin-audit-detail__value' + (mono ? " admin-audit-detail__value--mono" : "") + '">' + escapeHtml(value) + "</dd>" +
+      "</div>"
+    );
+  }
+
+  function renderAuditDetail(row) {
+    var summary = formatAuditSummary(row);
+    var metaJson = formatAuditMetaJson(row.meta);
+    var openLeadBtn =
+      row.target_type === "lead" && row.target_id
+        ? '<button type="button" class="admin-btn admin-btn--secondary admin-btn--small" data-audit-open-lead="' +
+          escapeAttr(String(row.target_id)) +
+          '">Открыть заявку</button>'
+        : "";
+    return (
+      '<div class="admin-audit-detail">' +
+      '<dl class="admin-audit-detail__grid">' +
+      renderAuditDetailItem("ID записи", String(row.id)) +
+      renderAuditDetailItem("Дата", formatDate(row.created_at)) +
+      renderAuditDetailItem("Пользователь", row.actor_email || "—") +
+      renderAuditDetailItem("ID пользователя", row.actor_id != null ? String(row.actor_id) : "—") +
+      renderAuditDetailItem("Действие", auditActionLabel(row.action)) +
+      renderAuditDetailItem("Код действия", row.action || "—", true) +
+      renderAuditDetailItem("Тип объекта", row.target_type || "—") +
+      renderAuditDetailItem("ID объекта", row.target_id || "—", true) +
+      "</dl>" +
+      '<div class="admin-audit-detail__summary">' +
+      '<h3 class="admin-audit-detail__section-title">Описание</h3>' +
+      '<p class="admin-audit-summary">' + escapeHtml(summary) + "</p>" +
+      "</div>" +
+      '<h3 class="admin-audit-detail__section-title">Данные (meta)</h3>' +
+      '<pre class="admin-audit-detail__json">' + escapeHtml(metaJson) + "</pre>" +
+      (openLeadBtn ? '<div class="admin-audit-detail__actions">' + openLeadBtn + "</div>" : "") +
+      "</div>"
+    );
   }
 
   function renderStatusBadge(status) {
@@ -1342,6 +1466,8 @@
       .then(function (res) {
         if (handleUnauthorized(res)) return null;
         if (!res.ok) throw new Error("Ошибка загрузки аудита");
+        var totalHeader = res.headers.get("X-Total-Count");
+        state.auditTotal = totalHeader ? parseInt(totalHeader, 10) || 0 : 0;
         return res.json();
       })
       .then(function (data) {
@@ -1355,6 +1481,43 @@
       });
   }
 
+  function toggleAuditDetail(auditId, expand) {
+    if (!els.auditTableBody) return;
+    var summaryRow = els.auditTableBody.querySelector('tr[data-audit-id="' + auditId + '"]');
+    var detailRow = els.auditTableBody.querySelector('tr[data-audit-detail-for="' + auditId + '"]');
+    if (!summaryRow || !detailRow) return;
+    var shouldExpand = typeof expand === "boolean" ? expand : detailRow.classList.contains("admin-hidden");
+    detailRow.classList.toggle("admin-hidden", !shouldExpand);
+    summaryRow.classList.toggle("admin-audit-row--expanded", shouldExpand);
+    summaryRow.setAttribute("aria-expanded", shouldExpand ? "true" : "false");
+    var toggleBtn = summaryRow.querySelector("[data-audit-toggle]");
+    if (toggleBtn) toggleBtn.setAttribute("aria-expanded", shouldExpand ? "true" : "false");
+  }
+
+  function bindAuditRowEvents() {
+    if (!els.auditTableBody) return;
+    els.auditTableBody.querySelectorAll(".admin-audit-row").forEach(function (row) {
+      var id = row.getAttribute("data-audit-id");
+      if (!id) return;
+      row.addEventListener("click", function (e) {
+        if (e.target.closest("[data-audit-open-lead]") || e.target.closest("[data-audit-toggle]")) return;
+        toggleAuditDetail(id);
+      });
+    });
+    els.auditTableBody.querySelectorAll("[data-audit-toggle]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        toggleAuditDetail(btn.getAttribute("data-audit-toggle"));
+      });
+    });
+    els.auditTableBody.querySelectorAll("[data-audit-open-lead]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        openLeadDetail(btn.getAttribute("data-audit-open-lead"));
+      });
+    });
+  }
+
   function renderAuditTable() {
     if (!els.auditTableBody) return;
     if (!state.auditData.length) {
@@ -1363,29 +1526,62 @@
     }
     els.auditTableBody.innerHTML = state.auditData
       .map(function (row) {
-        var meta = row.meta ? JSON.stringify(row.meta) : "—";
+        var detailId = "audit-detail-" + row.id;
+        var targetType = row.target_type || "—";
+        var targetId = row.target_id || "—";
         return (
-          "<tr>" +
-          "<td>" + formatDate(row.created_at) + "</td>" +
-          "<td>" + escapeHtml(row.actor_email || "—") + "</td>" +
-          "<td>" + escapeHtml(row.action || "—") + "</td>" +
-          "<td>" + escapeHtml((row.target_type || "—") + (row.target_id ? " #" + row.target_id : "")) + "</td>" +
-          "<td>" + escapeHtml(meta) + "</td>" +
-          "</tr>"
+          '<tr class="admin-audit-row" data-audit-id="' +
+          escapeAttr(String(row.id)) +
+          '" aria-expanded="false" aria-controls="' +
+          detailId +
+          '">' +
+          "<td>" +
+          formatDate(row.created_at) +
+          "</td>" +
+          "<td>" +
+          escapeHtml(row.actor_email || "—") +
+          "</td>" +
+          '<td><span class="admin-audit-action">' +
+          escapeHtml(auditActionLabel(row.action)) +
+          '</span><span class="admin-audit-action__code">' +
+          escapeHtml(row.action || "—") +
+          "</span></td>" +
+          '<td><span class="admin-audit-target__type">' +
+          escapeHtml(targetType) +
+          '</span><span class="admin-audit-target">' +
+          escapeHtml(targetId) +
+          "</span></td>" +
+          '<td><button type="button" class="admin-audit-toggle" data-audit-toggle="' +
+          escapeAttr(String(row.id)) +
+          '" aria-label="Показать подробности" aria-expanded="false" aria-controls="' +
+          detailId +
+          '"><svg class="admin-audit-toggle__icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button></td>' +
+          "</tr>" +
+          '<tr class="admin-audit-detail-row admin-hidden" id="' +
+          detailId +
+          '" data-audit-detail-for="' +
+          escapeAttr(String(row.id)) +
+          '"><td colspan="5">' +
+          renderAuditDetail(row) +
+          "</td></tr>"
         );
       })
       .join("");
+    bindAuditRowEvents();
   }
 
   function renderAuditPagination() {
     if (els.auditPrev) els.auditPrev.disabled = state.auditOffset === 0;
-    if (els.auditNext) els.auditNext.disabled = state.auditData.length < AUDIT_LIMIT;
+    if (els.auditNext) {
+      els.auditNext.disabled = state.auditOffset + state.auditData.length >= state.auditTotal || !state.auditData.length;
+    }
     if (els.auditInfo) {
-      if (!state.auditData.length) els.auditInfo.textContent = "0";
-      else {
+      if (!state.auditTotal || !state.auditData.length) {
+        els.auditInfo.textContent = state.auditTotal ? "0 из " + state.auditTotal : "0";
+      } else {
         var from = state.auditOffset + 1;
         var to = state.auditOffset + state.auditData.length;
-        els.auditInfo.textContent = from + "–" + to;
+        els.auditInfo.textContent = from + "–" + to + " из " + state.auditTotal;
       }
     }
   }
