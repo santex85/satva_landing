@@ -23,6 +23,8 @@ def contact(
     payload = {"name": body.name, "phone": body.phone}
     if body.email:
         payload["email"] = body.email
+    if body.lang:
+        payload["lang"] = body.lang
     submit_lead(
         db,
         request,

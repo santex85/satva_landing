@@ -121,6 +121,7 @@
         add('procedure', lead.procedure);
         add('package', lead.package_slug);
         add('source', lead.source);
+        add('site-language', lead.lang === 'en' ? 'English site (EN)' : lead.lang === 'ru' ? 'Русский сайт (RU)' : '');
         add('submitted-at', new Date().toISOString());
         return meta;
     }
@@ -1278,6 +1279,7 @@
 
             var src = (form.dataset && form.dataset.source) ? String(form.dataset.source).trim() : '';
             if (src) payload.source = src;
+            payload.lang = LANG;
 
             fetch(apiPath('/booking'), {
                 method: 'POST',
@@ -1559,6 +1561,7 @@
             if (emMainTrim) payload.email = emMainTrim;
             var src = (form.dataset && form.dataset.source) ? String(form.dataset.source).trim() : '';
             if (src) payload.source = src;
+            payload.lang = LANG;
 
             fetch(apiPath('/booking'), {
                 method: 'POST',

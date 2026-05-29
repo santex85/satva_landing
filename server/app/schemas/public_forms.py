@@ -4,6 +4,7 @@ from enum import Enum
 from pydantic import BaseModel, EmailStr, Field, field_validator
 
 _LEAD_SOURCE_WHITELIST = frozenset({"landing", "popup", "footer", "yoga-bridge"})
+_LEAD_LANG_WHITELIST = frozenset({"en", "ru"})
 
 
 class LeadSubmissionBase(BaseModel):
@@ -15,6 +16,7 @@ class LeadSubmissionBase(BaseModel):
     website: str | None = Field(None, description="Honeypot - must be empty")
     captcha_token: str | None = Field(None, description="Cloudflare Turnstile token")
     source: str | None = Field(None, max_length=32)
+    lang: str | None = Field(None, max_length=8, description="Site language: en or ru")
     email: EmailStr | None = Field(None, description="Необязательный email для связи")
 
     @field_validator("email", mode="before")
@@ -59,6 +61,14 @@ class LeadSubmissionBase(BaseModel):
             return None
         s = str(v).strip()
         return s if s in _LEAD_SOURCE_WHITELIST else None
+
+    @field_validator("lang", mode="before")
+    @classmethod
+    def lang_whitelist(cls, v):
+        if v is None or (isinstance(v, str) and not v.strip()):
+            return None
+        s = str(v).strip().lower()
+        return s if s in _LEAD_LANG_WHITELIST else None
 
 
 class ContactRequest(LeadSubmissionBase):

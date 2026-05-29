@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 _SKIP_KEYS = frozenset({"website", "consent", "captcha_token"})
 
 _FIELD_LABELS: dict[str, str] = {
+    "lang": "Сайт",
     "name": "Имя",
     "phone": "Телефон",
     "email": "Email",
@@ -24,6 +25,7 @@ _FIELD_LABELS: dict[str, str] = {
 }
 
 _FIELD_ORDER = (
+    "lang",
     "name",
     "phone",
     "email",
@@ -46,6 +48,11 @@ _SOURCE_LABELS: dict[str, str] = {
     "popup": "модальное окно (popup)",
     "footer": "подвал сайта (footer)",
     "yoga-bridge": "блок-мост (yoga-bridge)",
+}
+
+_LANG_LABELS: dict[str, str] = {
+    "en": "Английский сайт (EN)",
+    "ru": "Русский сайт (RU)",
 }
 
 _PACKAGE_LABELS: dict[str, str] = {
@@ -88,6 +95,10 @@ def _format_value(key: str, value) -> str | None:
         label = _SOURCE_LABELS.get(text, text)
         return label
 
+    if key == "lang":
+        text = str(value).strip().lower()
+        return _LANG_LABELS.get(text, text)
+
     if key == "package_slug":
         text = str(value).strip()
         return _PACKAGE_LABELS.get(text, text)
@@ -100,6 +111,15 @@ def _format_value(key: str, value) -> str | None:
 
 def _lead_type_label(lead_type: str) -> str:
     return _LEAD_TYPE_LABELS.get(lead_type, lead_type)
+
+
+def _site_tag(payload: dict) -> str:
+    lang = (payload.get("lang") or "").strip().lower()
+    if lang == "en":
+        return "EN"
+    if lang == "ru":
+        return "RU"
+    return ""
 
 
 def _build_body(lead_type: str, payload: dict, created_at: datetime | None, source: str | None) -> str:
@@ -155,6 +175,9 @@ def send_lead_notification(
         return
 
     subject = f"Новая заявка с сайта — {_lead_type_label(lead_type)}"
+    site_tag = _site_tag(payload)
+    if site_tag:
+        subject = f"Новая заявка с сайта ({site_tag}) — {_lead_type_label(lead_type)}"
     body = _build_body(lead_type, payload, created_at, source)
 
     resend.api_key = settings.RESEND_API_KEY
@@ -191,7 +214,10 @@ def send_tawk_ticket_notification(
     name = (payload.get("name") or "").strip() or "Гость"
     procedure = (payload.get("procedure") or "").strip()
     phone = (payload.get("phone") or "").strip()
+    site_tag = _site_tag(payload)
     subject = f"Заявка с сайта — {name}"
+    if site_tag:
+        subject = f"Заявка с сайта ({site_tag}) — {name}"
     if phone:
         subject = f"{subject} — {phone}"
     if procedure:
