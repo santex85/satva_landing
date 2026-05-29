@@ -298,10 +298,12 @@ def _build_confirmation_html(payload: dict, lang: str) -> str:
 <body style="margin:0;padding:0;background:#f7f5f2;font-family:Montserrat,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#2D3436;">
   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f7f5f2;padding:24px 12px;">
     <tr><td align="center">
-      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:560px;background:#ffffff;border-radius:12px;padding:32px 28px;">
-        <tr><td align="center" style="padding-bottom:24px;">
-          <img src="{LOGO_URL}" alt="Satva Samui" width="180" height="120" style="display:block;max-width:180px;height:auto;">
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:560px;background:#ffffff;border-radius:12px;overflow:hidden;">
+        <tr><td align="center" style="padding:24px 28px;background:#0F4C5C;">
+          <img src="{LOGO_URL}" alt="Satva Samui" width="180" height="120" style="display:block;max-width:180px;height:auto;border:0;">
         </td></tr>
+        <tr><td style="padding:32px 28px 0;">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
         <tr><td style="font-size:18px;line-height:1.4;color:#0F4C5C;padding-bottom:12px;">
           <strong>{copy['greeting'].format(name=name)}</strong>
         </td></tr>
@@ -328,9 +330,11 @@ def _build_confirmation_html(payload: dict, lang: str) -> str:
         <tr><td style="font-size:15px;line-height:1.65;padding-bottom:24px;">
           {signature}
         </td></tr>
-        <tr><td style="font-size:12px;line-height:1.5;color:#636e72;border-top:1px solid #e8e4df;padding-top:16px;">
+        <tr><td style="font-size:12px;line-height:1.5;color:#636e72;border-top:1px solid #e8e4df;padding-top:16px;padding-bottom:28px;">
           {escape(copy['footer'])}<br>
           <a href="{privacy_url}" style="color:#0F4C5C;">{escape(copy['privacy'])}</a>
+        </td></tr>
+        </table>
         </td></tr>
       </table>
     </td></tr>
