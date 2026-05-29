@@ -51,6 +51,7 @@ class Lead(Base):
     )
 
     consents: Mapped[list["Consent"]] = relationship("Consent", back_populates="lead", cascade="all, delete-orphan")
+    notes: Mapped[list["LeadNote"]] = relationship("LeadNote", back_populates="lead", cascade="all, delete-orphan")
 
 
 class Consent(Base):

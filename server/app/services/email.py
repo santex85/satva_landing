@@ -509,3 +509,39 @@ def send_lead_confirmation(
             extra={"lead_type": lead_type, "lang": lang, "error": str(e)},
             exc_info=True,
         )
+
+
+def send_admin_invitation(*, email: str, role: str, raw_token: str, expires_at: datetime) -> None:
+    if not settings.RESEND_API_KEY or not settings.RESEND_FROM:
+        logger.warning("Resend not configured, skipping invitation email")
+        return
+
+    admin_path = (settings.ADMIN_PATH or "samui-ctl-x7f2").strip().strip("/")
+    base = (settings.SITE_BASE_URL or SITE_BASE_URL).rstrip("/")
+    invite_url = f"{base}/{admin_path}?invite={raw_token}"
+    role_label = "Owner" if role == "owner" else "Manager"
+    expires_str = expires_at.strftime("%d.%m.%Y %H:%M UTC")
+
+    subject = "Приглашение в админ-панель Satva Samui"
+    text = (
+        f"Вас пригласили в админ-панель Satva Samui с ролью {role_label}.\n\n"
+        f"Перейдите по ссылке, чтобы задать пароль и войти:\n{invite_url}\n\n"
+        f"Ссылка действует до {expires_str}.\n"
+        "Если вы не ожидали это письмо — просто проигнорируйте его."
+    )
+
+    resend.api_key = settings.RESEND_API_KEY
+    try:
+        resend.Emails.send({
+            "from": settings.RESEND_FROM,
+            "to": [email],
+            "subject": subject,
+            "text": text,
+        })
+        logger.info("Admin invitation email sent", extra={"email": email, "role": role})
+    except Exception as e:
+        logger.error(
+            "Failed to send admin invitation email",
+            extra={"email": email, "error": str(e)},
+            exc_info=True,
+        )

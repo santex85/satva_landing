@@ -13,6 +13,7 @@ class TokenResponse(BaseModel):
 
 class MeResponse(BaseModel):
     email: EmailStr
+    role: str
 
 
 class ChangePasswordRequest(BaseModel):

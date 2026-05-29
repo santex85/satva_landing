@@ -45,5 +45,10 @@ class Settings(BaseSettings):
     UMAMI_WEBSITE_ID: str = ""
     UMAMI_API_BASE: str = "https://api.umami.is/v1"
 
+    # Admin panel
+    ADMIN_PATH: str = "samui-ctl-x7f2"
+    SITE_BASE_URL: str = "https://satvasamui.com"
+    INVITE_EXPIRE_HOURS: int = 72
+
 
 settings = Settings()

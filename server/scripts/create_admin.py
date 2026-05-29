@@ -25,7 +25,7 @@ def main():
         user = AdminUser(
             email=email,
             password_hash=get_password_hash(password),
-            role="admin",
+            role="owner",
         )
         db.add(user)
         db.commit()

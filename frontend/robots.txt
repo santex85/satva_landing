@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /samui-ctl-x7f2
+Disallow: /samui-ctl-x7f2.html

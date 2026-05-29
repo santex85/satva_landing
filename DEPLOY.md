@@ -246,6 +246,29 @@ ssh root@152.42.186.191 "cd /var/www/satva-landing && git checkout -- frontend/c
 
 ---
 
+## Админ-панель v2
+
+- **URL:** `https://satvasamui.com/samui-ctl-x7f2` (путь задаётся `ADMIN_PATH` в `server/.env`, синхронизировать с nginx).
+- **Первый owner:** на сервере в контейнере или локально с `DATABASE_URL`:
+  ```bash
+  cd server && python scripts/create_admin.py owner@example.com 'strong-password'
+  ```
+  Скрипт создаёт пользователя с ролью `owner`.
+- **Приглашения:** owner приглашает manager/owner по email (`POST /api/admin/users/invite`); письмо через Resend. Срок — `INVITE_EXPIRE_HOURS` (по умолчанию 72).
+- **Новые переменные в `server/.env`:**
+
+| Переменная | Назначение |
+|------------|------------|
+| `ADMIN_PATH` | Обфусцированный путь админки без слэша, напр. `samui-ctl-x7f2` |
+| `SITE_BASE_URL` | Базовый URL для ссылок в письмах, напр. `https://satvasamui.com` |
+| `INVITE_EXPIRE_HOURS` | Срок жизни приглашения в часах (по умолчанию 72) |
+| `JWT_SECRET` | **Обязателен на проде** — не дефолт `change-me-in-production`; иначе приложение не стартует |
+
+- **Миграции:** `005`–`007` (роли, приглашения, заметки, аудит) применяются при старте контейнера `app`.
+- **noindex:** nginx отдаёт `X-Robots-Tag: noindex, nofollow` для пути админки; в `frontend/robots.txt` — `Disallow` для того же пути.
+
+---
+
 ## Зависимости на сервере
 
 - **git** — для pull

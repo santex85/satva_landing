@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
     <title>Админка — Satva</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="css/admin.css?v=4">
+    <link rel="stylesheet" href="css/admin.css?v=5">
 </head>
 <body class="admin-page">
     <div class="admin-app">
@@ -17,11 +18,20 @@
             <nav class="admin-sidebar__nav">
                 <button type="button" id="admin-nav-leads" class="admin-sidebar__link admin-nav__tab admin-nav__tab--active" data-nav="leads">
                     <svg class="admin-sidebar__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                    Заявки
+                    <span class="admin-sidebar__link-text">Заявки</span>
+                    <span id="admin-nav-leads-badge" class="admin-nav-badge admin-hidden" aria-label="Новые заявки">0</span>
                 </button>
                 <button type="button" id="admin-nav-analytics" class="admin-sidebar__link admin-nav__tab" data-nav="analytics">
                     <svg class="admin-sidebar__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
                     Аналитика
+                </button>
+                <button type="button" id="admin-nav-users" class="admin-sidebar__link admin-nav__tab admin-owner-only" data-nav="users">
+                    <svg class="admin-sidebar__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Пользователи
+                </button>
+                <button type="button" id="admin-nav-audit" class="admin-sidebar__link admin-nav__tab admin-owner-only" data-nav="audit">
+                    <svg class="admin-sidebar__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                    Аудит
                 </button>
                 <button type="button" id="admin-nav-settings" class="admin-sidebar__link admin-nav__tab" data-nav="settings">
                     <svg class="admin-sidebar__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -71,6 +81,38 @@
                     </div>
                 </section>
 
+                <!-- 1b. Принятие приглашения -->
+                <section id="admin-invite" class="admin-block admin-login-view admin-hidden">
+                    <div class="admin-login-card">
+                        <div class="admin-login-brand">
+                            <span class="admin-login-brand__logo">Satva</span>
+                            <p class="admin-login-brand__tagline">Приглашение в админ-панель</p>
+                        </div>
+                        <h1 class="admin-page-heading">Принятие приглашения</h1>
+                        <p class="admin-page-subtitle">Задайте пароль для входа в систему</p>
+                        <form id="admin-invite-form" class="admin-login-form">
+                            <div class="form-group">
+                                <label for="admin-invite-email">Email</label>
+                                <input type="email" id="admin-invite-email" name="email" class="form-input admin-input" readonly autocomplete="username">
+                            </div>
+                            <div class="form-group">
+                                <label>Роль</label>
+                                <p id="admin-invite-role-display" class="admin-invite-role-display">—</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="admin-invite-password">Пароль</label>
+                                <input type="password" id="admin-invite-password" name="password" class="form-input admin-input" required autocomplete="new-password" minlength="8" placeholder="Минимум 8 символов">
+                            </div>
+                            <div class="form-group">
+                                <label for="admin-invite-confirm">Подтверждение пароля</label>
+                                <input type="password" id="admin-invite-confirm" name="confirm" class="form-input admin-input" required autocomplete="new-password" minlength="8" placeholder="Повторите пароль">
+                            </div>
+                            <button type="submit" class="admin-btn admin-btn--primary admin-btn--block">Создать аккаунт</button>
+                            <div id="admin-invite-message" class="form-message" role="alert" aria-live="polite"></div>
+                        </form>
+                    </div>
+                </section>
+
                 <!-- 2. Блок списка заявок -->
                 <section id="admin-leads" class="admin-block admin-hidden">
                     <header class="admin-page-header">
@@ -86,7 +128,11 @@
                             <button type="button" id="admin-tab-active" class="admin-archive-tab admin-archive-tab--active" role="tab" aria-selected="true">Активные</button>
                             <button type="button" id="admin-tab-archive" class="admin-archive-tab" role="tab" aria-selected="false">Архив</button>
                         </div>
-                        <div class="admin-toolbar">
+                        <div class="admin-toolbar admin-search-toolbar">
+                            <div class="admin-toolbar__group admin-search-group">
+                                <label for="admin-search" class="admin-label">Поиск</label>
+                                <input type="search" id="admin-search" class="form-input admin-input admin-search-input" placeholder="Имя, телефон, email" autocomplete="off" aria-label="Поиск по заявкам">
+                            </div>
                             <div class="admin-toolbar__group">
                                 <label for="admin-leads-filter" class="admin-label">Тип заявки</label>
                                 <select id="admin-leads-filter" class="admin-select" aria-label="Фильтр по типу заявки">
@@ -110,6 +156,11 @@
                             </div>
                             <div class="admin-toolbar__group admin-date-filters" role="group" aria-label="Фильтр по дате создания">
                                 <span class="admin-label">Период</span>
+                                <div class="admin-date-presets" role="group" aria-label="Быстрый выбор периода">
+                                    <button type="button" id="admin-date-preset-today" class="admin-archive-tab admin-date-preset" data-preset="today">Сегодня</button>
+                                    <button type="button" id="admin-date-preset-7d" class="admin-archive-tab admin-date-preset" data-preset="7d">7 дней</button>
+                                    <button type="button" id="admin-date-preset-30d" class="admin-archive-tab admin-date-preset" data-preset="30d">30 дней</button>
+                                </div>
                                 <div class="admin-date-row">
                                     <label class="admin-date-label">с <input type="datetime-local" id="admin-date-from" class="admin-date-input"></label>
                                     <label class="admin-date-label">по <input type="datetime-local" id="admin-date-to" class="admin-date-input"></label>
@@ -117,6 +168,7 @@
                                 <div class="admin-toolbar__actions">
                                     <button type="button" id="admin-apply-filters" class="admin-btn admin-btn--primary admin-btn--small">Применить</button>
                                     <button type="button" id="admin-clear-dates" class="admin-btn admin-btn--ghost admin-btn--small">Сбросить</button>
+                                    <button type="button" id="admin-export-csv" class="admin-btn admin-btn--secondary admin-btn--small">Экспорт CSV</button>
                                 </div>
                             </div>
                         </div>
@@ -194,6 +246,16 @@
                         <h2 class="admin-panel__title">Согласия</h2>
                         <div id="admin-detail-consents"></div>
                     </div>
+
+                    <div id="admin-detail-notes" class="admin-panel admin-detail-section admin-notes-panel">
+                        <h2 class="admin-panel__title">Заметки</h2>
+                        <div class="admin-notes-compose">
+                            <label for="admin-note-input" class="visually-hidden">Текст заметки</label>
+                            <textarea id="admin-note-input" class="admin-input admin-note-input" rows="3" placeholder="Добавить заметку…"></textarea>
+                            <button type="button" id="admin-note-add" class="admin-btn admin-btn--primary admin-btn--small">Добавить</button>
+                        </div>
+                        <div id="admin-detail-notes-list" class="admin-notes-list" aria-live="polite"></div>
+                    </div>
                 </section>
 
                 <!-- 4. Блок аналитики -->
@@ -230,6 +292,19 @@
                                 <span class="admin-analytics-card__label">Отказы</span>
                                 <span class="admin-analytics-card__value" id="admin-analytics-bounces">—</span>
                             </div>
+                            <div class="admin-analytics-card">
+                                <span class="admin-analytics-card__label">Заявки</span>
+                                <span class="admin-analytics-card__value" id="admin-analytics-leads-count">—</span>
+                            </div>
+                            <div class="admin-analytics-card">
+                                <span class="admin-analytics-card__label">Конверсия</span>
+                                <span class="admin-analytics-card__value" id="admin-analytics-conversion-rate">—</span>
+                            </div>
+                        </div>
+
+                        <div class="admin-panel admin-analytics-chart-panel">
+                            <h2 class="admin-panel__title">Динамика заявок</h2>
+                            <div id="admin-analytics-chart" class="admin-analytics-chart" role="img" aria-label="График заявок по дням"></div>
                         </div>
 
                         <div class="admin-panel admin-analytics-top-pages">
@@ -249,7 +324,7 @@
                     </header>
 
                     <div class="admin-settings-grid">
-                        <div class="admin-panel admin-settings-card admin-settings-card--wide">
+                        <div class="admin-panel admin-settings-card admin-settings-card--wide admin-owner-only">
                             <h2 class="admin-panel__title">Уведомления о заявках</h2>
                             <p class="admin-settings-hint">На эти адреса приходит письмо при каждой новой заявке с сайта.</p>
                             <ul id="admin-email-list" class="admin-email-list" aria-live="polite"></ul>
@@ -299,9 +374,145 @@
                         </div>
                     </div>
                 </section>
+
+                <!-- 6. Пользователи (owner) -->
+                <section id="admin-users" class="admin-block admin-hidden">
+                    <header class="admin-page-header">
+                        <div class="admin-page-header__text">
+                            <h1 class="admin-page-heading">Пользователи</h1>
+                            <p class="admin-page-subtitle">Учётные записи и приглашения</p>
+                        </div>
+                    </header>
+
+                    <div class="admin-panel admin-users-panel">
+                        <h2 class="admin-panel__title">Активные пользователи</h2>
+                        <div class="admin-table-wrap">
+                            <table class="admin-table admin-users-table" aria-label="Список пользователей">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Роль</th>
+                                        <th scope="col">Статус</th>
+                                        <th scope="col">Создан</th>
+                                        <th scope="col"><span class="visually-hidden">Действия</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-users-tbody">
+                                    <tr><td colspan="5" class="admin-table__empty">Загрузка…</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="admin-panel admin-users-invite-panel">
+                        <h2 class="admin-panel__title">Пригласить пользователя</h2>
+                        <form id="admin-users-invite-form" class="admin-users-invite-form">
+                            <div class="admin-toolbar">
+                                <div class="admin-toolbar__group">
+                                    <label for="admin-invite-user-email" class="admin-label">Email</label>
+                                    <input type="email" id="admin-invite-user-email" class="form-input admin-input" required placeholder="email@example.com" autocomplete="email">
+                                </div>
+                                <div class="admin-toolbar__group">
+                                    <label for="admin-invite-user-role" class="admin-label">Роль</label>
+                                    <select id="admin-invite-user-role" class="admin-select" aria-label="Роль приглашённого">
+                                        <option value="manager">manager</option>
+                                        <option value="owner">owner</option>
+                                    </select>
+                                </div>
+                                <div class="admin-toolbar__group admin-toolbar__group--actions">
+                                    <button type="submit" id="admin-invite-user-submit" class="admin-btn admin-btn--primary admin-btn--small">Отправить приглашение</button>
+                                </div>
+                            </div>
+                            <div id="admin-users-invite-message" class="form-message" role="alert" aria-live="polite"></div>
+                        </form>
+                    </div>
+
+                    <div class="admin-panel admin-users-invitations-panel">
+                        <h2 class="admin-panel__title">Ожидающие приглашения</h2>
+                        <ul id="admin-invitations-list" class="admin-invitations-list" aria-live="polite">
+                            <li class="admin-invitations-list__empty">Загрузка…</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 7. Аудит (owner) -->
+                <section id="admin-audit" class="admin-block admin-hidden">
+                    <header class="admin-page-header">
+                        <div class="admin-page-header__text">
+                            <h1 class="admin-page-heading">Аудит</h1>
+                            <p class="admin-page-subtitle">Журнал действий администраторов</p>
+                        </div>
+                    </header>
+
+                    <div class="admin-panel admin-table-panel">
+                        <div class="admin-table-wrap">
+                            <table class="admin-table admin-audit-table" aria-label="Журнал аудита">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Дата</th>
+                                        <th scope="col">Пользователь</th>
+                                        <th scope="col">Действие</th>
+                                        <th scope="col">Объект</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-audit-tbody">
+                                    <tr><td colspan="4" class="admin-table__empty">Загрузка…</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <nav class="admin-pagination" aria-label="Пагинация аудита">
+                            <button type="button" id="admin-audit-pagination-prev" class="admin-btn admin-btn--secondary admin-btn--small" aria-label="Предыдущая страница">Назад</button>
+                            <span id="admin-audit-pagination-info" class="admin-pagination__info" aria-live="polite">—</span>
+                            <button type="button" id="admin-audit-pagination-next" class="admin-btn admin-btn--secondary admin-btn--small" aria-label="Следующая страница">Вперёд</button>
+                        </nav>
+                    </div>
+                </section>
             </main>
         </div>
     </div>
-    <script src="js/admin.js?v=4"></script>
+
+    <!-- Быстрое редактирование заявки -->
+    <div id="admin-quick-modal" class="admin-quick-modal admin-hidden" role="dialog" aria-modal="true" aria-labelledby="admin-quick-modal-title">
+        <div id="admin-quick-modal-overlay" class="admin-quick-modal__overlay" tabindex="-1" aria-hidden="true"></div>
+        <div class="admin-quick-modal__dialog">
+            <header class="admin-quick-modal__header">
+                <h2 id="admin-quick-modal-title" class="admin-quick-modal__title">Заявка</h2>
+                <button type="button" id="admin-quick-modal-close" class="admin-quick-modal__close" aria-label="Закрыть">
+                    <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </header>
+            <div class="admin-quick-modal__body">
+                <p id="admin-quick-modal-meta" class="admin-quick-modal__meta"></p>
+                <div class="admin-toolbar__group">
+                    <label for="admin-quick-modal-status" class="admin-label">Статус</label>
+                    <select id="admin-quick-modal-status" class="admin-select" aria-label="Статус заявки">
+                        <option value="new">Новый</option>
+                        <option value="in_progress">В работе</option>
+                        <option value="contacted">Связались</option>
+                        <option value="booked">Забронировано</option>
+                        <option value="cancelled">Отмена</option>
+                        <option value="spam">Спам</option>
+                    </select>
+                </div>
+                <div class="admin-quick-modal__actions">
+                    <button type="button" id="admin-quick-modal-archive" class="admin-btn admin-btn--secondary admin-btn--small">В архив</button>
+                    <button type="button" id="admin-quick-modal-restore" class="admin-btn admin-btn--ghost admin-btn--small admin-hidden">Восстановить</button>
+                </div>
+                <div id="admin-quick-modal-notes" class="admin-quick-modal__notes">
+                    <h3 class="admin-quick-modal__notes-title">Заметки</h3>
+                    <p id="admin-quick-modal-notes-preview" class="admin-quick-modal__notes-preview"></p>
+                    <label for="admin-quick-modal-note-input" class="visually-hidden">Быстрая заметка</label>
+                    <textarea id="admin-quick-modal-note-input" class="admin-input admin-note-input" rows="2" placeholder="Быстро добавить заметку…"></textarea>
+                    <button type="button" id="admin-quick-modal-note-add" class="admin-btn admin-btn--primary admin-btn--small">Добавить заметку</button>
+                </div>
+                <div id="admin-quick-modal-message" class="form-message" role="status" aria-live="polite"></div>
+            </div>
+            <footer class="admin-quick-modal__footer">
+                <button type="button" id="admin-quick-modal-open-full" class="admin-btn admin-btn--primary">Открыть полную карточку</button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="js/admin.js?v=5"></script>
 </body>
 </html>
