@@ -6,6 +6,7 @@
 .yoga-food {
     background: color.mix($color-secondary, $color-bg-main, 38%);
     padding: $space-section $space-h;
+    padding-bottom: 40px;
 
     &__container {
         max-width: $container-base;

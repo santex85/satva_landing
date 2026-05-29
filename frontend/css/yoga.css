@@ -1316,6 +1316,7 @@ section[id^=yoga] h2 {
 .yoga-food {
   background: rgb(241.3, 235.5, 225.28);
   padding: clamp(60px, 8vw, 100px) 24px;
+  padding-bottom: 40px;
 }
 .yoga-food__container {
   max-width: 900px;
@@ -1372,6 +1373,7 @@ section[id^=yoga] h2 {
 .yoga-rooms {
   background: #f7f5f2;
   padding: clamp(60px, 8vw, 100px) 24px;
+  padding-top: 40px;
 }
 .yoga-rooms__container {
   max-width: 900px;
