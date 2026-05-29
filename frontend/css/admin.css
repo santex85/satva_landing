@@ -19,6 +19,12 @@
 }
 
 /* ── Utilities ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -551,8 +557,8 @@ body.admin-logged-in .admin-login-view {
 }
 
 .admin-date-filters {
-  flex: 1;
-  min-width: 280px;
+  grid-column: 1 / -1;
+  min-width: 0;
 }
 
 .admin-date-row {
@@ -588,7 +594,32 @@ body.admin-logged-in .admin-login-view {
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 640px;
+  table-layout: fixed;
+  min-width: 720px;
+}
+
+.admin-table__col-date {
+  width: 14%;
+}
+
+.admin-table__col-type {
+  width: 17%;
+}
+
+.admin-table__col-status {
+  width: 12%;
+}
+
+.admin-table__col-name {
+  width: 26%;
+}
+
+.admin-table__col-phone {
+  width: 17%;
+}
+
+.admin-table__col-action {
+  width: 14%;
 }
 
 .admin-table th,
@@ -626,8 +657,16 @@ body.admin-logged-in .admin-login-view {
   vertical-align: middle;
 }
 
+.admin-table th:last-child,
 .admin-table td:last-child {
   text-align: right;
+  white-space: nowrap;
+}
+
+.admin-table td:nth-child(4),
+.admin-table td:nth-child(5) {
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -1054,6 +1093,10 @@ body.admin-logged-in .admin-login-view {
     align-items: stretch;
   }
 
+  .admin-search-toolbar {
+    grid-template-columns: 1fr;
+  }
+
   .admin-select {
     width: 100%;
   }
@@ -1122,13 +1165,13 @@ body.admin-role-owner .admin-settings-grid .admin-owner-only {
 
 /* ── v2: Search toolbar ── */
 .admin-search-toolbar {
-  align-items: flex-end;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(160px, 1fr));
+  align-items: end;
 }
 
 .admin-search-group {
-  flex: 1 1 220px;
-  min-width: 200px;
-  max-width: 320px;
+  min-width: 0;
 }
 
 .admin-search-input {
@@ -1461,6 +1504,8 @@ body.admin-role-owner .admin-settings-grid .admin-owner-only {
   font-weight: 700;
   color: var(--admin-teal);
   line-height: 1.3;
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 .admin-quick-modal__close {
@@ -1490,6 +1535,8 @@ body.admin-role-owner .admin-settings-grid .admin-owner-only {
 
 .admin-quick-modal__body {
   flex: 1;
+  min-width: 0;
+  overflow-x: hidden;
   overflow-y: auto;
   padding: 1rem 1.5rem;
   display: flex;
@@ -1497,11 +1544,23 @@ body.admin-role-owner .admin-settings-grid .admin-owner-only {
   gap: 1rem;
 }
 
+.admin-quick-modal__body .admin-toolbar__group,
+.admin-quick-modal__notes {
+  min-width: 0;
+}
+
+.admin-quick-modal__body .admin-select {
+  width: 100%;
+  max-width: 100%;
+}
+
 .admin-quick-modal__meta {
   margin: 0;
   font-size: 0.9rem;
   color: var(--admin-text-muted);
   line-height: 1.5;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .admin-quick-modal__meta strong {
@@ -1526,6 +1585,12 @@ body.admin-role-owner .admin-settings-grid .admin-owner-only {
   font-size: 0.85rem;
   color: var(--admin-text-muted);
   line-height: 1.45;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+body.admin-modal-open {
+  overflow: hidden;
 }
 
 .admin-quick-modal__footer {

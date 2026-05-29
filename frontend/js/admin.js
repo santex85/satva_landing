@@ -535,7 +535,7 @@
     }
     tbody.innerHTML = rows
       .map(function (lead) {
-        return "<tr class=\"admin-table__row--clickable\" data-lead-id=\"" + escapeAttr(String(lead.id)) + "\">" + renderLeadRowCells(lead) + "</tr>";
+        return "<tr class=\"admin-table-row--clickable\" data-lead-id=\"" + escapeAttr(String(lead.id)) + "\">" + renderLeadRowCells(lead) + "</tr>";
       })
       .join("");
     tbody.querySelectorAll("tr[data-lead-id]").forEach(bindLeadRowEvents);
@@ -920,7 +920,10 @@
         var name = payload.name != null ? String(payload.name) : "—";
         var phone = payload.phone != null ? String(payload.phone) : "—";
         if (els.quickModalTitle) {
-          els.quickModalTitle.innerHTML = escapeHtml(lead.type || "—") + " · " + escapeHtml(name) + " · " + linkPhone(phone);
+          els.quickModalTitle.textContent = lead.type || "Заявка";
+        }
+        if (els.quickModalMeta) {
+          els.quickModalMeta.innerHTML = escapeHtml(name) + " · " + linkPhone(phone);
         }
         if (els.quickModalStatus) els.quickModalStatus.value = lead.status || "new";
         if (els.quickModalArchiveBtn) els.quickModalArchiveBtn.classList.toggle("admin-hidden", !!lead.archived_at);
@@ -1507,6 +1510,7 @@
     els.quickModalOverlay = document.getElementById("admin-quick-modal-overlay");
     els.quickModalClose = document.getElementById("admin-quick-modal-close");
     els.quickModalTitle = document.getElementById("admin-quick-modal-title");
+    els.quickModalMeta = document.getElementById("admin-quick-modal-meta");
     els.quickModalStatus = document.getElementById("admin-quick-modal-status");
     els.quickModalArchiveBtn = document.getElementById("admin-quick-modal-archive");
     els.quickModalRestoreBtn = document.getElementById("admin-quick-modal-restore");

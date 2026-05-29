@@ -6,7 +6,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Админка — Satva</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="css/admin.css?v=5">
+    <link rel="stylesheet" href="css/admin.css?v=6">
 </head>
 <body class="admin-page">
     <div class="admin-app">
@@ -177,6 +177,14 @@
                     <div class="admin-panel admin-table-panel">
                         <div class="admin-table-wrap">
                             <table class="admin-table" role="grid" aria-label="Список заявок">
+                                <colgroup>
+                                    <col class="admin-table__col-date">
+                                    <col class="admin-table__col-type">
+                                    <col class="admin-table__col-status">
+                                    <col class="admin-table__col-name">
+                                    <col class="admin-table__col-phone">
+                                    <col class="admin-table__col-action">
+                                </colgroup>
                                 <thead>
                                     <tr>
                                         <th scope="col">Дата</th>
@@ -513,6 +521,6 @@
         </div>
     </div>
 
-    <script src="js/admin.js?v=5"></script>
+    <script src="js/admin.js?v=6"></script>
 </body>
 </html>
