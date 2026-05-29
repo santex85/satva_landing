@@ -851,7 +851,7 @@ section[id^=yoga] h2 {
 .yoga-sea-band {
   position: relative;
   isolation: isolate;
-  padding: clamp(60px, 8vw, 100px) 0;
+  padding: clamp(60px, 8vw, 100px) 0 0;
   background-image: url("../img/yoga_tour/trust_sea.jpg");
   background-size: cover;
   background-position: center;
@@ -1228,6 +1228,7 @@ section[id^=yoga] h2 {
 .yoga-program {
   background: #f7f5f2;
   padding: clamp(60px, 8vw, 100px) 24px;
+  padding-bottom: 20px;
 }
 .yoga-program__container {
   max-width: 900px;
