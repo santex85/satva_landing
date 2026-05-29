@@ -54,12 +54,12 @@ def submit_lead(
         pass
 
     try:
-        send_tawk_ticket_notification(lead_type, lead.payload, lead.created_at, source=source)
+        send_lead_confirmation(lead_type, lead.payload, lead.created_at, source=source)
     except Exception:
         pass
 
     try:
-        send_lead_confirmation(lead_type, lead.payload, lead.created_at, source=source)
+        send_tawk_ticket_notification(lead_type, lead.payload, lead.created_at, source=source)
     except Exception:
         pass
 

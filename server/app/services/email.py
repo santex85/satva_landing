@@ -447,9 +447,7 @@ def send_tawk_ticket_notification(
         "subject": subject,
         "text": body,
     }
-    email = (payload.get("email") or "").strip()
-    if email:
-        message["reply_to"] = email
+    # Не ставим reply_to на email лида: Tawk шлёт автоответ с телом тикета (рус. служебные данные).
 
     resend.api_key = settings.RESEND_API_KEY
     try:
