@@ -944,8 +944,7 @@
             );
         }
 
-        function openModal() {
-            previousActive = document.activeElement;
+        function resetLeadModalFormState() {
             var leadForm = document.getElementById('yogaLeadFormModal');
             var leadSuccess = document.getElementById('yogaLeadFormSuccess');
             var leadError = document.getElementById('yogaLeadFormError');
@@ -955,6 +954,11 @@
                 leadError.textContent = '';
                 leadError.classList.add('is-hidden');
             }
+        }
+
+        function openModal() {
+            previousActive = document.activeElement;
+            resetLeadModalFormState();
             modal.removeAttribute('hidden');
             modal.classList.add('is-open');
             modal.setAttribute('aria-hidden', 'false');
