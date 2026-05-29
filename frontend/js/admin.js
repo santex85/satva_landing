@@ -1100,21 +1100,20 @@
     data.forEach(function (d) {
       if ((d.count || 0) > max) max = d.count;
     });
-    els.analyticsLeadsChart.innerHTML =
-      "<div class=\"admin-bar-chart\" role=\"img\" aria-label=\"График заявок по дням\">" +
-      data.map(function (d) {
+    els.analyticsLeadsChart.innerHTML = data
+      .map(function (d) {
         var count = d.count || 0;
-        var pct = Math.round((count / max) * 100);
+        var barHeight = 8 + Math.round((count / max) * 110);
         var label = d.date ? d.date.slice(5) : "";
         return (
-          "<div class=\"admin-bar-chart__item\" title=\"" + escapeAttr((d.date || "") + ": " + count) + "\">" +
-          "<div class=\"admin-bar-chart__bar-wrap\"><div class=\"admin-bar-chart__bar\" style=\"height:" + pct + "%\"></div></div>" +
-          "<span class=\"admin-bar-chart__value\">" + escapeHtml(String(count)) + "</span>" +
-          "<span class=\"admin-bar-chart__label\">" + escapeHtml(label) + "</span>" +
+          "<div class=\"admin-analytics-chart__bar-wrap\" title=\"" + escapeAttr((d.date || "") + ": " + count) + "\">" +
+          "<span class=\"admin-analytics-chart__value\">" + escapeHtml(String(count)) + "</span>" +
+          "<div class=\"admin-analytics-chart__bar\" style=\"height:" + barHeight + "px\"></div>" +
+          "<span class=\"admin-analytics-chart__label\">" + escapeHtml(label) + "</span>" +
           "</div>"
         );
-      }).join("") +
-      "</div>";
+      })
+      .join("");
   }
 
   function loadAnalytics(range) {

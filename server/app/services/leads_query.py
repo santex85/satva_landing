@@ -13,7 +13,7 @@ def apply_lead_filters(
     *,
     type_filter: str | None = None,
     status: str | None = None,
-    archived: bool = False,
+    archived: bool | None = False,
     created_after: datetime | None = None,
     created_before: datetime | None = None,
     q_text: str | None = None,
@@ -22,7 +22,9 @@ def apply_lead_filters(
         q = q.filter(Lead.type == type_filter)
     if status:
         q = q.filter(Lead.status == status)
-    if archived:
+    if archived is None:
+        pass
+    elif archived:
         q = q.filter(Lead.archived_at.isnot(None))
     else:
         q = q.filter(Lead.archived_at.is_(None))

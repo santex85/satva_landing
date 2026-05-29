@@ -136,6 +136,21 @@
         }
     }
 
+    function trackUmamiLead(lead) {
+        try {
+            if (window.umami && typeof window.umami.track === 'function') {
+                window.umami.track('lead-submit', {
+                    source: lead.source || '',
+                    procedure: lead.procedure || '',
+                    package: lead.package_slug || '',
+                    lang: lead.lang || '',
+                });
+            }
+        } catch (e) {
+            if (window.console) console.warn('Umami track failed:', e);
+        }
+    }
+
     /** Синхронизирует контакт Tawk (login по email + event). Без email — только addEvent. */
     function setTawkVisitor(lead, tawkLogin) {
         if (!lead || typeof lead !== 'object') return;
@@ -1308,6 +1323,7 @@
                     setFormLoading(false);
                     resetTurnstileLead();
                     if (r.ok) {
+                        trackUmamiLead(payload);
                         setTawkVisitor(payload, r.body && r.body.tawk_login);
                         form.reset();
                         clearNamePhoneErrors();
@@ -1590,6 +1606,7 @@
                     setFormLoading(false);
                     resetTurnstile();
                     if (r.ok) {
+                        trackUmamiLead(payload);
                         setTawkVisitor(payload, r.body && r.body.tawk_login);
                         if (successBox) successBox.classList.remove('is-hidden');
                         form.classList.add('is-hidden');

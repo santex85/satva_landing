@@ -31,7 +31,7 @@ def analytics_summary(
         db,
         type_filter=None,
         status=None,
-        archived=False,
+        archived=None,
         created_after=start,
         created_before=end,
         q_text=None,
