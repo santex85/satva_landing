@@ -210,11 +210,17 @@ def send_tawk_ticket_notification(
 
     resend.api_key = settings.RESEND_API_KEY
     try:
-        resend.Emails.send(message)
-        logger.info("Tawk ticket email sent", extra={"lead_type": lead_type, "name": name})
+        result = resend.Emails.send(message)
     except Exception as e:
         logger.error(
             "Failed to send Tawk ticket email",
             extra={"lead_type": lead_type, "error": str(e)},
             exc_info=True,
         )
+        return
+
+    resend_id = result.get("id") if isinstance(result, dict) else None
+    logger.info(
+        "Tawk ticket email sent",
+        extra={"lead_type": lead_type, "lead_name": name, "resend_id": resend_id},
+    )

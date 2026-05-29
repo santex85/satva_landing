@@ -8,7 +8,7 @@
 
 - **Хост:** `152.42.186.191`
 - **Пользователь:** `root` (SSH по ключу)
-- **Домен:** https://satvasamui.site
+- **Домен:** https://satvasamui.com
 - **Каталог проекта на сервере:** `/var/www/satva-landing` (или иной путь к клону репозитория)
 - **Владелец файлов:** при раздаче только статики — `www-data`; при Docker — файлы репо могут принадлежать root/deploy-пользователю
 - **Веб-сервер:** nginx на хосте (TLS, Certbot) + опционально стек в Docker (см. ниже)
@@ -26,7 +26,7 @@
 
 ### 2. Секреты
 
-Создай файл **`server/.env`** (не в git): `JWT_SECRET`, `RESEND_*`, `TURNSTILE_SECRET_KEY`, `TURNSTILE_SITE_KEY`, `CORS_ORIGINS=https://satvasamui.site`, и т.д. (см. `server/.env.example`).
+Создай файл **`server/.env`** (не в git): `JWT_SECRET`, `RESEND_*`, `TURNSTILE_SECRET_KEY`, `TURNSTILE_SITE_KEY`, `CORS_ORIGINS=https://satvasamui.com,https://www.satvasamui.com`, и т.д. (см. `server/.env.example`).
 
 Для Postgres задай пароль при запуске compose, например файл **`.env.deploy`** в корне репо (не коммитить):
 
@@ -49,7 +49,7 @@ docker compose -f docker-compose.prod.yml --env-file .env.deploy up -d --build
 
 ### 4. Nginx на хосте (HTTPS)
 
-Для `server_name satvasamui.site` вместо `root` на статику используй прокси на контейнер:
+Для `server_name satvasamui.com` вместо `root` на статику используй прокси на контейнер:
 
 ```nginx
 location / {
@@ -73,14 +73,14 @@ location / {
 | Переменная | Назначение |
 |------------|------------|
 | `RESEND_API_KEY` | API-ключ из [Resend Dashboard](https://resend.com/api-keys) |
-| `RESEND_FROM` | Адрес «От» с подтверждённым доменом, напр. `Satva Samui <hello@satvasamui.site>` (не используйте `noreply@`) |
+| `RESEND_FROM` | Адрес «От» с подтверждённым доменом, напр. `Satva Samui <hello@satvasamui.com>` (не используйте `noreply@`) |
 | `RESEND_TO` | Кому дублировать заявки (один или несколько адресов через запятую) |
 
 Домен отправителя нужно подтвердить в Resend ([DNS-записи](https://resend.com/domains)). Ошибки отправки пишутся в лог контейнера `app`; при сбое доставки заявка в PostgreSQL уже сохранена.
 
 ### 6. Капча Cloudflare Turnstile
 
-В панели Cloudflare Turnstile в списке **доменов сайта** (allowed hostnames) должны быть: **`satvasamui.site`**, а для локальной отладки — **`localhost`**, **`127.0.0.1`**.  
+В панели Cloudflare Turnstile в списке **доменов сайта** (allowed hostnames) должны быть: **`satvasamui.com`**, **`www.satvasamui.com`**, а для локальной отладки — **`localhost`**, **`127.0.0.1`**.  
 Страница **йога-тура** (`/yoga` и `/yoga.html`) использует тот же `turnstileSiteKey` с бэкенда (`GET /api/public-config`); отдельный ключ не нужен.
 
 Ключи прописать в `server/.env`. Если секрет задан, а ключ сайта нет — виджет не появится; в проде должны быть оба.
@@ -97,10 +97,11 @@ docker compose -f docker-compose.prod.yml --env-file .env.deploy up -d --build
 docker compose -f docker-compose.prod.yml --env-file .env.deploy restart nginx
 ```
 
-На сервере **хостовый nginx** раздаёт `frontend/` напрямую (не через Docker). После изменений в `deploy/nginx-host-satvasamui.site.conf`:
+На сервере **хостовый nginx** раздаёт `frontend/` напрямую (не через Docker). После изменений в `deploy/nginx-host-satvasamui.com.conf`:
 
 ```bash
-cp deploy/nginx-host-satvasamui.site.conf /etc/nginx/sites-available/satvasamui.site
+cp deploy/nginx-host-satvasamui.com.conf /etc/nginx/sites-available/satvasamui.com
+ln -sf /etc/nginx/sites-available/satvasamui.com /etc/nginx/sites-enabled/satvasamui.com
 nginx -t && systemctl reload nginx
 ```
 
@@ -108,7 +109,7 @@ nginx -t && systemctl reload nginx
 
 Панель заявок **не** доступна по `/admin.html` (404). Рабочий URL:
 
-**https://satvasamui.site/samui-ctl-x7f2**
+**https://satvasamui.com/samui-ctl-x7f2**
 
 Файл в репозитории: `frontend/samui-ctl-x7f2.html`. Прямой доступ к `*.html` этого пути тоже закрыт в nginx.
 
@@ -225,7 +226,7 @@ ssh root@152.42.186.191 "cd /var/www/satva-landing && git checkout -- frontend/c
 
 ## Проверка после деплоя
 
-- Открыть https://satvasamui.site и убедиться, что загружается новая версия.
+- Открыть https://satvasamui.com и убедиться, что загружается новая версия.
 - При необходимости: жёсткое обновление (Ctrl+F5 / Cmd+Shift+R) или проверка в режиме инкогнито — возможен кэш браузера или CDN.
 
 ---
