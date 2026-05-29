@@ -38,9 +38,9 @@ def patch_index(path: Path, modal_body: str) -> None:
         r'<div id="yogaModalOffer")'
     )
     closing = (
-        '\n                <p><em>Дата последнего обновления: 25 мая 2026 г. Версия документа: 2026-05-25.</em></p>'
+        '\n                <p><em>Дата последнего обновления: 29 мая 2026 г. Версия документа: 2026-05-29.</em></p>'
         if 'Настоящая' in modal_body or '«Политика»' in modal_body
-        else '\n                <p><em>Last updated: 25 May 2026. Document version: 2026-05-25.</em></p>'
+        else '\n                <p><em>Last updated: 29 May 2026. Document version: 2026-05-29.</em></p>'
     )
     repl = r'\1\n' + modal_body + closing + '\n            \2'
     new_text, n = re.subn(pattern, repl, text, count=1, flags=re.DOTALL)
