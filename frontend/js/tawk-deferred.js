@@ -23,7 +23,6 @@
     s1.async = true;
     s1.src = TAWK_SRC;
     s1.charset = "UTF-8";
-    s1.setAttribute("crossorigin", "*");
     if (s0 && s0.parentNode) s0.parentNode.insertBefore(s1, s0);
     else document.head.appendChild(s1);
   }

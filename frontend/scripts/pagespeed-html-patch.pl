@@ -81,7 +81,10 @@ for my $file (@files) {
     s0\.parentNode\.insertBefore\(s1, s0\);\s*
     \}\)\(\);\s*
     </script>
-  }{<!-- Tawk.to — отложенная загрузка (pagespeed) -->\n    <script defer src="/js/tawk-deferred.js?v=1"></script>}gsx;
+  }{<!-- Tawk.to — отложенная загрузка (pagespeed) -->\n    <script defer src="/js/tawk-deferred.js?v=2"></script>}gsx;
+
+  # preconnect tawk без crossorigin (скрипт грузится не в CORS-режиме)
+  $html =~ s{<link rel="preconnect" href="https://embed\.tawk\.to" crossorigin>}{<link rel="preconnect" href="https://embed.tawk.to">}g;
 
   open my $out, '>', $file or die "Cannot write $file: $!";
   print $out $html;
