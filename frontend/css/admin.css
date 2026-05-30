@@ -1129,6 +1129,18 @@ body.admin-logged-in .admin-login-view {
     align-items: stretch;
   }
 
+  .admin-users-invite-form .admin-toolbar {
+    align-items: stretch;
+  }
+
+  .admin-users-invite-form .admin-toolbar__group--actions {
+    align-self: stretch;
+  }
+
+  .admin-users-invite-form .admin-toolbar__group--actions .admin-btn {
+    width: 100%;
+  }
+
   .admin-search-toolbar {
     grid-template-columns: 1fr;
   }
