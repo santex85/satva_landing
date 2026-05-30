@@ -7,6 +7,8 @@ from sqlalchemy.orm import Query, Session
 
 from app.models import Lead
 
+WEB_FORM_SOURCES = frozenset({"landing", "popup", "footer", "yoga-bridge"})
+
 
 def apply_lead_filters(
     q: Query,
@@ -17,6 +19,7 @@ def apply_lead_filters(
     created_after: datetime | None = None,
     created_before: datetime | None = None,
     q_text: str | None = None,
+    source_in: frozenset[str] | list[str] | None = None,
 ) -> Query:
     if type_filter:
         q = q.filter(Lead.type == type_filter)
@@ -41,6 +44,8 @@ def apply_lead_filters(
                 Lead.payload["email"].astext.ilike(pattern),
             )
         )
+    if source_in:
+        q = q.filter(Lead.source.in_(list(source_in)))
     return q
 
 
@@ -66,6 +71,45 @@ def leads_to_csv(leads: list[Lead]) -> str:
             lead.source or "",
         ])
     return output.getvalue()
+
+
+def get_lead_stats(
+    db: Session,
+    *,
+    archived: bool = False,
+    type_filter: str | None = None,
+    created_after: datetime | None = None,
+    created_before: datetime | None = None,
+    q_text: str | None = None,
+) -> dict:
+    base_filters = {
+        "archived": archived,
+        "type_filter": type_filter,
+        "created_after": created_after,
+        "created_before": created_before,
+        "q_text": q_text,
+    }
+    status_rows = (
+        apply_lead_filters(db.query(Lead.status, func.count(Lead.id)), **base_filters)
+        .group_by(Lead.status)
+        .all()
+    )
+    by_status = {row.status: int(row.count) for row in status_rows}
+    today_start = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+    today_count = count_leads(
+        db,
+        archived=archived,
+        type_filter=type_filter,
+        created_after=today_start,
+        created_before=None,
+        q_text=q_text,
+    )
+    total = sum(by_status.values())
+    return {
+        "by_status": by_status,
+        "today": today_count,
+        "total": total,
+    }
 
 
 def get_leads_by_day(db: Session, start: datetime, end: datetime) -> list[dict]:

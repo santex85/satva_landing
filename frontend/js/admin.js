@@ -84,6 +84,17 @@
     quickEditLeadId: null,
     quickEditReturnFocus: null,
     modalKeydownHandler: null,
+    selectedLeadIds: {},
+    searchDebounceTimer: null,
+    currentLeadPayload: null,
+  };
+
+  var DESTRUCTIVE_STATUSES = { cancelled: true, spam: true };
+
+  var _LEAD_TYPE_LABELS = {
+    contact: "Контакт",
+    procedure_booking: "Бронирование",
+    package_choice: "Выбор пакета",
   };
 
   function getToken() {
@@ -140,6 +151,184 @@
     if (!el) return;
     el.textContent = text || "";
     el.className = "form-message" + (text ? (isError ? " form-message--error" : " form-message--success") : "");
+  }
+
+  function showToast(message, isError) {
+    var container = document.getElementById("admin-toast-container");
+    if (!container || !message) return;
+    var toast = document.createElement("div");
+    toast.className = "admin-toast" + (isError ? " admin-toast--error" : "");
+    toast.setAttribute("role", "status");
+    toast.textContent = message;
+    container.appendChild(toast);
+    window.setTimeout(function () {
+      toast.classList.add("admin-toast--hide");
+      window.setTimeout(function () {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+      }, 280);
+    }, 3200);
+  }
+
+  function confirmAction(message) {
+    return window.confirm(message);
+  }
+
+  function confirmStatusChange(status) {
+    if (!isDestructiveStatus(status)) return true;
+    return confirmAction("Установить статус «" + statusLabel(status) + "»? Это действие сложно отменить.");
+  }
+
+  function confirmArchiveAction(count) {
+    count = count || 1;
+    if (count === 1) return confirmAction("Переместить заявку в архив?");
+    return confirmAction("Переместить " + count + " заявок в архив?");
+  }
+
+  function scheduleLeadsSearch() {
+    if (state.searchDebounceTimer) window.clearTimeout(state.searchDebounceTimer);
+    state.searchDebounceTimer = window.setTimeout(function () {
+      state.q = els.leadsSearch ? els.leadsSearch.value.trim() : "";
+      state.offset = 0;
+      loadLeads();
+    }, 300);
+  }
+
+  function revertStatusSelect(leadId, previousStatus) {
+    if (String(state.currentLeadId) === String(leadId) && els.detailStatus && previousStatus) {
+      els.detailStatus.value = previousStatus;
+    }
+    if (String(state.quickEditLeadId) === String(leadId) && els.quickModalStatus && previousStatus) {
+      els.quickModalStatus.value = previousStatus;
+    }
+  }
+
+  function isDestructiveStatus(status) {
+    return !!DESTRUCTIVE_STATUSES[status];
+  }
+
+  function leadTypeLabel(type) {
+    return _LEAD_TYPE_LABELS[type] || type || "—";
+  }
+
+  function normalizePhoneDigits(phone) {
+    if (phone == null || phone === "") return "";
+    return String(phone).replace(/[^\d+]/g, "").replace(/^\+?/, function (m) { return m ? "+" : ""; });
+  }
+
+  function normalizeContactKey(payload) {
+    if (!payload) return "";
+    var phone = normalizePhoneDigits(payload.phone);
+    if (phone.length >= 8) return "p:" + phone.replace(/\D/g, "");
+    var email = (payload.email || "").trim().toLowerCase();
+    if (email) return "e:" + email;
+    return "";
+  }
+
+  function buildDuplicateCounts(leads) {
+    var counts = {};
+    (leads || []).forEach(function (lead) {
+      var key = normalizeContactKey(lead.payload || {});
+      if (key) counts[key] = (counts[key] || 0) + 1;
+    });
+    return counts;
+  }
+
+  function buildWhatsAppUrl(phone, payload) {
+    var digits = String(phone || "").replace(/\D/g, "");
+    if (!digits) return "";
+    var lang = (payload && payload.lang) === "en" ? "en" : "ru";
+    var name = payload && payload.name ? String(payload.name).split(" ")[0] : "";
+    var text =
+      lang === "en"
+        ? "Hello" + (name ? " " + name : "") + "! Thank you for your enquiry at Satva Samui. "
+        : "Здравствуйте" + (name ? ", " + name : "") + "! Спасибо за заявку в Satva Samui. ";
+    return "https://wa.me/" + digits + "?text=" + encodeURIComponent(text);
+  }
+
+  function buildMailtoUrl(payload) {
+    var email = payload && payload.email ? String(payload.email).trim() : "";
+    if (!email) return "";
+    var lang = payload.lang === "en" ? "en" : "ru";
+    var subject = lang === "en" ? "Satva Samui — your enquiry" : "Satva Samui — ваша заявка";
+    var body =
+      lang === "en"
+        ? "Hello,\n\nThank you for contacting Satva Samui.\n\n"
+        : "Здравствуйте,\n\nСпасибо за обращение в Satva Samui.\n\n";
+    return "mailto:" + encodeURIComponent(email) + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  }
+
+  function renderQuickReplies(container, payload) {
+    if (!container) return;
+    var phone = payload && payload.phone ? String(payload.phone) : "";
+    var email = payload && payload.email ? String(payload.email) : "";
+    var wa = buildWhatsAppUrl(phone, payload);
+    var mail = buildMailtoUrl(payload);
+    if (!wa && !mail && !phone) {
+      container.classList.add("admin-hidden");
+      container.innerHTML = "";
+      return;
+    }
+    var html = "";
+    if (wa) {
+      html += "<a class=\"admin-btn admin-btn--secondary admin-btn--small\" href=\"" + escapeAttr(wa) + "\" target=\"_blank\" rel=\"noopener noreferrer\">WhatsApp</a>";
+    }
+    if (mail) {
+      html += "<a class=\"admin-btn admin-btn--secondary admin-btn--small\" href=\"" + escapeAttr(mail) + "\">Email</a>";
+    }
+    if (phone) {
+      html += "<button type=\"button\" class=\"admin-btn admin-btn--ghost admin-btn--small\" data-copy-phone=\"" + escapeAttr(phone) + "\">Скопировать телефон</button>";
+    }
+    container.innerHTML = html;
+    container.classList.remove("admin-hidden");
+    container.querySelectorAll("[data-copy-phone]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var value = btn.getAttribute("data-copy-phone") || "";
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(value).then(function () {
+            showToast("Телефон скопирован");
+          }).catch(function () {
+            showToast("Не удалось скопировать", true);
+          });
+        } else {
+          showToast(value);
+        }
+      });
+    });
+  }
+
+  function getSelectedLeadIds() {
+    return Object.keys(state.selectedLeadIds).filter(function (id) {
+      return state.selectedLeadIds[id];
+    });
+  }
+
+  function updateBulkBar() {
+    var ids = getSelectedLeadIds();
+    if (els.bulkBar) els.bulkBar.classList.toggle("admin-hidden", ids.length === 0);
+    if (els.bulkCount) els.bulkCount.textContent = ids.length + " выбрано";
+    if (els.leadsSelectAll) {
+      var checkboxes = els.leadsTableBody ? els.leadsTableBody.querySelectorAll("[data-lead-select]") : [];
+      var allChecked = checkboxes.length > 0 && ids.length === checkboxes.length;
+      els.leadsSelectAll.checked = allChecked;
+      els.leadsSelectAll.indeterminate = ids.length > 0 && !allChecked;
+    }
+  }
+
+  function clearBulkSelection() {
+    state.selectedLeadIds = {};
+    if (els.leadsTableBody) {
+      els.leadsTableBody.querySelectorAll("[data-lead-select]").forEach(function (cb) {
+        cb.checked = false;
+      });
+    }
+    updateBulkBar();
+  }
+
+  function toggleLeadSelection(id, checked) {
+    if (checked) state.selectedLeadIds[String(id)] = true;
+    else delete state.selectedLeadIds[String(id)];
+    updateBulkBar();
   }
 
   function roleLabel(role) {
@@ -425,7 +614,6 @@
   function applyRoleVisibility() {
     var isOwner = state.role === "owner";
     document.body.classList.toggle("admin-role-owner", isOwner);
-    if (els.navSettings) els.navSettings.classList.toggle("admin-hidden", !isOwner);
     if (els.navUsers) els.navUsers.classList.toggle("admin-hidden", !isOwner);
     if (els.navAudit) els.navAudit.classList.toggle("admin-hidden", !isOwner);
   }
@@ -473,13 +661,11 @@
   }
 
   function showSettings() {
-    if (state.role !== "owner") {
-      showLeads();
-      return;
-    }
     showBlock("settings");
-    loadSettings();
     loadMe();
+    if (state.role === "owner") {
+      loadSettings();
+    }
   }
 
   function showAnalytics() {
@@ -583,6 +769,9 @@
       return;
     }
     syncFiltersToUrl();
+    if (els.leadsTableBody) {
+      els.leadsTableBody.innerHTML = "<tr><td colspan=\"7\" class=\"admin-table__empty\">Загрузка…</td></tr>";
+    }
     var url = apiUrl("/leads") + "?" + buildLeadsParams(true).toString();
     fetch(url, { method: "GET", headers: authHeaders() })
       .then(function (res) {
@@ -594,15 +783,75 @@
       .then(function (data) {
         if (!data) return;
         state.leadsData = Array.isArray(data) ? data : (data.items || data.data || []);
+        clearBulkSelection();
         renderLeadsTable();
         renderPagination();
         refreshNewLeadsBadge();
+        loadLeadStats();
       })
       .catch(function (err) {
         if (els.leadsTableBody) {
-          els.leadsTableBody.innerHTML = "<tr><td colspan=\"6\" class=\"admin-table__empty admin-error-msg\">" + escapeHtml(err.message || "Ошибка загрузки") + "</td></tr>";
+          els.leadsTableBody.innerHTML = "<tr><td colspan=\"7\" class=\"admin-table__empty admin-error-msg\">" + escapeHtml(err.message || "Ошибка загрузки") + "</td></tr>";
         }
       });
+  }
+
+  function loadLeadStats() {
+    if (!els.leadsStats || !getToken()) return;
+    var params = buildLeadsParams(false);
+    params.delete("limit");
+    params.delete("offset");
+    if (state.statusFilter) params.delete("status");
+    fetch(apiUrl("/leads/stats") + "?" + params.toString(), { method: "GET", headers: authHeaders() })
+      .then(function (res) {
+        if (handleUnauthorized(res)) return null;
+        if (!res.ok) throw new Error("Ошибка статистики");
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data || !els.leadsStats) return;
+        renderLeadStats(data);
+      })
+      .catch(function () {
+        if (els.leadsStats) els.leadsStats.innerHTML = "";
+      });
+  }
+
+  function renderLeadStats(data) {
+    if (!els.leadsStats) return;
+    var byStatus = data.by_status || {};
+    var items = [
+      { key: "", label: "Всего", value: data.total != null ? data.total : 0 },
+      { key: "new", label: "Новые", value: byStatus.new || 0 },
+      { key: "in_progress", label: "В работе", value: byStatus.in_progress || 0 },
+      { key: "contacted", label: "Связались", value: byStatus.contacted || 0 },
+      { key: "booked", label: "Забронировано", value: byStatus.booked || 0 },
+      { key: "__today__", label: "Сегодня", value: data.today || 0 },
+    ];
+    els.leadsStats.innerHTML = items
+      .map(function (item) {
+        var active = item.key === "__today__" ? false : (item.key === (state.statusFilter || ""));
+        return (
+          "<button type=\"button\" class=\"admin-leads-stat" + (active ? " admin-leads-stat--active" : "") + "\" data-stat-filter=\"" + escapeAttr(item.key) + "\">" +
+          "<span class=\"admin-leads-stat__label\">" + escapeHtml(item.label) + "</span>" +
+          "<span class=\"admin-leads-stat__value\">" + escapeHtml(String(item.value)) + "</span>" +
+          "</button>"
+        );
+      })
+      .join("");
+    els.leadsStats.querySelectorAll("[data-stat-filter]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var key = btn.getAttribute("data-stat-filter");
+        if (key === "__today__") {
+          applyDatePreset(0);
+          return;
+        }
+        state.statusFilter = key;
+        if (els.statusFilter) els.statusFilter.value = key;
+        state.offset = 0;
+        loadLeads();
+      });
+    });
   }
 
   function getLeadFromState(id) {
@@ -626,22 +875,29 @@
     var row = els.leadsTableBody.querySelector("tr[data-lead-id=\"" + id + "\"]");
     if (row) row.remove();
     if (!els.leadsTableBody.querySelector("tr[data-lead-id]")) {
-      els.leadsTableBody.innerHTML = "<tr><td colspan=\"6\" class=\"admin-table__empty\">" + (state.archived ? "Архив пуст" : "Нет заявок") + "</td></tr>";
+      els.leadsTableBody.innerHTML = "<tr><td colspan=\"7\" class=\"admin-table__empty\">" + (state.archived ? "Архив пуст" : "Нет заявок") + "</td></tr>";
     }
   }
 
-  function renderLeadRowCells(lead) {
+  function renderLeadRowCells(lead, duplicateCounts) {
     var payload = lead.payload || {};
     var name = payload.name != null ? String(payload.name) : "—";
     var phone = payload.phone != null ? String(payload.phone) : "—";
     var id = lead.id;
+    var dupKey = normalizeContactKey(payload);
+    var dupBadge =
+      dupKey && duplicateCounts[dupKey] > 1
+        ? "<span class=\"admin-duplicate-badge\">повтор ×" + duplicateCounts[dupKey] + "</span>"
+        : "";
+    var checked = state.selectedLeadIds[String(id)] ? " checked" : "";
     return (
-      "<td>" + formatDate(lead.created_at) + "</td>" +
-      "<td><span class=\"admin-type-badge\">" + escapeHtml(lead.type || "—") + "</span></td>" +
-      "<td>" + renderStatusBadge(lead.status) + "</td>" +
-      "<td>" + escapeHtml(name) + "</td>" +
-      "<td>" + linkPhone(phone) + "</td>" +
-      "<td><button type=\"button\" class=\"admin-btn admin-btn--primary admin-btn--small\" data-lead-detail=\"" + escapeAttr(String(id)) + "\">Подробнее</button></td>"
+      "<td class=\"admin-table__td-check\" data-label=\"\"><input type=\"checkbox\" class=\"admin-table__checkbox\" data-lead-select=\"" + escapeAttr(String(id)) + "\" aria-label=\"Выбрать заявку\"" + checked + "></td>" +
+      "<td data-label=\"Дата\">" + formatDate(lead.created_at) + "</td>" +
+      "<td data-label=\"Тип\"><span class=\"admin-type-badge\">" + escapeHtml(leadTypeLabel(lead.type)) + "</span></td>" +
+      "<td data-label=\"Статус\">" + renderStatusBadge(lead.status) + "</td>" +
+      "<td data-label=\"Имя\">" + escapeHtml(name) + dupBadge + "</td>" +
+      "<td data-label=\"Телефон\">" + linkPhone(phone) + "</td>" +
+      "<td data-label=\"Действие\"><button type=\"button\" class=\"admin-btn admin-btn--primary admin-btn--small\" data-lead-detail=\"" + escapeAttr(String(id)) + "\">Подробнее</button></td>"
     );
   }
 
@@ -649,7 +905,7 @@
     var id = row.getAttribute("data-lead-id");
     if (!id) return;
     row.addEventListener("click", function (e) {
-      if (e.target.closest("[data-lead-detail]")) return;
+      if (e.target.closest("[data-lead-detail]") || e.target.closest("[data-lead-select]") || e.target.closest(".admin-contact-link")) return;
       openQuickEdit(id, row);
     });
     var detailBtn = row.querySelector("[data-lead-detail]");
@@ -659,6 +915,15 @@
         openLeadDetail(id);
       });
     }
+    var selectCb = row.querySelector("[data-lead-select]");
+    if (selectCb) {
+      selectCb.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+      selectCb.addEventListener("change", function () {
+        toggleLeadSelection(id, selectCb.checked);
+      });
+    }
   }
 
   function renderLeadsTable() {
@@ -666,15 +931,18 @@
     if (!tbody) return;
     var rows = state.leadsData;
     if (!rows.length) {
-      tbody.innerHTML = "<tr><td colspan=\"6\" class=\"admin-table__empty\">" + (state.archived ? "Архив пуст" : "Нет заявок") + "</td></tr>";
+      tbody.innerHTML = "<tr><td colspan=\"7\" class=\"admin-table__empty\">" + (state.archived ? "Архив пуст" : "Нет заявок") + "</td></tr>";
+      updateBulkBar();
       return;
     }
+    var duplicateCounts = buildDuplicateCounts(rows);
     tbody.innerHTML = rows
       .map(function (lead) {
-        return "<tr class=\"admin-table-row--clickable\" data-lead-id=\"" + escapeAttr(String(lead.id)) + "\">" + renderLeadRowCells(lead) + "</tr>";
+        return "<tr class=\"admin-table-row--clickable\" data-lead-id=\"" + escapeAttr(String(lead.id)) + "\">" + renderLeadRowCells(lead, duplicateCounts) + "</tr>";
       })
       .join("");
     tbody.querySelectorAll("tr[data-lead-id]").forEach(bindLeadRowEvents);
+    updateBulkBar();
   }
 
   function updateLeadRowInTable(lead) {
@@ -682,12 +950,45 @@
     var archived = !!lead.archived_at;
     if (archived !== state.archived) {
       removeLeadFromTable(lead.id);
+      delete state.selectedLeadIds[String(lead.id)];
+      updateBulkBar();
       return;
     }
     var row = els.leadsTableBody.querySelector("tr[data-lead-id=\"" + lead.id + "\"]");
     if (!row) return;
-    row.innerHTML = renderLeadRowCells(lead);
+    var duplicateCounts = buildDuplicateCounts(state.leadsData);
+    row.innerHTML = renderLeadRowCells(lead, duplicateCounts);
     bindLeadRowEvents(row);
+  }
+
+  function bulkPatchLeads(ids, body, successMessage) {
+    if (!ids.length) return Promise.resolve([]);
+    var promises = ids.map(function (id) {
+      return fetch(apiUrl("/leads/" + encodeURIComponent(id)), {
+        method: "PATCH",
+        headers: Object.assign({ "Content-Type": "application/json" }, authHeaders()),
+        body: JSON.stringify(body),
+      }).then(function (res) {
+        if (handleUnauthorized(res)) return null;
+        return res.json().then(function (data) {
+          return parseJsonError(res, data, "Ошибка сохранения");
+        });
+      });
+    });
+    return Promise.all(promises).then(function (results) {
+      var ok = results.filter(function (r) { return r; });
+      ok.forEach(function (lead) {
+        updateLeadInState(lead);
+        updateLeadRowInTable(lead);
+      });
+      if (ok.length) {
+        showToast(successMessage || "Обновлено: " + ok.length);
+        refreshNewLeadsBadge();
+        loadLeadStats();
+      }
+      clearBulkSelection();
+      return ok;
+    });
   }
 
   function renderPagination() {
@@ -769,7 +1070,10 @@
     container.innerHTML = notes
       .map(function (note) {
         var author = note.author && note.author.email ? note.author.email : "—";
-        var edited = note.updated_at ? " <span class=\"admin-notes__edited\">(изм.)</span>" : "";
+        var edited =
+          note.updated_at && note.created_at && note.updated_at !== note.created_at
+            ? " <span class=\"admin-notes__edited\">(изменено)</span>"
+            : "";
         var actions = "";
         if (canEditNote(note)) {
           actions =
@@ -799,7 +1103,8 @@
         if (next == null) return;
         next = next.trim();
         if (!next || next === current) return;
-        patchNote(leadId, noteId, next, messageEl).then(function () {
+        patchNote(leadId, noteId, next, messageEl).then(function (ok) {
+          if (!ok) return null;
           return loadLeadNotes(leadId);
         }).then(function (notesData) {
           if (notesData) renderNotesList(container, notesData, leadId, messageEl);
@@ -811,7 +1116,8 @@
       btn.addEventListener("click", function () {
         var noteId = btn.getAttribute("data-note-delete");
         if (!window.confirm("Удалить заметку?")) return;
-        deleteNote(leadId, noteId, messageEl).then(function () {
+        deleteNote(leadId, noteId, messageEl).then(function (ok) {
+          if (!ok) return null;
           return loadLeadNotes(leadId);
         }).then(function (notesData) {
           if (notesData) renderNotesList(container, notesData, leadId, messageEl);
@@ -835,7 +1141,8 @@
       })
       .then(function (data) {
         if (!data) return null;
-        setFormMessage(messageEl, "Заметка добавлена", false);
+        setFormMessage(messageEl, "", false);
+        showToast("Заметка добавлена");
         return data;
       })
       .catch(function (err) {
@@ -856,8 +1163,15 @@
           return parseJsonError(res, data, "Ошибка изменения заметки");
         });
       })
+      .then(function (data) {
+        if (!data) return null;
+        setFormMessage(messageEl, "", false);
+        showToast("Заметка изменена");
+        return data;
+      })
       .catch(function (err) {
         setFormMessage(messageEl, err.message || "Ошибка изменения заметки", true);
+        showToast(err.message || "Ошибка изменения заметки", true);
         return null;
       });
   }
@@ -870,11 +1184,13 @@
       .then(function (res) {
         if (handleUnauthorized(res)) return null;
         if (!res.ok) throw new Error("Ошибка удаления заметки");
-        setFormMessage(messageEl, "Заметка удалена", false);
+        setFormMessage(messageEl, "", false);
+        showToast("Заметка удалена");
         return true;
       })
       .catch(function (err) {
         setFormMessage(messageEl, err.message || "Ошибка удаления заметки", true);
+        showToast(err.message || "Ошибка удаления заметки", true);
         return null;
       });
   }
@@ -922,6 +1238,8 @@
         if (els.detailRestoreBtn) els.detailRestoreBtn.classList.toggle("admin-hidden", !state.currentLeadArchived);
 
         var payload = data.payload || {};
+        state.currentLeadPayload = payload;
+        renderQuickReplies(els.detailQuickReplies, payload);
         var payloadKeys = Object.keys(payload);
         if (payloadKeys.length && els.detailPayload) {
           var dl = "<dl>";
@@ -955,9 +1273,24 @@
       });
   }
 
+  function handleLeadStatusChange(leadId, selectEl, messageEl) {
+    if (!selectEl) return;
+    var nextStatus = selectEl.value;
+    var lead = getLeadFromState(leadId);
+    var prevStatus = lead ? lead.status : nextStatus;
+    if (!confirmStatusChange(nextStatus)) {
+      selectEl.value = prevStatus;
+      return;
+    }
+    patchLead(leadId, { status: nextStatus }, "Статус обновлён", messageEl);
+  }
+
   function patchLead(leadId, body, successMessage, messageEl) {
     var id = leadId || state.currentLeadId;
     if (!id) return Promise.resolve(null);
+    if (body && body.archived === true && !confirmArchiveAction(1)) {
+      return Promise.resolve(null);
+    }
     var msgEl = messageEl || els.detailMessage;
     setFormMessage(msgEl, "Сохранение…", false);
     return fetch(apiUrl("/leads/" + encodeURIComponent(id)), {
@@ -981,12 +1314,15 @@
           if (els.detailArchiveBtn) els.detailArchiveBtn.classList.toggle("admin-hidden", state.currentLeadArchived);
           if (els.detailRestoreBtn) els.detailRestoreBtn.classList.toggle("admin-hidden", !state.currentLeadArchived);
         }
-        setFormMessage(msgEl, successMessage || "Сохранено", false);
+        setFormMessage(msgEl, "", false);
+        showToast(successMessage || "Сохранено");
         refreshNewLeadsBadge();
+        loadLeadStats();
         return data;
       })
       .catch(function (err) {
         setFormMessage(msgEl, err.message || "Ошибка сохранения", true);
+        showToast(err.message || "Ошибка сохранения", true);
         return null;
       });
   }
@@ -1067,6 +1403,7 @@
 
         renderQuickModalNotesPreview(notes);
         if (els.quickModalNoteInput) els.quickModalNoteInput.value = "";
+        renderQuickReplies(els.quickModalQuickReplies, payload);
 
         els.quickModal.classList.remove("admin-hidden");
         els.quickModal.setAttribute("aria-hidden", "false");
@@ -1809,6 +2146,14 @@
     els.inviteMessage = document.getElementById("admin-invite-message");
 
     els.leadsTableBody = document.getElementById("admin-leads-tbody");
+    els.leadsStats = document.getElementById("admin-leads-stats");
+    els.bulkBar = document.getElementById("admin-bulk-bar");
+    els.bulkCount = document.getElementById("admin-bulk-count");
+    els.bulkStatus = document.getElementById("admin-bulk-status");
+    els.bulkApplyStatus = document.getElementById("admin-bulk-apply-status");
+    els.bulkArchive = document.getElementById("admin-bulk-archive");
+    els.bulkClear = document.getElementById("admin-bulk-clear");
+    els.leadsSelectAll = document.getElementById("admin-leads-select-all");
     els.leadsFilter = document.getElementById("admin-leads-filter");
     els.statusFilter = document.getElementById("admin-status-filter");
     els.leadsSearch = document.getElementById("admin-search");
@@ -1838,6 +2183,7 @@
     els.detailNoteInput = document.getElementById("admin-note-input");
     els.detailNoteAdd = document.getElementById("admin-note-add");
     els.detailNotesMessage = document.getElementById("admin-detail-notes-message");
+    els.detailQuickReplies = document.getElementById("admin-detail-quick-replies");
 
     els.quickModal = document.getElementById("admin-quick-modal");
     els.quickModalOverlay = document.getElementById("admin-quick-modal-overlay");
@@ -1852,6 +2198,7 @@
     els.quickModalNoteInput = document.getElementById("admin-quick-modal-note-input");
     els.quickModalNoteAdd = document.getElementById("admin-quick-modal-note-add");
     els.quickModalOpenDetail = document.getElementById("admin-quick-modal-open-full");
+    els.quickModalQuickReplies = document.getElementById("admin-quick-modal-quick-replies");
 
     els.logoutBtn = document.getElementById("admin-logout");
     els.emailList = document.getElementById("admin-email-list");
@@ -1990,14 +2337,48 @@
       });
     }
     if (els.leadsSearch) {
+      els.leadsSearch.addEventListener("input", scheduleLeadsSearch);
       els.leadsSearch.addEventListener("keydown", function (e) {
         if (e.key === "Enter") {
           e.preventDefault();
+          if (state.searchDebounceTimer) window.clearTimeout(state.searchDebounceTimer);
           state.q = els.leadsSearch.value.trim();
           state.offset = 0;
           loadLeads();
         }
       });
+    }
+
+    if (els.leadsSelectAll) {
+      els.leadsSelectAll.addEventListener("change", function () {
+        var checked = els.leadsSelectAll.checked;
+        if (!els.leadsTableBody) return;
+        els.leadsTableBody.querySelectorAll("[data-lead-select]").forEach(function (cb) {
+          cb.checked = checked;
+          toggleLeadSelection(cb.getAttribute("data-lead-select"), checked);
+        });
+      });
+    }
+
+    if (els.bulkApplyStatus) {
+      els.bulkApplyStatus.addEventListener("click", function () {
+        var ids = getSelectedLeadIds();
+        if (!ids.length) return;
+        var status = els.bulkStatus ? els.bulkStatus.value : "new";
+        if (!confirmStatusChange(status)) return;
+        bulkPatchLeads(ids, { status: status }, "Статус обновлён для " + ids.length);
+      });
+    }
+    if (els.bulkArchive) {
+      els.bulkArchive.addEventListener("click", function () {
+        var ids = getSelectedLeadIds();
+        if (!ids.length) return;
+        if (!confirmArchiveAction(ids.length)) return;
+        bulkPatchLeads(ids, { archived: true }, ids.length + " заявок в архиве");
+      });
+    }
+    if (els.bulkClear) {
+      els.bulkClear.addEventListener("click", clearBulkSelection);
     }
 
     if (els.tabActive) {
@@ -2065,7 +2446,7 @@
     }
     if (els.detailStatus) {
       els.detailStatus.addEventListener("change", function () {
-        patchLead(state.currentLeadId, { status: els.detailStatus.value }, "Статус обновлён");
+        handleLeadStatusChange(state.currentLeadId, els.detailStatus, els.detailMessage);
       });
     }
     if (els.detailArchiveBtn) {
@@ -2101,7 +2482,7 @@
     if (els.quickModalStatus) {
       els.quickModalStatus.addEventListener("change", function () {
         if (!state.quickEditLeadId) return;
-        patchLead(state.quickEditLeadId, { status: els.quickModalStatus.value }, "Сохранено", els.quickModalMessage);
+        handleLeadStatusChange(state.quickEditLeadId, els.quickModalStatus, els.quickModalMessage);
       });
     }
     if (els.quickModalArchiveBtn) {

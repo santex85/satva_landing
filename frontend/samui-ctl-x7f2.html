@@ -6,7 +6,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Админка — Satva</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="css/admin.css?v=10">
+    <link rel="stylesheet" href="css/admin.css?v=12">
 </head>
 <body class="admin-page">
     <div class="admin-app">
@@ -122,6 +122,23 @@
                         </div>
                     </header>
 
+                    <div id="admin-leads-stats" class="admin-leads-stats" aria-live="polite"></div>
+
+                    <div id="admin-bulk-bar" class="admin-bulk-bar admin-hidden" role="region" aria-label="Массовые действия">
+                        <span id="admin-bulk-count" class="admin-bulk-bar__count">0 выбрано</span>
+                        <select id="admin-bulk-status" class="admin-select admin-select--compact" aria-label="Статус для выбранных">
+                            <option value="new">Новый</option>
+                            <option value="in_progress">В работе</option>
+                            <option value="contacted">Связались</option>
+                            <option value="booked">Забронировано</option>
+                            <option value="cancelled">Отмена</option>
+                            <option value="spam">Спам</option>
+                        </select>
+                        <button type="button" id="admin-bulk-apply-status" class="admin-btn admin-btn--secondary admin-btn--small">Применить статус</button>
+                        <button type="button" id="admin-bulk-archive" class="admin-btn admin-btn--ghost admin-btn--small">В архив</button>
+                        <button type="button" id="admin-bulk-clear" class="admin-btn admin-btn--ghost admin-btn--small">Снять выбор</button>
+                    </div>
+
                     <div class="admin-panel admin-filters-panel">
                         <h2 class="admin-panel__title">Фильтры</h2>
                         <div class="admin-archive-tabs" role="tablist" aria-label="Активные или архив">
@@ -176,8 +193,9 @@
 
                     <div class="admin-panel admin-table-panel">
                         <div class="admin-table-wrap">
-                            <table class="admin-table" role="grid" aria-label="Список заявок">
+                            <table class="admin-table admin-table--leads" role="grid" aria-label="Список заявок">
                                 <colgroup>
+                                    <col class="admin-table__col-check">
                                     <col class="admin-table__col-date">
                                     <col class="admin-table__col-type">
                                     <col class="admin-table__col-status">
@@ -187,6 +205,10 @@
                                 </colgroup>
                                 <thead>
                                     <tr>
+                                        <th scope="col" class="admin-table__th-check">
+                                            <label class="visually-hidden" for="admin-leads-select-all">Выбрать все</label>
+                                            <input type="checkbox" id="admin-leads-select-all" class="admin-table__checkbox" aria-label="Выбрать все заявки на странице">
+                                        </th>
                                         <th scope="col">Дата</th>
                                         <th scope="col">Тип</th>
                                         <th scope="col">Статус</th>
@@ -196,7 +218,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="admin-leads-tbody">
-                                    <tr><td colspan="6" class="admin-table__empty">Загрузка…</td></tr>
+                                    <tr><td colspan="7" class="admin-table__empty">Загрузка…</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -243,6 +265,7 @@
                             </div>
                             <div id="admin-detail-message" class="form-message" role="alert" aria-live="polite"></div>
                         </div>
+                        <div id="admin-detail-quick-replies" class="admin-quick-replies admin-hidden" aria-label="Быстрые ответы"></div>
                     </div>
 
                     <div class="admin-panel admin-detail-section">
@@ -305,7 +328,7 @@
                                 <span class="admin-analytics-card__value" id="admin-analytics-leads-count">—</span>
                             </div>
                             <div class="admin-analytics-card">
-                                <span class="admin-analytics-card__label">Конверсия</span>
+                                <span class="admin-analytics-card__label">Конверсия <span class="admin-analytics-card__hint" title="Оценка: заявки с сайта / визиты Umami">ⓘ</span></span>
                                 <span class="admin-analytics-card__value" id="admin-analytics-conversion-rate">—</span>
                             </div>
                         </div>
@@ -543,6 +566,7 @@
                     <button type="button" id="admin-quick-modal-restore" class="admin-btn admin-btn--ghost admin-btn--small admin-hidden">Восстановить</button>
                 </div>
                 <div id="admin-quick-modal-notes" class="admin-quick-modal__notes">
+                    <div id="admin-quick-modal-quick-replies" class="admin-quick-replies admin-hidden" aria-label="Быстрые ответы"></div>
                     <h3 class="admin-quick-modal__notes-title">Заметки</h3>
                     <p id="admin-quick-modal-notes-preview" class="admin-quick-modal__notes-preview"></p>
                     <label for="admin-quick-modal-note-input" class="visually-hidden">Быстрая заметка</label>
@@ -557,6 +581,8 @@
         </div>
     </div>
 
-    <script src="js/admin.js?v=10"></script>
+    <div id="admin-toast-container" class="admin-toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="js/admin.js?v=12"></script>
 </body>
 </html>

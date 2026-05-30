@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from app.api.deps import get_current_user
 from app.core.database import get_db
 from app.models import AdminUser
-from app.services.leads_query import count_leads, get_leads_by_day
+from app.services.leads_query import WEB_FORM_SOURCES, count_leads, get_leads_by_day
 from app.services.umami import get_analytics_summary
 
 router = APIRouter()
@@ -35,9 +35,10 @@ def analytics_summary(
         created_after=start,
         created_before=end,
         q_text=None,
+        source_in=WEB_FORM_SOURCES,
     )
     visits = summary.get("visits") or 0
-    conversion = round((leads_count / visits) * 100, 1) if visits else 0.0
+    conversion = min(round((leads_count / visits) * 100, 1), 100.0) if visits else 0.0
     summary["leads_count"] = leads_count
     summary["conversion_rate"] = conversion
     summary["leads_by_day"] = get_leads_by_day(db, start, end)

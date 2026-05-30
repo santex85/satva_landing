@@ -9,7 +9,7 @@ from app.api.deps import get_current_user
 from app.models import Lead, AdminUser
 from app.schemas.leads import LeadOut, LeadDetailOut, LeadUpdate
 from app.services.audit import log_audit
-from app.services.leads_query import apply_lead_filters, count_leads, leads_to_csv
+from app.services.leads_query import apply_lead_filters, count_leads, get_lead_stats, leads_to_csv
 
 router = APIRouter()
 
@@ -30,6 +30,21 @@ def _build_filters(
         "created_before": created_before,
         "q_text": q_text,
     }
+
+
+@router.get("/leads/stats")
+def lead_stats(
+    db: Session = Depends(get_db),
+    _: AdminUser = Depends(get_current_user),
+    type_filter: str | None = Query(None, alias="type"),
+    archived: bool = Query(False, description="true — только архив, false — только активные"),
+    q: str | None = Query(None, description="Поиск по имени/телефону/email"),
+    created_after: datetime | None = Query(None),
+    created_before: datetime | None = Query(None),
+):
+    filters = _build_filters(type_filter, None, archived, created_after, created_before, q)
+    filters.pop("status", None)
+    return get_lead_stats(db, **filters)
 
 
 @router.get("/leads", response_model=list[LeadOut])
