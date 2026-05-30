@@ -31,14 +31,16 @@
 
     <link rel="preconnect" href="https://challenges.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://embed.tawk.to" crossorigin>
+    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
     <link rel="dns-prefetch" href="https://challenges.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cloud.umami.is">
 
     <!-- Preload hero (LCP) — WebP -->
     <link rel="preload" as="image" href="/img/yoga_tour/hero_sunset@1x.webp" type="image/webp">
 
-    <link rel="stylesheet" href="/css/yoga.css">
+    <link rel="stylesheet" href="/css/yoga.css?v=5">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
-    <script defer src="/js/yoga.js?v=4"></script>
+    <script defer src="/js/yoga.js?v=5"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
 
     <!-- Structured Data: LodgingBusiness (расширенная карточка) -->
@@ -132,7 +134,7 @@
     <header id="yogaHeader" class="yoga-header">
         <div class="yoga-header__inner">
             <a href="#yogaHero" class="yoga-header__logo" aria-label="Satva Samui Retreat Hotel">
-                <img src="/img/satva-logo.png" alt="Satva Samui Retreat Hotel" width="72" height="48">
+                <picture><source type="image/webp" srcset="/img/satva-logo.webp"><img src="/img/satva-logo.png" alt="Satva Samui Retreat Hotel" width="72" height="48"></picture>
             </a>
             <a href="#yogaHero" class="yoga-header__slogan" aria-label="Satva Samui — Yoga Retreat">
                 <span class="yoga-header__slogan-title">Satva Samui <span>|</span> Yoga Retreat</span>
@@ -174,7 +176,7 @@
                 <span class="yoga-hero__price-note">per person, double Standard Room</span>
             </div>
             <div class="yoga-hero__logo yoga-fade-in">
-                <img src="/img/satva-logo.png" alt="Satva Samui Retreat Hotel" width="180" height="120">
+                <picture><source type="image/webp" srcset="/img/satva-logo.webp"><img src="/img/satva-logo.png" alt="Satva Samui Retreat Hotel" width="180" height="120"></picture>
             </div>
             <ul class="yoga-hero__subtitle yoga-fade-in">
                 <li>Sunrise &amp; Sunset Yoga</li>
@@ -297,10 +299,10 @@
             <div class="yoga-beach__block yoga-fade-in">
                 <div class="yoga-beach__photo">
                     <picture>
-                        <source type="image/webp" srcset="/img/yoga_tour/beach_day.webp">
+                        <source type="image/webp" srcset="/img/yoga_tour/beach_day-800.webp 800w, /img/yoga_tour/beach_day-1200.webp 1200w, /img/yoga_tour/beach_day-1600.webp 1600w" sizes="(max-width: 767px) 100vw, 560px">
                         <img src="/img/yoga_tour/beach_day.webp"
                              alt="Lipa Noi Beach on Koh Samui — Satva Samui beachfront retreat"
-                             loading="lazy" width="2820" height="2068" decoding="async">
+                             loading="lazy" width="1600" height="1170" decoding="async">
                     </picture>
                 </div>
                 <div class="yoga-beach__text">
@@ -393,22 +395,22 @@
                                     <div class="yoga-rooms-gallery__stage" role="region" aria-roledescription="gallery" aria-labelledby="yogaRoomsSlide0Title" tabindex="0">
                                         <div class="yoga-rooms-gallery__panes">
                                             <div class="yoga-rooms-gallery__pane is-active" data-gallery-pane aria-hidden="false" data-photo-index="1">
-                                                <img src="/img/yoga_tour/rooms_standard/01.png" alt="Standard Room interior with bed" width="1920" height="1080" decoding="async" fetchpriority="high">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard/01.webp"><img src="/img/yoga_tour/rooms_standard/01.png" alt="Standard Room interior with bed" width="1920" height="1080" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="2">
-                                                <img src="/img/yoga_tour/rooms_standard/02.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard/02.webp"><img src="/img/yoga_tour/rooms_standard/02.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="3">
-                                                <img src="/img/yoga_tour/rooms_standard/03.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard/03.webp"><img src="/img/yoga_tour/rooms_standard/03.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="4">
-                                                <img src="/img/yoga_tour/rooms_standard/04.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard/04.webp"><img src="/img/yoga_tour/rooms_standard/04.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="5">
-                                                <img src="/img/yoga_tour/rooms_standard/05.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard/05.webp"><img src="/img/yoga_tour/rooms_standard/05.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="6">
-                                                <img src="/img/yoga_tour/rooms_standard/06.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard/06.webp"><img src="/img/yoga_tour/rooms_standard/06.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                         </div>
                                     </div>
@@ -418,12 +420,12 @@
                                     </div>
                                 </div>
                                 <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Photos: Standard Room">
-                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Standard Room, photo 1 of 6"><img src="/img/yoga_tour/rooms_standard/01.png" alt="" width="104" height="72" decoding="async" fetchpriority="high"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Room, photo 2 of 6"><img src="/img/yoga_tour/rooms_standard/02.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Room, photo 3 of 6"><img src="/img/yoga_tour/rooms_standard/03.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Room, photo 4 of 6"><img src="/img/yoga_tour/rooms_standard/04.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Room, photo 5 of 6"><img src="/img/yoga_tour/rooms_standard/05.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Room, photo 6 of 6"><img src="/img/yoga_tour/rooms_standard/06.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Standard Room, photo 1 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard/01.webp"><img src="/img/yoga_tour/rooms_standard/01.png" alt="" width="104" height="72" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Room, photo 2 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard/02.webp"><img src="/img/yoga_tour/rooms_standard/02.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Room, photo 3 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard/03.webp"><img src="/img/yoga_tour/rooms_standard/03.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Room, photo 4 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard/04.webp"><img src="/img/yoga_tour/rooms_standard/04.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Room, photo 5 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard/05.webp"><img src="/img/yoga_tour/rooms_standard/05.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Room, photo 6 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard/06.webp"><img src="/img/yoga_tour/rooms_standard/06.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
                                 </div>
                             </div>
                             <div class="yoga-rooms-carousel__body">
@@ -442,16 +444,16 @@
                                     <div class="yoga-rooms-gallery__stage" role="region" aria-roledescription="gallery" aria-labelledby="yogaRoomsSlide1Title" tabindex="0">
                                         <div class="yoga-rooms-gallery__panes">
                                             <div class="yoga-rooms-gallery__pane is-active" data-gallery-pane aria-hidden="false" data-photo-index="1">
-                                                <img src="/img/yoga_tour/rooms_standard_seaview/01.png" alt="Standard Sea View Room with terrace and ocean view" width="1920" height="1080" decoding="async" fetchpriority="high">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard_seaview/01.webp"><img src="/img/yoga_tour/rooms_standard_seaview/01.png" alt="Standard Sea View Room with terrace and ocean view" width="1920" height="1080" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="2">
-                                                <img src="/img/yoga_tour/rooms_standard_seaview/02.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard_seaview/02.webp"><img src="/img/yoga_tour/rooms_standard_seaview/02.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="3">
-                                                <img src="/img/yoga_tour/rooms_standard_seaview/03.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard_seaview/03.webp"><img src="/img/yoga_tour/rooms_standard_seaview/03.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="4">
-                                                <img src="/img/yoga_tour/rooms_standard_seaview/04.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard_seaview/04.webp"><img src="/img/yoga_tour/rooms_standard_seaview/04.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                         </div>
                                     </div>
@@ -461,10 +463,10 @@
                                     </div>
                                 </div>
                                 <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Photos: Standard Sea View Room">
-                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Standard Sea View Room, photo 1 of 4"><img src="/img/yoga_tour/rooms_standard_seaview/01.png" alt="" width="104" height="72" decoding="async" fetchpriority="high"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Sea View Room, photo 2 of 4"><img src="/img/yoga_tour/rooms_standard_seaview/02.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Sea View Room, photo 3 of 4"><img src="/img/yoga_tour/rooms_standard_seaview/03.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Sea View Room, photo 4 of 4"><img src="/img/yoga_tour/rooms_standard_seaview/04.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Standard Sea View Room, photo 1 of 4"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard_seaview/01.webp"><img src="/img/yoga_tour/rooms_standard_seaview/01.png" alt="" width="104" height="72" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Sea View Room, photo 2 of 4"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard_seaview/02.webp"><img src="/img/yoga_tour/rooms_standard_seaview/02.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Sea View Room, photo 3 of 4"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard_seaview/03.webp"><img src="/img/yoga_tour/rooms_standard_seaview/03.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Sea View Room, photo 4 of 4"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_standard_seaview/04.webp"><img src="/img/yoga_tour/rooms_standard_seaview/04.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
                                 </div>
                             </div>
                             <div class="yoga-rooms-carousel__body">
@@ -484,25 +486,25 @@
                                     <div class="yoga-rooms-gallery__stage" role="region" aria-roledescription="gallery" aria-labelledby="yogaRoomsSlide2Title" tabindex="0">
                                         <div class="yoga-rooms-gallery__panes">
                                             <div class="yoga-rooms-gallery__pane is-active" data-gallery-pane aria-hidden="false" data-photo-index="1">
-                                                <img src="/img/yoga_tour/rooms_cottage_standard/01.png" alt="Standard Garden Bungalow exterior" width="1920" height="1080" decoding="async" fetchpriority="high">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage_standard/01.webp"><img src="/img/yoga_tour/rooms_cottage_standard/01.png" alt="Standard Garden Bungalow exterior" width="1920" height="1080" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="2">
-                                                <img src="/img/yoga_tour/rooms_cottage_standard/02.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage_standard/02.webp"><img src="/img/yoga_tour/rooms_cottage_standard/02.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="3">
-                                                <img src="/img/yoga_tour/rooms_cottage_standard/03.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage_standard/03.webp"><img src="/img/yoga_tour/rooms_cottage_standard/03.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="4">
-                                                <img src="/img/yoga_tour/rooms_cottage_standard/04.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage_standard/04.webp"><img src="/img/yoga_tour/rooms_cottage_standard/04.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="5">
-                                                <img src="/img/yoga_tour/rooms_cottage_standard/05.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage_standard/05.webp"><img src="/img/yoga_tour/rooms_cottage_standard/05.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="6">
-                                                <img src="/img/yoga_tour/rooms_cottage_standard/06.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage_standard/06.webp"><img src="/img/yoga_tour/rooms_cottage_standard/06.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="7">
-                                                <img src="/img/yoga_tour/rooms_cottage_standard/07.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage_standard/07.webp"><img src="/img/yoga_tour/rooms_cottage_standard/07.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                         </div>
                                     </div>
@@ -512,13 +514,13 @@
                                     </div>
                                 </div>
                                 <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Photos: Standard Garden Bungalow">
-                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Standard Garden Bungalow, photo 1 of 7"><img src="/img/yoga_tour/rooms_cottage_standard/01.png" alt="" width="104" height="72" decoding="async" fetchpriority="high"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Garden Bungalow, photo 2 of 7"><img src="/img/yoga_tour/rooms_cottage_standard/02.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Garden Bungalow, photo 3 of 7"><img src="/img/yoga_tour/rooms_cottage_standard/03.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Garden Bungalow, photo 4 of 7"><img src="/img/yoga_tour/rooms_cottage_standard/04.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Garden Bungalow, photo 5 of 7"><img src="/img/yoga_tour/rooms_cottage_standard/05.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Garden Bungalow, photo 6 of 7"><img src="/img/yoga_tour/rooms_cottage_standard/06.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Garden Bungalow, photo 7 of 7"><img src="/img/yoga_tour/rooms_cottage_standard/07.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Standard Garden Bungalow, photo 1 of 7"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage_standard/01.webp"><img src="/img/yoga_tour/rooms_cottage_standard/01.png" alt="" width="104" height="72" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Garden Bungalow, photo 2 of 7"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage_standard/02.webp"><img src="/img/yoga_tour/rooms_cottage_standard/02.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Garden Bungalow, photo 3 of 7"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage_standard/03.webp"><img src="/img/yoga_tour/rooms_cottage_standard/03.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Garden Bungalow, photo 4 of 7"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage_standard/04.webp"><img src="/img/yoga_tour/rooms_cottage_standard/04.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Garden Bungalow, photo 5 of 7"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage_standard/05.webp"><img src="/img/yoga_tour/rooms_cottage_standard/05.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Garden Bungalow, photo 6 of 7"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage_standard/06.webp"><img src="/img/yoga_tour/rooms_cottage_standard/06.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Standard Garden Bungalow, photo 7 of 7"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage_standard/07.webp"><img src="/img/yoga_tour/rooms_cottage_standard/07.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
                                 </div>
                             </div>
                             <div class="yoga-rooms-carousel__body">
@@ -537,19 +539,19 @@
                                     <div class="yoga-rooms-gallery__stage" role="region" aria-roledescription="gallery" aria-labelledby="yogaRoomsSlide3Title" tabindex="0">
                                         <div class="yoga-rooms-gallery__panes">
                                             <div class="yoga-rooms-gallery__pane is-active" data-gallery-pane aria-hidden="false" data-photo-index="1">
-                                                <img src="/img/yoga_tour/rooms_family_villa/02.png" alt="Family Villa with pool" width="1920" height="1080" decoding="async" fetchpriority="high">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_family_villa/02.webp"><img src="/img/yoga_tour/rooms_family_villa/02.png" alt="Family Villa with pool" width="1920" height="1080" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="2">
-                                                <img src="/img/yoga_tour/rooms_family_villa/03.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_family_villa/03.webp"><img src="/img/yoga_tour/rooms_family_villa/03.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="3">
-                                                <img src="/img/yoga_tour/rooms_family_villa/04.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_family_villa/04.webp"><img src="/img/yoga_tour/rooms_family_villa/04.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="4">
-                                                <img src="/img/yoga_tour/rooms_family_villa/05.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_family_villa/05.webp"><img src="/img/yoga_tour/rooms_family_villa/05.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="5">
-                                                <img src="/img/yoga_tour/rooms_family_villa/06.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_family_villa/06.webp"><img src="/img/yoga_tour/rooms_family_villa/06.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                         </div>
                                     </div>
@@ -559,11 +561,11 @@
                                     </div>
                                 </div>
                                 <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Photos: Family Villa">
-                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Family Villa, photo 1 of 5"><img src="/img/yoga_tour/rooms_family_villa/02.png" alt="" width="104" height="72" decoding="async" fetchpriority="high"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Family Villa, photo 2 of 5"><img src="/img/yoga_tour/rooms_family_villa/03.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Family Villa, photo 3 of 5"><img src="/img/yoga_tour/rooms_family_villa/04.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Family Villa, photo 4 of 5"><img src="/img/yoga_tour/rooms_family_villa/05.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Family Villa, photo 5 of 5"><img src="/img/yoga_tour/rooms_family_villa/06.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Family Villa, photo 1 of 5"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_family_villa/02.webp"><img src="/img/yoga_tour/rooms_family_villa/02.png" alt="" width="104" height="72" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Family Villa, photo 2 of 5"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_family_villa/03.webp"><img src="/img/yoga_tour/rooms_family_villa/03.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Family Villa, photo 3 of 5"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_family_villa/04.webp"><img src="/img/yoga_tour/rooms_family_villa/04.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Family Villa, photo 4 of 5"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_family_villa/05.webp"><img src="/img/yoga_tour/rooms_family_villa/05.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Family Villa, photo 5 of 5"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_family_villa/06.webp"><img src="/img/yoga_tour/rooms_family_villa/06.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
                                 </div>
                             </div>
                             <div class="yoga-rooms-carousel__body">
@@ -585,22 +587,22 @@
                                     <div class="yoga-rooms-gallery__stage" role="region" aria-roledescription="gallery" aria-labelledby="yogaRoomsSlide4Title" tabindex="0">
                                         <div class="yoga-rooms-gallery__panes">
                                             <div class="yoga-rooms-gallery__pane is-active" data-gallery-pane aria-hidden="false" data-photo-index="1">
-                                                <img src="/img/yoga_tour/rooms_cottage/01.png" alt="Cottage living and bedroom area" width="1920" height="1080" decoding="async" fetchpriority="high">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage/01.webp"><img src="/img/yoga_tour/rooms_cottage/01.png" alt="Cottage living and bedroom area" width="1920" height="1080" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="2">
-                                                <img src="/img/yoga_tour/rooms_cottage/02.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage/02.webp"><img src="/img/yoga_tour/rooms_cottage/02.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="3">
-                                                <img src="/img/yoga_tour/rooms_cottage/03.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage/03.webp"><img src="/img/yoga_tour/rooms_cottage/03.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="4">
-                                                <img src="/img/yoga_tour/rooms_cottage/04.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage/04.webp"><img src="/img/yoga_tour/rooms_cottage/04.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="5">
-                                                <img src="/img/yoga_tour/rooms_cottage/05.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage/05.webp"><img src="/img/yoga_tour/rooms_cottage/05.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="6">
-                                                <img src="/img/yoga_tour/rooms_cottage/06.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage/06.webp"><img src="/img/yoga_tour/rooms_cottage/06.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                         </div>
                                     </div>
@@ -610,12 +612,12 @@
                                     </div>
                                 </div>
                                 <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Photos: Cottage">
-                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Cottage, photo 1 of 6"><img src="/img/yoga_tour/rooms_cottage/01.png" alt="" width="104" height="72" decoding="async" fetchpriority="high"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Cottage, photo 2 of 6"><img src="/img/yoga_tour/rooms_cottage/02.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Cottage, photo 3 of 6"><img src="/img/yoga_tour/rooms_cottage/03.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Cottage, photo 4 of 6"><img src="/img/yoga_tour/rooms_cottage/04.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Cottage, photo 5 of 6"><img src="/img/yoga_tour/rooms_cottage/05.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Cottage, photo 6 of 6"><img src="/img/yoga_tour/rooms_cottage/06.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Cottage, photo 1 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage/01.webp"><img src="/img/yoga_tour/rooms_cottage/01.png" alt="" width="104" height="72" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Cottage, photo 2 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage/02.webp"><img src="/img/yoga_tour/rooms_cottage/02.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Cottage, photo 3 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage/03.webp"><img src="/img/yoga_tour/rooms_cottage/03.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Cottage, photo 4 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage/04.webp"><img src="/img/yoga_tour/rooms_cottage/04.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Cottage, photo 5 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage/05.webp"><img src="/img/yoga_tour/rooms_cottage/05.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Cottage, photo 6 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_cottage/06.webp"><img src="/img/yoga_tour/rooms_cottage/06.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
                                 </div>
                             </div>
                             <div class="yoga-rooms-carousel__body">
@@ -635,22 +637,22 @@
                                     <div class="yoga-rooms-gallery__stage" role="region" aria-roledescription="gallery" aria-labelledby="yogaRoomsSlide5Title" tabindex="0">
                                         <div class="yoga-rooms-gallery__panes">
                                             <div class="yoga-rooms-gallery__pane is-active" data-gallery-pane aria-hidden="false" data-photo-index="1">
-                                                <img src="/img/yoga_tour/rooms_bungalow/01.png" alt="Bungalow with thatched roof" width="1920" height="1080" decoding="async" fetchpriority="high">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_bungalow/01.webp"><img src="/img/yoga_tour/rooms_bungalow/01.png" alt="Bungalow with thatched roof" width="1920" height="1080" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="2">
-                                                <img src="/img/yoga_tour/rooms_bungalow/02.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_bungalow/02.webp"><img src="/img/yoga_tour/rooms_bungalow/02.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="3">
-                                                <img src="/img/yoga_tour/rooms_bungalow/03.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_bungalow/03.webp"><img src="/img/yoga_tour/rooms_bungalow/03.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="4">
-                                                <img src="/img/yoga_tour/rooms_bungalow/04.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_bungalow/04.webp"><img src="/img/yoga_tour/rooms_bungalow/04.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="5">
-                                                <img src="/img/yoga_tour/rooms_bungalow/05.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_bungalow/05.webp"><img src="/img/yoga_tour/rooms_bungalow/05.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                             <div class="yoga-rooms-gallery__pane" data-gallery-pane aria-hidden="true" data-photo-index="6">
-                                                <img src="/img/yoga_tour/rooms_bungalow/06.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+                                                <picture><source type="image/webp" srcset="/img/yoga_tour/rooms_bungalow/06.webp"><img src="/img/yoga_tour/rooms_bungalow/06.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture>
                                             </div>
                                         </div>
                                     </div>
@@ -660,12 +662,12 @@
                                     </div>
                                 </div>
                                 <div class="yoga-rooms-gallery__thumbs" role="tablist" aria-label="Photos: Bungalow">
-                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Bungalow, photo 1 of 6"><img src="/img/yoga_tour/rooms_bungalow/01.png" alt="" width="104" height="72" decoding="async" fetchpriority="high"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Bungalow, photo 2 of 6"><img src="/img/yoga_tour/rooms_bungalow/02.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Bungalow, photo 3 of 6"><img src="/img/yoga_tour/rooms_bungalow/03.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Bungalow, photo 4 of 6"><img src="/img/yoga_tour/rooms_bungalow/04.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Bungalow, photo 5 of 6"><img src="/img/yoga_tour/rooms_bungalow/05.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
-                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Bungalow, photo 6 of 6"><img src="/img/yoga_tour/rooms_bungalow/06.png" alt="" width="104" height="72" loading="lazy" decoding="async"></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb is-active" role="tab" aria-selected="true" data-gallery-thumb aria-label="Bungalow, photo 1 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_bungalow/01.webp"><img src="/img/yoga_tour/rooms_bungalow/01.png" alt="" width="104" height="72" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Bungalow, photo 2 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_bungalow/02.webp"><img src="/img/yoga_tour/rooms_bungalow/02.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Bungalow, photo 3 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_bungalow/03.webp"><img src="/img/yoga_tour/rooms_bungalow/03.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Bungalow, photo 4 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_bungalow/04.webp"><img src="/img/yoga_tour/rooms_bungalow/04.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Bungalow, photo 5 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_bungalow/05.webp"><img src="/img/yoga_tour/rooms_bungalow/05.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
+                                    <button type="button" class="yoga-rooms-gallery__thumb" role="tab" aria-selected="false" tabindex="-1" data-gallery-thumb aria-label="Bungalow, photo 6 of 6"><picture><source type="image/webp" srcset="/img/yoga_tour/rooms_bungalow/06.webp"><img src="/img/yoga_tour/rooms_bungalow/06.png" alt="" width="104" height="72" loading="lazy" decoding="async"></picture></button>
                                 </div>
                             </div>
                             <div class="yoga-rooms-carousel__body">
@@ -1941,20 +1943,7 @@
         </div>
     </div>
 
-    <!-- Tawk.to — онлайн-чат (тот же виджет, что на главной) -->
-    <script>
-        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-        Tawk_API.onLoad = function () {
-            Tawk_API.minimize();
-        };
-        (function () {
-            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = "https://embed.tawk.to/69c64bd90c50e01c367c2f38/1jkn9gj36";
-            s1.charset = "UTF-8";
-            s1.setAttribute("crossorigin", "*");
-            s0.parentNode.insertBefore(s1, s0);
-        })();
-    </script>
+    <!-- Tawk.to — отложенная загрузка (pagespeed) -->
+    <script defer src="/js/tawk-deferred.js?v=1"></script>
 </body>
 </html>
