@@ -1780,11 +1780,11 @@
           : "—";
         return (
           "<tr>" +
-          "<td>" + linkEmail(user.email) + "</td>" +
-          "<td>" + roleSelect + "</td>" +
-          "<td>" + escapeHtml(status) + "</td>" +
-          "<td>" + formatDate(user.created_at) + "</td>" +
-          "<td>" + deactivateBtn + "</td>" +
+          "<td data-label=\"Email\">" + linkEmail(user.email) + "</td>" +
+          "<td data-label=\"Роль\">" + roleSelect + "</td>" +
+          "<td data-label=\"Статус\">" + escapeHtml(status) + "</td>" +
+          "<td data-label=\"Создан\">" + formatDate(user.created_at) + "</td>" +
+          "<td data-label=\"Действие\">" + deactivateBtn + "</td>" +
           "</tr>"
         );
       })

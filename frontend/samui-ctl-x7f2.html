@@ -6,7 +6,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Админка — Satva</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="css/admin.css?v=13">
+    <link rel="stylesheet" href="css/admin.css?v=14">
 </head>
 <body class="admin-page">
     <div class="admin-app">
@@ -192,8 +192,8 @@
                     </div>
 
                     <div class="admin-panel admin-table-panel">
-                        <div class="admin-table-wrap">
-                            <table class="admin-table admin-table--leads" role="grid" aria-label="Список заявок">
+                        <div class="admin-table-wrap admin-table--cards-wrap">
+                            <table class="admin-table admin-table--leads admin-table--cards" role="grid" aria-label="Список заявок">
                                 <colgroup>
                                     <col class="admin-table__col-check">
                                     <col class="admin-table__col-date">
@@ -445,8 +445,8 @@
 
                     <div class="admin-panel admin-users-panel">
                         <h2 class="admin-panel__title">Активные пользователи</h2>
-                        <div class="admin-table-wrap">
-                            <table class="admin-table admin-users-table" aria-label="Список пользователей">
+                        <div class="admin-table-wrap admin-table--cards-wrap">
+                            <table class="admin-table admin-users-table admin-table--cards" aria-label="Список пользователей">
                                 <thead>
                                     <tr>
                                         <th scope="col">Email</th>
@@ -583,6 +583,6 @@
 
     <div id="admin-toast-container" class="admin-toast-container" aria-live="polite" aria-atomic="true"></div>
 
-    <script src="js/admin.js?v=13"></script>
+    <script src="js/admin.js?v=14"></script>
 </body>
 </html>

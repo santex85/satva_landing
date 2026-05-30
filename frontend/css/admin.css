@@ -2052,37 +2052,37 @@ body.admin-logged-in #admin-invite.admin-login-view {
   cursor: help;
 }
 
-/* ── v3: Mobile lead cards ── */
+/* ── v3: Mobile table cards (leads, users) ── */
 @media (max-width: 767px) {
   body.admin-page.admin-logged-in {
     overflow-x: hidden;
   }
 
-  .admin-table-panel .admin-table-wrap {
+  .admin-table--cards-wrap {
     overflow-x: visible;
   }
 
-  .admin-table--leads {
+  .admin-table--cards {
     display: block;
     width: 100%;
     min-width: 0;
     table-layout: auto;
   }
 
-  .admin-table--leads colgroup {
+  .admin-table--cards colgroup {
     display: none;
   }
 
-  .admin-table--leads tbody {
+  .admin-table--cards tbody {
     display: block;
     width: 100%;
   }
 
-  .admin-table--leads thead {
+  .admin-table--cards thead {
     display: none;
   }
 
-  .admin-table--leads tbody tr {
+  .admin-table--cards tbody tr {
     display: block;
     margin-bottom: 0.75rem;
     padding: 0.85rem 1rem;
@@ -2092,11 +2092,11 @@ body.admin-logged-in #admin-invite.admin-login-view {
     box-shadow: var(--admin-shadow);
   }
 
-  .admin-table--leads tbody tr.admin-table-row--clickable:hover {
+  .admin-table--cards tbody tr.admin-table-row--clickable:hover {
     background: var(--admin-surface);
   }
 
-  .admin-table--leads tbody td {
+  .admin-table--cards tbody td {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -2106,7 +2106,7 @@ body.admin-logged-in #admin-invite.admin-login-view {
     text-align: right;
   }
 
-  .admin-table--leads tbody td::before {
+  .admin-table--cards tbody td::before {
     content: attr(data-label);
     flex: 0 0 38%;
     font-size: 0.75rem;
@@ -2117,31 +2117,31 @@ body.admin-logged-in #admin-invite.admin-login-view {
     letter-spacing: 0.02em;
   }
 
-  .admin-table--leads tbody td.admin-table__td-check {
+  .admin-table--cards tbody td.admin-table__td-check {
     justify-content: flex-start;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--admin-teal-border);
     margin-bottom: 0.25rem;
   }
 
-  .admin-table--leads tbody td.admin-table__td-check::before {
+  .admin-table--cards tbody td.admin-table__td-check::before {
     content: "Выбрать";
   }
 
-  .admin-table--leads tbody td[data-label="Действие"] {
+  .admin-table--cards tbody td[data-label="Действие"] {
     justify-content: stretch;
     padding-top: 0.5rem;
   }
 
-  .admin-table--leads tbody td[data-label="Действие"]::before {
+  .admin-table--cards tbody td[data-label="Действие"]::before {
     display: none;
   }
 
-  .admin-table--leads tbody td[data-label="Действие"] .admin-btn {
+  .admin-table--cards tbody td[data-label="Действие"] .admin-btn {
     width: 100%;
   }
 
-  .admin-table--leads .admin-table__empty {
+  .admin-table--cards .admin-table__empty {
     display: block;
     text-align: center;
   }
