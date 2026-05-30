@@ -515,6 +515,51 @@ def send_lead_confirmation(
         )
 
 
+def _build_invitation_html(*, invite_url: str, role_label: str, expires_str: str) -> str:
+    role_safe = escape(role_label)
+    expires_safe = escape(expires_str)
+    url_safe = escape(invite_url)
+    return f"""<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background:#f7f5f2;font-family:Montserrat,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#2D3436;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f7f5f2;padding:24px 12px;">
+    <tr><td align="center">
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:560px;background:#ffffff;border-radius:12px;overflow:hidden;">
+        <tr><td align="center" style="padding:24px 28px;background:#0F4C5C;">
+          <img src="{LOGO_URL}" alt="Satva Samui" width="180" height="120" style="display:block;max-width:180px;height:auto;border:0;">
+        </td></tr>
+        <tr><td style="padding:32px 28px 0;">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+        <tr><td style="font-size:18px;line-height:1.4;color:#0F4C5C;padding-bottom:12px;">
+          <strong>Приглашение в админ-панель</strong>
+        </td></tr>
+        <tr><td style="font-size:15px;line-height:1.65;padding-bottom:16px;">
+          Вас пригласили в админ-панель <strong>Satva Samui</strong> с ролью <strong>{role_safe}</strong>.
+        </td></tr>
+        <tr><td style="font-size:15px;line-height:1.65;padding-bottom:24px;">
+          Нажмите кнопку, чтобы задать пароль и войти в систему:
+        </td></tr>
+        <tr><td align="center" style="padding-bottom:24px;">
+          <a href="{url_safe}" style="display:inline-block;background:#0F4C5C;color:#ffffff;text-decoration:none;font-size:15px;font-weight:600;padding:14px 32px;border-radius:8px;">Принять приглашение</a>
+        </td></tr>
+        <tr><td style="font-size:13px;line-height:1.6;color:#636e72;padding-bottom:16px;">
+          Если кнопка не работает, скопируйте ссылку в браузер:<br>
+          <a href="{url_safe}" style="color:#0F4C5C;word-break:break-all;">{url_safe}</a>
+        </td></tr>
+        <tr><td style="font-size:13px;line-height:1.6;color:#636e72;border-top:1px solid #e8e4df;padding-top:16px;padding-bottom:28px;">
+          Ссылка действует до <strong>{expires_safe}</strong>.<br>
+          Если вы не ожидали это письмо — просто проигнорируйте его.
+        </td></tr>
+        </table>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>"""
+
+
 def send_admin_invitation(*, email: str, role: str, raw_token: str, expires_at: datetime) -> None:
     if not settings.RESEND_API_KEY or not settings.RESEND_FROM:
         logger.warning("Resend not configured, skipping invitation email")
@@ -533,6 +578,7 @@ def send_admin_invitation(*, email: str, role: str, raw_token: str, expires_at: 
         f"Ссылка действует до {expires_str}.\n"
         "Если вы не ожидали это письмо — просто проигнорируйте его."
     )
+    html = _build_invitation_html(invite_url=invite_url, role_label=role_label, expires_str=expires_str)
 
     resend.api_key = settings.RESEND_API_KEY
     try:
@@ -541,6 +587,7 @@ def send_admin_invitation(*, email: str, role: str, raw_token: str, expires_at: 
             "to": [email],
             "subject": subject,
             "text": text,
+            "html": html,
         })
         logger.info("Admin invitation email sent", extra={"email": email, "role": role})
     except Exception as e:
