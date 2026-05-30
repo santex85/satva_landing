@@ -2062,6 +2062,22 @@ body.admin-logged-in #admin-invite.admin-login-view {
     overflow-x: visible;
   }
 
+  .admin-table--leads {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    table-layout: auto;
+  }
+
+  .admin-table--leads colgroup {
+    display: none;
+  }
+
+  .admin-table--leads tbody {
+    display: block;
+    width: 100%;
+  }
+
   .admin-table--leads thead {
     display: none;
   }
