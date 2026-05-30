@@ -1130,15 +1130,24 @@ body.admin-logged-in .admin-login-view {
   }
 
   .admin-users-invite-form .admin-toolbar {
-    align-items: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.75rem 1rem;
+  }
+
+  .admin-users-invite-form .admin-toolbar__group {
+    flex: 1 1 12rem;
+    min-width: 0;
   }
 
   .admin-users-invite-form .admin-toolbar__group--actions {
-    align-self: stretch;
+    flex: 0 0 auto;
+    align-self: flex-end;
   }
 
   .admin-users-invite-form .admin-toolbar__group--actions .admin-btn {
-    width: 100%;
+    width: auto;
   }
 
   .admin-search-toolbar {
