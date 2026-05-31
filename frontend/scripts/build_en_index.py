@@ -205,6 +205,7 @@ REPLACEMENTS = [
     ('>Йога на рассвете и закате<', '>Sunrise &amp; Sunset Yoga<'),
     ('>Сбалансированное питание<', '>Nourishing Plant-Based Meals<'),
     ('>Индивидуальный план оздоровления<', '>Personalised Wellness Plan<'),
+    ('>Аюрведический расслабляющий массаж в подарок<', '>Complimentary Ayurvedic Relaxation Massage<'),
     ('>Оставить заявку на даты<', '>Book Your Retreat<'),
     ('>листать<', '>scroll<'),
     ('>Почему нам доверяют<', '>Why Guests Choose Satva Samui<'),
