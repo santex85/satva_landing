@@ -6,7 +6,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Админка — Satva</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="css/admin.css?v=16">
+    <link rel="stylesheet" href="css/admin.css?v=17">
 </head>
 <body class="admin-page">
     <div class="admin-app">
@@ -118,7 +118,7 @@
                     <header class="admin-page-header">
                         <div class="admin-page-header__text">
                             <h1 class="admin-page-heading">Заявки</h1>
-                            <p class="admin-page-subtitle">Все обращения с сайта</p>
+                            <p class="admin-page-subtitle">Русский и английский лендинг, партнёрские сайты (в разработке)</p>
                         </div>
                     </header>
 
@@ -141,6 +141,12 @@
 
                     <div class="admin-panel admin-filters-panel">
                         <h2 class="admin-panel__title">Фильтры</h2>
+                        <div class="admin-site-tabs" role="tablist" aria-label="Сайт-источник заявки">
+                            <button type="button" id="admin-site-all" class="admin-archive-tab admin-site-tab admin-site-tab--active" data-site="" role="tab" aria-selected="true">Все сайты</button>
+                            <button type="button" id="admin-site-ru" class="admin-archive-tab admin-site-tab" data-site="ru" role="tab" aria-selected="false">Русский сайт</button>
+                            <button type="button" id="admin-site-en" class="admin-archive-tab admin-site-tab" data-site="en" role="tab" aria-selected="false">English site</button>
+                            <button type="button" id="admin-site-partner" class="admin-archive-tab admin-site-tab admin-site-tab--dev" data-site="partner" role="tab" aria-selected="false" title="Интеграция партнёрских сайтов в разработке">Партнёры <span class="admin-site-tab__badge">скоро</span></button>
+                        </div>
                         <div class="admin-archive-tabs" role="tablist" aria-label="Активные или архив">
                             <button type="button" id="admin-tab-active" class="admin-archive-tab admin-archive-tab--active" role="tab" aria-selected="true">Активные</button>
                             <button type="button" id="admin-tab-archive" class="admin-archive-tab" role="tab" aria-selected="false">Архив</button>
@@ -338,9 +344,16 @@
                             <div id="admin-analytics-chart" class="admin-analytics-chart" role="img" aria-label="График заявок по дням"></div>
                         </div>
 
-                        <div class="admin-panel admin-analytics-top-pages">
-                            <h2 class="admin-panel__title">Топ страниц</h2>
-                            <div id="admin-analytics-top-pages" class="admin-analytics-top-list"></div>
+                        <div class="admin-analytics-top-grid">
+                            <div class="admin-panel admin-analytics-top-pages">
+                                <h2 class="admin-panel__title">Топ страниц</h2>
+                                <div id="admin-analytics-top-pages" class="admin-analytics-top-list"></div>
+                            </div>
+                            <div class="admin-panel admin-analytics-top-referrers">
+                                <h2 class="admin-panel__title">Источники перехода (referral)</h2>
+                                <p class="admin-panel__hint">Рейтинг по числу визитов из Umami за выбранный период</p>
+                                <div id="admin-analytics-top-referrers" class="admin-analytics-top-list"></div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -583,6 +596,6 @@
 
     <div id="admin-toast-container" class="admin-toast-container" aria-live="polite" aria-atomic="true"></div>
 
-    <script src="js/admin.js?v=14"></script>
+    <script src="js/admin.js?v=15"></script>
 </body>
 </html>

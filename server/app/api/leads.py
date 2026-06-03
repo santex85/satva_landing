@@ -21,6 +21,7 @@ def _build_filters(
     created_after: datetime | None,
     created_before: datetime | None,
     q_text: str | None,
+    site_channel: str | None = None,
 ) -> dict:
     return {
         "type_filter": type_filter,
@@ -29,6 +30,7 @@ def _build_filters(
         "created_after": created_after,
         "created_before": created_before,
         "q_text": q_text,
+        "site_channel": site_channel,
     }
 
 
@@ -41,8 +43,9 @@ def lead_stats(
     q: str | None = Query(None, description="Поиск по имени/телефону/email"),
     created_after: datetime | None = Query(None),
     created_before: datetime | None = Query(None),
+    site: str | None = Query(None, description="Канал: ru, en, partner"),
 ):
-    filters = _build_filters(type_filter, None, archived, created_after, created_before, q)
+    filters = _build_filters(type_filter, None, archived, created_after, created_before, q, site)
     filters.pop("status", None)
     return get_lead_stats(db, **filters)
 
@@ -60,8 +63,9 @@ def list_leads(
     q: str | None = Query(None, description="Поиск по имени/телефону/email"),
     created_after: datetime | None = Query(None),
     created_before: datetime | None = Query(None),
+    site: str | None = Query(None, description="Канал: ru, en, partner"),
 ):
-    filters = _build_filters(type_filter, status, archived, created_after, created_before, q)
+    filters = _build_filters(type_filter, status, archived, created_after, created_before, q, site)
     total = count_leads(db, **filters)
     response.headers["X-Total-Count"] = str(total)
 
@@ -81,8 +85,9 @@ def export_leads(
     q: str | None = Query(None),
     created_after: datetime | None = Query(None),
     created_before: datetime | None = Query(None),
+    site: str | None = Query(None, description="Канал: ru, en, partner"),
 ):
-    filters = _build_filters(type_filter, status, archived, created_after, created_before, q)
+    filters = _build_filters(type_filter, status, archived, created_after, created_before, q, site)
     qry = db.query(Lead).order_by(Lead.created_at.desc())
     qry = apply_lead_filters(qry, **filters)
     leads = qry.limit(10000).all()

@@ -2,12 +2,41 @@ import csv
 import io
 from datetime import datetime, timezone
 
-from sqlalchemy import or_, func
+from sqlalchemy import or_, func, not_
 from sqlalchemy.orm import Query, Session
 
 from app.models import Lead
 
 WEB_FORM_SOURCES = frozenset({"landing", "popup", "footer", "yoga-bridge"})
+
+# Каналы лендинга для фильтра в админке (site=ru|en|partner).
+SITE_CHANNEL_RU = "ru"
+SITE_CHANNEL_EN = "en"
+SITE_CHANNEL_PARTNER = "partner"
+VALID_SITE_CHANNELS = frozenset({SITE_CHANNEL_RU, SITE_CHANNEL_EN, SITE_CHANNEL_PARTNER})
+
+
+def _partner_lead_clause():
+    """Заявки с сайтов партнёров (префикс source или payload.site)."""
+    return or_(
+        Lead.source.ilike("partner%"),
+        Lead.payload["site"].astext == SITE_CHANNEL_PARTNER,
+    )
+
+
+def apply_site_channel_filter(q: Query, site_channel: str | None) -> Query:
+    if not site_channel or site_channel not in VALID_SITE_CHANNELS:
+        return q
+    partner = _partner_lead_clause()
+    if site_channel == SITE_CHANNEL_PARTNER:
+        return q.filter(partner)
+    if site_channel == SITE_CHANNEL_EN:
+        return q.filter(Lead.payload["lang"].astext == "en", not_(partner))
+    # RU: не EN и не партнёр (в т.ч. старые заявки без lang)
+    return q.filter(
+        or_(Lead.payload["lang"].astext.is_(None), Lead.payload["lang"].astext != "en"),
+        not_(partner),
+    )
 
 
 def apply_lead_filters(
@@ -20,6 +49,7 @@ def apply_lead_filters(
     created_before: datetime | None = None,
     q_text: str | None = None,
     source_in: frozenset[str] | list[str] | None = None,
+    site_channel: str | None = None,
 ) -> Query:
     if type_filter:
         q = q.filter(Lead.type == type_filter)
@@ -46,6 +76,7 @@ def apply_lead_filters(
         )
     if source_in:
         q = q.filter(Lead.source.in_(list(source_in)))
+    q = apply_site_channel_filter(q, site_channel)
     return q
 
 
@@ -58,18 +89,28 @@ def count_leads(db: Session, **filters) -> int:
 def leads_to_csv(leads: list[Lead]) -> str:
     output = io.StringIO()
     writer = csv.writer(output)
-    writer.writerow(["created_at", "type", "status", "name", "phone", "email", "source"])
+    writer.writerow(["created_at", "type", "status", "site", "name", "phone", "email", "source"])
     for lead in leads:
         payload = lead.payload or {}
         writer.writerow([
             lead.created_at.isoformat() if lead.created_at else "",
             lead.type,
             lead.status,
+            lead_site_channel_label(lead),
             payload.get("name", ""),
             payload.get("phone", ""),
             payload.get("email", ""),
             lead.source or "",
         ])
+
+
+def lead_site_channel_label(lead: Lead) -> str:
+    src = (lead.source or "").lower()
+    if src.startswith("partner") or (lead.payload or {}).get("site") == SITE_CHANNEL_PARTNER:
+        return "partner"
+    if (lead.payload or {}).get("lang") == "en":
+        return "en"
+    return "ru"
     return output.getvalue()
 
 
@@ -81,6 +122,7 @@ def get_lead_stats(
     created_after: datetime | None = None,
     created_before: datetime | None = None,
     q_text: str | None = None,
+    site_channel: str | None = None,
 ) -> dict:
     base_filters = {
         "archived": archived,
@@ -88,6 +130,7 @@ def get_lead_stats(
         "created_after": created_after,
         "created_before": created_before,
         "q_text": q_text,
+        "site_channel": site_channel,
     }
     status_rows = (
         apply_lead_filters(db.query(Lead.status, func.count(Lead.id)), **base_filters)

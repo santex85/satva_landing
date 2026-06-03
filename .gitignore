@@ -38,6 +38,9 @@ yarn-error.log*
 *.temp
 .cache/
 
+# Локальный override Compose (порты и т.п.)
+docker-compose.local.yml
+
 # Environment variables
 .env
 .env.deploy

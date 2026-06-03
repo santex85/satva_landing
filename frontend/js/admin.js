@@ -67,6 +67,7 @@
     createdAfter: "",
     createdBefore: "",
     q: "",
+    siteChannel: "",
     leadsData: [],
     leadsTotal: 0,
     notificationEmails: [],
@@ -519,6 +520,7 @@
     if (state.q) params.set("q", state.q);
     if (state.createdAfter) params.set("created_after", state.createdAfter);
     if (state.createdBefore) params.set("created_before", state.createdBefore);
+    if (state.siteChannel) params.set("site", state.siteChannel);
     return params;
   }
 
@@ -531,6 +533,7 @@
     if (state.q) params.set("q", state.q);
     if (state.createdAfter) params.set("created_after", state.createdAfter);
     if (state.createdBefore) params.set("created_before", state.createdBefore);
+    if (state.siteChannel) params.set("site", state.siteChannel);
     if (state.offset > 0) params.set("offset", String(state.offset));
     var qs = params.toString();
     window.history.replaceState({}, "", window.location.pathname + (qs ? "?" + qs : ""));
@@ -545,7 +548,36 @@
     state.q = params.get("q") || "";
     state.createdAfter = params.get("created_after") || "";
     state.createdBefore = params.get("created_before") || "";
+    state.siteChannel = params.get("site") || "";
     state.offset = parseInt(params.get("offset") || "0", 10) || 0;
+  }
+
+  function isPartnerLead(lead) {
+    var src = (lead.source || "").toLowerCase();
+    if (src.indexOf("partner") === 0) return true;
+    var site = ((lead.payload || {}).site || "").toLowerCase();
+    return site === "partner";
+  }
+
+  function leadSiteMeta(lead) {
+    if (isPartnerLead(lead)) return { code: "partner", label: "Партнёры" };
+    if ((lead.payload || {}).lang === "en") return { code: "en", label: "EN" };
+    return { code: "ru", label: "RU" };
+  }
+
+  function renderSiteBadge(lead) {
+    var meta = leadSiteMeta(lead);
+    return "<span class=\"admin-site-badge admin-site-badge--" + escapeAttr(meta.code) + "\">" + escapeHtml(meta.label) + "</span>";
+  }
+
+  function updateSiteChannelTabs() {
+    var channel = state.siteChannel || "";
+    document.querySelectorAll(".admin-site-tab").forEach(function (btn) {
+      var site = btn.getAttribute("data-site") || "";
+      var active = site === channel;
+      btn.classList.toggle("admin-archive-tab--active", active);
+      btn.setAttribute("aria-selected", active ? "true" : "false");
+    });
   }
 
   function isoToDatetimeLocal(iso) {
@@ -572,6 +604,7 @@
     if (els.dateFrom) els.dateFrom.value = isoToDatetimeLocal(state.createdAfter);
     if (els.dateTo) els.dateTo.value = isoToDatetimeLocal(state.createdBefore);
     updateArchiveTabs();
+    updateSiteChannelTabs();
   }
 
   function setLoggedIn(isLoggedIn) {
@@ -893,7 +926,7 @@
     return (
       "<td class=\"admin-table__td-check\" data-label=\"\"><input type=\"checkbox\" class=\"admin-table__checkbox\" data-lead-select=\"" + escapeAttr(String(id)) + "\" aria-label=\"Выбрать заявку\"" + checked + "></td>" +
       "<td data-label=\"Дата\">" + formatDate(lead.created_at) + "</td>" +
-      "<td data-label=\"Тип\"><span class=\"admin-type-badge\">" + escapeHtml(leadTypeLabel(lead.type)) + "</span></td>" +
+      "<td data-label=\"Тип\"><span class=\"admin-type-badge\">" + escapeHtml(leadTypeLabel(lead.type)) + "</span>" + renderSiteBadge(lead) + "</td>" +
       "<td data-label=\"Статус\">" + renderStatusBadge(lead.status) + "</td>" +
       "<td data-label=\"Имя\">" + escapeHtml(name) + dupBadge + "</td>" +
       "<td data-label=\"Телефон\">" + linkPhone(phone) + "</td>" +
@@ -1241,15 +1274,17 @@
         state.currentLeadPayload = payload;
         renderQuickReplies(els.detailQuickReplies, payload);
         var payloadKeys = Object.keys(payload);
-        if (payloadKeys.length && els.detailPayload) {
+        if (els.detailPayload) {
           var dl = "<dl>";
+          var siteMeta = leadSiteMeta(data);
+          dl += "<dt>Сайт</dt><dd>" + escapeHtml(siteMeta.label);
+          if (data.source) dl += " <span class=\"admin-muted\">(" + escapeHtml(String(data.source)) + ")</span>";
+          dl += "</dd>";
           payloadKeys.forEach(function (k) {
             dl += "<dt>" + escapeHtml(k) + "</dt><dd>" + renderPayloadValue(k, payload[k]) + "</dd>";
           });
           dl += "</dl>";
           els.detailPayload.innerHTML = dl;
-        } else if (els.detailPayload) {
-          els.detailPayload.innerHTML = "<p>Нет данных</p>";
         }
 
         var consents = data.consents || [];
@@ -1512,20 +1547,30 @@
     if (els.analyticsLeadsCount) els.analyticsLeadsCount.textContent = String(data.leads_count != null ? data.leads_count : 0);
     if (els.analyticsConversion) els.analyticsConversion.textContent = String(data.conversion_rate != null ? data.conversion_rate : 0) + "%";
     renderLeadsByDayChart(data.leads_by_day || []);
+    renderAnalyticsTopList(els.analyticsTopPages, data.top_pages || [], "path", "views", "/");
+    renderAnalyticsTopList(els.analyticsTopReferrers, data.top_referrers || [], "referrer", "visits", "(direct)");
+  }
 
-    var pages = data.top_pages || [];
-    if (els.analyticsTopPages) {
-      if (!pages.length) {
-        els.analyticsTopPages.innerHTML = "<p class=\"admin-analytics-top-list__empty\">Нет данных за выбранный период</p>";
-      } else {
-        els.analyticsTopPages.innerHTML =
-          "<ol class=\"admin-analytics-top-list__items\">" +
-          pages.map(function (page) {
-            return "<li><span class=\"admin-analytics-top-list__path\">" + escapeHtml(page.path || "/") + "</span><span class=\"admin-analytics-top-list__views\">" + escapeHtml(String(page.views != null ? page.views : 0)) + "</span></li>";
-          }).join("") +
-          "</ol>";
-      }
+  function renderAnalyticsTopList(container, items, labelKey, valueKey, emptyLabel) {
+    if (!container) return;
+    if (!items.length) {
+      container.innerHTML = "<p class=\"admin-analytics-top-list__empty\">Нет данных за выбранный период</p>";
+      return;
     }
+    container.innerHTML =
+      "<ol class=\"admin-analytics-top-list__items\">" +
+      items
+        .map(function (item, index) {
+          var label = item[labelKey] != null && String(item[labelKey]).trim() !== "" ? String(item[labelKey]) : emptyLabel;
+          var value = item[valueKey] != null ? item[valueKey] : 0;
+          return (
+            "<li><span class=\"admin-analytics-top-list__rank\">" + escapeHtml(String(index + 1)) + "</span>" +
+            "<span class=\"admin-analytics-top-list__path\">" + escapeHtml(label) + "</span>" +
+            "<span class=\"admin-analytics-top-list__views\">" + escapeHtml(String(value)) + "</span></li>"
+          );
+        })
+        .join("") +
+      "</ol>";
   }
 
   function renderEmailList() {
@@ -2157,6 +2202,10 @@
     els.leadsFilter = document.getElementById("admin-leads-filter");
     els.statusFilter = document.getElementById("admin-status-filter");
     els.leadsSearch = document.getElementById("admin-search");
+    els.siteTabAll = document.getElementById("admin-site-all");
+    els.siteTabRu = document.getElementById("admin-site-ru");
+    els.siteTabEn = document.getElementById("admin-site-en");
+    els.siteTabPartner = document.getElementById("admin-site-partner");
     els.tabActive = document.getElementById("admin-tab-active");
     els.tabArchive = document.getElementById("admin-tab-archive");
     els.dateFrom = document.getElementById("admin-date-from");
@@ -2230,6 +2279,7 @@
     els.analyticsConversion = document.getElementById("admin-analytics-conversion-rate");
     els.analyticsLeadsChart = document.getElementById("admin-analytics-chart");
     els.analyticsTopPages = document.getElementById("admin-analytics-top-pages");
+    els.analyticsTopReferrers = document.getElementById("admin-analytics-top-referrers");
     els.analyticsRange7d = document.getElementById("admin-analytics-7d");
     els.analyticsRange30d = document.getElementById("admin-analytics-30d");
 
@@ -2380,6 +2430,17 @@
     if (els.bulkClear) {
       els.bulkClear.addEventListener("click", clearBulkSelection);
     }
+
+    document.querySelectorAll(".admin-site-tab").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var next = btn.getAttribute("data-site") || "";
+        if (state.siteChannel === next) return;
+        state.siteChannel = next;
+        state.offset = 0;
+        updateSiteChannelTabs();
+        loadLeads();
+      });
+    });
 
     if (els.tabActive) {
       els.tabActive.addEventListener("click", function () {

@@ -91,6 +91,7 @@ def get_analytics_summary(range_key: str = "7d", db: Session | None = None) -> d
             "visits": 0,
             "bounces": 0,
             "top_pages": [],
+            "top_referrers": [],
         }
 
     website_id = credentials["website_id"].strip()
@@ -102,6 +103,11 @@ def get_analytics_summary(range_key: str = "7d", db: Session | None = None) -> d
         credentials,
         f"/websites/{website_id}/metrics",
         {**params, "type": "path", "limit": 10},
+    )
+    referrer_metrics = _fetch_json(
+        credentials,
+        f"/websites/{website_id}/metrics",
+        {**params, "type": "referrer", "limit": 15},
     )
 
     visitors = 0
@@ -126,6 +132,19 @@ def get_analytics_summary(range_key: str = "7d", db: Session | None = None) -> d
                 }
             )
 
+    top_referrers: list[dict[str, Any]] = []
+    if isinstance(referrer_metrics, list):
+        for item in referrer_metrics[:15]:
+            if not isinstance(item, dict):
+                continue
+            referrer = str(item.get("x") or "").strip() or "(direct)"
+            top_referrers.append(
+                {
+                    "referrer": referrer,
+                    "visits": int(item.get("y") or 0),
+                }
+            )
+
     return {
         "configured": True,
         "range": range_key,
@@ -134,4 +153,5 @@ def get_analytics_summary(range_key: str = "7d", db: Session | None = None) -> d
         "visits": visits,
         "bounces": bounces,
         "top_pages": top_pages,
+        "top_referrers": top_referrers,
     }
