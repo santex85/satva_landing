@@ -2,8 +2,8 @@
 
 from alembic import op
 
-revision = "009_backfill_lead_lang"
-down_revision = "008_consent_geo"
+revision = "009"
+down_revision = "008"
 branch_labels = None
 depends_on = None
 
