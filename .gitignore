@@ -55,6 +55,7 @@ __pycache__/
 .Python
 venv/
 env/
+server/.venv/
 
 # Backup files
 *.bak

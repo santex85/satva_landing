@@ -44,7 +44,7 @@ deploy-dev-logs:
 
 # Статика + API на прод-сервере: pull, build CSS, docker rebuild (миграции в entrypoint)
 deploy-prod:
-	ssh $(DEPLOY_USER)@$(DEPLOY_HOST) 'cd $(DEPLOY_PATH) && git checkout -- frontend/css/yoga.css 2>/dev/null || true && git pull origin main && (command -v cwebp >/dev/null 2>&1 || (apt-get update -qq && apt-get install -y -qq webp)) && cd frontend && make build-prod && cd .. && docker compose -f docker-compose.prod.yml --env-file .env.deploy up -d --build && docker compose -f docker-compose.prod.yml --env-file .env.deploy restart nginx && cp deploy/nginx-host-satvasamui.com.conf /etc/nginx/sites-available/satvasamui.com && ln -sf /etc/nginx/sites-available/satvasamui.com /etc/nginx/sites-enabled/satvasamui.com && rm -f /etc/nginx/sites-enabled/satvasamui.site && chown -R www-data:www-data frontend && nginx -t && systemctl reload nginx && echo Deploy OK'
+	ssh $(DEPLOY_USER)@$(DEPLOY_HOST) 'cd $(DEPLOY_PATH) && git fetch origin main && git reset --hard origin/main && (command -v cwebp >/dev/null 2>&1 || (apt-get update -qq && apt-get install -y -qq webp)) && cd frontend && make build-prod && cd .. && docker compose -f docker-compose.prod.yml --env-file .env.deploy up -d --build && docker compose -f docker-compose.prod.yml --env-file .env.deploy restart nginx && cp deploy/nginx-host-satvasamui.com.conf /etc/nginx/sites-available/satvasamui.com && ln -sf /etc/nginx/sites-available/satvasamui.com /etc/nginx/sites-enabled/satvasamui.com && rm -f /etc/nginx/sites-enabled/satvasamui.site && chown -R www-data:www-data frontend && nginx -t && systemctl reload nginx && echo Deploy OK'
 
 # То же с минифицированным CSS (как рекомендовано в DEPLOY.md для production)
 deploy-prod-min:
