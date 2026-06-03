@@ -2,10 +2,11 @@ import csv
 import io
 from datetime import datetime, timezone
 
-from sqlalchemy import or_, func, not_
+from sqlalchemy import case, literal, or_, func, not_, select
 from sqlalchemy.orm import Query, Session
 
-from app.models import Lead
+from app.models import Lead, Consent
+from app.services.lead_lang import effective_lang
 
 WEB_FORM_SOURCES = frozenset({"landing", "popup", "footer", "yoga-bridge"})
 
@@ -24,19 +25,44 @@ def _partner_lead_clause():
     )
 
 
+def _consent_referer_subquery():
+    return (
+        select(Consent.referer)
+        .where(Consent.lead_id == Lead.id)
+        .order_by(Consent.id.asc())
+        .limit(1)
+        .scalar_subquery()
+    )
+
+
+def _effective_lang_expr():
+    """payload.lang или эвристика по Referer (старые заявки)."""
+    stored = Lead.payload["lang"].astext
+    referer = _consent_referer_subquery()
+    return case(
+        (stored.in_(("en", "ru")), stored),
+        (referer.ilike("%/ru/%"), literal("ru")),
+        (
+            or_(
+                referer.op("~*")(r"satvasamui\.(com|site)/?($|[?#])"),
+                referer.ilike("%www.satvasamui.com%"),
+            ),
+            literal("en"),
+        ),
+        else_=literal("ru"),
+    )
+
+
 def apply_site_channel_filter(q: Query, site_channel: str | None) -> Query:
     if not site_channel or site_channel not in VALID_SITE_CHANNELS:
         return q
     partner = _partner_lead_clause()
     if site_channel == SITE_CHANNEL_PARTNER:
         return q.filter(partner)
+    eff = _effective_lang_expr()
     if site_channel == SITE_CHANNEL_EN:
-        return q.filter(Lead.payload["lang"].astext == "en", not_(partner))
-    # RU: не EN и не партнёр (в т.ч. старые заявки без lang)
-    return q.filter(
-        or_(Lead.payload["lang"].astext.is_(None), Lead.payload["lang"].astext != "en"),
-        not_(partner),
-    )
+        return q.filter(eff == "en", not_(partner))
+    return q.filter(eff == "ru", not_(partner))
 
 
 def apply_lead_filters(
@@ -102,16 +128,18 @@ def leads_to_csv(leads: list[Lead]) -> str:
             payload.get("email", ""),
             lead.source or "",
         ])
+    return output.getvalue()
 
 
-def lead_site_channel_label(lead: Lead) -> str:
+def lead_site_channel_label(lead: Lead, referer: str | None = None) -> str:
     src = (lead.source or "").lower()
     if src.startswith("partner") or (lead.payload or {}).get("site") == SITE_CHANNEL_PARTNER:
         return "partner"
-    if (lead.payload or {}).get("lang") == "en":
-        return "en"
-    return "ru"
-    return output.getvalue()
+    if not referer and getattr(lead, "consents", None):
+        consents = lead.consents or []
+        if consents:
+            referer = consents[0].referer
+    return effective_lang(lead.payload, referer)
 
 
 def get_lead_stats(
