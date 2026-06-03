@@ -2,7 +2,7 @@ import csv
 import io
 from datetime import datetime, timezone
 
-from sqlalchemy import case, literal, or_, func, not_, select
+from sqlalchemy import and_, case, literal, or_, func, not_, select
 from sqlalchemy.orm import Query, Session
 
 from app.models import Lead, Consent
@@ -22,6 +22,15 @@ def _partner_lead_clause():
     return or_(
         Lead.source.ilike("partner%"),
         Lead.payload["site"].astext == SITE_CHANNEL_PARTNER,
+    )
+
+
+def _non_partner_clause():
+    """Исключить партнёрские заявки (NULL-safe: NOT (A OR B) ломается на NULL)."""
+    site = Lead.payload["site"].astext
+    return and_(
+        or_(Lead.source.is_(None), not_(Lead.source.ilike("partner%"))),
+        or_(site.is_(None), site != SITE_CHANNEL_PARTNER),
     )
 
 
@@ -60,9 +69,10 @@ def apply_site_channel_filter(q: Query, site_channel: str | None) -> Query:
     if site_channel == SITE_CHANNEL_PARTNER:
         return q.filter(partner)
     eff = _effective_lang_expr()
+    non_partner = _non_partner_clause()
     if site_channel == SITE_CHANNEL_EN:
-        return q.filter(eff == "en", not_(partner))
-    return q.filter(eff == "ru", not_(partner))
+        return q.filter(eff == literal("en"), non_partner)
+    return q.filter(eff == literal("ru"), non_partner)
 
 
 def apply_lead_filters(
