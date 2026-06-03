@@ -170,12 +170,13 @@ def get_lead_stats(
         "q_text": q_text,
         "site_channel": site_channel,
     }
+    lead_count = func.count(Lead.id).label("lead_count")
     status_rows = (
-        apply_lead_filters(db.query(Lead.status, func.count(Lead.id)), **base_filters)
+        apply_lead_filters(db.query(Lead.status, lead_count), **base_filters)
         .group_by(Lead.status)
         .all()
     )
-    by_status = {row.status: int(row.count) for row in status_rows}
+    by_status = {row.status: int(row.lead_count) for row in status_rows}
     today_start = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
     today_count = count_leads(
         db,
@@ -184,6 +185,7 @@ def get_lead_stats(
         created_after=today_start,
         created_before=None,
         q_text=q_text,
+        site_channel=site_channel,
     )
     total = sum(by_status.values())
     return {
@@ -196,10 +198,10 @@ def get_lead_stats(
 def get_leads_by_day(db: Session, start: datetime, end: datetime) -> list[dict]:
     day = func.date_trunc("day", Lead.created_at)
     rows = (
-        db.query(day.label("day"), func.count(Lead.id).label("count"))
+        db.query(day.label("day"), func.count(Lead.id).label("lead_count"))
         .filter(Lead.created_at >= start, Lead.created_at <= end)
         .group_by(day)
         .order_by(day.asc())
         .all()
     )
-    return [{"date": row.day.date().isoformat(), "count": int(row.count)} for row in rows]
+    return [{"date": row.day.date().isoformat(), "count": int(row.lead_count)} for row in rows]
