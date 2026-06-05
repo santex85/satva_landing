@@ -450,9 +450,9 @@
 
     // --- 09. Превью видео через canvas (кадр на ~1 с) -------------------------
     function initVideoThumbnails() {
-        var section = document.getElementById('yogaReviews');
-        if (!section) return;
-        var videos = section.querySelectorAll('.yoga-reviews__card video');
+        var videos = document.querySelectorAll(
+            '#yogaReviews .yoga-reviews__card video, #yogaPromo .yoga-promo__thumb video'
+        );
         if (!videos.length) return;
 
         var canvas = document.createElement('canvas');
@@ -516,16 +516,19 @@
 
     // --- 09b. Модалка видео-отзыва --------------------------------------------
     function initVideoModal() {
-        var section = document.getElementById('yogaReviews');
         var modal = document.getElementById('yogaVideoModal');
         var player = document.getElementById('yogaVideoPlayer');
-        if (!section || !modal || !player) return;
+        if (!modal || !player) return;
 
         var overlay = modal.querySelector('.yoga-video-modal__overlay');
         var closeBtn = modal.querySelector('.yoga-video-modal__close');
+        var landscapeClass = 'yoga-video-modal__player--landscape';
 
-        function openModal(src) {
+        function openModal(src, landscape) {
             player.src = src;
+            if (landscape) {
+                player.classList.add(landscapeClass);
+            }
             modal.removeAttribute('hidden');
             modal.classList.add('is-open');
             modal.setAttribute('aria-hidden', 'false');
@@ -537,6 +540,7 @@
         function closeModal() {
             player.pause();
             player.removeAttribute('src');
+            player.classList.remove(landscapeClass);
             try { player.load(); } catch (e) { /* noop */ }
             modal.classList.remove('is-open');
             modal.setAttribute('hidden', '');
@@ -544,12 +548,19 @@
             document.body.style.overflow = '';
         }
 
-        section.addEventListener('click', function (e) {
-            var card = e.target.closest('.yoga-reviews__card');
-            if (!card) return;
-            var src = card.getAttribute('data-video');
-            if (src) openModal(src);
-        });
+        function onVideoClick(e) {
+            var trigger = e.target.closest('[data-video]');
+            if (!trigger) return;
+            var src = trigger.getAttribute('data-video');
+            if (!src) return;
+            var isPromo = !!trigger.closest('#yogaPromo');
+            openModal(src, isPromo);
+        }
+
+        var reviews = document.getElementById('yogaReviews');
+        var promo = document.getElementById('yogaPromo');
+        if (reviews) reviews.addEventListener('click', onVideoClick);
+        if (promo) promo.addEventListener('click', onVideoClick);
 
         if (overlay) overlay.addEventListener('click', closeModal);
         if (closeBtn) closeBtn.addEventListener('click', closeModal);

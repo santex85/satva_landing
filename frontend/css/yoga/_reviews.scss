@@ -351,6 +351,10 @@
         border-radius: 16px;
         overflow: hidden;
         box-shadow: $shadow-lg;
+
+        &:has(.yoga-video-modal__player--landscape) {
+            max-width: min(960px, 100vw - 32px);
+        }
     }
 
     &__close {
@@ -383,5 +387,12 @@
         height: auto;
         max-height: min(90vh - 32px, 800px);
         vertical-align: bottom;
+
+        &--landscape {
+            aspect-ratio: 16 / 9;
+            max-width: min(960px, 92vw);
+            max-height: min(90vh - 32px, calc(min(960px, 92vw) * 9 / 16));
+            object-fit: contain;
+        }
     }
 }

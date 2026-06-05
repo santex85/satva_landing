@@ -38,9 +38,9 @@
     <!-- Preload hero (LCP) — WebP -->
     <link rel="preload" as="image" href="/img/yoga_tour/hero_sunset@1x.webp" type="image/webp">
 
-    <link rel="stylesheet" href="/css/yoga.css?v=6">
+    <link rel="stylesheet" href="/css/yoga.css?v=7">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
-    <script defer src="/js/yoga.js?v=5"></script>
+    <script defer src="/js/yoga.js?v=6"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
 
     <!-- Structured Data: LodgingBusiness (расширенная карточка) -->
@@ -241,6 +241,26 @@
                 <span>scroll</span>
                 <div class="yoga-hero__scroll-arrow"></div>
             </div>
+        </div>
+    </section>
+
+    <section id="yogaPromo" class="yoga-promo" aria-labelledby="yogaPromoTitle">
+        <div class="yoga-promo__container">
+            <header class="yoga-promo__header yoga-fade-in">
+                <p class="yoga-chip-title">Video tour</p>
+                <h2 id="yogaPromoTitle">Discover Satva Samui</h2>
+                <p class="yoga-promo__lead">A glimpse of beachfront yoga, sunsets, and daily life at our retreat.</p>
+            </header>
+            <button type="button" class="yoga-promo__trigger yoga-fade-in"
+                    data-video="/video/promo.mp4"
+                    aria-label="Play promo video">
+                <span class="yoga-promo__thumb">
+                    <video src="/video/promo.mp4" muted playsinline preload="metadata" width="1920" height="1080"></video>
+                    <span class="yoga-promo__play" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                    </span>
+                </span>
+            </button>
         </div>
     </section>
 
@@ -1989,6 +2009,14 @@
                         <p>12.3. Current version: <code>2026-05-25</code>.</p>
                 <p><em>Last updated: 25 May 2026. Document version: 2026-05-25.</em></p>
             </div>
+        </div>
+    </div>
+
+    <div id="yogaVideoModal" class="yoga-video-modal" hidden aria-hidden="true">
+        <div class="yoga-video-modal__overlay"></div>
+        <div class="yoga-video-modal__inner">
+            <button type="button" class="yoga-video-modal__close" aria-label="Close player">&times;</button>
+            <video id="yogaVideoPlayer" class="yoga-video-modal__player" controls playsinline></video>
         </div>
     </div>
 

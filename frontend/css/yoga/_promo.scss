@@ -1,0 +1,118 @@
+@use '../core' as *;
+
+// Промо-ролик после hero (16:9)
+.yoga-promo {
+    background: $color-white;
+    padding: $space-section $space-h;
+
+    &__container {
+        max-width: $container-wide;
+        margin: 0 auto;
+    }
+
+    &__header {
+        text-align: center;
+        margin-bottom: 40px;
+
+        h2 {
+            color: $color-primary;
+            margin: 0 0 12px;
+            font-size: $font-size-h2;
+            line-height: $line-height-tight;
+        }
+    }
+
+    &__lead {
+        color: $color-text-light;
+        font-size: 1.05rem;
+        margin: 0;
+        max-width: 38rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &__trigger {
+        display: block;
+        position: relative;
+        width: 100%;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: $shadow-sm;
+        transition: transform $transition-fast, box-shadow $transition-fast;
+        -webkit-tap-highlight-color: transparent;
+        aspect-ratio: 16 / 9;
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover,
+            &:focus-visible {
+                transform: translateY(-4px);
+                box-shadow: $shadow-md;
+            }
+        }
+
+        &:focus-visible {
+            outline: 3px solid $color-primary;
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            &:hover,
+            &:focus-visible {
+                transform: none;
+            }
+        }
+    }
+
+    &__thumb {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background: $color-primary-dark;
+        }
+    }
+
+    &__play {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: rgba($color-primary, 0.55);
+        color: $color-white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        transition: background $transition-fast, transform $transition-fast;
+
+        .yoga-promo__trigger:hover &,
+        .yoga-promo__trigger:focus-visible & {
+            background: rgba($color-primary, 0.75);
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        svg {
+            width: 28px;
+            height: 28px;
+            display: block;
+            margin-left: 4px;
+        }
+    }
+}
