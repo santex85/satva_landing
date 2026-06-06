@@ -1,0 +1,68 @@
+@use '../core' as *;
+
+// Летний сезон (партнёрский лендинг)
+.yoga-summer {
+    background: $color-secondary;
+    padding: $space-section $space-h;
+
+    &__container {
+        max-width: $container-base;
+        margin: 0 auto;
+    }
+
+    &__block {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+        align-items: center;
+
+        @media (min-width: 768px) {
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+    }
+
+    &__text {
+        h2 {
+            color: $color-primary;
+            margin: 0 0 16px;
+            font-size: $font-size-h2;
+            line-height: $line-height-tight;
+        }
+    }
+
+    &__placeholder {
+        color: rgba($color-dark, 0.65);
+        line-height: 1.7;
+        margin: 0;
+        font-size: 1rem;
+        font-style: italic;
+    }
+
+    &__photos {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    &__photo {
+        border-radius: 20px;
+        overflow: hidden;
+        aspect-ratio: 4 / 3;
+
+        &--placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba($color-white, 0.55);
+            border: 2px dashed rgba($color-primary, 0.25);
+
+            span {
+                color: rgba($color-primary, 0.45);
+                font-size: 0.875rem;
+                font-weight: 600;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
