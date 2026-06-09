@@ -38,7 +38,7 @@
     <!-- Preload hero (LCP) — WebP -->
     <link rel="preload" as="image" href="/img/yoga_tour/hero_sunset@1x.webp" type="image/webp">
 
-    <link rel="stylesheet" href="/css/yoga.css?v=11">
+    <link rel="stylesheet" href="/css/yoga.css?v=13">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
     <script defer src="/js/yoga.js?v=6"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
@@ -212,7 +212,7 @@
         <div class="yoga-promo__container">
             <header class="yoga-promo__header yoga-fade-in">
                 <h2 id="yogaPromoTitle">Познакомьтесь с Satva Samui</h2>
-                <p class="yoga-promo__lead">Йога у моря, закаты и атмосфера нашего ретрита на Самуи — в одном ролике.</p>
+                <p class="yoga-promo__lead">Йога у моря, закаты и атмосфера отеля — в одном ролике.</p>
             </header>
             <button type="button" class="yoga-promo__trigger yoga-fade-in"
                     data-video="/video/promo.mp4"
@@ -303,17 +303,24 @@
             </div>
             <p class="yoga-includes__legend yoga-fade-in"><span class="yoga-includes__optional">*</span>&nbsp;— оплачивается отдельно, не входит в базовый пакет тура.</p>
             <div class="yoga-includes__amenities yoga-fade-in" aria-label="Инфраструктура, включённая в пакет">
-                <p class="yoga-includes__amenities-title">На территории отеля:</p>
-                <ul class="yoga-includes__amenities-list">
-                    <li>2 йога-зала</li>
-                    <li>Ресторан у моря</li>
-                    <li>3 бассейна</li>
-                    <li>3 массажных кабинета</li>
-                    <li>Спа-салон</li>
-                    <li>2 сауны</li>
-                    <li>Тренажерный зал</li>
-                    <li>Конференц-зал</li>
-                </ul>
+                <div class="yoga-includes__amenities-layout">
+                    <div class="yoga-includes__amenities-photo yoga-includes__amenities-photo--placeholder" aria-label="Фото — скоро">
+                        <span>Фото</span>
+                    </div>
+                    <div class="yoga-includes__amenities-body">
+                        <p class="yoga-includes__amenities-title">На территории отеля:</p>
+                        <ul class="yoga-includes__amenities-list">
+                            <li>3 йога-зала</li>
+                            <li>Ресторан у моря</li>
+                            <li>3 бассейна</li>
+                            <li>3 массажных кабинета</li>
+                            <li>Спа-салон</li>
+                            <li>2 сауны</li>
+                            <li>Тренажерный зал</li>
+                            <li>Конференц-зал</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -345,6 +352,212 @@
             </div>
         </div>
     </section>
+
+    <!-- 04a. Тарифы -->
+    <section id="yogaPricing" class="yoga-pricing" aria-labelledby="yogaPricingTitle">
+        <div class="yoga-pricing__container">
+            <header class="yoga-pricing__header yoga-fade-in">
+                <h2 id="yogaPricingTitle">Тарифы по сезонам</h2>
+                <p>Цены в&nbsp;USD за&nbsp;человека в&nbsp;сутки, всё включено. Зависит от&nbsp;типа размещения и&nbsp;сезона.</p>
+            </header>
+            <div class="yoga-pricing__season">
+                <input type="radio" name="yoga-pricing-season" id="yoga-pricing-summer" checked>
+                <input type="radio" name="yoga-pricing-season" id="yoga-pricing-autumn">
+                <input type="radio" name="yoga-pricing-season" id="yoga-pricing-winter">
+                <div class="yoga-pricing__tabs" role="tablist" aria-label="Сезон">
+                    <label class="yoga-pricing__tab" for="yoga-pricing-summer" role="tab">Август–сентябрь</label>
+                    <label class="yoga-pricing__tab" for="yoga-pricing-autumn" role="tab">Октябрь–ноябрь</label>
+                    <label class="yoga-pricing__tab" for="yoga-pricing-winter" role="tab">Декабрь — до 28&nbsp;дек.</label>
+                </div>
+                <div class="yoga-pricing__panels">
+                    <div class="yoga-pricing__panel yoga-pricing__panel--summer yoga-fade-in" role="tabpanel" aria-labelledby="yoga-pricing-summer">
+                        <div class="yoga-pricing__group">
+                            <h3>Основное размещение</h3>
+                            <ul class="yoga-pricing__list">
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Стандарт</h4><p class="yoga-pricing__meta">1 или 2 кровати</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$60</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$85</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Стандарт у моря</h4><p class="yoga-pricing__meta">1 кровать</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$65</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$95</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Домик стандарт</h4><p class="yoga-pricing__meta">1 кровать</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$65</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$95</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Вилла 2-комнатная</h4><p class="yoga-pricing__meta">2 комнаты</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$60</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$85</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Новые коттеджи</h4><p class="yoga-pricing__meta">через дорогу от моря</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$65</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$95</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="yoga-pricing__group">
+                            <h3>Бунгало</h3>
+                            <ul class="yoga-pricing__list">
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Бунгало у моря</h4><p class="yoga-pricing__meta">1 кровать</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$80</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$120</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Бунгало в саду</h4><p class="yoga-pricing__meta">1 или 2 кровати</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$75</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$110</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="yoga-pricing__panel yoga-pricing__panel--autumn yoga-fade-in" role="tabpanel" aria-labelledby="yoga-pricing-autumn">
+                        <div class="yoga-pricing__group">
+                            <h3>Основное размещение</h3>
+                            <ul class="yoga-pricing__list">
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Стандарт</h4><p class="yoga-pricing__meta">1 или 2 кровати</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$65</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$90</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Стандарт у моря</h4><p class="yoga-pricing__meta">1 кровать</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$75</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$100</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Домик стандарт</h4><p class="yoga-pricing__meta">1 кровать</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$75</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$100</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Вилла 2-комнатная</h4><p class="yoga-pricing__meta">2 комнаты</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$65</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$95</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Новые коттеджи</h4><p class="yoga-pricing__meta">через дорогу от моря</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$75</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$100</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="yoga-pricing__group">
+                            <h3>Бунгало</h3>
+                            <ul class="yoga-pricing__list">
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Бунгало у моря</h4><p class="yoga-pricing__meta">1 кровать</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$90</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$125</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Бунгало в саду</h4><p class="yoga-pricing__meta">1 или 2 кровати</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$85</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$115</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="yoga-pricing__panel yoga-pricing__panel--winter yoga-fade-in" role="tabpanel" aria-labelledby="yoga-pricing-winter">
+                        <div class="yoga-pricing__group">
+                            <h3>Основное размещение</h3>
+                            <ul class="yoga-pricing__list">
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Стандарт</h4><p class="yoga-pricing__meta">1 или 2 кровати</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$65</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$90</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Стандарт у моря</h4><p class="yoga-pricing__meta">1 кровать</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$75</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$100</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Домик стандарт</h4><p class="yoga-pricing__meta">1 кровать</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$75</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$100</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Вилла 2-комнатная</h4><p class="yoga-pricing__meta">2 комнаты</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$65</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$95</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Новые коттеджи</h4><p class="yoga-pricing__meta">через дорогу от моря</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$75</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$100</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="yoga-pricing__group">
+                            <h3>Бунгало</h3>
+                            <ul class="yoga-pricing__list">
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Бунгало у моря</h4><p class="yoga-pricing__meta">1 кровать</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$90</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$125</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Бунгало в саду</h4><p class="yoga-pricing__meta">1 или 2 кровати</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">от <strong>$85</strong> <small>2-мест.</small></span>
+                                        <span class="yoga-pricing__price"><strong>$115</strong> <small>1-мест.</small></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- 04b. Лето на Самуи -->
     <section id="yogaSummer" class="yoga-summer" aria-labelledby="yogaSummerTitle">
@@ -1809,7 +2022,11 @@
                             <li>Английская версия: <a href="/privacy.html">Privacy Policy (EN)</a>.</li>
                         </ul>
                 <p><em>Дата последнего обновления: 29 мая 2026 г. Версия документа: 2026-05-29.</em></p>
-             class="yoga-modal" hidden aria-hidden="true">
+            </div>
+        </div>
+    </div>
+
+    <div id="yogaModalOffer" class="yoga-modal" hidden aria-hidden="true">
         <div class="yoga-modal__overlay" tabindex="-1"></div>
         <div class="yoga-modal__content yoga-modal__content--wide" role="dialog" aria-modal="true" aria-labelledby="yogaModalOfferTitle">
             <button type="button" class="yoga-modal__close" aria-label="Закрыть">&times;</button>

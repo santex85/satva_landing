@@ -38,7 +38,7 @@
     <!-- Preload hero (LCP) — WebP -->
     <link rel="preload" as="image" href="/img/yoga_tour/hero_sunset@1x.webp" type="image/webp">
 
-    <link rel="stylesheet" href="/css/yoga.css?v=11">
+    <link rel="stylesheet" href="/css/yoga.css?v=13">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
     <script defer src="/js/yoga.js?v=6"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
@@ -322,17 +322,24 @@
             </div>
             <p class="yoga-includes__legend yoga-fade-in"><span class="yoga-includes__optional">*</span>&nbsp;— Available at an additional cost, not included in the base package.</p>
             <div class="yoga-includes__amenities yoga-fade-in" aria-label="Hotel amenities included in your retreat">
-                <p class="yoga-includes__amenities-title">On the hotel grounds:</p>
-                <ul class="yoga-includes__amenities-list">
-                    <li>2 Yoga Studios</li>
-                    <li>Beachfront Restaurant</li>
-                    <li>3 Swimming Pools</li>
-                    <li>3 Treatment Rooms</li>
-                    <li>Spa</li>
-                    <li>2 Saunas</li>
-                    <li>Fitness Centre</li>
-                    <li>Conference Room</li>
-                </ul>
+                <div class="yoga-includes__amenities-layout">
+                    <div class="yoga-includes__amenities-photo yoga-includes__amenities-photo--placeholder" aria-label="Photo — coming soon">
+                        <span>Photo</span>
+                    </div>
+                    <div class="yoga-includes__amenities-body">
+                        <p class="yoga-includes__amenities-title">On the hotel grounds:</p>
+                        <ul class="yoga-includes__amenities-list">
+                            <li>3 Yoga Studios</li>
+                            <li>Beachfront Restaurant</li>
+                            <li>3 Swimming Pools</li>
+                            <li>3 Treatment Rooms</li>
+                            <li>Spa</li>
+                            <li>2 Saunas</li>
+                            <li>Fitness Centre</li>
+                            <li>Conference Room</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -364,6 +371,212 @@
             </div>
         </div>
     </section>
+
+    <!-- 04a. Тарифы -->
+    <section id="yogaPricing" class="yoga-pricing" aria-labelledby="yogaPricingTitle">
+        <div class="yoga-pricing__container">
+            <header class="yoga-pricing__header yoga-fade-in">
+                <h2 id="yogaPricingTitle">Seasonal rates</h2>
+                <p>Prices in&nbsp;USD per person per night, all-inclusive. Vary by room type and season.</p>
+            </header>
+            <div class="yoga-pricing__season">
+                <input type="radio" name="yoga-pricing-season" id="yoga-pricing-summer" checked>
+                <input type="radio" name="yoga-pricing-season" id="yoga-pricing-autumn">
+                <input type="radio" name="yoga-pricing-season" id="yoga-pricing-winter">
+                <div class="yoga-pricing__tabs" role="tablist" aria-label="Season">
+                    <label class="yoga-pricing__tab" for="yoga-pricing-summer" role="tab">August–September</label>
+                    <label class="yoga-pricing__tab" for="yoga-pricing-autumn" role="tab">October–November</label>
+                    <label class="yoga-pricing__tab" for="yoga-pricing-winter" role="tab">December — until Dec&nbsp;28</label>
+                </div>
+                <div class="yoga-pricing__panels">
+                    <div class="yoga-pricing__panel yoga-pricing__panel--summer yoga-fade-in" role="tabpanel" aria-labelledby="yoga-pricing-summer">
+                        <div class="yoga-pricing__group">
+                            <h3>Main accommodation</h3>
+                            <ul class="yoga-pricing__list">
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Standard</h4><p class="yoga-pricing__meta">1 or 2 beds</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$60</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$85</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Standard sea view</h4><p class="yoga-pricing__meta">1 bed</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$65</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$95</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Standard cottage</h4><p class="yoga-pricing__meta">1 bed</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$65</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$95</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>2-bedroom villa</h4><p class="yoga-pricing__meta">2 bedrooms</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$60</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$85</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>New cottages</h4><p class="yoga-pricing__meta">across the road from the beach</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$65</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$95</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="yoga-pricing__group">
+                            <h3>Bungalows</h3>
+                            <ul class="yoga-pricing__list">
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Bungalows у моря</h4><p class="yoga-pricing__meta">1 bed</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$80</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$120</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Bungalows в саду</h4><p class="yoga-pricing__meta">1 or 2 beds</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$75</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$110</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="yoga-pricing__panel yoga-pricing__panel--autumn yoga-fade-in" role="tabpanel" aria-labelledby="yoga-pricing-autumn">
+                        <div class="yoga-pricing__group">
+                            <h3>Main accommodation</h3>
+                            <ul class="yoga-pricing__list">
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Standard</h4><p class="yoga-pricing__meta">1 or 2 beds</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$65</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$90</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Standard sea view</h4><p class="yoga-pricing__meta">1 bed</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$75</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$100</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Standard cottage</h4><p class="yoga-pricing__meta">1 bed</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$75</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$100</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>2-bedroom villa</h4><p class="yoga-pricing__meta">2 bedrooms</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$65</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$95</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>New cottages</h4><p class="yoga-pricing__meta">across the road from the beach</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$75</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$100</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="yoga-pricing__group">
+                            <h3>Bungalows</h3>
+                            <ul class="yoga-pricing__list">
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Bungalows у моря</h4><p class="yoga-pricing__meta">1 bed</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$90</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$125</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Bungalows в саду</h4><p class="yoga-pricing__meta">1 or 2 beds</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$85</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$115</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="yoga-pricing__panel yoga-pricing__panel--winter yoga-fade-in" role="tabpanel" aria-labelledby="yoga-pricing-winter">
+                        <div class="yoga-pricing__group">
+                            <h3>Main accommodation</h3>
+                            <ul class="yoga-pricing__list">
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Standard</h4><p class="yoga-pricing__meta">1 or 2 beds</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$65</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$90</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Standard sea view</h4><p class="yoga-pricing__meta">1 bed</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$75</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$100</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Standard cottage</h4><p class="yoga-pricing__meta">1 bed</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$75</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$100</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>2-bedroom villa</h4><p class="yoga-pricing__meta">2 bedrooms</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$65</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$95</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>New cottages</h4><p class="yoga-pricing__meta">across the road from the beach</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$75</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$100</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="yoga-pricing__group">
+                            <h3>Bungalows</h3>
+                            <ul class="yoga-pricing__list">
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Bungalows у моря</h4><p class="yoga-pricing__meta">1 bed</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$90</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$125</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                                <li class="yoga-pricing__card">
+                                    <div class="yoga-pricing__card-head"><h4>Bungalows в саду</h4><p class="yoga-pricing__meta">1 or 2 beds</p></div>
+                                    <div class="yoga-pricing__prices">
+                                        <span class="yoga-pricing__price yoga-pricing__price--featured">from <strong>$85</strong> <small>twin</small></span>
+                                        <span class="yoga-pricing__price"><strong>$115</strong> <small>single</small></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- 04b. Summer on Samui -->
     <section id="yogaSummer" class="yoga-summer" aria-labelledby="yogaSummerTitle">
@@ -1724,7 +1937,11 @@
                             <li>Russian version: <a href="/ru/privacy.html">Политика конфиденциальности (RU)</a>.</li>
                         </ul>
                 <p><em>Last updated: 29 May 2026. Document version: 2026-05-29.</em></p>
-             class="yoga-modal" hidden aria-hidden="true">
+            </div>
+        </div>
+    </div>
+
+    <div id="yogaModalOffer" class="yoga-modal" hidden aria-hidden="true">
         <div class="yoga-modal__overlay" tabindex="-1"></div>
         <div class="yoga-modal__content yoga-modal__content--wide" role="dialog" aria-modal="true" aria-labelledby="yogaModalOfferTitle">
             <button type="button" class="yoga-modal__close" aria-label="Close">&times;</button>

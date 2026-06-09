@@ -180,6 +180,39 @@
         text-align: left;
     }
 
+    &__amenities-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        align-items: center;
+
+        @media (min-width: 768px) {
+            grid-template-columns: 1fr 1.15fr;
+        }
+    }
+
+    &__amenities-photo {
+        border-radius: 12px;
+        overflow: hidden;
+        aspect-ratio: 4 / 3;
+
+        &--placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba($color-bg-main, 0.9);
+            border: 2px dashed rgba($color-primary, 0.25);
+
+            span {
+                color: rgba($color-primary, 0.45);
+                font-size: 0.875rem;
+                font-weight: 600;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+            }
+        }
+    }
+
     &__amenities-title {
         font-weight: $font-weight-bold;
         color: $color-primary;
