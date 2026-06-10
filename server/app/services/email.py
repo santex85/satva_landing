@@ -28,6 +28,7 @@ _FIELD_LABELS: dict[str, str] = {
     "package_slug": "Пакет",
     "preferred_date": "Дата заезда",
     "departure_date": "Дата выезда",
+    "guest_count": "Количество человек",
     "comment": "Комментарий",
     "source": "Источник формы",
 }
@@ -41,6 +42,7 @@ _FIELD_ORDER = (
     "package_slug",
     "preferred_date",
     "departure_date",
+    "guest_count",
     "comment",
     "source",
 )
@@ -80,6 +82,7 @@ _CONFIRMATION_FIELD_ORDER = (
     "package_slug",
     "preferred_date",
     "departure_date",
+    "guest_count",
     "comment",
     "phone",
 )
@@ -90,6 +93,7 @@ _CONFIRMATION_FIELD_LABELS: dict[str, dict[str, str]] = {
         "package_slug": "Пакет",
         "preferred_date": "Дата заезда",
         "departure_date": "Дата выезда",
+        "guest_count": "Количество человек",
         "comment": "Комментарий",
         "phone": "Телефон",
     },
@@ -98,6 +102,7 @@ _CONFIRMATION_FIELD_LABELS: dict[str, dict[str, str]] = {
         "package_slug": "Package",
         "preferred_date": "Check-in date",
         "departure_date": "Check-out date",
+        "guest_count": "Number of guests",
         "comment": "Comment",
         "phone": "Phone",
     },

@@ -788,6 +788,17 @@ section[id^=yoga] h2 {
   padding: 0 12px;
   line-height: 1.45;
 }
+.yoga-hero__price-organizer {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ff8e72;
+  margin-top: 10px;
+  max-width: 36rem;
+  text-align: center;
+  padding: 0 12px;
+  line-height: 1.4;
+  text-shadow: 0 2px 20px rgba(255, 142, 114, 0.4);
+}
 .yoga-hero__buttons {
   display: flex;
   gap: 16px;
@@ -1425,75 +1436,32 @@ section[id^=yoga] h2 {
   display: none;
   animation: yoga-pricing-fade 0.25s ease;
 }
-.yoga-pricing__group + .yoga-pricing__group {
-  margin-top: 28px;
-}
-.yoga-pricing__group h3 {
-  margin: 0 0 14px;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(15, 76, 92, 0.65);
-}
-.yoga-pricing__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 12px;
-}
-@media (min-width: 640px) {
-  .yoga-pricing__list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-.yoga-pricing__card {
+.yoga-pricing__summary {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  text-align: center;
   gap: 12px;
-  padding: 18px 20px;
-  background: #f7f5f2;
-  border-radius: 14px;
-  border: 1px solid rgba(15, 76, 92, 0.08);
-  min-height: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 8px 0 4px;
 }
-.yoga-pricing__card-head h4 {
-  margin: 0 0 4px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #0f4c5c;
-  line-height: 1.3;
-}
-.yoga-pricing__meta {
+.yoga-pricing__from {
   margin: 0;
-  font-size: 0.875rem;
-  color: #666666;
-  line-height: 1.4;
-}
-.yoga-pricing__prices {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 10px 16px;
-}
-.yoga-pricing__price {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   color: #2d3436;
-  line-height: 1.3;
+  line-height: 1.2;
 }
-.yoga-pricing__price strong {
-  font-size: 1.35rem;
+.yoga-pricing__from strong {
+  font-size: clamp(2.5rem, 8vw, 3.25rem);
   font-weight: 700;
   color: #0f4c5c;
 }
-.yoga-pricing__price small {
-  font-size: 0.75rem;
+.yoga-pricing__note {
+  margin: 0;
+  font-size: 0.9375rem;
   color: #666666;
-}
-.yoga-pricing__price--featured {
-  font-size: 0.8125rem;
+  line-height: 1.45;
 }
 
 #yoga-pricing-summer:checked ~ .yoga-pricing__tabs label[for=yoga-pricing-summer],
@@ -1529,6 +1497,9 @@ section[id^=yoga] h2 {
   background: #e8dcc6;
   padding: clamp(60px, 8vw, 100px) 24px;
 }
+.yoga-summer--light {
+  background: #ffffff;
+}
 .yoga-summer__container {
   max-width: 900px;
   margin: 0 auto;
@@ -1550,6 +1521,15 @@ section[id^=yoga] h2 {
   margin: 0 0 16px;
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   line-height: 1.2;
+}
+.yoga-summer__body {
+  color: #2d3436;
+  line-height: 1.7;
+  margin: 0;
+  font-size: 1rem;
+}
+.yoga-summer__body + .yoga-summer__body {
+  margin-top: 14px;
 }
 .yoga-summer__placeholder {
   color: rgba(45, 52, 54, 0.65);
@@ -1937,25 +1917,25 @@ section[id^=yoga] h2 {
   width: 44px;
   height: 44px;
   padding: 0;
-  border: none;
+  border: 2px solid rgba(15, 76, 92, 0.25);
   border-radius: 50%;
-  background: transparent;
+  background: #ffffff;
+  color: #0f4c5c;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
   cursor: pointer;
-  position: relative;
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
-.yoga-rooms-carousel__dot::after {
-  content: "";
-  position: absolute;
-  inset: 17px;
-  border-radius: 50%;
-  background: rgba(15, 76, 92, 0.25);
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-.yoga-rooms-carousel__dot.is-active::after {
+.yoga-rooms-carousel__dot.is-active {
   background: #0f4c5c;
-  transform: scale(1.15);
+  border-color: #0f4c5c;
+  color: #ffffff;
+  transform: scale(1.05);
 }
 .yoga-rooms-carousel__dot:focus-visible {
   outline: 2px solid #ff8e72;
@@ -2514,6 +2494,31 @@ section[id^=yoga] h2 {
   object-fit: contain;
 }
 
+.yoga-travel-help {
+  background: #ffffff;
+  padding: clamp(36px, 5vw, 52px) 24px;
+}
+.yoga-travel-help__container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.yoga-travel-help__block {
+  text-align: center;
+}
+.yoga-travel-help h2 {
+  margin: 0 0 12px;
+  color: #0f4c5c;
+  font-size: clamp(1.25rem, 3vw, clamp(1.75rem, 4vw, 2.5rem));
+  line-height: 1.2;
+}
+.yoga-travel-help p {
+  margin: 0 auto;
+  max-width: 520px;
+  color: #2d3436;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
 .yoga-team {
   background: #e8dcc6;
   padding: clamp(60px, 8vw, 100px) 24px;
@@ -2850,33 +2855,64 @@ section[id^=yoga] h2 {
   border-radius: 20px;
   overflow: hidden;
   aspect-ratio: 4/3;
+  background: #093642;
 }
-.yoga-expert__photo--placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.55);
-  border: 2px dashed rgba(15, 76, 92, 0.25);
+.yoga-expert__photo picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
-.yoga-expert__photo--placeholder span {
-  color: rgba(15, 76, 92, 0.45);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.yoga-expert__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .yoga-expert__text h2 {
   color: #0f4c5c;
-  margin: 0 0 20px;
+  margin: 0 0 4px;
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   line-height: 1.2;
 }
-.yoga-expert__placeholder {
-  color: rgba(45, 52, 54, 0.65);
-  line-height: 1.7;
+.yoga-expert__role {
+  display: block;
+  margin: 0 0 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ff8e72;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+}
+.yoga-expert__bio {
   margin: 0;
-  font-size: 1rem;
-  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #2d3436;
+}
+.yoga-expert__bio + .yoga-expert__bio {
+  margin-top: 12px;
+}
+.yoga-expert__bio-list {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.yoga-expert__bio-list li {
+  padding: 5px 0 5px 1.1rem;
+  position: relative;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #2d3436;
+}
+.yoga-expert__bio-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff8e72;
 }
 
 .yoga-pancha {
@@ -2927,6 +2963,31 @@ section[id^=yoga] h2 {
   color: #2d3436;
   line-height: 1.7;
   margin: 0 0 20px;
+}
+
+.yoga-group-offer {
+  background: #e8dcc6;
+  padding: clamp(36px, 5vw, 52px) 24px;
+}
+.yoga-group-offer__container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.yoga-group-offer__block {
+  text-align: center;
+}
+.yoga-group-offer h2 {
+  margin: 0 0 12px;
+  color: #0f4c5c;
+  font-size: clamp(1.25rem, 3vw, clamp(1.75rem, 4vw, 2.5rem));
+  line-height: 1.2;
+}
+.yoga-group-offer p {
+  margin: 0 auto 20px;
+  max-width: 520px;
+  color: #2d3436;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .yoga-team-group {

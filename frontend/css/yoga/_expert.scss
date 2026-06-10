@@ -25,38 +25,74 @@
         border-radius: 20px;
         overflow: hidden;
         aspect-ratio: 4 / 3;
+        background: $color-primary-dark;
 
-        &--placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba($color-white, 0.55);
-            border: 2px dashed rgba($color-primary, 0.25);
+        picture {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
 
-            span {
-                color: rgba($color-primary, 0.45);
-                font-size: 0.875rem;
-                font-weight: 600;
-                letter-spacing: 0.04em;
-                text-transform: uppercase;
-            }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     }
 
     &__text {
         h2 {
             color: $color-primary;
-            margin: 0 0 20px;
+            margin: 0 0 4px;
             font-size: $font-size-h2;
             line-height: $line-height-tight;
         }
     }
 
-    &__placeholder {
-        color: rgba($color-dark, 0.65);
-        line-height: 1.7;
+    &__role {
+        display: block;
+        margin: 0 0 14px;
+        font-size: 0.85rem;
+        font-weight: $font-weight-semibold;
+        color: $color-accent;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        line-height: 1.4;
+    }
+
+    &__bio {
         margin: 0;
-        font-size: 1rem;
-        font-style: italic;
+        font-size: 0.95rem;
+        line-height: $line-height-body;
+        color: $color-text;
+
+        & + & {
+            margin-top: 12px;
+        }
+    }
+
+    &__bio-list {
+        margin: 8px 0 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+            padding: 5px 0 5px 1.1rem;
+            position: relative;
+            font-size: 0.95rem;
+            line-height: $line-height-body;
+            color: $color-text;
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0.72rem;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: $color-accent;
+            }
+        }
     }
 }

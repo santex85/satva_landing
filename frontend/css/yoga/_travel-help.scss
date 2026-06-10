@@ -1,0 +1,31 @@
+@use '../core' as *;
+
+// Добраться до Самуи (партнёрский лендинг)
+.yoga-travel-help {
+    background: $color-white;
+    padding: clamp(36px, 5vw, 52px) $space-h;
+
+    &__container {
+        max-width: 640px;
+        margin: 0 auto;
+    }
+
+    &__block {
+        text-align: center;
+    }
+
+    h2 {
+        margin: 0 0 12px;
+        color: $color-primary;
+        font-size: clamp(1.25rem, 3vw, $font-size-h2);
+        line-height: $line-height-tight;
+    }
+
+    p {
+        margin: 0 auto;
+        max-width: 520px;
+        color: $color-dark;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+}

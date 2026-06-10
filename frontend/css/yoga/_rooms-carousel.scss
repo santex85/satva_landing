@@ -158,26 +158,29 @@
         width: 44px; // WCAG 2.5.5 target minimum
         height: 44px;
         padding: 0;
-        border: none;
+        border: 2px solid rgba($color-primary, 0.25);
         border-radius: $radius-circle;
-        background: transparent;
+        background: $color-white;
+        color: $color-primary;
+        font-size: 0.875rem;
+        font-weight: 700;
+        line-height: 1;
         cursor: pointer;
-        position: relative;
         flex-shrink: 0;
-        transition: transform $transition-fast;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+            background $transition-fast,
+            color $transition-fast,
+            border-color $transition-fast,
+            transform $transition-fast;
 
-        &::after {
-            content: '';
-            position: absolute;
-            inset: 17px; // визуальный круг ~10px при 44×44
-            border-radius: $radius-circle;
-            background: rgba($color-primary, 0.25);
-            transition: transform $transition-fast, background $transition-fast;
-        }
-
-        &.is-active::after {
+        &.is-active {
             background: $color-primary;
-            transform: scale(1.15);
+            border-color: $color-primary;
+            color: $color-white;
+            transform: scale(1.05);
         }
 
         &:focus-visible {

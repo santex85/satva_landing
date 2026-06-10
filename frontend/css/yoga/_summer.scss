@@ -1,9 +1,13 @@
 @use '../core' as *;
 
-// Летний сезон (партнёрский лендинг)
+// Почему Самуи / Лето на Самуи (партнёрский лендинг)
 .yoga-summer {
     background: $color-secondary;
     padding: $space-section $space-h;
+
+    &--light {
+        background: $color-white;
+    }
 
     &__container {
         max-width: $container-base;
@@ -28,6 +32,17 @@
             margin: 0 0 16px;
             font-size: $font-size-h2;
             line-height: $line-height-tight;
+        }
+    }
+
+    &__body {
+        color: $color-dark;
+        line-height: 1.7;
+        margin: 0;
+        font-size: 1rem;
+
+        & + & {
+            margin-top: 14px;
         }
     }
 

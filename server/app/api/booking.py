@@ -28,6 +28,7 @@ def booking(
         "procedure": body.procedure,
         "preferred_date": body.preferred_date,
         "departure_date": body.departure_date,
+        "guest_count": body.guest_count,
         "comment": body.comment,
     }
     if body.email:

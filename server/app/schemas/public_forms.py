@@ -85,7 +85,15 @@ class BookingRequest(LeadSubmissionBase):
     procedure: str = Field(..., min_length=1, max_length=300)
     preferred_date: str | None = Field(None, max_length=64)
     departure_date: str | None = Field(None, max_length=64)
+    guest_count: int | None = Field(None, ge=1, le=999, description="Approximate number of guests")
     comment: str | None = Field(None, max_length=2000)
+
+    @field_validator("guest_count", mode="before")
+    @classmethod
+    def guest_count_optional(cls, v):
+        if v is None or v == "":
+            return None
+        return v
 
     @field_validator("procedure")
     @classmethod

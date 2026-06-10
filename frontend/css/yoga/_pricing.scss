@@ -81,88 +81,35 @@
         animation: yoga-pricing-fade 0.25s ease;
     }
 
-    &__group {
-        & + & {
-            margin-top: 28px;
-        }
-
-        h3 {
-            margin: 0 0 14px;
-            font-size: 0.8125rem;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: rgba($color-primary, 0.65);
-        }
-    }
-
-    &__list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: grid;
-        gap: 12px;
-
-        @media (min-width: 640px) {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    &__card {
+    &__summary {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        align-items: center;
+        text-align: center;
         gap: 12px;
-        padding: 18px 20px;
-        background: $color-bg-main;
-        border-radius: 14px;
-        border: 1px solid rgba($color-primary, 0.08);
-        min-height: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+        padding: 8px 0 4px;
     }
 
-    &__card-head {
-        h4 {
-            margin: 0 0 4px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: $color-primary;
-            line-height: 1.3;
-        }
-    }
-
-    &__meta {
+    &__from {
         margin: 0;
-        font-size: 0.875rem;
-        color: $color-text-light;
-        line-height: 1.4;
-    }
-
-    &__prices {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: baseline;
-        gap: 10px 16px;
-    }
-
-    &__price {
-        font-size: 0.875rem;
+        font-size: 1.125rem;
         color: $color-dark;
-        line-height: 1.3;
+        line-height: 1.2;
 
         strong {
-            font-size: 1.35rem;
+            font-size: clamp(2.5rem, 8vw, 3.25rem);
             font-weight: 700;
             color: $color-primary;
         }
+    }
 
-        small {
-            font-size: 0.75rem;
-            color: $color-text-light;
-        }
-
-        &--featured {
-            font-size: 0.8125rem;
-        }
+    &__note {
+        margin: 0;
+        font-size: 0.9375rem;
+        color: $color-text-light;
+        line-height: 1.45;
     }
 }
 

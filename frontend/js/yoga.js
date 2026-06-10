@@ -103,6 +103,12 @@
         return cleaned;
     }
 
+    function parseGuestCount(el) {
+        if (!el || !el.value) return null;
+        var n = parseInt(el.value, 10);
+        return n >= 1 && n <= 999 ? n : null;
+    }
+
     /** Метаданные для addEvent — без ключей phone/email (Tawk оборачивает их в HTML). */
     function buildTawkEventMeta(lead) {
         if (!lead || typeof lead !== 'object') return {};
@@ -117,6 +123,7 @@
         add('email-address', lead.email);
         add('arrival-date', lead.preferred_date);
         add('departure-date', lead.departure_date);
+        if (lead.guest_count != null) add('guest-count', lead.guest_count);
         add('comment', lead.comment);
         add('procedure', lead.procedure);
         add('package', lead.package_slug);
@@ -788,6 +795,9 @@
             var b = document.createElement('button');
             b.type = 'button';
             b.className = 'yoga-rooms-carousel__dot' + (i === 0 ? ' is-active' : '');
+            b.setAttribute('role', 'tab');
+            b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+            b.textContent = String(i + 1);
             b.setAttribute('aria-label', tFmt('roomSlideLabel', { n: i + 1, total: total }));
             (function (slideIndex) {
                 b.addEventListener('click', function () {
@@ -805,7 +815,10 @@
                 s.classList.toggle('is-active', on);
                 s.hidden = !on;
                 s.setAttribute('aria-hidden', on ? 'false' : 'true');
-                if (dots[j]) dots[j].classList.toggle('is-active', on);
+                if (dots[j]) {
+                    dots[j].classList.toggle('is-active', on);
+                    dots[j].setAttribute('aria-selected', on ? 'true' : 'false');
+                }
             });
         }
 
@@ -1138,6 +1151,7 @@
         var emailErr = document.getElementById('yogaLeadModalEmailErr');
         var arrivalDate = document.getElementById('yogaLeadModalArrivalDate');
         var departureDate = document.getElementById('yogaLeadModalDepartureDate');
+        var guestCount = document.getElementById('yogaLeadModalGuestCount');
         var comment = document.getElementById('yogaLeadModalComment');
 
         var lastSubmitTime = 0;
@@ -1304,6 +1318,7 @@
 
             var pDate = (arrivalDate && arrivalDate.value) ? arrivalDate.value.trim() : '';
             var depDate = (departureDate && departureDate.value) ? departureDate.value.trim() : '';
+            var guests = parseGuestCount(guestCount);
             var cmt = (comment && comment.value) ? comment.value.trim() : '';
             var procEl = form.querySelector('input[name="procedure"]');
             var procedure = (procEl && procEl.value) ? procEl.value.trim() : t('defaultProcedure');
@@ -1317,6 +1332,7 @@
                 procedure: procedure,
                 preferred_date: pDate || null,
                 departure_date: depDate || null,
+                guest_count: guests,
                 comment: cmt || null,
             };
             var emLeadTrim = (emailIn && emailIn.value) ? emailIn.value.trim() : '';
@@ -1384,6 +1400,7 @@
         var consent = document.getElementById('yogaConsent');
         var arrivalDate = document.getElementById('yogaArrivalDate');
         var departureDate = document.getElementById('yogaDepartureDate');
+        var guestCount = document.getElementById('yogaGuestCount');
         var comment = document.getElementById('yogaComment');
         var websiteHp = document.getElementById('yogaWebsite');
         var submitBtn = document.getElementById('yogaSubmitBtn');
@@ -1593,6 +1610,7 @@
 
             var pDate = (arrivalDate && arrivalDate.value) ? arrivalDate.value.trim() : '';
             var depDate = (departureDate && departureDate.value) ? departureDate.value.trim() : '';
+            var guests = parseGuestCount(guestCount);
             var cmt = (comment && comment.value) ? comment.value.trim() : '';
             var procEl = form.querySelector('input[name="procedure"]');
             var procedure = (procEl && procEl.value) ? procEl.value.trim() : t('defaultProcedure');
@@ -1605,6 +1623,7 @@
                 procedure: procedure,
                 preferred_date: pDate || null,
                 departure_date: depDate || null,
+                guest_count: guests,
                 comment: cmt || null,
             };
             var emMainTrim = (emailIn && emailIn.value) ? emailIn.value.trim() : '';
