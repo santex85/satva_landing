@@ -818,6 +818,9 @@
                 if (dots[j]) {
                     dots[j].classList.toggle('is-active', on);
                     dots[j].setAttribute('aria-selected', on ? 'true' : 'false');
+                    if (on && dots[j].scrollIntoView) {
+                        dots[j].scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+                    }
                 }
             });
         }

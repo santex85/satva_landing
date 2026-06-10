@@ -38,9 +38,9 @@
     <!-- Preload hero (LCP) — WebP -->
     <link rel="preload" as="image" href="/img/yoga_tour/hero_sunset@1x.webp" type="image/webp">
 
-    <link rel="stylesheet" href="/css/yoga.css?v=21">
+    <link rel="stylesheet" href="/css/yoga.css?v=25">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
-    <script defer src="/js/yoga.js?v=8"></script>
+    <script defer src="/js/yoga.js?v=9"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
 
     <!-- Structured Data: LodgingBusiness (расширенная карточка) -->
@@ -305,8 +305,13 @@
             <p class="yoga-includes__legend yoga-fade-in"><span class="yoga-includes__optional">*</span>&nbsp;— оплачивается отдельно, не входит в базовый пакет тура.</p>
             <div class="yoga-includes__amenities yoga-fade-in" aria-label="Инфраструктура, включённая в пакет">
                 <div class="yoga-includes__amenities-layout">
-                    <div class="yoga-includes__amenities-photo yoga-includes__amenities-photo--placeholder" aria-label="Фото — скоро">
-                        <span>Фото</span>
+                    <div class="yoga-includes__amenities-photo">
+                        <picture>
+                            <source type="image/webp" srcset="/img/yoga_tour/includes_amenities.webp">
+                            <img src="/img/yoga_tour/includes_amenities.webp"
+                                 alt="Территория отеля Satva Samui у моря на закате"
+                                 loading="lazy" width="1024" height="683" decoding="async">
+                        </picture>
                     </div>
                     <div class="yoga-includes__amenities-body">
                         <p class="yoga-includes__amenities-title">На территории отеля:</p>
@@ -441,8 +446,13 @@
             </header>
 
             <div class="yoga-program__block yoga-fade-in">
-                <div class="yoga-program__photo yoga-program__photo--placeholder" aria-label="Фото — скоро">
-                    <span>Фото</span>
+                <div class="yoga-program__photo">
+                    <picture>
+                        <source type="image/webp" srcset="/img/yoga_tour/program_beach_sala.webp">
+                        <img src="/img/yoga_tour/program_beach_sala.webp"
+                             alt="Йога-площадка на берегу моря — занятия в открытом павильоне у воды"
+                             loading="lazy" width="1024" height="683" decoding="async">
+                    </picture>
                 </div>
                 <div class="yoga-program__text">
                     <h3>Йога-площадка прямо на берегу моря</h3>
@@ -451,8 +461,13 @@
             </div>
 
             <div class="yoga-program__block yoga-fade-in">
-                <div class="yoga-program__photo yoga-program__photo--placeholder" aria-label="Фото — скоро">
-                    <span>Фото</span>
+                <div class="yoga-program__photo">
+                    <picture>
+                        <source type="image/webp" srcset="/img/yoga_tour/program_garden_sala.webp">
+                        <img src="/img/yoga_tour/program_garden_sala.webp"
+                             alt="Йога-площадка в саду — открытый зал с видом на тропическую зелень"
+                             loading="lazy" width="1024" height="683" decoding="async">
+                    </picture>
                 </div>
                 <div class="yoga-program__text">
                     <h3>Йога-площадка в саду</h3>

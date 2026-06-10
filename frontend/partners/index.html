@@ -38,9 +38,9 @@
     <!-- Preload hero (LCP) — WebP -->
     <link rel="preload" as="image" href="/img/yoga_tour/hero_sunset@1x.webp" type="image/webp">
 
-    <link rel="stylesheet" href="/css/yoga.css?v=21">
+    <link rel="stylesheet" href="/css/yoga.css?v=25">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
-    <script defer src="/js/yoga.js?v=8"></script>
+    <script defer src="/js/yoga.js?v=9"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
 
     <!-- Structured Data: LodgingBusiness (расширенная карточка) -->
@@ -324,8 +324,13 @@
             <p class="yoga-includes__legend yoga-fade-in"><span class="yoga-includes__optional">*</span>&nbsp;— Available at an additional cost, not included in the base package.</p>
             <div class="yoga-includes__amenities yoga-fade-in" aria-label="Hotel amenities included in your retreat">
                 <div class="yoga-includes__amenities-layout">
-                    <div class="yoga-includes__amenities-photo yoga-includes__amenities-photo--placeholder" aria-label="Photo — coming soon">
-                        <span>Photo</span>
+                    <div class="yoga-includes__amenities-photo">
+                        <picture>
+                            <source type="image/webp" srcset="/img/yoga_tour/includes_amenities.webp">
+                            <img src="/img/yoga_tour/includes_amenities.webp"
+                                 alt="Satva Samui hotel grounds by the sea at sunset"
+                                 loading="lazy" width="1024" height="683" decoding="async">
+                        </picture>
                     </div>
                     <div class="yoga-includes__amenities-body">
                         <p class="yoga-includes__amenities-title">On the hotel grounds:</p>
@@ -460,8 +465,13 @@
             </header>
 
             <div class="yoga-program__block yoga-fade-in">
-                <div class="yoga-program__photo yoga-program__photo--placeholder" aria-label="Photo — coming soon">
-                    <span>Photo</span>
+                <div class="yoga-program__photo">
+                    <picture>
+                        <source type="image/webp" srcset="/img/yoga_tour/program_beach_sala.webp">
+                        <img src="/img/yoga_tour/program_beach_sala.webp"
+                             alt="Open-air yoga pavilion on the beach — group session by the sea"
+                             loading="lazy" width="1024" height="683" decoding="async">
+                    </picture>
                 </div>
                 <div class="yoga-program__text">
                     <h3>Open-air yoga deck on the beach</h3>
@@ -470,8 +480,13 @@
             </div>
 
             <div class="yoga-program__block yoga-fade-in">
-                <div class="yoga-program__photo yoga-program__photo--placeholder" aria-label="Photo — coming soon">
-                    <span>Photo</span>
+                <div class="yoga-program__photo">
+                    <picture>
+                        <source type="image/webp" srcset="/img/yoga_tour/program_garden_sala.webp">
+                        <img src="/img/yoga_tour/program_garden_sala.webp"
+                             alt="Garden yoga pavilion — open-air studio overlooking tropical greenery"
+                             loading="lazy" width="1024" height="683" decoding="async">
+                    </picture>
                 </div>
                 <div class="yoga-program__text">
                     <h3>Garden yoga deck</h3>

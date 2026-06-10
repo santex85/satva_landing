@@ -1223,6 +1223,12 @@ section[id^=yoga] h2 {
   border: 1px solid rgba(15, 76, 92, 0.08);
   text-align: left;
 }
+.yoga-includes__amenities:has(.yoga-includes__amenities-layout) {
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
 .yoga-includes__amenities-layout {
   display: grid;
   grid-template-columns: 1fr;
@@ -1238,6 +1244,17 @@ section[id^=yoga] h2 {
   border-radius: 12px;
   overflow: hidden;
   aspect-ratio: 4/3;
+}
+.yoga-includes__amenities-photo picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.yoga-includes__amenities-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .yoga-includes__amenities-photo--placeholder {
   display: flex;
@@ -1858,6 +1875,14 @@ section[id^=yoga] h2 {
   flex-wrap: nowrap;
   width: 100%;
 }
+@media (max-width: 540px) {
+  .yoga-rooms-carousel__controls {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 12px;
+    column-gap: 16px;
+  }
+}
 .yoga-rooms-carousel__btn {
   width: 44px;
   height: 44px;
@@ -1896,6 +1921,11 @@ section[id^=yoga] h2 {
   outline: 3px solid #ff8e72;
   outline-offset: 2px;
 }
+@media (max-width: 540px) {
+  .yoga-rooms-carousel__btn {
+    display: none;
+  }
+}
 .yoga-rooms-carousel__dots {
   display: flex;
   flex-wrap: nowrap;
@@ -1909,9 +1939,19 @@ section[id^=yoga] h2 {
   padding: 4px 0;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  scroll-snap-type: x proximity;
 }
 .yoga-rooms-carousel__dots::-webkit-scrollbar {
   display: none;
+}
+@media (max-width: 540px) {
+  .yoga-rooms-carousel__dots {
+    flex: 0 0 100%;
+    order: -1;
+    justify-content: center;
+    overflow-x: auto;
+    scroll-padding-inline: 8px;
+  }
 }
 .yoga-rooms-carousel__dot {
   width: 44px;
@@ -1936,6 +1976,16 @@ section[id^=yoga] h2 {
   border-color: #0f4c5c;
   color: #ffffff;
   transform: scale(1.05);
+}
+@media (max-width: 540px) {
+  .yoga-rooms-carousel__dot.is-active {
+    transform: none;
+  }
+}
+@media (max-width: 540px) {
+  .yoga-rooms-carousel__dot {
+    scroll-snap-align: center;
+  }
 }
 .yoga-rooms-carousel__dot:focus-visible {
   outline: 2px solid #ff8e72;
