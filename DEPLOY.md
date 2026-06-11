@@ -26,7 +26,7 @@
 
 ### 2. Секреты
 
-Создай файл **`server/.env`** (не в git): `JWT_SECRET`, `RESEND_*`, `TURNSTILE_SECRET_KEY`, `TURNSTILE_SITE_KEY`, `CORS_ORIGINS=https://satvasamui.com,https://www.satvasamui.com`, и т.д. (см. `server/.env.example`).
+Создай файл **`server/.env`** (не в git): `JWT_SECRET`, `RESEND_*`, `TURNSTILE_SECRET_KEY`, `TURNSTILE_SITE_KEY`, `CORS_ORIGINS=https://satvasamui.com,https://www.satvasamui.com,https://satvasamui.ru,https://www.satvasamui.ru`, и т.д. (см. `server/.env.example`). На `.ru` формы шлют запросы cross-origin на `https://satvasamui.com/api` — без `.ru` в CORS заявки с русского домена не пройдут.
 
 Для Postgres задай пароль при запуске compose, например файл **`.env.deploy`** в корне репо (не коммитить):
 

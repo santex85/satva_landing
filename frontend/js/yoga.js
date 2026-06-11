@@ -13,6 +13,16 @@
     var yogaTurnstileSiteKey = '';
 
     var LANG = (document.documentElement.lang || 'ru').toLowerCase().indexOf('en') === 0 ? 'en' : 'ru';
+
+    /** API: на satvasamui.ru запросы идут cross-origin на .com */
+    function apiPath(p) {
+        var h = window.location.hostname;
+        if (h === 'satvasamui.ru' || h === 'www.satvasamui.ru') {
+            return 'https://satvasamui.com/api' + p;
+        }
+        return (window.location.origin || '') + '/api' + p;
+    }
+
     var STRINGS = {
         ru: {
             invalidEmail: 'Некорректный email',
@@ -1162,10 +1172,6 @@
 
         var GENERIC_ERR = t('genericErr');
 
-        function apiPath(p) {
-            return (window.location.origin || '') + '/api' + p;
-        }
-
         function setFormLoading(loading) {
             if (!submitBtn) return;
             submitBtn.disabled = loading;
@@ -1420,10 +1426,6 @@
         var turnstileSiteKey = '';
 
         var GENERIC_ERR = t('genericErr');
-
-        function apiPath(p) {
-            return (window.location.origin || '') + '/api' + p;
-        }
 
         function setFormLoading(loading) {
             if (!submitBtn) return;
