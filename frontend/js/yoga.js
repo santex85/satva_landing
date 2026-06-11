@@ -851,14 +851,14 @@
             b.setAttribute('aria-label', tFmt('roomSlideLabel', { n: i + 1, total: total }));
             (function (slideIndex) {
                 b.addEventListener('click', function () {
-                    go(slideIndex);
+                    go(slideIndex, true);
                 });
             }(i));
             dotsRoot.appendChild(b);
         });
         var dots = dotsRoot.querySelectorAll('.yoga-rooms-carousel__dot');
 
-        function go(i) {
+        function go(i, scrollDot) {
             idx = (i + total) % total;
             slides.forEach(function (s, j) {
                 var on = j === idx;
@@ -868,7 +868,8 @@
                 if (dots[j]) {
                     dots[j].classList.toggle('is-active', on);
                     dots[j].setAttribute('aria-selected', on ? 'true' : 'false');
-                    if (on && dots[j].scrollIntoView) {
+                    // scrollIntoView только по действию пользователя — иначе при go(0) на загрузке страница прыгает к номерам
+                    if (on && scrollDot && dots[j].scrollIntoView) {
                         dots[j].scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
                     }
                 }
@@ -877,12 +878,12 @@
 
         if (prevBtn) {
             prevBtn.addEventListener('click', function () {
-                go(idx - 1);
+                go(idx - 1, true);
             });
         }
         if (nextBtn) {
             nextBtn.addEventListener('click', function () {
-                go(idx + 1);
+                go(idx + 1, true);
             });
         }
         var startX = null;
@@ -904,8 +905,8 @@
                 startX = null;
                 if (Math.abs(dx) < 45) return;
                 if (fromGalleryStage) return;
-                if (dx < 0) go(idx + 1);
-                else go(idx - 1);
+                if (dx < 0) go(idx + 1, true);
+                else go(idx - 1, true);
             }, { passive: true });
         }
         go(0);
