@@ -38,9 +38,12 @@
     <!-- Preload hero (LCP) — WebP -->
     <link rel="preload" as="image" href="/img/yoga_tour/hero_sunset@1x.webp" type="image/webp">
 
-    <link rel="stylesheet" href="/css/yoga.css?v=7">
+    <link rel="stylesheet" href="/css/yoga.css?v=8">
+    <meta name="satva-meta-pixel-id" content="">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
-    <script defer src="/js/yoga.js?v=10"></script>
+    <script defer src="/js/consent.js?v=2"></script>
+    <script defer src="/js/pixel.js?v=1"></script>
+    <script defer src="/js/yoga.js?v=11"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
 
     <!-- Structured Data: LodgingBusiness (расширенная карточка) -->
@@ -1292,6 +1295,7 @@
 
     <!-- 14. Финальная форма -->
     <section id="yogaForm" class="yoga-form" aria-labelledby="yogaFormTitle">
+        <span id="booking" class="yoga-form__anchor" aria-hidden="true"></span>
         <div class="yoga-form__bg" style="background-size: cover; background-repeat: no-repeat; background-position: center; background-image: url('/img/yoga_tour/beach_sunset.webp');" role="presentation"></div>
         <div class="yoga-form__overlay" role="presentation"></div>
         <div class="yoga-form__container">
@@ -1492,6 +1496,7 @@
                 <button type="button" class="yoga-site-footer__link js-open-yoga-privacy">Политика конфиденциальности</button>
                 · <a href="/oferta.html" class="yoga-site-footer__link">Публичная оферта</a>
                 · <a href="/cancellation.html" class="yoga-site-footer__link">Условия отмены</a>
+                · <button type="button" class="yoga-site-footer__link js-open-cookie-settings">Настроить cookies</button>
             </p>
         </div>
     </footer>
@@ -1715,8 +1720,8 @@
             <button type="button" class="yoga-modal__close" aria-label="Закрыть">&times;</button>
             <h2 class="yoga-modal__title" id="yogaModalPrivacyTitle">Политика конфиденциальности</h2>
             <div class="yoga-modal__body yoga-modal__body--scroll">
-                <p><a href="/privacy.html" target="_blank" rel="noopener noreferrer">Полная версия на отдельной странице</a></p>
-                <p class="meta"><strong>Версия:</strong> 2026-05-29 &nbsp;|&nbsp; <strong>Дата вступления в силу:</strong> 29 мая 2026 г.</p>
+                <p><a href="/ru/privacy.html" target="_blank" rel="noopener noreferrer">Полная версия на отдельной странице</a></p>
+                <p class="meta"><strong>Версия:</strong> 2026-06-11 &nbsp;|&nbsp; <strong>Дата вступления в силу:</strong> 11 июня 2026 г.</p>
                 
                         <p>Настоящая Политика конфиденциальности (далее — <strong>«Политика»</strong>) описывает порядок сбора, использования, хранения, передачи и защиты персональных данных при использовании сайта <a href="https://satvasamui.ru/">satvasamui.ru</a> (далее — <strong>«Сайт»</strong>) и взаимодействии с <strong>Satva Samui Retreat Hotel</strong> (йога-отель на острове Самуи, Королевство Таиланд; далее — <strong>«Satva Samui»</strong>, <strong>«мы»</strong>, <strong>«Оператор»</strong>).</p>
                         <p>Политика разработана с учётом требований Федерального закона РФ от 27.07.2006 № 152-ФЗ «О персональных данных», Закона Таиланда о защите персональных данных B.E. 2562 (2019) (PDPA), Общего регламента ЕС о защите данных (GDPR), Закона Великобритании о защите данных 2018 (UK GDPR), а также иных применимых норм на 2026 год. Если вы находитесь в юрисдикции с более строгими требованиями, к вам применяются соответствующие положения настоящей Политики.</p>
@@ -1746,7 +1751,7 @@
                         <ul>
                             <li><strong>Идентификационные и контактные:</strong> имя, номер телефона (включая WhatsApp, MAX, Telegram), адрес электронной почты (если указан).</li>
                             <li><strong>Данные заявки:</strong> выбранная программа или процедура, желаемые даты заезда/отъезда, комментарии к запросу, источник формы (лендинг, попап, подвал страницы).</li>
-                            <li><strong>Данные согласия:</strong> факт принятия Политики, дата и время, версия Политики (<code>2026-05-29</code>), IP-адрес, User-Agent, Referer (при отправке формы).</li>
+                            <li><strong>Данные согласия:</strong> факт принятия Политики, дата и время, версия Политики (<code>2026-06-11</code>), IP-адрес, User-Agent, Referer (при отправке формы).</li>
                             <li><strong>Аналитика использования:</strong> агрегированная анонимная статистика просмотров (страницы, источник перехода, тип браузера/устройства, примерная страна) через Umami; не связывается с данными заявки, если вы не отправляли форму.</li>
                             <li><strong>Технические:</strong> данные, необходимые для работы Сайта, защиты от злоупотреблений и ведения журналов (в т.ч. через Cloudflare Turnstile).</li>
                             <li><strong>Данные чата:</strong> сообщения и метаданные в виджете Tawk.to, если вы им пользуетесь.</li>
@@ -1775,6 +1780,7 @@
                                 <tr><td style="padding:0.4rem 0.25rem; vertical-align:top;">Подтверждение согласия с Политикой и офертой</td><td style="padding:0.4rem 0.25rem; vertical-align:top;">Юридическая обязанность; согласие</td></tr>
                                 <tr><td style="padding:0.4rem 0.25rem; vertical-align:top;">Защита Сайта от спама и злоупотреблений (Turnstile)</td><td style="padding:0.4rem 0.25rem; vertical-align:top;">Законный интерес; согласие (где требуется для cookie)</td></tr>
                                 <tr><td style="padding:0.4rem 0.25rem; vertical-align:top;">Анализ посещаемости Сайта и улучшение контента (Umami)</td><td style="padding:0.4rem 0.25rem; vertical-align:top;">Законный интерес</td></tr>
+                                <tr><td style="padding:0.4rem 0.25rem; vertical-align:top;">Измерение эффективности рекламы Meta (Pixel / Conversions API) — только при согласии на маркетинговые cookie</td><td style="padding:0.4rem 0.25rem; vertical-align:top;">Согласие</td></tr>
                                 <tr><td style="padding:0.4rem 0.25rem; vertical-align:top;">Маркетинговые рассылки об акциях (только при указании email для этой цели)</td><td style="padding:0.4rem 0.25rem; vertical-align:top;">Отдельное согласие; отзыв в любой момент</td></tr>
                                 <tr><td style="padding:0.4rem 0.25rem; vertical-align:top;">Соблюдение закона, учёт претензий</td><td style="padding:0.4rem 0.25rem; vertical-align:top;">Юридическая обязанность</td></tr>
                             </tbody>
@@ -1794,15 +1800,17 @@
                         <p>Поле email в форме необязательно. Если вы указываете email <em>с целью получения рассылок о скидках и акциях</em>, это считается отдельным согласием на маркетинговые сообщения. Вы можете отказаться от рассылки в любой момент (ссылка в письме или сообщение нам в WhatsApp/Telegram). Отказ от маркетинга не лишает нас возможности отвечать на вашу заявку по основным контактным данным.</p>
                 
                         <h3>8. Cookie и аналогичные технологии</h3>
-                        <p>Сайт может использовать:</p>
+                        <p>Сайт использует cookie, локальное хранилище и аналогичные технологии:</p>
                         <ul>
-                            <li><strong>строго необходимые</strong> cookie и локальное хранилище — для работы форм, безопасности, сессии;</li>
+                            <li><strong>строго необходимые</strong> — работа форм, безопасность, сессия, сохранение ваших настроек cookie;</li>
                             <li><strong>функциональные</strong> — виджет онлайн-чата Tawk.to (<a href="https://www.tawk.to/privacy-policy/" rel="noopener noreferrer" target="_blank">политика Tawk.to</a>);</li>
                             <li><strong>технические</strong> — Cloudflare Turnstile для проверки «Я не робот» (<a href="https://www.cloudflare.com/privacypolicy/" rel="noopener noreferrer" target="_blank">политика Cloudflare</a>);</li>
-                            <li><strong>аналитические</strong> — конфиденциальная статистика посещений через <strong>Umami</strong> (<a href="https://umami.is/privacy" rel="noopener noreferrer" target="_blank">политика Umami</a>): просмотры страниц, referrer, тип браузера/устройства, примерная страна; без рекламных профилей и кросс-сайтового отслеживания.</li>
+                            <li><strong>аналитические</strong> — конфиденциальная статистика посещений через <strong>Umami</strong> (<a href="https://umami.is/privacy" rel="noopener noreferrer" target="_blank">политика Umami</a>): просмотры страниц, referrer, тип браузера/устройства, примерная страна; без рекламных профилей и кросс-сайтового отслеживания (режим без рекламных cookie);</li>
+                            <li><strong>маркетинговые</strong> — <strong>Meta Pixel</strong> (Meta Platforms Ireland Ltd. / Meta Platforms, Inc.) для измерения эффективности рекламы и аудиторий кампаний Satva Samui в Facebook и Instagram. Meta Pixel загружается только после вашего согласия на маркетинговые cookie через баннер на Сайте.</li>
                         </ul>
-                        <p>Мы <strong>не используем</strong> рекламные пиксели и поведенческую аналитику для таргетинга (Google Analytics с рекламными функциями, Meta Pixel и т.п.). Umami не строит маркетинговые профили и не передаёт данные рекламным сетям. При подключении иных инструментов отслеживания мы обновим Политику и, где требуется законом, запросим согласие.</p>
-                        <p>Вы можете ограничить cookie в настройках браузера; это может повлиять на работу чата и отправку форм.</p>
+                        <p>При первом посещении отображается баннер с кнопками <strong>«Принять»</strong>, <strong>«Отклонить»</strong> и <strong>«Настроить»</strong>. Изменить выбор можно в любой момент через <strong>«Настроить cookies»</strong> в подвале Сайта или кнопку ниже. При отказе от маркетинговых cookie Meta Pixel не загружается; Umami остаётся включённым, так как не использует рекламные cookie.</p>
+                        <p>Данные Meta Pixel обрабатываются до <strong>90 дней</strong> в Meta Events Manager для атрибуции и оптимизации кампаний, далее — по политикам Meta. Вы также можете управлять рекламными настройками в аккаунте Facebook/Instagram.</p>
+                        <p>Вы можете ограничить cookie в настройках браузера; без строго необходимых cookie чат и формы могут работать неполноценно.</p>
                 
                         <h3>9. Получатели и обработчики (третьи лица)</h3>
                         <p>Данные могут передаваться следующим категориям получателей <strong>только в объёме, необходимом для целей обработки</strong>:</p>
@@ -1812,6 +1820,7 @@
                             <li><strong>Tawk.to</strong> — онлайн-чат и тикеты поддержки (<a href="https://www.tawk.to/privacy-policy/" rel="noopener noreferrer" target="_blank">политика Tawk.to</a>);</li>
                             <li><strong>Cloudflare</strong> — Turnstile, защита от ботов (<a href="https://www.cloudflare.com/privacypolicy/" rel="noopener noreferrer" target="_blank">политика Cloudflare</a>);</li>
                             <li><strong>Umami</strong> — конфиденциальная веб-аналитика (<a href="https://umami.is/privacy" rel="noopener noreferrer" target="_blank">политика Umami</a>);</li>
+                            <li><strong>Meta Platforms</strong> — Meta Pixel и Conversions API для измерения рекламы (<a href="https://www.facebook.com/privacy/policy/" rel="noopener noreferrer" target="_blank">политика Meta</a>);</li>
                             <li><strong>Мессенджеры и соцсети</strong> — при вашем обращении по ссылкам с Сайта (WhatsApp, Telegram, Instagram, VK, MAX и др.);</li>
                             <li><strong>Профессиональные советники</strong> — юристы, бухгалтерия — при необходимости и под обязательством конфиденциальности;</li>
                             <li><strong>Государственные органы</strong> — при наличии законного требования.</li>
@@ -1869,7 +1878,7 @@
                         <p>Мы не используем полностью автоматизированную обработку, которая порождает для вас юридические или существенные последствия без участия человека. Антиспам-проверка Turnstile носит технический характер.</p>
                 
                         <h3>19. Изменения Политики</h3>
-                        <p>Мы можем обновлять Политику. Актуальная версия публикуется на этой странице с указанием даты и версии (<code>2026-05-29</code>). Существенные изменения могут дополнительно доводиться до сведения на Сайте. Продолжение использования Сайта после вступления изменений в силу при отсутствии возражения может рассматриваться как принятие обновлённой Политики, если иное не запрещено применимым правом.</p>
+                        <p>Мы можем обновлять Политику. Актуальная версия публикуется на этой странице с указанием даты и версии (<code>2026-06-11</code>). Существенные изменения могут дополнительно доводиться до сведения на Сайте. Продолжение использования Сайта после вступления изменений в силу при отсутствии возражения может рассматриваться как принятие обновлённой Политики, если иное не запрещено применимым правом.</p>
                 
                         <h3>20. Связанные документы</h3>
                         <ul>
@@ -1877,7 +1886,7 @@
                             <li><a href="/cancellation.html">Условия отмены бронирования</a>;</li>
                             <li>Английская версия: <a href="/privacy.html">Privacy Policy (EN)</a>.</li>
                         </ul>
-                <p><em>Дата последнего обновления: 29 мая 2026 г. Версия документа: 2026-05-29.</em></p>
+                <p><em>Дата последнего обновления: 11 июня 2026 г. Версия документа: 2026-06-11.</em></p>
             </div>
         </div>
     </div>

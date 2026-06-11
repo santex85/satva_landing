@@ -33,6 +33,7 @@
 @use 'yoga/faq';
 @use 'yoga/form';
 @use 'yoga/modal';
+@use 'yoga/consent';
 
 // ---------- доступность: уважение prefers-reduced-motion ----------
 @media (prefers-reduced-motion: reduce) {

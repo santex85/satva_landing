@@ -18,6 +18,13 @@ class LeadSubmissionBase(BaseModel):
     source: str | None = Field(None, max_length=32)
     lang: str | None = Field(None, max_length=8, description="Site language: en or ru")
     email: EmailStr | None = Field(None, description="Необязательный email для связи")
+    utm_source: str | None = Field(None, max_length=256)
+    utm_medium: str | None = Field(None, max_length=256)
+    utm_campaign: str | None = Field(None, max_length=256)
+    utm_content: str | None = Field(None, max_length=256)
+    utm_term: str | None = Field(None, max_length=256)
+    fbclid: str | None = Field(None, max_length=512)
+    meta_event_id: str | None = Field(None, max_length=128, description="Meta Pixel event_id for CAPI dedup")
 
     @field_validator("email", mode="before")
     @classmethod
@@ -69,6 +76,24 @@ class LeadSubmissionBase(BaseModel):
             return None
         s = str(v).strip().lower()
         return s if s in _LEAD_LANG_WHITELIST else None
+
+    @field_validator(
+        "utm_source",
+        "utm_medium",
+        "utm_campaign",
+        "utm_content",
+        "utm_term",
+        "fbclid",
+        "meta_event_id",
+        mode="before",
+    )
+    @classmethod
+    def empty_attribution_to_none(cls, v):
+        if v is None:
+            return None
+        if isinstance(v, str) and not v.strip():
+            return None
+        return str(v).strip()
 
 
 class ContactRequest(LeadSubmissionBase):

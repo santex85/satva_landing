@@ -168,6 +168,30 @@
         }
     }
 
+    function generateEventId() {
+        if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+            return window.crypto.randomUUID();
+        }
+        return 'evt-' + Date.now() + '-' + Math.random().toString(36).slice(2, 11);
+    }
+
+    function appendAttributionToPayload(payload) {
+        if (window.satvaUtm && typeof window.satvaUtm.mergeIntoPayload === 'function') {
+            window.satvaUtm.mergeIntoPayload(payload);
+        }
+        return payload;
+    }
+
+    function trackMetaLead(eventId) {
+        try {
+            if (window.satvaPixel && typeof window.satvaPixel.trackLead === 'function') {
+                window.satvaPixel.trackLead(eventId);
+            }
+        } catch (e) {
+            if (window.console) console.warn('Meta Pixel trackLead failed:', e);
+        }
+    }
+
     /** Синхронизирует контакт Tawk (login по email + event). Без email — только addEvent. */
     function setTawkVisitor(lead, tawkLogin) {
         if (!lead || typeof lead !== 'object') return;
@@ -1350,6 +1374,8 @@
             var src = (form.dataset && form.dataset.source) ? String(form.dataset.source).trim() : '';
             if (src) payload.source = src;
             payload.lang = LANG;
+            payload.meta_event_id = generateEventId();
+            appendAttributionToPayload(payload);
 
             fetch(apiPath('/booking'), {
                 method: 'POST',
@@ -1374,6 +1400,7 @@
                     resetTurnstileLead();
                     if (r.ok) {
                         trackUmamiLead(payload);
+                        trackMetaLead(payload.meta_event_id);
                         setTawkVisitor(payload, r.body && r.body.tawk_login);
                         form.reset();
                         clearNamePhoneErrors();
@@ -1636,6 +1663,8 @@
             var src = (form.dataset && form.dataset.source) ? String(form.dataset.source).trim() : '';
             if (src) payload.source = src;
             payload.lang = LANG;
+            payload.meta_event_id = generateEventId();
+            appendAttributionToPayload(payload);
 
             fetch(apiPath('/booking'), {
                 method: 'POST',
@@ -1660,6 +1689,7 @@
                     resetTurnstile();
                     if (r.ok) {
                         trackUmamiLead(payload);
+                        trackMetaLead(payload.meta_event_id);
                         setTawkVisitor(payload, r.body && r.body.tawk_login);
                         if (successBox) successBox.classList.remove('is-hidden');
                         form.classList.add('is-hidden');

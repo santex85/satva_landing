@@ -17,7 +17,7 @@ WHATSAPP_DISPLAY = "+66 950 165 058"
 TELEGRAM_URL = "https://t.me/OlgaSatva"
 TELEGRAM_DISPLAY = "@OlgaSatva"
 
-_SKIP_KEYS = frozenset({"website", "consent", "captcha_token"})
+_SKIP_KEYS = frozenset({"website", "consent", "captcha_token", "meta_event_id"})
 
 _FIELD_LABELS: dict[str, str] = {
     "lang": "Сайт",
@@ -31,6 +31,12 @@ _FIELD_LABELS: dict[str, str] = {
     "guest_count": "Количество человек",
     "comment": "Комментарий",
     "source": "Источник формы",
+    "utm_source": "UTM source",
+    "utm_medium": "UTM medium",
+    "utm_campaign": "UTM campaign",
+    "utm_content": "UTM content",
+    "utm_term": "UTM term",
+    "fbclid": "Facebook click ID",
 }
 
 _FIELD_ORDER = (
@@ -45,6 +51,12 @@ _FIELD_ORDER = (
     "guest_count",
     "comment",
     "source",
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_content",
+    "utm_term",
+    "fbclid",
 )
 
 _LEAD_TYPE_LABELS: dict[str, str] = {

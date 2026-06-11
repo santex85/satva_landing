@@ -38,7 +38,11 @@ class Settings(BaseSettings):
     TURNSTILE_SITE_KEY: str = ""
 
     # Policy version for consents
-    POLICY_VERSION: str = "2026-05-29"
+    POLICY_VERSION: str = "2026-06-11"
+
+    # Meta Ads (Pixel browser + Conversions API)
+    META_PIXEL_ID: str = ""
+    META_CAPI_TOKEN: str = ""
 
     # Umami Cloud analytics (admin dashboard proxy)
     UMAMI_API_KEY: str = ""

@@ -8,6 +8,7 @@ from app.schemas.contact import ContactResponse
 from app.schemas.public_forms import BookingRequest
 from app.services.captcha import verify_turnstile_or_skip
 from app.services.lead_submission import submit_lead
+from app.services.meta_capi import send_meta_lead_event
 from app.services.tawk import contact_response_with_tawk
 
 router = APIRouter()
@@ -34,7 +35,20 @@ def booking(
     if body.email:
         payload["email"] = body.email
     payload["lang"] = body.lang or "ru"
-    submit_lead(
+    for key in ("utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"):
+        value = getattr(body, key, None)
+        if value:
+            payload[key] = value
+    if body.meta_event_id:
+        payload["meta_event_id"] = body.meta_event_id
+
+    client_host = request.client.host if request.client else None
+    forwarded = request.headers.get("x-forwarded-for")
+    ip_address = (forwarded.split(",")[0].strip() if forwarded else None) or client_host
+    user_agent = request.headers.get("user-agent")
+    referer = request.headers.get("referer")
+
+    lead = submit_lead(
         db,
         request,
         LeadType.PROCEDURE_BOOKING,
@@ -43,4 +57,18 @@ def booking(
         source=body.source,
         background_tasks=background_tasks,
     )
+
+    if body.meta_event_id:
+        background_tasks.add_task(
+            send_meta_lead_event,
+            event_id=body.meta_event_id,
+            event_source_url=referer,
+            client_ip=ip_address,
+            user_agent=user_agent,
+            email=str(body.email) if body.email else None,
+            phone=body.phone,
+            fbclid=body.fbclid,
+            event_time=lead.created_at,
+        )
+
     return contact_response_with_tawk(body.name, body.email, body.phone)

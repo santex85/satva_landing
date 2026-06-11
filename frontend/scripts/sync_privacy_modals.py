@@ -38,11 +38,11 @@ def patch_index(path: Path, modal_body: str) -> None:
         r'<div id="yogaModalOffer")'
     )
     closing = (
-        '\n                <p><em>Дата последнего обновления: 29 мая 2026 г. Версия документа: 2026-05-29.</em></p>'
+        '\n                <p><em>Дата последнего обновления: 11 июня 2026 г. Версия документа: 2026-06-11.</em></p>'
         if 'Настоящая' in modal_body or '«Политика»' in modal_body
-        else '\n                <p><em>Last updated: 29 May 2026. Document version: 2026-05-29.</em></p>'
+        else '\n                <p><em>Last updated: 11 June 2026. Document version: 2026-06-11.</em></p>'
     )
-    repl = r'\1\n' + modal_body + closing + '\n            \2'
+    repl = r'\1\n' + modal_body + closing + r'\n            \2'
     new_text, n = re.subn(pattern, repl, text, count=1, flags=re.DOTALL)
     if n != 1:
         raise SystemExit(f'Failed to patch {path}: {n} replacements')
@@ -53,8 +53,14 @@ def patch_index(path: Path, modal_body: str) -> None:
 def main() -> None:
     ru_body = extract_body((ROOT / 'ru' / 'privacy.html').read_text(encoding='utf-8'))
     en_body = extract_body((ROOT / 'privacy.html').read_text(encoding='utf-8'))
-    patch_index(ROOT / 'ru' / 'index.html', '                ' + ru_body.replace('\n', '\n                '))
-    patch_index(ROOT / 'index.html', '                ' + en_body.replace('\n', '\n                '))
+    targets = [
+        (ROOT / 'ru' / 'index.html', '                ' + ru_body.replace('\n', '\n                ')),
+        (ROOT / 'index.html', '                ' + en_body.replace('\n', '\n                ')),
+        (ROOT / 'ru' / 'partners' / 'index.html', '                ' + ru_body.replace('\n', '\n                ')),
+        (ROOT / 'partners' / 'index.html', '                ' + en_body.replace('\n', '\n                ')),
+    ]
+    for path, body in targets:
+        patch_index(path, body)
 
 
 if __name__ == '__main__':

@@ -38,9 +38,12 @@
     <!-- Preload hero (LCP) — WebP -->
     <link rel="preload" as="image" href="/img/yoga_tour/hero_sunset@1x.webp" type="image/webp">
 
-    <link rel="stylesheet" href="/css/yoga.css?v=25">
+    <link rel="stylesheet" href="/css/yoga.css?v=8">
+    <meta name="satva-meta-pixel-id" content="">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
-    <script defer src="/js/yoga.js?v=10"></script>
+    <script defer src="/js/consent.js?v=2"></script>
+    <script defer src="/js/pixel.js?v=1"></script>
+    <script defer src="/js/yoga.js?v=11"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
 
     <!-- Structured Data: LodgingBusiness (расширенная карточка) -->
@@ -1271,6 +1274,7 @@
 
     <!-- 14. Финальная форма -->
     <section id="yogaForm" class="yoga-form" aria-labelledby="yogaFormTitle">
+        <span id="booking" class="yoga-form__anchor" aria-hidden="true"></span>
         <div class="yoga-form__bg" style="background-size: cover; background-repeat: no-repeat; background-position: center; background-image: url('/img/yoga_tour/beach_sunset.webp');" role="presentation"></div>
         <div class="yoga-form__overlay" role="presentation"></div>
         <div class="yoga-form__container">
@@ -1474,6 +1478,7 @@
                 <button type="button" class="yoga-site-footer__link js-open-yoga-privacy">Privacy Policy</button>
                 · <a href="/terms.html" class="yoga-site-footer__link">Terms &amp; Conditions</a>
                 · <a href="/cancellation.html" class="yoga-site-footer__link">Cancellation Policy</a>
+                · <button type="button" class="yoga-site-footer__link js-open-cookie-settings">Cookie settings</button>
             </p>
         </div>
     </footer>
@@ -1701,7 +1706,7 @@
             <h2 class="yoga-modal__title" id="yogaModalPrivacyTitle">Privacy Policy</h2>
             <div class="yoga-modal__body yoga-modal__body--scroll">
                 <p><a href="/privacy.html" target="_blank" rel="noopener noreferrer">Full version on a separate page</a></p>
-                <p class="meta"><strong>Version:</strong> 2026-05-29 &nbsp;|&nbsp; <strong>Effective date:</strong> 29 May 2026</p>
+                <p class="meta"><strong>Version:</strong> 2026-06-11 &nbsp;|&nbsp; <strong>Effective date:</strong> 11 June 2026</p>
                 
                         <p>This Privacy Policy (the <strong>“Policy”</strong>) explains how <strong>Satva Samui Retreat Hotel</strong> (yoga retreat hotel on Koh Samui, Kingdom of Thailand; <strong>“Satva Samui”</strong>, <strong>“we”</strong>, <strong>“us”</strong>, the <strong>“Controller”</strong>) collects, uses, stores, shares, and protects personal data when you use <a href="https://satvasamui.com/">satvasamui.com</a> (the <strong>“Website”</strong>).</p>
                         <p>The Policy is designed to align with the EU General Data Protection Regulation (GDPR), the UK GDPR, Thailand’s Personal Data Protection Act B.E. 2562 (2019) (PDPA), and other applicable privacy laws as of 2026. Where your local law grants stronger rights, those rights apply.</p>
@@ -1730,7 +1735,7 @@
                         <ul>
                             <li><strong>Identity &amp; contact:</strong> name, phone number (including WhatsApp and Telegram), email (if provided).</li>
                             <li><strong>Enquiry data:</strong> selected programme or treatment, preferred dates, comments, form source (landing, popup, footer).</li>
-                            <li><strong>Consent records:</strong> acceptance of this Policy, date/time, policy version (<code>2026-05-29</code>), IP address, User-Agent, Referer (on form submission).</li>
+                            <li><strong>Consent records:</strong> acceptance of this Policy, date/time, policy version (<code>2026-06-11</code>), IP address, User-Agent, Referer (on form submission).</li>
                             <li><strong>Usage analytics:</strong> aggregated, anonymised page-view statistics (pages visited, referrer, browser/device type, approximate country) via Umami; not linked to form submissions unless you also submit a form.</li>
                             <li><strong>Technical data:</strong> data required for Website operation, abuse prevention, and logs (including Cloudflare Turnstile).</li>
                             <li><strong>Chat data:</strong> messages and metadata in the Tawk.to widget, if you use it.</li>
@@ -1759,6 +1764,7 @@
                                 <tr><td style="padding:0.4rem 0.25rem; vertical-align:top;">Proof of consent to Policy and terms</td><td style="padding:0.4rem 0.25rem; vertical-align:top;">Legal obligation; consent</td></tr>
                                 <tr><td style="padding:0.4rem 0.25rem; vertical-align:top;">Spam and abuse prevention (Turnstile)</td><td style="padding:0.4rem 0.25rem; vertical-align:top;">Legitimate interests; consent where required for cookies</td></tr>
                                 <tr><td style="padding:0.4rem 0.25rem; vertical-align:top;">Understand Website traffic and improve content (Umami analytics)</td><td style="padding:0.4rem 0.25rem; vertical-align:top;">Legitimate interests</td></tr>
+                                <tr><td style="padding:0.4rem 0.25rem; vertical-align:top;">Measure Meta ad performance (Pixel / Conversions API) — only with marketing cookie consent</td><td style="padding:0.4rem 0.25rem; vertical-align:top;">Consent</td></tr>
                                 <tr><td style="padding:0.4rem 0.25rem; vertical-align:top;">Promotional emails (only if you opt in via the email field)</td><td style="padding:0.4rem 0.25rem; vertical-align:top;">Separate consent; withdraw anytime</td></tr>
                                 <tr><td style="padding:0.4rem 0.25rem; vertical-align:top;">Legal compliance and claims</td><td style="padding:0.4rem 0.25rem; vertical-align:top;">Legal obligation</td></tr>
                             </tbody>
@@ -1772,15 +1778,17 @@
                         <p>Email is optional. If you provide an email <em>to receive offers and promotions</em>, that constitutes separate marketing consent. You may opt out anytime (unsubscribe link or message us on WhatsApp/Telegram). Opting out of marketing does not prevent us from responding to your enquiry using your main contact details.</p>
                 
                         <h3>8. Cookies &amp; similar technologies</h3>
-                        <p>We may use:</p>
+                        <p>We use cookies, local storage and similar technologies as follows:</p>
                         <ul>
-                            <li><strong>strictly necessary</strong> cookies and local storage — forms, security, session;</li>
+                            <li><strong>strictly necessary</strong> — forms, security, session, storing your cookie preferences;</li>
                             <li><strong>functional</strong> — Tawk.to live chat (<a href="https://www.tawk.to/privacy-policy/" rel="noopener noreferrer" target="_blank">Tawk.to privacy</a>);</li>
                             <li><strong>technical</strong> — Cloudflare Turnstile (<a href="https://www.cloudflare.com/privacypolicy/" rel="noopener noreferrer" target="_blank">Cloudflare privacy</a>);</li>
-                            <li><strong>analytics</strong> — privacy-friendly website statistics via <strong>Umami</strong> (<a href="https://umami.is/privacy" rel="noopener noreferrer" target="_blank">Umami privacy</a>): page views, referrer, browser/device type, approximate country; no advertising profiles or cross-site tracking.</li>
+                            <li><strong>analytics</strong> — privacy-friendly website statistics via <strong>Umami</strong> (<a href="https://umami.is/privacy" rel="noopener noreferrer" target="_blank">Umami privacy</a>): page views, referrer, browser/device type, approximate country; no advertising profiles or cross-site tracking (cookieless mode);</li>
+                            <li><strong>marketing</strong> — <strong>Meta Pixel</strong> (Meta Platforms Ireland Ltd. / Meta Platforms, Inc.) to measure ad performance and build audiences for Satva Samui campaigns on Facebook and Instagram. Meta Pixel loads only after you consent to marketing cookies via our cookie banner.</li>
                         </ul>
-                        <p>We <strong>do not use</strong> advertising pixels or behavioural analytics for ad targeting (Google Analytics with advertising features, Meta Pixel, etc.). Umami does not build marketing profiles or share data with ad networks. If we add other tracking tools, we will update this Policy and obtain consent where required by law.</p>
-                        <p>You may restrict cookies in your browser; chat and forms may not work fully.</p>
+                        <p>On first visit you will see a cookie banner with <strong>Accept</strong>, <strong>Reject</strong> and <strong>Configure</strong> options. You can change your choice anytime via <strong>Cookie settings</strong> in the site footer or the button below. Rejecting marketing cookies means Meta Pixel will not load; Umami analytics remains enabled because it does not use advertising cookies.</p>
+                        <p>Meta Pixel data is processed for up to <strong>90 days</strong> in Meta Events Manager for attribution and campaign optimisation, then retained according to Meta's policies. You may also manage ad preferences in your Facebook/Instagram account settings.</p>
+                        <p>You may restrict cookies in your browser; chat and forms may not work fully without strictly necessary storage.</p>
                 
                         <h3>9. Recipients &amp; processors</h3>
                         <ul>
@@ -1789,6 +1797,7 @@
                             <li><strong>Tawk.to</strong> — live chat and support tickets (<a href="https://www.tawk.to/privacy-policy/" rel="noopener noreferrer" target="_blank">Tawk.to privacy</a>);</li>
                             <li><strong>Cloudflare</strong> — Turnstile, bot protection (<a href="https://www.cloudflare.com/privacypolicy/" rel="noopener noreferrer" target="_blank">Cloudflare privacy</a>);</li>
                             <li><strong>Umami</strong> — privacy-friendly website analytics (<a href="https://umami.is/privacy" rel="noopener noreferrer" target="_blank">Umami privacy</a>);</li>
+                            <li><strong>Meta Platforms</strong> — Meta Pixel and Conversions API for ad measurement (<a href="https://www.facebook.com/privacy/policy/" rel="noopener noreferrer" target="_blank">Meta Privacy Policy</a>);</li>
                             <li><strong>Messengers &amp; social networks</strong> — when you contact us via Website links (WhatsApp, Telegram, Instagram, etc.);</li>
                             <li><strong>Professional advisers</strong> — lawyers, accountants, under confidentiality;</li>
                             <li><strong>Public authorities</strong> — where legally required.</li>
@@ -1837,7 +1846,7 @@
                         <p>We do not use fully automated processing that produces legal or similarly significant effects without human involvement. Turnstile is a technical anti-abuse measure only.</p>
                 
                         <h3>18. Changes</h3>
-                        <p>We may update this Policy. The current version is published here with date and version (<code>2026-05-29</code>). Material changes may be highlighted on the Website. Continued use after changes take effect may constitute acceptance where permitted by law.</p>
+                        <p>We may update this Policy. The current version is published here with date and version (<code>2026-06-11</code>). Material changes may be highlighted on the Website. Continued use after changes take effect may constitute acceptance where permitted by law.</p>
                 
                         <h3>19. Related documents</h3>
                         <ul>
@@ -1845,7 +1854,7 @@
                             <li><a href="/cancellation.html">Cancellation Policy</a>;</li>
                             <li>Russian version: <a href="/ru/privacy.html">Политика конфиденциальности (RU)</a>.</li>
                         </ul>
-                <p><em>Last updated: 29 May 2026. Document version: 2026-05-29.</em></p>
+                <p><em>Last updated: 11 June 2026. Document version: 2026-06-11.</em></p>
             </div>
         </div>
     </div>
