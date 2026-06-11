@@ -314,6 +314,9 @@
 
     if (currentPrefs) {
         dispatchConsentChanged(currentPrefs);
+        window.addEventListener('load', function () {
+            dispatchConsentChanged(currentPrefs);
+        });
     } else {
         showBanner();
     }

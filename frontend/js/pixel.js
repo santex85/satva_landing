@@ -111,9 +111,15 @@
 
     window.addEventListener('satva-consent-changed', onConsentChanged);
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', onConsentChanged);
-    } else {
+    function scheduleInit() {
         onConsentChanged();
     }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', scheduleInit);
+    } else {
+        scheduleInit();
+    }
+    // Повтор после load — consent.js может отработать раньше pixel.js (defer-порядок)
+    window.addEventListener('load', scheduleInit);
 })();
