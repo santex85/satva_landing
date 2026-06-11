@@ -53,6 +53,7 @@ class Settings(BaseSettings):
     ADMIN_PATH: str = "samui-ctl-x7f2"
     SITE_BASE_URL: str = "https://satvasamui.com"
     INVITE_EXPIRE_HOURS: int = 72
+    PASSWORD_RESET_EXPIRE_MINUTES: int = 60
 
 
 settings = Settings()

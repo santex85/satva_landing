@@ -25,6 +25,8 @@
     "lead.restore": "Заявка восстановлена из архива",
     "auth.login": "Вход в систему",
     "auth.password_change": "Смена пароля",
+    "auth.password_reset_request": "Запрос восстановления пароля",
+    "auth.password_reset": "Восстановление пароля",
     "user.invite": "Приглашение пользователя",
     "user.invite_accept": "Принятие приглашения",
     "user.invite_revoke": "Отзыв приглашения",
@@ -38,6 +40,8 @@
   var PAGE_TITLES = {
     login: "Вход",
     invite: "Приглашение",
+    forgot: "Восстановление пароля",
+    reset: "Новый пароль",
     leads: "Заявки",
     detail: "Заявка",
     analytics: "Аналитика",
@@ -501,9 +505,14 @@
     return new URLSearchParams(window.location.search).get("invite");
   }
 
+  function getResetTokenFromUrl() {
+    return new URLSearchParams(window.location.search).get("reset");
+  }
+
   function clearInviteFromUrl() {
     var url = new URL(window.location.href);
     url.searchParams.delete("invite");
+    url.searchParams.delete("reset");
     var qs = url.searchParams.toString();
     window.history.replaceState({}, "", url.pathname + (qs ? "?" + qs : ""));
   }
@@ -540,7 +549,7 @@
   }
 
   function restoreFiltersFromUrl() {
-    if (getInviteTokenFromUrl()) return;
+    if (getInviteTokenFromUrl() || getResetTokenFromUrl()) return;
     var params = new URLSearchParams(window.location.search);
     state.typeFilter = params.get("type") || "";
     state.statusFilter = params.get("status") || "";
@@ -665,7 +674,7 @@
     Object.keys(blocks).forEach(function (key) {
       if (blocks[key]) blocks[key].classList.toggle("admin-hidden", key !== name);
     });
-    var showNav = name !== "login" && name !== "invite";
+    var showNav = name !== "login" && name !== "invite" && name !== "forgot" && name !== "reset";
     if (els.nav) els.nav.classList.toggle("admin-hidden", !showNav);
     if (els.topbar) els.topbar.classList.toggle("admin-hidden", !showNav);
     setLoggedIn(showNav);
@@ -683,6 +692,17 @@
   function showInviteBlock() {
     setLoggedIn(false);
     showBlock("invite");
+  }
+
+  function showForgotBlock() {
+    setLoggedIn(false);
+    showBlock("forgot");
+    setFormMessage(els.forgotMessage, "", false);
+  }
+
+  function showResetBlock() {
+    setLoggedIn(false);
+    showBlock("reset");
   }
 
   function showLeads() {
@@ -2105,6 +2125,64 @@
     }
   }
 
+  function loadResetPreview(token) {
+    setFormMessage(els.resetMessage, "", false);
+    fetch(apiUrl("/auth/password-reset/" + encodeURIComponent(token)), { method: "GET" })
+      .then(function (res) {
+        if (res.status === 404 || res.status === 410) throw new Error("Ссылка недействительна или истекла. Запросите восстановление ещё раз.");
+        if (!res.ok) throw new Error("Ошибка проверки ссылки");
+        return res.json();
+      })
+      .then(function (data) {
+        if (els.resetEmail) {
+          els.resetEmail.value = data.email || "";
+          els.resetEmail.readOnly = true;
+        }
+        state.resetToken = token;
+        showResetBlock();
+      })
+      .catch(function (err) {
+        setFormMessage(els.resetMessage, err.message || "Ошибка", true);
+        showResetBlock();
+      });
+  }
+
+  function applyPasswordReset(password) {
+    if (!state.resetToken) return Promise.resolve(null);
+    return fetch(apiUrl("/auth/password-reset/" + encodeURIComponent(state.resetToken)), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: password }),
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok) {
+            var detail = data && data.detail ? data.detail : "Ошибка сброса пароля";
+            throw new Error(typeof detail === "string" ? detail : "Ошибка сброса пароля");
+          }
+          return data;
+        });
+      });
+  }
+
+  function requestPasswordReset(email) {
+    return fetch(apiUrl("/auth/forgot-password"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email }),
+    })
+      .then(function (res) {
+        if (res.status === 429) throw new Error("Слишком много запросов. Попробуйте через 15 минут.");
+        return res.json().then(function (data) {
+          if (!res.ok) {
+            var detail = data && data.detail ? data.detail : "Ошибка запроса";
+            throw new Error(typeof detail === "string" ? detail : "Ошибка запроса");
+          }
+          return data;
+        });
+      });
+  }
+
   function loadInvitePreview(token) {
     setFormMessage(els.inviteMessage, "", false);
     fetch(apiUrl("/admin/invitations/" + encodeURIComponent(token)), { method: "GET" })
@@ -2161,6 +2239,8 @@
   function initElements() {
     blocks.login = document.getElementById("admin-login");
     blocks.invite = document.getElementById("admin-invite");
+    blocks.forgot = document.getElementById("admin-forgot");
+    blocks.reset = document.getElementById("admin-reset");
     blocks.leads = document.getElementById("admin-leads");
     blocks.detail = document.getElementById("admin-lead-detail");
     blocks.analytics = document.getElementById("admin-analytics");
@@ -2182,6 +2262,17 @@
 
     els.loginForm = document.getElementById("admin-login-form");
     els.loginMessage = document.getElementById("admin-login-message");
+    els.forgotLink = document.getElementById("admin-forgot-link");
+    els.forgotForm = document.getElementById("admin-forgot-form");
+    els.forgotEmail = document.getElementById("admin-forgot-email");
+    els.forgotMessage = document.getElementById("admin-forgot-message");
+    els.forgotBack = document.getElementById("admin-forgot-back");
+    els.resetForm = document.getElementById("admin-reset-form");
+    els.resetEmail = document.getElementById("admin-reset-email");
+    els.resetPassword = document.getElementById("admin-reset-password");
+    els.resetConfirm = document.getElementById("admin-reset-confirm");
+    els.resetMessage = document.getElementById("admin-reset-message");
+    els.resetBack = document.getElementById("admin-reset-back");
 
     els.inviteForm = document.getElementById("admin-invite-form");
     els.inviteEmail = document.getElementById("admin-invite-email");
@@ -2334,6 +2425,72 @@
       });
     }
 
+    if (els.forgotLink) {
+      els.forgotLink.addEventListener("click", function () {
+        if (els.forgotEmail && els.loginForm) {
+          var loginEmail = document.getElementById("admin-email");
+          if (loginEmail && loginEmail.value) els.forgotEmail.value = loginEmail.value;
+        }
+        showForgotBlock();
+      });
+    }
+    if (els.forgotBack) {
+      els.forgotBack.addEventListener("click", function () {
+        showLogin();
+      });
+    }
+    if (els.resetBack) {
+      els.resetBack.addEventListener("click", function () {
+        state.resetToken = null;
+        clearInviteFromUrl();
+        showLogin();
+      });
+    }
+    if (els.forgotForm) {
+      els.forgotForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var email = els.forgotEmail ? els.forgotEmail.value.trim() : "";
+        if (!email) {
+          setFormMessage(els.forgotMessage, "Укажите email", true);
+          return;
+        }
+        setFormMessage(els.forgotMessage, "Отправка…", false);
+        requestPasswordReset(email)
+          .then(function () {
+            setFormMessage(els.forgotMessage, "Если такой email зарегистрирован, мы отправили ссылку для сброса пароля. Проверьте почту (и папку «Спам»).", false);
+          })
+          .catch(function (err) {
+            setFormMessage(els.forgotMessage, err.message || "Ошибка", true);
+          });
+      });
+    }
+    if (els.resetForm) {
+      els.resetForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var password = els.resetPassword ? els.resetPassword.value : "";
+        var confirm = els.resetConfirm ? els.resetConfirm.value : "";
+        if (!password || password.length < 8) {
+          setFormMessage(els.resetMessage, "Пароль — минимум 8 символов", true);
+          return;
+        }
+        if (password !== confirm) {
+          setFormMessage(els.resetMessage, "Пароли не совпадают", true);
+          return;
+        }
+        setFormMessage(els.resetMessage, "Сохранение пароля…", false);
+        applyPasswordReset(password)
+          .then(function (data) {
+            if (!data || !data.access_token) throw new Error("Не удалось войти");
+            setToken(data.access_token);
+            state.resetToken = null;
+            if (els.resetForm) els.resetForm.reset();
+            return afterAuthSuccess();
+          })
+          .catch(function (err) {
+            setFormMessage(els.resetMessage, err.message || "Ошибка", true);
+          });
+      });
+    }
     if (els.inviteForm) {
       els.inviteForm.addEventListener("submit", function (e) {
         e.preventDefault();
@@ -2695,6 +2852,13 @@
     if (inviteToken) {
       state.inviteToken = inviteToken;
       loadInvitePreview(inviteToken);
+      return;
+    }
+
+    var resetToken = getResetTokenFromUrl();
+    if (resetToken) {
+      state.resetToken = resetToken;
+      loadResetPreview(resetToken);
       return;
     }
 

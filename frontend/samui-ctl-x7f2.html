@@ -6,7 +6,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Админка — Satva</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="css/admin.css?v=17">
+    <link rel="stylesheet" href="css/admin.css?v=18">
 </head>
 <body class="admin-page">
     <div class="admin-app">
@@ -77,6 +77,57 @@
                             </div>
                             <button type="submit" class="admin-btn admin-btn--primary admin-btn--block">Войти</button>
                             <div id="admin-login-message" class="form-message" role="alert" aria-live="polite"></div>
+                            <p class="admin-login-forgot"><button type="button" id="admin-forgot-link" class="admin-link-btn">Забыли пароль?</button></p>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- 1c. Запрос восстановления пароля -->
+                <section id="admin-forgot" class="admin-block admin-login-view admin-hidden">
+                    <div class="admin-login-card">
+                        <div class="admin-login-brand">
+                            <span class="admin-login-brand__logo">Satva</span>
+                            <p class="admin-login-brand__tagline">Панель управления</p>
+                        </div>
+                        <h1 class="admin-page-heading">Восстановление пароля</h1>
+                        <p class="admin-page-subtitle">Укажите email — пришлём ссылку для сброса пароля</p>
+                        <form id="admin-forgot-form" class="admin-login-form">
+                            <div class="form-group">
+                                <label for="admin-forgot-email">Email</label>
+                                <input type="email" id="admin-forgot-email" name="email" class="form-input admin-input" required autocomplete="email" placeholder="admin@example.com">
+                            </div>
+                            <button type="submit" class="admin-btn admin-btn--primary admin-btn--block">Отправить ссылку</button>
+                            <div id="admin-forgot-message" class="form-message" role="alert" aria-live="polite"></div>
+                            <p class="admin-login-forgot"><button type="button" id="admin-forgot-back" class="admin-link-btn">← Вернуться ко входу</button></p>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- 1d. Установка нового пароля по ссылке из письма -->
+                <section id="admin-reset" class="admin-block admin-login-view admin-hidden">
+                    <div class="admin-login-card">
+                        <div class="admin-login-brand">
+                            <span class="admin-login-brand__logo">Satva</span>
+                            <p class="admin-login-brand__tagline">Панель управления</p>
+                        </div>
+                        <h1 class="admin-page-heading">Новый пароль</h1>
+                        <p class="admin-page-subtitle">Задайте новый пароль для входа в систему</p>
+                        <form id="admin-reset-form" class="admin-login-form">
+                            <div class="form-group">
+                                <label for="admin-reset-email">Email</label>
+                                <input type="email" id="admin-reset-email" name="email" class="form-input admin-input" readonly autocomplete="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="admin-reset-password">Новый пароль</label>
+                                <input type="password" id="admin-reset-password" name="password" class="form-input admin-input" required autocomplete="new-password" minlength="8" placeholder="Минимум 8 символов">
+                            </div>
+                            <div class="form-group">
+                                <label for="admin-reset-confirm">Подтверждение пароля</label>
+                                <input type="password" id="admin-reset-confirm" name="confirm" class="form-input admin-input" required autocomplete="new-password" minlength="8" placeholder="Повторите пароль">
+                            </div>
+                            <button type="submit" class="admin-btn admin-btn--primary admin-btn--block">Сохранить пароль</button>
+                            <div id="admin-reset-message" class="form-message" role="alert" aria-live="polite"></div>
+                            <p class="admin-login-forgot"><button type="button" id="admin-reset-back" class="admin-link-btn">← Вернуться ко входу</button></p>
                         </form>
                     </div>
                 </section>
@@ -596,6 +647,6 @@
 
     <div id="admin-toast-container" class="admin-toast-container" aria-live="polite" aria-atomic="true"></div>
 
-    <script src="js/admin.js?v=16"></script>
+    <script src="js/admin.js?v=17"></script>
 </body>
 </html>

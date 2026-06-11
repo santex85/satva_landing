@@ -369,6 +369,26 @@ body.admin-logged-in .admin-login-view {
   margin-bottom: 1.5rem;
 }
 
+.admin-login-forgot {
+  margin: 1rem 0 0;
+  text-align: center;
+}
+
+.admin-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: 0.875rem;
+  color: var(--color-primary, #0f4c5c);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.admin-link-btn:hover {
+  text-decoration: none;
+}
+
 /* ── Forms ── */
 .admin-login-form .form-group,
 .admin-settings-form .form-group {
