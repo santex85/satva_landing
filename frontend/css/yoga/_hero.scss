@@ -18,14 +18,13 @@ $yoga-hero-header-offset: 5.75rem;
     justify-content: center;
     text-align: center;
     overflow: hidden;
-    // Запас под safe-area на всех ширинах; на мобайле — доп. место под Tawk.to
     padding-bottom: max(28px, env(safe-area-inset-bottom, 0));
 
     @media (max-width: 768px) {
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        padding-bottom: calc(52px + max(12px, env(safe-area-inset-bottom, 0px)));
+        padding-bottom: max(28px, env(safe-area-inset-bottom, 0));
     }
 
     &__bg {

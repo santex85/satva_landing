@@ -64,27 +64,12 @@ for my $file (@files) {
     }gsx;
   }
 
-  # replace inline Tawk loader
+  # Tawk.to отключён — убираем loader и preconnect
   $html =~ s{
     <!-- Tawk\.to[^>]*-->\s*
-    <script>\s*
-    var Tawk_API = Tawk_API \|\| \{\}, Tawk_LoadStart = new Date\(\);\s*
-    Tawk_API\.onLoad = function \(\) \{\s*
-    Tawk_API\.minimize\(\);\s*
-    \};\s*
-    \(function \(\) \{\s*
-    var s1 = document\.createElement\("script"\), s0 = document\.getElementsByTagName\("script"\)\[0\];\s*
-    s1\.async = true;\s*
-    s1\.src = "https://embed\.tawk\.to/[^"]+";\s*
-    s1\.charset = "UTF-8";\s*
-    s1\.setAttribute\("crossorigin", "\*"\);\s*
-    s0\.parentNode\.insertBefore\(s1, s0\);\s*
-    \}\)\(\);\s*
-    </script>
-  }{<!-- Tawk.to — отложенная загрузка (pagespeed) -->\n    <script defer src="/js/tawk-deferred.js?v=2"></script>}gsx;
-
-  # preconnect tawk без crossorigin (скрипт грузится не в CORS-режиме)
-  $html =~ s{<link rel="preconnect" href="https://embed\.tawk\.to" crossorigin>}{<link rel="preconnect" href="https://embed.tawk.to">}g;
+    <script[^>]*src="/js/tawk-deferred\.js[^"]*"[^>]*></script>\s*
+  }{}gsx;
+  $html =~ s{<link rel="preconnect" href="https://embed\.tawk\.to"[^>]*>\s*}{}g;
 
   open my $out, '>', $file or die "Cannot write $file: $!";
   print $out $html;
