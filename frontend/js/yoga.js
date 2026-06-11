@@ -23,6 +23,22 @@
         return (window.location.origin || '') + '/api' + p;
     }
 
+    function isPartnerPage() {
+        var path = (window.location.pathname || '').replace(/\/+$/, '') || '/';
+        return path === '/partners' || path.indexOf('/partners/') === 0;
+    }
+
+    function applyLeadMeta(payload, form) {
+        var src = (form.dataset && form.dataset.source) ? String(form.dataset.source).trim() : '';
+        if (isPartnerPage()) {
+            var base = src.replace(/^partner-/, '') || 'landing';
+            payload.source = 'partner-' + base;
+        } else if (src) {
+            payload.source = src;
+        }
+        payload.lang = LANG;
+    }
+
     var STRINGS = {
         ru: {
             invalidEmail: 'Некорректный email',
@@ -1371,9 +1387,7 @@
             var emLeadTrim = (emailIn && emailIn.value) ? emailIn.value.trim() : '';
             if (emLeadTrim) payload.email = emLeadTrim;
 
-            var src = (form.dataset && form.dataset.source) ? String(form.dataset.source).trim() : '';
-            if (src) payload.source = src;
-            payload.lang = LANG;
+            applyLeadMeta(payload, form);
             payload.meta_event_id = generateEventId();
             appendAttributionToPayload(payload);
 
@@ -1660,9 +1674,7 @@
             };
             var emMainTrim = (emailIn && emailIn.value) ? emailIn.value.trim() : '';
             if (emMainTrim) payload.email = emMainTrim;
-            var src = (form.dataset && form.dataset.source) ? String(form.dataset.source).trim() : '';
-            if (src) payload.source = src;
-            payload.lang = LANG;
+            applyLeadMeta(payload, form);
             payload.meta_event_id = generateEventId();
             appendAttributionToPayload(payload);
 

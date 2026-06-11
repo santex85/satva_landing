@@ -70,6 +70,8 @@ _SOURCE_LABELS: dict[str, str] = {
     "popup": "модальное окно (popup)",
     "footer": "подвал сайта (footer)",
     "yoga-bridge": "блок-мост (yoga-bridge)",
+    "partner-landing": "партнёрский лендинг (форма на странице)",
+    "partner-popup": "партнёрский лендинг (модальное окно)",
 }
 
 _LANG_LABELS: dict[str, str] = {

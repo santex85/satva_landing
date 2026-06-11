@@ -8,7 +8,10 @@ from sqlalchemy.orm import Query, Session
 from app.models import Lead, Consent
 from app.services.lead_lang import effective_lang
 
-WEB_FORM_SOURCES = frozenset({"landing", "popup", "footer", "yoga-bridge"})
+WEB_FORM_SOURCES = frozenset({
+    "landing", "popup", "footer", "yoga-bridge",
+    "partner-landing", "partner-popup",
+})
 
 # Каналы лендинга для фильтра в админке (site=ru|en|partner).
 SITE_CHANNEL_RU = "ru"
@@ -51,6 +54,13 @@ def _effective_lang_expr():
     return case(
         (stored.in_(("en", "ru")), stored),
         (referer.ilike("%/ru/%"), literal("ru")),
+        (
+            or_(
+                referer.ilike("%satvasamui.ru%"),
+                referer.ilike("%www.satvasamui.ru%"),
+            ),
+            literal("ru"),
+        ),
         (
             or_(
                 referer.op("~*")(r"satvasamui\.(com|site)/?($|[?#])"),

@@ -12,6 +12,8 @@ def infer_lang_from_referer(referer: str | None) -> str:
     r = str(referer).strip().lower()
     if "/ru/" in r or r.rstrip("/").endswith("/ru"):
         return "ru"
+    if "satvasamui.ru" in r:
+        return "ru"
     if _SITE_ROOT_EN.search(r) or "www.satvasamui.com" in r:
         return "en"
     return "ru"

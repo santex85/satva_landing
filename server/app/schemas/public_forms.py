@@ -67,6 +67,9 @@ class LeadSubmissionBase(BaseModel):
         if v is None or (isinstance(v, str) and not v.strip()):
             return None
         s = str(v).strip()
+        if s.startswith("partner-"):
+            base = s[8:]
+            return s if base in _LEAD_SOURCE_WHITELIST else None
         return s if s in _LEAD_SOURCE_WHITELIST else None
 
     @field_validator("lang", mode="before")
