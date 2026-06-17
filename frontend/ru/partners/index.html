@@ -89,56 +89,6 @@
         ]
     }
     </script>
-
-    <!-- Structured Data: FAQPage (соответствует видимой секции FAQ) -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "Что входит в стоимость от 75 $ в сутки?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Проживание, завтрак и обед, йога 2 раза в день, вечерние медитации. При бронировании от 7 дней — диагностика здоровья по пульсу и рекомендации специалиста по питанию и очищению, плюс инфраструктура отеля: сауны, зал, бассейны, каяки и падлборды. Отдельно оплачиваются оздоровительные программы, экскурсии, перелёт и трансфер. 75 $ в сутки — при 2-местном размещении в номере «Стандарт»; стоимость при одноместном размещении уточняйте при бронировании." }
-            },
-            {
-                "@type": "Question",
-                "name": "Какая минимальная длительность?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Мы рекомендуем от 10 дней и больше. При бронировании от 7 дней для вас также включена диагностика здоровья по пульсу и консультация специалиста аюрведы. Но вы можете приехать на любое количество дней." }
-            },
-            {
-                "@type": "Question",
-                "name": "Есть ли трансфер из аэропорта?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Мы организуем для вас трансфер и встретим вас в отеле (стоимость трансфера 30$)." }
-            },
-            {
-                "@type": "Question",
-                "name": "Условия бронирования?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Для бронирования нужно оплатить депозит в размере, эквивалентном 100$ за номер (есть разные способы оплаты). Остальное оплачивается в отеле в день заезда удобным для вас способом." }
-            },
-            {
-                "@type": "Question",
-                "name": "Нужен ли опыт йоги?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Многие наши гости — новички в йоге. Программа рассчитана на разный уровень: от начинающего до продвинутого. Преподаватели позаботятся, чтоб вам было комфортно на занятиях, и вы получили нужный результат." }
-            },
-            {
-                "@type": "Question",
-                "name": "Сколько стоит перелёт?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Зависит от города вылета и сезона. Напишите, когда вы хотели бы приехать и откуда летите. Мы рассчитаем примерную стоимость перелёта и поможем с билетами." }
-            },
-            {
-                "@type": "Question",
-                "name": "Когда лучший сезон?",
-                "acceptedAnswer": { "@type": "Answer", "text": "На Самуи комфортная и приятная погода круглый год. Море около нашего отеля всегда без отливов и сильных волн. Выбирайте удобные для вас даты без привязки к сезону." }
-            },
-            {
-                "@type": "Question",
-                "name": "Что взять с собой?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Одежда для занятий, купальник, удобная обувь для экскурсий. Дополнительные вещи сможете купить в магазинчике рядом с отелем. Коврики для йоги, пляжные полотенца есть в отеле." }
-            }
-        ]
-    }
-    </script>
 </head>
 <body>
     <a href="#yogaHero" class="yoga-skip-link">Перейти к началу страницы</a>
@@ -168,7 +118,6 @@
                 <a href="#yogaIncludes">Что включено</a>
                 <a href="#yogaProgram">Программа</a>
                 <a href="#yogaRooms">Номера</a>
-                <a href="#yogaFaq">Вопросы</a>
                 <button type="button" class="btn-yoga-primary btn--small" data-open-modal="modal-lead">Забронировать</button>
             </nav>
         </div>
@@ -410,8 +359,13 @@
                     <p class="yoga-summer__body">Остров сочетает в&nbsp;себе всё&nbsp;— бирюзовые пляжи с&nbsp;белым песком, невероятные закаты, джунгли, горы, древние храмы и&nbsp;водопады. А&nbsp;ещё Самуи называют Кокосовым островом. Местные кокосы настолько сладкие, что считаются одними из&nbsp;лучших в&nbsp;Таиланде.</p>
                 </div>
                 <div class="yoga-summer__photos">
-                    <div class="yoga-summer__photo yoga-summer__photo--placeholder" aria-label="Фото — скоро">
-                        <span>Фото</span>
+                    <div class="yoga-summer__photo">
+                        <picture>
+                            <source type="image/webp" srcset="/img/yoga_tour/why_samui_beach.webp">
+                            <img src="/img/yoga_tour/why_samui_beach.webp"
+                                 alt="Тропический пляж Самуи — бирюзовое море и пальмы"
+                                 loading="lazy" width="1024" height="683" decoding="async">
+                        </picture>
                     </div>
                 </div>
             </div>
@@ -428,8 +382,13 @@
                     <p class="yoga-summer__body">Море тёплое и&nbsp;спокойное, как впрочем и&nbsp;всегда на&nbsp;пляже Липа&nbsp;Ной. Кроме того, на&nbsp;острове в&nbsp;это время меньше туристов, что создаёт более спокойную и&nbsp;уединённую атмосферу для проведения ретритов.</p>
                 </div>
                 <div class="yoga-summer__photos">
-                    <div class="yoga-summer__photo yoga-summer__photo--placeholder" aria-label="Фото — скоро">
-                        <span>Фото</span>
+                    <div class="yoga-summer__photo">
+                        <picture>
+                            <source type="image/webp" srcset="/img/yoga_tour/samui_summer_sunset.webp">
+                            <img src="/img/yoga_tour/samui_summer_sunset.webp"
+                                 alt="Закат на пляже Самуи — тёплое море и спокойная атмосфера"
+                                 loading="lazy" width="1024" height="731" decoding="async">
+                        </picture>
                     </div>
                 </div>
             </div>
@@ -482,8 +441,13 @@
             </div>
 
             <div class="yoga-program__block yoga-fade-in">
-                <div class="yoga-program__photo yoga-program__photo--placeholder" aria-label="Фото — скоро">
-                    <span>Фото</span>
+                <div class="yoga-program__photo">
+                    <picture>
+                        <source type="image/webp" srcset="/img/yoga_tour/program_indoor_sala.webp">
+                        <img src="/img/yoga_tour/program_indoor_sala.webp"
+                             alt="Закрытый зал с кондиционером и зеркалами — йога-студия Satva Samui"
+                             loading="lazy" width="1024" height="768" decoding="async">
+                    </picture>
                 </div>
                 <div class="yoga-program__text">
                     <h3>Закрытый зал с кондиционером и зеркалами</h3>
@@ -1260,7 +1224,7 @@
     </section>
 
     <!-- 13. Частые вопросы -->
-    <section id="yogaFaq" class="yoga-faq" aria-labelledby="yogaFaqTitle">
+    <section id="yogaFaq" class="yoga-faq" aria-labelledby="yogaFaqTitle" hidden>
         <div class="yoga-faq__container">
             <div class="yoga-faq__header yoga-fade-in">
                 <h2 id="yogaFaqTitle">Частые вопросы</h2>
