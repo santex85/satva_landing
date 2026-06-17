@@ -8,7 +8,6 @@ from app.models import Consent, Lead
 from app.services.email import (
     send_lead_confirmation,
     send_lead_notification,
-    send_tawk_ticket_notification,
 )
 from app.services.geoip import resolve_and_store_geo
 
@@ -61,11 +60,6 @@ def submit_lead(
 
     try:
         send_lead_confirmation(lead_type, lead.payload, lead.created_at, source=source)
-    except Exception:
-        pass
-
-    try:
-        send_tawk_ticket_notification(lead_type, lead.payload, lead.created_at, source=source)
     except Exception:
         pass
 

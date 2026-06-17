@@ -25,10 +25,6 @@ class Settings(BaseSettings):
     RESEND_FROM: str = ""
     RESEND_TO: str = ""
 
-    # Tawk.to: адрес «Ticket forwarding email» (Administration → Overview).
-    # Каждая заявка уходит письмом → появляется отдельный тикет в Inbox Tawk.
-    TAWK_TICKET_FORWARD_EMAIL: str = ""
-
     # Tawk JavaScript API key (Administration → Overview → JavaScript API → Key).
     # Нужен для login() с hash — телефон попадает в поле Contact (E.164).
     TAWK_JS_API_KEY: str = ""
