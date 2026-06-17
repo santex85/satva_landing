@@ -11,7 +11,7 @@ GIT_ROOT := $(abspath $(CURDIR)/..)
 
 .PHONY: pull sync deploy-dev css build watch serve run stop-port clean build-prod \
         yoga-css yoga-watch yoga-build-prod build-all yoga-clean \
-        yoga-webp yoga-beach-variants yoga-hero-variants help
+        yoga-webp yoga-beach-variants yoga-large-webp yoga-hero-variants help
 
 # Обновить ветку с origin (первая операция перед сборкой при работе из frontend/)
 pull:
@@ -34,7 +34,7 @@ css build yoga-css:
 build-prod yoga-build-prod:
 	$(SASS) $(YOGA_SRC) $(YOGA_OUT) --style=compressed --no-source-map
 	@echo "✓ $(YOGA_OUT) (production) собран"
-	@$(MAKE) yoga-webp yoga-beach-variants
+	@$(MAKE) yoga-webp yoga-beach-variants yoga-large-webp
 
 # Следить за изменениями и пересобирать
 watch yoga-watch:
@@ -81,7 +81,27 @@ yoga-beach-variants:
 	cwebp -q 82 -resize 1600 0 "$$SRC" -o img/yoga_tour/beach_day.webp -quiet; \
 	echo "✓ beach_day responsive WebP variants"
 
-build-all: build yoga-webp yoga-beach-variants
+# Крупные WebP: resize + пересжатие (tour, фон формы, evening)
+yoga-large-webp:
+	@command -v cwebp >/dev/null 2>&1 || { echo "Install: apt-get install webp OR brew install webp"; exit 1; }
+	@set -e; \
+	decode_src() { \
+		f="$$1"; \
+		if [ -f "img/yoga_tour/$${f}.jpg" ]; then echo "img/yoga_tour/$${f}.jpg"; \
+		elif [ -f "img/yoga_tour/$${f}.png" ]; then echo "img/yoga_tour/$${f}.png"; \
+		elif [ -f "img/yoga_tour/$${f}.webp" ] && command -v dwebp >/dev/null 2>&1; then \
+			dwebp "img/yoga_tour/$${f}.webp" -o "/tmp/$${f}_src.png" -quiet; echo "/tmp/$${f}_src.png"; \
+		else echo ""; fi; \
+	}; \
+	SRC=$$(decode_src tour); \
+	if [ -n "$$SRC" ]; then cwebp -q 80 -resize 1600 0 "$$SRC" -o img/yoga_tour/tour.webp -quiet; fi; \
+	SRC=$$(decode_src beach_sunset); \
+	if [ -n "$$SRC" ]; then cwebp -q 78 -resize 1920 0 "$$SRC" -o img/yoga_tour/beach_sunset.webp -quiet; fi; \
+	SRC=$$(decode_src evening); \
+	if [ -n "$$SRC" ]; then cwebp -q 80 -resize 1200 0 "$$SRC" -o img/yoga_tour/evening.webp -quiet; fi; \
+	echo "✓ tour, beach_sunset, evening WebP optimized"
+
+build-all: build yoga-webp yoga-beach-variants yoga-large-webp
 
 yoga-clean clean:
 	rm -f $(YOGA_OUT) $(YOGA_OUT).map
@@ -111,6 +131,7 @@ help:
 	@echo "    make watch           — watch-режим для yoga.scss"
 	@echo "    make build-prod      — минифицированный yoga.css"
 	@echo "    make yoga-webp       — cwebp: *.webp рядом с jpg/png в img/yoga_tour/"
+	@echo "    make yoga-large-webp — resize tour, beach_sunset, evening"
 	@echo ""
 	@echo "  Общее:"
 	@echo "    make deploy-dev      — из корня: git pull + yoga.css + docker compose up"
