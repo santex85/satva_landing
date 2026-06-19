@@ -19,7 +19,9 @@
 ## Pages
 
 - [Home (English)](https://satvasamui.com/): retreat overview, rooms, programme, reviews, FAQ, booking
-- [Home (Russian)](https://satvasamui.com/ru/): Russian-language version
+- [Home (Russian)](https://satvasamui.ru/): Russian-language version
+- [Partners (English)](https://satvasamui.com/partners/): retreat venue for yoga tour organizers
+- [Partners (Russian)](https://satvasamui.ru/partners/): Russian partner landing
 - [Privacy policy](https://satvasamui.com/privacy.html)
 
 ## Frequently asked questions

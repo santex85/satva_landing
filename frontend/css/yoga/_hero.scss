@@ -239,6 +239,11 @@ $yoga-hero-header-offset: 5.75rem;
         transform: rotate(45deg);
         animation: yogaScrollBounce 1.5s ease-in-out infinite;
     }
+
+    // LCP: hero content visible immediately (no JS opacity gate)
+    .yoga-fade-in {
+        opacity: 1;
+    }
 }
 
 @keyframes yogaScrollBounce {

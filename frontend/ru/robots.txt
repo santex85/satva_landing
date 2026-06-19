@@ -53,3 +53,5 @@ User-agent: YandexBot
 Allow: /
 
 Sitemap: https://satvasamui.ru/sitemap.xml
+
+# LLM context: https://satvasamui.ru/llms.txt

@@ -5,7 +5,10 @@
     position: relative;
     isolation: isolate;
     padding: $space-section 0 0;
-    background-image: url('../img/yoga_tour/trust_sea.jpg');
+    background-image: image-set(
+        url('../img/yoga_tour/trust_sea.webp') type('image/webp'),
+        url('../img/yoga_tour/trust_sea.jpg') type('image/jpeg')
+    );
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

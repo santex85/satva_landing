@@ -1,58 +1,28 @@
-/* Satva Samui — Meta Pixel (marketing consent only) */
+/* Satva Samui — Meta Pixel extended events (marketing consent).
+   PageView fires from inline <head> on main landings; this file handles Lead/Contact/ViewContent. */
 (function () {
     'use strict';
 
-    var pixelId = '';
-    var meta = document.querySelector('meta[name="satva-meta-pixel-id"]');
-    if (meta && meta.content) pixelId = String(meta.content).trim();
-
-    var initialized = false;
+    var marketingReady = false;
     var viewContentSent = false;
 
     function getFbq() {
         return typeof window.fbq === 'function' ? window.fbq : null;
     }
 
-    function loadPixelScript(callback) {
-        if (window.fbq) {
-            callback();
-            return;
-        }
-        var n = window.fbq = function () {
-            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-        };
-        if (!window._fbq) window._fbq = n;
-        n.push = n;
-        n.loaded = true;
-        n.version = '2.0';
-        n.queue = [];
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://connect.facebook.net/en_US/fbevents.js';
-        script.onload = callback;
-        script.onerror = callback;
-        var first = document.getElementsByTagName('script')[0];
-        first.parentNode.insertBefore(script, first);
+    function hasMarketingConsent() {
+        return window.satvaConsent && window.satvaConsent.isGranted('marketing');
     }
 
-    function initPixel() {
-        if (initialized || !pixelId) return;
-        if (!window.satvaConsent || !window.satvaConsent.isGranted('marketing')) return;
-
-        loadPixelScript(function () {
-            if (initialized || !pixelId) return;
-            var fbq = getFbq();
-            if (!fbq) return;
-            fbq('init', pixelId);
-            fbq('track', 'PageView');
-            initialized = true;
-            bindContactTracking();
-            bindViewContentTracking();
-        });
+    function initMarketingEvents() {
+        if (marketingReady || !hasMarketingConsent()) return;
+        marketingReady = true;
+        bindContactTracking();
+        bindViewContentTracking();
     }
 
     function trackLead(eventId) {
-        if (!initialized || !eventId) return;
+        if (!hasMarketingConsent() || !eventId) return;
         var fbq = getFbq();
         if (!fbq) return;
         fbq('track', 'Lead', {}, { eventID: String(eventId) });
@@ -60,7 +30,7 @@
 
     function bindContactTracking() {
         document.addEventListener('click', function (e) {
-            if (!initialized) return;
+            if (!marketingReady) return;
             var link = e.target && e.target.closest ? e.target.closest('a[href]') : null;
             if (!link) return;
             var href = link.getAttribute('href') || '';
@@ -96,23 +66,17 @@
         observer.observe(target);
     }
 
-    function onConsentChanged() {
-        if (window.satvaConsent && window.satvaConsent.isGranted('marketing')) {
-            initPixel();
-        }
-    }
-
     window.satvaPixel = {
         trackLead: trackLead,
         isReady: function () {
-            return initialized;
+            return marketingReady && !!getFbq();
         },
     };
 
-    window.addEventListener('satva-consent-changed', onConsentChanged);
+    window.addEventListener('satva-consent-changed', initMarketingEvents);
 
     function scheduleInit() {
-        onConsentChanged();
+        initMarketingEvents();
     }
 
     if (document.readyState === 'loading') {
@@ -120,6 +84,5 @@
     } else {
         scheduleInit();
     }
-    // Повтор после load — consent.js может отработать раньше pixel.js (defer-порядок)
     window.addEventListener('load', scheduleInit);
 })();
