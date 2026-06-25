@@ -181,7 +181,7 @@ $yoga-hero-block-gap: 16px;
         text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
 
         .yoga-hero__content > &:first-child {
-            margin-top: 8px;
+            margin-top: 18px;
             margin-bottom: 20px;
             max-width: 30rem;
             padding-left: 10px;
@@ -193,7 +193,7 @@ $yoga-hero-block-gap: 16px;
             margin-top: 12px;
 
             .yoga-hero__content > &:first-child {
-                margin-top: 8px;
+                margin-top: 18px;
                 margin-bottom: 20px;
                 max-width: 22rem;
                 padding-left: 10px;
@@ -206,7 +206,7 @@ $yoga-hero-block-gap: 16px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 0 0 $yoga-hero-block-gap;
+        margin: 10px 0 26px;
 
         &-value {
             font-size: 30px;
@@ -260,6 +260,11 @@ $yoga-hero-block-gap: 16px;
         flex-wrap: wrap;
         margin-top: 8px;
         margin-bottom: 48px;
+
+        .btn-yoga-primary {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
 
         @media (max-width: 768px) {
             margin-top: 28px;

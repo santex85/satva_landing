@@ -825,7 +825,7 @@ section[id^=yoga] h2 {
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
 }
 .yoga-hero__content > .yoga-hero__tagline:first-child {
-  margin-top: 8px;
+  margin-top: 18px;
   margin-bottom: 20px;
   max-width: 30rem;
   padding-left: 10px;
@@ -837,7 +837,7 @@ section[id^=yoga] h2 {
     margin-top: 12px;
   }
   .yoga-hero__content > .yoga-hero__tagline:first-child {
-    margin-top: 8px;
+    margin-top: 18px;
     margin-bottom: 20px;
     max-width: 22rem;
     padding-left: 10px;
@@ -848,7 +848,7 @@ section[id^=yoga] h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 0 16px;
+  margin: 10px 0 26px;
 }
 .yoga-hero__price-value {
   font-size: 30px;
@@ -896,6 +896,10 @@ section[id^=yoga] h2 {
   flex-wrap: wrap;
   margin-top: 8px;
   margin-bottom: 48px;
+}
+.yoga-hero__buttons .btn-yoga-primary {
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 @media (max-width: 768px) {
   .yoga-hero__buttons {
