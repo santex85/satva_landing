@@ -144,7 +144,7 @@ $yoga-hero-block-gap: 16px;
         }
 
         &-heading {
-            font-size: 1.05rem;
+            font-size: 19px;
             font-weight: 600;
             margin-top: 0;
             margin-bottom: 0.35em;
@@ -181,7 +181,7 @@ $yoga-hero-block-gap: 16px;
         text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
 
         .yoga-hero__content > &:first-child {
-            margin-top: 18px;
+            margin-top: 28px;
             margin-bottom: 20px;
             max-width: 30rem;
             padding-left: 10px;
@@ -193,7 +193,7 @@ $yoga-hero-block-gap: 16px;
             margin-top: 12px;
 
             .yoga-hero__content > &:first-child {
-                margin-top: 18px;
+                margin-top: 28px;
                 margin-bottom: 20px;
                 max-width: 22rem;
                 padding-left: 10px;
@@ -206,7 +206,7 @@ $yoga-hero-block-gap: 16px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 10px 0 26px;
+        margin: 10px 0 10px;
 
         &-value {
             font-size: 30px;
