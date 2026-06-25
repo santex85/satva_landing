@@ -9,6 +9,8 @@
 
 // Высота шапки (fixed): padding-y + логотип; запас под бургер ~44px
 $yoga-hero-header-offset: 5.75rem;
+// Одинаковый зазор между tagline → price → includes
+$yoga-hero-block-gap: 16px;
 
 .yoga-hero {
     position: relative;
@@ -132,6 +134,37 @@ $yoga-hero-header-offset: 5.75rem;
             margin-top: 0.35em;
         }
 
+        &:has(.yoga-hero__subtitle-heading) {
+            display: inline-block;
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 22rem;
+            margin-top: 0;
+        }
+
+        &-heading {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 0.35em;
+            text-align: center;
+            width: 100%;
+            padding-left: 0;
+        }
+
+        &:has(.yoga-hero__subtitle-heading) li:not(.yoga-hero__subtitle-heading) {
+            position: relative;
+            padding-left: 0.85em;
+
+            &::before {
+                content: '·';
+                position: absolute;
+                left: 0;
+                font-weight: 700;
+            }
+        }
+
         @media (max-width: 768px) {
             margin-bottom: 8px;
             flex-shrink: 0;
@@ -148,7 +181,8 @@ $yoga-hero-header-offset: 5.75rem;
         text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
 
         .yoga-hero__content > &:first-child {
-            margin-top: 0;
+            margin-top: 8px;
+            margin-bottom: 20px;
             max-width: 30rem;
             padding-left: 10px;
             padding-right: 10px;
@@ -157,10 +191,10 @@ $yoga-hero-header-offset: 5.75rem;
 
         @media (max-width: 768px) {
             margin-top: 12px;
-            margin-bottom: 16px;
 
             .yoga-hero__content > &:first-child {
-                margin-top: 0;
+                margin-top: 8px;
+                margin-bottom: 20px;
                 max-width: 22rem;
                 padding-left: 10px;
                 padding-right: 10px;
@@ -172,12 +206,7 @@ $yoga-hero-header-offset: 5.75rem;
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 10px;
-        margin-bottom: clamp(16px, 3vw, 28px);
-
-        @media (max-width: 768px) {
-            margin-bottom: 0;
-        }
+        margin: 0 0 $yoga-hero-block-gap;
 
         &-value {
             font-size: 30px;
