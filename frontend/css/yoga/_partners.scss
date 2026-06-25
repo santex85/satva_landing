@@ -24,4 +24,34 @@
         display: block;
         margin: 0 auto 20px;
     }
+
+    @media (max-width: 768px) {
+        .yoga-header {
+            padding-top: 34px;
+            padding-bottom: 34px;
+
+            &--scrolled {
+                padding-top: 20px;
+                padding-bottom: 18px;
+            }
+        }
+
+        .yoga-header__inner {
+            min-height: 56px;
+        }
+
+        .yoga-header__slogan {
+            top: 52%;
+            padding-top: 4px;
+            padding-bottom: 6px;
+        }
+
+        .yoga-header__slogan-title {
+            line-height: 1.2;
+        }
+
+        .yoga-header__slogan-sub {
+            margin-bottom: 2px;
+        }
+    }
 }

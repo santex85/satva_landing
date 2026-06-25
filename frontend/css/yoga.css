@@ -649,6 +649,30 @@ section[id^=yoga] h2 {
   display: block;
   margin: 0 auto 20px;
 }
+@media (max-width: 768px) {
+  .yoga-landing--partners .yoga-header {
+    padding-top: 34px;
+    padding-bottom: 34px;
+  }
+  .yoga-landing--partners .yoga-header--scrolled {
+    padding-top: 20px;
+    padding-bottom: 18px;
+  }
+  .yoga-landing--partners .yoga-header__inner {
+    min-height: 56px;
+  }
+  .yoga-landing--partners .yoga-header__slogan {
+    top: 52%;
+    padding-top: 4px;
+    padding-bottom: 6px;
+  }
+  .yoga-landing--partners .yoga-header__slogan-title {
+    line-height: 1.2;
+  }
+  .yoga-landing--partners .yoga-header__slogan-sub {
+    margin-bottom: 2px;
+  }
+}
 
 .yoga-hero {
   position: relative;
