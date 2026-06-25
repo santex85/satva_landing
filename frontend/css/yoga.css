@@ -784,7 +784,8 @@ section[id^=yoga] h2 {
 }
 @media (max-width: 768px) {
   .yoga-hero__subtitle {
-    margin-bottom: 0;
+    margin-bottom: 8px;
+    flex-shrink: 0;
   }
 }
 .yoga-hero__tagline {
@@ -796,10 +797,23 @@ section[id^=yoga] h2 {
   opacity: 0.94;
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
 }
+.yoga-hero__content > .yoga-hero__tagline:first-child {
+  margin-top: 0;
+  max-width: 30rem;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
 @media (max-width: 768px) {
   .yoga-hero__tagline {
     margin-top: 12px;
     margin-bottom: 16px;
+  }
+  .yoga-hero__content > .yoga-hero__tagline:first-child {
+    margin-top: 0;
+    max-width: 22rem;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 .yoga-hero__price {
@@ -820,6 +834,13 @@ section[id^=yoga] h2 {
   color: #ff8e72;
   line-height: 1.05;
   text-shadow: 0 2px 20px rgba(255, 142, 114, 0.4);
+}
+.yoga-hero__price-mark {
+  font-size: 0.55em;
+  font-weight: 600;
+  vertical-align: super;
+  line-height: 0;
+  margin-left: 1px;
 }
 .yoga-hero__price-label {
   font-size: 1.05rem;
@@ -856,8 +877,27 @@ section[id^=yoga] h2 {
 }
 @media (max-width: 768px) {
   .yoga-hero__buttons {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    flex-shrink: 0;
+  }
+}
+.yoga-hero__footnote {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  opacity: 0.65;
+  text-align: center;
+  max-width: 36rem;
+  margin: 12px auto 0;
+  padding: 0 16px;
+}
+@media (max-width: 768px) {
+  .yoga-hero__footnote {
+    margin-top: auto;
+    margin-bottom: 6px;
+    font-size: 0.7rem;
+    padding: 0 20px;
+    flex-shrink: 0;
   }
 }
 .yoga-hero__scroll-hint {
