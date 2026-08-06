@@ -976,6 +976,80 @@ section[id^=yoga] h2 {
     animation: none;
   }
 }
+.yoga-award {
+  position: relative;
+  z-index: 1;
+  padding: clamp(2.5rem, 5vw, 3.5rem) 24px;
+  background: linear-gradient(135deg, rgba(15, 76, 92, 0.06) 0%, white 42%, rgba(15, 76, 92, 0.04) 100%);
+  border-bottom: 1px solid rgba(15, 76, 92, 0.1);
+}
+.yoga-award__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .yoga-award__container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(2rem, 4vw, 3.5rem);
+    text-align: left;
+  }
+}
+.yoga-award__mark {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 5.5rem;
+  padding: 0.5rem 0;
+  color: #0f4c5c;
+  line-height: 1;
+}
+.yoga-award__rank {
+  font-size: clamp(3.25rem, 8vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+.yoga-award__year {
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+.yoga-award__copy {
+  max-width: 38rem;
+}
+.yoga-award__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(15, 76, 92, 0.72);
+}
+.yoga-award h2 {
+  margin: 0 0 0.65rem;
+  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #0f4c5c;
+}
+.yoga-award__text {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+  line-height: 1.55;
+  color: #666666;
+}
+
 .yoga-promo {
   background: #ffffff;
   padding: clamp(60px, 8vw, 100px) 24px;
