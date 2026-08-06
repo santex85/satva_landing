@@ -716,7 +716,7 @@ section[id^=yoga] h2 {
 .yoga-hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(160deg, rgba(92, 29, 58, 0.52) 0%, rgba(15, 76, 92, 0.4) 50%, rgba(9, 54, 66, 0.55) 100%);
+  background: linear-gradient(160deg, rgba(92, 29, 58, 0.08) 0%, rgba(15, 76, 92, 0.06) 50%, rgba(9, 54, 66, 0.1) 100%);
 }
 .yoga-hero__content {
   position: relative;
