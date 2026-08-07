@@ -9,6 +9,8 @@
     var HEADER_OFFSET = 80; // высота хедера для smooth scroll и триггера .--scrolled
 
     var closeYogaLeadModalFn = null;
+    var openYogaLeadModalFn = null;
+    var closePromoModalFn = null;
     var yogaTurnstileLeadWidgetId = null;
     var yogaTurnstileSiteKey = '';
 
@@ -177,6 +179,7 @@
                     procedure: lead.procedure || '',
                     package: lead.package_slug || '',
                     lang: lead.lang || '',
+                    promo: !!lead.promo_optin,
                 });
             }
         } catch (e) {
@@ -198,14 +201,239 @@
         return payload;
     }
 
-    function trackMetaLead(eventId) {
+    function trackMetaLead(eventId, extra) {
         try {
             if (window.satvaPixel && typeof window.satvaPixel.trackLead === 'function') {
-                window.satvaPixel.trackLead(eventId);
+                window.satvaPixel.trackLead(eventId, extra);
             }
         } catch (e) {
             if (window.console) console.warn('Meta Pixel trackLead failed:', e);
         }
+    }
+
+    function isPromoFeatureActive() {
+        return !!(window.satvaPromo && typeof window.satvaPromo.isActive === 'function' && window.satvaPromo.isActive());
+    }
+
+    function trackPromoEvent(name) {
+        try {
+            if (window.umami && typeof window.umami.track === 'function') {
+                window.umami.track(name);
+            }
+        } catch (e) {
+            if (window.console) console.warn('Umami promo track failed:', e);
+        }
+    }
+
+    function countNights(arrival, departure) {
+        if (!arrival || !departure) return null;
+        var a = new Date(arrival + 'T00:00:00');
+        var d = new Date(departure + 'T00:00:00');
+        if (isNaN(a.getTime()) || isNaN(d.getTime())) return null;
+        var nights = Math.round((d - a) / 86400000);
+        return nights >= 0 ? nights : null;
+    }
+
+    function normalizeSocialHandle(raw) {
+        var v = (raw || '').trim();
+        v = v.replace(/^@+/, '');
+        v = v.replace(/^https?:\/\/(www\.)?instagram\.com\//i, '');
+        v = v.replace(/\/.*$/, '');
+        v = v.toLowerCase();
+        v = v.replace(/[^a-z0-9._]/g, '');
+        return v.slice(0, 64);
+    }
+
+    function appendPromoToPayload(payload, optinEl, handleEl) {
+        if (!isPromoFeatureActive()) {
+            payload.promo_id = null;
+            payload.promo_optin = false;
+            payload.social_handle = null;
+            return;
+        }
+        var opted = !!(optinEl && optinEl.checked);
+        payload.promo_optin = opted;
+        payload.promo_id = opted && window.SATVA_PROMO ? window.SATVA_PROMO.id : null;
+        payload.social_handle = opted && handleEl
+            ? (normalizeSocialHandle(handleEl.value) || null)
+            : null;
+    }
+
+    function bindPromoFormFields(cfg) {
+        if (!cfg || !cfg.optin) return;
+
+        function setHandleVisible(open) {
+            if (cfg.optin) cfg.optin.setAttribute('aria-expanded', open ? 'true' : 'false');
+            if (cfg.wrap) {
+                cfg.wrap.classList.toggle('is-open', open);
+                cfg.wrap.classList.toggle('is-hidden', !open);
+                cfg.wrap.setAttribute('aria-hidden', open ? 'false' : 'true');
+            }
+        }
+
+        function updateNightsHint() {
+            if (!cfg.hint || !cfg.optin || !cfg.optin.checked) {
+                if (cfg.hint) cfg.hint.classList.add('is-hidden');
+                return;
+            }
+            var nights = countNights(
+                cfg.arrival && cfg.arrival.value ? cfg.arrival.value.trim() : '',
+                cfg.departure && cfg.departure.value ? cfg.departure.value.trim() : ''
+            );
+            var paid = window.satvaPromo && typeof window.satvaPromo.paidNights === 'function'
+                ? window.satvaPromo.paidNights()
+                : 10;
+            var show = nights !== null && nights < paid;
+            cfg.hint.classList.toggle('is-hidden', !show);
+        }
+
+        function onOptinChange() {
+            var checked = cfg.optin.checked;
+            setHandleVisible(checked);
+            updateNightsHint();
+            if (checked) trackPromoEvent('promo_optin_checked');
+        }
+
+        cfg.optin.addEventListener('change', onOptinChange);
+
+        if (cfg.handle) {
+            function onHandleInput() {
+                cfg.handle.value = normalizeSocialHandle(cfg.handle.value);
+            }
+            cfg.handle.addEventListener('input', onHandleInput);
+            cfg.handle.addEventListener('blur', onHandleInput);
+        }
+
+        if (cfg.arrival) cfg.arrival.addEventListener('change', updateNightsHint);
+        if (cfg.departure) cfg.departure.addEventListener('change', updateNightsHint);
+
+        onOptinChange();
+    }
+
+    function openLeadModalWithPromoOptin() {
+        if (closePromoModalFn) closePromoModalFn();
+        if (openYogaLeadModalFn) openYogaLeadModalFn();
+        var chk = document.getElementById('yogaLeadModalPromoOptin');
+        var wrap = document.getElementById('yogaLeadModalPromoHandleWrap');
+        if (chk) {
+            chk.checked = true;
+            chk.setAttribute('aria-expanded', 'true');
+        }
+        if (wrap) {
+            wrap.classList.add('is-open');
+            wrap.classList.remove('is-hidden');
+            wrap.setAttribute('aria-hidden', 'false');
+        }
+        trackPromoEvent('promo_modal_cta');
+    }
+
+    function initPromoBadgeView() {
+        var badge = document.getElementById('promoBadge');
+        if (!badge || !isPromoFeatureActive()) return;
+        if (sessionStorage.getItem('satva_promo_badge_view')) return;
+
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    if (!sessionStorage.getItem('satva_promo_badge_view')) {
+                        sessionStorage.setItem('satva_promo_badge_view', '1');
+                        trackPromoEvent('promo_badge_view');
+                    }
+                    observer.disconnect();
+                });
+            }, { threshold: 0.5 });
+            io.observe(badge);
+        }
+    }
+
+    function initPromoModal() {
+        var modal = document.getElementById('promoModal');
+        if (!modal || !modal.classList.contains('yoga-modal') || !isPromoFeatureActive()) return;
+
+        var overlay = modal.querySelector('.yoga-modal__overlay');
+        var closeBtn = modal.querySelector('.yoga-modal__close');
+        var panel = modal.querySelector('.yoga-modal__content');
+        var previousActive = null;
+        var trapHandler = null;
+
+        function getFocusable() {
+            if (!panel) return [];
+            return panel.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+        }
+
+        function openModal(trigger) {
+            previousActive = trigger || document.activeElement;
+            modal.removeAttribute('hidden');
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            var list = getFocusable();
+            if (list.length) list[0].focus();
+            var first = list[0];
+            var last = list[list.length - 1];
+            trapHandler = function (e) {
+                if (e.key !== 'Tab' || !list.length) return;
+                if (e.shiftKey) {
+                    if (document.activeElement === first) {
+                        e.preventDefault();
+                        last.focus();
+                    }
+                } else if (document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            };
+            modal.addEventListener('keydown', trapHandler);
+        }
+
+        function closeModal() {
+            if (trapHandler) {
+                modal.removeEventListener('keydown', trapHandler);
+                trapHandler = null;
+            }
+            modal.classList.remove('is-open');
+            modal.setAttribute('hidden', '');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            if (previousActive && previousActive.focus) previousActive.focus();
+        }
+
+        closePromoModalFn = closeModal;
+
+        document.addEventListener('click', function (e) {
+            var btn = e.target.closest ? e.target.closest('[data-open-modal]') : null;
+            if (!btn || btn.getAttribute('data-open-modal') !== 'promoModal') return;
+            e.preventDefault();
+            if (btn.id === 'promoBadge') trackPromoEvent('promo_badge_click');
+            openModal(btn);
+        });
+
+        document.addEventListener('click', function (e) {
+            var ig = e.target.closest ? e.target.closest('[data-promo-instagram-link]') : null;
+            if (!ig || !modal.contains(ig)) return;
+            trackPromoEvent('promo_instagram_click');
+        });
+
+        var cta = document.getElementById('promoModalCtaLead');
+        if (cta) {
+            cta.addEventListener('click', function (e) {
+                e.preventDefault();
+                openLeadModalWithPromoOptin();
+            });
+        }
+
+        if (overlay) overlay.addEventListener('click', closeModal);
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key !== 'Escape') return;
+            if (!modal.classList.contains('is-open')) return;
+            e.preventDefault();
+            closeModal();
+        }, true);
     }
 
     /** Синхронизирует контакт Tawk (login по email + event). Без email — только addEvent. */
@@ -1079,6 +1307,7 @@
         }
 
         closeYogaLeadModalFn = closeModal;
+        openYogaLeadModalFn = openModal;
 
         document.addEventListener('click', function (e) {
             var btn = e.target.closest ? e.target.closest('[data-open-modal]') : null;
@@ -1207,6 +1436,17 @@
         var departureDate = document.getElementById('yogaLeadModalDepartureDate');
         var guestCount = document.getElementById('yogaLeadModalGuestCount');
         var comment = document.getElementById('yogaLeadModalComment');
+        var promoOptin = document.getElementById('yogaLeadModalPromoOptin');
+        var promoHandle = document.getElementById('yogaLeadModalSocialHandle');
+
+        bindPromoFormFields({
+            optin: promoOptin,
+            handle: promoHandle,
+            wrap: document.getElementById('yogaLeadModalPromoHandleWrap'),
+            hint: document.getElementById('yogaLeadModalPromoNightsHint'),
+            arrival: arrivalDate,
+            departure: departureDate,
+        });
 
         var lastSubmitTime = 0;
         var SUBMIT_COOLDOWN_MS = 5000;
@@ -1388,6 +1628,7 @@
             var emLeadTrim = (emailIn && emailIn.value) ? emailIn.value.trim() : '';
             if (emLeadTrim) payload.email = emLeadTrim;
 
+            appendPromoToPayload(payload, promoOptin, promoHandle);
             applyLeadMeta(payload, form);
             payload.meta_event_id = generateEventId();
             appendAttributionToPayload(payload);
@@ -1415,12 +1656,25 @@
                     resetTurnstileLead();
                     if (r.ok) {
                         trackUmamiLead(payload);
-                        trackMetaLead(payload.meta_event_id);
+                        trackMetaLead(
+                            payload.meta_event_id,
+                            payload.promo_optin ? { content_category: 'promo_11th_night' } : undefined
+                        );
                         setTawkVisitor(payload, r.body && r.body.tawk_login);
                         form.reset();
                         clearNamePhoneErrors();
                         showFormError('');
                         if (consent) consent.checked = false;
+                        if (promoOptin) {
+                            promoOptin.checked = false;
+                            promoOptin.setAttribute('aria-expanded', 'false');
+                        }
+                        var promoWrap = document.getElementById('yogaLeadModalPromoHandleWrap');
+                        if (promoWrap) {
+                            promoWrap.classList.remove('is-open');
+                            promoWrap.classList.add('is-hidden');
+                            promoWrap.setAttribute('aria-hidden', 'true');
+                        }
                         form.classList.add('is-hidden');
                         if (successBox) successBox.classList.remove('is-hidden');
                         setTimeout(function () {
@@ -1461,6 +1715,17 @@
         var nameErr = document.getElementById('yogaNameErr');
         var phoneErr = document.getElementById('yogaPhoneErr');
         var emailErr = document.getElementById('yogaEmailErr');
+        var promoOptin = document.getElementById('yogaPromoOptin');
+        var promoHandle = document.getElementById('yogaSocialHandle');
+
+        bindPromoFormFields({
+            optin: promoOptin,
+            handle: promoHandle,
+            wrap: document.getElementById('yogaPromoHandleWrap'),
+            hint: document.getElementById('yogaPromoNightsHint'),
+            arrival: arrivalDate,
+            departure: departureDate,
+        });
 
         var lastSubmitTime = 0;
         var SUBMIT_COOLDOWN_MS = 5000;
@@ -1675,6 +1940,7 @@
             };
             var emMainTrim = (emailIn && emailIn.value) ? emailIn.value.trim() : '';
             if (emMainTrim) payload.email = emMainTrim;
+            appendPromoToPayload(payload, promoOptin, promoHandle);
             applyLeadMeta(payload, form);
             payload.meta_event_id = generateEventId();
             appendAttributionToPayload(payload);
@@ -1702,7 +1968,10 @@
                     resetTurnstile();
                     if (r.ok) {
                         trackUmamiLead(payload);
-                        trackMetaLead(payload.meta_event_id);
+                        trackMetaLead(
+                            payload.meta_event_id,
+                            payload.promo_optin ? { content_category: 'promo_11th_night' } : undefined
+                        );
                         setTawkVisitor(payload, r.body && r.body.tawk_login);
                         if (successBox) successBox.classList.remove('is-hidden');
                         form.classList.add('is-hidden');
@@ -1737,6 +2006,8 @@
         initYogaOfferCancellationModals();
         initYogaLeadModal();
         initYogaPanchaInfoModal();
+        initPromoModal();
+        initPromoBadgeView();
         initForm();
         initYogaLeadForm();
     }

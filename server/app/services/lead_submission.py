@@ -20,6 +20,9 @@ def submit_lead(
     honeypot: str | None,
     source: str | None = None,
     background_tasks: BackgroundTasks | None = None,
+    promo_id: str | None = None,
+    promo_optin: bool = False,
+    social_handle: str | None = None,
 ) -> Lead:
     if honeypot and honeypot.strip():
         raise HTTPException(status_code=400, detail="Invalid request")
@@ -28,6 +31,9 @@ def submit_lead(
         type=lead_type,
         payload=payload,
         source=source or "landing",
+        promo_id=promo_id,
+        promo_optin=promo_optin,
+        social_handle=social_handle,
     )
     db.add(lead)
     db.flush()
@@ -54,7 +60,17 @@ def submit_lead(
         background_tasks.add_task(resolve_and_store_geo, consent.id, ip_address)
 
     try:
-        send_lead_notification(lead_type, lead.payload, lead.created_at, source=source, db=db)
+        send_lead_notification(
+            lead_type,
+            lead.payload,
+            lead.created_at,
+            source=source,
+            db=db,
+            promo_optin=lead.promo_optin,
+            social_handle=lead.social_handle,
+            preferred_date=payload.get("preferred_date"),
+            departure_date=payload.get("departure_date"),
+        )
     except Exception:
         pass
 

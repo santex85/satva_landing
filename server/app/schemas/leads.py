@@ -27,6 +27,9 @@ class LeadOut(BaseModel):
     source: str | None
     status: str
     archived_at: datetime | None
+    promo_id: str | None = None
+    promo_optin: bool = False
+    social_handle: str | None = None
 
     class Config:
         from_attributes = True

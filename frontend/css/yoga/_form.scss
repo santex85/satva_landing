@@ -237,16 +237,57 @@
         font-size: $font-size-small;
         color: rgba(255, 255, 255, 0.95);
         cursor: pointer;
+
         a {
             color: $color-accent;
             text-decoration: underline;
+
             &:hover {
                 color: #ff9d80;
             }
         }
+
         input {
             margin-top: 0.2rem;
             flex-shrink: 0;
+        }
+    }
+
+    &__promo {
+        margin-bottom: 1rem;
+    }
+
+    &__promo-optin {
+        margin-bottom: 0.5rem;
+    }
+
+    &__promo-hint {
+        display: block;
+        margin: 0 0 0.65rem;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.82);
+        line-height: 1.4;
+
+        &.is-hidden {
+            display: none !important;
+        }
+    }
+
+    &__promo-handle {
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        margin-bottom: 0;
+        transition: max-height 0.25s ease, opacity 0.25s ease, margin-bottom 0.25s ease;
+
+        &.is-open {
+            max-height: 6rem;
+            opacity: 1;
+            margin-bottom: 0.75rem;
+        }
+
+        &.is-hidden:not(.is-open) {
+            display: block !important;
         }
     }
 
@@ -363,6 +404,10 @@ form.yoga-form.yoga-form--modal-light {
 
     .yoga-form__error-text {
         color: #b02a37;
+    }
+
+    .yoga-form__promo-hint {
+        color: $color-text-light;
     }
 
     .yoga-form__turnstile {

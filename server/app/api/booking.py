@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import APIRouter, Depends, Request, BackgroundTasks
 from sqlalchemy.orm import Session
 
@@ -9,7 +11,10 @@ from app.schemas.public_forms import BookingRequest
 from app.services.captcha import verify_turnstile_or_skip
 from app.services.lead_submission import submit_lead
 from app.services.meta_capi import send_meta_lead_event
+from app.services.promo import resolve_promo_fields
 from app.services.tawk import contact_response_with_tawk
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -42,6 +47,12 @@ def booking(
     if body.meta_event_id:
         payload["meta_event_id"] = body.meta_event_id
 
+    promo_id, promo_optin, social_handle = resolve_promo_fields(
+        body.promo_id,
+        body.promo_optin,
+        body.social_handle,
+    )
+
     client_host = request.client.host if request.client else None
     forwarded = request.headers.get("x-forwarded-for")
     ip_address = (forwarded.split(",")[0].strip() if forwarded else None) or client_host
@@ -56,6 +67,9 @@ def booking(
         body.website,
         source=body.source,
         background_tasks=background_tasks,
+        promo_id=promo_id,
+        promo_optin=promo_optin,
+        social_handle=social_handle,
     )
 
     if body.meta_event_id:

@@ -17,7 +17,7 @@ WHATSAPP_DISPLAY = "+66 950 165 058"
 TELEGRAM_URL = "https://t.me/OlgaSatva"
 TELEGRAM_DISPLAY = "@OlgaSatva"
 
-_SKIP_KEYS = frozenset({"website", "consent", "captcha_token", "meta_event_id"})
+_SKIP_KEYS = frozenset({"website", "consent", "captcha_token", "meta_event_id", "promo_id", "promo_optin", "social_handle"})
 
 _FIELD_LABELS: dict[str, str] = {
     "lang": "Сайт",
@@ -362,18 +362,36 @@ def _build_confirmation_html(payload: dict, lang: str) -> str:
 </html>"""
 
 
-def _build_body(lead_type: str, payload: dict, created_at: datetime | None, source: str | None) -> str:
+def _build_body(
+    lead_type: str,
+    payload: dict,
+    created_at: datetime | None,
+    source: str | None,
+    *,
+    promo_optin: bool = False,
+    social_handle: str | None = None,
+    stay_nights: int | None = None,
+) -> str:
     created = (created_at or datetime.utcnow()).strftime("%Y-%m-%d %H:%M UTC")
     merged = dict(payload)
     if source and not _is_empty(source):
         merged.setdefault("source", source)
 
-    lines = [
+    lines: list[str] = []
+    if promo_optin:
+        handle_display = social_handle or "—"
+        nights_display = stay_nights if stay_nights is not None else "—"
+        lines.append(
+            f"🎁 АКЦИЯ «+1 ночь бесплатно» · ник: @{handle_display} · ночей: {nights_display}"
+        )
+        lines.append("")
+
+    lines.extend([
         f"Тип заявки: {_lead_type_label(lead_type)}",
         f"Дата: {created}",
         "",
         "Данные:",
-    ]
+    ])
 
     seen: set[str] = set()
     for key in _FIELD_ORDER:
@@ -404,6 +422,11 @@ def send_lead_notification(
     created_at: datetime | None = None,
     source: str | None = None,
     db: Session | None = None,
+    *,
+    promo_optin: bool = False,
+    social_handle: str | None = None,
+    preferred_date: str | None = None,
+    departure_date: str | None = None,
 ) -> None:
     if not settings.RESEND_API_KEY or not settings.RESEND_FROM:
         logger.warning("Resend not configured, skipping email")
@@ -414,11 +437,23 @@ def send_lead_notification(
         logger.warning("No lead notification recipients configured, skipping email")
         return
 
+    from app.services.promo import count_stay_nights
+
+    stay_nights = count_stay_nights(preferred_date, departure_date)
+
     subject = f"Новая заявка с сайта — {_lead_type_label(lead_type)}"
     site_tag = _site_tag(payload)
     if site_tag:
         subject = f"Новая заявка с сайта ({site_tag}) — {_lead_type_label(lead_type)}"
-    body = _build_body(lead_type, payload, created_at, source)
+    body = _build_body(
+        lead_type,
+        payload,
+        created_at,
+        source,
+        promo_optin=promo_optin,
+        social_handle=social_handle,
+        stay_nights=stay_nights,
+    )
 
     resend.api_key = settings.RESEND_API_KEY
     try:

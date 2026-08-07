@@ -46,4 +46,10 @@
         <xhtml:link rel="alternate" hreflang="ru" href="https://satvasamui.ru/cancellation.html"/>
         <xhtml:link rel="alternate" hreflang="x-default" href="https://satvasamui.com/cancellation.html"/>
     </url>
+    <url>
+        <loc>https://satvasamui.ru/promo.html</loc>
+        <lastmod>2026-08-08</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
 </urlset>

@@ -115,6 +115,9 @@ class BookingRequest(LeadSubmissionBase):
     departure_date: str | None = Field(None, max_length=64)
     guest_count: int | None = Field(None, ge=1, le=999, description="Approximate number of guests")
     comment: str | None = Field(None, max_length=2000)
+    promo_id: str | None = Field(None, max_length=64)
+    promo_optin: bool = False
+    social_handle: str | None = Field(None, max_length=64)
 
     @field_validator("guest_count", mode="before")
     @classmethod
@@ -127,6 +130,15 @@ class BookingRequest(LeadSubmissionBase):
     @classmethod
     def procedure_strip(cls, v: str) -> str:
         return v.strip()
+
+    @field_validator("social_handle", mode="before")
+    @classmethod
+    def social_handle_sanitize(cls, v):
+        if v is None or (isinstance(v, str) and not v.strip()):
+            return None
+        from app.services.promo import sanitize_social_handle
+
+        return sanitize_social_handle(str(v))
 
 
 class PackageRequest(LeadSubmissionBase):

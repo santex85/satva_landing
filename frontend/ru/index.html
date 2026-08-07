@@ -44,9 +44,10 @@
     .yoga-hero__bg picture,.yoga-hero__bg img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
     .yoga-hero__content{position:relative;z-index:2;max-width:700px;width:100%;padding:0 24px;color:#fff}
     .yoga-hero .yoga-fade-in{opacity:1}
+    [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=9" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=9"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=12" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=12"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -62,8 +63,9 @@
     src="https://www.facebook.com/tr?id=1358193522870162&amp;ev=PageView&amp;noscript=1"></noscript>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
     <script defer src="/js/consent.js?v=3"></script>
-    <script defer src="/js/pixel.js?v=3"></script>
-    <script defer src="/js/yoga.js?v=13"></script>
+    <script defer src="/js/pixel.js?v=4"></script>
+    <script defer src="/js/promo-config.js?v=2"></script>
+    <script defer src="/js/yoga.js?v=14"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
 
     <!-- Structured Data: LodgingBusiness (расширенная карточка) -->
@@ -138,6 +140,11 @@
             },
             {
                 "@type": "Question",
+                "name": "Есть ли скидки при длительном проживании?",
+                "acceptedAnswer": { "@type": "Answer", "text": "При бронировании от 10 ночей и подписке на Instagram @satvasamui — +1 ночь бесплатно. Подробные условия акции: https://satvasamui.ru/promo.html" }
+            },
+            {
+                "@type": "Question",
                 "name": "Нужен ли опыт йоги?",
                 "acceptedAnswer": { "@type": "Answer", "text": "Многие наши гости — новички в йоге. Программа рассчитана на разный уровень: от начинающего до продвинутого. Преподаватели позаботятся, чтоб вам было комфортно на занятиях, и вы получили нужный результат." }
             },
@@ -206,6 +213,18 @@
         </div>
         <div class="yoga-hero__overlay"></div>
         <div class="yoga-hero__content">
+            <button type="button"
+                    class="promo-badge yoga-fade-in"
+                    id="promoBadge"
+                    data-promo-gated
+                    data-promo-trigger
+                    data-open-modal="promoModal"
+                    aria-haspopup="dialog"
+                    aria-controls="promoModal">
+                <span class="promo-badge__icon" aria-hidden="true">🎁</span>
+                <span class="promo-badge__main">+1 ночь бесплатно</span>
+                <span class="promo-badge__sub">при бронировании от 10 ночей · условия</span>
+            </button>
             <h1 class="yoga-hero__tagline yoga-fade-in">Вы будете жить на берегу тихого, спокойного моря и&nbsp;наслаждаться прекрасными закатами.</h1>
             <div class="yoga-hero__price yoga-fade-in" aria-describedby="yogaHeroFootnote">
                 <span class="yoga-hero__price-value">75&nbsp;$&nbsp;сутки<sup class="yoga-hero__price-mark" aria-hidden="true">*</sup></span>
@@ -222,7 +241,7 @@
                 <li>Медитация каждый вечер</li>
             </ul>
             <div class="yoga-hero__buttons yoga-fade-in">
-                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Оставить заявку на даты</button>
+                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Забронировать</button>
             </div>
             <p class="yoga-hero__footnote yoga-fade-in" id="yogaHeroFootnote"><span aria-hidden="true">*</span> при 2-местном размещении в номере «Стандарт».</p>
             <div class="yoga-hero__scroll-hint" aria-hidden="true">
@@ -348,6 +367,10 @@
                 </div>
             </div>
             <p class="yoga-includes__legend yoga-fade-in"><span class="yoga-includes__optional">*</span>&nbsp;— оплачивается отдельно, не входит в базовый пакет тура.</p>
+            <p class="yoga-includes__promo yoga-fade-in" data-promo-gated>
+                При бронировании от 10 ночей — +1 ночь бесплатно.
+                <button type="button" data-open-modal="promoModal" data-promo-trigger>Условия</button>
+            </p>
             <div class="yoga-includes__amenities yoga-fade-in" aria-label="Инфраструктура, включённая в пакет">
                 <p class="yoga-includes__amenities-title">На территории отеля:</p>
                 <ul class="yoga-includes__amenities-list">
@@ -680,9 +703,15 @@
             </div>
 
             <div class="yoga-rooms__urgency yoga-fade-in">
-                <p>
-                    <strong>Осталось только 3 номера.</strong>
-                </p>
+                <div class="yoga-rooms__urgency-copy">
+                    <p>
+                        <strong>Ограниченное количество номеров.</strong>
+                    </p>
+                    <p class="yoga-rooms__urgency-promo" data-promo-gated>
+                        При бронировании от 10 ночей — +1 ночь бесплатно.
+                        <button type="button" data-open-modal="promoModal" data-promo-trigger>Условия</button>
+                    </p>
+                </div>
                 <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Забронировать номер</button>
             </div>
         </div>
@@ -1190,38 +1219,50 @@
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__term">
                         <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA5" id="yogaFaqQ5">
-                            <span class="yoga-faq__question-label">Нужен ли опыт йоги?</span>
+                            <span class="yoga-faq__question-label">Есть ли скидки при длительном проживании?</span>
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA5" role="region" aria-labelledby="yogaFaqQ5" hidden>Многие наши гости — новички в йоге. Программа рассчитана на разный уровень: от начинающего до продвинутого. Преподаватели позаботятся, чтоб вам было комфортно на занятиях, и вы получили нужный результат.</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA5" role="region" aria-labelledby="yogaFaqQ5" hidden>
+                        <span data-promo-faq-active hidden>При бронировании от 10 ночей и подписке на Instagram <a href="https://www.instagram.com/satvasamui/" target="_blank" rel="noopener noreferrer">@satvasamui</a> — +1 ночь бесплатно. <a href="promo.html">Подробные условия акции</a>.</span>
+                        <span data-promo-faq-inactive>Стоимость длительного проживания зависит от дат и категории номера. Свяжитесь с нами — подберём оптимальный тариф.</span>
+                    </dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__term">
                         <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA6" id="yogaFaqQ6">
-                            <span class="yoga-faq__question-label">Сколько стоит перелёт?</span>
+                            <span class="yoga-faq__question-label">Нужен ли опыт йоги?</span>
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA6" role="region" aria-labelledby="yogaFaqQ6" hidden>Зависит от города вылета и сезона. Напишите, когда вы хотели бы приехать и откуда летите. Мы рассчитаем примерную стоимость перелёта и поможем с билетами.</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA6" role="region" aria-labelledby="yogaFaqQ6" hidden>Многие наши гости — новички в йоге. Программа рассчитана на разный уровень: от начинающего до продвинутого. Преподаватели позаботятся, чтоб вам было комфортно на занятиях, и вы получили нужный результат.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__term">
                         <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA7" id="yogaFaqQ7">
-                            <span class="yoga-faq__question-label">Когда лучший сезон?</span>
+                            <span class="yoga-faq__question-label">Сколько стоит перелёт?</span>
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA7" role="region" aria-labelledby="yogaFaqQ7" hidden>На Самуи комфортная и приятная погода круглый год. Море около нашего отеля всегда без отливов и сильных волн. Выбирайте удобные для вас даты без привязки к сезону.</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA7" role="region" aria-labelledby="yogaFaqQ7" hidden>Зависит от города вылета и сезона. Напишите, когда вы хотели бы приехать и откуда летите. Мы рассчитаем примерную стоимость перелёта и поможем с билетами.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__term">
                         <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA8" id="yogaFaqQ8">
+                            <span class="yoga-faq__question-label">Когда лучший сезон?</span>
+                            <span class="yoga-faq__chevron" aria-hidden="true"></span>
+                        </button>
+                    </dt>
+                    <dd class="yoga-faq__answer" id="yogaFaqA8" role="region" aria-labelledby="yogaFaqQ8" hidden>На Самуи комфортная и приятная погода круглый год. Море около нашего отеля всегда без отливов и сильных волн. Выбирайте удобные для вас даты без привязки к сезону.</dd>
+                </div>
+                <div class="yoga-faq__row yoga-fade-in">
+                    <dt class="yoga-faq__term">
+                        <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA9" id="yogaFaqQ9">
                             <span class="yoga-faq__question-label">Что взять с собой?</span>
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA8" role="region" aria-labelledby="yogaFaqQ8" hidden>Одежда для занятий, купальник, удобная обувь для экскурсий. Дополнительные вещи сможете купить в магазинчике рядом с отелем. Коврики для йоги, пляжные полотенца есть в отеле.</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA9" role="region" aria-labelledby="yogaFaqQ9" hidden>Одежда для занятий, купальник, удобная обувь для экскурсий. Дополнительные вещи сможете купить в магазинчике рядом с отелем. Коврики для йоги, пляжные полотенца есть в отеле.</dd>
                 </div>
             </dl>
         </div>
@@ -1237,6 +1278,10 @@
                 <img class="yoga-form__logo" src="/img/satva-logo.png" alt="" width="180" height="120" loading="lazy">
                 <h2 id="yogaFormTitle">Заявка на йога-тур</h2>
                 <p class="yoga-form__lead">Оставьте ваши контакты – мы свяжемся с вами, ответим на все вопросы, поможем с бронированием и перелетом.</p>
+                <p class="yoga-form__promo-note" data-promo-gated>
+                    Акция «+1 ночь бесплатно» при бронировании от 10 ночей.
+                    <button type="button" data-open-modal="promoModal" data-promo-trigger>Условия акции</button>
+                </p>
 
                 <div id="yogaFormSuccess" class="yoga-form__status yoga-form__status--success is-hidden" role="status">
                     Спасибо, заявка принята. Свяжемся с вами в ближайшее время.
@@ -1412,9 +1457,21 @@
 
                     <div id="yogaTurnstileWidget" class="yoga-form__turnstile" role="group" aria-label="Проверка «Я не робот»"></div>
 
+                    <div class="yoga-form__promo" data-promo-gated>
+                        <label class="yoga-form__checkbox yoga-form__promo-optin">
+                            <input type="checkbox" id="yogaPromoOptin" name="promo_optin" value="true" aria-expanded="false" aria-controls="yogaPromoHandleWrap">
+                            <span>Участвую в акции «+1 ночь бесплатно»</span>
+                        </label>
+                        <span id="yogaPromoNightsHint" class="yoga-form__promo-hint is-hidden" role="status">Для участия нужно 10 и более ночей</span>
+                        <div class="yoga-form__promo-handle is-hidden" id="yogaPromoHandleWrap" aria-hidden="true">
+                            <label class="yoga-form__label" for="yogaSocialHandle">Ваш ник в Instagram</label>
+                            <input class="yoga-form__input" type="text" id="yogaSocialHandle" name="social_handle" maxlength="64" placeholder="@ваш_ник" autocomplete="off" inputmode="text">
+                        </div>
+                    </div>
+
                     <label class="yoga-form__checkbox">
                         <input type="checkbox" id="yogaConsent" name="consent" value="true" required>
-                        <span>Я согласен с <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">политикой конфиденциальности</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">публичной офертой</button> и <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">условиями отмены бронирования</button></span>
+                        <span>Я согласен с <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">политикой конфиденциальности</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">публичной офертой</button>, <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">условиями отмены бронирования</button> и <a href="promo.html">условиями акции «+1 ночь бесплатно»</a></span>
                     </label>
 
                     <button type="submit" class="btn-yoga-primary btn-yoga-primary--block" id="yogaSubmitBtn">Отправить заявку</button>
@@ -1610,13 +1667,56 @@
                         <textarea class="yoga-form__textarea" id="yogaLeadModalComment" name="comment" maxlength="2000" rows="3"></textarea>
                     </div>
                     <div id="yogaTurnstileWidgetLead" class="yoga-form__turnstile" role="group" aria-label="Проверка «Я не робот»"></div>
+                    <div class="yoga-form__promo" data-promo-gated>
+                        <label class="yoga-form__checkbox yoga-form__promo-optin">
+                            <input type="checkbox" id="yogaLeadModalPromoOptin" name="promo_optin" value="true" aria-expanded="false" aria-controls="yogaLeadModalPromoHandleWrap">
+                            <span>Участвую в акции «+1 ночь бесплатно»</span>
+                        </label>
+                        <span id="yogaLeadModalPromoNightsHint" class="yoga-form__promo-hint is-hidden" role="status">Для участия нужно 10 и более ночей</span>
+                        <div class="yoga-form__promo-handle is-hidden" id="yogaLeadModalPromoHandleWrap" aria-hidden="true">
+                            <label class="yoga-form__label" for="yogaLeadModalSocialHandle">Ваш ник в Instagram</label>
+                            <input class="yoga-form__input" type="text" id="yogaLeadModalSocialHandle" name="social_handle" maxlength="64" placeholder="@ваш_ник" autocomplete="off" inputmode="text">
+                        </div>
+                    </div>
                     <label class="yoga-form__checkbox">
                         <input type="checkbox" id="yogaLeadModalConsent" name="consent" value="true" required>
-                        <span>Я согласен с <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">политикой конфиденциальности</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">публичной офертой</button> и <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">условиями отмены бронирования</button></span>
+                        <span>Я согласен с <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">политикой конфиденциальности</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">публичной офертой</button>, <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">условиями отмены бронирования</button> и <a href="promo.html">условиями акции «+1 ночь бесплатно»</a></span>
                     </label>
                     <div id="yogaLeadFormError" class="yoga-form__status yoga-form__status--error is-hidden" role="alert" aria-live="assertive"></div>
                     <button type="submit" class="btn-yoga-primary btn-yoga-primary--block" id="yogaLeadModalSubmit">Отправить заявку</button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="promoModal" class="yoga-modal" hidden aria-hidden="true" data-promo-gated>
+        <div class="yoga-modal__overlay" tabindex="-1"></div>
+        <div class="yoga-modal__content yoga-modal__content--compact" role="dialog" aria-modal="true" aria-labelledby="promoModalTitle">
+            <button type="button" class="yoga-modal__close" aria-label="Закрыть">&times;</button>
+            <h2 class="yoga-modal__title" id="promoModalTitle">+1 ночь бесплатно</h2>
+            <div class="yoga-modal__body yoga-modal__body--scroll promo-modal">
+                <p class="promo-modal__lead">Забронируйте <strong>10 ночей и более</strong> и подпишитесь на наш Instagram — <strong>+1 ночь бесплатно</strong>.</p>
+                <p><strong>Как получить:</strong></p>
+                <ol class="promo-modal__steps">
+                    <li>Оставьте заявку на 10 и более ночей.</li>
+                    <li>Подпишитесь на <a href="https://www.instagram.com/satvasamui/" target="_blank" rel="noopener noreferrer" data-promo-instagram-link>@satvasamui</a> и укажите свой ник в заявке.</li>
+                    <li>Покажите подписку администратору при заезде — +1 ночь добавляется к вашему проживанию бесплатно.</li>
+                </ol>
+                <p><strong>Условия:</strong></p>
+                <ul class="promo-modal__terms">
+                    <li>Акция действует — забронируйте до <strong><span data-promo-bookby></span></strong> включительно.</li>
+                    <li>Подарочная ночь добавляется в конец периода проживания и не выплачивается деньгами.</li>
+                    <li>Один подарок на одно бронирование независимо от длительности.</li>
+                    <li>Не суммируется с другими скидками и спецпредложениями.</li>
+                    <li>В подарочную ночь входят проживание, завтрак, обед, йога и медитация. Процедуры, экскурсии и трансфер оплачиваются отдельно.</li>
+                    <li>Депозит и <a href="/cancellation.html">условия отмены бронирования</a> применяются без изменений.</li>
+                    <li>Акция действует по заявкам, поданным до <span data-promo-enddate></span> включительно.</li>
+                </ul>
+                <div class="promo-modal__actions">
+                    <button type="button" class="btn-yoga-primary" id="promoModalCtaLead" data-promo-modal-cta>Оставить заявку</button>
+                    <a class="btn-yoga-secondary" href="https://www.instagram.com/satvasamui/" target="_blank" rel="noopener noreferrer" data-promo-instagram-link>Подписаться в Instagram</a>
+                </div>
+                <small class="promo-modal__disclaimer">Instagram — сервис компании Meta Platforms Inc., деятельность которой признана экстремистской и запрещена на территории Российской Федерации.</small>
             </div>
         </div>
     </div>
@@ -1831,8 +1931,8 @@
             <button type="button" class="yoga-modal__close" aria-label="Закрыть">&times;</button>
             <h2 class="yoga-modal__title" id="yogaModalOfferTitle">Публичная оферта</h2>
             <div class="yoga-modal__body yoga-modal__body--scroll">
-                <p><a href="/oferta.html" target="_blank" rel="noopener noreferrer">Полная версия на отдельной странице</a></p>
-                                <p class="meta"><strong>Версия:</strong> 2026-05-25 &nbsp;|&nbsp; <strong>Дата публикации:</strong> 25 мая 2026 г.</p>
+                <p><a href="/ru/oferta.html" target="_blank" rel="noopener noreferrer">Полная версия на отдельной странице</a></p>
+                                <p class="meta"><strong>Версия:</strong> 2026-08-08 &nbsp;|&nbsp; <strong>Дата публикации:</strong> 8 августа 2026 г.</p>
                 
                         <p>Настоящий документ является официальным предложением <strong>Satva Samui Retreat Hotel</strong> (йога-отель на острове Самуи, провинция Сураттхани, Королевство Таиланд; далее — <strong>«Исполнитель»</strong>, <strong>«отель»</strong>, <strong>«мы»</strong>) заключить договор на условиях ниже с любым дееспособным физическим лицом или уполномоченным представителем юридического лица (далее — <strong>«Заказчик»</strong>, <strong>«Гость»</strong>, <strong>«вы»</strong>).</p>
                         <p>Оферта размещена на сайте <a href="https://satvasamui.ru/">satvasamui.ru</a> (далее — <strong>«Сайт»</strong>) и действует до её отзыва или замены новой редакцией.</p>
@@ -1873,6 +1973,17 @@
                         <p>5.2. Тариф <strong>от 75 USD/сутки</strong> применяется при двухместном размещении в номере «Стандарт», если в подтверждении не указано иное. Стоимость одноместного размещения и других категорий номеров согласуется отдельно.</p>
                         <p>5.3. Исполнитель вправе изменять опубликованные на Сайте цены до момента акцепта. Подтверждённое бронирование фиксирует согласованную цену, если иное не предусмотрено законом или соглашением сторон.</p>
                         <p>5.4. Неоплаченное бронирование может быть аннулировано без уведомления по истечении срока, указанного Исполнителем при выставлении счёта на депозит.</p>
+                        <p>5.5. Исполнитель вправе проводить акции и специальные предложения на условиях, опубликованных на Сайте. Условия акции «+1 ночь бесплатно»:</p>
+                        <ul>
+                            <li>подарочная ночь добавляется в конец периода проживания, не вычитается из счёта;</li>
+                            <li>не конвертируется в деньги, не переносится на другое бронирование, не суммируется с другими скидками и спецпредложениями;</li>
+                            <li>предоставляется однократно на одно бронирование независимо от длительности (при проживании 20 ночей — всё равно одна подарочная ночь);</li>
+                            <li>в подарочную ночь входят проживание, завтрак, обед, йога и вечерняя медитация; процедуры, экскурсии и трансфер не включены;</li>
+                            <li>депозит 100 USD/номер и <a href="/cancellation.html">условия отмены бронирования</a> применяются без изменений; при отмене и повторном бронировании акция применяется заново только если новая заявка подана в срок действия акции;</li>
+                            <li>подписка на Instagram <a href="https://www.instagram.com/satvasamui/" target="_blank" rel="noopener noreferrer">@satvasamui</a> проверяется на ресепшн при заезде;</li>
+                            <li>акция действует по заявкам, поданным до 31 октября 2026 г. включительно (по времени Asia/Bangkok).</li>
+                        </ul>
+                        <p>Полный текст акции: <a href="promo.html">Условия акции «+1 ночь бесплатно»</a>.</p>
                 
                         <h3>6. Изменение и отмена бронирования</h3>
                         <p>6.1. Условия отмены, переноса дат и сохранения депозита регулируются отдельным документом <strong>«Условия отмены бронирования»</strong>, являющимся неотъемлемой частью настоящей оферты:</p>
@@ -1938,13 +2049,14 @@
                         <h3>15. Срок действия и изменение оферты</h3>
                         <p>15.1. Оферта вступает в силу с даты публикации на Сайте и действует бессрочно до отзыва.</p>
                         <p>15.2. Исполнитель вправе изменить оферту в одностороннем порядке, разместив новую редакцию на Сайте. К уже подтверждённым бронированиям применяется редакция, действовавшая на момент акцепта, если иное не согласовано.</p>
-                        <p>15.3. Актуальная версия: <code>2026-05-25</code>.</p>
+                        <p>15.3. Актуальная версия: <code>2026-08-08</code>.</p>
                 
                         <h3>16. Реквизиты и контакты Исполнителя</h3>
                         <p><strong>Satva Samui Retreat Hotel</strong><br>
                         Koh Samui, Surat Thani Province, Thailand</p>
                         <ul>
                             <li>Сайт: <a href="https://satvasamui.ru/">satvasamui.ru</a></li>
+                            <li>Email: <a href="mailto:satvasamui@gmail.com">satvasamui@gmail.com</a></li>
                             <li>WhatsApp: <a href="https://wa.me/66950165058">+66 950 165 058</a></li>
                             <li>Telegram: <a href="https://t.me/OlgaSatva">@OlgaSatva</a></li>
                         </ul>

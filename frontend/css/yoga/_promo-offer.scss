@@ -1,0 +1,323 @@
+@use 'sass:color';
+@use '../core' as *;
+
+// Hero promo badge + modal CTA (акция «+1 ночь бесплатно»)
+
+.promo-badge {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem 0.5rem;
+    max-width: 100%;
+    margin: 0 auto 0.75rem;
+    padding: 0.4rem 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    background:
+        linear-gradient(rgba($color-primary, 0.22), rgba($color-primary, 0.22)),
+        rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: $color-white;
+    font-family: inherit;
+    line-height: 1.25;
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        border-color: rgba(255, 255, 255, 0.6);
+        transform: translateY(-1px);
+    }
+
+    &:focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.9);
+        outline-offset: 2px;
+    }
+
+    @media (max-width: 479px) {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        max-width: calc(100% - 8px);
+        padding: 0.45rem 0.85rem;
+        border-radius: 1rem;
+        text-align: center;
+        gap: 0.15rem 0.35rem;
+    }
+
+    @media (min-width: 480px) {
+        max-height: 40px;
+        flex-wrap: nowrap;
+    }
+
+    &__icon {
+        flex-shrink: 0;
+        font-size: 0.95rem;
+        line-height: 1;
+    }
+
+    &__main {
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+
+        @media (max-width: 479px) {
+            font-size: 12px;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 480px) {
+            font-size: 15px;
+        }
+    }
+
+    &__sub {
+        font-size: 11px;
+        font-weight: 400;
+        opacity: 0.8;
+        white-space: nowrap;
+
+        @media (max-width: 479px) {
+            flex-basis: 100%;
+            text-align: center;
+            white-space: normal;
+            line-height: 1.25;
+            font-size: 10px;
+        }
+
+        @media (min-width: 480px) {
+            font-size: 12px;
+        }
+    }
+}
+
+.yoga-hero__content > .promo-badge + .yoga-hero__tagline {
+    margin-top: 12px;
+}
+
+.yoga-hero:has(.promo-badge) {
+    .yoga-hero__tagline {
+        margin-bottom: 12px;
+    }
+
+    .yoga-hero__price {
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
+
+    .yoga-hero__subtitle {
+        margin-bottom: 6px;
+    }
+
+    .yoga-hero__buttons {
+        margin-top: 4px;
+        margin-bottom: 24px;
+
+        .btn-yoga-primary {
+            margin-top: 16px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            margin-top: 12px;
+            margin-bottom: 8px;
+        }
+    }
+}
+
+.yoga-includes__promo {
+    margin: 0.75rem auto 0;
+    max-width: 38rem;
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: $color-text-light;
+
+    button {
+        display: inline;
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: none;
+        font: inherit;
+        color: $color-primary;
+        text-decoration: underline;
+        cursor: pointer;
+
+        &:hover {
+            color: color.adjust($color-primary, $lightness: -8%);
+        }
+
+        &:focus-visible {
+            outline: 2px solid rgba($color-primary, 0.45);
+            outline-offset: 2px;
+        }
+    }
+}
+
+.yoga-rooms__urgency-promo {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba($color-white, 0.92);
+
+    button {
+        display: inline;
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: none;
+        font: inherit;
+        color: $color-accent;
+        text-decoration: underline;
+        cursor: pointer;
+
+        &:hover {
+            color: color.adjust($color-accent, $lightness: 8%);
+        }
+
+        &:focus-visible {
+            outline: 2px solid rgba($color-white, 0.85);
+            outline-offset: 2px;
+        }
+    }
+}
+
+.yoga-form__promo-note {
+    margin: -0.5rem 0 1.25rem;
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba($color-white, 0.95);
+
+    button {
+        display: inline;
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: none;
+        font: inherit;
+        font-weight: 600;
+        color: $color-accent;
+        text-decoration: underline;
+        cursor: pointer;
+
+        &:hover {
+            color: color.adjust($color-accent, $lightness: 8%);
+        }
+
+        &:focus-visible {
+            outline: 2px solid rgba($color-white, 0.85);
+            outline-offset: 2px;
+        }
+    }
+}
+
+.promo-modal {
+    &__lead {
+        font-size: 1rem;
+        line-height: 1.55;
+        margin: 0 0 1rem;
+    }
+
+    &__steps {
+        margin: 0 0 1rem;
+        padding-left: 1.25rem;
+
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+    }
+
+    &__terms {
+        margin: 0 0 1.25rem;
+        padding-left: 1.25rem;
+
+        li {
+            margin-bottom: 0.45rem;
+            line-height: 1.5;
+            font-size: 0.92rem;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+
+        .btn-yoga-primary,
+        .btn-yoga-secondary {
+            flex: 1 1 auto;
+            min-width: 10rem;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .btn-yoga-secondary {
+            color: $color-primary;
+            border-color: rgba($color-primary, 0.4);
+            background: $color-white;
+
+            &:hover {
+                background: rgba($color-primary, 0.06);
+                border-color: $color-primary;
+                color: $color-primary;
+            }
+
+            &:focus-visible {
+                outline: 2px solid $color-primary;
+                outline-offset: 2px;
+            }
+        }
+    }
+
+    &__disclaimer {
+        display: block;
+        margin: 0;
+        font-size: 0.72rem;
+        line-height: 1.45;
+        color: $color-text-light;
+    }
+}
+
+.promo-page-ended {
+    margin: 1.5rem 0;
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    background: rgba($color-primary, 0.08);
+    border: 1px solid rgba($color-primary, 0.15);
+    color: $color-primary;
+    font-weight: 600;
+    text-align: center;
+}
+
+.promo-page-actions .btn-yoga-secondary {
+    color: $color-primary;
+    border-color: rgba($color-primary, 0.4);
+    background: $color-white;
+
+    &:hover {
+        background: rgba($color-primary, 0.06);
+        border-color: $color-primary;
+        color: $color-primary;
+    }
+
+    &:focus-visible {
+        outline: 2px solid $color-primary;
+        outline-offset: 2px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .promo-badge {
+        transition: none;
+
+        &:hover {
+            transform: none;
+        }
+    }
+}

@@ -976,6 +976,294 @@ section[id^=yoga] h2 {
     animation: none;
   }
 }
+.promo-badge {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 0.5rem;
+  max-width: 100%;
+  margin: 0 auto 0.75rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: linear-gradient(rgba(15, 76, 92, 0.22), rgba(15, 76, 92, 0.22)), rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-family: inherit;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.promo-badge:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+.promo-badge:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 2px;
+}
+@media (max-width: 479px) {
+  .promo-badge {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: calc(100% - 8px);
+    padding: 0.45rem 0.85rem;
+    border-radius: 1rem;
+    text-align: center;
+    gap: 0.15rem 0.35rem;
+  }
+}
+@media (min-width: 480px) {
+  .promo-badge {
+    max-height: 40px;
+    flex-wrap: nowrap;
+  }
+}
+.promo-badge__icon {
+  flex-shrink: 0;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+.promo-badge__main {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+@media (max-width: 479px) {
+  .promo-badge__main {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+}
+@media (min-width: 480px) {
+  .promo-badge__main {
+    font-size: 15px;
+  }
+}
+.promo-badge__sub {
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+@media (max-width: 479px) {
+  .promo-badge__sub {
+    flex-basis: 100%;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.25;
+    font-size: 10px;
+  }
+}
+@media (min-width: 480px) {
+  .promo-badge__sub {
+    font-size: 12px;
+  }
+}
+
+.yoga-hero__content > .promo-badge + .yoga-hero__tagline {
+  margin-top: 12px;
+}
+
+.yoga-hero:has(.promo-badge) .yoga-hero__tagline {
+  margin-bottom: 12px;
+}
+.yoga-hero:has(.promo-badge) .yoga-hero__price {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.yoga-hero:has(.promo-badge) .yoga-hero__subtitle {
+  margin-bottom: 6px;
+}
+.yoga-hero:has(.promo-badge) .yoga-hero__buttons {
+  margin-top: 4px;
+  margin-bottom: 24px;
+}
+.yoga-hero:has(.promo-badge) .yoga-hero__buttons .btn-yoga-primary {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+@media (max-width: 768px) {
+  .yoga-hero:has(.promo-badge) .yoga-hero__buttons {
+    margin-top: 12px;
+    margin-bottom: 8px;
+  }
+}
+
+.yoga-includes__promo {
+  margin: 0.75rem auto 0;
+  max-width: 38rem;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #666666;
+}
+.yoga-includes__promo button {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: #0f4c5c;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.yoga-includes__promo button:hover {
+  color: rgb(9.2803738318, 47.0205607477, 56.9196261682);
+}
+.yoga-includes__promo button:focus-visible {
+  outline: 2px solid rgba(15, 76, 92, 0.45);
+  outline-offset: 2px;
+}
+
+.yoga-rooms__urgency-promo {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.92);
+}
+.yoga-rooms__urgency-promo button {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: #ff8e72;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.yoga-rooms__urgency-promo button:hover {
+  color: rgb(255, 174.6978723404, 154.8);
+}
+.yoga-rooms__urgency-promo button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 2px;
+}
+
+.yoga-form__promo-note {
+  margin: -0.5rem 0 1.25rem;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.95);
+}
+.yoga-form__promo-note button {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  color: #ff8e72;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.yoga-form__promo-note button:hover {
+  color: rgb(255, 174.6978723404, 154.8);
+}
+.yoga-form__promo-note button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 2px;
+}
+
+.promo-modal__lead {
+  font-size: 1rem;
+  line-height: 1.55;
+  margin: 0 0 1rem;
+}
+.promo-modal__steps {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+.promo-modal__steps li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+.promo-modal__terms {
+  margin: 0 0 1.25rem;
+  padding-left: 1.25rem;
+}
+.promo-modal__terms li {
+  margin-bottom: 0.45rem;
+  line-height: 1.5;
+  font-size: 0.92rem;
+}
+.promo-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.promo-modal__actions .btn-yoga-primary,
+.promo-modal__actions .btn-yoga-secondary {
+  flex: 1 1 auto;
+  min-width: 10rem;
+  text-align: center;
+  justify-content: center;
+}
+.promo-modal__actions .btn-yoga-secondary {
+  color: #0f4c5c;
+  border-color: rgba(15, 76, 92, 0.4);
+  background: #ffffff;
+}
+.promo-modal__actions .btn-yoga-secondary:hover {
+  background: rgba(15, 76, 92, 0.06);
+  border-color: #0f4c5c;
+  color: #0f4c5c;
+}
+.promo-modal__actions .btn-yoga-secondary:focus-visible {
+  outline: 2px solid #0f4c5c;
+  outline-offset: 2px;
+}
+.promo-modal__disclaimer {
+  display: block;
+  margin: 0;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: #666666;
+}
+
+.promo-page-ended {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  background: rgba(15, 76, 92, 0.08);
+  border: 1px solid rgba(15, 76, 92, 0.15);
+  color: #0f4c5c;
+  font-weight: 600;
+  text-align: center;
+}
+
+.promo-page-actions .btn-yoga-secondary {
+  color: #0f4c5c;
+  border-color: rgba(15, 76, 92, 0.4);
+  background: #ffffff;
+}
+.promo-page-actions .btn-yoga-secondary:hover {
+  background: rgba(15, 76, 92, 0.06);
+  border-color: #0f4c5c;
+  color: #0f4c5c;
+}
+.promo-page-actions .btn-yoga-secondary:focus-visible {
+  outline: 2px solid #0f4c5c;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promo-badge {
+    transition: none;
+  }
+  .promo-badge:hover {
+    transform: none;
+  }
+}
 .yoga-award {
   position: relative;
   z-index: 1;
@@ -1998,6 +2286,14 @@ section[id^=yoga] h2 {
 }
 .yoga-rooms__urgency p strong {
   color: #ff8e72;
+}
+.yoga-rooms__urgency-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1 1 16rem;
+  max-width: 36rem;
 }
 
 .yoga-rooms-carousel {
@@ -3829,6 +4125,37 @@ section[id^=yoga] h2 {
   margin-top: 0.2rem;
   flex-shrink: 0;
 }
+.yoga-form__promo {
+  margin-bottom: 1rem;
+}
+.yoga-form__promo-optin {
+  margin-bottom: 0.5rem;
+}
+.yoga-form__promo-hint {
+  display: block;
+  margin: 0 0 0.65rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.4;
+}
+.yoga-form__promo-hint.is-hidden {
+  display: none !important;
+}
+.yoga-form__promo-handle {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  margin-bottom: 0;
+  transition: max-height 0.25s ease, opacity 0.25s ease, margin-bottom 0.25s ease;
+}
+.yoga-form__promo-handle.is-open {
+  max-height: 6rem;
+  opacity: 1;
+  margin-bottom: 0.75rem;
+}
+.yoga-form__promo-handle.is-hidden:not(.is-open) {
+  display: block !important;
+}
 .yoga-form__privacy-btn {
   display: inline;
   margin: 0;
@@ -3927,6 +4254,9 @@ form.yoga-form.yoga-form--modal-light .yoga-form__checkbox {
 }
 form.yoga-form.yoga-form--modal-light .yoga-form__error-text {
   color: #b02a37;
+}
+form.yoga-form.yoga-form--modal-light .yoga-form__promo-hint {
+  color: #666666;
 }
 form.yoga-form.yoga-form--modal-light .yoga-form__turnstile {
   min-height: 68px;

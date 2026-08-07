@@ -21,11 +21,12 @@
         bindViewContentTracking();
     }
 
-    function trackLead(eventId) {
+    function trackLead(eventId, extra) {
         if (!hasMarketingConsent() || !eventId) return;
         var fbq = getFbq();
         if (!fbq) return;
-        fbq('track', 'Lead', {}, { eventID: String(eventId) });
+        var custom = extra && typeof extra === 'object' ? extra : {};
+        fbq('track', 'Lead', custom, { eventID: String(eventId) });
     }
 
     function bindContactTracking() {

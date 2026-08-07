@@ -36,6 +36,12 @@ class Settings(BaseSettings):
     # Policy version for consents
     POLICY_VERSION: str = "2026-06-11"
 
+    # Promo «+1 ночь бесплатно» (server-side validation; must match frontend/js/promo-config.js)
+    PROMO_ID: str = "promo_11th_night_2026q4"
+    PROMO_ACTIVE: bool = True
+    PROMO_START_DATE: str = "2026-08-07"
+    PROMO_END_DATE: str = "2026-10-31"
+
     # Meta Ads (Pixel browser + Conversions API)
     META_PIXEL_ID: str = ""
     META_CAPI_TOKEN: str = ""

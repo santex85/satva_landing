@@ -44,9 +44,10 @@
     .yoga-hero__bg picture,.yoga-hero__bg img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
     .yoga-hero__content{position:relative;z-index:2;max-width:700px;width:100%;padding:0 24px;color:#fff}
     .yoga-hero .yoga-fade-in{opacity:1}
+    [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=9" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=9"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=12" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=12"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -62,8 +63,9 @@
     src="https://www.facebook.com/tr?id=1358193522870162&amp;ev=PageView&amp;noscript=1"></noscript>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
     <script defer src="/js/consent.js?v=3"></script>
-    <script defer src="/js/pixel.js?v=3"></script>
-    <script defer src="/js/yoga.js?v=13"></script>
+    <script defer src="/js/pixel.js?v=4"></script>
+    <script defer src="/js/promo-config.js?v=2"></script>
+    <script defer src="/js/yoga.js?v=14"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
 
     <!-- Structured Data: LodgingBusiness (расширенная карточка) -->
@@ -141,7 +143,7 @@
             "longitude": 100.06
         },
         "sameAs": [
-            "https://www.instagram.com/satvasamui/",
+            "https://www.instagram.com/satva_samui_eng/",
             "https://t.me/OlgaSatva"
         ]
     }
@@ -172,6 +174,11 @@
                 "@type": "Question",
                 "name": "What are the booking conditions?",
                 "acceptedAnswer": { "@type": "Answer", "text": "A deposit of $100 per room is required to confirm your booking (multiple payment options available). The remaining balance is due on arrival. Deposits are accepted in multiple currencies and via various payment methods." }
+            },
+            {
+                "@type": "Question",
+                "name": "Are there discounts for longer stays?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Book 10 nights or more and follow us on Instagram @satva_samui_eng — get +1 free night. Full offer terms: https://satvasamui.com/promo.html" }
             },
             {
                 "@type": "Question",
@@ -243,6 +250,18 @@
         </div>
         <div class="yoga-hero__overlay"></div>
         <div class="yoga-hero__content">
+            <button type="button"
+                    class="promo-badge yoga-fade-in"
+                    id="promoBadge"
+                    data-promo-gated
+                    data-promo-trigger
+                    data-open-modal="promoModal"
+                    aria-haspopup="dialog"
+                    aria-controls="promoModal">
+                <span class="promo-badge__icon" aria-hidden="true">🎁</span>
+                <span class="promo-badge__main">+1 free night</span>
+                <span class="promo-badge__sub">when booking 10+ nights · terms</span>
+            </button>
             <h1 class="yoga-hero__tagline yoga-fade-in">Wake up to the sound of waves. Fall asleep to the colours of the sunset.</h1>
             <div class="yoga-hero__price yoga-fade-in" aria-describedby="yogaHeroFootnote">
                 <span class="yoga-hero__price-value">$75 / night<sup class="yoga-hero__price-mark" aria-hidden="true">*</sup></span>
@@ -367,6 +386,10 @@
                 </div>
             </div>
             <p class="yoga-includes__legend yoga-fade-in"><span class="yoga-includes__optional">*</span>&nbsp;— Available at an additional cost, not included in the base package.</p>
+            <p class="yoga-includes__promo yoga-fade-in" data-promo-gated>
+                Book 10+ nights — get +1 free night.
+                <button type="button" data-open-modal="promoModal" data-promo-trigger>Terms</button>
+            </p>
             <div class="yoga-includes__amenities yoga-fade-in" aria-label="Hotel amenities included in your retreat">
                 <p class="yoga-includes__amenities-title">On the hotel grounds:</p>
                 <ul class="yoga-includes__amenities-list">
@@ -697,9 +720,15 @@
             </div>
 
             <div class="yoga-rooms__urgency yoga-fade-in">
-                <p>
-                    <strong>Only 3 rooms left.</strong>
-                </p>
+                <div class="yoga-rooms__urgency-copy">
+                    <p>
+                        <strong>Only 3 rooms left.</strong>
+                    </p>
+                    <p class="yoga-rooms__urgency-promo" data-promo-gated>
+                        Book 10+ nights — get +1 free night.
+                        <button type="button" data-open-modal="promoModal" data-promo-trigger>Terms</button>
+                    </p>
+                </div>
                 <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Reserve Your Room</button>
             </div>
         </div>
@@ -1054,7 +1083,7 @@
                         <span>WhatsApp</span>
                     </a>
                 </li><li>
-                    <a href="https://www.instagram.com/satvasamui/" class="yoga-contacts__link yoga-fade-in" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <a href="https://www.instagram.com/satva_samui_eng/" class="yoga-contacts__link yoga-fade-in" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                         <span class="yoga-contacts__icon" aria-hidden="true">
                             <img src="/img/icons/social/instagram.svg" alt="" width="30" height="30">
                         </span>
@@ -1110,38 +1139,50 @@
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__term">
                         <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA5" id="yogaFaqQ5">
-                            <span class="yoga-faq__question-label">Do I need yoga experience?</span>
+                            <span class="yoga-faq__question-label">Are there discounts for longer stays?</span>
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA5" role="region" aria-labelledby="yogaFaqQ5" hidden>No experience is needed at all. Many of our guests are complete beginners. Our instructors adapt each session to individual levels — from first-timers to experienced practitioners.</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA5" role="region" aria-labelledby="yogaFaqQ5" hidden>
+                        <span data-promo-faq-active hidden>Book 10 nights or more and follow us on Instagram <a href="https://www.instagram.com/satva_samui_eng/" target="_blank" rel="noopener noreferrer">@satva_samui_eng</a> — get +1 free night. <a href="/promo.html">Full offer terms</a>.</span>
+                        <span data-promo-faq-inactive>Long-stay rates depend on your dates and room category. Contact us — we'll find the best option for you.</span>
+                    </dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__term">
                         <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA6" id="yogaFaqQ6">
-                            <span class="yoga-faq__question-label">How do I get to Koh Samui?</span>
+                            <span class="yoga-faq__question-label">Do I need yoga experience?</span>
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA6" role="region" aria-labelledby="yogaFaqQ6" hidden>Koh Samui (USM) is served by Bangkok Airways. Most international guests fly via Bangkok (BKK or DMK) or Singapore. Let us know your departure city and dates — we'll share estimated flight costs and routing options.</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA6" role="region" aria-labelledby="yogaFaqQ6" hidden>No experience is needed at all. Many of our guests are complete beginners. Our instructors adapt each session to individual levels — from first-timers to experienced practitioners.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__term">
                         <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA7" id="yogaFaqQ7">
-                            <span class="yoga-faq__question-label">When is the best time to visit?</span>
+                            <span class="yoga-faq__question-label">How do I get to Koh Samui?</span>
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA7" role="region" aria-labelledby="yogaFaqQ7" hidden>Koh Samui enjoys comfortable weather year-round. The sea near our hotel is always calm, with no strong currents — perfect for swimming at any time of year. Choose the dates that suit you best.</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA7" role="region" aria-labelledby="yogaFaqQ7" hidden>Koh Samui (USM) is served by Bangkok Airways. Most international guests fly via Bangkok (BKK or DMK) or Singapore. Let us know your departure city and dates — we'll share estimated flight costs and routing options.</dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
                     <dt class="yoga-faq__term">
                         <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA8" id="yogaFaqQ8">
+                            <span class="yoga-faq__question-label">When is the best time to visit?</span>
+                            <span class="yoga-faq__chevron" aria-hidden="true"></span>
+                        </button>
+                    </dt>
+                    <dd class="yoga-faq__answer" id="yogaFaqA8" role="region" aria-labelledby="yogaFaqQ8" hidden>Koh Samui enjoys comfortable weather year-round. The sea near our hotel is always calm, with no strong currents — perfect for swimming at any time of year. Choose the dates that suit you best.</dd>
+                </div>
+                <div class="yoga-faq__row yoga-fade-in">
+                    <dt class="yoga-faq__term">
+                        <button type="button" class="yoga-faq__question" aria-expanded="false" aria-controls="yogaFaqA9" id="yogaFaqQ9">
                             <span class="yoga-faq__question-label">What should I pack?</span>
                             <span class="yoga-faq__chevron" aria-hidden="true"></span>
                         </button>
                     </dt>
-                    <dd class="yoga-faq__answer" id="yogaFaqA8" role="region" aria-labelledby="yogaFaqQ8" hidden>Lightweight yoga clothes, swimwear, and comfortable shoes for excursions. Everything else you may need is available nearby. Yoga mats and beach towels are provided by the hotel.</dd>
+                    <dd class="yoga-faq__answer" id="yogaFaqA9" role="region" aria-labelledby="yogaFaqQ9" hidden>Lightweight yoga clothes, swimwear, and comfortable shoes for excursions. Everything else you may need is available nearby. Yoga mats and beach towels are provided by the hotel.</dd>
                 </div>
             </dl>
         </div>
@@ -1157,6 +1198,10 @@
                 <img class="yoga-form__logo" src="/img/satva-logo.png" alt="" width="180" height="120" loading="lazy">
                 <h2 id="yogaFormTitle">Book Your Yoga Retreat</h2>
                 <p class="yoga-form__lead">Leave your details and we'll be in touch to answer your questions, confirm availability and help you plan your journey.</p>
+                <p class="yoga-form__promo-note" data-promo-gated>
+                    «+1 free night» offer when booking 10+ nights.
+                    <button type="button" data-open-modal="promoModal" data-promo-trigger>Offer terms</button>
+                </p>
 
                 <div id="yogaFormSuccess" class="yoga-form__status yoga-form__status--success is-hidden" role="status">
                     Thank you! We've received your enquiry and will be in touch shortly.
@@ -1330,9 +1375,21 @@
 
                     <div id="yogaTurnstileWidget" class="yoga-form__turnstile" role="group" aria-label="Security verification"></div>
 
+                    <div class="yoga-form__promo" data-promo-gated>
+                        <label class="yoga-form__checkbox yoga-form__promo-optin">
+                            <input type="checkbox" id="yogaPromoOptin" name="promo_optin" value="true" aria-expanded="false" aria-controls="yogaPromoHandleWrap">
+                            <span>I want the «+1 free night» offer</span>
+                        </label>
+                        <span id="yogaPromoNightsHint" class="yoga-form__promo-hint is-hidden" role="status">10 or more nights required</span>
+                        <div class="yoga-form__promo-handle is-hidden" id="yogaPromoHandleWrap" aria-hidden="true">
+                            <label class="yoga-form__label" for="yogaSocialHandle">Your Instagram handle</label>
+                            <input class="yoga-form__input" type="text" id="yogaSocialHandle" name="social_handle" maxlength="64" placeholder="@your_handle" autocomplete="off" inputmode="text">
+                        </div>
+                    </div>
+
                     <label class="yoga-form__checkbox">
                         <input type="checkbox" id="yogaConsent" name="consent" value="true" required>
-                        <span>I agree to the <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">Privacy Policy</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">Terms &amp; Conditions</button> and <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">Cancellation Policy</button></span>
+                        <span>I agree to the <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">Privacy Policy</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">Terms &amp; Conditions</button>, <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">Cancellation Policy</button> and <a href="/promo.html">«+1 free night» offer terms</a></span>
                     </label>
 
                     <button type="submit" class="btn-yoga-primary btn-yoga-primary--block" id="yogaSubmitBtn">Send Enquiry</button>
@@ -1526,13 +1583,55 @@
                         <textarea class="yoga-form__textarea" id="yogaLeadModalComment" name="comment" maxlength="2000" rows="3"></textarea>
                     </div>
                     <div id="yogaTurnstileWidgetLead" class="yoga-form__turnstile" role="group" aria-label="Security verification"></div>
+                    <div class="yoga-form__promo" data-promo-gated>
+                        <label class="yoga-form__checkbox yoga-form__promo-optin">
+                            <input type="checkbox" id="yogaLeadModalPromoOptin" name="promo_optin" value="true" aria-expanded="false" aria-controls="yogaLeadModalPromoHandleWrap">
+                            <span>I want the «+1 free night» offer</span>
+                        </label>
+                        <span id="yogaLeadModalPromoNightsHint" class="yoga-form__promo-hint is-hidden" role="status">10 or more nights required</span>
+                        <div class="yoga-form__promo-handle is-hidden" id="yogaLeadModalPromoHandleWrap" aria-hidden="true">
+                            <label class="yoga-form__label" for="yogaLeadModalSocialHandle">Your Instagram handle</label>
+                            <input class="yoga-form__input" type="text" id="yogaLeadModalSocialHandle" name="social_handle" maxlength="64" placeholder="@your_handle" autocomplete="off" inputmode="text">
+                        </div>
+                    </div>
                     <label class="yoga-form__checkbox">
                         <input type="checkbox" id="yogaLeadModalConsent" name="consent" value="true" required>
-                        <span>I agree to the <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">Privacy Policy</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">Terms &amp; Conditions</button> and <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">Cancellation Policy</button></span>
+                        <span>I agree to the <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">Privacy Policy</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">Terms &amp; Conditions</button>, <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">Cancellation Policy</button> and <a href="/promo.html">«+1 free night» offer terms</a></span>
                     </label>
                     <div id="yogaLeadFormError" class="yoga-form__status yoga-form__status--error is-hidden" role="alert" aria-live="assertive"></div>
                     <button type="submit" class="btn-yoga-primary btn-yoga-primary--block" id="yogaLeadModalSubmit">Send Enquiry</button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="promoModal" class="yoga-modal" hidden aria-hidden="true" data-promo-gated>
+        <div class="yoga-modal__overlay" tabindex="-1"></div>
+        <div class="yoga-modal__content yoga-modal__content--compact" role="dialog" aria-modal="true" aria-labelledby="promoModalTitle">
+            <button type="button" class="yoga-modal__close" aria-label="Close">&times;</button>
+            <h2 class="yoga-modal__title" id="promoModalTitle">+1 free night</h2>
+            <div class="yoga-modal__body yoga-modal__body--scroll promo-modal">
+                <p class="promo-modal__lead">Book <strong>10 nights or more</strong> and follow us on Instagram — <strong>+1 free night</strong>.</p>
+                <p><strong>How to claim:</strong></p>
+                <ol class="promo-modal__steps">
+                    <li>Send an enquiry for 10 nights or more.</li>
+                    <li>Follow <a href="https://www.instagram.com/satva_samui_eng/" target="_blank" rel="noopener noreferrer" data-promo-instagram-link>@satva_samui_eng</a> and enter your handle in the form.</li>
+                    <li>Show your follow at check-in — +1 night is added to your stay at no extra charge.</li>
+                </ol>
+                <p><strong>Terms:</strong></p>
+                <ul class="promo-modal__terms">
+                    <li>Offer valid — book by <strong><span data-promo-bookby></span></strong> inclusive.</li>
+                    <li>The bonus night is added at the end of your stay and cannot be exchanged for cash.</li>
+                    <li>One bonus per booking regardless of length of stay.</li>
+                    <li>Cannot be combined with other discounts or special offers.</li>
+                    <li>The bonus night includes accommodation, breakfast, lunch, yoga and meditation. Treatments, excursions and transfers are not included.</li>
+                    <li>Deposit and <a href="/cancellation.html">cancellation policy</a> apply as usual.</li>
+                    <li>Offer applies to enquiries submitted by <span data-promo-enddate></span> inclusive.</li>
+                </ul>
+                <div class="promo-modal__actions">
+                    <button type="button" class="btn-yoga-primary" id="promoModalCtaLead" data-promo-modal-cta>Send enquiry</button>
+                    <a class="btn-yoga-secondary" href="https://www.instagram.com/satva_samui_eng/" target="_blank" rel="noopener noreferrer" data-promo-instagram-link>Follow on Instagram</a>
+                </div>
             </div>
         </div>
     </div>
@@ -1731,7 +1830,7 @@
             <h2 class="yoga-modal__title" id="yogaModalOfferTitle">Terms &amp; Conditions</h2>
             <div class="yoga-modal__body yoga-modal__body--scroll">
                 <p><a href="/terms.html" target="_blank" rel="noopener noreferrer">Full version on a separate page</a></p>
-                                <p class="meta"><strong>Version:</strong> 2026-05-25 &nbsp;|&nbsp; <strong>Effective date:</strong> 25 May 2026</p>
+                                <p class="meta"><strong>Version:</strong> 2026-08-08 &nbsp;|&nbsp; <strong>Effective date:</strong> 8 August 2026</p>
                 
                         <p>These Terms &amp; Conditions (the <strong>“Terms”</strong>) constitute a binding agreement between <strong>Satva Samui Retreat Hotel</strong> (yoga retreat hotel on Koh Samui, Surat Thani Province, Kingdom of Thailand; the <strong>“Provider”</strong>, <strong>“we”</strong>, <strong>“us”</strong>) and you, the guest or authorised representative (<strong>“Guest”</strong>, <strong>“you”</strong>).</p>
                         <p>By booking or using our services you agree to these Terms. They are published at <a href="https://satvasamui.com/">satvasamui.com</a> (the <strong>“Website”</strong>) and remain in effect until withdrawn or replaced.</p>
@@ -1769,6 +1868,17 @@
                         <p>5.2. The <strong>from USD 75/night</strong> rate applies to double occupancy in a Standard Room unless your confirmation states otherwise. Single occupancy and other room categories are priced separately.</p>
                         <p>5.3. Published Website prices may change before confirmation. A confirmed reservation locks in the agreed price unless mandatory law requires otherwise.</p>
                         <p>5.4. Unpaid reservations may be cancelled after the payment deadline stated in our invoice or message.</p>
+                        <p>5.5. We may run promotions and special offers on terms published on the Website. Terms of the «+1 free night» offer:</p>
+                        <ul>
+                            <li>the bonus night is added at the end of your stay, not deducted from your bill;</li>
+                            <li>cannot be exchanged for cash, transferred to another booking, or combined with other discounts or special offers;</li>
+                            <li>provided once per booking regardless of length of stay (a 20-night stay still receives one bonus night);</li>
+                            <li>the bonus night includes accommodation, breakfast, lunch, yoga and evening meditation; treatments, excursions and transfers are not included;</li>
+                            <li>USD 100/room deposit and <a href="/cancellation.html">cancellation policy</a> apply as usual; if you cancel and rebook, the offer applies again only if the new enquiry falls within the offer period;</li>
+                            <li>Instagram follow <a href="https://www.instagram.com/satva_samui_eng/" target="_blank" rel="noopener noreferrer">@satva_samui_eng</a> is verified at reception on arrival;</li>
+                            <li>offer applies to enquiries submitted by 31 October 2026 inclusive (Asia/Bangkok time).</li>
+                        </ul>
+                        <p>Full offer text: <a href="/promo.html">«+1 free night» offer terms</a>.</p>
                 
                         <h3>6. Changes and cancellation</h3>
                         <p>6.1. Cancellation, date changes and deposit retention are governed by our <strong>Cancellation Policy</strong>, which forms part of these Terms:</p>
@@ -1817,18 +1927,19 @@
                 
                         <h3>15. Changes to these Terms</h3>
                         <p>15.1. We may update these Terms by publishing a new version on the Website. Confirmed reservations remain subject to the version in effect at acceptance unless we agree otherwise.</p>
-                        <p>15.2. Current version: <code>2026-05-25</code>.</p>
+                        <p>15.2. Current version: <code>2026-08-08</code>.</p>
                 
                         <h3>16. Contact</h3>
                         <p><strong>Satva Samui Retreat Hotel</strong><br>
                         Koh Samui, Surat Thani Province, Thailand</p>
                         <ul>
                             <li>Website: <a href="https://satvasamui.com/">satvasamui.com</a></li>
+                            <li>Email: <a href="mailto:satvasamui@gmail.com">satvasamui@gmail.com</a></li>
                             <li>WhatsApp: <a href="https://wa.me/66950165058">+66 950 165 058</a></li>
                             <li>Telegram: <a href="https://t.me/OlgaSatva">@OlgaSatva</a></li>
                         </ul>
                         <p>Full legal entity name and registration details are provided in your booking confirmation or on request.</p>
-                <p><em>Last updated: 25 May 2026. Document version: 2026-05-25.</em></p>
+                <p><em>Last updated: 8 August 2026. Document version: 2026-08-08.</em></p>
             </div>
         </div>
     </div>
