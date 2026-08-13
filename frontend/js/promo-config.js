@@ -18,14 +18,14 @@
             },
             ru: {
                 network: 'instagram',
-                handle: 'satvasamui',
-                url: 'https://www.instagram.com/satvasamui/',
+                handle: 'satva_samui',
+                url: 'https://www.instagram.com/satva_samui/',
             },
         },
         social: {
             network: 'instagram',
-            handle: 'satvasamui',
-            url: 'https://www.instagram.com/satvasamui/',
+            handle: 'satva_samui',
+            url: 'https://www.instagram.com/satva_samui/',
         },
         termsUrl: '/promo.html',
         tz: 'Asia/Bangkok',
