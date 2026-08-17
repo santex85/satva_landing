@@ -1146,6 +1146,38 @@ section[id^=yoga] h2 {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22) inset, 0 10px 32px rgba(255, 90, 40, 0.7);
 }
 
+.yoga-lead-promo {
+  flex-shrink: 0;
+  margin: 0 1.25rem 0.35rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 142, 114, 0.12);
+  border: 1px solid rgba(255, 142, 114, 0.35);
+  color: #2d3436;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+.yoga-lead-promo__deadline {
+  margin: 0 0 0.55rem;
+  text-align: center;
+}
+.yoga-lead-promo__deadline strong {
+  color: #0f4c5c;
+  font-weight: 700;
+}
+.yoga-lead-promo__includes-title {
+  margin: 0 0 0.25rem;
+  font-weight: 700;
+  color: #0f4c5c;
+}
+.yoga-lead-promo__list {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.yoga-lead-promo__list li {
+  margin: 0.1rem 0;
+}
+
 .yoga-includes__promo {
   margin: 0.75rem auto 0;
   max-width: 38rem;

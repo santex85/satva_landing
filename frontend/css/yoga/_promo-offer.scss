@@ -191,6 +191,43 @@
     }
 }
 
+.yoga-lead-promo {
+    flex-shrink: 0;
+    margin: 0 1.25rem 0.35rem;
+    padding: 0.75rem 0.85rem;
+    border-radius: 0.75rem;
+    background: rgba($color-accent, 0.12);
+    border: 1px solid rgba($color-accent, 0.35);
+    color: $color-text;
+    font-size: 0.9rem;
+    line-height: 1.4;
+
+    &__deadline {
+        margin: 0 0 0.55rem;
+        text-align: center;
+
+        strong {
+            color: $color-primary;
+            font-weight: 700;
+        }
+    }
+
+    &__includes-title {
+        margin: 0 0 0.25rem;
+        font-weight: 700;
+        color: $color-primary;
+    }
+
+    &__list {
+        margin: 0;
+        padding-left: 1.2rem;
+
+        li {
+            margin: 0.1rem 0;
+        }
+    }
+}
+
 .yoga-includes__promo {
     margin: 0.75rem auto 0;
     max-width: 38rem;
