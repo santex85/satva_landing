@@ -234,95 +234,87 @@
         return nights >= 0 ? nights : null;
     }
 
-    function normalizeSocialHandle(raw) {
-        var v = (raw || '').trim();
-        v = v.replace(/^@+/, '');
-        v = v.replace(/^https?:\/\/(www\.)?instagram\.com\//i, '');
-        v = v.replace(/\/.*$/, '');
-        v = v.toLowerCase();
-        v = v.replace(/[^a-z0-9._]/g, '');
-        return v.slice(0, 64);
+    function paidPromoNights() {
+        return window.satvaPromo && typeof window.satvaPromo.paidNights === 'function'
+            ? window.satvaPromo.paidNights()
+            : 10;
     }
 
-    function appendPromoToPayload(payload, optinEl, handleEl) {
+    function isPromoStayEligible(arrival, departure) {
+        var nights = countNights(arrival, departure);
+        return nights !== null && nights >= paidPromoNights();
+    }
+
+    function appendPromoToPayload(payload, optinEl) {
         if (!isPromoFeatureActive()) {
             payload.promo_id = null;
             payload.promo_optin = false;
-            payload.social_handle = null;
             return;
         }
-        var opted = !!(optinEl && optinEl.checked);
+        var eligible = isPromoStayEligible(payload.preferred_date, payload.departure_date);
+        var opted = eligible && !!(optinEl && optinEl.checked && !optinEl.disabled);
         payload.promo_optin = opted;
         payload.promo_id = opted && window.SATVA_PROMO ? window.SATVA_PROMO.id : null;
-        payload.social_handle = opted && handleEl
-            ? (normalizeSocialHandle(handleEl.value) || null)
-            : null;
     }
+
+    var pendingPromoOptin = false;
 
     function bindPromoFormFields(cfg) {
         if (!cfg || !cfg.optin) return;
 
-        function setHandleVisible(open) {
-            if (cfg.optin) cfg.optin.setAttribute('aria-expanded', open ? 'true' : 'false');
-            if (cfg.wrap) {
-                cfg.wrap.classList.toggle('is-open', open);
-                cfg.wrap.classList.toggle('is-hidden', !open);
-                cfg.wrap.setAttribute('aria-hidden', open ? 'false' : 'true');
+        function syncOptinEnabled() {
+            var arrival = cfg.arrival && cfg.arrival.value ? cfg.arrival.value.trim() : '';
+            var departure = cfg.departure && cfg.departure.value ? cfg.departure.value.trim() : '';
+            var eligible = isPromoStayEligible(arrival, departure);
+            cfg.optin.disabled = !eligible;
+            cfg.optin.setAttribute('aria-disabled', eligible ? 'false' : 'true');
+            var label = cfg.optin.closest ? cfg.optin.closest('.yoga-form__promo-optin') : null;
+            if (label) label.classList.toggle('is-disabled', !eligible);
+            if (!eligible) {
+                cfg.optin.checked = false;
+            } else if (pendingPromoOptin) {
+                cfg.optin.checked = true;
+                pendingPromoOptin = false;
             }
-        }
-
-        function updateNightsHint() {
-            if (!cfg.hint || !cfg.optin || !cfg.optin.checked) {
-                if (cfg.hint) cfg.hint.classList.add('is-hidden');
-                return;
-            }
-            var nights = countNights(
-                cfg.arrival && cfg.arrival.value ? cfg.arrival.value.trim() : '',
-                cfg.departure && cfg.departure.value ? cfg.departure.value.trim() : ''
-            );
-            var paid = window.satvaPromo && typeof window.satvaPromo.paidNights === 'function'
-                ? window.satvaPromo.paidNights()
-                : 10;
-            var show = nights !== null && nights < paid;
-            cfg.hint.classList.toggle('is-hidden', !show);
+            if (cfg.hint) cfg.hint.classList.toggle('is-hidden', eligible);
         }
 
         function onOptinChange() {
-            var checked = cfg.optin.checked;
-            setHandleVisible(checked);
-            updateNightsHint();
-            if (checked) trackPromoEvent('promo_optin_checked');
+            if (cfg.optin.disabled) {
+                cfg.optin.checked = false;
+                return;
+            }
+            if (cfg.optin.checked) trackPromoEvent('promo_optin_checked');
         }
 
         cfg.optin.addEventListener('change', onOptinChange);
+        ['change', 'input'].forEach(function (evt) {
+            if (cfg.arrival) cfg.arrival.addEventListener(evt, syncOptinEnabled);
+            if (cfg.departure) cfg.departure.addEventListener(evt, syncOptinEnabled);
+        });
 
-        if (cfg.handle) {
-            function onHandleInput() {
-                cfg.handle.value = normalizeSocialHandle(cfg.handle.value);
-            }
-            cfg.handle.addEventListener('input', onHandleInput);
-            cfg.handle.addEventListener('blur', onHandleInput);
-        }
-
-        if (cfg.arrival) cfg.arrival.addEventListener('change', updateNightsHint);
-        if (cfg.departure) cfg.departure.addEventListener('change', updateNightsHint);
-
-        onOptinChange();
+        syncOptinEnabled();
     }
 
     function openLeadModalWithPromoOptin() {
         if (closePromoModalFn) closePromoModalFn();
         if (openYogaLeadModalFn) openYogaLeadModalFn();
+        pendingPromoOptin = true;
         var chk = document.getElementById('yogaLeadModalPromoOptin');
-        var wrap = document.getElementById('yogaLeadModalPromoHandleWrap');
+        var arrival = document.getElementById('yogaLeadModalArrivalDate');
+        var departure = document.getElementById('yogaLeadModalDepartureDate');
         if (chk) {
-            chk.checked = true;
-            chk.setAttribute('aria-expanded', 'true');
-        }
-        if (wrap) {
-            wrap.classList.add('is-open');
-            wrap.classList.remove('is-hidden');
-            wrap.setAttribute('aria-hidden', 'false');
+            var eligible = isPromoStayEligible(
+                arrival && arrival.value ? arrival.value.trim() : '',
+                departure && departure.value ? departure.value.trim() : ''
+            );
+            chk.disabled = !eligible;
+            chk.checked = eligible;
+            if (eligible) pendingPromoOptin = false;
+            var label = chk.closest ? chk.closest('.yoga-form__promo-optin') : null;
+            if (label) label.classList.toggle('is-disabled', !eligible);
+            var hint = document.getElementById('yogaLeadModalPromoNightsHint');
+            if (hint) hint.classList.toggle('is-hidden', eligible);
         }
         trackPromoEvent('promo_modal_cta');
     }
@@ -409,12 +401,6 @@
             e.preventDefault();
             if (btn.id === 'promoBadge') trackPromoEvent('promo_badge_click');
             openModal(btn);
-        });
-
-        document.addEventListener('click', function (e) {
-            var ig = e.target.closest ? e.target.closest('[data-promo-instagram-link]') : null;
-            if (!ig || !modal.contains(ig)) return;
-            trackPromoEvent('promo_instagram_click');
         });
 
         var cta = document.getElementById('promoModalCtaLead');
@@ -1314,6 +1300,31 @@
             if (!btn || btn.getAttribute('data-open-modal') !== 'modal-lead') return;
             e.preventDefault();
             openModal();
+            if (btn.hasAttribute('data-promo-cta')) {
+                pendingPromoOptin = true;
+                var chk = document.getElementById('yogaLeadModalPromoOptin');
+                var arrival = document.getElementById('yogaLeadModalArrivalDate');
+                var departure = document.getElementById('yogaLeadModalDepartureDate');
+                if (chk) {
+                    var eligible = isPromoStayEligible(
+                        arrival && arrival.value ? arrival.value.trim() : '',
+                        departure && departure.value ? departure.value.trim() : ''
+                    );
+                    chk.disabled = !eligible;
+                    if (eligible) {
+                        chk.checked = true;
+                        pendingPromoOptin = false;
+                    } else {
+                        chk.checked = false;
+                    }
+                    chk.dispatchEvent(new Event('change'));
+                    var label = chk.closest ? chk.closest('.yoga-form__promo-optin') : null;
+                    if (label) label.classList.toggle('is-disabled', !eligible);
+                    var hint = document.getElementById('yogaLeadModalPromoNightsHint');
+                    if (hint) hint.classList.toggle('is-hidden', eligible);
+                }
+                trackPromoEvent('promo_hero_cta');
+            }
         });
 
         if (overlay) {
@@ -1437,12 +1448,9 @@
         var guestCount = document.getElementById('yogaLeadModalGuestCount');
         var comment = document.getElementById('yogaLeadModalComment');
         var promoOptin = document.getElementById('yogaLeadModalPromoOptin');
-        var promoHandle = document.getElementById('yogaLeadModalSocialHandle');
 
         bindPromoFormFields({
             optin: promoOptin,
-            handle: promoHandle,
-            wrap: document.getElementById('yogaLeadModalPromoHandleWrap'),
             hint: document.getElementById('yogaLeadModalPromoNightsHint'),
             arrival: arrivalDate,
             departure: departureDate,
@@ -1628,7 +1636,7 @@
             var emLeadTrim = (emailIn && emailIn.value) ? emailIn.value.trim() : '';
             if (emLeadTrim) payload.email = emLeadTrim;
 
-            appendPromoToPayload(payload, promoOptin, promoHandle);
+            appendPromoToPayload(payload, promoOptin);
             applyLeadMeta(payload, form);
             payload.meta_event_id = generateEventId();
             appendAttributionToPayload(payload);
@@ -1665,16 +1673,7 @@
                         clearNamePhoneErrors();
                         showFormError('');
                         if (consent) consent.checked = false;
-                        if (promoOptin) {
-                            promoOptin.checked = false;
-                            promoOptin.setAttribute('aria-expanded', 'false');
-                        }
-                        var promoWrap = document.getElementById('yogaLeadModalPromoHandleWrap');
-                        if (promoWrap) {
-                            promoWrap.classList.remove('is-open');
-                            promoWrap.classList.add('is-hidden');
-                            promoWrap.setAttribute('aria-hidden', 'true');
-                        }
+                        if (promoOptin) promoOptin.checked = false;
                         form.classList.add('is-hidden');
                         if (successBox) successBox.classList.remove('is-hidden');
                         setTimeout(function () {
@@ -1716,12 +1715,9 @@
         var phoneErr = document.getElementById('yogaPhoneErr');
         var emailErr = document.getElementById('yogaEmailErr');
         var promoOptin = document.getElementById('yogaPromoOptin');
-        var promoHandle = document.getElementById('yogaSocialHandle');
 
         bindPromoFormFields({
             optin: promoOptin,
-            handle: promoHandle,
-            wrap: document.getElementById('yogaPromoHandleWrap'),
             hint: document.getElementById('yogaPromoNightsHint'),
             arrival: arrivalDate,
             departure: departureDate,
@@ -1940,7 +1936,7 @@
             };
             var emMainTrim = (emailIn && emailIn.value) ? emailIn.value.trim() : '';
             if (emMainTrim) payload.email = emMainTrim;
-            appendPromoToPayload(payload, promoOptin, promoHandle);
+            appendPromoToPayload(payload, promoOptin);
             applyLeadMeta(payload, form);
             payload.meta_event_id = generateEventId();
             appendAttributionToPayload(payload);

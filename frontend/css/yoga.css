@@ -4183,6 +4183,13 @@ section[id^=yoga] h2 {
 .yoga-form__promo-optin {
   margin-bottom: 0.5rem;
 }
+.yoga-form__promo-optin.is-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.yoga-form__promo-optin.is-disabled input {
+  cursor: not-allowed;
+}
 .yoga-form__promo-hint {
   display: block;
   margin: 0 0 0.65rem;
@@ -4192,21 +4199,6 @@ section[id^=yoga] h2 {
 }
 .yoga-form__promo-hint.is-hidden {
   display: none !important;
-}
-.yoga-form__promo-handle {
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  margin-bottom: 0;
-  transition: max-height 0.25s ease, opacity 0.25s ease, margin-bottom 0.25s ease;
-}
-.yoga-form__promo-handle.is-open {
-  max-height: 6rem;
-  opacity: 1;
-  margin-bottom: 0.75rem;
-}
-.yoga-form__promo-handle.is-hidden:not(.is-open) {
-  display: block !important;
 }
 .yoga-form__privacy-btn {
   display: inline;

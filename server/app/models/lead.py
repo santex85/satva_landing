@@ -51,7 +51,6 @@ class Lead(Base):
     )
     promo_id: Mapped[str | None] = mapped_column(Text, nullable=True)
     promo_optin: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="false", default=False)
-    social_handle: Mapped[str | None] = mapped_column(Text, nullable=True)
 
     consents: Mapped[list["Consent"]] = relationship("Consent", back_populates="lead", cascade="all, delete-orphan")
     notes: Mapped[list["LeadNote"]] = relationship("LeadNote", back_populates="lead", cascade="all, delete-orphan")

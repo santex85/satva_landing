@@ -64,8 +64,8 @@
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
     <script defer src="/js/consent.js?v=3"></script>
     <script defer src="/js/pixel.js?v=4"></script>
-    <script defer src="/js/promo-config.js?v=2"></script>
-    <script defer src="/js/yoga.js?v=14"></script>
+    <script defer src="/js/promo-config.js?v=4"></script>
+    <script defer src="/js/yoga.js?v=18"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
 
     <!-- Structured Data: LodgingBusiness (расширенная карточка) -->
@@ -178,7 +178,7 @@
             {
                 "@type": "Question",
                 "name": "Are there discounts for longer stays?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Book 10 nights or more and follow us on Instagram @satva_samui_eng — get +1 free night. Full offer terms: https://satvasamui.com/promo.html" }
+                "acceptedAnswer": { "@type": "Answer", "text": "Book 10 nights or more — get +1 free night." }
             },
             {
                 "@type": "Question",
@@ -1144,7 +1144,7 @@
                         </button>
                     </dt>
                     <dd class="yoga-faq__answer" id="yogaFaqA5" role="region" aria-labelledby="yogaFaqQ5" hidden>
-                        <span data-promo-faq-active hidden>Book 10 nights or more and follow us on Instagram <a href="https://www.instagram.com/satva_samui_eng/" target="_blank" rel="noopener noreferrer">@satva_samui_eng</a> — get +1 free night. <a href="/promo.html">Full offer terms</a>.</span>
+                        <span data-promo-faq-active hidden>Book 10 nights or more — get +1 free night.</span>
                         <span data-promo-faq-inactive>Long-stay rates depend on your dates and room category. Contact us — we'll find the best option for you.</span>
                     </dd>
                 </div>
@@ -1377,19 +1377,15 @@
 
                     <div class="yoga-form__promo" data-promo-gated>
                         <label class="yoga-form__checkbox yoga-form__promo-optin">
-                            <input type="checkbox" id="yogaPromoOptin" name="promo_optin" value="true" aria-expanded="false" aria-controls="yogaPromoHandleWrap">
+                            <input type="checkbox" id="yogaPromoOptin" name="promo_optin" value="true">
                             <span>I want the «+1 free night» offer</span>
                         </label>
                         <span id="yogaPromoNightsHint" class="yoga-form__promo-hint is-hidden" role="status">10 or more nights required</span>
-                        <div class="yoga-form__promo-handle is-hidden" id="yogaPromoHandleWrap" aria-hidden="true">
-                            <label class="yoga-form__label" for="yogaSocialHandle">Your Instagram handle</label>
-                            <input class="yoga-form__input" type="text" id="yogaSocialHandle" name="social_handle" maxlength="64" placeholder="@your_handle" autocomplete="off" inputmode="text">
-                        </div>
                     </div>
 
                     <label class="yoga-form__checkbox">
                         <input type="checkbox" id="yogaConsent" name="consent" value="true" required>
-                        <span>I agree to the <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">Privacy Policy</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">Terms &amp; Conditions</button>, <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">Cancellation Policy</button> and <a href="/promo.html">«+1 free night» offer terms</a></span>
+                        <span>I agree to the <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">Privacy Policy</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">Terms &amp; Conditions</button> and <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">Cancellation Policy</button></span>
                     </label>
 
                     <button type="submit" class="btn-yoga-primary btn-yoga-primary--block" id="yogaSubmitBtn">Send Enquiry</button>
@@ -1585,18 +1581,14 @@
                     <div id="yogaTurnstileWidgetLead" class="yoga-form__turnstile" role="group" aria-label="Security verification"></div>
                     <div class="yoga-form__promo" data-promo-gated>
                         <label class="yoga-form__checkbox yoga-form__promo-optin">
-                            <input type="checkbox" id="yogaLeadModalPromoOptin" name="promo_optin" value="true" aria-expanded="false" aria-controls="yogaLeadModalPromoHandleWrap">
+                            <input type="checkbox" id="yogaLeadModalPromoOptin" name="promo_optin" value="true">
                             <span>I want the «+1 free night» offer</span>
                         </label>
                         <span id="yogaLeadModalPromoNightsHint" class="yoga-form__promo-hint is-hidden" role="status">10 or more nights required</span>
-                        <div class="yoga-form__promo-handle is-hidden" id="yogaLeadModalPromoHandleWrap" aria-hidden="true">
-                            <label class="yoga-form__label" for="yogaLeadModalSocialHandle">Your Instagram handle</label>
-                            <input class="yoga-form__input" type="text" id="yogaLeadModalSocialHandle" name="social_handle" maxlength="64" placeholder="@your_handle" autocomplete="off" inputmode="text">
-                        </div>
                     </div>
                     <label class="yoga-form__checkbox">
                         <input type="checkbox" id="yogaLeadModalConsent" name="consent" value="true" required>
-                        <span>I agree to the <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">Privacy Policy</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">Terms &amp; Conditions</button>, <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">Cancellation Policy</button> and <a href="/promo.html">«+1 free night» offer terms</a></span>
+                        <span>I agree to the <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">Privacy Policy</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">Terms &amp; Conditions</button> and <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">Cancellation Policy</button></span>
                     </label>
                     <div id="yogaLeadFormError" class="yoga-form__status yoga-form__status--error is-hidden" role="alert" aria-live="assertive"></div>
                     <button type="submit" class="btn-yoga-primary btn-yoga-primary--block" id="yogaLeadModalSubmit">Send Enquiry</button>
@@ -1611,26 +1603,15 @@
             <button type="button" class="yoga-modal__close" aria-label="Close">&times;</button>
             <h2 class="yoga-modal__title" id="promoModalTitle">+1 free night</h2>
             <div class="yoga-modal__body yoga-modal__body--scroll promo-modal">
-                <p class="promo-modal__lead">Book <strong>10 nights or more</strong> and follow us on Instagram — <strong>+1 free night</strong>.</p>
-                <p><strong>How to claim:</strong></p>
-                <ol class="promo-modal__steps">
-                    <li>Send an enquiry for 10 nights or more.</li>
-                    <li>Follow <a href="https://www.instagram.com/satva_samui_eng/" target="_blank" rel="noopener noreferrer" data-promo-instagram-link>@satva_samui_eng</a> and enter your handle in the form.</li>
-                    <li>Show your follow at check-in — +1 night is added to your stay at no extra charge.</li>
-                </ol>
+                <p class="promo-modal__lead">Book <strong>10 nights or more</strong> — get <strong>+1 free night</strong>.</p>
                 <p><strong>Terms:</strong></p>
                 <ul class="promo-modal__terms">
                     <li>Offer valid — book by <strong><span data-promo-bookby></span></strong> inclusive.</li>
                     <li>The bonus night is added at the end of your stay and cannot be exchanged for cash.</li>
-                    <li>One bonus per booking regardless of length of stay.</li>
-                    <li>Cannot be combined with other discounts or special offers.</li>
-                    <li>The bonus night includes accommodation, breakfast, lunch, yoga and meditation. Treatments, excursions and transfers are not included.</li>
-                    <li>Deposit and <a href="/cancellation.html">cancellation policy</a> apply as usual.</li>
-                    <li>Offer applies to enquiries submitted by <span data-promo-enddate></span> inclusive.</li>
+                    <li>The bonus night includes accommodation, breakfast, lunch, yoga and meditation.</li>
                 </ul>
                 <div class="promo-modal__actions">
                     <button type="button" class="btn-yoga-primary" id="promoModalCtaLead" data-promo-modal-cta>Send enquiry</button>
-                    <a class="btn-yoga-secondary" href="https://www.instagram.com/satva_samui_eng/" target="_blank" rel="noopener noreferrer" data-promo-instagram-link>Follow on Instagram</a>
                 </div>
             </div>
         </div>
@@ -1870,15 +1851,10 @@
                         <p>5.4. Unpaid reservations may be cancelled after the payment deadline stated in our invoice or message.</p>
                         <p>5.5. We may run promotions and special offers on terms published on the Website. Terms of the «+1 free night» offer:</p>
                         <ul>
+                            <li>the offer applies when booking 10 nights or more;</li>
                             <li>the bonus night is added at the end of your stay, not deducted from your bill;</li>
-                            <li>cannot be exchanged for cash, transferred to another booking, or combined with other discounts or special offers;</li>
-                            <li>provided once per booking regardless of length of stay (a 20-night stay still receives one bonus night);</li>
-                            <li>the bonus night includes accommodation, breakfast, lunch, yoga and evening meditation; treatments, excursions and transfers are not included;</li>
-                            <li>USD 100/room deposit and <a href="/cancellation.html">cancellation policy</a> apply as usual; if you cancel and rebook, the offer applies again only if the new enquiry falls within the offer period;</li>
-                            <li>Instagram follow <a href="https://www.instagram.com/satva_samui_eng/" target="_blank" rel="noopener noreferrer">@satva_samui_eng</a> is verified at reception on arrival;</li>
-                            <li>offer applies to enquiries submitted by 31 October 2026 inclusive (Asia/Bangkok time).</li>
+                            <li>the bonus night includes accommodation, breakfast, lunch, yoga and evening meditation.</li>
                         </ul>
-                        <p>Full offer text: <a href="/promo.html">«+1 free night» offer terms</a>.</p>
                 
                         <h3>6. Changes and cancellation</h3>
                         <p>6.1. Cancellation, date changes and deposit retention are governed by our <strong>Cancellation Policy</strong>, which forms part of these Terms:</p>

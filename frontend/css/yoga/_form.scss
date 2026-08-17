@@ -259,6 +259,15 @@
 
     &__promo-optin {
         margin-bottom: 0.5rem;
+
+        &.is-disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+
+            input {
+                cursor: not-allowed;
+            }
+        }
     }
 
     &__promo-hint {
@@ -270,24 +279,6 @@
 
         &.is-hidden {
             display: none !important;
-        }
-    }
-
-    &__promo-handle {
-        overflow: hidden;
-        max-height: 0;
-        opacity: 0;
-        margin-bottom: 0;
-        transition: max-height 0.25s ease, opacity 0.25s ease, margin-bottom 0.25s ease;
-
-        &.is-open {
-            max-height: 6rem;
-            opacity: 1;
-            margin-bottom: 0.75rem;
-        }
-
-        &.is-hidden:not(.is-open) {
-            display: block !important;
         }
     }
 

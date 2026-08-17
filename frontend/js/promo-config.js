@@ -1,4 +1,4 @@
-/* Satva Samui — promo config (single source of truth for «+1 ночь бесплатно») */
+/* Satva Samui — promo config (single source of truth for «+1 день в подарок») */
 (function () {
     'use strict';
 
@@ -9,25 +9,6 @@
         endDate: '2026-10-31',
         stayBefore: null,
         paidNights: 10,
-        bonusNights: 1,
-        socialByLang: {
-            en: {
-                network: 'instagram',
-                handle: 'satva_samui_eng',
-                url: 'https://www.instagram.com/satva_samui_eng/',
-            },
-            ru: {
-                network: 'instagram',
-                handle: 'satva_samui',
-                url: 'https://www.instagram.com/satva_samui/',
-            },
-        },
-        social: {
-            network: 'instagram',
-            handle: 'satva_samui',
-            url: 'https://www.instagram.com/satva_samui/',
-        },
-        termsUrl: '/promo.html',
         tz: 'Asia/Bangkok',
         bookingDeadlineDays: 5,
     };
@@ -46,13 +27,6 @@
         var lang = document.documentElement && document.documentElement.lang;
         if (!lang) return 'en';
         return lang.split('-')[0].toLowerCase();
-    }
-
-    function getSocial() {
-        var p = window.SATVA_PROMO;
-        var lang = getPageLang();
-        if (p && p.socialByLang && p.socialByLang[lang]) return p.socialByLang[lang];
-        return p && p.social ? p.social : { handle: '', url: '' };
     }
 
     function getBangkokDateIso() {
@@ -154,7 +128,6 @@
         formatBookingDeadline: formatBookingDeadline,
         getBookingDeadlineIso: getBookingDeadlineIso,
         getBangkokDateIso: getBangkokDateIso,
-        getSocial: getSocial,
         paidNights: function () {
             return window.SATVA_PROMO ? window.SATVA_PROMO.paidNights : 10;
         },

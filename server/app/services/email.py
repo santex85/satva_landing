@@ -17,7 +17,7 @@ WHATSAPP_DISPLAY = "+66 950 165 058"
 TELEGRAM_URL = "https://t.me/OlgaSatva"
 TELEGRAM_DISPLAY = "@OlgaSatva"
 
-_SKIP_KEYS = frozenset({"website", "consent", "captcha_token", "meta_event_id", "promo_id", "promo_optin", "social_handle"})
+_SKIP_KEYS = frozenset({"website", "consent", "captcha_token", "meta_event_id", "promo_id", "promo_optin"})
 
 _FIELD_LABELS: dict[str, str] = {
     "lang": "Сайт",
@@ -369,7 +369,6 @@ def _build_body(
     source: str | None,
     *,
     promo_optin: bool = False,
-    social_handle: str | None = None,
     stay_nights: int | None = None,
 ) -> str:
     created = (created_at or datetime.utcnow()).strftime("%Y-%m-%d %H:%M UTC")
@@ -379,10 +378,9 @@ def _build_body(
 
     lines: list[str] = []
     if promo_optin:
-        handle_display = social_handle or "—"
         nights_display = stay_nights if stay_nights is not None else "—"
         lines.append(
-            f"🎁 АКЦИЯ «+1 ночь бесплатно» · ник: @{handle_display} · ночей: {nights_display}"
+            f"🎁 АКЦИЯ «+1 день в подарок» · ночей: {nights_display}"
         )
         lines.append("")
 
@@ -424,7 +422,6 @@ def send_lead_notification(
     db: Session | None = None,
     *,
     promo_optin: bool = False,
-    social_handle: str | None = None,
     preferred_date: str | None = None,
     departure_date: str | None = None,
 ) -> None:
@@ -451,7 +448,6 @@ def send_lead_notification(
         created_at,
         source,
         promo_optin=promo_optin,
-        social_handle=social_handle,
         stay_nights=stay_nights,
     )
 

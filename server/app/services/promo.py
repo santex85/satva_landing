@@ -1,14 +1,11 @@
 """Server-side promo validation (do not trust client dates)."""
 
 import logging
-import re
 from datetime import date, datetime, timedelta, timezone
 
 from app.config import settings
 
 logger = logging.getLogger(__name__)
-
-_SOCIAL_HANDLE_RE = re.compile(r"^[a-z0-9._]{0,64}$")
 
 
 def _bangkok_today() -> date:
@@ -29,22 +26,6 @@ def is_promo_active_on_server() -> bool:
     return start <= today <= end
 
 
-def sanitize_social_handle(value: str | None) -> str | None:
-    if value is None:
-        return None
-    v = value.strip().lower()
-    if v.startswith("@"):
-        v = v[1:]
-    if "instagram.com/" in v:
-        v = re.sub(r"^https?://(www\.)?instagram\.com/", "", v)
-    v = v.split("/")[0].split("?")[0]
-    v = re.sub(r"[^a-z0-9._]", "", v)
-    v = v[:64]
-    if not v or not _SOCIAL_HANDLE_RE.match(v):
-        return None
-    return v
-
-
 def count_stay_nights(preferred_date: str | None, departure_date: str | None) -> int | None:
     if not preferred_date or not departure_date:
         return None
@@ -60,11 +41,12 @@ def count_stay_nights(preferred_date: str | None, departure_date: str | None) ->
 def resolve_promo_fields(
     promo_id: str | None,
     promo_optin: bool,
-    social_handle: str | None,
-) -> tuple[str | None, bool, str | None]:
+    preferred_date: str | None = None,
+    departure_date: str | None = None,
+) -> tuple[str | None, bool]:
     """Validate promo opt-in against server config; log rejected attempts."""
     if not promo_optin:
-        return None, False, None
+        return None, False
 
     active = is_promo_active_on_server()
     valid_id = promo_id and promo_id == settings.PROMO_ID
@@ -78,7 +60,14 @@ def resolve_promo_fields(
                 "expected_id": settings.PROMO_ID,
             },
         )
-        return None, False, None
+        return None, False
 
-    handle = sanitize_social_handle(social_handle)
-    return settings.PROMO_ID, True, handle
+    nights = count_stay_nights(preferred_date, departure_date)
+    if nights is None or nights < 10:
+        logger.warning(
+            "Rejected promo opt-in: stay shorter than 10 nights",
+            extra={"nights": nights},
+        )
+        return None, False
+
+    return settings.PROMO_ID, True

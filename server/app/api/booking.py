@@ -47,10 +47,11 @@ def booking(
     if body.meta_event_id:
         payload["meta_event_id"] = body.meta_event_id
 
-    promo_id, promo_optin, social_handle = resolve_promo_fields(
+    promo_id, promo_optin = resolve_promo_fields(
         body.promo_id,
         body.promo_optin,
-        body.social_handle,
+        body.preferred_date,
+        body.departure_date,
     )
 
     client_host = request.client.host if request.client else None
@@ -69,7 +70,6 @@ def booking(
         background_tasks=background_tasks,
         promo_id=promo_id,
         promo_optin=promo_optin,
-        social_handle=social_handle,
     )
 
     if body.meta_event_id:
