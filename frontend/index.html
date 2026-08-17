@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=12" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=12"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=24" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=24"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -178,7 +178,7 @@
             {
                 "@type": "Question",
                 "name": "Are there discounts for longer stays?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Book 10 nights or more — get +1 free night." }
+                "acceptedAnswer": { "@type": "Answer", "text": "Stay 10 nights or more — +1 extra night included." }
             },
             {
                 "@type": "Question",
@@ -250,6 +250,7 @@
         </div>
         <div class="yoga-hero__overlay"></div>
         <div class="yoga-hero__content">
+            <!-- promo badge hidden (hero urgency experiment)
             <button type="button"
                     class="promo-badge yoga-fade-in"
                     id="promoBadge"
@@ -259,9 +260,10 @@
                     aria-haspopup="dialog"
                     aria-controls="promoModal">
                 <span class="promo-badge__icon" aria-hidden="true">🎁</span>
-                <span class="promo-badge__main">+1 free night</span>
-                <span class="promo-badge__sub">when booking 10+ nights · terms</span>
+                <span class="promo-badge__main">+1 extra night included</span>
+                <span class="promo-badge__sub">when booking 10+ nights</span>
             </button>
+            -->
             <h1 class="yoga-hero__tagline yoga-fade-in">Wake up to the sound of waves. Fall asleep to the colours of the sunset.</h1>
             <div class="yoga-hero__price yoga-fade-in" aria-describedby="yogaHeroFootnote">
                 <span class="yoga-hero__price-value">$75 / night<sup class="yoga-hero__price-mark" aria-hidden="true">*</sup></span>
@@ -277,8 +279,13 @@
                 <li>Personalised Wellness Plan</li>
                 <li>Evening meditation every day</li>
             </ul>
+            <p class="yoga-hero__promo-urgency yoga-fade-in" data-promo-gated>
+                <strong class="yoga-hero__promo-urgency-title">Stay 10 nights. Get 1 extra night included.</strong>
+                Book by <strong><span data-promo-bookby></span></strong><br>
+                to add an extra night to your stay.
+            </p>
             <div class="yoga-hero__buttons yoga-fade-in">
-                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Book Your Retreat</button>
+                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead" data-promo-cta>Get an extra night included</button>
             </div>
             <p class="yoga-hero__footnote yoga-fade-in" id="yogaHeroFootnote"><span aria-hidden="true">*</span> per person, double Standard Room</p>
             <div class="yoga-hero__scroll-hint" aria-hidden="true">
@@ -386,10 +393,6 @@
                 </div>
             </div>
             <p class="yoga-includes__legend yoga-fade-in"><span class="yoga-includes__optional">*</span>&nbsp;— Available at an additional cost, not included in the base package.</p>
-            <p class="yoga-includes__promo yoga-fade-in" data-promo-gated>
-                Book 10+ nights — get +1 free night.
-                <button type="button" data-open-modal="promoModal" data-promo-trigger>Terms</button>
-            </p>
             <div class="yoga-includes__amenities yoga-fade-in" aria-label="Hotel amenities included in your retreat">
                 <p class="yoga-includes__amenities-title">On the hotel grounds:</p>
                 <ul class="yoga-includes__amenities-list">
@@ -725,8 +728,7 @@
                         <strong>Only 3 rooms left.</strong>
                     </p>
                     <p class="yoga-rooms__urgency-promo" data-promo-gated>
-                        Book 10+ nights — get +1 free night.
-                        <button type="button" data-open-modal="promoModal" data-promo-trigger>Terms</button>
+                        Stay 10+ nights — +1 extra night included.
                     </p>
                 </div>
                 <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Reserve Your Room</button>
@@ -1144,7 +1146,7 @@
                         </button>
                     </dt>
                     <dd class="yoga-faq__answer" id="yogaFaqA5" role="region" aria-labelledby="yogaFaqQ5" hidden>
-                        <span data-promo-faq-active hidden>Book 10 nights or more — get +1 free night.</span>
+                        <span data-promo-faq-active hidden>Stay 10 nights or more — +1 extra night included.</span>
                         <span data-promo-faq-inactive>Long-stay rates depend on your dates and room category. Contact us — we'll find the best option for you.</span>
                     </dd>
                 </div>
@@ -1199,8 +1201,7 @@
                 <h2 id="yogaFormTitle">Book Your Yoga Retreat</h2>
                 <p class="yoga-form__lead">Leave your details and we'll be in touch to answer your questions, confirm availability and help you plan your journey.</p>
                 <p class="yoga-form__promo-note" data-promo-gated>
-                    «+1 free night» offer when booking 10+ nights.
-                    <button type="button" data-open-modal="promoModal" data-promo-trigger>Offer terms</button>
+                    Stay 10+ nights — +1 extra night included.
                 </p>
 
                 <div id="yogaFormSuccess" class="yoga-form__status yoga-form__status--success is-hidden" role="status">
@@ -1378,9 +1379,9 @@
                     <div class="yoga-form__promo" data-promo-gated>
                         <label class="yoga-form__checkbox yoga-form__promo-optin">
                             <input type="checkbox" id="yogaPromoOptin" name="promo_optin" value="true">
-                            <span>I want the «+1 free night» offer</span>
+                            <span>Include the extra night</span>
                         </label>
-                        <span id="yogaPromoNightsHint" class="yoga-form__promo-hint is-hidden" role="status">10 or more nights required</span>
+                        <span id="yogaPromoNightsHint" class="yoga-form__promo-hint is-hidden" role="status">Available for stays of 10 nights or more</span>
                     </div>
 
                     <label class="yoga-form__checkbox">
@@ -1412,6 +1413,20 @@
             <button type="button" class="yoga-modal__close" aria-label="Close">&times;</button>
             <h2 class="yoga-modal__title" id="yogaModalLeadTitle">Book Your Yoga Retreat</h2>
             <div class="yoga-modal__body yoga-modal__body--scroll">
+                <div class="yoga-lead-promo" data-promo-gated>
+                    <p class="yoga-lead-promo__deadline">
+                        Book by <strong><span data-promo-bookby></span></strong><br>
+                        — we'll include an extra night.
+                    </p>
+                    <p class="yoga-lead-promo__includes-title">Your extra night includes:</p>
+                    <ul class="yoga-lead-promo__list">
+                        <li>accommodation</li>
+                        <li>breakfast</li>
+                        <li>lunch</li>
+                        <li>morning and evening yoga</li>
+                        <li>meditation</li>
+                    </ul>
+                </div>
                 <div id="yogaLeadFormSuccess" class="yoga-form__status yoga-form__status--success is-hidden" role="status">
                     Thank you! We've received your enquiry and will be in touch shortly.
                 </div>
@@ -1582,9 +1597,9 @@
                     <div class="yoga-form__promo" data-promo-gated>
                         <label class="yoga-form__checkbox yoga-form__promo-optin">
                             <input type="checkbox" id="yogaLeadModalPromoOptin" name="promo_optin" value="true">
-                            <span>I want the «+1 free night» offer</span>
+                            <span>Include the extra night</span>
                         </label>
-                        <span id="yogaLeadModalPromoNightsHint" class="yoga-form__promo-hint is-hidden" role="status">10 or more nights required</span>
+                        <span id="yogaLeadModalPromoNightsHint" class="yoga-form__promo-hint is-hidden" role="status">Available for stays of 10 nights or more</span>
                     </div>
                     <label class="yoga-form__checkbox">
                         <input type="checkbox" id="yogaLeadModalConsent" name="consent" value="true" required>
@@ -1593,26 +1608,6 @@
                     <div id="yogaLeadFormError" class="yoga-form__status yoga-form__status--error is-hidden" role="alert" aria-live="assertive"></div>
                     <button type="submit" class="btn-yoga-primary btn-yoga-primary--block" id="yogaLeadModalSubmit">Send Enquiry</button>
                 </form>
-            </div>
-        </div>
-    </div>
-
-    <div id="promoModal" class="yoga-modal" hidden aria-hidden="true" data-promo-gated>
-        <div class="yoga-modal__overlay" tabindex="-1"></div>
-        <div class="yoga-modal__content yoga-modal__content--compact" role="dialog" aria-modal="true" aria-labelledby="promoModalTitle">
-            <button type="button" class="yoga-modal__close" aria-label="Close">&times;</button>
-            <h2 class="yoga-modal__title" id="promoModalTitle">+1 free night</h2>
-            <div class="yoga-modal__body yoga-modal__body--scroll promo-modal">
-                <p class="promo-modal__lead">Book <strong>10 nights or more</strong> — get <strong>+1 free night</strong>.</p>
-                <p><strong>Terms:</strong></p>
-                <ul class="promo-modal__terms">
-                    <li>Offer valid — book by <strong><span data-promo-bookby></span></strong> inclusive.</li>
-                    <li>The bonus night is added at the end of your stay and cannot be exchanged for cash.</li>
-                    <li>The bonus night includes accommodation, breakfast, lunch, yoga and meditation.</li>
-                </ul>
-                <div class="promo-modal__actions">
-                    <button type="button" class="btn-yoga-primary" id="promoModalCtaLead" data-promo-modal-cta>Send enquiry</button>
-                </div>
             </div>
         </div>
     </div>
@@ -1849,11 +1844,11 @@
                         <p>5.2. The <strong>from USD 75/night</strong> rate applies to double occupancy in a Standard Room unless your confirmation states otherwise. Single occupancy and other room categories are priced separately.</p>
                         <p>5.3. Published Website prices may change before confirmation. A confirmed reservation locks in the agreed price unless mandatory law requires otherwise.</p>
                         <p>5.4. Unpaid reservations may be cancelled after the payment deadline stated in our invoice or message.</p>
-                        <p>5.5. We may run promotions and special offers on terms published on the Website. Terms of the «+1 free night» offer:</p>
+                        <p>5.5. We may run promotions and special offers on terms published on the Website. Terms of the extra night offer:</p>
                         <ul>
                             <li>the offer applies when booking 10 nights or more;</li>
-                            <li>the bonus night is added at the end of your stay, not deducted from your bill;</li>
-                            <li>the bonus night includes accommodation, breakfast, lunch, yoga and evening meditation.</li>
+                            <li>the extra night is added at the end of your stay, not deducted from your bill;</li>
+                            <li>the extra night includes accommodation, breakfast, lunch, yoga and evening meditation.</li>
                         </ul>
                 
                         <h3>6. Changes and cancellation</h3>
