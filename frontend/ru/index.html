@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=12" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=12"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=14" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=14"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -213,6 +213,7 @@
         </div>
         <div class="yoga-hero__overlay"></div>
         <div class="yoga-hero__content">
+            <!-- promo badge временно скрыт (локальный эксперимент hero)
             <button type="button"
                     class="promo-badge yoga-fade-in"
                     id="promoBadge"
@@ -225,6 +226,7 @@
                 <span class="promo-badge__main">+1 ночь бесплатно</span>
                 <span class="promo-badge__sub">при бронировании от 10 ночей · условия</span>
             </button>
+            -->
             <h1 class="yoga-hero__tagline yoga-fade-in">Вы будете жить на берегу тихого, спокойного моря и&nbsp;наслаждаться прекрасными закатами.</h1>
             <div class="yoga-hero__price yoga-fade-in" aria-describedby="yogaHeroFootnote">
                 <span class="yoga-hero__price-value">75&nbsp;$&nbsp;сутки<sup class="yoga-hero__price-mark" aria-hidden="true">*</sup></span>
@@ -240,8 +242,11 @@
                 <li>Индивидуальный план оздоровления</li>
                 <li>Медитация каждый вечер</li>
             </ul>
+            <p class="yoga-hero__promo-urgency yoga-fade-in" data-promo-gated>
+                <strong>Внимание, акция!</strong> Успейте забронировать до <strong><span data-promo-bookby></span></strong> включительно и получите +1 ночь в подарок.
+            </p>
             <div class="yoga-hero__buttons yoga-fade-in">
-                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Забронировать</button>
+                <button type="button" class="btn-yoga-primary" data-open-modal="promoModal" data-promo-trigger>Получить подарок</button>
             </div>
             <p class="yoga-hero__footnote yoga-fade-in" id="yogaHeroFootnote"><span aria-hidden="true">*</span> при 2-местном размещении в номере «Стандарт».</p>
             <div class="yoga-hero__scroll-hint" aria-hidden="true">
