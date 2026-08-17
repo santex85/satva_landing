@@ -1110,13 +1110,24 @@ section[id^=yoga] h2 {
   text-align: center;
 }
 .yoga-hero__promo-urgency strong {
-  color: #ff8e72;
   font-weight: 700;
+}
+.yoga-hero__promo-urgency-title {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #ff8e72;
+  font-size: 1.45rem;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  text-align: center;
 }
 @media (max-width: 479px) {
   .yoga-hero__promo-urgency {
     font-size: 0.85rem;
     padding: 0.55rem 0.7rem;
+  }
+  .yoga-hero__promo-urgency .yoga-hero__promo-urgency-title {
+    font-size: 1.28rem;
   }
 }
 
@@ -1125,6 +1136,14 @@ section[id^=yoga] h2 {
 }
 .yoga-hero:has(.yoga-hero__promo-urgency) .yoga-hero__buttons {
   margin-top: 0.75rem;
+}
+.yoga-hero:has(.yoga-hero__promo-urgency) .yoga-hero__buttons .btn-yoga-primary {
+  background: linear-gradient(180deg, #ff7a4d 0%, #ef4e28 100%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18) inset, 0 8px 28px rgba(255, 90, 40, 0.55);
+}
+.yoga-hero:has(.yoga-hero__promo-urgency) .yoga-hero__buttons .btn-yoga-primary:hover {
+  background: linear-gradient(180deg, #ff8b62 0%, #ff5a32 100%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22) inset, 0 10px 32px rgba(255, 90, 40, 0.7);
 }
 
 .yoga-includes__promo {
