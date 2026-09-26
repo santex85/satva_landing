@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=24" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=24"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=26" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=26"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -65,7 +65,7 @@
     <script defer src="/js/consent.js?v=3"></script>
     <script defer src="/js/pixel.js?v=4"></script>
     <script defer src="/js/promo-config.js?v=4"></script>
-    <script defer src="/js/yoga.js?v=18"></script>
+    <script defer src="/js/yoga.js?v=19"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
 
     <!-- Structured Data: LodgingBusiness (расширенная карточка) -->
@@ -455,14 +455,50 @@
     <!-- 06. Питание -->
     <section id="yogaFood" class="yoga-food" aria-labelledby="yogaFoodTitle">
         <div class="yoga-food__container">
-            <div class="yoga-food__photos yoga-fade-in">
-                <figure class="yoga-food__photo yoga-food__photo--secondary">
-                    <picture>
-                        <source type="image/webp" srcset="/img/yoga_tour/food2.webp">
-                        <img src="/img/yoga_tour/food2.webp"
-                             alt="Тропический завтрак с фруктовыми соками на пляже"
-                             loading="lazy" width="1024" height="683" decoding="async">
-                    </picture>
+            <div class="yoga-food__photos yoga-food__photos--grid yoga-fade-in">
+                <figure class="yoga-food__photo yoga-food__photo--zoomable">
+                    <button type="button" class="yoga-food__zoom" data-food-zoom aria-label="Крупнее: вегетарианская тарелка со свекольным супом, салатом и свежим соком">
+                        <picture>
+                            <source type="image/webp" srcset="/img/yoga_tour/food-plate-1.webp">
+                            <img src="/img/yoga_tour/food-plate-1.webp"
+                                 alt="Вегетарианская тарелка со свекольным супом, салатом и свежим соком"
+                                 loading="lazy" width="1024" height="677" decoding="async">
+                        </picture>
+                        <span class="yoga-food__zoom-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4"/></svg></span>
+                    </button>
+                </figure>
+                <figure class="yoga-food__photo yoga-food__photo--zoomable">
+                    <button type="button" class="yoga-food__zoom" data-food-zoom aria-label="Крупнее: вегетарианская тарелка с овощным супом, рисом и салатом">
+                        <picture>
+                            <source type="image/webp" srcset="/img/yoga_tour/food-plate-2.webp">
+                            <img src="/img/yoga_tour/food-plate-2.webp"
+                                 alt="Вегетарианская тарелка с овощным супом, рисом и салатом"
+                                 loading="lazy" width="1024" height="717" decoding="async">
+                        </picture>
+                        <span class="yoga-food__zoom-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4"/></svg></span>
+                    </button>
+                </figure>
+                <figure class="yoga-food__photo yoga-food__photo--zoomable">
+                    <button type="button" class="yoga-food__zoom" data-food-zoom aria-label="Крупнее: вегетарианская тарелка с зелёным супом, жёлтым скрэмблом и салатом">
+                        <picture>
+                            <source type="image/webp" srcset="/img/yoga_tour/food-plate-3.webp">
+                            <img src="/img/yoga_tour/food-plate-3.webp"
+                                 alt="Вегетарианская тарелка с зелёным супом, жёлтым скрэмблом и салатом"
+                                 loading="lazy" width="1024" height="678" decoding="async">
+                        </picture>
+                        <span class="yoga-food__zoom-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4"/></svg></span>
+                    </button>
+                </figure>
+                <figure class="yoga-food__photo yoga-food__photo--zoomable">
+                    <button type="button" class="yoga-food__zoom" data-food-zoom aria-label="Крупнее: вегетарианская тарелка с супом, салатом и свежим соком">
+                        <picture>
+                            <source type="image/webp" srcset="/img/yoga_tour/food-plate-4.webp">
+                            <img src="/img/yoga_tour/food-plate-4.webp"
+                                 alt="Вегетарианская тарелка с супом, салатом и свежим соком"
+                                 loading="lazy" width="1024" height="678" decoding="async">
+                        </picture>
+                        <span class="yoga-food__zoom-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4"/></svg></span>
+                    </button>
                 </figure>
             </div>
             <div class="yoga-food__text yoga-fade-in">
@@ -1096,6 +1132,16 @@
                     </button>
                     <p class="yoga-reviews__summary">Рекомендую всем приехать сюда. Волшебный отдых — спокойно, красиво, замечательная команда. Я в восторге!</p>
                 </div>
+            </div>
+        </div>
+        <div id="yogaFoodLightbox" class="yoga-food-lightbox" hidden aria-hidden="true">
+            <div class="yoga-food-lightbox__overlay" data-food-lightbox-close></div>
+            <div class="yoga-food-lightbox__dialog" role="dialog" aria-modal="true" aria-label="Фото блюда">
+                <button type="button" class="yoga-food-lightbox__close" data-food-lightbox-close aria-label="Закрыть">&times;</button>
+                <button type="button" class="yoga-food-lightbox__nav yoga-food-lightbox__nav--prev" data-food-lightbox-prev aria-label="Предыдущее фото"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+                <img class="yoga-food-lightbox__img" alt="">
+                <button type="button" class="yoga-food-lightbox__nav yoga-food-lightbox__nav--next" data-food-lightbox-next aria-label="Следующее фото"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+                <p class="yoga-food-lightbox__count"></p>
             </div>
         </div>
         <div id="yogaVideoModal" class="yoga-video-modal" hidden aria-hidden="true">

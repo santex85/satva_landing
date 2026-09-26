@@ -785,6 +785,93 @@
         }
     }
 
+    // --- 09a. Просмотр фото питания -------------------------------------------
+    function initFoodLightbox() {
+        var modal = document.getElementById('yogaFoodLightbox');
+        var grid = document.querySelector('.yoga-food__photos--grid');
+        if (!modal || !grid) return;
+
+        var triggers = Array.prototype.slice.call(grid.querySelectorAll('[data-food-zoom]'));
+        var img = modal.querySelector('.yoga-food-lightbox__img');
+        var count = modal.querySelector('.yoga-food-lightbox__count');
+        var dialog = modal.querySelector('.yoga-food-lightbox__dialog');
+        var closeBtn = modal.querySelector('.yoga-food-lightbox__close');
+        if (!triggers.length || !img || !dialog) return;
+
+        var index = 0;
+        var previousActive = null;
+        var touchStartX = 0;
+
+        function show(i) {
+            var total = triggers.length;
+            index = (i + total) % total;
+            var thumb = triggers[index].querySelector('img');
+            if (!thumb) return;
+            img.src = thumb.currentSrc || thumb.src;
+            img.alt = thumb.alt || '';
+            if (count) count.textContent = (index + 1) + ' / ' + total;
+            dialog.setAttribute('aria-label', img.alt || 'Food photo');
+        }
+
+        function openAt(i, trigger) {
+            previousActive = trigger || document.activeElement;
+            show(i);
+            modal.removeAttribute('hidden');
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            if (closeBtn) closeBtn.focus();
+        }
+
+        function close() {
+            modal.classList.remove('is-open');
+            modal.setAttribute('hidden', '');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            img.removeAttribute('src');
+            if (previousActive && previousActive.focus) previousActive.focus();
+        }
+
+        grid.addEventListener('click', function (e) {
+            var trigger = e.target.closest('[data-food-zoom]');
+            if (!trigger || !grid.contains(trigger)) return;
+            openAt(triggers.indexOf(trigger), trigger);
+        });
+
+        modal.addEventListener('click', function (e) {
+            if (e.target.closest('[data-food-lightbox-close]')) {
+                close();
+                return;
+            }
+            if (e.target.closest('[data-food-lightbox-prev]')) {
+                show(index - 1);
+                return;
+            }
+            if (e.target.closest('[data-food-lightbox-next]')) {
+                show(index + 1);
+            }
+        });
+
+        dialog.addEventListener('touchstart', function (e) {
+            if (!e.changedTouches || !e.changedTouches.length) return;
+            touchStartX = e.changedTouches[0].clientX;
+        }, { passive: true });
+
+        dialog.addEventListener('touchend', function (e) {
+            if (!modal.classList.contains('is-open') || !e.changedTouches || !e.changedTouches.length) return;
+            var dx = e.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(dx) < 40) return;
+            show(dx < 0 ? index + 1 : index - 1);
+        }, { passive: true });
+
+        document.addEventListener('keydown', function (e) {
+            if (!modal.classList.contains('is-open')) return;
+            if (e.key === 'Escape') close();
+            else if (e.key === 'ArrowLeft') show(index - 1);
+            else if (e.key === 'ArrowRight') show(index + 1);
+        });
+    }
+
     // --- 09b. Модалка видео-отзыва --------------------------------------------
     function initVideoModal() {
         var modal = document.getElementById('yogaVideoModal');
@@ -1992,6 +2079,7 @@
         initSmoothScroll();
         initFadeIn();
         initVideoThumbnails();
+        initFoodLightbox();
         initVideoModal();
         initTextReviewsShuffle();
         initFaqAccordion();
