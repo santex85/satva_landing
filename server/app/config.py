@@ -1,3 +1,4 @@
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -8,8 +9,18 @@ class Settings(BaseSettings):
     APP_VERSION: str = "0.1.0"
     DEBUG: bool = False
 
-    # Database
+    # Database. postgresql:// is rewritten to psycopg2: SQLAlchemy 2.1
+    # otherwise selects psycopg v3, which is not installed.
     DATABASE_URL: str = "postgresql://postgres:postgres@localhost:5432/satva"
+
+    @field_validator("DATABASE_URL", mode="before")
+    @classmethod
+    def use_psycopg2_driver(cls, value: str) -> str:
+        if isinstance(value, str) and value.startswith("postgresql://"):
+            return "postgresql+psycopg2://" + value[len("postgresql://") :]
+        if isinstance(value, str) and value.startswith("postgres://"):
+            return "postgresql+psycopg2://" + value[len("postgres://") :]
+        return value
 
     # JWT
     JWT_SECRET: str = "change-me-in-production"
