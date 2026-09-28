@@ -113,6 +113,8 @@ def send_mail(env: dict[str, str], subject: str, text: str) -> None:
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
+            "Accept": "application/json",
+            "User-Agent": "satva-api-check/1.0",
         },
     )
     try:
