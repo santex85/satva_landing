@@ -20,6 +20,15 @@
         <xhtml:link rel="alternate" hreflang="x-default" href="https://satvasamui.com/partners/"/>
     </url>
     <url>
+        <loc>https://satvasamui.ru/hotel/</loc>
+        <lastmod>2026-08-08</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://satvasamui.com/"/>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://satvasamui.ru/hotel/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://satvasamui.com/"/>
+    </url>
+    <url>
         <loc>https://satvasamui.ru/privacy.html</loc>
         <lastmod>2026-06-11</lastmod>
         <changefreq>yearly</changefreq>
