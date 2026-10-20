@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=26" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=26"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=27" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=27"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -246,10 +246,24 @@
         </div>
     </section>
 
-    <!-- 02a. Вегетарианская кухня (сразу после Hero — главный акцент версии) -->
-    <section id="yogaFood" class="yoga-food" aria-labelledby="yogaFoodTitle">
+    <!-- 02a. Вегетарианская кухня (сразу после Hero — главный акцент версии; верхнее фото — заглушка до съёмки) -->
+    <section id="yogaFood" class="yoga-food yoga-food--stacked" aria-labelledby="yogaFoodTitle">
         <div class="yoga-food__container">
-            <div class="yoga-food__photos yoga-food__photos--grid yoga-fade-in">
+            <div class="yoga-food__lead yoga-food__lead--placeholder yoga-fade-in" role="img" aria-label="Фото ресторана появится позже">
+                <span>Фото скоро появится</span>
+            </div>
+            <div class="yoga-food__text yoga-fade-in">
+                <h2 id="yogaFoodTitle">Вегетарианская кухня</h2>
+                <p>
+                    Satva Samui — полностью вегетарианский отель. В нашем ресторане не готовят мясо, рыбу и морепродукты.
+                    Каждый день — разнообразные вкусные блюда из свежих местных овощей, фруктов, зелени и злаков.
+                </p>
+                <p>
+                    В стоимость проживания включены вегетарианский завтрак и обед (шведский стол). Ужин можно заказать дополнительно в ресторане отеля по меню.
+                </p>
+                <p>По запросу с радостью готовим веганские блюда и меню без глютена.</p>
+            </div>
+            <div class="yoga-food__photos yoga-food__photos--grid yoga-food__photos--stack yoga-fade-in">
                 <figure class="yoga-food__photo yoga-food__photo--zoomable">
                     <button type="button" class="yoga-food__zoom" data-food-zoom aria-label="Крупнее: вегетарианская тарелка со свекольным супом, салатом и свежим соком">
                         <picture>
@@ -295,16 +309,32 @@
                     </button>
                 </figure>
             </div>
-            <div class="yoga-food__text yoga-fade-in">
-                <h2 id="yogaFoodTitle">Вегетарианская кухня</h2>
-                <p>
-                    Satva Samui — полностью вегетарианский отель. В нашем ресторане не готовят мясо, рыбу и морепродукты.
-                    Каждый день — разнообразные вкусные блюда из свежих местных овощей, фруктов, зелени и злаков.
-                </p>
-                <p>
-                    В стоимость проживания включены вегетарианский завтрак и обед (шведский стол). Ужин можно заказать дополнительно в ресторане отеля по меню.
-                </p>
-                <p>По запросу с радостью готовим веганские блюда и меню без глютена.</p>
+        </div>
+    </section>
+
+    <!-- 02a-2. Мастер-класс шеф-повара (фото — заглушка до съёмки) -->
+    <section id="hotelChef" class="yoga-program" aria-labelledby="hotelChefTitle">
+        <div class="yoga-program__container">
+            <div class="yoga-program__block yoga-fade-in">
+                <div class="yoga-program__photo yoga-program__photo--placeholder" role="img" aria-label="Фото шеф-повара появится позже">
+                    <span>Фото шеф-повара</span>
+                </div>
+                <div class="yoga-program__text">
+                    <h2 id="hotelChefTitle">Мастер-класс от нашего шеф-повара</h2>
+                    <p>
+                        Наш шеф-повар каждый день готовит для гостей и с удовольствием делится тем, что умеет. На мастер-классе он показывает, как из простых местных продуктов приготовить вкусные и сытные вегетарианские блюда.
+                    </p>
+                    <p>
+                        Это спокойная встреча на кухне, а не строгий урок: можно задавать вопросы, попробовать приготовить самому и записать рецепты, чтобы повторить их дома.
+                    </p>
+                    <ul class="yoga-program__list">
+                        <li>Блюда из меню нашего ресторана: супы, салаты, горячее и десерты</li>
+                        <li>Как работать с тайскими специями, свежими травами и тропическими фруктами</li>
+                        <li>Подходит и тем, кто только знакомится с вегетарианской кухней</li>
+                        <li>Рецепты, которые легко повторить дома</li>
+                    </ul>
+                    <p class="yoga-program__note">Расписание и условия участия уточняйте при бронировании.</p>
+                </div>
             </div>
         </div>
     </section>

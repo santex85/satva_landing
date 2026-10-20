@@ -2325,6 +2325,58 @@ section[id^=yoga] h2 {
   cursor: zoom-in;
   position: relative;
 }
+.yoga-food__photo--primary {
+  aspect-ratio: 4/3;
+}
+.yoga-food__photo--secondary {
+  aspect-ratio: 3/2;
+}
+.yoga-food__text h2 {
+  color: #0f4c5c;
+  margin: 0 0 20px;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.2;
+}
+.yoga-food__text p {
+  color: #2d3436;
+  line-height: 1.7;
+  margin: 0 0 20px;
+}
+.yoga-food__lead {
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+@media (min-width: 768px) {
+  .yoga-food__lead {
+    aspect-ratio: 16/9;
+  }
+}
+.yoga-food__lead--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px dashed rgba(15, 76, 92, 0.25);
+}
+.yoga-food__lead--placeholder span {
+  color: rgba(15, 76, 92, 0.45);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.yoga-food--stacked .yoga-food__container {
+  grid-template-columns: 1fr;
+}
+.yoga-food--stacked .yoga-food__text p:last-child {
+  margin-bottom: 0;
+}
+.yoga-food--stacked .yoga-food__photos--stack {
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
 .yoga-food__zoom-icon {
   position: absolute;
   right: 8px;
@@ -2343,23 +2395,6 @@ section[id^=yoga] h2 {
   display: block;
   width: 16px;
   height: 16px;
-}
-.yoga-food__photo--primary {
-  aspect-ratio: 4/3;
-}
-.yoga-food__photo--secondary {
-  aspect-ratio: 3/2;
-}
-.yoga-food__text h2 {
-  color: #0f4c5c;
-  margin: 0 0 20px;
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  line-height: 1.2;
-}
-.yoga-food__text p {
-  color: #2d3436;
-  line-height: 1.7;
-  margin: 0 0 20px;
 }
 
 .yoga-food-lightbox {
@@ -2409,8 +2444,7 @@ section[id^=yoga] h2 {
   border-radius: 12px;
   background: #2d3436;
 }
-.yoga-food-lightbox__close,
-.yoga-food-lightbox__nav {
+.yoga-food-lightbox__close, .yoga-food-lightbox__nav {
   position: absolute;
   z-index: 2;
   border: 0;
@@ -2423,8 +2457,7 @@ section[id^=yoga] h2 {
   justify-content: center;
   transition: background 0.2s ease;
 }
-.yoga-food-lightbox__close:hover,
-.yoga-food-lightbox__nav:hover {
+.yoga-food-lightbox__close:hover, .yoga-food-lightbox__nav:hover {
   background: rgba(0, 0, 0, 0.65);
 }
 .yoga-food-lightbox__close {
