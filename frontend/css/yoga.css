@@ -844,6 +844,19 @@ section[id^=yoga] h2 {
     padding-right: 10px;
   }
 }
+@media (max-width: 768px) {
+  .yoga-hero__tagline--desktop-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
 .yoga-hero__price {
   display: flex;
   flex-direction: column;
