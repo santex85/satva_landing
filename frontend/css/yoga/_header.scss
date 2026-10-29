@@ -26,6 +26,24 @@
         padding: 12px 0;
     }
 
+    // Непрозрачная бордовая с самого верха, в цвет панели с кнопкой в Hero (/veg/)
+    &--solid {
+        background: linear-gradient(180deg, $veg-burgundy 0%, $veg-burgundy-dark 100%);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+
+        // Высота не меняется при прокрутке
+        &.yoga-header--scrolled {
+            padding: 20px 0;
+        }
+
+        // Шире базовой колонки, чтобы меню встало в одну строку и шапка не закрывала заголовок Hero
+        @media (min-width: 769px) {
+            .yoga-header__inner {
+                max-width: 1200px;
+            }
+        }
+    }
+
     &__inner {
         max-width: $container-base;
         margin: 0 auto;
@@ -161,6 +179,10 @@
         &--scrolled {
             padding: 14px 0;
         }
+
+        &--solid.yoga-header--scrolled {
+            padding: 26px 0;
+        }
     }
 
     .yoga-header__inner {
@@ -218,6 +240,10 @@
         padding: 40px;
         box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
         transition: right $transition-normal;
+
+        .yoga-header--solid & {
+            background: $veg-burgundy-dark;
+        }
 
         &.is-open { right: 0; }
 

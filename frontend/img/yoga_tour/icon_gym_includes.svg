@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="60 140 570 256" fill="#0f4c5c">
+  <!-- гантель -->
+  <rect x="84" y="284" width="18" height="34" rx="5"/>
+  <rect x="100" y="232" width="38" height="134" rx="9"/>
+  <rect x="140" y="254" width="24" height="90" rx="7"/>
+  <rect x="162" y="290" width="128" height="18" rx="6"/>
+  <rect x="288" y="254" width="24" height="90" rx="7"/>
+  <rect x="314" y="232" width="38" height="134" rx="9"/>
+  <rect x="350" y="284" width="18" height="34" rx="5"/>
+
+  <!-- гиря -->
+  <g transform="translate(500 366) scale(1.12) translate(-500 -366)">
+  <path d="M452 262 C444 176 556 176 548 262" fill="none" stroke="#0f4c5c" stroke-width="24" stroke-linecap="round"/>
+  <path d="M500 232 C548 232 572 264 572 300 C572 330 556 352 534 364 H466 C444 352 428 330 428 300 C428 264 452 232 500 232 Z"/>
+  </g>
+
+  <!-- земля -->
+  <path d="M30 372 Q320 356 610 372 Q320 388 30 372 Z"/>
+</svg>

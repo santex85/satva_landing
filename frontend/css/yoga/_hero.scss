@@ -320,7 +320,7 @@ $yoga-hero-block-gap: 16px;
 
     // /veg/: тёмный текст в небе над фото ужина на пляже, люди за столиком видны внизу
     &--veg {
-        $veg-text: #5e1a1d;
+        $veg-text: $veg-burgundy;
         $veg-price: #8c2a1a;
 
         align-items: flex-start;
@@ -346,10 +346,15 @@ $yoga-hero-block-gap: 16px;
             @media (max-width: 768px) {
                 justify-content: flex-start;
             }
+
+            // 769–1199px: меню в непрозрачной шапке переносится на 2 строки (~122px) — опускаем текст под неё
+            @media (min-width: 769px) and (max-width: 1199px) {
+                padding-top: calc(env(safe-area-inset-top, 0px) + 8rem);
+            }
         }
 
         .yoga-hero__content > .yoga-hero__tagline {
-            margin: 12px auto 8px;
+            margin: 32px auto 8px;
         }
 
         .yoga-hero__tagline {
@@ -368,10 +373,12 @@ $yoga-hero-block-gap: 16px;
             text-shadow: none;
         }
 
+        // Размер = 0.67 от заголовка: самая длинная строка списка ≈ ширине строки заголовка
         .yoga-hero__subtitle {
             display: block;
             text-align: center;
             max-width: none;
+            font-size: clamp(1.07rem, 1.34vw + 0.67rem, 1.74rem);
             font-weight: $font-weight-regular;
             opacity: 1;
             margin-bottom: 0;
@@ -403,7 +410,7 @@ $yoga-hero-block-gap: 16px;
             left: 50%;
             bottom: 0;
             transform: translateX(-50%);
-            width: clamp(320px, 32vw, 520px);
+            width: clamp(360px, 32vw, 520px);
             min-height: max(16%, 112px);
             box-sizing: border-box;
             padding: 16px 24px max(12px, env(safe-area-inset-bottom, 0px));
@@ -412,7 +419,7 @@ $yoga-hero-block-gap: 16px;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            background: linear-gradient(180deg, rgba($veg-text, 0.94) 0%, #4a1417 100%);
+            background: linear-gradient(180deg, rgba($veg-burgundy, 0.94) 0%, $veg-burgundy-dark 100%);
             border-radius: 20px 20px 0 0;
             border-top: 1px solid rgba($color-accent, 0.35);
             box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25);
