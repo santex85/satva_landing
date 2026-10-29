@@ -200,21 +200,6 @@ $yoga-hero-block-gap: 16px;
                 padding-right: 10px;
             }
         }
-
-        // На телефоне тот же текст уже в слогане шапки — заголовок остаётся только для SEO и скринридеров (/veg/)
-        &--desktop-only {
-            @media (max-width: 768px) {
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                padding: 0;
-                margin: -1px;
-                overflow: hidden;
-                clip: rect(0, 0, 0, 0);
-                white-space: nowrap;
-                border: 0;
-            }
-        }
     }
 
     &__price {
@@ -331,6 +316,114 @@ $yoga-hero-block-gap: 16px;
         border-bottom: 2px solid rgba(255, 255, 255, 0.6);
         transform: rotate(45deg);
         animation: yogaScrollBounce 1.5s ease-in-out infinite;
+    }
+
+    // /veg/: тёмный текст в небе над фото ужина на пляже, люди за столиком видны внизу
+    &--veg {
+        $veg-text: #5e1a1d;
+        $veg-price: #8c2a1a;
+
+        align-items: flex-start;
+
+        .yoga-hero__bg img {
+            object-position: center center;
+        }
+
+        .yoga-hero__overlay {
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 236, 228, 0.28) 0%,
+                rgba(255, 236, 228, 0) 45%
+            );
+        }
+
+        // Контент на всю высоту hero: текст сверху, сноска (absolute) у нижнего края
+        .yoga-hero__content {
+            color: $veg-text;
+            align-self: stretch;
+
+            // Базовый мобильный hero разносит блоки по высоте — здесь текст держится вместе в небе
+            @media (max-width: 768px) {
+                justify-content: flex-start;
+            }
+        }
+
+        .yoga-hero__content > .yoga-hero__tagline {
+            margin: 12px auto 8px;
+        }
+
+        .yoga-hero__tagline {
+            font-size: clamp(1.6rem, 2vw + 1rem, 2.6rem);
+            font-weight: $font-weight-regular;
+            line-height: 1.25;
+            opacity: 1;
+            text-shadow: none;
+            max-width: none;
+        }
+
+        .yoga-hero__price-value {
+            font-size: clamp(1.5rem, 1.2vw + 1rem, 2rem);
+            font-weight: $font-weight-regular;
+            color: $veg-price;
+            text-shadow: none;
+        }
+
+        .yoga-hero__subtitle {
+            display: block;
+            text-align: center;
+            max-width: none;
+            font-weight: $font-weight-regular;
+            opacity: 1;
+            margin-bottom: 0;
+
+            line-height: 1.5;
+
+            li + li {
+                margin-top: 0.15em;
+            }
+        }
+
+        .yoga-hero__subtitle:has(.yoga-hero__subtitle-heading) li:not(.yoga-hero__subtitle-heading) {
+            padding-left: 0;
+
+            &::before {
+                content: none;
+            }
+        }
+
+        .yoga-hero__subtitle-heading {
+            font-size: inherit;
+            font-weight: $font-weight-regular;
+        }
+
+        .yoga-hero__buttons {
+            margin: 20px 0 0;
+
+            .btn-yoga-primary {
+                margin: 0;
+            }
+        }
+
+        // Сноска внизу экрана, чтобы не ложиться на людей за столиком
+        .yoga-hero__footnote {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: max(12px, env(safe-area-inset-bottom, 0px));
+            margin: 0 auto;
+            color: $color-white;
+            opacity: 0.85;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+        }
+
+        .yoga-hero__scroll-hint {
+            display: none;
+        }
+
+        // Плашка акции на светлом небе не читается; акция остаётся в номерах, форме и попапе
+        .yoga-hero__promo-urgency {
+            display: none;
+        }
     }
 
     // LCP: hero content visible immediately (no JS opacity gate)

@@ -97,26 +97,19 @@
     &__lead {
         border-radius: 20px;
         overflow: hidden;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 3 / 2;
 
-        @media (min-width: 768px) {
-            aspect-ratio: 16 / 9;
+        picture {
+            display: block;
+            width: 100%;
+            height: 100%;
         }
 
-        &--placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba($color-white, 0.7);
-            border: 2px dashed rgba($color-primary, 0.25);
-
-            span {
-                color: rgba($color-primary, 0.45);
-                font-size: 0.875rem;
-                font-weight: 600;
-                letter-spacing: 0.04em;
-                text-transform: uppercase;
-            }
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     }
 

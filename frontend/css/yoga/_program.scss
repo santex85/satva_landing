@@ -62,6 +62,15 @@
             transform: scale(1.03);
         }
 
+        // Вертикальный снимок (мастер-класс шефа на /veg/)
+        &--portrait {
+            aspect-ratio: 4 / 5;
+
+            img {
+                object-position: center 35%;
+            }
+        }
+
         &--placeholder {
             display: flex;
             align-items: center;
