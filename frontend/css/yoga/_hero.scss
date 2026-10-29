@@ -396,24 +396,49 @@ $yoga-hero-block-gap: 16px;
             font-weight: $font-weight-regular;
         }
 
-        .yoga-hero__buttons {
-            margin: 20px 0 0;
+        // Панель внизу по центру: закрывает ноги и низ столика (на фото это ~нижние 18–20% кадра)
+        .yoga-hero__dock {
+            position: absolute;
+            z-index: 3;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: clamp(320px, 32vw, 520px);
+            min-height: max(16%, 112px);
+            box-sizing: border-box;
+            padding: 16px 24px max(12px, env(safe-area-inset-bottom, 0px));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(180deg, rgba($veg-text, 0.94) 0%, #4a1417 100%);
+            border-radius: 20px 20px 0 0;
+            border-top: 1px solid rgba($color-accent, 0.35);
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25);
+
+            @media (max-width: 768px) {
+                width: min(340px, calc(100% - 32px));
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+
+        .yoga-hero__dock .yoga-hero__buttons {
+            margin: 0;
 
             .btn-yoga-primary {
                 margin: 0;
             }
         }
 
-        // Сноска внизу экрана, чтобы не ложиться на людей за столиком
-        .yoga-hero__footnote {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: max(12px, env(safe-area-inset-bottom, 0px));
-            margin: 0 auto;
-            color: $color-white;
-            opacity: 0.85;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+        .yoga-hero__dock .yoga-hero__footnote {
+            margin: 0;
+            padding: 0;
+            max-width: 26rem;
+            font-size: 0.7rem;
+            color: rgba($color-white, 0.72);
+            opacity: 1;
         }
 
         .yoga-hero__scroll-hint {

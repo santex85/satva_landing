@@ -1009,21 +1009,46 @@ section[id^=yoga] h2 {
   font-size: inherit;
   font-weight: 400;
 }
-.yoga-hero--veg .yoga-hero__buttons {
-  margin: 20px 0 0;
+.yoga-hero--veg .yoga-hero__dock {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: clamp(320px, 32vw, 520px);
+  min-height: max(16%, 112px);
+  box-sizing: border-box;
+  padding: 16px 24px max(12px, env(safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(180deg, rgba(94, 26, 29, 0.94) 0%, #4a1417 100%);
+  border-radius: 20px 20px 0 0;
+  border-top: 1px solid rgba(255, 142, 114, 0.35);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25);
 }
-.yoga-hero--veg .yoga-hero__buttons .btn-yoga-primary {
+@media (max-width: 768px) {
+  .yoga-hero--veg .yoga-hero__dock {
+    width: min(340px, 100% - 32px);
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+.yoga-hero--veg .yoga-hero__dock .yoga-hero__buttons {
   margin: 0;
 }
-.yoga-hero--veg .yoga-hero__footnote {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: max(12px, env(safe-area-inset-bottom, 0px));
-  margin: 0 auto;
-  color: #ffffff;
-  opacity: 0.85;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+.yoga-hero--veg .yoga-hero__dock .yoga-hero__buttons .btn-yoga-primary {
+  margin: 0;
+}
+.yoga-hero--veg .yoga-hero__dock .yoga-hero__footnote {
+  margin: 0;
+  padding: 0;
+  max-width: 26rem;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.72);
+  opacity: 1;
 }
 .yoga-hero--veg .yoga-hero__scroll-hint {
   display: none;
