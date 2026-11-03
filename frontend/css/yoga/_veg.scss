@@ -1,0 +1,43 @@
+@use '../core' as *;
+
+
+// /veg/ на телефоне: страница листается блоками (scroll-snap),
+// а фото, с которого начинается блок, идёт на всю ширину без отступов.
+// Включается классом veg-page на <html>; Hero не меняется.
+
+// Высота непрозрачной шапки на телефоне (yoga-header--solid не сжимается при прокрутке)
+$veg-header-height-mobile: 96px;
+
+@media (max-width: 768px) {
+    html.veg-page {
+        scroll-snap-type: y mandatory;
+        scroll-padding-top: $veg-header-height-mobile;
+    }
+
+    .veg-page {
+        body > section,
+        .yoga-sea-band > section,
+        .yoga-site-footer {
+            scroll-snap-align: start;
+        }
+
+        // Блоки, которые начинаются с фото: фото вплотную к шапке и к краям экрана
+        .yoga-food,
+        .yoga-beach,
+        #hotelChef,
+        #hotelAmenities,
+        #hotelYoga {
+            padding-top: 0;
+        }
+
+        .yoga-food__lead,
+        .yoga-beach__photo,
+        #hotelChef .yoga-program__photo,
+        #hotelAmenities .yoga-program__photo,
+        #hotelYoga .yoga-program__photo {
+            margin-left: -$space-h;
+            margin-right: -$space-h;
+            border-radius: 0;
+        }
+    }
+}

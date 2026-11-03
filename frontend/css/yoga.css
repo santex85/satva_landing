@@ -4943,6 +4943,33 @@ html.satva-consent-modal-open {
   scroll-margin-top: 80px;
 }
 
+@media (max-width: 768px) {
+  html.veg-page {
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: 96px;
+  }
+  .veg-page body > section,
+  .veg-page .yoga-sea-band > section,
+  .veg-page .yoga-site-footer {
+    scroll-snap-align: start;
+  }
+  .veg-page .yoga-food,
+  .veg-page .yoga-beach,
+  .veg-page #hotelChef,
+  .veg-page #hotelAmenities,
+  .veg-page #hotelYoga {
+    padding-top: 0;
+  }
+  .veg-page .yoga-food__lead,
+  .veg-page .yoga-beach__photo,
+  .veg-page #hotelChef .yoga-program__photo,
+  .veg-page #hotelAmenities .yoga-program__photo,
+  .veg-page #hotelYoga .yoga-program__photo {
+    margin-left: -24px;
+    margin-right: -24px;
+    border-radius: 0;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
