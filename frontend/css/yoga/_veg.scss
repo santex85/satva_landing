@@ -39,5 +39,18 @@ $veg-header-height-mobile: 96px;
             margin-right: -$space-h;
             border-radius: 0;
         }
+
+        // «Остров, который удивляет» и «Уютные вечера»: карточки во всю ширину,
+        // каждая — отдельный шаг свайпа с фото сразу под шапкой
+        .yoga-activities {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .yoga-activities__block {
+            border-radius: 0;
+            box-shadow: none;
+            scroll-snap-align: start;
+        }
     }
 }

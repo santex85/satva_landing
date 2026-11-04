@@ -4969,6 +4969,15 @@ html.satva-consent-modal-open {
     margin-right: -24px;
     border-radius: 0;
   }
+  .veg-page .yoga-activities {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .veg-page .yoga-activities__block {
+    border-radius: 0;
+    box-shadow: none;
+    scroll-snap-align: start;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   html {
