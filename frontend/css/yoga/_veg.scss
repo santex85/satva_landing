@@ -22,7 +22,6 @@ $veg-header-height-mobile: 96px;
         }
 
         // Блоки, которые начинаются с фото: фото вплотную к шапке и к краям экрана
-        .yoga-food,
         .yoga-beach,
         #hotelChef,
         #hotelAmenities,
@@ -30,7 +29,13 @@ $veg-header-height-mobile: 96px;
             padding-top: 0;
         }
 
+        // Кухня начинается с заголовка, фото идёт под ним
+        .yoga-food {
+            padding-top: 32px;
+        }
+
         .yoga-food__lead,
+        .yoga-food__photos--stack .yoga-food__photo,
         .yoga-beach__photo,
         #hotelChef .yoga-program__photo,
         #hotelAmenities .yoga-program__photo,

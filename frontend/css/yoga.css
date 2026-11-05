@@ -2495,6 +2495,12 @@ section[id^=yoga] h2 {
 .yoga-food--stacked .yoga-food__container {
   grid-template-columns: 1fr;
 }
+.yoga-food--stacked .yoga-food__heading {
+  margin-bottom: -16px;
+}
+.yoga-food--stacked .yoga-food__heading h2 {
+  margin: 0;
+}
 .yoga-food--stacked .yoga-food__text p:last-child {
   margin-bottom: 0;
 }
@@ -4953,14 +4959,17 @@ html.satva-consent-modal-open {
   .veg-page .yoga-site-footer {
     scroll-snap-align: start;
   }
-  .veg-page .yoga-food,
   .veg-page .yoga-beach,
   .veg-page #hotelChef,
   .veg-page #hotelAmenities,
   .veg-page #hotelYoga {
     padding-top: 0;
   }
+  .veg-page .yoga-food {
+    padding-top: 32px;
+  }
   .veg-page .yoga-food__lead,
+  .veg-page .yoga-food__photos--stack .yoga-food__photo,
   .veg-page .yoga-beach__photo,
   .veg-page #hotelChef .yoga-program__photo,
   .veg-page #hotelAmenities .yoga-program__photo,

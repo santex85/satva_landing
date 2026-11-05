@@ -119,6 +119,15 @@
             grid-template-columns: 1fr;
         }
 
+        // Заголовок над большим фото: ближе к фото, чем общий шаг сетки
+        .yoga-food__heading {
+            margin-bottom: -16px;
+
+            h2 {
+                margin: 0;
+            }
+        }
+
         .yoga-food__text p:last-child {
             margin-bottom: 0;
         }
