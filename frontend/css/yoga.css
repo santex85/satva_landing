@@ -4985,6 +4985,9 @@ html.satva-consent-modal-open {
     margin-right: -24px;
     border-radius: 0;
   }
+  .veg-page .yoga-food--stacked .yoga-food__photos--stack {
+    gap: 0;
+  }
   .veg-page .yoga-activities {
     padding-left: 0;
     padding-right: 0;

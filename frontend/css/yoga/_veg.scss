@@ -45,6 +45,11 @@ $veg-header-height-mobile: 96px;
             border-radius: 0;
         }
 
+        // Фото тарелок встык, без зазоров между ними
+        .yoga-food--stacked .yoga-food__photos--stack {
+            gap: 0;
+        }
+
         // «Остров, который удивляет» и «Уютные вечера»: карточки во всю ширину,
         // каждая — отдельный шаг свайпа с фото сразу под шапкой
         .yoga-activities {
