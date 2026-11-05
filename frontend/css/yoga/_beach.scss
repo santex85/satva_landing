@@ -11,6 +11,15 @@
         margin: 0 auto;
     }
 
+    // Заголовок над фото и текстом (/veg/)
+    &__heading {
+        color: $color-primary;
+        margin: 0 0 24px;
+        font-size: $font-size-h2;
+        line-height: $line-height-tight;
+        text-align: center;
+    }
+
     &__block {
         display: grid;
         grid-template-columns: 1fr;

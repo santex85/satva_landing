@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=42" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=42"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=43" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=43"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -247,7 +247,34 @@
         </div>
     </section>
 
-    <!-- 02a. Вегетарианская кухня (сразу после Hero — главный акцент версии) -->
+    <!-- 02a-1. Пляж (сразу после Hero, перед кухней) -->
+    <section id="yogaBeach" class="yoga-beach" aria-labelledby="yogaBeachTitle">
+        <div class="yoga-beach__container">
+            <h2 id="yogaBeachTitle" class="yoga-beach__heading yoga-fade-in">Отель расположен на берегу моря</h2>
+            <div class="yoga-beach__block yoga-fade-in">
+                <div class="yoga-beach__photo">
+                    <picture>
+                        <source type="image/webp" srcset="/img/yoga_tour/beach_day-800.webp 800w, /img/yoga_tour/beach_day-1200.webp 1200w, /img/yoga_tour/beach_day-1600.webp 1600w" sizes="(max-width: 767px) 100vw, 560px">
+                        <img src="/img/yoga_tour/beach_day.webp"
+                             alt="Пляж Липа Ной на Самуи — отель Satva Samui на берегу моря"
+                             loading="lazy" width="1600" height="1170" decoding="async">
+                    </picture>
+                </div>
+                <div class="yoga-beach__text">
+                    <p class="yoga-beach__lead">Липа Ной — один из лучших пляжей на Самуи:</p>
+                    <ul class="yoga-beach__list">
+                        <li>Мелкий чистый песок</li>
+                        <li>Плавный заход в море без камней и кораллов</li>
+                        <li>Температура воды +27…+30 °C круглый год</li>
+                        <li>Мало туристов</li>
+                        <li>Прекрасные закаты каждый вечер</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 02a. Вегетарианская кухня (после пляжа — главный акцент версии) -->
     <section id="yogaFood" class="yoga-food yoga-food--stacked" aria-labelledby="yogaFoodTitle">
         <div class="yoga-food__container">
             <div class="yoga-food__text yoga-food__heading yoga-fade-in">
@@ -305,33 +332,6 @@
                         <span class="yoga-food__zoom-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4"/></svg></span>
                     </button>
                 </figure>
-            </div>
-        </div>
-    </section>
-
-    <!-- 02a-1. Пляж (между кухней и мастер-классом) -->
-    <section id="yogaBeach" class="yoga-beach" aria-labelledby="yogaBeachTitle">
-        <div class="yoga-beach__container">
-            <div class="yoga-beach__block yoga-fade-in">
-                <div class="yoga-beach__photo">
-                    <picture>
-                        <source type="image/webp" srcset="/img/yoga_tour/beach_day-800.webp 800w, /img/yoga_tour/beach_day-1200.webp 1200w, /img/yoga_tour/beach_day-1600.webp 1600w" sizes="(max-width: 767px) 100vw, 560px">
-                        <img src="/img/yoga_tour/beach_day.webp"
-                             alt="Пляж Липа Ной на Самуи — отель Satva Samui на берегу моря"
-                             loading="lazy" width="1600" height="1170" decoding="async">
-                    </picture>
-                </div>
-                <div class="yoga-beach__text">
-                    <h2 id="yogaBeachTitle">Отель расположен на берегу моря</h2>
-                    <p class="yoga-beach__lead">Липа Ной — один из лучших пляжей на Самуи:</p>
-                    <ul class="yoga-beach__list">
-                        <li>Мелкий чистый песок</li>
-                        <li>Плавный заход в море без камней и кораллов</li>
-                        <li>Температура воды +27…+30 °C круглый год</li>
-                        <li>Мало туристов</li>
-                        <li>Прекрасные закаты каждый вечер</li>
-                    </ul>
-                </div>
             </div>
         </div>
     </section>
