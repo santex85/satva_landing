@@ -4988,6 +4988,16 @@ html.satva-consent-modal-open {
   .veg-page .yoga-food--stacked .yoga-food__photos--stack {
     gap: 0;
   }
+  .veg-page .yoga-rooms-carousel__viewport {
+    margin-left: -24px;
+    margin-right: -24px;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+  .veg-page .yoga-rooms-gallery__stage-wrap {
+    border-radius: 0;
+  }
   .veg-page .yoga-activities {
     padding-left: 0;
     padding-right: 0;

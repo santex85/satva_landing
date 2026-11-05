@@ -50,6 +50,19 @@ $veg-header-height-mobile: 96px;
             gap: 0;
         }
 
+        // Типы размещения: карточка номера во всю ширину, фото от края до края
+        .yoga-rooms-carousel__viewport {
+            margin-left: -$space-h;
+            margin-right: -$space-h;
+            border-radius: 0;
+            border-left: 0;
+            border-right: 0;
+        }
+
+        .yoga-rooms-gallery__stage-wrap {
+            border-radius: 0;
+        }
+
         // «Остров, который удивляет» и «Уютные вечера»: карточки во всю ширину,
         // каждая — отдельный шаг свайпа с фото сразу под шапкой
         .yoga-activities {
