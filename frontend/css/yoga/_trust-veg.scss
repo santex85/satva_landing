@@ -6,8 +6,25 @@
 
 .yoga-trust-veg {
     position: relative;
-    z-index: 1;
-    padding: 0 $space-h;
+    isolation: isolate;
+    padding: $space-section $space-h;
+    // Тот же морской фон, что у полосы «Что входит в стоимость»
+    background-image: image-set(
+        url('../img/yoga_tour/trust_sea.webp') type('image/webp'),
+        url('../img/yoga_tour/trust_sea.jpg') type('image/jpeg')
+    );
+    background-size: cover;
+    background-position: center;
+    background-color: $color-white;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background: rgba($color-white, 0.72);
+    }
 
     &__container {
         max-width: $container-base;
@@ -80,8 +97,13 @@
     }
 
     @media (max-width: 768px) {
-        // Свайп ставит секцию вплотную к шапке: отступ, чтобы заголовок не прилипал
+        // Одинаковые отступы над и под заголовком; бордовая панель доходит до низа секции
         padding-top: 32px;
+        padding-bottom: 0;
+
+        &__title {
+            margin-bottom: 32px;
+        }
 
         &__card {
             margin-left: -$space-h;

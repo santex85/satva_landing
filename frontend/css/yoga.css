@@ -4958,8 +4958,20 @@ html.satva-consent-modal-open {
 
 .yoga-trust-veg {
   position: relative;
-  z-index: 1;
-  padding: 0 24px;
+  isolation: isolate;
+  padding: clamp(60px, 8vw, 100px) 24px;
+  background-image: image-set(url("../img/yoga_tour/trust_sea.webp") type('image/webp'), url("../img/yoga_tour/trust_sea.jpg") type('image/jpeg'));
+  background-size: cover;
+  background-position: center;
+  background-color: #ffffff;
+}
+.yoga-trust-veg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.72);
 }
 .yoga-trust-veg__container {
   max-width: 900px;
@@ -5025,6 +5037,10 @@ html.satva-consent-modal-open {
 @media (max-width: 768px) {
   .yoga-trust-veg {
     padding-top: 32px;
+    padding-bottom: 0;
+  }
+  .yoga-trust-veg__title {
+    margin-bottom: 32px;
   }
   .yoga-trust-veg__card {
     margin-left: -24px;
