@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=45" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=45"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=46" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=46"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -626,33 +626,20 @@
 
 
     <div class="yoga-sea-band">
-    <!-- 02b. Цифры и доверие -->
-    <section class="yoga-trust-bar" id="yoga-trust" aria-labelledby="yogaTrustTitle">
-        <div class="yoga-trust-bar__container">
-            <header class="yoga-trust-bar__header yoga-fade-in">
-                <h2 id="yogaTrustTitle">Почему нам доверяют</h2>
-            </header>
-            <ul class="yoga-trust-bar__list">
-                <li class="yoga-trust-bar__item">
-                    <span class="yoga-trust-bar__value">12</span>
-                    <span class="yoga-trust-bar__label">лет работы на Самуи</span>
-                </li>
-                <li class="yoga-trust-bar__item">
-                    <span class="yoga-trust-bar__value">8000+</span>
-                    <span class="yoga-trust-bar__label">гостей посетили наш отель</span>
-                </li>
-                <li class="yoga-trust-bar__item yoga-trust-bar__item--rating">
-                    <span class="yoga-trust-bar__value">
-                        4.8
-                        <span class="yoga-trust-bar__stars" aria-hidden="true">★★★★★</span>
-                    </span>
-                    <span class="yoga-trust-bar__label">
-                        средний рейтинг в Google —
-                        <a href="#yogaReviews"
-                           class="yoga-trust-bar__link">смотреть отзывы гостей</a>
-                    </span>
-                </li>
-            </ul>
+    <!-- 02b. Нам доверяют: заголовок, фото команды с гостями, бордовая панель с кнопкой -->
+    <section class="yoga-trust-veg" id="yoga-trust" aria-labelledby="yogaTrustTitle">
+        <div class="yoga-trust-veg__container">
+            <h2 id="yogaTrustTitle" class="yoga-trust-veg__title yoga-fade-in">За&nbsp;12&nbsp;лет в&nbsp;нашем отеле отдохнули более 5000&nbsp;человек</h2>
+            <div class="yoga-trust-veg__card yoga-fade-in">
+                <!-- Заглушка: сюда встанет фото команды отеля с гостями -->
+                <div class="yoga-trust-veg__photo yoga-trust-veg__photo--placeholder" role="img" aria-label="Команда отеля Satva Samui с гостями">
+                    <span>Фото команды с гостями</span>
+                </div>
+                <div class="yoga-trust-veg__cta">
+                    <p class="yoga-trust-veg__text">Наш уютный отель очень быстро бронируется.<br> Успей забронировать свой номер.</p>
+                    <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Забронировать</button>
+                </div>
+            </div>
         </div>
     </section>
 

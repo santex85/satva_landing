@@ -4956,6 +4956,89 @@ html.satva-consent-modal-open {
   scroll-margin-top: 80px;
 }
 
+.yoga-trust-veg {
+  position: relative;
+  z-index: 1;
+  padding: 0 24px;
+}
+.yoga-trust-veg__container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.yoga-trust-veg__title {
+  color: #0f4c5c;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  max-width: 36rem;
+  margin: 0 auto 28px;
+}
+.yoga-trust-veg__card {
+  max-width: 820px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+}
+.yoga-trust-veg__photo {
+  aspect-ratio: 3/2;
+}
+.yoga-trust-veg__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.yoga-trust-veg__photo--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px dashed rgba(15, 76, 92, 0.25);
+  border-bottom: 0;
+  border-radius: 20px 20px 0 0;
+}
+.yoga-trust-veg__photo--placeholder span {
+  color: rgba(15, 76, 92, 0.45);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.yoga-trust-veg__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 28px 24px 32px;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(94, 26, 29, 0.94) 0%, #4a1417 100%);
+  border-top: 1px solid rgba(255, 142, 114, 0.35);
+}
+.yoga-trust-veg__text {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.1rem, 1vw + 0.85rem, 1.4rem);
+  line-height: 1.45;
+}
+@media (max-width: 768px) {
+  .yoga-trust-veg {
+    padding-top: 32px;
+  }
+  .yoga-trust-veg__card {
+    margin-left: -24px;
+    margin-right: -24px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .yoga-trust-veg__photo--placeholder {
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+  }
+}
+
 @media (max-width: 768px) {
   html.veg-page {
     scroll-snap-type: y mandatory;
