@@ -22,6 +22,7 @@ def submit_lead(
     background_tasks: BackgroundTasks | None = None,
     promo_id: str | None = None,
     promo_optin: bool = False,
+    send_confirmation: bool = True,
 ) -> Lead:
     if honeypot and honeypot.strip():
         raise HTTPException(status_code=400, detail="Invalid request")
@@ -71,9 +72,10 @@ def submit_lead(
     except Exception:
         pass
 
-    try:
-        send_lead_confirmation(lead_type, lead.payload, lead.created_at, source=source)
-    except Exception:
-        pass
+    if send_confirmation:
+        try:
+            send_lead_confirmation(lead_type, lead.payload, lead.created_at, source=source)
+        except Exception:
+            pass
 
     return lead

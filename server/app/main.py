@@ -15,6 +15,7 @@ from app.api import (
     public_config,
     booking,
     package_request,
+    info_request,
     admin_settings,
     admin_analytics,
     admin_users,
@@ -49,6 +50,7 @@ app.include_router(public_config.router, prefix="/api", tags=["config"])
 app.include_router(contact.router, prefix="/api", tags=["contact"])
 app.include_router(booking.router, prefix="/api", tags=["booking"])
 app.include_router(package_request.router, prefix="/api", tags=["package"])
+app.include_router(info_request.router, prefix="/api", tags=["info"])
 app.include_router(auth.router, prefix="/api", tags=["auth"])
 app.include_router(admin_settings.router, prefix="/api", tags=["admin"])
 app.include_router(admin_analytics.router, prefix="/api", tags=["admin"])

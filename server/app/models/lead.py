@@ -11,6 +11,7 @@ class LeadType:
     CONTACT = "contact"
     PROCEDURE_BOOKING = "procedure_booking"
     PACKAGE_CHOICE = "package_choice"
+    INFO_REQUEST = "info_request"  # только e-mail: «Получить всю информацию» (/veg/)
 
 
 class LeadStatus:

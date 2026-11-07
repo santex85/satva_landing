@@ -30,6 +30,7 @@ _FIELD_LABELS: dict[str, str] = {
     "departure_date": "Дата выезда",
     "guest_count": "Количество человек",
     "comment": "Комментарий",
+    "request": "Запрос",
     "source": "Источник формы",
     "utm_source": "UTM source",
     "utm_medium": "UTM medium",
@@ -63,6 +64,7 @@ _LEAD_TYPE_LABELS: dict[str, str] = {
     "contact": "Контактная заявка",
     "procedure_booking": "Заявка на бронирование",
     "package_choice": "Выбор пакета",
+    "info_request": "Получить всю информацию (только e-mail)",
 }
 
 _SOURCE_LABELS: dict[str, str] = {
@@ -72,6 +74,7 @@ _SOURCE_LABELS: dict[str, str] = {
     "yoga-bridge": "блок-мост (yoga-bridge)",
     "partner-landing": "партнёрский лендинг (форма на странице)",
     "partner-popup": "партнёрский лендинг (модальное окно)",
+    "veg-info": "/veg/, панель «Получить всю информацию»",
 }
 
 _LANG_LABELS: dict[str, str] = {

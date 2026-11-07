@@ -99,6 +99,51 @@ class LeadSubmissionBase(BaseModel):
         return str(v).strip()
 
 
+class InfoRequest(BaseModel):
+    """POST /api/info-request — заявка из одного e-mail («Получить всю информацию» на /veg/)."""
+
+    email: EmailStr
+    consent: bool = Field(..., description="Must be true")
+    website: str | None = Field(None, description="Honeypot - must be empty")
+    captcha_token: str | None = Field(None, description="Cloudflare Turnstile token")
+    lang: str | None = Field(None, max_length=8)
+    utm_source: str | None = Field(None, max_length=256)
+    utm_medium: str | None = Field(None, max_length=256)
+    utm_campaign: str | None = Field(None, max_length=256)
+    utm_content: str | None = Field(None, max_length=256)
+    utm_term: str | None = Field(None, max_length=256)
+    fbclid: str | None = Field(None, max_length=512)
+
+    @field_validator("email", mode="before")
+    @classmethod
+    def email_strip(cls, v):
+        return v.strip() if isinstance(v, str) else v
+
+    @field_validator("consent")
+    @classmethod
+    def consent_required(cls, v: bool) -> bool:
+        if v is not True:
+            raise ValueError("Необходимо согласие с политикой конфиденциальности")
+        return v
+
+    @field_validator("lang", mode="before")
+    @classmethod
+    def lang_whitelist(cls, v):
+        if v is None or (isinstance(v, str) and not v.strip()):
+            return None
+        s = str(v).strip().lower()
+        return s if s in _LEAD_LANG_WHITELIST else None
+
+    @field_validator(
+        "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", mode="before"
+    )
+    @classmethod
+    def empty_attribution_to_none(cls, v):
+        if v is None or (isinstance(v, str) and not v.strip()):
+            return None
+        return str(v).strip()
+
+
 class ContactRequest(LeadSubmissionBase):
     """POST /api/contact"""
 

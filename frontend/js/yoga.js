@@ -12,6 +12,7 @@
     var openYogaLeadModalFn = null;
     var closePromoModalFn = null;
     var yogaTurnstileLeadWidgetId = null;
+    var yogaTurnstileInfoWidgetId = null;
     var yogaTurnstileSiteKey = '';
 
     var LANG = (document.documentElement.lang || 'ru').toLowerCase().indexOf('en') === 0 ? 'en' : 'ru';
@@ -1925,6 +1926,14 @@
                         theme: 'light',
                     });
                 }
+                var turnstileInfoEl = document.getElementById('yogaTurnstileWidgetInfo');
+                if (turnstileInfoEl) {
+                    turnstileInfoEl.innerHTML = '';
+                    yogaTurnstileInfoWidgetId = window.turnstile.render(turnstileInfoEl, {
+                        sitekey: turnstileSiteKey,
+                        theme: 'light',
+                    });
+                }
                 var turnstileLeadEl = document.getElementById('yogaTurnstileWidgetLead');
                 if (turnstileLeadEl) {
                     turnstileLeadEl.innerHTML = '';
@@ -2072,6 +2081,115 @@
         });
     }
 
+    // /veg/: бордовая панель «Получить всю информацию» — отправляет только e-mail
+    function initInfoRequestForm() {
+        var form = document.getElementById('yogaInfoForm');
+        if (!form) return;
+        var emailIn = document.getElementById('yogaInfoEmail');
+        var submitBtn = document.getElementById('yogaInfoSubmit');
+        var errorEl = document.getElementById('yogaInfoError');
+        var body = document.getElementById('yogaInfoFormBody');
+        var success = document.getElementById('yogaInfoSuccess');
+        var hp = form.querySelector('input[name="website"]');
+        var sending = false;
+
+        function showError(msg) {
+            if (!errorEl) return;
+            errorEl.textContent = msg || '';
+            errorEl.hidden = !msg;
+        }
+
+        function captchaToken() {
+            if (yogaTurnstileInfoWidgetId == null || !window.turnstile || !window.turnstile.getResponse) return '';
+            return window.turnstile.getResponse(yogaTurnstileInfoWidgetId) || '';
+        }
+
+        function resetCaptcha() {
+            if (yogaTurnstileInfoWidgetId != null && window.turnstile && window.turnstile.reset) {
+                try { window.turnstile.reset(yogaTurnstileInfoWidgetId); } catch (e) { /* noop */ }
+            }
+        }
+
+        if (emailIn) {
+            emailIn.addEventListener('input', function () {
+                emailIn.classList.remove('is-invalid');
+                showError('');
+            });
+        }
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (sending) return;
+            var email = emailIn && emailIn.value ? emailIn.value.trim() : '';
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                if (emailIn) {
+                    emailIn.classList.add('is-invalid');
+                    emailIn.focus();
+                }
+                showError('Введите корректный e-mail');
+                return;
+            }
+            if (yogaTurnstileSiteKey && !captchaToken()) {
+                showError('Подтвердите, что вы не робот');
+                return;
+            }
+
+            var payload = {
+                email: email,
+                consent: true,
+                website: hp && hp.value ? hp.value : '',
+                captcha_token: captchaToken() || null,
+                lang: 'ru',
+            };
+            appendAttributionToPayload(payload);
+
+            sending = true;
+            showError('');
+            if (submitBtn) submitBtn.disabled = true;
+
+            fetch(apiPath('/info-request'), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            })
+                .then(function (response) {
+                    return response.json().catch(function () { return null; }).then(function (data) {
+                        return { ok: response.ok, status: response.status, data: data };
+                    });
+                })
+                .then(function (r) {
+                    sending = false;
+                    if (submitBtn) submitBtn.disabled = false;
+                    resetCaptcha();
+                    if (r.ok) {
+                        try {
+                            if (window.umami && typeof window.umami.track === 'function') {
+                                window.umami.track('info-request', { source: 'veg-info' });
+                            }
+                        } catch (err) { /* noop */ }
+                        trackMetaLead(generateEventId(), { content_category: 'info_request' });
+                        form.reset();
+                        if (body) body.hidden = true;
+                        if (success) success.hidden = false;
+                        return;
+                    }
+                    if (r.status === 429) {
+                        showError('Слишком много попыток. Попробуйте через минуту.');
+                    } else if (r.status === 422) {
+                        showError('Проверьте e-mail и попробуйте ещё раз.');
+                    } else {
+                        showError((r.data && typeof r.data.detail === 'string') ? r.data.detail : 'Не удалось отправить. Попробуйте ещё раз.');
+                    }
+                })
+                .catch(function () {
+                    sending = false;
+                    if (submitBtn) submitBtn.disabled = false;
+                    resetCaptcha();
+                    showError('Нет связи с сервером. Попробуйте ещё раз.');
+                });
+        });
+    }
+
     function boot() {
         initScrollProgress();
         initHeader();
@@ -2094,6 +2212,7 @@
         initPromoBadgeView();
         initForm();
         initYogaLeadForm();
+        initInfoRequestForm();
     }
 
     if (document.readyState === 'loading') {

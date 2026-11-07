@@ -4993,6 +4993,94 @@ html.satva-consent-modal-open {
 .yoga-rooms-veg__text p:last-child {
   margin-bottom: 0;
 }
+.yoga-rooms-veg__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 32px;
+  padding: 28px 24px 32px;
+  border-radius: 20px;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(94, 26, 29, 0.94) 0%, #4a1417 100%);
+  border-top: 1px solid rgba(255, 142, 114, 0.35);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+}
+.yoga-rooms-veg__info-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+.yoga-rooms-veg__info-body[hidden] {
+  display: none;
+}
+.yoga-rooms-veg__info-captcha:empty {
+  display: none;
+}
+.yoga-rooms-veg__info-error {
+  margin: 0;
+  color: #ffd2c8;
+  font-size: 0.9rem;
+}
+.yoga-rooms-veg__info-consent {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+.yoga-rooms-veg__info-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.yoga-rooms-veg__info-success {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.05rem, 0.8vw + 0.85rem, 1.3rem);
+  line-height: 1.45;
+}
+.yoga-rooms-veg__info-text {
+  margin: 0;
+  max-width: 560px;
+  color: #ffffff;
+  font-size: clamp(1.05rem, 0.8vw + 0.85rem, 1.3rem);
+  line-height: 1.45;
+}
+.yoga-rooms-veg__info-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.yoga-rooms-veg__info-input {
+  width: 100%;
+  max-width: 360px;
+  box-sizing: border-box;
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #2d3436;
+  font: inherit;
+  font-size: 1rem;
+  text-align: center;
+}
+.yoga-rooms-veg__info-input:focus {
+  outline: 2px solid #ff8e72;
+  outline-offset: 2px;
+}
+.yoga-rooms-veg__info-input.is-invalid {
+  outline: 2px solid #ffb4a3;
+  outline-offset: 2px;
+}
 .yoga-rooms-veg__photos {
   display: flex;
   flex-direction: column;
@@ -5027,6 +5115,12 @@ html.satva-consent-modal-open {
   .yoga-rooms-veg__lead img {
     object-fit: cover;
     object-position: 35% center;
+  }
+  .yoga-rooms-veg__info {
+    margin-left: -24px;
+    margin-right: -24px;
+    border-radius: 0;
+    box-shadow: none;
   }
   .yoga-rooms-veg__photos {
     gap: 0;

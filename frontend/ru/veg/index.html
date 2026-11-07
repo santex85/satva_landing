@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=50" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=50"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=52" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=52"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -65,7 +65,7 @@
     <script defer src="/js/consent.js?v=3"></script>
     <script defer src="/js/pixel.js?v=4"></script>
     <script defer src="/js/promo-config.js?v=4"></script>
-    <script defer src="/js/yoga.js?v=19"></script>
+    <script defer src="/js/yoga.js?v=20"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
 
     <!-- Structured Data: LodgingBusiness -->
@@ -336,21 +336,34 @@
         </div>
     </section>
 
-    <!-- 07. Наше размещение (сразу после кухни): заголовок, большое фото, текст, 4 фото номеров -->
+    <!-- 07. Размещение (сразу после кухни): заголовок, фото на закате, текст, бордовая панель с e-mail, фото номеров -->
     <section id="yogaRooms" class="yoga-rooms-veg" aria-labelledby="yogaRoomsTitle">
         <div class="yoga-rooms-veg__container">
-            <h2 id="yogaRoomsTitle" class="yoga-rooms-veg__title yoga-fade-in">Наше размещение</h2>
+            <h2 id="yogaRoomsTitle" class="yoga-rooms-veg__title yoga-fade-in">Чем дальше мы от&nbsp;суеты, тем больше видим красоты</h2>
             <div class="yoga-rooms-veg__lead yoga-fade-in">
                 <picture>
                     <source type="image/webp" srcset="/img/yoga_tour/rooms_veg_terrace-800.webp 800w, /img/yoga_tour/rooms_veg_terrace-1280.webp 1280w, /img/yoga_tour/rooms_veg_terrace.webp 2000w" sizes="(max-width: 768px) 100vw, 1100px">
                     <img src="/img/yoga_tour/rooms_veg_terrace.jpg" alt="Гостья отдыхает в шезлонге на веранде номера с видом на море и закат" loading="lazy" width="1600" height="892" decoding="async">
                 </picture>
             </div>
-            <!-- Текст-заглушка про номера: заменить, когда будет финальный текст -->
             <div class="yoga-rooms-veg__text yoga-fade-in">
-                <p>Номера и домики стоят в тропическом саду в 5–20 метрах от моря. У каждого своя веранда — с неё удобно встречать закат, пить утренний чай или просто слушать прибой.</p>
-                <p>В каждом номере есть кондиционер, горячий душ, Wi-Fi, чайник, сейф, фен, полотенца для номера и пляжа. Можно выбрать номер с одной большой кроватью или с раздельными, с видом на море или на сад, а для семьи — виллу с двумя спальнями.</p>
+                <p>Отель Satva Samui находится на&nbsp;самом спокойном пляже острова&nbsp;— Липа&nbsp;Ной. Тишина&nbsp;— главное украшение нашего отеля.</p>
+                <p>Отель утопает в&nbsp;тропической зелени. Вы&nbsp;будете наслаждаться прекрасными закатами и&nbsp;просыпаться под пение утренних птиц.</p>
             </div>
+            <!-- Бордовая панель: отправляет только e-mail на /api/info-request (заявка «Получить всю информацию») -->
+            <form class="yoga-rooms-veg__info yoga-fade-in" id="yogaInfoForm" novalidate>
+                <div class="yoga-rooms-veg__info-body" id="yogaInfoFormBody">
+                    <p class="yoga-rooms-veg__info-text">Оставьте ваш e-mail, и&nbsp;менеджер отправит вам подробную информацию о&nbsp;нашем отеле.</p>
+                    <input type="text" name="website" class="yoga-form__hp" tabindex="-1" autocomplete="off" aria-hidden="true" value="">
+                    <label class="yoga-rooms-veg__info-label" for="yogaInfoEmail">Ваш e-mail</label>
+                    <input class="yoga-rooms-veg__info-input" type="email" id="yogaInfoEmail" name="email" placeholder="Ваш e-mail" autocomplete="email" inputmode="email" maxlength="254" required aria-describedby="yogaInfoError">
+                    <div class="yoga-rooms-veg__info-captcha" id="yogaTurnstileWidgetInfo"></div>
+                    <button type="submit" class="btn-yoga-primary" id="yogaInfoSubmit">Получить всю информацию</button>
+                    <p class="yoga-rooms-veg__info-error" id="yogaInfoError" role="alert" hidden></p>
+                    <p class="yoga-rooms-veg__info-consent">Нажимая кнопку, вы&nbsp;соглашаетесь с&nbsp;<button type="button" class="js-open-yoga-privacy yoga-rooms-veg__info-link">политикой конфиденциальности</button></p>
+                </div>
+                <p class="yoga-rooms-veg__info-success" id="yogaInfoSuccess" role="status" hidden>Спасибо! Менеджер отправит подробную информацию на&nbsp;ваш e-mail.</p>
+            </form>
             <div class="yoga-rooms-veg__photos yoga-fade-in">
                 <figure class="yoga-rooms-veg__photo">
                     <picture>
