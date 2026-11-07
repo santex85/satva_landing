@@ -64,6 +64,11 @@
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
     }
 
+    // Панель последняя в блоке — без нижнего отступа
+    &__info:last-child {
+        margin-bottom: 0;
+    }
+
     &__info-body {
         display: flex;
         flex-direction: column;
@@ -208,6 +213,69 @@
 
         &__photo {
             border-radius: 0;
+        }
+    }
+}
+
+
+// «Наш уютный отель очень быстро бронируется»: текст → фото (пока заглушка) → кнопка
+.yoga-book-fast {
+    &__head {
+        text-align: center;
+        margin-bottom: 28px;
+    }
+
+    &__title {
+        margin-bottom: 8px;
+    }
+
+    &__sub {
+        margin: 0;
+        color: $color-dark;
+        font-size: clamp(1.05rem, 0.6vw + 0.9rem, 1.25rem);
+        line-height: 1.5;
+    }
+
+    &__photo {
+        border-radius: 20px;
+        overflow: hidden;
+        aspect-ratio: 3 / 2;
+
+        &--placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba($color-white, 0.85);
+            border: 2px dashed rgba($color-primary, 0.25);
+
+            span {
+                color: rgba($color-primary, 0.45);
+                font-size: 0.875rem;
+                font-weight: 600;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    &__action {
+        margin-top: 28px;
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        // Кнопка последняя — нужен отступ снизу (у остальных блоков фото идёт до края)
+        padding-bottom: 32px;
+
+        &__photo {
+            margin-left: -$space-h;
+            margin-right: -$space-h;
+            border-radius: 0;
+
+            &--placeholder {
+                border-left: 0;
+                border-right: 0;
+            }
         }
     }
 }

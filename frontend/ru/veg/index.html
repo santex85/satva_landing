@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=52" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=52"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=54" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=54"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -364,6 +364,13 @@
                 </div>
                 <p class="yoga-rooms-veg__info-success" id="yogaInfoSuccess" role="status" hidden>Спасибо! Менеджер отправит подробную информацию на&nbsp;ваш e-mail.</p>
             </form>
+        </div>
+    </section>
+
+    <!-- 07a. Типы размещения: 3 фото (номер с пологом, бассейн, номер с двумя кроватями) -->
+    <section id="yogaRoomTypes" class="yoga-rooms-veg" aria-labelledby="yogaRoomTypesTitle">
+        <div class="yoga-rooms-veg__container">
+            <h2 id="yogaRoomTypesTitle" class="yoga-rooms-veg__title yoga-fade-in">Типы размещения</h2>
             <div class="yoga-rooms-veg__photos yoga-fade-in">
                 <figure class="yoga-rooms-veg__photo">
                     <picture>
@@ -383,29 +390,23 @@
                         <img src="/img/yoga_tour/rooms_veg_03.jpg" alt="Номер с двумя раздельными кроватями и окнами в сад" loading="lazy" width="1280" height="854" decoding="async">
                     </picture>
                 </figure>
-                <figure class="yoga-rooms-veg__photo">
-                    <picture>
-                        <source type="image/webp" srcset="/img/yoga_tour/rooms_veg_02.webp">
-                        <img src="/img/yoga_tour/rooms_veg_02.jpg" alt="Веранда номера с видом на море и остров: шезлонги, столик и подвесное кресло" loading="lazy" width="1280" height="854" decoding="async">
-                    </picture>
-                </figure>
             </div>
         </div>
     </section>
 
-    <!-- 07b. Нам доверяют (сразу после номеров): заголовок, фото команды с гостями, бордовая панель с кнопкой -->
-    <section class="yoga-trust-veg" id="yoga-trust" aria-labelledby="yogaTrustTitle">
-        <div class="yoga-trust-veg__container">
-            <h2 id="yogaTrustTitle" class="yoga-trust-veg__title yoga-fade-in">За&nbsp;12&nbsp;лет в&nbsp;нашем отеле отдохнули более 5000&nbsp;человек</h2>
-            <div class="yoga-trust-veg__card yoga-fade-in">
-                <!-- Заглушка: сюда встанет фото команды отеля с гостями -->
-                <div class="yoga-trust-veg__photo yoga-trust-veg__photo--placeholder" role="img" aria-label="Команда отеля Satva Samui с гостями">
-                    <span>Фото команды с гостями</span>
-                </div>
-                <div class="yoga-trust-veg__cta">
-                    <p class="yoga-trust-veg__text">Наш уютный отель очень быстро бронируется.<br> Успей забронировать свой номер.</p>
-                    <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Забронировать</button>
-                </div>
+    <!-- 07a-1. Быстро бронируется: текст, фото (пока заглушка), кнопка «Забронировать» -->
+    <section id="yogaBookFast" class="yoga-rooms-veg yoga-book-fast" aria-labelledby="yogaBookFastTitle">
+        <div class="yoga-rooms-veg__container">
+            <div class="yoga-book-fast__head yoga-fade-in">
+                <h2 id="yogaBookFastTitle" class="yoga-rooms-veg__title yoga-book-fast__title">Наш уютный отель очень быстро бронируется</h2>
+                <p class="yoga-book-fast__sub">Успейте забронировать свой номер.</p>
+            </div>
+            <!-- Заглушка: сюда встанет фото -->
+            <div class="yoga-book-fast__photo yoga-book-fast__photo--placeholder yoga-fade-in" role="img" aria-label="Фото отеля Satva Samui">
+                <span>Фото</span>
+            </div>
+            <div class="yoga-book-fast__action yoga-fade-in">
+                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Забронировать</button>
             </div>
         </div>
     </section>
