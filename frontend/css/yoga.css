@@ -4972,6 +4972,27 @@ html.satva-consent-modal-open {
   text-align: center;
   margin: 0 0 32px;
 }
+.yoga-rooms-veg__lead {
+  border-radius: 20px;
+  overflow: hidden;
+}
+.yoga-rooms-veg__lead picture,
+.yoga-rooms-veg__lead img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.yoga-rooms-veg__text {
+  margin: 32px 0;
+}
+.yoga-rooms-veg__text p {
+  color: #2d3436;
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+.yoga-rooms-veg__text p:last-child {
+  margin-bottom: 0;
+}
 .yoga-rooms-veg__photos {
   display: flex;
   flex-direction: column;
@@ -4992,6 +5013,20 @@ html.satva-consent-modal-open {
   .yoga-rooms-veg {
     padding-top: 32px;
     padding-bottom: 0;
+  }
+  .yoga-rooms-veg__lead {
+    margin-left: -24px;
+    margin-right: -24px;
+    border-radius: 0;
+    aspect-ratio: 3/2;
+  }
+  .yoga-rooms-veg__lead picture,
+  .yoga-rooms-veg__lead img {
+    height: 100%;
+  }
+  .yoga-rooms-veg__lead img {
+    object-fit: cover;
+    object-position: 35% center;
   }
   .yoga-rooms-veg__photos {
     gap: 0;

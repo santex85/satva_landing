@@ -22,6 +22,33 @@
         margin: 0 0 32px;
     }
 
+    // Большое фото под заголовком (гостья на веранде на закате)
+    &__lead {
+        border-radius: 20px;
+        overflow: hidden;
+
+        picture,
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &__text {
+        margin: 32px 0;
+
+        p {
+            color: $color-dark;
+            line-height: 1.7;
+            margin: 0 0 16px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
     &__photos {
         display: flex;
         flex-direction: column;
@@ -45,6 +72,24 @@
         // Свайп ставит секцию вплотную к шапке: 32px над заголовком, как у остальных
         padding-top: 32px;
         padding-bottom: 0;
+
+        // На телефоне кадр выше (3:2), чтобы гостья и закат читались; гостья левее центра
+        &__lead {
+            margin-left: -$space-h;
+            margin-right: -$space-h;
+            border-radius: 0;
+            aspect-ratio: 3 / 2;
+
+            picture,
+            img {
+                height: 100%;
+            }
+
+            img {
+                object-fit: cover;
+                object-position: 35% center;
+            }
+        }
 
         &__photos {
             gap: 0;
