@@ -1,0 +1,59 @@
+@use '../core' as *;
+
+
+// «Типы размещения» на /veg/: заголовок и 4 фото номеров друг под другом.
+// На телефоне фото во всю ширину экрана и встык, как фото тарелок в кухне.
+
+.yoga-rooms-veg {
+    background: $color-bg-main;
+    padding: $space-section $space-h;
+
+    &__container {
+        max-width: $container-base;
+        margin: 0 auto;
+    }
+
+    &__title {
+        color: $color-primary;
+        font-size: $font-size-h2;
+        font-weight: $font-weight-bold;
+        line-height: $line-height-tight;
+        text-align: center;
+        margin: 0 0 32px;
+    }
+
+    &__photos {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    &__photo {
+        margin: 0;
+        border-radius: 20px;
+        overflow: hidden;
+
+        picture,
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    @media (max-width: 768px) {
+        // Свайп ставит секцию вплотную к шапке: 32px над заголовком, как у остальных
+        padding-top: 32px;
+        padding-bottom: 0;
+
+        &__photos {
+            gap: 0;
+            margin-left: -$space-h;
+            margin-right: -$space-h;
+        }
+
+        &__photo {
+            border-radius: 0;
+        }
+    }
+}
