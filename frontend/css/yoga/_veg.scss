@@ -124,6 +124,134 @@ $veg-header-height-mobile: 96px;
             margin-bottom: 6px;
         }
 
+        // ── Каждый шаг свайпа помещается в один экран телефона (ориентир Galaxy S25 Ultra, ~412×830) ──
+        // Заголовки 24px, отступы 20px, текст 15px; фото чуть ниже по высоте.
+
+        #yogaFood,
+        #yogaRoomTypes,
+        #yogaBookFast,
+        #hotelChef,
+        #yogaRecipes {
+            padding-top: 24px;
+        }
+
+        #yogaFood h2,
+        #yogaRoomTypes h2,
+        #yogaBookFast h2,
+        #hotelChef h2,
+        #yogaRecipes h2,
+        #hotelAmenities h2,
+        #hotelYoga h2,
+        .yoga-activities__text h2 {
+            font-size: 24px;
+            line-height: 1.2;
+        }
+
+        #yogaFood .yoga-food__text p,
+        #hotelChef .yoga-program__text p,
+        #hotelAmenities .yoga-program__text p,
+        #hotelYoga .yoga-program__text p,
+        #yogaRecipes .yoga-recipes__text,
+        .yoga-activities__text p {
+            font-size: 15px;
+            line-height: 1.55;
+        }
+
+        #hotelAmenities .yoga-program__list li,
+        #hotelYoga .yoga-program__list li {
+            font-size: 15px;
+            line-height: 1.4;
+            margin-bottom: 6px;
+        }
+
+        // Кухня: заголовок → фото → текст — первый экран; три фото тарелок — следующий шаг свайпа
+        #yogaFood .yoga-food__container {
+            gap: 20px;
+        }
+
+        #yogaFood .yoga-food__heading {
+            margin-bottom: 0;
+        }
+
+        #yogaFood .yoga-food__text p {
+            margin-bottom: 10px;
+        }
+
+        #yogaFood .yoga-food__photos--stack {
+            scroll-snap-align: start;
+        }
+
+        #yogaFood .yoga-food__photos--stack .yoga-food__photo {
+            aspect-ratio: 7 / 4;
+
+            picture,
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        // Типы размещения: заголовок и три фото на одном экране
+        #yogaRoomTypes .yoga-rooms-veg__title,
+        #yogaRecipes .yoga-rooms-veg__title {
+            margin-bottom: 20px;
+        }
+
+        #yogaRoomTypes .yoga-rooms-veg__photo {
+            aspect-ratio: 2 / 1;
+
+            picture,
+            img {
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        // Мастер-классы: квадратное фото вместо вертикального
+        #hotelChef .yoga-program__header--top {
+            margin-bottom: 20px;
+        }
+
+        #hotelChef .yoga-program__photo--portrait {
+            aspect-ratio: 1 / 1;
+        }
+
+        #hotelChef .yoga-program__block,
+        #hotelAmenities .yoga-program__block,
+        #hotelYoga .yoga-program__block {
+            gap: 20px;
+        }
+
+        // Рецепты
+        #yogaRecipes .yoga-recipes__text {
+            margin-top: 20px;
+        }
+
+        #yogaRecipes .yoga-recipes__action {
+            margin-top: 20px;
+        }
+
+        #yogaRecipes {
+            padding-bottom: 24px;
+        }
+
+        // Инфраструктура и йога: фото 3:2 вместо 4:3
+        #hotelAmenities .yoga-program__photo,
+        #hotelYoga .yoga-program__photo {
+            aspect-ratio: 3 / 2;
+        }
+
+        #hotelAmenities .yoga-program__text h2,
+        #hotelYoga .yoga-program__text h2 {
+            margin-bottom: 12px;
+        }
+
+        #hotelAmenities .yoga-program__text p,
+        #hotelYoga .yoga-program__text p {
+            margin-bottom: 12px;
+        }
+
         // «Остров, который удивляет» и «Уютные вечера»: карточки во всю ширину,
         // каждая — отдельный шаг свайпа с фото сразу под шапкой
         .yoga-activities {
