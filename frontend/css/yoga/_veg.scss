@@ -77,22 +77,22 @@ $veg-header-height-mobile: 96px;
             margin-bottom: 20px;
         }
 
+        // Панель с e-mail отсюда переехала вниз (#yogaInfo) — блок заканчивается текстом
+        #yogaRooms {
+            padding-bottom: 24px;
+        }
+
         #yogaRooms .yoga-rooms-veg__text {
-            margin: 20px 0;
+            margin: 20px 0 0;
 
             p {
                 line-height: 1.55;
                 margin-bottom: 10px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
             }
-        }
-
-        #yogaRooms .yoga-rooms-veg__info {
-            padding-top: 20px;
-            padding-bottom: 24px;
-        }
-
-        #yogaRooms .yoga-rooms-veg__info-body {
-            gap: 12px;
         }
 
         #yogaBeach {
@@ -129,6 +129,11 @@ $veg-header-height-mobile: 96px;
         .yoga-activities {
             padding-left: 0;
             padding-right: 0;
+        }
+
+        // Под экскурсиями сразу бордовая панель с e-mail (#yogaInfo) — без белой полосы между ними
+        #hotelActivities {
+            padding-bottom: 0;
         }
 
         .yoga-activities__block {

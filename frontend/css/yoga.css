@@ -5261,6 +5261,13 @@ html.satva-consent-modal-open {
 }
 
 @media (max-width: 768px) {
+  .yoga-info-veg {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
   html.veg-page {
     scroll-snap-type: y mandatory;
     scroll-padding-top: 96px;
@@ -5312,19 +5319,18 @@ html.satva-consent-modal-open {
     line-height: 1.2;
     margin-bottom: 20px;
   }
+  .veg-page #yogaRooms {
+    padding-bottom: 24px;
+  }
   .veg-page #yogaRooms .yoga-rooms-veg__text {
-    margin: 20px 0;
+    margin: 20px 0 0;
   }
   .veg-page #yogaRooms .yoga-rooms-veg__text p {
     line-height: 1.55;
     margin-bottom: 10px;
   }
-  .veg-page #yogaRooms .yoga-rooms-veg__info {
-    padding-top: 20px;
-    padding-bottom: 24px;
-  }
-  .veg-page #yogaRooms .yoga-rooms-veg__info-body {
-    gap: 12px;
+  .veg-page #yogaRooms .yoga-rooms-veg__text p:last-child {
+    margin-bottom: 0;
   }
   .veg-page #yogaBeach {
     padding-bottom: 24px;
@@ -5352,6 +5358,9 @@ html.satva-consent-modal-open {
   .veg-page .yoga-activities {
     padding-left: 0;
     padding-right: 0;
+  }
+  .veg-page #hotelActivities {
+    padding-bottom: 0;
   }
   .veg-page .yoga-activities__block {
     border-radius: 0;

@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=58" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=58"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=59" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=59"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -247,7 +247,7 @@
         </div>
     </section>
 
-    <!-- 02a-0. Размещение (сразу после Hero): заголовок, фото на закате, текст, бордовая панель с e-mail -->
+    <!-- 02a-0. Размещение (сразу после Hero): заголовок, фото на закате, текст -->
     <section id="yogaRooms" class="yoga-rooms-veg" aria-labelledby="yogaRoomsTitle">
         <div class="yoga-rooms-veg__container">
             <h2 id="yogaRoomsTitle" class="yoga-rooms-veg__title yoga-fade-in">Тишина&nbsp;— главное украшение нашего отеля</h2>
@@ -261,20 +261,6 @@
                 <p>Чем дальше мы от&nbsp;суеты, тем больше видим красоты. Отель Satva Samui находится на&nbsp;самом спокойном пляже острова&nbsp;— Липа&nbsp;Ной.</p>
                 <p>Отель утопает в&nbsp;тропической зелени. Вы&nbsp;будете наслаждаться прекрасными закатами и&nbsp;просыпаться под пение утренних птиц.</p>
             </div>
-            <!-- Бордовая панель: отправляет только e-mail на /api/info-request (заявка «Получить всю информацию») -->
-            <form class="yoga-rooms-veg__info yoga-fade-in" id="yogaInfoForm" novalidate>
-                <div class="yoga-rooms-veg__info-body" id="yogaInfoFormBody">
-                    <p class="yoga-rooms-veg__info-text">Оставьте ваш e-mail, и&nbsp;менеджер отправит вам подробную информацию о&nbsp;нашем отеле.</p>
-                    <input type="text" name="website" class="yoga-form__hp" tabindex="-1" autocomplete="off" aria-hidden="true" value="">
-                    <label class="yoga-rooms-veg__info-label" for="yogaInfoEmail">Ваш e-mail</label>
-                    <input class="yoga-rooms-veg__info-input" type="email" id="yogaInfoEmail" name="email" placeholder="Ваш e-mail" autocomplete="email" inputmode="email" maxlength="254" required aria-describedby="yogaInfoError">
-                    <div class="yoga-rooms-veg__info-captcha" id="yogaTurnstileWidgetInfo"></div>
-                    <button type="submit" class="btn-yoga-primary" id="yogaInfoSubmit">Получить всю информацию</button>
-                    <p class="yoga-rooms-veg__info-error" id="yogaInfoError" role="alert" hidden></p>
-                    <p class="yoga-rooms-veg__info-consent">Нажимая кнопку, вы&nbsp;соглашаетесь с&nbsp;<button type="button" class="js-open-yoga-privacy yoga-rooms-veg__info-link">политикой конфиденциальности</button></p>
-                </div>
-                <p class="yoga-rooms-veg__info-success" id="yogaInfoSuccess" role="status" hidden>Спасибо! Менеджер отправит подробную информацию на&nbsp;ваш e-mail.</p>
-            </form>
         </div>
     </section>
 
@@ -609,6 +595,25 @@
                     </p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- 07b. Бордовая панель «Получить всю информацию»: только e-mail на /api/info-request (до 09.11.2026 стояла во втором блоке) -->
+    <section id="yogaInfo" class="yoga-rooms-veg yoga-info-veg" aria-label="Получить подробную информацию об отеле на e-mail">
+        <div class="yoga-rooms-veg__container">
+            <form class="yoga-rooms-veg__info yoga-fade-in" id="yogaInfoForm" novalidate>
+                <div class="yoga-rooms-veg__info-body" id="yogaInfoFormBody">
+                    <p class="yoga-rooms-veg__info-text">Оставьте ваш e-mail, и&nbsp;менеджер отправит вам подробную информацию о&nbsp;нашем отеле.</p>
+                    <input type="text" name="website" class="yoga-form__hp" tabindex="-1" autocomplete="off" aria-hidden="true" value="">
+                    <label class="yoga-rooms-veg__info-label" for="yogaInfoEmail">Ваш e-mail</label>
+                    <input class="yoga-rooms-veg__info-input" type="email" id="yogaInfoEmail" name="email" placeholder="Ваш e-mail" autocomplete="email" inputmode="email" maxlength="254" required aria-describedby="yogaInfoError">
+                    <div class="yoga-rooms-veg__info-captcha" id="yogaTurnstileWidgetInfo"></div>
+                    <button type="submit" class="btn-yoga-primary" id="yogaInfoSubmit">Получить всю информацию</button>
+                    <p class="yoga-rooms-veg__info-error" id="yogaInfoError" role="alert" hidden></p>
+                    <p class="yoga-rooms-veg__info-consent">Нажимая кнопку, вы&nbsp;соглашаетесь с&nbsp;<button type="button" class="js-open-yoga-privacy yoga-rooms-veg__info-link">политикой конфиденциальности</button></p>
+                </div>
+                <p class="yoga-rooms-veg__info-success" id="yogaInfoSuccess" role="status" hidden>Спасибо! Менеджер отправит подробную информацию на&nbsp;ваш e-mail.</p>
+            </form>
         </div>
     </section>
 

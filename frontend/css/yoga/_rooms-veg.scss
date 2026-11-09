@@ -345,3 +345,13 @@
 #yogaRecipesForm .yoga-form__input.is-invalid {
     border-color: #dc3545;
 }
+
+
+// Отдельная секция с бордовой панелью «Получить всю информацию» (перед отзывами).
+// На телефоне панель во всю ширину, без отступов сверху и снизу.
+.yoga-info-veg {
+    @media (max-width: 768px) {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
