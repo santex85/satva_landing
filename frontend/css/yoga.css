@@ -5176,6 +5176,13 @@ html.satva-consent-modal-open {
   overflow: hidden;
   aspect-ratio: 3/2;
 }
+.yoga-book-fast__photo picture,
+.yoga-book-fast__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .yoga-book-fast__photo--placeholder {
   display: flex;
   align-items: center;

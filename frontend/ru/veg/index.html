@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=61" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=61"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=62" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=62"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -390,9 +390,11 @@
                 <h2 id="yogaBookFastTitle" class="yoga-rooms-veg__title yoga-book-fast__title">Наш уютный отель очень быстро бронируется</h2>
                 <p class="yoga-book-fast__sub">Успейте забронировать свой номер.</p>
             </div>
-            <!-- Заглушка: сюда встанет фото -->
-            <div class="yoga-book-fast__photo yoga-book-fast__photo--placeholder yoga-fade-in" role="img" aria-label="Фото отеля Satva Samui">
-                <span>Фото</span>
+            <div class="yoga-book-fast__photo yoga-fade-in">
+                <picture>
+                    <source type="image/webp" srcset="/img/yoga_tour/room_garden_door-800.webp 800w, /img/yoga_tour/room_garden_door-1280.webp 1280w, /img/yoga_tour/room_garden_door.webp 2000w" sizes="(max-width: 768px) 100vw, 1100px">
+                    <img src="/img/yoga_tour/room_garden_door.jpg" alt="Номер с кроватью под москитной сеткой и открытой дверью в тропический сад" loading="lazy" width="1600" height="1194" decoding="async">
+                </picture>
             </div>
             <div class="yoga-book-fast__action yoga-fade-in">
                 <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Забронировать</button>
