@@ -2522,6 +2522,9 @@ section[id^=yoga] h2 {
 .yoga-food--stacked .yoga-food__container {
   grid-template-columns: 1fr;
 }
+.yoga-food--stacked .yoga-food__intro {
+  display: contents;
+}
 .yoga-food--stacked .yoga-food__heading {
   margin-bottom: -16px;
 }
@@ -5464,6 +5467,334 @@ html.satva-consent-modal-open {
     border-radius: 0;
     box-shadow: none;
     scroll-snap-align: start;
+  }
+}
+@media (max-width: 768px) {
+  .veg-page #yogaRooms {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 96px);
+    min-height: calc(100svh - 96px);
+  }
+  .veg-page #yogaRooms .yoga-rooms-veg__container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    min-height: 0;
+  }
+  .veg-page #yogaRooms .yoga-rooms-veg__lead {
+    flex: 1 1 0;
+    align-self: stretch;
+    min-height: 120px;
+    max-height: 100vw;
+    aspect-ratio: auto;
+  }
+  .veg-page #yogaRooms .yoga-rooms-veg__lead picture,
+  .veg-page #yogaRooms .yoga-rooms-veg__lead img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .veg-page #yogaBeach {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 96px);
+    min-height: calc(100svh - 96px);
+  }
+  .veg-page #yogaBeach .yoga-beach__container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    min-height: 0;
+  }
+  .veg-page #yogaBeach .yoga-beach__block {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    min-height: 0;
+    gap: 20px;
+  }
+  .veg-page #yogaBeach .yoga-beach__photo {
+    flex: 1 1 0;
+    align-self: stretch;
+    min-height: 120px;
+    max-height: 100vw;
+    aspect-ratio: auto;
+  }
+  .veg-page #yogaBeach .yoga-beach__photo picture,
+  .veg-page #yogaBeach .yoga-beach__photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .veg-page #yogaFood {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .veg-page #yogaFood .yoga-food__container {
+    gap: 0;
+  }
+  .veg-page #yogaFood .yoga-food__intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 96px);
+    min-height: calc(100svh - 96px);
+    gap: 20px;
+    padding: 24px 0;
+  }
+  .veg-page #yogaFood .yoga-food__lead {
+    flex: 1 1 0;
+    align-self: stretch;
+    min-height: 120px;
+    max-height: 100vw;
+    aspect-ratio: auto;
+  }
+  .veg-page #yogaFood .yoga-food__lead picture,
+  .veg-page #yogaFood .yoga-food__lead img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .veg-page #yogaFood .yoga-food__photos--stack {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 96px);
+    min-height: calc(100svh - 96px);
+    justify-content: stretch;
+  }
+  .veg-page #yogaFood .yoga-food__photos--stack .yoga-food__photo {
+    flex: 1 1 0;
+    align-self: stretch;
+    min-height: 120px;
+    max-height: 100vw;
+    aspect-ratio: auto;
+  }
+  .veg-page #yogaFood .yoga-food__photos--stack .yoga-food__photo picture,
+  .veg-page #yogaFood .yoga-food__photos--stack .yoga-food__photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .veg-page #yogaFood .yoga-food__photos--stack .yoga-food__photo {
+    min-height: 100px;
+  }
+  .veg-page #yogaFood .yoga-food__photos--stack .yoga-food__photo .yoga-food__zoom {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .veg-page #yogaRoomTypes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 96px);
+    min-height: calc(100svh - 96px);
+  }
+  .veg-page #yogaRoomTypes .yoga-rooms-veg__container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    min-height: 0;
+  }
+  .veg-page #yogaRoomTypes .yoga-rooms-veg__photos {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    min-height: 0;
+    justify-content: stretch;
+    width: auto;
+  }
+  .veg-page #yogaRoomTypes .yoga-rooms-veg__photo {
+    flex: 1 1 0;
+    align-self: stretch;
+    min-height: 120px;
+    max-height: 100vw;
+    aspect-ratio: auto;
+  }
+  .veg-page #yogaRoomTypes .yoga-rooms-veg__photo picture,
+  .veg-page #yogaRoomTypes .yoga-rooms-veg__photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .veg-page #yogaRoomTypes .yoga-rooms-veg__photo {
+    min-height: 100px;
+  }
+  .veg-page #yogaBookFast {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 96px);
+    min-height: calc(100svh - 96px);
+  }
+  .veg-page #yogaBookFast .yoga-rooms-veg__container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    min-height: 0;
+  }
+  .veg-page #yogaBookFast .yoga-book-fast__photo {
+    flex: 1 1 0;
+    align-self: stretch;
+    min-height: 120px;
+    max-height: 100vw;
+    aspect-ratio: auto;
+  }
+  .veg-page #yogaBookFast .yoga-book-fast__photo picture,
+  .veg-page #yogaBookFast .yoga-book-fast__photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .veg-page #hotelChef {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 96px);
+    min-height: calc(100svh - 96px);
+  }
+  .veg-page #hotelChef .yoga-program__container,
+  .veg-page #hotelChef .yoga-program__block {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    min-height: 0;
+    gap: 20px;
+  }
+  .veg-page #hotelChef .yoga-program__photo {
+    flex: 1 1 0;
+    align-self: stretch;
+    min-height: 120px;
+    max-height: 100vw;
+    aspect-ratio: auto;
+  }
+  .veg-page #hotelChef .yoga-program__photo picture,
+  .veg-page #hotelChef .yoga-program__photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .veg-page #yogaRecipes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 96px);
+    min-height: calc(100svh - 96px);
+  }
+  .veg-page #yogaRecipes .yoga-rooms-veg__container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    min-height: 0;
+  }
+  .veg-page #yogaRecipes .yoga-recipes__photo {
+    flex: 1 1 0;
+    align-self: stretch;
+    min-height: 120px;
+    max-height: 100vw;
+    aspect-ratio: auto;
+  }
+  .veg-page #yogaRecipes .yoga-recipes__photo picture,
+  .veg-page #yogaRecipes .yoga-recipes__photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .veg-page #hotelAmenities,
+  .veg-page #hotelYoga {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 96px);
+    min-height: calc(100svh - 96px);
+  }
+  .veg-page #hotelAmenities .yoga-program__container,
+  .veg-page #hotelAmenities .yoga-program__block,
+  .veg-page #hotelYoga .yoga-program__container,
+  .veg-page #hotelYoga .yoga-program__block {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    min-height: 0;
+    gap: 20px;
+  }
+  .veg-page #hotelAmenities .yoga-program__photo,
+  .veg-page #hotelYoga .yoga-program__photo {
+    flex: 1 1 0;
+    align-self: stretch;
+    min-height: 120px;
+    max-height: 100vw;
+    aspect-ratio: auto;
+  }
+  .veg-page #hotelAmenities .yoga-program__photo picture,
+  .veg-page #hotelAmenities .yoga-program__photo img,
+  .veg-page #hotelYoga .yoga-program__photo picture,
+  .veg-page #hotelYoga .yoga-program__photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .veg-page .yoga-activities__block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 96px);
+    min-height: calc(100svh - 96px);
+    justify-content: flex-start;
+  }
+  .veg-page .yoga-activities__photo {
+    flex: 1 1 0;
+    align-self: stretch;
+    min-height: 120px;
+    max-height: 100vw;
+    aspect-ratio: auto;
+  }
+  .veg-page .yoga-activities__photo picture,
+  .veg-page .yoga-activities__photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 @media (prefers-reduced-motion: reduce) {

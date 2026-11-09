@@ -119,6 +119,11 @@
             grid-template-columns: 1fr;
         }
 
+        // Обёртка первого экрана (заголовок, фото, текст) — на компьютере её «как будто нет»
+        .yoga-food__intro {
+            display: contents;
+        }
+
         // Заголовок над большим фото: ближе к фото, чем общий шаг сетки
         .yoga-food__heading {
             margin-bottom: -16px;

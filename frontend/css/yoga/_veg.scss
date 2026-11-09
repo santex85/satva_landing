@@ -271,3 +271,145 @@ $veg-header-height-mobile: 96px;
         }
     }
 }
+
+
+// ── Универсально для любого телефона: каждый шаг свайпа ровно в один экран ──
+// Шаг занимает высоту экрана минус шапка (svh — экран с показанной адресной строкой,
+// чтобы ничего не пряталось под ней). Заголовок и текст своего размера, а фото
+// растягивается или сжимается и забирает оставшееся место. На очень маленьком экране
+// фото не меньше 120px — тогда блок чуть выше экрана и долистывается.
+
+$veg-photo-min: 120px;
+
+@mixin veg-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - #{$veg-header-height-mobile});
+    min-height: calc(100svh - #{$veg-header-height-mobile});
+}
+
+// Промежуточная обёртка: растягивается по высоте шага и передаёт место дальше
+@mixin veg-column {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    min-height: 0;
+}
+
+// Фото, которое забирает свободное место (не выше квадрата, чтобы не резать кадр по бокам)
+@mixin veg-fill-photo {
+    flex: 1 1 0;
+    align-self: stretch;
+    min-height: $veg-photo-min;
+    max-height: 100vw;
+    aspect-ratio: auto;
+
+    picture,
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 768px) {
+    .veg-page {
+        // «Тишина»: заголовок → фото → текст
+        #yogaRooms { @include veg-screen; }
+        #yogaRooms .yoga-rooms-veg__container { @include veg-column; }
+        #yogaRooms .yoga-rooms-veg__lead { @include veg-fill-photo; }
+
+        // Пляж: заголовок → текст → фото → список
+        #yogaBeach { @include veg-screen; }
+        #yogaBeach .yoga-beach__container { @include veg-column; }
+        #yogaBeach .yoga-beach__block { @include veg-column; gap: 20px; }
+        #yogaBeach .yoga-beach__photo { @include veg-fill-photo; }
+
+        // Кухня: первый экран — заголовок, фото, текст; второй — три фото тарелок
+        #yogaFood {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        #yogaFood .yoga-food__container { gap: 0; }
+
+        #yogaFood .yoga-food__intro {
+            @include veg-screen;
+            gap: 20px;
+            padding: 24px 0;
+        }
+
+        #yogaFood .yoga-food__lead { @include veg-fill-photo; }
+
+        #yogaFood .yoga-food__photos--stack {
+            @include veg-screen;
+            justify-content: stretch;
+        }
+
+        #yogaFood .yoga-food__photos--stack .yoga-food__photo {
+            @include veg-fill-photo;
+            min-height: 100px;
+
+            .yoga-food__zoom {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        // Типы размещения: заголовок → три фото
+        #yogaRoomTypes { @include veg-screen; }
+        #yogaRoomTypes .yoga-rooms-veg__container { @include veg-column; }
+        #yogaRoomTypes .yoga-rooms-veg__photos {
+            @include veg-column;
+            justify-content: stretch;
+            width: auto; // во всю ширину экрана за счёт отрицательных полей
+        }
+
+        #yogaRoomTypes .yoga-rooms-veg__photo {
+            @include veg-fill-photo;
+            min-height: 100px;
+        }
+
+        // Быстро бронируется: текст → фото → кнопка
+        #yogaBookFast { @include veg-screen; }
+        #yogaBookFast .yoga-rooms-veg__container { @include veg-column; }
+        #yogaBookFast .yoga-book-fast__photo { @include veg-fill-photo; }
+
+        // Мастер-классы: заголовок → фото → текст
+        #hotelChef { @include veg-screen; }
+        #hotelChef .yoga-program__container,
+        #hotelChef .yoga-program__block { @include veg-column; gap: 20px; }
+        #hotelChef .yoga-program__photo { @include veg-fill-photo; }
+
+        // Рецепты: заголовок → фото → текст → кнопка
+        #yogaRecipes { @include veg-screen; }
+        #yogaRecipes .yoga-rooms-veg__container { @include veg-column; }
+        #yogaRecipes .yoga-recipes__photo { @include veg-fill-photo; }
+
+        // Инфраструктура и йога: фото → заголовок → текст
+        #hotelAmenities,
+        #hotelYoga { @include veg-screen; }
+
+        #hotelAmenities .yoga-program__container,
+        #hotelAmenities .yoga-program__block,
+        #hotelYoga .yoga-program__container,
+        #hotelYoga .yoga-program__block { @include veg-column; gap: 20px; }
+
+        #hotelAmenities .yoga-program__photo,
+        #hotelYoga .yoga-program__photo { @include veg-fill-photo; }
+
+        // Экскурсии и вечера: каждая карточка — свой экран, фото сверху
+        .yoga-activities__block {
+            @include veg-screen;
+            justify-content: flex-start;
+        }
+
+        .yoga-activities__photo { @include veg-fill-photo; }
+    }
+}
