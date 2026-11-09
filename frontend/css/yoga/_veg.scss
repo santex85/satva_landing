@@ -63,6 +63,67 @@ $veg-header-height-mobile: 96px;
             border-radius: 0;
         }
 
+        // Первые два блока («Тишина…» и «Пляж») ужаты, чтобы помещаться на один экран телефона:
+        // заголовок 24px вместо 28px, отступы 20px вместо 32px, текст плотнее
+        #yogaRooms,
+        #yogaBeach {
+            padding-top: 24px;
+        }
+
+        #yogaRooms .yoga-rooms-veg__title,
+        #yogaBeach .yoga-beach__heading {
+            font-size: 24px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        #yogaRooms .yoga-rooms-veg__text {
+            margin: 20px 0;
+
+            p {
+                line-height: 1.55;
+                margin-bottom: 10px;
+            }
+        }
+
+        #yogaRooms .yoga-rooms-veg__info {
+            padding-top: 20px;
+            padding-bottom: 24px;
+        }
+
+        #yogaRooms .yoga-rooms-veg__info-body {
+            gap: 12px;
+        }
+
+        #yogaBeach {
+            padding-bottom: 24px;
+        }
+
+        #yogaBeach .yoga-beach__intro {
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        #yogaBeach .yoga-beach__block {
+            gap: 20px;
+        }
+
+        #yogaBeach .yoga-beach__photo {
+            aspect-ratio: 3 / 2;
+        }
+
+        #yogaBeach .yoga-beach__text .yoga-beach__lead {
+            line-height: 1.45;
+            margin-bottom: 10px;
+        }
+
+        #yogaBeach .yoga-beach__list li {
+            font-size: 15px;
+            line-height: 1.4;
+            margin-bottom: 6px;
+        }
+
         // «Остров, который удивляет» и «Уютные вечера»: карточки во всю ширину,
         // каждая — отдельный шаг свайпа с фото сразу под шапкой
         .yoga-activities {

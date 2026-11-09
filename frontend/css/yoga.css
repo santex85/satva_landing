@@ -5302,6 +5302,53 @@ html.satva-consent-modal-open {
   .veg-page .yoga-rooms-gallery__stage-wrap {
     border-radius: 0;
   }
+  .veg-page #yogaRooms,
+  .veg-page #yogaBeach {
+    padding-top: 24px;
+  }
+  .veg-page #yogaRooms .yoga-rooms-veg__title,
+  .veg-page #yogaBeach .yoga-beach__heading {
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .veg-page #yogaRooms .yoga-rooms-veg__text {
+    margin: 20px 0;
+  }
+  .veg-page #yogaRooms .yoga-rooms-veg__text p {
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .veg-page #yogaRooms .yoga-rooms-veg__info {
+    padding-top: 20px;
+    padding-bottom: 24px;
+  }
+  .veg-page #yogaRooms .yoga-rooms-veg__info-body {
+    gap: 12px;
+  }
+  .veg-page #yogaBeach {
+    padding-bottom: 24px;
+  }
+  .veg-page #yogaBeach .yoga-beach__intro {
+    margin-bottom: 20px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .veg-page #yogaBeach .yoga-beach__block {
+    gap: 20px;
+  }
+  .veg-page #yogaBeach .yoga-beach__photo {
+    aspect-ratio: 3/2;
+  }
+  .veg-page #yogaBeach .yoga-beach__text .yoga-beach__lead {
+    line-height: 1.45;
+    margin-bottom: 10px;
+  }
+  .veg-page #yogaBeach .yoga-beach__list li {
+    font-size: 15px;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
   .veg-page .yoga-activities {
     padding-left: 0;
     padding-right: 0;
