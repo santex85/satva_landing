@@ -22,15 +22,15 @@ $veg-header-height-mobile: 96px;
         }
 
         // Блоки, которые начинаются с фото: фото вплотную к шапке и к краям экрана
-        #hotelChef,
         #hotelAmenities,
         #hotelYoga {
             padding-top: 0;
         }
 
-        // Пляж и кухня начинаются с заголовка, фото идёт под ним
+        // Пляж, кухня и мастер-классы начинаются с заголовка, фото идёт под ним
         .yoga-beach,
-        .yoga-food {
+        .yoga-food,
+        #hotelChef {
             padding-top: 32px;
         }
 

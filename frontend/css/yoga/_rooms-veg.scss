@@ -279,3 +279,69 @@
         }
     }
 }
+
+
+// «Угощайтесь на здоровье» (под мастер-классом): заголовок → фото гостей с шефом → текст → кнопка.
+// Кнопка открывает попап #modal-recipes (e-mail или телефон → /api/recipes-request).
+.yoga-recipes {
+    &__photo {
+        border-radius: 20px;
+        overflow: hidden;
+
+        picture,
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &__text {
+        max-width: 640px;
+        margin: 32px auto 0;
+        color: $color-dark;
+        font-size: clamp(1.05rem, 0.6vw + 0.9rem, 1.25rem);
+        line-height: 1.6;
+        text-align: center;
+    }
+
+    &__action {
+        margin-top: 28px;
+        text-align: center;
+    }
+
+    &__modal-text {
+        margin: 0 0 20px;
+        color: $color-text;
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    &__modal-consent {
+        margin: 12px 0 0;
+        color: $color-text-light;
+        font-size: 0.75rem;
+        line-height: 1.4;
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        // Кнопка последняя — нужен отступ снизу
+        padding-bottom: 32px;
+
+        &__photo {
+            margin-left: -$space-h;
+            margin-right: -$space-h;
+            border-radius: 0;
+        }
+
+    }
+}
+
+#yogaTurnstileWidgetRecipes:empty {
+    display: none;
+}
+
+#yogaRecipesForm .yoga-form__input.is-invalid {
+    border-color: #dc3545;
+}

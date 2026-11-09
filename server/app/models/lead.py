@@ -12,6 +12,7 @@ class LeadType:
     PROCEDURE_BOOKING = "procedure_booking"
     PACKAGE_CHOICE = "package_choice"
     INFO_REQUEST = "info_request"  # только e-mail: «Получить всю информацию» (/veg/)
+    RECIPES_REQUEST = "recipes_request"  # e-mail или телефон: рецепты от шеф-повара (/veg/)
 
 
 class LeadStatus:

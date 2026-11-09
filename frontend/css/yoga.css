@@ -2007,6 +2007,19 @@ section[id^=yoga] h2 {
   line-height: 1.2;
   text-align: center;
 }
+.yoga-beach__intro {
+  max-width: 760px;
+  margin: 0 auto 32px;
+  color: #2d3436;
+  font-size: 1rem;
+  line-height: 1.7;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .yoga-beach__intro {
+    text-align: left;
+  }
+}
 .yoga-beach__block {
   display: grid;
   grid-template-columns: 1fr;
@@ -2305,6 +2318,13 @@ section[id^=yoga] h2 {
   margin: 0;
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   line-height: 1.2;
+}
+.yoga-program__header--top {
+  max-width: 900px;
+  margin: 0 auto 32px;
+}
+.yoga-program__text p:last-child {
+  margin-bottom: 0;
 }
 .yoga-program__block {
   display: grid;
@@ -5186,6 +5206,60 @@ html.satva-consent-modal-open {
   }
 }
 
+.yoga-recipes__photo {
+  border-radius: 20px;
+  overflow: hidden;
+}
+.yoga-recipes__photo picture,
+.yoga-recipes__photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.yoga-recipes__text {
+  max-width: 640px;
+  margin: 32px auto 0;
+  color: #2d3436;
+  font-size: clamp(1.05rem, 0.6vw + 0.9rem, 1.25rem);
+  line-height: 1.6;
+  text-align: center;
+}
+.yoga-recipes__action {
+  margin-top: 28px;
+  text-align: center;
+}
+.yoga-recipes__modal-text {
+  margin: 0 0 20px;
+  color: #2d3436;
+  line-height: 1.5;
+  text-align: center;
+}
+.yoga-recipes__modal-consent {
+  margin: 12px 0 0;
+  color: #666666;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .yoga-recipes {
+    padding-bottom: 32px;
+  }
+  .yoga-recipes__photo {
+    margin-left: -24px;
+    margin-right: -24px;
+    border-radius: 0;
+  }
+}
+
+#yogaTurnstileWidgetRecipes:empty {
+  display: none;
+}
+
+#yogaRecipesForm .yoga-form__input.is-invalid {
+  border-color: #dc3545;
+}
+
 @media (max-width: 768px) {
   html.veg-page {
     scroll-snap-type: y mandatory;
@@ -5196,13 +5270,13 @@ html.satva-consent-modal-open {
   .veg-page .yoga-site-footer {
     scroll-snap-align: start;
   }
-  .veg-page #hotelChef,
   .veg-page #hotelAmenities,
   .veg-page #hotelYoga {
     padding-top: 0;
   }
   .veg-page .yoga-beach,
-  .veg-page .yoga-food {
+  .veg-page .yoga-food,
+  .veg-page #hotelChef {
     padding-top: 32px;
   }
   .veg-page .yoga-food__lead,

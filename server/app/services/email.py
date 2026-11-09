@@ -65,6 +65,7 @@ _LEAD_TYPE_LABELS: dict[str, str] = {
     "procedure_booking": "Заявка на бронирование",
     "package_choice": "Выбор пакета",
     "info_request": "Получить всю информацию (только e-mail)",
+    "recipes_request": "Рецепты от шеф-повара (e-mail или телефон)",
 }
 
 _SOURCE_LABELS: dict[str, str] = {
@@ -75,6 +76,7 @@ _SOURCE_LABELS: dict[str, str] = {
     "partner-landing": "партнёрский лендинг (форма на странице)",
     "partner-popup": "партнёрский лендинг (модальное окно)",
     "veg-info": "/veg/, панель «Получить всю информацию»",
+    "veg-recipes": "/veg/, попап «Рецепты от шеф-повара»",
 }
 
 _LANG_LABELS: dict[str, str] = {

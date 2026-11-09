@@ -13,6 +13,7 @@
     var closePromoModalFn = null;
     var yogaTurnstileLeadWidgetId = null;
     var yogaTurnstileInfoWidgetId = null;
+    var yogaTurnstileRecipesWidgetId = null;
     var yogaTurnstileSiteKey = '';
 
     var LANG = (document.documentElement.lang || 'ru').toLowerCase().indexOf('en') === 0 ? 'en' : 'ru';
@@ -1934,6 +1935,14 @@
                         theme: 'light',
                     });
                 }
+                var turnstileRecipesEl = document.getElementById('yogaTurnstileWidgetRecipes');
+                if (turnstileRecipesEl) {
+                    turnstileRecipesEl.innerHTML = '';
+                    yogaTurnstileRecipesWidgetId = window.turnstile.render(turnstileRecipesEl, {
+                        sitekey: turnstileSiteKey,
+                        theme: 'light',
+                    });
+                }
                 var turnstileLeadEl = document.getElementById('yogaTurnstileWidgetLead');
                 if (turnstileLeadEl) {
                     turnstileLeadEl.innerHTML = '';
@@ -2190,6 +2199,211 @@
         });
     }
 
+    // /veg/: попап «Рецепты от шеф-повара» — e-mail или телефон (хотя бы одно) → /api/recipes-request
+    function initRecipesModal() {
+        var modal = document.getElementById('modal-recipes');
+        var form = document.getElementById('yogaRecipesForm');
+        if (!modal || !form) return;
+
+        var overlay = modal.querySelector('.yoga-modal__overlay');
+        var closeBtn = modal.querySelector('.yoga-modal__close');
+        var panel = modal.querySelector('.yoga-modal__content');
+        var emailIn = document.getElementById('yogaRecipesEmail');
+        var phoneIn = document.getElementById('yogaRecipesPhone');
+        var submitBtn = document.getElementById('yogaRecipesSubmit');
+        var errorEl = document.getElementById('yogaRecipesError');
+        var success = document.getElementById('yogaRecipesSuccess');
+        var hp = form.querySelector('input[name="website"]');
+        var previousActive = null;
+        var trapHandler = null;
+        var sending = false;
+
+        function showError(msg) {
+            if (!errorEl) return;
+            errorEl.textContent = msg || '';
+            errorEl.hidden = !msg;
+        }
+
+        function getFocusable() {
+            if (!panel) return [];
+            return Array.prototype.filter.call(
+                panel.querySelectorAll('button, [href], input:not([tabindex="-1"]), select, textarea, [tabindex]:not([tabindex="-1"])'),
+                function (el) { return el.offsetParent !== null; }
+            );
+        }
+
+        function openModal() {
+            previousActive = document.activeElement;
+            modal.removeAttribute('hidden');
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            var list = getFocusable();
+            if (emailIn && !form.hidden) {
+                emailIn.focus();
+            } else if (list.length) {
+                list[0].focus();
+            }
+            trapHandler = function (e) {
+                if (e.key !== 'Tab') return;
+                var items = getFocusable();
+                if (!items.length) return;
+                var first = items[0];
+                var last = items[items.length - 1];
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            };
+            modal.addEventListener('keydown', trapHandler);
+        }
+
+        function closeModal() {
+            if (trapHandler) {
+                modal.removeEventListener('keydown', trapHandler);
+                trapHandler = null;
+            }
+            modal.classList.remove('is-open');
+            modal.setAttribute('hidden', '');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            if (previousActive && previousActive.focus) {
+                previousActive.focus();
+            }
+        }
+
+        document.addEventListener('click', function (e) {
+            var btn = e.target.closest ? e.target.closest('[data-open-modal]') : null;
+            if (!btn || btn.getAttribute('data-open-modal') !== 'modal-recipes') return;
+            e.preventDefault();
+            openModal();
+        });
+        if (overlay) overlay.addEventListener('click', closeModal);
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        document.addEventListener('keydown', function (e) {
+            if (e.key !== 'Escape') return;
+            if (!modal.classList.contains('is-open')) return;
+            var privacy = document.getElementById('yogaModalPrivacy');
+            if (privacy && privacy.classList.contains('is-open')) return;
+            e.preventDefault();
+            closeModal();
+        }, true);
+
+        function captchaToken() {
+            if (yogaTurnstileRecipesWidgetId == null || !window.turnstile || !window.turnstile.getResponse) return '';
+            return window.turnstile.getResponse(yogaTurnstileRecipesWidgetId) || '';
+        }
+
+        function resetCaptcha() {
+            if (yogaTurnstileRecipesWidgetId != null && window.turnstile && window.turnstile.reset) {
+                try { window.turnstile.reset(yogaTurnstileRecipesWidgetId); } catch (e) { /* noop */ }
+            }
+        }
+
+        [emailIn, phoneIn].forEach(function (el) {
+            if (!el) return;
+            el.addEventListener('input', function () {
+                el.classList.remove('is-invalid');
+                showError('');
+            });
+        });
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (sending) return;
+            var email = emailIn && emailIn.value ? emailIn.value.trim() : '';
+            var phone = phoneIn && phoneIn.value ? phoneIn.value.trim() : '';
+            if (!email && !phone) {
+                if (emailIn) {
+                    emailIn.classList.add('is-invalid');
+                    emailIn.focus();
+                }
+                showError('Укажите e-mail или телефон');
+                return;
+            }
+            if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                if (emailIn) {
+                    emailIn.classList.add('is-invalid');
+                    emailIn.focus();
+                }
+                showError('Введите корректный e-mail');
+                return;
+            }
+            var digits = phone.replace(/\D/g, '');
+            if (phone && (digits.length < 10 || digits.length > 15)) {
+                if (phoneIn) {
+                    phoneIn.classList.add('is-invalid');
+                    phoneIn.focus();
+                }
+                showError('Введите телефон с кодом страны, например +7 900 123-45-67');
+                return;
+            }
+            if (yogaTurnstileSiteKey && !captchaToken()) {
+                showError('Подтвердите, что вы не робот');
+                return;
+            }
+
+            var payload = {
+                email: email || null,
+                phone: phone || null,
+                consent: true,
+                website: hp && hp.value ? hp.value : '',
+                captcha_token: captchaToken() || null,
+                lang: 'ru',
+            };
+            appendAttributionToPayload(payload);
+
+            sending = true;
+            showError('');
+            if (submitBtn) submitBtn.disabled = true;
+
+            fetch(apiPath('/recipes-request'), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            })
+                .then(function (response) {
+                    return response.json().catch(function () { return null; }).then(function (data) {
+                        return { ok: response.ok, status: response.status, data: data };
+                    });
+                })
+                .then(function (r) {
+                    sending = false;
+                    if (submitBtn) submitBtn.disabled = false;
+                    resetCaptcha();
+                    if (r.ok) {
+                        try {
+                            if (window.umami && typeof window.umami.track === 'function') {
+                                window.umami.track('recipes-request', { source: 'veg-recipes' });
+                            }
+                        } catch (err) { /* noop */ }
+                        trackMetaLead(generateEventId(), { content_category: 'recipes_request' });
+                        form.reset();
+                        form.hidden = true;
+                        if (success) success.hidden = false;
+                        if (closeBtn) closeBtn.focus();
+                        return;
+                    }
+                    if (r.status === 429) {
+                        showError('Слишком много попыток. Попробуйте через минуту.');
+                    } else if (r.status === 422) {
+                        showError('Проверьте e-mail и телефон и попробуйте ещё раз.');
+                    } else {
+                        showError((r.data && typeof r.data.detail === 'string') ? r.data.detail : 'Не удалось отправить. Попробуйте ещё раз.');
+                    }
+                })
+                .catch(function () {
+                    sending = false;
+                    if (submitBtn) submitBtn.disabled = false;
+                    resetCaptcha();
+                    showError('Нет связи с сервером. Попробуйте ещё раз.');
+                });
+        });
+    }
+
     function boot() {
         initScrollProgress();
         initHeader();
@@ -2213,6 +2427,7 @@
         initForm();
         initYogaLeadForm();
         initInfoRequestForm();
+        initRecipesModal();
     }
 
     if (document.readyState === 'loading') {

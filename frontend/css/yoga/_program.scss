@@ -26,6 +26,16 @@
         }
     }
 
+    // Заголовок над фото и текстом, вне контейнера с блоками (/veg/: мастер-классы)
+    &__header--top {
+        max-width: $container-base;
+        margin: 0 auto 32px;
+    }
+
+    &__text p:last-child {
+        margin-bottom: 0;
+    }
+
     &__block {
         display: grid;
         grid-template-columns: 1fr;

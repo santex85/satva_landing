@@ -101,6 +101,7 @@
     procedure_booking: "Бронирование",
     package_choice: "Выбор пакета",
     info_request: "Получить всю информацию (e-mail)",
+    recipes_request: "Рецепты от шеф-повара",
   };
 
   function getToken() {

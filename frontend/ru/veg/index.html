@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=54" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=54"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=57" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=57"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -65,7 +65,7 @@
     <script defer src="/js/consent.js?v=3"></script>
     <script defer src="/js/pixel.js?v=4"></script>
     <script defer src="/js/promo-config.js?v=4"></script>
-    <script defer src="/js/yoga.js?v=20"></script>
+    <script defer src="/js/yoga.js?v=21"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
 
     <!-- Structured Data: LodgingBusiness -->
@@ -247,10 +247,42 @@
         </div>
     </section>
 
-    <!-- 02a-1. Пляж (сразу после Hero, перед кухней) -->
+    <!-- 02a-0. Размещение (сразу после Hero): заголовок, фото на закате, текст, бордовая панель с e-mail -->
+    <section id="yogaRooms" class="yoga-rooms-veg" aria-labelledby="yogaRoomsTitle">
+        <div class="yoga-rooms-veg__container">
+            <h2 id="yogaRoomsTitle" class="yoga-rooms-veg__title yoga-fade-in">Тишина&nbsp;— главное украшение нашего отеля</h2>
+            <div class="yoga-rooms-veg__lead yoga-fade-in">
+                <picture>
+                    <source type="image/webp" srcset="/img/yoga_tour/rooms_veg_sunset-800.webp 800w, /img/yoga_tour/rooms_veg_sunset-1280.webp 1280w, /img/yoga_tour/rooms_veg_sunset.webp 2000w" sizes="(max-width: 768px) 100vw, 1100px">
+                    <img src="/img/yoga_tour/rooms_veg_sunset.jpg" alt="Гостья отдыхает в шезлонге на веранде номера с видом на море и закат" loading="lazy" width="1600" height="893" decoding="async">
+                </picture>
+            </div>
+            <div class="yoga-rooms-veg__text yoga-fade-in">
+                <p>Чем дальше мы от&nbsp;суеты, тем больше видим красоты. Отель Satva Samui находится на&nbsp;самом спокойном пляже острова&nbsp;— Липа&nbsp;Ной.</p>
+                <p>Отель утопает в&nbsp;тропической зелени. Вы&nbsp;будете наслаждаться прекрасными закатами и&nbsp;просыпаться под пение утренних птиц.</p>
+            </div>
+            <!-- Бордовая панель: отправляет только e-mail на /api/info-request (заявка «Получить всю информацию») -->
+            <form class="yoga-rooms-veg__info yoga-fade-in" id="yogaInfoForm" novalidate>
+                <div class="yoga-rooms-veg__info-body" id="yogaInfoFormBody">
+                    <p class="yoga-rooms-veg__info-text">Оставьте ваш e-mail, и&nbsp;менеджер отправит вам подробную информацию о&nbsp;нашем отеле.</p>
+                    <input type="text" name="website" class="yoga-form__hp" tabindex="-1" autocomplete="off" aria-hidden="true" value="">
+                    <label class="yoga-rooms-veg__info-label" for="yogaInfoEmail">Ваш e-mail</label>
+                    <input class="yoga-rooms-veg__info-input" type="email" id="yogaInfoEmail" name="email" placeholder="Ваш e-mail" autocomplete="email" inputmode="email" maxlength="254" required aria-describedby="yogaInfoError">
+                    <div class="yoga-rooms-veg__info-captcha" id="yogaTurnstileWidgetInfo"></div>
+                    <button type="submit" class="btn-yoga-primary" id="yogaInfoSubmit">Получить всю информацию</button>
+                    <p class="yoga-rooms-veg__info-error" id="yogaInfoError" role="alert" hidden></p>
+                    <p class="yoga-rooms-veg__info-consent">Нажимая кнопку, вы&nbsp;соглашаетесь с&nbsp;<button type="button" class="js-open-yoga-privacy yoga-rooms-veg__info-link">политикой конфиденциальности</button></p>
+                </div>
+                <p class="yoga-rooms-veg__info-success" id="yogaInfoSuccess" role="status" hidden>Спасибо! Менеджер отправит подробную информацию на&nbsp;ваш e-mail.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- 02a-1. Пляж (после блока о размещении, перед кухней) -->
     <section id="yogaBeach" class="yoga-beach" aria-labelledby="yogaBeachTitle">
         <div class="yoga-beach__container">
             <h2 id="yogaBeachTitle" class="yoga-beach__heading yoga-fade-in">Отель расположен на берегу моря</h2>
+            <p class="yoga-beach__intro yoga-fade-in">Остров Самуи официально признан лучшим островом в&nbsp;мире в&nbsp;2026&nbsp;году по&nbsp;версии авторитетной премии Travel&nbsp;+&nbsp;Leisure, набрав 95,64&nbsp;балла из&nbsp;100 по&nbsp;результатам голосования более 200&nbsp;тысяч.</p>
             <div class="yoga-beach__block yoga-fade-in">
                 <div class="yoga-beach__photo">
                     <picture>
@@ -261,12 +293,11 @@
                     </picture>
                 </div>
                 <div class="yoga-beach__text">
-                    <p class="yoga-beach__lead">Липа Ной — один из лучших пляжей на Самуи:</p>
+                    <p class="yoga-beach__lead">Липа Ной&nbsp;— самый красивый и&nbsp;спокойный пляж на&nbsp;Самуи:</p>
                     <ul class="yoga-beach__list">
                         <li>Мелкий чистый песок</li>
                         <li>Плавный заход в море без камней и кораллов</li>
                         <li>Температура воды +27…+30 °C круглый год</li>
-                        <li>Мало туристов</li>
                         <li>Прекрасные закаты каждый вечер</li>
                     </ul>
                 </div>
@@ -336,37 +367,6 @@
         </div>
     </section>
 
-    <!-- 07. Размещение (сразу после кухни): заголовок, фото на закате, текст, бордовая панель с e-mail, фото номеров -->
-    <section id="yogaRooms" class="yoga-rooms-veg" aria-labelledby="yogaRoomsTitle">
-        <div class="yoga-rooms-veg__container">
-            <h2 id="yogaRoomsTitle" class="yoga-rooms-veg__title yoga-fade-in">Чем дальше мы от&nbsp;суеты, тем больше видим красоты</h2>
-            <div class="yoga-rooms-veg__lead yoga-fade-in">
-                <picture>
-                    <source type="image/webp" srcset="/img/yoga_tour/rooms_veg_terrace-800.webp 800w, /img/yoga_tour/rooms_veg_terrace-1280.webp 1280w, /img/yoga_tour/rooms_veg_terrace.webp 2000w" sizes="(max-width: 768px) 100vw, 1100px">
-                    <img src="/img/yoga_tour/rooms_veg_terrace.jpg" alt="Гостья отдыхает в шезлонге на веранде номера с видом на море и закат" loading="lazy" width="1600" height="892" decoding="async">
-                </picture>
-            </div>
-            <div class="yoga-rooms-veg__text yoga-fade-in">
-                <p>Отель Satva Samui находится на&nbsp;самом спокойном пляже острова&nbsp;— Липа&nbsp;Ной. Тишина&nbsp;— главное украшение нашего отеля.</p>
-                <p>Отель утопает в&nbsp;тропической зелени. Вы&nbsp;будете наслаждаться прекрасными закатами и&nbsp;просыпаться под пение утренних птиц.</p>
-            </div>
-            <!-- Бордовая панель: отправляет только e-mail на /api/info-request (заявка «Получить всю информацию») -->
-            <form class="yoga-rooms-veg__info yoga-fade-in" id="yogaInfoForm" novalidate>
-                <div class="yoga-rooms-veg__info-body" id="yogaInfoFormBody">
-                    <p class="yoga-rooms-veg__info-text">Оставьте ваш e-mail, и&nbsp;менеджер отправит вам подробную информацию о&nbsp;нашем отеле.</p>
-                    <input type="text" name="website" class="yoga-form__hp" tabindex="-1" autocomplete="off" aria-hidden="true" value="">
-                    <label class="yoga-rooms-veg__info-label" for="yogaInfoEmail">Ваш e-mail</label>
-                    <input class="yoga-rooms-veg__info-input" type="email" id="yogaInfoEmail" name="email" placeholder="Ваш e-mail" autocomplete="email" inputmode="email" maxlength="254" required aria-describedby="yogaInfoError">
-                    <div class="yoga-rooms-veg__info-captcha" id="yogaTurnstileWidgetInfo"></div>
-                    <button type="submit" class="btn-yoga-primary" id="yogaInfoSubmit">Получить всю информацию</button>
-                    <p class="yoga-rooms-veg__info-error" id="yogaInfoError" role="alert" hidden></p>
-                    <p class="yoga-rooms-veg__info-consent">Нажимая кнопку, вы&nbsp;соглашаетесь с&nbsp;<button type="button" class="js-open-yoga-privacy yoga-rooms-veg__info-link">политикой конфиденциальности</button></p>
-                </div>
-                <p class="yoga-rooms-veg__info-success" id="yogaInfoSuccess" role="status" hidden>Спасибо! Менеджер отправит подробную информацию на&nbsp;ваш e-mail.</p>
-            </form>
-        </div>
-    </section>
-
     <!-- 07a. Типы размещения: 3 фото (номер с пологом, бассейн, номер с двумя кроватями) -->
     <section id="yogaRoomTypes" class="yoga-rooms-veg" aria-labelledby="yogaRoomTypesTitle">
         <div class="yoga-rooms-veg__container">
@@ -380,8 +380,8 @@
                 </figure>
                 <figure class="yoga-rooms-veg__photo">
                     <picture>
-                        <source type="image/webp" srcset="/img/yoga_tour/rooms_veg_pool.webp">
-                        <img src="/img/yoga_tour/rooms_veg_pool.jpg" alt="Бассейн у номеров: кокос и манговый сок на бортике, надувной фламинго" loading="lazy" width="1280" height="854" decoding="async">
+                        <source type="image/webp" srcset="/img/yoga_tour/rooms_veg_net.webp">
+                        <img src="/img/yoga_tour/rooms_veg_net.jpg" alt="Номер с большой кроватью под москитной сеткой и окнами в сад" loading="lazy" width="1280" height="854" decoding="async">
                     </picture>
                 </figure>
                 <figure class="yoga-rooms-veg__photo">
@@ -413,6 +413,9 @@
 
     <!-- 02a-2. Мастер-класс шеф-повара -->
     <section id="hotelChef" class="yoga-program" aria-labelledby="hotelChefTitle">
+        <div class="yoga-program__header yoga-program__header--top yoga-fade-in">
+            <h2 id="hotelChefTitle">Мастер-классы от&nbsp;нашего <span style="white-space: nowrap">шеф-повара</span></h2>
+        </div>
         <div class="yoga-program__container">
             <div class="yoga-program__block yoga-fade-in">
                 <div class="yoga-program__photo yoga-program__photo--portrait">
@@ -424,21 +427,25 @@
                     </picture>
                 </div>
                 <div class="yoga-program__text">
-                    <h2 id="hotelChefTitle">Мастер-класс от нашего шеф-повара</h2>
-                    <p>
-                        Наш шеф-повар каждый день готовит для гостей и с удовольствием делится тем, что умеет. На мастер-классе он показывает, как из простых местных продуктов приготовить вкусные и сытные вегетарианские блюда.
-                    </p>
-                    <p>
-                        Это спокойная встреча на кухне, а не строгий урок: можно задавать вопросы, попробовать приготовить самому и записать рецепты, чтобы повторить их дома.
-                    </p>
-                    <ul class="yoga-program__list">
-                        <li>Блюда из меню нашего ресторана: супы, салаты, горячее и десерты</li>
-                        <li>Как работать с тайскими специями, свежими травами и тропическими фруктами</li>
-                        <li>Подходит и тем, кто только знакомится с вегетарианской кухней</li>
-                        <li>Рецепты, которые легко повторить дома</li>
-                    </ul>
-                    <p class="yoga-program__note">Расписание и условия участия уточняйте при бронировании.</p>
+                    <p>На&nbsp;мастер-классах наш <span style="white-space: nowrap">шеф-повар</span> Тарас с&nbsp;удовольствием поделится с&nbsp;вами рецептами своих фирменных невероятно вкусных блюд.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 02a-3. Рецепты от шеф-повара: заголовок, фото с мастер-класса, текст, кнопка → попап с e-mail и телефоном (/api/recipes-request) -->
+    <section id="yogaRecipes" class="yoga-rooms-veg yoga-recipes" aria-labelledby="yogaRecipesTitle">
+        <div class="yoga-rooms-veg__container">
+            <h2 id="yogaRecipesTitle" class="yoga-rooms-veg__title yoga-fade-in">Угощайтесь на&nbsp;здоровье, приготовлено с&nbsp;любовью</h2>
+            <div class="yoga-recipes__photo yoga-fade-in">
+                <picture>
+                    <source type="image/webp" srcset="/img/yoga_tour/chef_guests_recipes-800.webp 800w, /img/yoga_tour/chef_guests_recipes-1280.webp 1280w, /img/yoga_tour/chef_guests_recipes.webp 2000w" sizes="(max-width: 768px) 100vw, 1100px">
+                    <img src="/img/yoga_tour/chef_guests_recipes.jpg" alt="Гости в фартуках Satva Samui и шеф-повар после мастер-класса у стола с приготовленными блюдами" loading="lazy" width="1600" height="1194" decoding="async">
+                </picture>
+            </div>
+            <p class="yoga-recipes__text yoga-fade-in">Отправьте ваш e-mail или телефон, и&nbsp;вы&nbsp;будете бесплатно получать удивительные рецепты от&nbsp;нашего <span style="white-space: nowrap">шеф-повара</span>.</p>
+            <div class="yoga-recipes__action">
+                <button type="button" class="btn-yoga-primary" data-open-modal="modal-recipes">Получать рецепты</button>
             </div>
         </div>
     </section>
@@ -1327,6 +1334,36 @@
     </div>
 
 
+
+    <!-- Попап «Рецепты от шеф-повара»: e-mail или телефон → /api/recipes-request -->
+    <div id="modal-recipes" class="yoga-modal" hidden aria-hidden="true">
+        <div class="yoga-modal__overlay" tabindex="-1"></div>
+        <div class="yoga-modal__content" role="dialog" aria-modal="true" aria-labelledby="yogaModalRecipesTitle">
+            <button type="button" class="yoga-modal__close" aria-label="Закрыть">&times;</button>
+            <h2 class="yoga-modal__title" id="yogaModalRecipesTitle">Рецепты от шеф-повара</h2>
+            <div class="yoga-modal__body">
+                <div id="yogaRecipesSuccess" class="yoga-form__status yoga-form__status--success" role="status" hidden>
+                    Спасибо! Скоро пришлём первые рецепты от&nbsp;нашего шеф-повара.
+                </div>
+                <form id="yogaRecipesForm" class="yoga-form yoga-form--modal-light" novalidate>
+                    <p class="yoga-recipes__modal-text">Оставьте e-mail или телефон&nbsp;— достаточно чего-то одного.</p>
+                    <input type="text" name="website" class="yoga-form__hp" tabindex="-1" autocomplete="off" aria-hidden="true" value="">
+                    <div class="yoga-form__row">
+                        <label class="yoga-form__label" for="yogaRecipesEmail">E-mail</label>
+                        <input class="yoga-form__input" type="email" id="yogaRecipesEmail" name="email" autocomplete="email" maxlength="254" inputmode="email">
+                    </div>
+                    <div class="yoga-form__row">
+                        <label class="yoga-form__label" for="yogaRecipesPhone">Телефон / WhatsApp / Telegram</label>
+                        <input class="yoga-form__input" type="tel" id="yogaRecipesPhone" name="phone" autocomplete="tel" maxlength="48" inputmode="tel" placeholder="+7 900 123-45-67">
+                    </div>
+                    <div id="yogaTurnstileWidgetRecipes" class="yoga-form__turnstile" role="group" aria-label="Проверка «Я не робот»"></div>
+                    <div id="yogaRecipesError" class="yoga-form__status yoga-form__status--error" role="alert" aria-live="assertive" hidden></div>
+                    <button type="submit" class="btn-yoga-primary btn-yoga-primary--block" id="yogaRecipesSubmit">Получать рецепты</button>
+                    <p class="yoga-recipes__modal-consent">Нажимая кнопку, вы&nbsp;соглашаетесь с&nbsp;<button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">политикой конфиденциальности</button></p>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <div id="yogaModalPrivacy" class="yoga-modal" hidden aria-hidden="true">
         <div class="yoga-modal__overlay" tabindex="-1"></div>

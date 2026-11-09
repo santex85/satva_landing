@@ -1,7 +1,7 @@
 import re
 from enum import Enum
 
-from pydantic import BaseModel, EmailStr, Field, field_validator
+from pydantic import BaseModel, EmailStr, Field, field_validator, model_validator
 
 _LEAD_SOURCE_WHITELIST = frozenset({"landing", "popup", "footer", "yoga-bridge"})
 _LEAD_LANG_WHITELIST = frozenset({"en", "ru"})
@@ -142,6 +142,75 @@ class InfoRequest(BaseModel):
         if v is None or (isinstance(v, str) and not v.strip()):
             return None
         return str(v).strip()
+
+
+class RecipesRequest(BaseModel):
+    """POST /api/recipes-request — подписка на рецепты шеф-повара (/veg/): e-mail или телефон, хотя бы одно."""
+
+    email: EmailStr | None = None
+    phone: str | None = Field(None, max_length=48)
+    consent: bool = Field(..., description="Must be true")
+    website: str | None = Field(None, description="Honeypot - must be empty")
+    captcha_token: str | None = Field(None, description="Cloudflare Turnstile token")
+    lang: str | None = Field(None, max_length=8)
+    utm_source: str | None = Field(None, max_length=256)
+    utm_medium: str | None = Field(None, max_length=256)
+    utm_campaign: str | None = Field(None, max_length=256)
+    utm_content: str | None = Field(None, max_length=256)
+    utm_term: str | None = Field(None, max_length=256)
+    fbclid: str | None = Field(None, max_length=512)
+
+    @field_validator("email", "phone", mode="before")
+    @classmethod
+    def empty_to_none(cls, v):
+        if v is None:
+            return None
+        if isinstance(v, str):
+            v = v.strip()
+            return v or None
+        return v
+
+    @field_validator("phone")
+    @classmethod
+    def phone_format(cls, v: str | None) -> str | None:
+        if v is None:
+            return None
+        digits = re.sub(r"\D", "", v)
+        if len(digits) < 10:
+            raise ValueError("Телефон должен содержать минимум 10 цифр")
+        if len(digits) > 15:
+            raise ValueError("Телефон слишком длинный")
+        return v
+
+    @field_validator("consent")
+    @classmethod
+    def consent_required(cls, v: bool) -> bool:
+        if v is not True:
+            raise ValueError("Необходимо согласие с политикой конфиденциальности")
+        return v
+
+    @field_validator("lang", mode="before")
+    @classmethod
+    def lang_whitelist(cls, v):
+        if v is None or (isinstance(v, str) and not v.strip()):
+            return None
+        s = str(v).strip().lower()
+        return s if s in _LEAD_LANG_WHITELIST else None
+
+    @field_validator(
+        "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", mode="before"
+    )
+    @classmethod
+    def empty_attribution_to_none(cls, v):
+        if v is None or (isinstance(v, str) and not v.strip()):
+            return None
+        return str(v).strip()
+
+    @model_validator(mode="after")
+    def email_or_phone(self):
+        if not self.email and not self.phone:
+            raise ValueError("Укажите e-mail или телефон")
+        return self
 
 
 class ContactRequest(LeadSubmissionBase):
