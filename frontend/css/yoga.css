@@ -5291,10 +5291,6 @@ html.satva-consent-modal-open {
   .veg-page .yoga-site-footer {
     scroll-snap-align: start;
   }
-  .veg-page #hotelAmenities,
-  .veg-page #hotelYoga {
-    padding-top: 0;
-  }
   .veg-page .yoga-beach,
   .veg-page .yoga-food,
   .veg-page #hotelChef {
@@ -5373,7 +5369,9 @@ html.satva-consent-modal-open {
   .veg-page #yogaRoomTypes,
   .veg-page #yogaBookFast,
   .veg-page #hotelChef,
-  .veg-page #yogaRecipes {
+  .veg-page #yogaRecipes,
+  .veg-page #hotelAmenities,
+  .veg-page #hotelYoga {
     padding-top: 24px;
   }
   .veg-page #yogaFood h2,
@@ -5435,7 +5433,9 @@ html.satva-consent-modal-open {
     height: 100%;
     object-fit: cover;
   }
-  .veg-page #hotelChef .yoga-program__header--top {
+  .veg-page #hotelChef .yoga-program__header--top,
+  .veg-page #hotelAmenities .yoga-program__header--top,
+  .veg-page #hotelYoga .yoga-program__header--top {
     margin-bottom: 20px;
   }
   .veg-page #hotelChef .yoga-program__photo--portrait {
@@ -5459,10 +5459,6 @@ html.satva-consent-modal-open {
   .veg-page #hotelYoga .yoga-program__photo {
     aspect-ratio: 3/2;
   }
-  .veg-page #hotelAmenities .yoga-program__text h2,
-  .veg-page #hotelYoga .yoga-program__text h2 {
-    margin-bottom: 12px;
-  }
   .veg-page #hotelAmenities .yoga-program__text p,
   .veg-page #hotelYoga .yoga-program__text p {
     margin-bottom: 12px;
@@ -5478,6 +5474,24 @@ html.satva-consent-modal-open {
     border-radius: 0;
     box-shadow: none;
     scroll-snap-align: start;
+  }
+  .veg-page .yoga-activities__text {
+    display: contents;
+  }
+  .veg-page .yoga-activities__text h2 {
+    order: -1;
+    margin: 0;
+    padding: 24px 24px 20px;
+    text-align: center;
+  }
+  .veg-page .yoga-activities__text p {
+    padding: 0 24px;
+  }
+  .veg-page .yoga-activities__text h2 + p {
+    margin-top: 20px;
+  }
+  .veg-page .yoga-activities__text p:last-child {
+    padding-bottom: 28px;
   }
 }
 @media (max-width: 768px) {
@@ -5806,6 +5820,29 @@ html.satva-consent-modal-open {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+}
+@media (max-width: 768px) and (max-height: 700px) {
+  .veg-page #hotelAmenities,
+  .veg-page #hotelYoga {
+    padding-top: 16px;
+    padding-bottom: 12px;
+  }
+  .veg-page #hotelAmenities .yoga-program__header--top,
+  .veg-page #hotelYoga .yoga-program__header--top {
+    margin-bottom: 12px;
+  }
+  .veg-page #hotelAmenities .yoga-program__block,
+  .veg-page #hotelYoga .yoga-program__block {
+    gap: 12px;
+  }
+  .veg-page #hotelAmenities .yoga-program__text p,
+  .veg-page #hotelYoga .yoga-program__text p {
+    margin-bottom: 8px;
+  }
+  .veg-page #hotelAmenities .yoga-program__list li,
+  .veg-page #hotelYoga .yoga-program__list li {
+    margin-bottom: 3px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

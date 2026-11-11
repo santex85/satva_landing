@@ -21,12 +21,6 @@ $veg-header-height-mobile: 96px;
             scroll-snap-align: start;
         }
 
-        // Блоки, которые начинаются с фото: фото вплотную к шапке и к краям экрана
-        #hotelAmenities,
-        #hotelYoga {
-            padding-top: 0;
-        }
-
         // Пляж, кухня и мастер-классы начинаются с заголовка, фото идёт под ним
         .yoga-beach,
         .yoga-food,
@@ -131,7 +125,9 @@ $veg-header-height-mobile: 96px;
         #yogaRoomTypes,
         #yogaBookFast,
         #hotelChef,
-        #yogaRecipes {
+        #yogaRecipes,
+        #hotelAmenities,
+        #hotelYoga {
             padding-top: 24px;
         }
 
@@ -208,8 +204,10 @@ $veg-header-height-mobile: 96px;
             }
         }
 
-        // Мастер-классы: квадратное фото вместо вертикального
-        #hotelChef .yoga-program__header--top {
+        // Мастер-классы, инфраструктура, йога: заголовок над фото
+        #hotelChef .yoga-program__header--top,
+        #hotelAmenities .yoga-program__header--top,
+        #hotelYoga .yoga-program__header--top {
             margin-bottom: 20px;
         }
 
@@ -242,11 +240,6 @@ $veg-header-height-mobile: 96px;
             aspect-ratio: 3 / 2;
         }
 
-        #hotelAmenities .yoga-program__text h2,
-        #hotelYoga .yoga-program__text h2 {
-            margin-bottom: 12px;
-        }
-
         #hotelAmenities .yoga-program__text p,
         #hotelYoga .yoga-program__text p {
             margin-bottom: 12px;
@@ -268,6 +261,32 @@ $veg-header-height-mobile: 96px;
             border-radius: 0;
             box-shadow: none;
             scroll-snap-align: start;
+        }
+
+        // Карточки экскурсий и вечеров: заголовок над фото, как в блоках выше.
+        // Текстовая колонка «растворяется» (display: contents), и заголовок встаёт первым;
+        // на десктопе карточка остаётся двухколоночной без изменений.
+        .yoga-activities__text {
+            display: contents;
+
+            h2 {
+                order: -1;
+                margin: 0;
+                padding: 24px $space-h 20px;
+                text-align: center;
+            }
+
+            p {
+                padding: 0 $space-h;
+            }
+
+            h2 + p {
+                margin-top: 20px;
+            }
+
+            p:last-child {
+                padding-bottom: 28px;
+            }
         }
     }
 }
@@ -411,5 +430,37 @@ $veg-photo-min: 120px;
         }
 
         .yoga-activities__photo { @include veg-fill-photo; }
+    }
+}
+
+// Низкие телефоны (iPhone SE и т.п.): в «Инфраструктуре» и «Йоге» заголовок теперь над фото,
+// и длинный список не влезал на 5–20px — ужимаем отступы, текст не трогаем
+@media (max-width: 768px) and (max-height: 700px) {
+    .veg-page {
+        #hotelAmenities,
+        #hotelYoga {
+            padding-top: 16px;
+            padding-bottom: 12px;
+        }
+
+        #hotelAmenities .yoga-program__header--top,
+        #hotelYoga .yoga-program__header--top {
+            margin-bottom: 12px;
+        }
+
+        #hotelAmenities .yoga-program__block,
+        #hotelYoga .yoga-program__block {
+            gap: 12px;
+        }
+
+        #hotelAmenities .yoga-program__text p,
+        #hotelYoga .yoga-program__text p {
+            margin-bottom: 8px;
+        }
+
+        #hotelAmenities .yoga-program__list li,
+        #hotelYoga .yoga-program__list li {
+            margin-bottom: 3px;
+        }
     }
 }
