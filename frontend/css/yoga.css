@@ -1996,6 +1996,61 @@ section[id^=yoga] h2 {
   border-radius: 50%;
 }
 
+.yoga-includes--list .yoga-includes__container {
+  max-width: 720px;
+}
+.yoga-includes--list .yoga-includes__heading {
+  margin: 0 0 28px;
+  color: #0f4c5c;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  text-align: center;
+}
+.yoga-includes--list .yoga-includes__subheading {
+  margin: 0 0 20px;
+  color: #0f4c5c;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+}
+.yoga-includes--list .yoga-includes__list {
+  margin: 0;
+}
+.yoga-includes--list .yoga-includes__list li {
+  margin-bottom: 18px;
+  color: #666666;
+}
+.yoga-includes--list .yoga-includes__list li:last-child {
+  margin-bottom: 0;
+}
+.yoga-includes--list .yoga-includes__list strong {
+  display: block;
+  margin-bottom: 2px;
+  color: #0f4c5c;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.yoga-includes--list .yoga-includes__list strong .yoga-includes__optional {
+  font-size: 0.7em;
+  vertical-align: super;
+  line-height: 0;
+}
+.yoga-includes--list .yoga-includes__step + .yoga-includes__step {
+  margin-top: 18px;
+}
+.yoga-includes--list .yoga-includes__step:last-child {
+  margin-top: 48px;
+}
+.yoga-includes--list .yoga-includes__step:last-child li {
+  margin-bottom: 10px;
+  color: #2d3436;
+}
+.yoga-includes--list .yoga-includes__legend {
+  margin: 16px 0 0;
+  text-align: left;
+}
+
 .yoga-beach {
   background: #ffffff;
   padding: clamp(60px, 8vw, 100px) 24px;
@@ -5716,6 +5771,21 @@ html.satva-consent-modal-open {
     line-height: 1.4;
     margin-bottom: 6px;
   }
+  .veg-page #yogaIncludes {
+    margin-top: 0;
+    scroll-snap-align: none;
+  }
+  .veg-page #yogaIncludes .yoga-includes__step {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 96px);
+    min-height: calc(100svh - 96px);
+    padding: 24px 0;
+    margin-top: 0;
+    box-sizing: border-box;
+    scroll-snap-align: start;
+  }
   .veg-page #yogaBookFast {
     display: flex;
     flex-direction: column;
@@ -5890,6 +5960,13 @@ html.satva-consent-modal-open {
   .veg-page #hotelAmenities .yoga-program__list li,
   .veg-page #hotelYoga .yoga-program__list li {
     margin-bottom: 3px;
+  }
+  .veg-page #yogaIncludes .yoga-includes__step {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .veg-page #yogaIncludes .yoga-includes__heading {
+    margin-bottom: 16px;
   }
 }
 @media (max-width: 768px) {

@@ -420,6 +420,21 @@ $veg-photo-min: 120px;
             margin-bottom: 6px;
         }
 
+        // «Что входит в стоимость»: три шага свайпа — заголовок + 3 пункта, ещё 3 пункта,
+        // «На территории отеля». Фото нет, поэтому список стоит по центру экрана.
+        #yogaIncludes {
+            margin-top: 0;
+            scroll-snap-align: none;
+        }
+
+        #yogaIncludes .yoga-includes__step {
+            @include veg-screen;
+            padding: 24px 0;
+            margin-top: 0;
+            box-sizing: border-box;
+            scroll-snap-align: start;
+        }
+
         // Быстро бронируется: текст → фото → кнопка
         #yogaBookFast { @include veg-screen; }
         #yogaBookFast .yoga-rooms-veg__container { @include veg-column; }
@@ -486,6 +501,16 @@ $veg-photo-min: 120px;
         #hotelAmenities .yoga-program__list li,
         #hotelYoga .yoga-program__list li {
             margin-bottom: 3px;
+        }
+
+        // «Что входит»: на 320×568 заголовок с тремя пунктами был выше экрана на 20px
+        #yogaIncludes .yoga-includes__step {
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        #yogaIncludes .yoga-includes__heading {
+            margin-bottom: 16px;
         }
     }
 }

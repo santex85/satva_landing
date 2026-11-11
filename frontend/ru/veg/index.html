@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=66" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=66"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=67" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=67"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -472,58 +472,34 @@
 
     <div class="yoga-sea-band">
     <!-- 03. Что включено -->
-    <section id="yogaIncludes" class="yoga-includes" aria-labelledby="yogaIncludesTitle">
+    <section id="yogaIncludes" class="yoga-includes yoga-includes--list" aria-labelledby="yogaIncludesTitle">
+        <!-- Без иконок, списком; на телефоне три шага свайпа: заголовок + 3 пункта, ещё 3 пункта, «На территории отеля» -->
         <div class="yoga-includes__container">
-            <div class="yoga-includes__header yoga-fade-in">
-                <h2 id="yogaIncludesTitle">Что входит в стоимость проживания</h2>
+            <div class="yoga-includes__step yoga-fade-in">
+                <h2 id="yogaIncludesTitle" class="yoga-includes__heading">Что входит в&nbsp;стоимость проживания</h2>
+                <ul class="yoga-includes__list yoga-program__list">
+                    <li><strong>Вегетарианский завтрак и обед</strong> Шведский стол. Ужин можно заказать дополнительно.</li>
+                    <li><strong>Отель у моря</strong> Уютные номера со&nbsp;всеми удобствами на&nbsp;первой береговой линии.</li>
+                    <li><strong>Бассейны и сауны</strong> 3&nbsp;открытых бассейна, травяная и&nbsp;финская сауны.</li>
+                </ul>
             </div>
-            <div class="yoga-includes__grid">
-                <div class="yoga-includes__card yoga-fade-in">
-                    <img class="yoga-includes__image" src="/img/yoga_tour/icon_food_includes.png" alt="" loading="lazy" width="285" height="180" decoding="async">
-                    <h3>Вегетарианский завтрак и обед</h3>
-                    <p>Satva Samui — вегетарианский отель. Завтрак и обед (шведский стол) включены в стоимость проживания. Ужин можно заказать дополнительно.</p>
-                </div>
-
-                <div class="yoga-includes__card yoga-fade-in">
-                    <img class="yoga-includes__image" src="/img/yoga_tour/icon_palm.png" alt="" loading="lazy" width="285" height="162" decoding="async">
-                    <h3>Отель у моря</h3>
-                    <p>Уютные номера со всеми удобствами на первой береговой линии.</p>
-                </div>
-
-                <div class="yoga-includes__card yoga-fade-in">
-                    <img class="yoga-includes__image" src="/img/yoga_tour/icon_pool_sauna_includes.svg" alt="" loading="lazy" width="285" height="156" decoding="async">
-                    <h3>Бассейны и сауны</h3>
-                    <p>3 открытых бассейна, травяная и финская сауны для расслабления и полноценного отдыха.</p>
-                </div>
-
-                <div class="yoga-includes__card yoga-fade-in">
-                    <img class="yoga-includes__image" src="/img/yoga_tour/icon_gym_includes.svg" alt="" loading="lazy" width="285" height="128" decoding="async">
-                    <h3>Тренажерный зал</h3>
-                    <p>Кардио- и силовые тренажёры с видом на сад.</p>
-                </div>
-
-                <div class="yoga-includes__card yoga-fade-in">
-                    <img class="yoga-includes__image" src="/img/yoga_tour/icon_water_includes.svg" alt="" loading="lazy" width="285" height="149" decoding="async">
-                    <h3>Водные активности</h3>
-                    <p>Бесплатное пользование каяками и сапбордами (SUP) для прогулок по спокойному морю прямо у отеля.</p>
-                </div>
-
-                <div class="yoga-includes__card yoga-fade-in">
-                    <img class="yoga-includes__image" src="/img/yoga_tour/icon_temple_includes.png" alt="" loading="lazy" width="285" height="242" decoding="async">
-                    <h3 class="yoga-includes__title--with-note"><span class="yoga-includes__title-text">Экскурсии и трансфер</span><span class="yoga-includes__optional" aria-hidden="true">*</span></h3>
-                    <p>Организация индивидуального трансфера из аэропорта и экскурсий по самым красивым местам Самуи.</p>
-                </div>
+            <div class="yoga-includes__step yoga-fade-in">
+                <ul class="yoga-includes__list yoga-program__list">
+                    <li><strong>Тренажёрный зал</strong> Кардио- и&nbsp;силовые тренажёры с&nbsp;видом на&nbsp;сад.</li>
+                    <li><strong>Водные активности</strong> Бесплатные каяки и&nbsp;сапборды (SUP) для прогулок по&nbsp;спокойному морю прямо у&nbsp;отеля.</li>
+                    <li><strong>Экскурсии и трансфер<span class="yoga-includes__optional" aria-hidden="true">*</span></strong> Индивидуальный трансфер из&nbsp;аэропорта и&nbsp;экскурсии по&nbsp;самым красивым местам Самуи.</li>
+                </ul>
+                <p class="yoga-includes__legend"><span class="yoga-includes__optional">*</span>&nbsp;— трансфер и&nbsp;экскурсии оплачиваются отдельно при заказе.</p>
             </div>
-            <p class="yoga-includes__legend yoga-fade-in"><span class="yoga-includes__optional">*</span>&nbsp;— трансфер и экскурсии оплачиваются отдельно при заказе.</p>
-            <div class="yoga-includes__amenities yoga-fade-in" aria-label="Инфраструктура, включённая в стоимость">
-                <p class="yoga-includes__amenities-title">На территории отеля:</p>
-                <ul class="yoga-includes__amenities-list">
+            <div class="yoga-includes__step yoga-fade-in" aria-label="Инфраструктура, включённая в стоимость">
+                <h3 class="yoga-includes__subheading">На территории отеля</h3>
+                <ul class="yoga-includes__list yoga-program__list">
                     <li>3 открытых бассейна</li>
-                    <li>Вегетарианский ресторан у моря</li>
+                    <li>Вегетарианский ресторан у&nbsp;моря</li>
                     <li>2 сауны</li>
-                    <li>Тренажерный зал</li>
-                    <li>Собственный пляж с шезлонгами</li>
-                    <li>Каяки и сапборды</li>
+                    <li>Тренажёрный зал</li>
+                    <li>Собственный пляж с&nbsp;шезлонгами</li>
+                    <li>Каяки и&nbsp;сапборды</li>
                     <li>Тропический сад</li>
                     <li>Конференц-зал</li>
                 </ul>
