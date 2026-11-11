@@ -428,7 +428,9 @@ section[id^=yoga] h2 {
   width: 0%;
   background: #ff8e72;
   z-index: 9999;
-  transition: width 0.2s linear;
+  transform-origin: left center;
+  transition: transform 0.2s linear;
+  will-change: transform;
   pointer-events: none;
 }
 
@@ -623,7 +625,7 @@ section[id^=yoga] h2 {
     z-index: 1001;
     width: 280px;
     max-width: 85vw;
-    height: 100vh;
+    bottom: 0;
     background: #0f4c5c;
     flex-direction: column;
     align-items: flex-start;
@@ -694,7 +696,8 @@ section[id^=yoga] h2 {
 
 .yoga-hero {
   position: relative;
-  min-height: max(600px, 100dvh);
+  min-height: max(600px, 100vh);
+  min-height: max(600px, 100svh);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -759,7 +762,8 @@ section[id^=yoga] h2 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: calc(100dvh - 52px - max(12px, env(safe-area-inset-bottom, 0px)));
+    min-height: calc(100vh - 52px - max(12px, env(safe-area-inset-bottom, 0px)));
+    min-height: calc(100svh - 52px - max(12px, env(safe-area-inset-bottom, 0px)));
   }
 }
 .yoga-hero__logo {

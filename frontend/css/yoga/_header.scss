@@ -231,7 +231,7 @@
         z-index: 1001;
         width: 280px;
         max-width: 85vw;
-        height: 100vh;
+        bottom: 0; // во всю высоту без 100vh — не зависит от адресной строки
         background: $color-primary;
         flex-direction: column;
         align-items: flex-start;

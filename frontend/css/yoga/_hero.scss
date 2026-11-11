@@ -14,7 +14,10 @@ $yoga-hero-block-gap: 16px;
 
 .yoga-hero {
     position: relative;
-    min-height: max(600px, 100dvh);
+    // svh, а не dvh: высота не меняется, пока прячется или появляется адресная строка браузера,
+    // иначе на телефоне Hero пересчитывается каждый кадр и тянет за собой всю страницу (рывки при скролле)
+    min-height: max(600px, 100vh);
+    min-height: max(600px, 100svh);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -88,7 +91,8 @@ $yoga-hero-block-gap: 16px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: calc(100dvh - 52px - max(12px, env(safe-area-inset-bottom, 0px)));
+            min-height: calc(100vh - 52px - max(12px, env(safe-area-inset-bottom, 0px)));
+            min-height: calc(100svh - 52px - max(12px, env(safe-area-inset-bottom, 0px)));
         }
     }
 

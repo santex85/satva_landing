@@ -553,7 +553,7 @@
             var pct = max > 0 ? (scrollTop / max) * 100 : 0;
             if (pct < 0) pct = 0;
             if (pct > 100) pct = 100;
-            bar.style.width = pct + '%';
+            bar.style.transform = 'scaleX(' + (pct / 100) + ')';
             ticking = false;
         }
 
@@ -564,8 +564,19 @@
             }
         }
 
+        // Пересчёт при resize — только если изменилась ширина: на телефоне адресная строка,
+        // пряча себя, шлёт resize по высоте на каждом кадре; прогресс и так обновит scroll
+        var lastWidth = window.innerWidth;
+        function onResize() {
+            if (window.innerWidth === lastWidth) return;
+            lastWidth = window.innerWidth;
+            onScroll();
+        }
+
+        bar.style.width = '100%';
+        bar.style.transform = 'scaleX(0)';
         window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', onScroll, { passive: true });
+        window.addEventListener('resize', onResize, { passive: true });
         update();
     }
 

@@ -14,6 +14,10 @@
     width: 0%;
     background: $color-accent;
     z-index: 9999;
-    transition: width $duration-fast linear;
+    // JS ставит width: 100% и двигает scaleX — это только композитинг, без пересчёта макета.
+    // width: 0% остаётся для старого закешированного yoga.js, который меняет width.
+    transform-origin: left center;
+    transition: transform $duration-fast linear;
+    will-change: transform;
     pointer-events: none;
 }
