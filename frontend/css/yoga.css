@@ -5845,6 +5845,12 @@ html.satva-consent-modal-open {
     margin-bottom: 3px;
   }
 }
+@media (max-width: 768px) {
+  .veg-page #hotelAmenities .yoga-program__photo,
+  .veg-page #hotelYoga .yoga-program__photo {
+    min-height: 56vw;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

@@ -464,3 +464,14 @@ $veg-photo-min: 120px;
         }
     }
 }
+
+// Инфраструктура и йога: фото не ниже 16:9 (раньше на телефонах с высотой ~690px
+// оставалась полоска ~150px); текст под это сокращён 11.11.2026
+@media (max-width: 768px) {
+    .veg-page {
+        #hotelAmenities .yoga-program__photo,
+        #hotelYoga .yoga-program__photo {
+            min-height: 56vw;
+        }
+    }
+}
