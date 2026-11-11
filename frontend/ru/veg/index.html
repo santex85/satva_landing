@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=65" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=65"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=66" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=66"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -356,29 +356,58 @@
         </div>
     </section>
 
-    <!-- 07a. Типы размещения: 3 фото (номер с пологом, бассейн, номер с двумя кроватями) -->
-    <section id="yogaRoomTypes" class="yoga-rooms-veg" aria-labelledby="yogaRoomTypesTitle">
+    <!-- 07a. Типы размещения: вилла, бунгало одноместное, бунгало двуместное.
+         На телефоне каждый тип — отдельный шаг свайпа (подзаголовок → фото → список); на десктопе три карточки в ряд.
+         Пункты списков примерные — уточнить у отеля. -->
+    <section id="yogaRoomTypes" class="yoga-rooms-veg yoga-room-types" aria-labelledby="yogaRoomTypesTitle">
         <div class="yoga-rooms-veg__container">
             <h2 id="yogaRoomTypesTitle" class="yoga-rooms-veg__title yoga-fade-in">Типы размещения</h2>
-            <div class="yoga-rooms-veg__photos yoga-fade-in">
-                <figure class="yoga-rooms-veg__photo">
-                    <picture>
-                        <source type="image/webp" srcset="/img/yoga_tour/rooms_veg_04.webp">
-                        <img src="/img/yoga_tour/rooms_veg_04.jpg" alt="Номер с большой кроватью под пологом и тёплыми напольными светильниками" loading="lazy" width="1280" height="854" decoding="async">
-                    </picture>
-                </figure>
-                <figure class="yoga-rooms-veg__photo">
-                    <picture>
-                        <source type="image/webp" srcset="/img/yoga_tour/rooms_veg_net.webp">
-                        <img src="/img/yoga_tour/rooms_veg_net.jpg" alt="Номер с большой кроватью под москитной сеткой и окнами в сад" loading="lazy" width="1280" height="854" decoding="async">
-                    </picture>
-                </figure>
-                <figure class="yoga-rooms-veg__photo">
-                    <picture>
-                        <source type="image/webp" srcset="/img/yoga_tour/rooms_veg_03.webp">
-                        <img src="/img/yoga_tour/rooms_veg_03.jpg" alt="Номер с двумя раздельными кроватями и окнами в сад" loading="lazy" width="1280" height="854" decoding="async">
-                    </picture>
-                </figure>
+            <div class="yoga-room-types__list">
+                <article class="yoga-room-type yoga-fade-in">
+                    <h3 class="yoga-room-type__name">Вилла</h3>
+                    <figure class="yoga-room-type__photo">
+                        <picture>
+                            <source type="image/webp" srcset="/img/yoga_tour/rooms_veg_04.webp">
+                            <img src="/img/yoga_tour/rooms_veg_04.jpg" alt="Вилла: спальня с большой кроватью под пологом и тёплыми напольными светильниками" loading="lazy" width="1280" height="854" decoding="async">
+                        </picture>
+                    </figure>
+                    <ul class="yoga-room-type__list yoga-program__list">
+                        <li>Просторная спальня с&nbsp;большой кроватью</li>
+                        <li>Собственная терраса</li>
+                        <li>Кондиционер, Wi-Fi, сейф</li>
+                        <li>Душ, фен, чайник, полотенца</li>
+                    </ul>
+                </article>
+                <article class="yoga-room-type yoga-fade-in">
+                    <h3 class="yoga-room-type__name">Бунгало одноместное</h3>
+                    <figure class="yoga-room-type__photo">
+                        <picture>
+                            <source type="image/webp" srcset="/img/yoga_tour/rooms_veg_net.webp">
+                            <img src="/img/yoga_tour/rooms_veg_net.jpg" alt="Одноместное бунгало: большая кровать под москитной сеткой и окна в сад" loading="lazy" width="1280" height="854" decoding="async">
+                        </picture>
+                    </figure>
+                    <ul class="yoga-room-type__list yoga-program__list">
+                        <li>Для одного гостя, большая кровать</li>
+                        <li>Москитная сетка над кроватью</li>
+                        <li>Окна в&nbsp;тропический сад</li>
+                        <li>Кондиционер, Wi-Fi, душ, фен</li>
+                    </ul>
+                </article>
+                <article class="yoga-room-type yoga-fade-in">
+                    <h3 class="yoga-room-type__name">Бунгало двуместное</h3>
+                    <figure class="yoga-room-type__photo">
+                        <picture>
+                            <source type="image/webp" srcset="/img/yoga_tour/rooms_veg_03.webp">
+                            <img src="/img/yoga_tour/rooms_veg_03.jpg" alt="Двуместное бунгало: две раздельные кровати и окна в сад" loading="lazy" width="1280" height="854" decoding="async">
+                        </picture>
+                    </figure>
+                    <ul class="yoga-room-type__list yoga-program__list">
+                        <li>Две раздельные кровати</li>
+                        <li>Окна в&nbsp;тропический сад</li>
+                        <li>Кондиционер, Wi-Fi, сейф</li>
+                        <li>Душ, фен, чайник, полотенца</li>
+                    </ul>
+                </article>
             </div>
         </div>
     </section>

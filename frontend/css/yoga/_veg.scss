@@ -122,7 +122,6 @@ $veg-header-height-mobile: 96px;
         // Заголовки 24px, отступы 20px, текст 15px; фото чуть ниже по высоте.
 
         #yogaFood,
-        #yogaRoomTypes,
         #yogaBookFast,
         #hotelChef,
         #yogaRecipes,
@@ -188,20 +187,8 @@ $veg-header-height-mobile: 96px;
             }
         }
 
-        // Типы размещения: заголовок и три фото на одном экране
-        #yogaRoomTypes .yoga-rooms-veg__title,
         #yogaRecipes .yoga-rooms-veg__title {
             margin-bottom: 20px;
-        }
-
-        #yogaRoomTypes .yoga-rooms-veg__photo {
-            aspect-ratio: 2 / 1;
-
-            picture,
-            img {
-                height: 100%;
-                object-fit: cover;
-            }
         }
 
         // Мастер-классы, инфраструктура, йога: заголовок над фото
@@ -381,18 +368,56 @@ $veg-photo-min: 120px;
             }
         }
 
-        // Типы размещения: заголовок → три фото
-        #yogaRoomTypes { @include veg-screen; }
-        #yogaRoomTypes .yoga-rooms-veg__container { @include veg-column; }
-        #yogaRoomTypes .yoga-rooms-veg__photos {
-            @include veg-column;
-            justify-content: stretch;
-            width: auto; // во всю ширину экрана за счёт отрицательных полей
+        // Типы размещения: три шага свайпа — вилла, бунгало одноместное, бунгало двуместное.
+        // Каждый шаг: подзаголовок → фото → список. Общий заголовок «Типы размещения» стоит
+        // над первым шагом; его высота фиксирована (24 + 29 + 20 = 73px), и первый шаг
+        // короче на неё, чтобы заголовок с виллой вместе заняли ровно один экран.
+        #yogaRoomTypes {
+            padding-top: 0;
+            padding-bottom: 0;
         }
 
-        #yogaRoomTypes .yoga-rooms-veg__photo {
+        #yogaRoomTypes .yoga-rooms-veg__title {
+            margin: 0;
+            padding: 24px 0 20px;
+            line-height: 29px;
+            white-space: nowrap;
+        }
+
+        .yoga-room-type {
+            @include veg-screen;
+            justify-content: center;
+            padding: 24px 0;
+            box-sizing: border-box;
+            scroll-snap-align: start;
+        }
+
+        .yoga-room-type:first-child {
+            min-height: calc(100vh - #{$veg-header-height-mobile} - 73px);
+            min-height: calc(100svh - #{$veg-header-height-mobile} - 73px);
+            padding-top: 0;
+            scroll-snap-align: none; // шаг начинается с заголовка секции
+        }
+
+        .yoga-room-type__name {
+            margin: 0 0 16px;
+        }
+
+        .yoga-room-type__photo {
             @include veg-fill-photo;
-            min-height: 100px;
+            margin-left: -$space-h;
+            margin-right: -$space-h;
+            border-radius: 0;
+        }
+
+        .yoga-room-type__list {
+            margin: 20px 0 0;
+        }
+
+        .yoga-room-type__list li {
+            font-size: 15px;
+            line-height: 1.4;
+            margin-bottom: 6px;
         }
 
         // Быстро бронируется: текст → фото → кнопка
