@@ -3341,6 +3341,12 @@ section[id^=yoga] h2 {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+.yoga-reviews__step {
+  display: contents;
+}
+.yoga-reviews__step .yoga-reviews__header {
+  grid-column: 1/-1;
+}
 .yoga-reviews__item {
   display: flex;
   flex-direction: column;
@@ -5787,6 +5793,60 @@ html.satva-consent-modal-open {
     box-sizing: border-box;
     scroll-snap-align: start;
   }
+  .veg-page #yogaReviews {
+    padding-top: 0;
+    padding-bottom: 0;
+    scroll-snap-align: none;
+  }
+  .veg-page #yogaReviews .yoga-reviews__grid {
+    display: block;
+  }
+  .veg-page #yogaReviews .yoga-reviews__step {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: minmax(0, calc((100vw - 48px - 12px) / 2 * 16 / 9)) auto;
+    align-content: center;
+    column-gap: 12px;
+    row-gap: 10px;
+    height: calc(100vh - 96px);
+    height: calc(100svh - 96px);
+    padding: 24px 0;
+    box-sizing: border-box;
+    scroll-snap-align: start;
+  }
+  .veg-page #yogaReviews .yoga-reviews__step.yoga-reviews__step--first {
+    grid-template-rows: auto minmax(0, calc((100vw - 48px - 12px) / 2 * 16 / 9)) auto;
+  }
+  .veg-page #yogaReviews .yoga-reviews__header {
+    grid-row: 1;
+    margin: 0 0 10px;
+  }
+  .veg-page #yogaReviews .yoga-reviews__header h2 {
+    margin-bottom: 8px;
+  }
+  .veg-page #yogaReviews .yoga-reviews__header p:not(.yoga-chip-title) {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  .veg-page #yogaReviews .yoga-reviews__item {
+    display: contents;
+  }
+  .veg-page #yogaReviews .yoga-reviews__card {
+    grid-row: 1;
+    aspect-ratio: auto;
+    height: 100%;
+  }
+  .veg-page #yogaReviews .yoga-reviews__summary {
+    grid-row: 2;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .veg-page #yogaReviews .yoga-reviews__step--first .yoga-reviews__card {
+    grid-row: 2;
+  }
+  .veg-page #yogaReviews .yoga-reviews__step--first .yoga-reviews__summary {
+    grid-row: 3;
+  }
   .veg-page #yogaBookFast {
     display: flex;
     flex-direction: column;
@@ -5961,6 +6021,13 @@ html.satva-consent-modal-open {
   .veg-page #hotelAmenities .yoga-program__list li,
   .veg-page #hotelYoga .yoga-program__list li {
     margin-bottom: 3px;
+  }
+  .veg-page #yogaReviews .yoga-reviews__step {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .veg-page #yogaReviews .yoga-reviews__summary {
+    font-size: 13px;
   }
   .veg-page #yogaIncludes .yoga-includes__step {
     padding-top: 16px;

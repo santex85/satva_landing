@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=70" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=70"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=71" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=71"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -611,114 +611,124 @@
     <!-- 08. Видео- и текстовые отзывы -->
     <section id="yogaReviews" class="yoga-reviews" aria-labelledby="yogaReviewsTitle">
         <div class="yoga-reviews__container">
-            <div class="yoga-reviews__header yoga-fade-in">
-                <h2 id="yogaReviewsTitle">Отзывы гостей</h2>
-                <p>Многие из наших гостей приезжают в отель повторно, рекомендуют нас своим друзьям и близким.</p>
-            </div>
+            <!-- На телефоне каждый .yoga-reviews__step — один экран свайпа: два отзыва (на первом ещё заголовок).
+                 На десктопе шаги «растворяются» (display: contents), остаётся сетка в 4 колонки. -->
             <div class="yoga-reviews__grid">
-                <div class="yoga-reviews__item yoga-fade-in">
-                    <button type="button" class="yoga-reviews__card"
-                         data-video="/video/review_1.mp4" aria-label="Открыть видео: потрясающий отдых у моря, природа, команда и атмосфера">
-                        <div class="yoga-reviews__thumb">
-                            <video src="/video/review_1.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                            <span class="yoga-reviews__play" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                            </span>
-                        </div>
-                        <p class="yoga-reviews__caption">Видео-отзыв 1</p>
-                    </button>
-                    <p class="yoga-reviews__summary">Потрясающий отдых у моря, красивая природа, прекрасная команда и спокойная атмосфера – крутейший опыт. Первый такой отдых за 20 лет</p>
+                <div class="yoga-reviews__step yoga-reviews__step--first">
+                    <div class="yoga-reviews__header">
+                        <h2 id="yogaReviewsTitle">Отзывы гостей</h2>
+                        <p>Многие из наших гостей приезжают в отель повторно, рекомендуют нас своим друзьям и близким.</p>
+                    </div>
+                    <div class="yoga-reviews__item yoga-fade-in">
+                        <button type="button" class="yoga-reviews__card"
+                             data-video="/video/review_1.mp4" aria-label="Открыть видео: потрясающий отдых у моря, природа, команда и атмосфера">
+                            <div class="yoga-reviews__thumb">
+                                <video src="/video/review_1.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                                <span class="yoga-reviews__play" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                                </span>
+                            </div>
+                            <p class="yoga-reviews__caption">Видео-отзыв 1</p>
+                        </button>
+                        <p class="yoga-reviews__summary">Потрясающий отдых у моря, красивая природа, прекрасная команда и спокойная атмосфера – крутейший опыт. Первый такой отдых за 20 лет</p>
+                    </div>
+                    <div class="yoga-reviews__item yoga-fade-in">
+                        <button type="button" class="yoga-reviews__card"
+                             data-video="/video/review_2.mp4" aria-label="Открыть видео: второй визит в Сатва Самуи, силы и баланс, благодарность команде">
+                            <div class="yoga-reviews__thumb">
+                                <video src="/video/review_2.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                                <span class="yoga-reviews__play" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                                </span>
+                            </div>
+                            <p class="yoga-reviews__caption">Видео-отзыв 2</p>
+                        </button>
+                        <p class="yoga-reviews__summary">Второй раз приехала в Сатва Самуи. Набралась силы, спокойствия, баланса, энергии. Благодарна всем, кто его создаёт</p>
+                    </div>
                 </div>
-                <div class="yoga-reviews__item yoga-fade-in">
-                    <button type="button" class="yoga-reviews__card"
-                         data-video="/video/review_2.mp4" aria-label="Открыть видео: второй визит в Сатва Самуи, силы и баланс, благодарность команде">
-                        <div class="yoga-reviews__thumb">
-                            <video src="/video/review_2.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                            <span class="yoga-reviews__play" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                            </span>
-                        </div>
-                        <p class="yoga-reviews__caption">Видео-отзыв 2</p>
-                    </button>
-                    <p class="yoga-reviews__summary">Второй раз приехала в Сатва Самуи. Набралась силы, спокойствия, баланса, энергии. Благодарна всем, кто его создаёт</p>
+                <div class="yoga-reviews__step">
+                    <div class="yoga-reviews__item yoga-fade-in">
+                        <button type="button" class="yoga-reviews__card"
+                             data-video="/video/review_3.mp4" aria-label="Открыть видео: второй отдых в Сатва, сервис и вкусная еда, гости приедут снова">
+                            <div class="yoga-reviews__thumb">
+                                <video src="/video/review_3.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                                <span class="yoga-reviews__play" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                                </span>
+                            </div>
+                            <p class="yoga-reviews__caption">Видео-отзыв 3</p>
+                        </button>
+                        <p class="yoga-reviews__summary">Второй раз отдыхаем тут, всё очень нравится. Прекрасный сервис, вкусная вегетарианская еда. Обязательно приедем снова</p>
+                    </div>
+                    <div class="yoga-reviews__item yoga-fade-in">
+                        <button type="button" class="yoga-reviews__card"
+                             data-video="/video/review_4.mp4" aria-label="Открыть видео: уникальное место для отдыха, природа и море, спокойная атмосфера">
+                            <div class="yoga-reviews__thumb">
+                                <video src="/video/review_4.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                                <span class="yoga-reviews__play" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                                </span>
+                            </div>
+                            <p class="yoga-reviews__caption">Видео-отзыв 4</p>
+                        </button>
+                        <p class="yoga-reviews__summary">Уникальное место для отдыха. Всё волшебное — природа, воздух, море, атмосфера. Здесь спокойно, душевно, каждый найдёт то, что хочет</p>
+                    </div>
                 </div>
-                <div class="yoga-reviews__item yoga-fade-in">
-                    <button type="button" class="yoga-reviews__card"
-                         data-video="/video/review_3.mp4" aria-label="Открыть видео: второй отдых в Сатва, сервис и вкусная еда, гости приедут снова">
-                        <div class="yoga-reviews__thumb">
-                            <video src="/video/review_3.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                            <span class="yoga-reviews__play" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                            </span>
-                        </div>
-                        <p class="yoga-reviews__caption">Видео-отзыв 3</p>
-                    </button>
-                    <p class="yoga-reviews__summary">Второй раз отдыхаем тут, всё очень нравится. Прекрасный сервис, вкусная вегетарианская еда. Обязательно приедем снова</p>
+                <div class="yoga-reviews__step">
+                    <div class="yoga-reviews__item yoga-fade-in">
+                        <button type="button" class="yoga-reviews__card"
+                             data-video="/video/review_5.mp4" aria-label="Открыть видео: море и природа, дружелюбный персонал и индивидуальный подход">
+                            <div class="yoga-reviews__thumb">
+                                <video src="/video/review_5.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                                <span class="yoga-reviews__play" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                                </span>
+                            </div>
+                            <p class="yoga-reviews__caption">Видео-отзыв 5</p>
+                        </button>
+                        <p class="yoga-reviews__summary">Море твоё! Много воздуха, зелени, спокойствия. Очень дружелюбный персонал. К вам относятся внимательно и с индивидуальным подходом, что очень ценно</p>
+                    </div>
+                    <div class="yoga-reviews__item yoga-fade-in">
+                        <button type="button" class="yoga-reviews__card"
+                             data-video="/video/review_6.mp4" aria-label="Открыть видео: атмосфера и природа как рай, звуки моря, гость вернется снова">
+                            <div class="yoga-reviews__thumb">
+                                <video src="/video/review_6.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                                <span class="yoga-reviews__play" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                                </span>
+                            </div>
+                            <p class="yoga-reviews__caption">Видео-отзыв 6</p>
+                        </button>
+                        <p class="yoga-reviews__summary">Мы попали в рай — звуки, запахи, столько зелени вокруг, уютные номера и вкусная вегетарианская кухня</p>
+                    </div>
                 </div>
-                <div class="yoga-reviews__item yoga-fade-in">
-                    <button type="button" class="yoga-reviews__card"
-                         data-video="/video/review_4.mp4" aria-label="Открыть видео: уникальное место для отдыха, природа и море, спокойная атмосфера">
-                        <div class="yoga-reviews__thumb">
-                            <video src="/video/review_4.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                            <span class="yoga-reviews__play" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                            </span>
-                        </div>
-                        <p class="yoga-reviews__caption">Видео-отзыв 4</p>
-                    </button>
-                    <p class="yoga-reviews__summary">Уникальное место для отдыха. Всё волшебное — природа, воздух, море, атмосфера. Здесь спокойно, душевно, каждый найдёт то, что хочет</p>
-                </div>
-                <div class="yoga-reviews__item yoga-fade-in">
-                    <button type="button" class="yoga-reviews__card"
-                         data-video="/video/review_5.mp4" aria-label="Открыть видео: море и природа, дружелюбный персонал и индивидуальный подход">
-                        <div class="yoga-reviews__thumb">
-                            <video src="/video/review_5.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                            <span class="yoga-reviews__play" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                            </span>
-                        </div>
-                        <p class="yoga-reviews__caption">Видео-отзыв 5</p>
-                    </button>
-                    <p class="yoga-reviews__summary">Море твоё! Много воздуха, зелени, спокойствия. Очень дружелюбный персонал. К вам относятся внимательно и с индивидуальным подходом, что очень ценно</p>
-                </div>
-                <div class="yoga-reviews__item yoga-fade-in">
-                    <button type="button" class="yoga-reviews__card"
-                         data-video="/video/review_6.mp4" aria-label="Открыть видео: атмосфера и природа как рай, звуки моря, гость вернется снова">
-                        <div class="yoga-reviews__thumb">
-                            <video src="/video/review_6.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                            <span class="yoga-reviews__play" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                            </span>
-                        </div>
-                        <p class="yoga-reviews__caption">Видео-отзыв 6</p>
-                    </button>
-                    <p class="yoga-reviews__summary">Мы попали в рай — звуки, запахи, столько зелени вокруг, уютные номера и вкусная вегетарианская кухня</p>
-                </div>
-                <div class="yoga-reviews__item yoga-fade-in">
-                    <button type="button" class="yoga-reviews__card"
-                         data-video="/video/review_7.mp4" aria-label="Открыть видео: спокойный отдых, вкусная вегетарианская еда, внимательный персонал">
-                        <div class="yoga-reviews__thumb">
-                            <video src="/video/review_7.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                            <span class="yoga-reviews__play" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                            </span>
-                        </div>
-                        <p class="yoga-reviews__caption">Видео-отзыв 7</p>
-                    </button>
-                    <p class="yoga-reviews__summary">Отличный спокойный отдых. Чистота, вкусная вегетарианская кухня, замечательный персонал</p>
-                </div>
-                <div class="yoga-reviews__item yoga-fade-in">
-                    <button type="button" class="yoga-reviews__card"
-                         data-video="/video/review_8.mp4" aria-label="Открыть видео: рекомендация приехать, спокойный отдых, команда, гость в восторге">
-                        <div class="yoga-reviews__thumb">
-                            <video src="/video/review_8.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
-                            <span class="yoga-reviews__play" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
-                            </span>
-                        </div>
-                        <p class="yoga-reviews__caption">Видео-отзыв 8</p>
-                    </button>
-                    <p class="yoga-reviews__summary">Рекомендую всем приехать сюда. Волшебный отдых — спокойно, красиво, замечательная команда. Я в восторге!</p>
+                <div class="yoga-reviews__step">
+                    <div class="yoga-reviews__item yoga-fade-in">
+                        <button type="button" class="yoga-reviews__card"
+                             data-video="/video/review_7.mp4" aria-label="Открыть видео: спокойный отдых, вкусная вегетарианская еда, внимательный персонал">
+                            <div class="yoga-reviews__thumb">
+                                <video src="/video/review_7.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                                <span class="yoga-reviews__play" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                                </span>
+                            </div>
+                            <p class="yoga-reviews__caption">Видео-отзыв 7</p>
+                        </button>
+                        <p class="yoga-reviews__summary">Отличный спокойный отдых. Чистота, вкусная вегетарианская кухня, замечательный персонал</p>
+                    </div>
+                    <div class="yoga-reviews__item yoga-fade-in">
+                        <button type="button" class="yoga-reviews__card"
+                             data-video="/video/review_8.mp4" aria-label="Открыть видео: рекомендация приехать, спокойный отдых, команда, гость в восторге">
+                            <div class="yoga-reviews__thumb">
+                                <video src="/video/review_8.mp4" muted playsinline preload="metadata" width="720" height="1280"></video>
+                                <span class="yoga-reviews__play" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                                </span>
+                            </div>
+                            <p class="yoga-reviews__caption">Видео-отзыв 8</p>
+                        </button>
+                        <p class="yoga-reviews__summary">Рекомендую всем приехать сюда. Волшебный отдых — спокойно, красиво, замечательная команда. Я в восторге!</p>
+                    </div>
                 </div>
             </div>
         </div>

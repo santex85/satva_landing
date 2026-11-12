@@ -462,6 +462,73 @@ $veg-photo-min: 120px;
             scroll-snap-align: start;
         }
 
+        // Отзывы: четыре экрана по два видео (на первом ещё заголовок). Раньше вся секция
+        // была одной целью привязки в три с лишним экрана, и свайп пролетал её до конца.
+        // Шаг ровно в экран; видео в паре одной высоты (общая строка сетки): строка растёт
+        // до 9:16 и ужимается, если экран низкий; текст отзывов — строкой ниже; всё по центру.
+        #yogaReviews {
+            padding-top: 0;
+            padding-bottom: 0;
+            scroll-snap-align: none;
+        }
+
+        #yogaReviews .yoga-reviews__grid {
+            display: block;
+        }
+
+        #yogaReviews .yoga-reviews__step {
+            $card-9x16: calc((100vw - #{2 * $space-h} - 12px) / 2 * 16 / 9);
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: minmax(0, $card-9x16) auto;
+            align-content: center;
+            column-gap: 12px;
+            row-gap: 10px;
+            height: calc(100vh - #{$veg-header-height-mobile});
+            height: calc(100svh - #{$veg-header-height-mobile});
+            padding: 24px 0;
+            box-sizing: border-box;
+            scroll-snap-align: start;
+
+            &.yoga-reviews__step--first {
+                grid-template-rows: auto minmax(0, $card-9x16) auto;
+            }
+        }
+
+        #yogaReviews .yoga-reviews__header {
+            grid-row: 1;
+            margin: 0 0 10px;
+
+            h2 {
+                margin-bottom: 8px;
+            }
+
+            p:not(.yoga-chip-title) {
+                font-size: 15px;
+                line-height: 1.45;
+            }
+        }
+
+        #yogaReviews .yoga-reviews__item {
+            display: contents;
+        }
+
+        #yogaReviews .yoga-reviews__card {
+            grid-row: 1;
+            aspect-ratio: auto;
+            height: 100%;
+        }
+
+        #yogaReviews .yoga-reviews__summary {
+            grid-row: 2;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        #yogaReviews .yoga-reviews__step--first .yoga-reviews__card { grid-row: 2; }
+        #yogaReviews .yoga-reviews__step--first .yoga-reviews__summary { grid-row: 3; }
+
         // Быстро бронируется: текст → фото → кнопка
         #yogaBookFast { @include veg-screen; }
         #yogaBookFast .yoga-rooms-veg__container { @include veg-column; }
@@ -528,6 +595,16 @@ $veg-photo-min: 120px;
         #hotelAmenities .yoga-program__list li,
         #hotelYoga .yoga-program__list li {
             margin-bottom: 3px;
+        }
+
+        // Отзывы: на 320×568 первый экран (заголовок + два видео) был выше на 69px
+        #yogaReviews .yoga-reviews__step {
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        #yogaReviews .yoga-reviews__summary {
+            font-size: 13px;
         }
 
         // «Что входит»: на низких экранах (320×568) ужимаем отступы, чтобы список влез
