@@ -436,8 +436,11 @@ $veg-photo-min: 120px;
             line-height: 1.4;
         }
 
+        // Заголовок прижат к верху (24px, как у «Типов размещения»), а не по центру экрана:
+        // при центровке над ним оставалось ~80px пустоты
         #yogaIncludes .yoga-includes__step {
             @include veg-screen;
+            justify-content: flex-start;
             padding: 24px 0;
             margin-top: 0;
             box-sizing: border-box;
