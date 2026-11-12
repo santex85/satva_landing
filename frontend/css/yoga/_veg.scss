@@ -420,11 +420,20 @@ $veg-photo-min: 120px;
             margin-bottom: 6px;
         }
 
-        // «Что входит в стоимость»: три шага свайпа — заголовок + 3 пункта, ещё 3 пункта,
-        // «На территории отеля». Фото нет, поэтому список стоит по центру экрана.
+        // «Что входит в стоимость»: один экран — заголовок и список на подложке по центру.
+        // Верхний отступ полосы с морем убран: он добавлял пустоту над заголовком.
+        .yoga-sea-band {
+            padding-top: 0;
+        }
+
         #yogaIncludes {
             margin-top: 0;
             scroll-snap-align: none;
+        }
+
+        #yogaIncludes .yoga-includes__list li {
+            font-size: 15px;
+            line-height: 1.4;
         }
 
         #yogaIncludes .yoga-includes__step {
@@ -503,14 +512,22 @@ $veg-photo-min: 120px;
             margin-bottom: 3px;
         }
 
-        // «Что входит»: на 320×568 заголовок с тремя пунктами был выше экрана на 20px
+        // «Что входит»: на низких экранах (320×568) ужимаем отступы, чтобы список влез
         #yogaIncludes .yoga-includes__step {
             padding-top: 16px;
             padding-bottom: 16px;
         }
 
         #yogaIncludes .yoga-includes__heading {
-            margin-bottom: 16px;
+            margin-bottom: 14px;
+        }
+
+        #yogaIncludes .yoga-includes__panel {
+            padding: 16px 16px 14px;
+        }
+
+        #yogaIncludes .yoga-includes__list li {
+            margin-bottom: 7px;
         }
     }
 }
@@ -522,6 +539,30 @@ $veg-photo-min: 120px;
         #hotelAmenities .yoga-program__photo,
         #hotelYoga .yoga-program__photo {
             min-height: 56vw;
+        }
+    }
+}
+
+// «Что входит»: на узких телефонах (320px) пункты переносились на две строки,
+// и список не влезал в экран на 80px — меньше поля по бокам и шрифт заголовка
+@media (max-width: 340px) {
+    .veg-page {
+        #yogaIncludes {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        #yogaIncludes .yoga-includes__heading {
+            font-size: 24px;
+        }
+
+        #yogaIncludes .yoga-includes__panel {
+            padding-left: 14px;
+            padding-right: 12px;
+        }
+
+        #yogaIncludes .yoga-includes__list li {
+            font-size: 14px;
         }
     }
 }
