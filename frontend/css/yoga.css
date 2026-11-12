@@ -5567,6 +5567,16 @@ html.satva-consent-modal-open {
   }
 }
 @media (max-width: 768px) {
+  .veg-page #yogaFood,
+  .veg-page #yogaRoomTypes,
+  .veg-page #hotelActivities {
+    scroll-snap-align: none;
+  }
+  .veg-page #yogaFood .yoga-food__intro,
+  .veg-page #yogaRoomTypes .yoga-rooms-veg__title,
+  .veg-page .yoga-activities__block {
+    scroll-snap-align: start;
+  }
   .veg-page #yogaRooms {
     display: flex;
     flex-direction: column;

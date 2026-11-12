@@ -325,6 +325,21 @@ $veg-photo-min: 120px;
 
 @media (max-width: 768px) {
     .veg-page {
+        // Секции из нескольких экранов (кухня, типы размещения, экскурсии и вечера) сами
+        // не привязываются: они выше экрана, а такую цель браузер листает свободно, без щелчка,
+        // и свайп внутри неё «доезжал» медленно. Привязка — на каждом экране внутри.
+        #yogaFood,
+        #yogaRoomTypes,
+        #hotelActivities {
+            scroll-snap-align: none;
+        }
+
+        #yogaFood .yoga-food__intro,
+        #yogaRoomTypes .yoga-rooms-veg__title,
+        .yoga-activities__block {
+            scroll-snap-align: start;
+        }
+
         // «Тишина»: заголовок → фото → текст
         #yogaRooms { @include veg-screen; }
         #yogaRooms .yoga-rooms-veg__container { @include veg-column; }
