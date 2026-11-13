@@ -2580,6 +2580,9 @@ section[id^=yoga] h2 {
   grid-template-columns: 1fr;
   gap: 16px;
 }
+.yoga-food--stacked .yoga-food__plates {
+  display: contents;
+}
 
 .yoga-food__zoom-icon {
   position: absolute;
@@ -5496,9 +5499,6 @@ html.satva-consent-modal-open {
   .veg-page #yogaFood .yoga-food__text p {
     margin-bottom: 10px;
   }
-  .veg-page #yogaFood .yoga-food__photos--stack {
-    scroll-snap-align: start;
-  }
   .veg-page #yogaFood .yoga-food__photos--stack .yoga-food__photo {
     aspect-ratio: 7/4;
   }
@@ -5683,13 +5683,26 @@ html.satva-consent-modal-open {
     height: 100%;
     object-fit: cover;
   }
-  .veg-page #yogaFood .yoga-food__photos--stack {
+  .veg-page #yogaFood .yoga-food__plates {
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-height: calc(100vh - 96px);
     min-height: calc(100svh - 96px);
     justify-content: stretch;
+    scroll-snap-align: start;
+  }
+  .veg-page #yogaFood .yoga-food__photos--stack {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .veg-page #yogaFood .yoga-food__note {
+    padding: 16px 0 20px;
+  }
+  .veg-page #yogaFood .yoga-food__note p {
+    margin: 0;
   }
   .veg-page #yogaFood .yoga-food__photos--stack .yoga-food__photo {
     flex: 1 1 0;
@@ -6050,6 +6063,19 @@ html.satva-consent-modal-open {
   }
 }
 @media (max-width: 340px) {
+  .veg-page #yogaFood .yoga-food__intro {
+    gap: 12px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .veg-page #yogaFood .yoga-food__intro .yoga-food__text p {
+    font-size: 14px;
+    line-height: 1.45;
+    margin-bottom: 6px;
+  }
+  .veg-page #yogaFood .yoga-food__lead {
+    min-height: 100px;
+  }
   .veg-page #yogaIncludes {
     padding-left: 16px;
     padding-right: 16px;

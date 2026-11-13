@@ -172,9 +172,6 @@ $veg-header-height-mobile: 96px;
             margin-bottom: 10px;
         }
 
-        #yogaFood .yoga-food__photos--stack {
-            scroll-snap-align: start;
-        }
 
         #yogaFood .yoga-food__photos--stack .yoga-food__photo {
             aspect-ratio: 7 / 4;
@@ -351,7 +348,8 @@ $veg-photo-min: 120px;
         #yogaBeach .yoga-beach__block { @include veg-column; gap: 20px; }
         #yogaBeach .yoga-beach__photo { @include veg-fill-photo; }
 
-        // Кухня: первый экран — заголовок, фото, текст; второй — три фото тарелок
+        // Кухня: первый экран — заголовок, фото, два абзаца; второй — три фото тарелок
+        // и строка о веганском меню (текст 13.11.2026 длиннее, на одном экране фото сжималось до 120px)
         #yogaFood {
             padding-top: 0;
             padding-bottom: 0;
@@ -367,9 +365,26 @@ $veg-photo-min: 120px;
 
         #yogaFood .yoga-food__lead { @include veg-fill-photo; }
 
-        #yogaFood .yoga-food__photos--stack {
+        // Второй экран: три тарелки встык забирают место, под ними строка о веганском меню
+        #yogaFood .yoga-food__plates {
             @include veg-screen;
             justify-content: stretch;
+            scroll-snap-align: start;
+        }
+
+        #yogaFood .yoga-food__photos--stack {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        #yogaFood .yoga-food__note {
+            padding: 16px 0 20px;
+
+            p {
+                margin: 0;
+            }
         }
 
         #yogaFood .yoga-food__photos--stack .yoga-food__photo {
@@ -642,6 +657,23 @@ $veg-photo-min: 120px;
 // и список не влезал в экран на 80px — меньше поля по бокам и шрифт заголовка
 @media (max-width: 340px) {
     .veg-page {
+        // Кухня: два абзаца на 320px занимали 15+ строк — первый экран был выше на 116px
+        #yogaFood .yoga-food__intro {
+            gap: 12px;
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        #yogaFood .yoga-food__intro .yoga-food__text p {
+            font-size: 14px;
+            line-height: 1.45;
+            margin-bottom: 6px;
+        }
+
+        #yogaFood .yoga-food__lead {
+            min-height: 100px;
+        }
+
         #yogaIncludes {
             padding-left: 16px;
             padding-right: 16px;

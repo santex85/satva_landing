@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=71" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=71"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=72" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=72"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -308,50 +308,67 @@
                     </picture>
                 </div>
                 <div class="yoga-food__text yoga-fade-in">
-                    <p>
-                        Satva Samui — полностью вегетарианский отель. В нашем ресторане не готовят мясо, рыбу и морепродукты.
-                        Каждый день — разнообразные вкусные блюда из свежих местных овощей, фруктов, зелени и злаков.
-                    </p>
-                    <p>
-                        В стоимость проживания включены вегетарианский завтрак и обед (шведский стол). Ужин можно заказать дополнительно в ресторане отеля по меню.
-                    </p>
-                    <p>По запросу с радостью готовим веганские блюда и меню без глютена.</p>
+                    <p>Satva Samui&nbsp;— полностью вегетарианский отель. В&nbsp;нашем ресторане не&nbsp;готовят мясо, рыбу и&nbsp;яйца. Каждый день вас ждут разнообразные, очень вкусные и&nbsp;полезные блюда из&nbsp;свежих овощей, фруктов, зелени и&nbsp;злаков.</p>
+                    <p>В&nbsp;стоимость проживания включены вегетарианский завтрак (шведский стол) и&nbsp;комплексный обед с&nbsp;добавкой. Ужин можно заказать дополнительно в&nbsp;ресторане отеля по&nbsp;меню.</p>
                 </div>
             </div>
-            <div class="yoga-food__photos yoga-food__photos--grid yoga-food__photos--stack yoga-fade-in">
-                <figure class="yoga-food__photo yoga-food__photo--zoomable">
-                    <button type="button" class="yoga-food__zoom" data-food-zoom aria-label="Крупнее: вегетарианская тарелка с овощным супом, рисом и салатом">
-                        <picture>
-                            <source type="image/webp" srcset="/img/yoga_tour/food-plate-2.webp">
-                            <img src="/img/yoga_tour/food-plate-2.webp"
-                                 alt="Вегетарианская тарелка с овощным супом, рисом и салатом"
-                                 loading="lazy" width="1024" height="717" decoding="async">
-                        </picture>
-                        <span class="yoga-food__zoom-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4"/></svg></span>
-                    </button>
-                </figure>
-                <figure class="yoga-food__photo yoga-food__photo--zoomable">
-                    <button type="button" class="yoga-food__zoom" data-food-zoom aria-label="Крупнее: вегетарианская тарелка с зелёным супом, жёлтым скрэмблом и салатом">
-                        <picture>
-                            <source type="image/webp" srcset="/img/yoga_tour/food-plate-3.webp?v=2">
-                            <img src="/img/yoga_tour/food-plate-3.webp?v=2"
-                                 alt="Вегетарианская тарелка с зелёным супом, жёлтым скрэмблом и салатом"
-                                 loading="lazy" width="1024" height="618" decoding="async">
-                        </picture>
-                        <span class="yoga-food__zoom-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4"/></svg></span>
-                    </button>
-                </figure>
-                <figure class="yoga-food__photo yoga-food__photo--zoomable">
-                    <button type="button" class="yoga-food__zoom" data-food-zoom aria-label="Крупнее: вегетарианская тарелка с супом, салатом и свежим соком">
-                        <picture>
-                            <source type="image/webp" srcset="/img/yoga_tour/food-plate-4.webp">
-                            <img src="/img/yoga_tour/food-plate-4.webp"
-                                 alt="Вегетарианская тарелка с супом, салатом и свежим соком"
-                                 loading="lazy" width="1024" height="678" decoding="async">
-                        </picture>
-                        <span class="yoga-food__zoom-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4"/></svg></span>
-                    </button>
-                </figure>
+            <!-- Второй экран на телефоне: три фото тарелок и строка про веганское меню под ними -->
+            <div class="yoga-food__plates">
+                <div class="yoga-food__photos yoga-food__photos--grid yoga-food__photos--stack yoga-fade-in">
+                    <figure class="yoga-food__photo yoga-food__photo--zoomable">
+                        <button type="button" class="yoga-food__zoom" data-food-zoom aria-label="Крупнее: вегетарианская тарелка с овощным супом, рисом и салатом">
+                            <picture>
+                                <source type="image/webp" srcset="/img/yoga_tour/food-plate-2.webp">
+                                <img src="/img/yoga_tour/food-plate-2.webp"
+                                     alt="Вегетарианская тарелка с овощным супом, рисом и салатом"
+                                     loading="lazy" width="1024" height="717" decoding="async">
+                            </picture>
+                            <span class="yoga-food__zoom-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4"/></svg></span>
+                        </button>
+                    </figure>
+                    <figure class="yoga-food__photo yoga-food__photo--zoomable">
+                        <button type="button" class="yoga-food__zoom" data-food-zoom aria-label="Крупнее: вегетарианская тарелка с зелёным супом, жёлтым скрэмблом и салатом">
+                            <picture>
+                                <source type="image/webp" srcset="/img/yoga_tour/food-plate-3.webp?v=2">
+                                <img src="/img/yoga_tour/food-plate-3.webp?v=2"
+                                     alt="Вегетарианская тарелка с зелёным супом, жёлтым скрэмблом и салатом"
+                                     loading="lazy" width="1024" height="618" decoding="async">
+                            </picture>
+                            <span class="yoga-food__zoom-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4"/></svg></span>
+                        </button>
+                    </figure>
+                    <figure class="yoga-food__photo yoga-food__photo--zoomable">
+                        <button type="button" class="yoga-food__zoom" data-food-zoom aria-label="Крупнее: вегетарианская тарелка с супом, салатом и свежим соком">
+                            <picture>
+                                <source type="image/webp" srcset="/img/yoga_tour/food-plate-4.webp">
+                                <img src="/img/yoga_tour/food-plate-4.webp"
+                                     alt="Вегетарианская тарелка с супом, салатом и свежим соком"
+                                     loading="lazy" width="1024" height="678" decoding="async">
+                            </picture>
+                            <span class="yoga-food__zoom-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4"/></svg></span>
+                        </button>
+                    </figure>
+                </div>
+                <div class="yoga-food__text yoga-food__note yoga-fade-in">
+                    <p>По&nbsp;запросу мы с&nbsp;радостью готовим для вас веганские блюда без молока и&nbsp;без глютена.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 02a-3. Рецепты от шеф-повара (сразу после фото блюд, с 13.11.2026): заголовок, фото с мастер-класса, текст, кнопка → попап с e-mail и телефоном (/api/recipes-request) -->
+    <section id="yogaRecipes" class="yoga-rooms-veg yoga-recipes" aria-labelledby="yogaRecipesTitle">
+        <div class="yoga-rooms-veg__container">
+            <h2 id="yogaRecipesTitle" class="yoga-rooms-veg__title yoga-fade-in">Угощайтесь на&nbsp;здоровье, приготовлено с&nbsp;любовью</h2>
+            <div class="yoga-recipes__photo yoga-fade-in">
+                <picture>
+                    <source type="image/webp" srcset="/img/yoga_tour/chef_guests_recipes-800.webp 800w, /img/yoga_tour/chef_guests_recipes-1280.webp 1280w, /img/yoga_tour/chef_guests_recipes.webp 2000w" sizes="(max-width: 768px) 100vw, 1100px">
+                    <img src="/img/yoga_tour/chef_guests_recipes.jpg" alt="Гости в фартуках Satva Samui и шеф-повар после мастер-класса у стола с приготовленными блюдами" loading="lazy" width="1600" height="1194" decoding="async">
+                </picture>
+            </div>
+            <p class="yoga-recipes__text yoga-fade-in">Отправьте ваш e-mail или телефон, и&nbsp;вы&nbsp;будете бесплатно получать удивительные рецепты от&nbsp;нашего <span style="white-space: nowrap">шеф-повара</span>.</p>
+            <div class="yoga-recipes__action">
+                <button type="button" class="btn-yoga-primary" data-open-modal="modal-recipes">Получать рецепты</button>
             </div>
         </div>
     </section>
@@ -453,23 +470,6 @@
         </div>
     </section>
 
-    <!-- 02a-3. Рецепты от шеф-повара: заголовок, фото с мастер-класса, текст, кнопка → попап с e-mail и телефоном (/api/recipes-request) -->
-    <section id="yogaRecipes" class="yoga-rooms-veg yoga-recipes" aria-labelledby="yogaRecipesTitle">
-        <div class="yoga-rooms-veg__container">
-            <h2 id="yogaRecipesTitle" class="yoga-rooms-veg__title yoga-fade-in">Угощайтесь на&nbsp;здоровье, приготовлено с&nbsp;любовью</h2>
-            <div class="yoga-recipes__photo yoga-fade-in">
-                <picture>
-                    <source type="image/webp" srcset="/img/yoga_tour/chef_guests_recipes-800.webp 800w, /img/yoga_tour/chef_guests_recipes-1280.webp 1280w, /img/yoga_tour/chef_guests_recipes.webp 2000w" sizes="(max-width: 768px) 100vw, 1100px">
-                    <img src="/img/yoga_tour/chef_guests_recipes.jpg" alt="Гости в фартуках Satva Samui и шеф-повар после мастер-класса у стола с приготовленными блюдами" loading="lazy" width="1600" height="1194" decoding="async">
-                </picture>
-            </div>
-            <p class="yoga-recipes__text yoga-fade-in">Отправьте ваш e-mail или телефон, и&nbsp;вы&nbsp;будете бесплатно получать удивительные рецепты от&nbsp;нашего <span style="white-space: nowrap">шеф-повара</span>.</p>
-            <div class="yoga-recipes__action">
-                <button type="button" class="btn-yoga-primary" data-open-modal="modal-recipes">Получать рецепты</button>
-            </div>
-        </div>
-    </section>
-
     <div class="yoga-sea-band">
     <!-- 03. Что включено -->
     <section id="yogaIncludes" class="yoga-includes yoga-includes--list" aria-labelledby="yogaIncludesTitle">
@@ -541,12 +541,11 @@
                     </picture>
                 </div>
                 <div class="yoga-program__text">
-                    <p>Утренние и&nbsp;вечерние занятия на&nbsp;открытой террасе у&nbsp;моря&nbsp;— для новичков и&nbsp;опытных практиков. Оплачиваются отдельно.</p>
+                    <p>На&nbsp;занятиях йогой вы сможете освоить следующие комплексы:</p>
                     <ul class="yoga-program__list">
-                        <li>Мягкая утренняя гимнастика и&nbsp;разминка</li>
-                        <li>Упражнения на&nbsp;гибкость и&nbsp;осанку</li>
-                        <li>Дыхательные практики и&nbsp;вечернее расслабление</li>
-                        <li>Коврики и&nbsp;инвентарь&nbsp;— в&nbsp;отеле</li>
+                        <li>Йога для здорового позвоночника и&nbsp;прямой осанки</li>
+                        <li>Йога для нормализации веса</li>
+                        <li>Йога для полного расслабления</li>
                     </ul>
                 </div>
             </div>
