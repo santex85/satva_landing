@@ -431,9 +431,11 @@ $veg-photo-min: 120px;
             white-space: nowrap;
         }
 
+        // Шаг прижат к верху: над подзаголовком и под ним по 24px на любом телефоне
+        // (при центровке на высоких экранах сверху набегало до 110px)
         .yoga-room-type {
             @include veg-screen;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 24px 0;
             box-sizing: border-box;
             scroll-snap-align: start;
@@ -446,8 +448,9 @@ $veg-photo-min: 120px;
             scroll-snap-align: none; // шаг начинается с заголовка секции
         }
 
+        // Отступ под подзаголовком равен отступу над ним (24px), раньше снизу было 16px
         .yoga-room-type__name {
-            margin: 0 0 16px;
+            margin: 0 0 24px;
         }
 
         .yoga-room-type__photo {

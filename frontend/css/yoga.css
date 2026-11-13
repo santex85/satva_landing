@@ -5754,7 +5754,7 @@ html.satva-consent-modal-open {
     justify-content: center;
     min-height: calc(100vh - 96px);
     min-height: calc(100svh - 96px);
-    justify-content: center;
+    justify-content: flex-start;
     padding: 24px 0;
     box-sizing: border-box;
     scroll-snap-align: start;
@@ -5766,7 +5766,7 @@ html.satva-consent-modal-open {
     scroll-snap-align: none;
   }
   .veg-page .yoga-room-type__name {
-    margin: 0 0 16px;
+    margin: 0 0 24px;
   }
   .veg-page .yoga-room-type__photo {
     flex: 1 1 0;
