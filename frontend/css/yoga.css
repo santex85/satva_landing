@@ -5583,6 +5583,18 @@ html.satva-consent-modal-open {
   .veg-page .yoga-activities__block {
     scroll-snap-align: start;
   }
+  .veg-page body > section,
+  .veg-page .yoga-sea-band > section,
+  .veg-page .yoga-site-footer,
+  .veg-page #yogaFood .yoga-food__intro,
+  .veg-page #yogaFood .yoga-food__plates,
+  .veg-page #yogaRoomTypes .yoga-rooms-veg__title,
+  .veg-page .yoga-room-type,
+  .veg-page #yogaIncludes .yoga-includes__step,
+  .veg-page .yoga-activities__block,
+  .veg-page #yogaReviews .yoga-reviews__step {
+    scroll-snap-stop: always;
+  }
   .veg-page #yogaRooms {
     display: flex;
     flex-direction: column;

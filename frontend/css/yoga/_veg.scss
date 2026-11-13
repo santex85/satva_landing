@@ -337,6 +337,23 @@ $veg-photo-min: 120px;
             scroll-snap-align: start;
         }
 
+        // Не пролетать экраны: без этого сильный свайп проносил страницу на несколько
+        // экранов вперёд (с первого экрана — сразу к «Экскурсиям»). Каждый свайп
+        // останавливается на следующем экране. Свойство действует только там,
+        // где у элемента есть привязка (scroll-snap-align), остальным не мешает.
+        body > section,
+        .yoga-sea-band > section,
+        .yoga-site-footer,
+        #yogaFood .yoga-food__intro,
+        #yogaFood .yoga-food__plates,
+        #yogaRoomTypes .yoga-rooms-veg__title,
+        .yoga-room-type,
+        #yogaIncludes .yoga-includes__step,
+        .yoga-activities__block,
+        #yogaReviews .yoga-reviews__step {
+            scroll-snap-stop: always;
+        }
+
         // «Тишина»: заголовок → фото → текст
         #yogaRooms { @include veg-screen; }
         #yogaRooms .yoga-rooms-veg__container { @include veg-column; }
