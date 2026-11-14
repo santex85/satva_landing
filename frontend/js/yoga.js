@@ -798,6 +798,40 @@
         }
     }
 
+    // --- 09b. Фоновые видео-«гифки» (блок йоги на /veg/) -------------------------
+    // Без звука, по кругу. Начинают грузиться и играть, только когда видны на экране,
+    // и встают на паузу, когда ушли с экрана. При «уменьшении движения» остаётся постер.
+    function initAmbientVideos() {
+        var videos = document.querySelectorAll('video[data-ambient-video]');
+        if (!videos.length) return;
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) return;
+
+        function play(v) {
+            v.muted = true;
+            var p = v.play();
+            if (p && typeof p.catch === 'function') p.catch(function () { /* автозапуск запрещён — остаётся постер */ });
+        }
+
+        if (!('IntersectionObserver' in window)) {
+            Array.prototype.forEach.call(videos, play);
+            return;
+        }
+
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                var v = entry.target;
+                if (entry.isIntersecting) {
+                    play(v);
+                } else if (!v.paused) {
+                    v.pause();
+                }
+            });
+        }, { rootMargin: '200px 0px', threshold: 0.01 });
+
+        Array.prototype.forEach.call(videos, function (v) { io.observe(v); });
+    }
+
     // --- 09a. Просмотр фото питания -------------------------------------------
     function initFoodLightbox() {
         var modal = document.getElementById('yogaFoodLightbox');
@@ -2422,6 +2456,7 @@
         initSmoothScroll();
         initFadeIn();
         initVideoThumbnails();
+        initAmbientVideos();
         initFoodLightbox();
         initVideoModal();
         initTextReviewsShuffle();

@@ -323,7 +323,8 @@ $veg-photo-min: 120px;
     aspect-ratio: auto;
 
     picture,
-    img {
+    img,
+    video {
         display: block;
         width: 100%;
         height: 100%;
@@ -613,6 +614,15 @@ $veg-photo-min: 120px;
 
         #hotelAmenities .yoga-program__photo,
         #hotelYoga .yoga-program__photo { @include veg-fill-photo; }
+
+        // Йога: квадратное видео выше своей ширины не растёт; на высоких телефонах лишнее
+        // место раньше делилось между «под заголовком» и «под текстом» (до 75px пустоты
+        // под заголовком). Теперь всё прижато к верху: заголовок → 20px → видео → текст.
+        #hotelYoga,
+        #hotelYoga .yoga-program__container,
+        #hotelYoga .yoga-program__block {
+            justify-content: flex-start;
+        }
 
         // Экскурсии и вечера: каждая карточка — свой экран, фото сверху
         .yoga-activities__block {

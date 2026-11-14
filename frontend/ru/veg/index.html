@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=76" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=76"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=77" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=77"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -65,7 +65,7 @@
     <script defer src="/js/consent.js?v=3"></script>
     <script defer src="/js/pixel.js?v=4"></script>
     <script defer src="/js/promo-config.js?v=4"></script>
-    <script defer src="/js/yoga.js?v=22"></script>
+    <script defer src="/js/yoga.js?v=23"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
 
     <!-- Structured Data: LodgingBusiness -->
@@ -531,17 +531,21 @@
     <!-- 05a. Йога на берегу моря -->
     <section id="hotelYoga" class="yoga-program yoga-program--reverse" aria-labelledby="hotelYogaTitle">
         <div class="yoga-program__header yoga-program__header--top yoga-fade-in">
-            <h2 id="hotelYogaTitle">Йога у моря — по желанию</h2>
+            <h2 id="hotelYogaTitle">Йога у&nbsp;моря&nbsp;— по&nbsp;желанию</h2>
         </div>
         <div class="yoga-program__container">
             <div class="yoga-program__block yoga-fade-in">
-                <div class="yoga-program__photo">
-                    <picture>
-                        <source type="image/webp" srcset="/img/yoga_tour/yoga_sunset_pool.webp">
-                        <img src="/img/yoga_tour/yoga_sunset_pool.jpg"
-                             alt="Занятие йогой в беседке у моря на закате, на переднем плане бассейн отеля Satva Samui"
-                             loading="lazy" width="896" height="793" decoding="async">
-                    </picture>
+                <!-- Квадратное видео-«гифка» (14.11.2026): занятие на закате, 14 с, без звука, по кругу.
+                     Грузится и играет, только когда блок на экране (initAmbientVideos в yoga.js);
+                     до этого и при «уменьшении движения» виден постер. Исходник — IMG_7701.MOV,
+                     кадр 720×720 из середины, последняя секунда плавно переходит в первую. -->
+                <div class="yoga-program__photo yoga-program__photo--video">
+                    <video class="yoga-program__video" data-ambient-video
+                           src="/video/yoga_sunset_loop.mp4"
+                           poster="/img/yoga_tour/yoga_sunset_loop_poster.jpg"
+                           muted loop playsinline preload="none" disablepictureinpicture
+                           width="720" height="720"
+                           aria-label="Занятие йогой на открытой террасе у моря на закате"></video>
                 </div>
                 <div class="yoga-program__text">
                     <p>На&nbsp;занятиях йогой вы сможете освоить следующие комплексы:</p>

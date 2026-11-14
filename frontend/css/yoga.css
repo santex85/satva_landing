@@ -2404,6 +2404,16 @@ section[id^=yoga] h2 {
 .yoga-program__photo:hover img {
   transform: scale(1.03);
 }
+.yoga-program__photo--video {
+  aspect-ratio: 1/1;
+  background: #093642;
+}
+.yoga-program__photo video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .yoga-program__photo--portrait {
   aspect-ratio: 4/5;
 }
@@ -5624,7 +5634,8 @@ html.satva-consent-modal-open {
     aspect-ratio: auto;
   }
   .veg-page #yogaRooms .yoga-rooms-veg__lead picture,
-  .veg-page #yogaRooms .yoga-rooms-veg__lead img {
+  .veg-page #yogaRooms .yoga-rooms-veg__lead img,
+  .veg-page #yogaRooms .yoga-rooms-veg__lead video {
     display: block;
     width: 100%;
     height: 100%;
@@ -5664,7 +5675,8 @@ html.satva-consent-modal-open {
     aspect-ratio: auto;
   }
   .veg-page #yogaBeach .yoga-beach__photo picture,
-  .veg-page #yogaBeach .yoga-beach__photo img {
+  .veg-page #yogaBeach .yoga-beach__photo img,
+  .veg-page #yogaBeach .yoga-beach__photo video {
     display: block;
     width: 100%;
     height: 100%;
@@ -5694,7 +5706,8 @@ html.satva-consent-modal-open {
     aspect-ratio: auto;
   }
   .veg-page #yogaFood .yoga-food__lead picture,
-  .veg-page #yogaFood .yoga-food__lead img {
+  .veg-page #yogaFood .yoga-food__lead img,
+  .veg-page #yogaFood .yoga-food__lead video {
     display: block;
     width: 100%;
     height: 100%;
@@ -5729,7 +5742,8 @@ html.satva-consent-modal-open {
     aspect-ratio: auto;
   }
   .veg-page #yogaFood .yoga-food__photos--stack .yoga-food__photo picture,
-  .veg-page #yogaFood .yoga-food__photos--stack .yoga-food__photo img {
+  .veg-page #yogaFood .yoga-food__photos--stack .yoga-food__photo img,
+  .veg-page #yogaFood .yoga-food__photos--stack .yoga-food__photo video {
     display: block;
     width: 100%;
     height: 100%;
@@ -5781,7 +5795,8 @@ html.satva-consent-modal-open {
     aspect-ratio: auto;
   }
   .veg-page .yoga-room-type__photo picture,
-  .veg-page .yoga-room-type__photo img {
+  .veg-page .yoga-room-type__photo img,
+  .veg-page .yoga-room-type__photo video {
     display: block;
     width: 100%;
     height: 100%;
@@ -5923,7 +5938,8 @@ html.satva-consent-modal-open {
     aspect-ratio: auto;
   }
   .veg-page #yogaBookFast .yoga-book-fast__photo picture,
-  .veg-page #yogaBookFast .yoga-book-fast__photo img {
+  .veg-page #yogaBookFast .yoga-book-fast__photo img,
+  .veg-page #yogaBookFast .yoga-book-fast__photo video {
     display: block;
     width: 100%;
     height: 100%;
@@ -5955,7 +5971,8 @@ html.satva-consent-modal-open {
     aspect-ratio: auto;
   }
   .veg-page #hotelChef .yoga-program__photo picture,
-  .veg-page #hotelChef .yoga-program__photo img {
+  .veg-page #hotelChef .yoga-program__photo img,
+  .veg-page #hotelChef .yoga-program__photo video {
     display: block;
     width: 100%;
     height: 100%;
@@ -5985,7 +6002,8 @@ html.satva-consent-modal-open {
     aspect-ratio: auto;
   }
   .veg-page #yogaRecipes .yoga-recipes__photo picture,
-  .veg-page #yogaRecipes .yoga-recipes__photo img {
+  .veg-page #yogaRecipes .yoga-recipes__photo img,
+  .veg-page #yogaRecipes .yoga-recipes__photo video {
     display: block;
     width: 100%;
     height: 100%;
@@ -6022,12 +6040,19 @@ html.satva-consent-modal-open {
   }
   .veg-page #hotelAmenities .yoga-program__photo picture,
   .veg-page #hotelAmenities .yoga-program__photo img,
+  .veg-page #hotelAmenities .yoga-program__photo video,
   .veg-page #hotelYoga .yoga-program__photo picture,
-  .veg-page #hotelYoga .yoga-program__photo img {
+  .veg-page #hotelYoga .yoga-program__photo img,
+  .veg-page #hotelYoga .yoga-program__photo video {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  .veg-page #hotelYoga,
+  .veg-page #hotelYoga .yoga-program__container,
+  .veg-page #hotelYoga .yoga-program__block {
+    justify-content: flex-start;
   }
   .veg-page .yoga-activities__block {
     display: flex;
@@ -6045,7 +6070,8 @@ html.satva-consent-modal-open {
     aspect-ratio: auto;
   }
   .veg-page .yoga-activities__photo picture,
-  .veg-page .yoga-activities__photo img {
+  .veg-page .yoga-activities__photo img,
+  .veg-page .yoga-activities__photo video {
     display: block;
     width: 100%;
     height: 100%;

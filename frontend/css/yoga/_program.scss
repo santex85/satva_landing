@@ -72,6 +72,19 @@
             transform: scale(1.03);
         }
 
+        // Квадратное видео вместо фото (йога на /veg/)
+        &--video {
+            aspect-ratio: 1 / 1;
+            background: $color-primary-dark;
+        }
+
+        video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         // Вертикальный снимок (мастер-класс шефа на /veg/)
         &--portrait {
             aspect-ratio: 4 / 5;
