@@ -9,6 +9,12 @@
 $veg-header-height-mobile: 96px;
 
 @media (max-width: 768px) {
+    // Основной текст на телефоне: 16px везде (с 14.11.2026; в кухне, йоге, списках было 15px).
+    // 17px пробовали — «Инфраструктура» не влезала в экран на 360px. На низких экранах — 15px.
+    html.veg-page {
+        --veg-text: 16px;
+    }
+
     html.veg-page {
         scroll-snap-type: y mandatory;
         scroll-padding-top: $veg-header-height-mobile;
@@ -80,6 +86,7 @@ $veg-header-height-mobile: 96px;
             margin: 20px 0 0;
 
             p {
+                font-size: var(--veg-text);
                 line-height: 1.55;
                 margin-bottom: 10px;
 
@@ -95,7 +102,7 @@ $veg-header-height-mobile: 96px;
 
         #yogaBeach .yoga-beach__intro {
             margin-bottom: 20px;
-            font-size: 15px;
+            font-size: var(--veg-text);
             line-height: 1.5;
         }
 
@@ -108,12 +115,13 @@ $veg-header-height-mobile: 96px;
         }
 
         #yogaBeach .yoga-beach__text .yoga-beach__lead {
+            font-size: var(--veg-text);
             line-height: 1.45;
             margin-bottom: 10px;
         }
 
         #yogaBeach .yoga-beach__list li {
-            font-size: 15px;
+            font-size: var(--veg-text);
             line-height: 1.4;
             margin-bottom: 6px;
         }
@@ -148,13 +156,13 @@ $veg-header-height-mobile: 96px;
         #hotelYoga .yoga-program__text p,
         #yogaRecipes .yoga-recipes__text,
         .yoga-activities__text p {
-            font-size: 15px;
+            font-size: var(--veg-text);
             line-height: 1.55;
         }
 
         #hotelAmenities .yoga-program__list li,
         #hotelYoga .yoga-program__list li {
-            font-size: 15px;
+            font-size: var(--veg-text);
             line-height: 1.4;
             margin-bottom: 6px;
         }
@@ -277,10 +285,13 @@ $veg-header-height-mobile: 96px;
 
 
 // ── Универсально для любого телефона: каждый шаг свайпа ровно в один экран ──
-// Шаг занимает высоту экрана минус шапка (svh — экран с показанной адресной строкой,
-// чтобы ничего не пряталось под ней). Заголовок и текст своего размера, а фото
-// растягивается или сжимается и забирает оставшееся место. На очень маленьком экране
-// фото не меньше 120px — тогда блок чуть выше экрана и долистывается.
+// Шаг занимает высоту экрана минус шапка. С 14.11.2026 — lvh, экран со спрятанной
+// адресной строкой: пока листаешь вниз, строка спрятана, и с svh под каждым шагом
+// оставалась пустая полоса ~56px. lvh не меняется, пока строка прячется/появляется,
+// поэтому дёрганья нет. Когда строка показана (листаешь вверх), низ шага (~56px)
+// уходит за край экрана. Заголовок и текст своего размера, а фото растягивается или
+// сжимается и забирает оставшееся место. На очень маленьком экране фото не меньше
+// 120px — тогда блок чуть выше экрана и долистывается.
 
 $veg-photo-min: 120px;
 
@@ -289,7 +300,7 @@ $veg-photo-min: 120px;
     flex-direction: column;
     justify-content: center;
     min-height: calc(100vh - #{$veg-header-height-mobile});
-    min-height: calc(100svh - #{$veg-header-height-mobile});
+    min-height: calc(100lvh - #{$veg-header-height-mobile});
 }
 
 // Промежуточная обёртка: растягивается по высоте шага и передаёт место дальше
@@ -443,7 +454,7 @@ $veg-photo-min: 120px;
 
         .yoga-room-type:first-child {
             min-height: calc(100vh - #{$veg-header-height-mobile} - 73px);
-            min-height: calc(100svh - #{$veg-header-height-mobile} - 73px);
+            min-height: calc(100lvh - #{$veg-header-height-mobile} - 73px);
             padding-top: 0;
             scroll-snap-align: none; // шаг начинается с заголовка секции
         }
@@ -465,7 +476,7 @@ $veg-photo-min: 120px;
         }
 
         .yoga-room-type__list li {
-            font-size: 15px;
+            font-size: var(--veg-text);
             line-height: 1.4;
             margin-bottom: 6px;
         }
@@ -482,7 +493,7 @@ $veg-photo-min: 120px;
         }
 
         #yogaIncludes .yoga-includes__list li {
-            font-size: 15px;
+            font-size: var(--veg-text);
             line-height: 1.4;
         }
 
@@ -521,7 +532,7 @@ $veg-photo-min: 120px;
             column-gap: 12px;
             row-gap: 10px;
             height: calc(100vh - #{$veg-header-height-mobile});
-            height: calc(100svh - #{$veg-header-height-mobile});
+            height: calc(100lvh - #{$veg-header-height-mobile});
             padding: 24px 0;
             box-sizing: border-box;
             scroll-snap-align: start;
@@ -540,7 +551,7 @@ $veg-photo-min: 120px;
             }
 
             p:not(.yoga-chip-title) {
-                font-size: 15px;
+                font-size: var(--veg-text);
                 line-height: 1.45;
             }
         }
@@ -563,6 +574,17 @@ $veg-photo-min: 120px;
 
         #yogaReviews .yoga-reviews__step--first .yoga-reviews__card { grid-row: 2; }
         #yogaReviews .yoga-reviews__step--first .yoga-reviews__summary { grid-row: 3; }
+
+        // Бордовая панель с e-mail: на весь экран, содержимое по центру
+        #yogaInfo { @include veg-screen; }
+        #yogaInfo .yoga-rooms-veg__container { @include veg-column; }
+
+        #yogaInfo .yoga-rooms-veg__info {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
         // Быстро бронируется: текст → фото → кнопка
         #yogaBookFast { @include veg-screen; }
@@ -605,6 +627,11 @@ $veg-photo-min: 120px;
 // Низкие телефоны (iPhone SE и т.п.): в «Инфраструктуре» и «Йоге» заголовок теперь над фото,
 // и длинный список не влезал на 5–20px — ужимаем отступы, текст не трогаем
 @media (max-width: 768px) and (max-height: 700px) {
+    // На низких экранах основной текст остаётся 15px, иначе не влезает в один экран
+    html.veg-page {
+        --veg-text: 15px;
+    }
+
     .veg-page {
         #hotelAmenities,
         #hotelYoga {
@@ -669,6 +696,11 @@ $veg-photo-min: 120px;
         #hotelAmenities .yoga-program__photo,
         #hotelYoga .yoga-program__photo {
             min-height: 56vw;
+        }
+
+        // С текстом 16px «Инфраструктура» на 375×720 была выше экрана на 18px
+        #hotelAmenities .yoga-program__photo {
+            min-height: 50vw;
         }
     }
 }
