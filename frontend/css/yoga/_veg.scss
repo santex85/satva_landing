@@ -745,3 +745,14 @@ $veg-photo-min: 120px;
         }
     }
 }
+
+// Блоки «Что входит в стоимость» и «Комфортный отдых и инфраструктура» скрыты атрибутом hidden
+// (14.11.2026, разметка оставлена). Правила выше задают им display: flex — без этого
+// атрибут бы не сработал.
+.veg-page {
+    .yoga-sea-band[hidden],
+    #hotelAmenities[hidden],
+    .yoga-header__nav a[hidden] {
+        display: none !important;
+    }
+}

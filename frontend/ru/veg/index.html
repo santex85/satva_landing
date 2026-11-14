@@ -46,8 +46,8 @@
     .yoga-hero .yoga-fade-in{opacity:1}
     [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=75" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=75"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=76" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=76"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -195,8 +195,9 @@
             </button>
             <nav id="yogaNav" class="yoga-header__nav" aria-label="Основная навигация">
                 <a href="#yogaFood">Вегетарианская кухня</a>
-                <a href="#yogaIncludes">Что включено</a>
-                <a href="#hotelAmenities">Инфраструктура</a>
+                <!-- Пункты скрыты вместе с блоками «Что включено» и «Инфраструктура» (14.11.2026) -->
+                <a href="#yogaIncludes" hidden>Что включено</a>
+                <a href="#hotelAmenities" hidden>Инфраструктура</a>
                 <a href="#yogaRooms">Номера</a>
                 <a href="#yogaReviews">Отзывы</a>
                 <a href="#yogaFaq">Вопросы</a>
@@ -470,7 +471,8 @@
         </div>
     </section>
 
-    <div class="yoga-sea-band">
+    <!-- Скрыто 14.11.2026 по просьбе заказчика (не удалять): «Что входит в стоимость проживания» -->
+    <div class="yoga-sea-band" hidden>
     <!-- 03. Что включено -->
     <section id="yogaIncludes" class="yoga-includes yoga-includes--list" aria-labelledby="yogaIncludesTitle">
         <!-- Один экран: заголовок и короткий список на белой подложке (без иконок и описаний; «На территории отеля» влит сюда без повторов) -->
@@ -496,7 +498,8 @@
     </div>
 
     <!-- 05. Инфраструктура отеля -->
-    <section id="hotelAmenities" class="yoga-program" aria-labelledby="hotelAmenitiesTitle">
+    <!-- Скрыто 14.11.2026 по просьбе заказчика (не удалять): «Комфортный отдых и инфраструктура» -->
+    <section id="hotelAmenities" class="yoga-program" aria-labelledby="hotelAmenitiesTitle" hidden>
         <div class="yoga-program__header yoga-program__header--top yoga-fade-in">
             <h2 id="hotelAmenitiesTitle">Комфортный отдых и инфраструктура</h2>
         </div>

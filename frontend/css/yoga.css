@@ -6136,6 +6136,12 @@ html.satva-consent-modal-open {
     font-size: 14px;
   }
 }
+.veg-page .yoga-sea-band[hidden],
+.veg-page #hotelAmenities[hidden],
+.veg-page .yoga-header__nav a[hidden] {
+  display: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
