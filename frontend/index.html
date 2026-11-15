@@ -310,7 +310,25 @@
         </div>
     </section>
 
-    <!-- 02a. Promo video: hidden on EN until English version is ready (promo.mp4 is RU) -->
+    <!-- 02a. Promo video -->
+    <section id="yogaPromo" class="yoga-promo" aria-labelledby="yogaPromoTitle">
+        <div class="yoga-promo__container">
+            <header class="yoga-promo__header yoga-fade-in">
+                <h2 id="yogaPromoTitle">Discover Satva Samui</h2>
+                <p class="yoga-promo__lead">Yoga by the sea, sunsets, and the hotel atmosphere — in one short film.</p>
+            </header>
+            <button type="button" class="yoga-promo__trigger yoga-fade-in"
+                    data-video="/video/promo_en.mp4"
+                    aria-label="Play promo video">
+                <span class="yoga-promo__thumb">
+                    <video src="/video/promo_en.mp4" muted playsinline preload="metadata" width="1280" height="720"></video>
+                </span>
+                <span class="yoga-promo__play" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+                </span>
+            </button>
+        </div>
+    </section>
 
     <div class="yoga-sea-band">
     <!-- 02b. Цифры и доверие -->
@@ -445,12 +463,12 @@
                     <picture>
                         <source type="image/webp" srcset="/img/yoga_tour/yoga_platform.webp">
                         <img src="/img/yoga_tour/yoga_platform.webp"
-                             alt="Open-air yoga deck at Satva Samui overlooking the sea at sunset"
+                             alt="Open-air yoga shala at Satva Samui overlooking the sea at sunset"
                              loading="lazy" width="1024" height="683" decoding="async">
                     </picture>
                 </div>
                 <div class="yoga-program__text">
-                    <h2 id="yogaProgramTitle">An Open-Air Yoga Deck Overlooking the Sea</h2>
+                    <h2 id="yogaProgramTitle">An Open-Air Yoga Shala Overlooking the Sea</h2>
                     <p>
                         Yoga at sunrise and sunset.
                     </p>
