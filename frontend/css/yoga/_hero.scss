@@ -361,6 +361,18 @@ $yoga-hero-block-gap: 16px;
             margin: 32px auto 8px;
         }
 
+        // Невысокие телефоны: заголовок в 4 строки — поджимаем отступы, чтобы список не наезжал на людей на фото
+        @media (max-width: 768px) and (max-height: 700px) {
+            .yoga-hero__content > .yoga-hero__tagline {
+                margin-top: 14px;
+            }
+
+            .yoga-hero__price {
+                margin-top: 6px;
+                margin-bottom: 6px;
+            }
+        }
+
         .yoga-hero__tagline {
             font-size: clamp(1.6rem, 2vw + 1rem, 2.6rem);
             font-weight: $font-weight-regular;
@@ -368,6 +380,19 @@ $yoga-hero-block-gap: 16px;
             opacity: 1;
             text-shadow: none;
             max-width: none;
+        }
+
+        // Вторая часть заголовка («на самом красивом пляже…») мельче, отдельным блоком
+        .yoga-hero__tagline-sub {
+            display: block;
+            margin-top: 0.35em;
+            font-size: 0.66em;
+            line-height: 1.35;
+
+            // 320px: держим подзаголовок в 2 строки
+            @media (max-width: 340px) {
+                font-size: 0.58em;
+            }
         }
 
         .yoga-hero__price-value {
@@ -388,6 +413,10 @@ $yoga-hero-block-gap: 16px;
             margin-bottom: 0;
 
             line-height: 1.5;
+
+            @media (max-width: 768px) and (max-height: 700px) {
+                line-height: 1.35;
+            }
 
             li + li {
                 margin-top: 0.15em;

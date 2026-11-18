@@ -1000,6 +1000,15 @@ section[id^=yoga] h2 {
 .yoga-hero--veg .yoga-hero__content > .yoga-hero__tagline {
   margin: 32px auto 8px;
 }
+@media (max-width: 768px) and (max-height: 700px) {
+  .yoga-hero--veg .yoga-hero__content > .yoga-hero__tagline {
+    margin-top: 14px;
+  }
+  .yoga-hero--veg .yoga-hero__price {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+}
 .yoga-hero--veg .yoga-hero__tagline {
   font-size: clamp(1.6rem, 2vw + 1rem, 2.6rem);
   font-weight: 400;
@@ -1007,6 +1016,17 @@ section[id^=yoga] h2 {
   opacity: 1;
   text-shadow: none;
   max-width: none;
+}
+.yoga-hero--veg .yoga-hero__tagline-sub {
+  display: block;
+  margin-top: 0.35em;
+  font-size: 0.66em;
+  line-height: 1.35;
+}
+@media (max-width: 340px) {
+  .yoga-hero--veg .yoga-hero__tagline-sub {
+    font-size: 0.58em;
+  }
 }
 .yoga-hero--veg .yoga-hero__price-value {
   font-size: clamp(1.5rem, 1.2vw + 1rem, 2rem);
@@ -1023,6 +1043,11 @@ section[id^=yoga] h2 {
   opacity: 1;
   margin-bottom: 0;
   line-height: 1.5;
+}
+@media (max-width: 768px) and (max-height: 700px) {
+  .yoga-hero--veg .yoga-hero__subtitle {
+    line-height: 1.35;
+  }
 }
 .yoga-hero--veg .yoga-hero__subtitle li + li {
   margin-top: 0.15em;
