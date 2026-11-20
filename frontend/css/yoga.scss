@@ -39,6 +39,7 @@
 @use 'yoga/consent';
 @use 'yoga/rooms-veg';
 @use 'yoga/veg';
+@use 'yoga/veg-v2';
 
 // ---------- доступность: уважение prefers-reduced-motion ----------
 @media (prefers-reduced-motion: reduce) {

@@ -1,0 +1,225 @@
+@use '../core' as *;
+
+// ============================================================
+// /veg/ v2 (19.11.2026, по макету заказчика): цвета, иконки в списке, шапка «Satva Samui / Вегетарианский отель на Самуи»,
+// кнопка со стрелкой без тёмной панели.
+// Включается классом veg-v2 на <body> в ru/veg/index.html. Откат: убрать класс — страница вернётся к прежнему виду.
+// ============================================================
+
+$veg2-header: #6e3742;
+$veg2-header-dark: #5f2e38;
+$veg2-title: #5b1f2b;
+$veg2-text: #3d2a2e;
+$veg2-icon: #7a3442;
+
+// Шрифт /veg/ v2 (20.11.2026): полный Montserrat с кириллицей из набора заказчика (400/600/700, woff2).
+// Отдельное имя семейства — действует только на /veg/ с классом veg-v2; остальные страницы на прежнем Montserrat.
+@font-face {
+    font-family: 'Montserrat Satva';
+    src: url('../assets/fonts/montserrat-400.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat Satva';
+    src: url('../assets/fonts/montserrat-600.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat Satva';
+    src: url('../assets/fonts/montserrat-700.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+// Поля форм и кнопки сами задают font-family — перекрываем их тоже
+body.veg-v2,
+body.veg-v2 button,
+body.veg-v2 input,
+body.veg-v2 select,
+body.veg-v2 textarea,
+body.veg-v2 .yoga-chip-title {
+    font-family: 'Montserrat Satva', $font-family-primary;
+}
+
+// Без класса v2 новые элементы разметки скрыты
+body:not(.veg-v2) {
+    .yoga-header__v2,
+    .yoga-hero__icon,
+    .yoga-hero__btn-arrow {
+        display: none;
+    }
+}
+
+.veg-v2 {
+    // ---------- Шапка ----------
+    .yoga-header__v1 {
+        display: none;
+    }
+
+    .yoga-header--solid {
+        background: $veg2-header;
+    }
+
+    .yoga-header--solid .yoga-header__nav {
+        @media (max-width: 768px) {
+            background: $veg2-header;
+        }
+    }
+
+    .yoga-header .yoga-header__slogan-title.yoga-header__v2 {
+        font-size: clamp(1.45rem, 2vw + 0.9rem, 1.75rem);
+        font-weight: $font-weight-semibold;
+        letter-spacing: 0.01em;
+        line-height: 1.1;
+    }
+
+    .yoga-header .yoga-header__slogan-sub.yoga-header__v2 {
+        margin-top: 6px;
+        white-space: nowrap;
+        font-size: clamp(0.85rem, 0.6vw + 0.75rem, 1rem);
+
+        // До 380px строка в Montserrat упирается в бургер — переносим «на Самуи» на вторую строку
+        @media (max-width: 380px) {
+            white-space: normal;
+            max-width: 15em;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        font-weight: $font-weight-regular;
+        opacity: 0.9;
+    }
+
+    // ---------- Hero ----------
+    .yoga-hero--veg {
+        // Небо чуть светлее — тёмному тексту контрастнее
+        .yoga-hero__overlay {
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 236, 228, 0.4) 0%,
+                rgba(255, 236, 228, 0.18) 35%,
+                rgba(255, 236, 228, 0) 55%
+            );
+        }
+
+        // «вегетарианский отель» не переносится (&nbsp;) — на узких экранах кегль от ширины экрана,
+        // чтобы строка (≈12.3 кегля в Montserrat Bold) влезала в колонку и не сдвигала блок вправо
+        .yoga-hero__tagline {
+            color: $veg2-title;
+            font-weight: $font-weight-bold;
+            line-height: 1.15;
+            padding-left: 0;
+            padding-right: 0;
+            font-size: min(clamp(1.6rem, 2vw + 1rem, 2.6rem), calc((100vw - 60px) / 12.3));
+        }
+
+        .yoga-hero__tagline-sub {
+            margin-top: 0.4em;
+            color: $veg2-text;
+            text-wrap: balance;
+            font-weight: $font-weight-regular;
+        }
+
+        .yoga-hero__price-value {
+            color: $veg2-title;
+            font-weight: $font-weight-bold;
+        }
+
+        // Список: колонка по центру, внутри — иконка слева и текст по левому краю
+        .yoga-hero__subtitle {
+            display: grid;
+            justify-content: center;
+            row-gap: 0.45em;
+            margin: 0 auto;
+            color: $veg2-text;
+            // Самая длинная строка с иконкой ≈ 19.6 кегля: на 320–380px кегль уменьшается, чтобы пункты были в одну строку
+            font-size: min(clamp(1rem, 0.6vw + 0.85rem, 1.35rem), calc((100vw - 56px) / 19.6));
+            line-height: 1.3;
+
+            li + li {
+                margin-top: 0;
+            }
+        }
+
+        .yoga-hero__subtitle:has(.yoga-hero__subtitle-heading) li:not(.yoga-hero__subtitle-heading) {
+            display: flex;
+            align-items: center;
+            gap: 0.75em;
+            text-align: left;
+        }
+
+        .yoga-hero__subtitle-heading {
+            justify-self: center;
+            margin-bottom: 0.15em;
+            font-size: 0.95em;
+
+            &::first-letter {
+                text-transform: uppercase;
+            }
+        }
+
+        .yoga-hero__icon {
+            flex: 0 0 auto;
+            display: inline-flex;
+            width: 1.6em;
+            height: 1.6em;
+            color: $veg2-icon;
+
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        // Кнопка и сноска прямо на фото, без бордовой панели
+        .yoga-hero__dock {
+            background: none;
+            border: 0;
+            box-shadow: none;
+            border-radius: 0;
+            gap: 8px;
+            width: min(400px, calc(100% - 32px));
+        }
+
+        .yoga-hero__dock .btn-yoga-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            width: 100%;
+            box-shadow: 0 10px 28px rgba(60, 20, 20, 0.35);
+        }
+
+        .yoga-hero__btn-arrow {
+            flex: 0 0 auto;
+            width: 1.4em;
+            height: 1.4em;
+        }
+
+        .yoga-hero__dock .yoga-hero__footnote {
+            // Низ фото тёмный (столик, стулья) — сноска светлая на мягкой тени
+            color: rgba($color-white, 0.88);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55), 0 1px 10px rgba(0, 0, 0, 0.5);
+        }
+    }
+}
+
+// ---------- Секции без цветных фонов (бежевый, мятный и т. п.) — всё на белом ----------
+// Hero и форма внизу не трогаем: у них фон — фото
+.veg-v2 {
+    section:not(.yoga-hero):not(.yoga-form),
+    .yoga-activities__block {
+        background: $color-white;
+    }
+}
+
+// Бордовые блоки (форма «Оставьте ваш e-mail») — тем же цветом, что шапка
+.veg-v2 .yoga-rooms-veg__info {
+    background: $veg2-header;
+}
