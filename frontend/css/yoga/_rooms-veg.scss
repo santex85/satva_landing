@@ -35,6 +35,17 @@
         }
     }
 
+    // Подпись к большому фото
+    &__caption {
+        margin: 16px 0 0;
+        text-align: center;
+        color: $color-primary;
+        font-size: 1.1rem;
+        font-weight: $font-weight-semibold;
+        line-height: 1.4;
+        text-wrap: balance;
+    }
+
     &__text {
         margin: 32px 0;
 

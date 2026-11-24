@@ -5091,6 +5091,15 @@ html.satva-consent-modal-open {
   width: 100%;
   height: auto;
 }
+.yoga-rooms-veg__caption {
+  margin: 16px 0 0;
+  text-align: center;
+  color: #0f4c5c;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-wrap: balance;
+}
 .yoga-rooms-veg__text {
   margin: 32px 0;
 }
@@ -5461,8 +5470,13 @@ html.satva-consent-modal-open {
   .veg-page #yogaRooms {
     padding-bottom: 24px;
   }
+  .veg-page #yogaRooms .yoga-rooms-veg__caption {
+    margin: 14px 0 0;
+    font-size: 1rem;
+    line-height: 1.35;
+  }
   .veg-page #yogaRooms .yoga-rooms-veg__text {
-    margin: 20px 0 0;
+    margin: 14px 0 0;
   }
   .veg-page #yogaRooms .yoga-rooms-veg__text p {
     font-size: var(--veg-text);

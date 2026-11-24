@@ -82,8 +82,14 @@ $veg-header-height-mobile: 96px;
             padding-bottom: 24px;
         }
 
+        #yogaRooms .yoga-rooms-veg__caption {
+            margin: 14px 0 0;
+            font-size: 1rem;
+            line-height: 1.35;
+        }
+
         #yogaRooms .yoga-rooms-veg__text {
-            margin: 20px 0 0;
+            margin: 14px 0 0;
 
             p {
                 font-size: var(--veg-text);
