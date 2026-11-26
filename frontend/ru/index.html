@@ -44,10 +44,9 @@
     .yoga-hero__bg picture,.yoga-hero__bg img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
     .yoga-hero__content{position:relative;z-index:2;max-width:700px;width:100%;padding:0 24px;color:#fff}
     .yoga-hero .yoga-fade-in{opacity:1}
-    [data-promo-gated]{display:none!important}
     </style>
-    <link rel="preload" href="/css/yoga.css?v=26" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/yoga.css?v=26"></noscript>
+    <link rel="preload" href="/css/yoga.css?v=97" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/yoga.css?v=97"></noscript>
     <meta name="satva-meta-pixel-id" content="1358193522870162">
     <!-- Meta Pixel: PageView on load (LPV); Lead/Contact/ViewContent in pixel.js after marketing consent -->
     <script>
@@ -64,8 +63,7 @@
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
     <script defer src="/js/consent.js?v=3"></script>
     <script defer src="/js/pixel.js?v=4"></script>
-    <script defer src="/js/promo-config.js?v=4"></script>
-    <script defer src="/js/yoga.js?v=19"></script>
+    <script defer src="/js/yoga.js?v=24"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="0cc0f862-5822-4abc-bf47-1c8a8af4ac22"></script>
 
     <!-- Structured Data: LodgingBusiness (расширенная карточка) -->
@@ -141,7 +139,7 @@
             {
                 "@type": "Question",
                 "name": "Есть ли скидки при длительном проживании?",
-                "acceptedAnswer": { "@type": "Answer", "text": "При бронировании от 10 ночей — +1 день в подарок." }
+                "acceptedAnswer": { "@type": "Answer", "text": "Стоимость длительного проживания зависит от дат и категории номера. Свяжитесь с нами — подберём оптимальный тариф." }
             },
             {
                 "@type": "Question",
@@ -213,20 +211,6 @@
         </div>
         <div class="yoga-hero__overlay"></div>
         <div class="yoga-hero__content">
-            <!-- promo badge временно скрыт (локальный эксперимент hero)
-            <button type="button"
-                    class="promo-badge yoga-fade-in"
-                    id="promoBadge"
-                    data-promo-gated
-                    data-promo-trigger
-                    data-open-modal="promoModal"
-                    aria-haspopup="dialog"
-                    aria-controls="promoModal">
-                <span class="promo-badge__icon" aria-hidden="true">🎁</span>
-                <span class="promo-badge__main">+1 день в подарок</span>
-                <span class="promo-badge__sub">при бронировании от 10 ночей · условия</span>
-            </button>
-            -->
             <h1 class="yoga-hero__tagline yoga-fade-in">Вы будете жить на берегу тихого, спокойного моря и&nbsp;наслаждаться прекрасными закатами.</h1>
             <div class="yoga-hero__price yoga-fade-in" aria-describedby="yogaHeroFootnote">
                 <span class="yoga-hero__price-value">75&nbsp;$&nbsp;сутки<sup class="yoga-hero__price-mark" aria-hidden="true">*</sup></span>
@@ -242,13 +226,8 @@
                 <li>Индивидуальный план оздоровления</li>
                 <li>Медитация каждый вечер</li>
             </ul>
-            <p class="yoga-hero__promo-urgency yoga-fade-in" data-promo-gated>
-                <strong class="yoga-hero__promo-urgency-title">Внимание, акция!</strong>
-                Успейте забронировать до <strong><span data-promo-bookby></span></strong><br>
-                и получите день в подарок.
-            </p>
             <div class="yoga-hero__buttons yoga-fade-in">
-                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead" data-promo-cta>Получить день в подарок</button>
+                <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Забронировать номер</button>
             </div>
             <p class="yoga-hero__footnote yoga-fade-in" id="yogaHeroFootnote"><span aria-hidden="true">*</span> при 2-местном размещении в номере «Стандарт».</p>
             <div class="yoga-hero__scroll-hint" aria-hidden="true">
@@ -745,9 +724,6 @@
                 <div class="yoga-rooms__urgency-copy">
                     <p>
                         <strong>Ограниченное количество номеров.</strong>
-                    </p>
-                    <p class="yoga-rooms__urgency-promo" data-promo-gated>
-                        При бронировании от 10 ночей — +1 день в подарок.
                     </p>
                 </div>
                 <button type="button" class="btn-yoga-primary" data-open-modal="modal-lead">Забронировать номер</button>
@@ -1272,8 +1248,7 @@
                         </button>
                     </dt>
                     <dd class="yoga-faq__answer" id="yogaFaqA5" role="region" aria-labelledby="yogaFaqQ5" hidden>
-                        <span data-promo-faq-active hidden>При бронировании от 10 ночей — +1 день в подарок.</span>
-                        <span data-promo-faq-inactive>Стоимость длительного проживания зависит от дат и категории номера. Свяжитесь с нами — подберём оптимальный тариф.</span>
+                        Стоимость длительного проживания зависит от дат и категории номера. Свяжитесь с нами — подберём оптимальный тариф.
                     </dd>
                 </div>
                 <div class="yoga-faq__row yoga-fade-in">
@@ -1326,9 +1301,6 @@
                 <img class="yoga-form__logo" src="/img/satva-logo.png" alt="" width="180" height="120" loading="lazy">
                 <h2 id="yogaFormTitle">Заявка на йога-тур</h2>
                 <p class="yoga-form__lead">Оставьте ваши контакты – мы свяжемся с вами, ответим на все вопросы, поможем с бронированием и перелетом.</p>
-                <p class="yoga-form__promo-note" data-promo-gated>
-                    Акция «+1 день в подарок» при бронировании от 10 ночей.
-                </p>
 
                 <div id="yogaFormSuccess" class="yoga-form__status yoga-form__status--success is-hidden" role="status">
                     Спасибо, заявка принята. Свяжемся с вами в ближайшее время.
@@ -1504,13 +1476,6 @@
 
                     <div id="yogaTurnstileWidget" class="yoga-form__turnstile" role="group" aria-label="Проверка «Я не робот»"></div>
 
-                    <div class="yoga-form__promo" data-promo-gated>
-                        <label class="yoga-form__checkbox yoga-form__promo-optin">
-                            <input type="checkbox" id="yogaPromoOptin" name="promo_optin" value="true">
-                            <span>Участвую в акции «+1 день в подарок»</span>
-                        </label>
-                        <span id="yogaPromoNightsHint" class="yoga-form__promo-hint is-hidden" role="status">Для участия нужно 10 и более ночей</span>
-                    </div>
 
                     <label class="yoga-form__checkbox">
                         <input type="checkbox" id="yogaConsent" name="consent" value="true" required>
@@ -1541,20 +1506,6 @@
             <button type="button" class="yoga-modal__close" aria-label="Закрыть">&times;</button>
             <h2 class="yoga-modal__title" id="yogaModalLeadTitle">Заявка на йога-тур</h2>
             <div class="yoga-modal__body yoga-modal__body--scroll">
-                <div class="yoga-lead-promo" data-promo-gated>
-                    <p class="yoga-lead-promo__deadline">
-                        Успейте забронировать до <strong><span data-promo-bookby></span></strong><br>
-                        и получите день в подарок.
-                    </p>
-                    <p class="yoga-lead-promo__includes-title">Подарочный день включает:</p>
-                    <ul class="yoga-lead-promo__list">
-                        <li>проживание</li>
-                        <li>завтрак</li>
-                        <li>обед</li>
-                        <li>йога утром и вечером</li>
-                        <li>медитация</li>
-                    </ul>
-                </div>
                 <div id="yogaLeadFormSuccess" class="yoga-form__status yoga-form__status--success is-hidden" role="status">
                     Спасибо! Заявка отправлена, мы свяжемся с вами в ближайшее время.
                 </div>
@@ -1724,13 +1675,6 @@
                         <textarea class="yoga-form__textarea" id="yogaLeadModalComment" name="comment" maxlength="2000" rows="3"></textarea>
                     </div>
                     <div id="yogaTurnstileWidgetLead" class="yoga-form__turnstile" role="group" aria-label="Проверка «Я не робот»"></div>
-                    <div class="yoga-form__promo" data-promo-gated>
-                        <label class="yoga-form__checkbox yoga-form__promo-optin">
-                            <input type="checkbox" id="yogaLeadModalPromoOptin" name="promo_optin" value="true">
-                            <span>Участвую в акции «+1 день в подарок»</span>
-                        </label>
-                        <span id="yogaLeadModalPromoNightsHint" class="yoga-form__promo-hint is-hidden" role="status">Для участия нужно 10 и более ночей</span>
-                    </div>
                     <label class="yoga-form__checkbox">
                         <input type="checkbox" id="yogaLeadModalConsent" name="consent" value="true" required>
                         <span>Я согласен с <button type="button" class="js-open-yoga-privacy yoga-form__privacy-btn">политикой конфиденциальности</button>, <button type="button" class="js-open-yoga-offer yoga-form__privacy-btn">публичной офертой</button> и <button type="button" class="js-open-yoga-cancellation yoga-form__privacy-btn">условиями отмены бронирования</button></span>
@@ -1994,12 +1938,7 @@
                         <p>5.2. Тариф <strong>от 75 USD/сутки</strong> применяется при двухместном размещении в номере «Стандарт», если в подтверждении не указано иное. Стоимость одноместного размещения и других категорий номеров согласуется отдельно.</p>
                         <p>5.3. Исполнитель вправе изменять опубликованные на Сайте цены до момента акцепта. Подтверждённое бронирование фиксирует согласованную цену, если иное не предусмотрено законом или соглашением сторон.</p>
                         <p>5.4. Неоплаченное бронирование может быть аннулировано без уведомления по истечении срока, указанного Исполнителем при выставлении счёта на депозит.</p>
-                        <p>5.5. Исполнитель вправе проводить акции и специальные предложения на условиях, опубликованных на Сайте. Условия акции «+1 день в подарок»:</p>
-                        <ul>
-                            <li>акция действует при бронировании от 10 ночей;</li>
-                            <li>подарочный день добавляется в конец периода проживания, не вычитается из счёта;</li>
-                            <li>в подарочный день входят проживание, завтрак, обед, йога и вечерняя медитация.</li>
-                        </ul>
+                        <p>5.5. Исполнитель вправе проводить акции и специальные предложения на условиях, опубликованных на Сайте.</p>
                 
                         <h3>6. Изменение и отмена бронирования</h3>
                         <p>6.1. Условия отмены, переноса дат и сохранения депозита регулируются отдельным документом <strong>«Условия отмены бронирования»</strong>, являющимся неотъемлемой частью настоящей оферты:</p>

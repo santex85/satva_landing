@@ -484,11 +484,6 @@ $yoga-hero-block-gap: 16px;
         .yoga-hero__scroll-hint {
             display: none;
         }
-
-        // Плашка акции на светлом небе не читается; акция остаётся в номерах, форме и попапе
-        .yoga-hero__promo-urgency {
-            display: none;
-        }
     }
 
     // LCP: hero content visible immediately (no JS opacity gate)
